@@ -1,0 +1,2222 @@
+SITE_CURRENCY,USDT
+START_TRADING,เริ่มการซื้อขาย
+Login,เข้าสู่ระบบ
+Trading password is wrong!,โปรดตรวจสอบรหัสผ่านกองทุนของคุณ
+VOL,กวน
+NEW_PWD_CANT_BE_SAME_AS_FUND_PASS,รหัสผ่านใหม่ไม่สามารถเหมือนกับรหัสผ่านกองทุน
+GOOGLE_AUTHENTICATOR,google 2fa
+Use your Google Authenticator or Authy app,ใช้ Google Authenticator หรือ Authy App ของคุณ
+Authenticate,รับรองความถูกต้อง
+Enter_2FA_Code,ป้อนรหัส 2FA
+ENTER_COIN_QTY_BUY,ปริมาณเหรียญต้องการซื้อ
+ENTER_COIN_QTY_SALE,ปริมาณเหรียญต้องการขาย
+_MODULE_NOT_EXIST_,ไม่สามารถโหลดโมดูลได้
+_CONTROLLER_NOT_EXIST_,ไม่สามารถโหลดคอนโทรลเลอร์ได้
+_ERROR_ACTION_,การกระทำที่ผิดกฎหมาย
+_LANGUAGE_NOT_LOAD_,ไม่สามารถโหลดแพ็คเกจภาษา
+_TEMPLATE_NOT_EXIST_,เทมเพลตไม่มีอยู่
+_MODULE_,โมดูล
+_ACTION_,การกระทำ
+_MODEL_NOT_EXIST_,ไม่สามารถโหลดโมเดลได้
+_VALID_ACCESS_,ไม่มีการเข้าถึง
+_XML_TAG_ERROR_,ข้อผิดพลาดไวยากรณ์แท็ก XML
+_DATA_TYPE_INVALID_,วัตถุข้อมูลที่ผิดกฎหมาย!
+_OPERATION_WRONG_,เกิดข้อผิดพลาดในการดำเนินงาน
+_NOT_LOAD_DB_,ไม่สามารถโหลดฐานข้อมูล
+_NO_DB_DRIVER_,ไม่สามารถโหลดไดรเวอร์ฐานข้อมูล
+_NOT_SUPPORT_DB_,ระบบไม่รองรับฐานข้อมูลชั่วคราว
+_NO_DB_CONFIG_,ไม่กำหนดการกำหนดค่าฐานข้อมูล
+_NOT_SUPPORT_,ระบบไม่รองรับ
+_CACHE_TYPE_INVALID_,ไม่สามารถโหลดประเภทแคช
+_FILE_NOT_WRITABLE_,ไดเรกทอรี (ไฟล์) ไม่สามารถเขียนได้
+_METHOD_NOT_EXIST_,วิธีที่คุณขอไม่มีอยู่!
+_CLASS_NOT_EXIST_,Instantiating คลาสไม่มีอยู่จริง!
+_CLASS_CONFLICT_,ความขัดแย้งชื่อคลาส
+_TEMPLATE_ERROR_,ข้อผิดพลาดของเครื่องยนต์เทมเพลต
+_CACHE_WRITE_ERROR_,การเขียนไฟล์แคชล้มเหลว!
+_TAGLIB_NOT_EXIST_,ไม่ได้กำหนดไลบรารีแท็ก
+_OPERATION_FAIL_,การดำเนินการล้มเหลว!
+_OPERATION_SUCCESS_,การดำเนินงานประสบความสำเร็จ!
+_SELECT_NOT_EXIST_,ไม่มีบันทึก!
+_EXPRESS_ERROR_,ข้อผิดพลาดการแสดงออก
+_TOKEN_ERROR_,ข้อผิดพลาดโทเค็นของฟอร์ม
+_RECORD_HAS_UPDATE_,บันทึกได้รับการปรับปรุง
+_NOT_ALLOW_PHP_,ไม่อนุญาตให้ใช้รหัส PHP ในเทมเพลต
+_PARAM_ERROR_,ข้อผิดพลาดพารามิเตอร์หรือไม่ได้กำหนด
+_ERROR_QUERY_EXPRESS_,ข้อผิดพลาดแบบสอบถามด่วน
+NO_WARRANTY_LIABLITY_WARNING,สินทรัพย์สุทธิของผู้ที่ชื่นชอบดิจิทัลเท่านั้นที่ให้แพลตฟอร์มแลกเปลี่ยนออนไลน์ฟรีมูลค่าการลงทุนของสกุลเงินไม่ได้ดำเนินการใด ๆ การรับประกันความรับผิดที่คุณต้องรับผิดชอบอย่างเต็มที่สำหรับการสูญเสียการลงทุนหากคุณไม่สามารถยอมรับได้โปรดอย่า ซื้อขาย! ขอขอบคุณ!
+2FO_OPT_ADVICE,หลังจากฟังก์ชั่นการรับรองความถูกต้องสองปัจจัยในการเปิดบัญชีทุกครั้งที่คุณถอนเงินสดระบบจะแจ้งให้คุณป้อนรหัสผ่านครั้งเดียวที่แสดงบนแอพมือถือเพื่อให้มั่นใจถึงความมั่นคงทางการเงินของคุณ คุณสามารถเปิดใช้งานคุณสมบัตินี้และตั้งค่าตามขั้นตอนต่อไปนี้
+IF_YOU_HAVE_ALTERED_THE_DATABA,หากคุณมีการเปลี่ยนแปลงฐานข้อมูลตรวจสอบการเปลี่ยนแปลงฐานข้อมูลต่อไปนี้ด้วยตนเองเช่นความขัดแย้งฐานข้อมูลที่แก้ไขของคุณเองหากคุณพบปัญหาหลังจากการอัพเกรดโปรดดึงไฟล์สำรองและกู้คืนการสำรองข้อมูลฐานข้อมูล
+RISK_WARNING_TRADING_BITCOIN,"คำเตือนความเสี่ยง: การซื้อขาย Bitcoin และสินทรัพย์ดิจิทัลอื่น ๆ ที่มีความเสี่ยงสูง (Pre-Dig, Spike, การจัดการ, ทีมที่ถูกยกเลิก, ข้อบกพร่องทางเทคนิค, ฯลฯ ) ตามที่รัฐห้ากระทรวงในการป้องกันความเสี่ยงของการแจ้งความเสี่ยงของ Bitcoin ของ"
+TRADING_PLATFORM_ONLY_DIGITAL_,แพลตฟอร์มการซื้อขายที่ผู้ที่ชื่นชอบสกุลเงินดิจิทัลเท่านั้นที่ให้แพลตฟอร์มแลกเปลี่ยนออนไลน์ฟรีมูลค่าการลงทุนของสกุลเงินไม่ได้ดำเนินการใด ๆ การรับประกันความรับผิดและถ้าคุณไม่สามารถยอมรับได้โปรดอย่าค้าขาย!
+DIGITAL_CURRENCY_TRADING_IS_VE,"การซื้อขายสกุลเงินดิจิตอลมีความเสี่ยงมาก (pre-dig, ขัดขวางการจัดการ, ทีมที่ถูกยกเลิก, ข้อบกพร่องทางเทคนิค, ฯลฯ ), ที่อยู่จัดส่ง:"
+FOR_THE_CONFLICT_FILES_PLEASE_,สำหรับไฟล์ที่มีความขัดแย้งโปรดพบว่าตัวเองเป็นผู้พัฒนาไฟล์ใหม่ด้วยตนเอง Merge Code หลังจากการควบรวมเสร็จแล้วให้คลิกที่ปุ่มสีเทาเพื่อข้ามรหัสจะได้รับการอัปเดตโดยอัตโนมัติเพื่อให้แน่ใจว่าเนื้อหาของคุณเป็นของการพัฒนารองที่สงวนไว้
+RISK_WARNING_DIGITAL_MONEY_INV,คำเตือนความเสี่ยง: เงินดิจิทัลลงทุนมีความเสี่ยงบางอย่างโปรดควบคุมจำนวนเงินของคุณอย่าลงทุนเงินที่คุณไม่เข้าใจตัวเลขที่ปฏิเสธองค์กร MLM ระวังการโฆษณาชวนเชื่อเท็จ
+TRADING_PROMISING_INVESTMENT_C,ซื้อขายสกุลเงินการลงทุนที่มีแนวโน้มลดความเสี่ยงการลงทุน การลงจอดของสินทรัพย์ดิจิทัลโดยเฉพาะเพื่อประโยชน์ภายใต้ผู้ค้าสายมากขึ้นโอกาสในการลงทุนที่เท่าเทียมกัน
+THE_INVESTMENT_VALUE_OF_THE_CU,มูลค่าการลงทุนของสกุลเงินไม่ได้ดำเนินการตรวจสอบการรับประกันความรับผิดและหากคุณไม่สามารถยอมรับได้โปรดอย่าค้าขาย! ขอขอบคุณ!
+INTERFACE_IS_SIMPLE_AND_EASY_T,อินเทอร์เฟซนั้นง่ายและเข้าใจง่ายใช้งานง่าย ระบบความเร็วในการตอบสนองที่มั่นคงและมีประสิทธิภาพรวดเร็ว คอมพิวเตอร์มือถือและลูกค้าอื่น ๆ สามารถแลกเปลี่ยนได้ทุกที่ทุกเวลา
+THIS_IS_YOUR_SPECIAL_INVITATIO,นี่คือรหัสพันธมิตรของคุณคุณสามารถคลิกปุ่ม [คัดลอก] และแบ่งปันกับเพื่อน ๆ และให้พวกเขาป้อนรหัสเชิญของคุณเมื่อพวกเขาลงทะเบียนบัญชี:
+_BANKLEVEL_SECURITY_TECHNOLOGI,เทคโนโลยีความปลอดภัยระดับธนาคารกระบวนการและความรับผิดชอบของกลไกกระเป๋าเงินเย็นเช่นการตรวจสอบระบบการจัดการการจัดเก็บข้อมูลหลายเข้ารหัส
+THIS_IS_YOUR_EXCLUSIVE_ADVERTI,นี่คือสโลแกนโฆษณาพิเศษของคุณคุณสามารถคลิกปุ่ม [คัดลอก] เพื่อวางกระดาษและส่งเพื่อนของคุณ:
+IF_YOU_HAVE_SECONDARY_DEVELOPM,หากคุณมีการพัฒนารองและนำไปสู่ความแตกต่างในไฟล์ที่คุณสามารถดึงเอกสารเหล่านี้ได้รับการคุ้มครอง
+IF_YOU_CAN_NOT_SUCCESSFULLY_SC,หากคุณไม่สามารถสแกนโค้ดบาร์บนแอปได้สำเร็จคุณสามารถเพิ่มบัญชีด้วยตนเองและป้อนรหัสต่อไปนี้:
+THIS_IS_YOUR_SPECIAL_LINK_YOU_,นี่คือลิงค์พันธมิตรของคุณคุณสามารถคลิกปุ่ม [คัดลอก] และแบ่งปันกับเพื่อน ๆ :
+COUNT_ONE_AND_REVENUE_PREPAID_,นับหนึ่ง) และรายได้ (แรงจูงใจในการทำธุรกรรมแบบเติมเงินและรางวัลผลรวมของ) ผู้คนสองประเภทและสิบรางวัลก่อนแต่ละคน
+_AND_THEN_SELECT__SCAN_BARCODE, และจากนั้นเลือกสแกนบาร์โค้ด แผนภาพต่อไปนี้จะจัดบาร์โค้ดสแกนเลนส์กล้องในโทรศัพท์
+BANKLEVEL_USER_DATA_ENCRYPTION,การเข้ารหัสข้อมูลผู้ใช้ระดับธนาคารการรับรองความถูกต้องแบบไดนามิกการควบคุมการระบุความเสี่ยงหลายระดับและให้ความปลอดภัย
+WITHIN_MINUTES_YOU_RECORDED_DU,ภายในไม่กี่นาทีที่คุณบันทึกในช่วงเวลานี้โดยไม่ต้องติดต่อฝ่ายบริการลูกค้าคำถามใด ๆ ที่เราจะใช้ความคิดริเริ่มที่จะติดต่อคุณ
+TWOFACTOR_AUTHENTICATION_CAN_B,การรับรองความถูกต้องสองปัจจัยสามารถป้องกันความปลอดภัยมากขึ้นสำหรับบัญชีของคุณไม่เปิดบัญชีโดยไม่ส่งผลกระทบต่อธุรกรรมการรับรองความถูกต้องสองปัจจัยปกติ
+INSTANT_RECHARGE_RAPID_WITHDRA,เติมเงินทันทีการถอนอย่างรวดเร็วล้านครั้งต่อเครื่องยนต์ธุรกรรมที่มีประสิทธิภาพสูง
+WALLET_MULTILAYER_ENCRYPTION_O,Wallet การเข้ารหัสหลายชั้นการจัดเก็บออฟไลน์ในตู้นิรภัยธนาคารกองทุน Escrow เพื่อความปลอดภัย
+YOU_ARE_USING_A_BROWSER_VERSIO,คุณกำลังใช้เวอร์ชันเบราว์เซอร์ต่ำเกินไปเอฟเฟกต์อาจนำไปสู่การสูญเสียมุมมองและข้อมูล
+ONLY_DIGITAL_CURRENCY_ENTHUSIA,แลกเปลี่ยนสกุลเงินดิจิตอลสำหรับการซื้อขายออนไลน์
+PLEASE_USE_ALIPAY_TRANSFER_TO_,โปรดใช้การโอน Alipay ไปยังหมายเลขบัญชีต่อไปนี้หรือสแกนการสแกนรหัส QR
+DO_NOT_FILL_IN_THE_OTHER_CHARA,"อย่ากรอกข้อมูลในคำอื่น ๆ เช่น (Bitcoin, ผลประโยชน์ทับซ้อนลับ ฯลฯ )!"
+DO_NOT_DELETE_THIS_TWOFACTOR_A,อย่าลบบัญชีรหัสผ่านการรับรองความถูกต้องสองปัจจัยนี้มิฉะนั้นจะทำให้คุณไม่สามารถดำเนินการบัญชีได้
+PLEASE_USE_THE_MICROCHANNEL_TR,ทำการถ่ายโอน WeChat เพื่อบัญชีต่อไปนี้หรือสแกนรหัส QR
+ACCORDING_TO_THE_HEAD_OF_CUSTO,จากหัวของการบริการลูกค้าเอกสารมือถือหมายเลขที่ต้องการและจำนวนสกุลเงินอย่างแน่นอนมากกว่าระดับก่อนหน้า
+OFFICIAL_BULLETIN_NET_LONG_CUR,[Bulletin อย่างเป็นทางการ] สกุลเงินที่ยาวนานสุทธิ
+PLEASE_FILL_OUT_AN_OFFICIAL_RE,กรุณากรอกบัญชีสกุลเงินแผนกต้อนรับอย่างเป็นทางการที่อยู่ที่อยู่ในแผนกค่าธรรมเนียม
+PLEASE_TRANSFER_MONEY_TO_THE_F,โอนเงินไปยังบัญชีธนาคารต่อไปนี้พร้อมรายละเอียดที่กล่าวถึง
+NEXT_TO_A_DOMESTIC_USER_NAME_O,ถัดจากชื่อผู้ใช้ในประเทศเขียนทับไฟล์เหล่านี้และอัปเกรด (อาจผิด)
+ANNOUNCEMENT_PLATFORM__CURRENC,[ประกาศ] แพลตฟอร์มสกุลเงินสุทธิเครื่องหมายการค้ายาวได้รับการยอมรับจากการบริหารของรัฐสำหรับอุตสาหกรรม
+AFTER_SETTING_THE_REAL_NAME_CA,หลังจากตั้งค่าชื่อจริงไม่สามารถเปลี่ยนแปลงได้และชื่อบัญชีเดียวกันและการถอนดอกเบี้ย
+UPLOAD_A_POSITIVE_ID_PHOTOS_ID,อัปโหลดสีที่สแกนด้านหน้าและภาพด้านหลังของ ID ของคุณ
+ACCORDING_TO_THE_STATE_FIVE_MI,ตามที่รัฐห้ากระทรวงในการป้องกันความเสี่ยงของ Bitcoin สัดส่วนที่รอดำเนินการ
+THE_DEFAULT_BROWSER_ALSO_DISPL,เบราว์เซอร์เริ่มต้นยังแสดงแถบเลื่อนแนวตั้งแถบเลื่อนเพื่อป้องกันการสั่นไหวที่เกิดจากเนื่องจาก
+STATE_REGULATIONS_PLEASE_FILL_,ป้อนรายละเอียดตามบัตรประจำตัวประชาชนของคุณ
+PHONE_SEARCH_FOR__GOOGLE_AUTHE,โทรศัพท์: ค้นหา Google Authenticator ในตลาดแอปพลิเคชันหรือค้นหา
+AUDIT_CHANGE_REQUEST_AFTER_THE,คุณสามารถตรวจสอบที่นี่เพื่อตรวจสอบสถานะ KYC ของคุณ
+HERE_WITH_THE_ATTRIBUTE_SELECT,ที่นี่ด้วยตัวเลือกแอตทริบิวต์นี่คือที่อยู่กระเป๋าเงินของคุณโปรดส่งของคุณ
+TO_PROTECT_YOUR_FINANCIAL_SECU,เพื่อปกป้องความมั่นคงทางการเงินของคุณให้ตั้งรหัสผ่านกองทุนให้แน่ใจว่าต้องคำนึงถึง
+PLEASE_STRICTLY_IN_ACCORDANCE_,โปรดปฏิบัติตามจำนวนที่แตกต่างกันของสกุลเงินที่แตกต่างกันของสกุลเงินที่เพิ่มขึ้นเพื่อกรอกแบบฟอร์ม
+DYNAMIC_AUTHENTICATION_AND_OTH,การรับรองความถูกต้องแบบไดนามิกและเทคโนโลยีความปลอดภัยระดับธนาคารอื่น ๆ เพื่อปกป้องความปลอดภัยของการทำธุรกรรม
+ENTER_THE_TWOFACTOR_AUTHENTICA,ป้อนรหัสผ่านการรับรองความถูกต้องสองปัจจัยเพื่อเปิดหรือปิดการรับรองความถูกต้องสองปัจจัย
+SECOND_CHANGE_ONCE_THIS_NUMBER,การเปลี่ยนแปลงครั้งที่สองหนึ่งครั้ง หมายเลขนี้จะตรวจสอบรหัสผ่านของคุณเป็นสองเท่า
+LAYOUT_BLOCK_CHAIN_ALI_TENCENT,ห่วงโซ่บล็อกเค้าโครง: อาลี Tencent ก้าวใหญ่ก้าวไปข้างหน้า Baidu ขั้นตอนเล็ก ๆ เดิน
+AFTER_INSTALLATION_YOU_NEED_TO,หลังจากการติดตั้งคุณต้องกำหนดค่าแอปพลิเคชันดังต่อไปนี้
+AND_SUBJECT_TO_NATIONAL_REQUIR,กรอก KYC ให้สมบูรณ์เพื่อประโยชน์สูงสุดของการแลกเปลี่ยน
+AFTER_GIVING_THESE_MAY_NOT_HAV,หลังจากให้สิ่งเหล่านี้อาจไม่มีการเข้าถึงการเขียนสิทธิ์การเขียนไฟล์ที่ต่ำกว่า
+IN_THE_CENTER_YOU_CAN_SEE_THE_,ในศูนย์คุณสามารถดูบุคคล (ติดตามรูปแบบเพื่อนำเข้าอินพุต)
+PLEASE_ENTER_TRANSACTION_PASSW,ยืนยันรหัสผ่านกองทุน
+PLEASE_ENTER_THE_TWOFACTOR_AUT,ป้อนรหัส 2FA
+APPLICATION_FAILS_PLEASE_RESUB,คุณสามารถส่งคำขอ KYC ของคุณอีกครั้งเมื่อล้มเหลว
+DURING_THE_EVENT_A_SINGLE_DAY_,ในช่วงกิจกรรมการซื้อขายวันเดียว (การซื้อและขายได้รับการพิจารณา) จำนวน
+THIS_UPDATE_DOES_NOT_INVOLVE_C,การปรับปรุงนี้ไม่เกี่ยวข้องกับการเปลี่ยนแปลงฐานข้อมูลคุณสามารถข้ามได้
+FRIENDS_SAY_THREE_COINS_COLUMN,เพื่อนพูดสามเหรียญคอลัมน์การจำแนกสกุลเงิน จำเป็นต้องใช้เมื่อโทรกลับบ้าน
+PROFESSIONAL_REVIEWS_BITCOIN_U,ความคิดเห็นมืออาชีพ Bitcoin ผู้ใช้มุมมองกล่าวว่าอัตราการเติบโตประจำปีทั่วโลก
+TRANSACTION_CROSSSITE_CURRENCY,[ธุรกรรม] สกุลเงินข้ามไซต์สายเคเบิลเครือข่ายยาวระบบการซื้อขายข้ามไซต์เปิด
+THE_OPPORTUNITY_TO_DRAW_VALID_,โอกาสในการวาดที่ถูกต้องในวันนั้นไม่สามารถดำเนินการได้ในวันถัดไป
+PHONE_DOES_NOT_SUPPORT_TWODIME,โทรศัพท์: ไม่รองรับการสแกนโค้ดสองมิติคุณสามารถป้อนคีย์ด้วยตนเอง
+THE_ABOVE_PICTURES_ARE_FOR_REF,รูปภาพข้างต้นใช้สำหรับการอ้างอิงเท่านั้นโปรดชนะรางวัลชนิด
+TO_PROTECT_YOUR_ACCOUNT_SECURI,เพื่อปกป้องความปลอดภัยของบัญชีของคุณโปรดกรอกข้อมูลบัญชีของคุณ
+_OFFICIAL_ANNOUNCEMENT_ON_CURR,[ประกาศอย่างเป็นทางการเกี่ยวกับสกุลเงินการซื้อขายสกุลเงินที่ยาวนานจะมีการเปลี่ยนแปลง]
+PS_STRICTLY_REQUIRED_TO_FILL_T,ต้องกรอกหมายเลขลำดับสูงสุด:
+AFTER_SUCCESSFULLY_ADDED_AN_OF,หลังจากประสบความสำเร็จในการเพิ่มที่อยู่บัญชีสกุลเงินสำเนาอย่างเป็นทางการ
+LOWERCASE_MANDATORY_KEYWORDS_S,จำเป็นต้องใช้ตัวพิมพ์เล็ก: คำหลักเช่นการโทร แต่ไม่สามารถเติมได้
+MEET_THE_FOLLOWING_CURRENCY_AM,พบกับจำนวนเงินต่อไปนี้จะได้รับการอัพเกรดโดยอัตโนมัติเป็นระดับ
+EVENT_DESCRIPTION_INVITE_DIVID,คำอธิบายเหตุการณ์: เชิญ Divided Daren (รายละเอียดกิจกรรมเดียวกัน
+IF_IN_ERROR_IT_CAN_BE_RESTORED,หากเกิดข้อผิดพลาดสามารถเรียกคืนได้โดยคีย์อินพุตแบบแมนนวล
+THE_HIGHER_THE_AMOUNT_OF_THE_T,จำนวนการทำธุรกรรมที่สูงขึ้นเท่าใดความน่าจะเป็นที่น่าจะเป็นรางวัลใหญ่เท่านั้น
+WALLET_WALLET_SERVER_USER_NAME_,บริการเชื่อมต่อชื่อผู้ใช้เซิร์ฟเวอร์ Wallet โปรดติดต่อ
+PLEASE_USE_THE_IPS_ONLINE_PAYM,โปรดใช้การชำระเงิน IPS ออนไลน์หากมีข้อสงสัยโปรด
+JUMP_END_ERROR_PAGE_AFTER_LOGI,หน้าข้อผิดพลาดของ Jump End หลังจากการรับรองความถูกต้องเข้าสู่ระบบไม่ใช่ชื่อจริง
+BY_APPLICATION_PLEASE_REREGIST,โปรดอย่ากลับคืนสู่กฎเกณฑ์
+YOUR_ACCOUNT_LOGIN_IN_OTHER_PL,บัญชีของคุณเข้าสู่ระบบในที่อื่นกรุณาเข้าสู่ระบบอีกครั้ง
+CHARACTER_REPRESENTATION_SO_TH,การแสดงตัวละครเพื่อให้ในการเข้ารหัสใด ๆ ไม่มีปัญหา
+STRICT_CONTROLS_ON_CURRENCY_AU,การควบคุมอย่างเข้มงวดเกี่ยวกับกลไกการตรวจสอบสกุลเงินที่ครอบคลุมของความเสี่ยง
+PROFESSIONAL_SERVICES_TEAM_ONL,ทีมงานบริการระดับมืออาชีพการบริการลูกค้าออนไลน์และการสนับสนุนทางเทคนิค
+LEAVE_EMPTY_FOR_THE_LATEST_MAR,ปล่อยให้ว่างเปล่าสำหรับราคาตลาดล่าสุดเติมตัวเลข
+BEYOND_THE_SCROLL_BAR_NAVIGATI,นอกเหนือจากแถบการนำทางบาร์เลื่อนจำลองความสูงของหน้าต่าง
+UPGRADE_AND_REPAIR_THE_PROBLEM,อัปเกรดและซ่อมแซมบันทึกปัญหา โปรแกรมการพัฒนาที่กำหนดเอง
+INTERNET_GIANT_TENCENT_IS_TO_C,Tencent ยักษ์อินเทอร์เน็ตคือการสร้างแพลตฟอร์มโซ่บล็อก
+PROFESSIONAL_CUSTOMER_SERVICE_,ทีมบริการลูกค้ามืออาชีพหนึ่งในหนึ่งบริการระดับมืออาชีพ
+REENTER_TRANSACTION_PASSWORD_T,ป้อนรหัสผ่านกองทุนอีกครั้งจะต้องสอดคล้องกันอีกครั้ง
+DEPENDING_ON_THE_SETTING_OF_TH,รหัสผ่านกองทุนหากมีอยู่
+REFERRAL_COMMISSION_A_PROMOTIO,คณะกรรมาธิการการอ้างอิง
+TODAY_ONLY_SELL_CURRENCY_ACCOU,วันนี้ขายยอดคงเหลือในบัญชีสกุลเงินเท่านั้น
+SMS_TEXT_MESSAGING_INTERFACE_U,SMS ข้อความการส่งข้อความอินเตอร์เฟสชื่อผู้ใช้คีย์ความปลอดภัยอินเตอร์เฟซ
+CONCEPT_CLEAR_AND_RESET_ARE_TI,แนวคิด: ชัดเจนและรีเซ็ตแยกกันไม่ได้
+TYRANT_ERA_COINS_FINAL_INTERPR,เหรียญทรราชการตีความขั้นสุดท้ายของเน็ตทั้งหมด
+NO_NEED_TO_UPGRADE_THE_DATABAS,ไม่จำเป็นต้องอัพเกรดฐานข้อมูลข้ามการอัพเกรดฐานข้อมูล
+SIEGE_LION_EFFORTS_TO_DEVELOP_,Siege ความพยายามในการพัฒนาเพื่อพัฒนาดังนั้นคอยติดตามการหดตัว
+I_HAVE_MERGED_THEIR_OWN_DATABA,ฉันได้ผสานการอัพเกรดฐานข้อมูลของตัวเองข้าม
+THE_CENTRAL_BANK_REGULATION_BI,แพลตฟอร์ม Bitcoin ของธนาคารกลางเพื่อเริ่มต้นจากการฟอกเงิน
+INSTALL_TWOFACTOR_AUTHENTICATI,ติดตั้งโปรแกรมการรับรองความถูกต้องสองปัจจัยบนโทรศัพท์ของคุณ:
+AFTER_THE_BUTTON_CODE_IF_YOU_D,หลังจากรหัสปุ่มถ้าคุณไม่ลบ
+THE_CURRENT_RUN_IS_CREATED_BAS,การรันปัจจุบันถูกสร้างขึ้นตามภายในอาจเป็น
+YUAN_WILL_BE_ABLE_TO_GET_A_LUC,หยวนจะสามารถดึงโชคดีได้
+TO_PREVENT_LOSS_OF_DATA_OR_CON,เพื่อป้องกันการสูญเสียข้อมูลหรือเนื้อหาของการพัฒนาทุติยภูมิ
+ANNOUNCEMENT_ON_THE_CURRENCY_H,[ประกาศ] หมวกสกุลเงินเส้นประกาศการทำธุรกรรม
+_APPLICATION_CLICK_ON_THE__ADD, แอพลิเคชันคลิกที่เพิ่มบัญชีใหม่
+THEN_CLICK_THE_ADD_FILE_BUTTON,จากนั้นคลิกปุ่มเพิ่มไฟล์ถูกคลิกรูปภาพ
+DOWNLOAD_THE_UPDATE_PACKAGE_AN,ดาวน์โหลดแพ็คเกจการอัปเดตแล้วรับรายการไฟล์
+PLEASE_ENTER_YOUR_REAL_NAME_IN,กรุณากรอกชื่อจริงของคุณในการโอนเงิน [หมายเหตุ
+YOU_DO_NOT_NEED_TO_ENTER_EACH_,ไม่จำเป็นต้องใช้รหัสผ่านกองทุน
+FEES_DEDUCTED_DIRECTLY_FROM_TH,ค่าธรรมเนียมหักโดยตรงจากที่อยู่ค่าธรรมเนียมอย่างเป็นทางการ
+PLEASE_ENTER_THE_CONTACT_NAME_,โปรดป้อนชื่อผู้ติดต่อโปรดป้อนที่อยู่ติดต่อ
+AFTER_CONFIGURATION_IT_WILL_BE,หลังจากการกำหนดค่ามันจะปรากฏบนโทรศัพท์มือถือ
+PLEASE_SELECT_THE_CORRECT_FILE,โปรดเลือกประเภทไฟล์และขนาดที่ถูกต้อง!
+NET_NEW_CURRENCY_ON_THE_LINE_A,สกุลเงินใหม่สุทธิในบรรทัดและใส่เหรียญประกาศคำอธิบาย
+COMPUTER_END_A_NEW_REVISION_IN,คอมพิวเตอร์จบการแก้ไขใหม่เพิ่มขึ้นเทอร์มินัลมือถือ
+QUOTE_CHANGE_COMPUTING_WHEN_NO,การคำนวณการเปลี่ยนแปลงการคำนวณเมื่อไม่มีตลาดการค้าสำหรับใหม่
+BITCOIN_WALLET_STANDARD_DISCUS,การอภิปรายมาตรฐาน Bitcoin Wallet จัดขึ้นในประเทศเยอรมนี
+RESTORING_DATABASE_PLEASE_DO_N,การกู้คืนฐานข้อมูลโปรดอย่าปิด!
+THE_DATABASE_IS_BEING_BACKED_U,ฐานข้อมูลกำลังสำรองไว้โปรดอย่าปิด!
+YET_ON_THE_LINE_SO_STAY_TUNED_,แต่ในบรรทัดดังนั้นคอยติดตามกลุ่มผู้ใช้ทั่วไป
+I_HAVE_NOT_ALTERED_THE_DATABAS,ฉันไม่ได้เปลี่ยนแปลงฐานข้อมูลการอัพเกรดฐานข้อมูล
+CHENGDU_FIRST_BLOCK_CHAIN_SUMM,การประชุมสุดยอด Summit First Chengdu First Block Forum จะจัดขึ้น
+START_BACKUP_PLEASE_DO_NOT_CLO,เริ่มการสำรองข้อมูลโปรดอย่าปิดหน้านี้!
+ANNOUNCED_BITCOIN_THEFT_BEFORE,ประกาศการโจรกรรม Bitcoin ก่อนที่จะประสบความสำเร็จ
+REPAIR_VERIFY_THE_TRANSACTION_,ซ่อมแซมตรวจสอบการทำธุรกรรมฟังก์ชั่นการตั้งค่ารหัสผ่านไม่ถูกต้อง
+ADMINISTRATORS_GROUP_TO_ADD_AN,กลุ่มผู้ดูแลระบบเพื่อเพิ่มและแก้ไขหน้า
+ENTER_ONLY_ONCE_EACH_TIME_YOU_,จำเป็นต้องใช้เพียงครั้งเดียวต่อการเข้าสู่ระบบ
+OFFICIAL_FEES_PAID_DIRECTLY_IN,ค่าธรรมเนียมอย่างเป็นทางการจ่ายโดยตรงในที่อยู่
+YOU_DO_NOT_NEED_TO_ENTER_THE_T,ป้อนรหัสผ่านกองทุน
+OTHERWISE_YOU_MUST_FILL_IN_A_L,มิฉะนั้นคุณต้องกรอกสถานที่มากมายไม่เห็น
+AFTER_FINISHED_SELECTING_FILES,หลังจากเลือกไฟล์เสร็จแล้วว่าจะอัปโหลดโดยอัตโนมัติ
+NO_ACCOUNT_SIGN_UP_TO_HAVE,ไม่มีบัญชี? ลงทะเบียนเพื่อมี!
+PLEASE_ENTER_A_CURRENCY_NAME_P,โปรดป้อนชื่อสกุลเงินโปรดป้อนจำนวนเงินเติมเงิน
+MAKE_SURE_ALL_FILES_RELATED_TO,ตรวจสอบให้แน่ใจว่าไฟล์ทั้งหมดที่เกี่ยวข้องกับรัฐ
+LITECOIN_ISOLATION_WITNESS_SUP,อัตราการสนับสนุนการแยก Litecoin
+PHONE_REAL_NAME_DATA_UPGRADE_S,อัปเกรดข้อมูลชื่อจริงโทรศัพท์ระงับ
+NO_ACCOUNT_NO_BEGINNING_OF_THE,ไม่มีบัญชีไม่มีจุดเริ่มต้นของ ICO ปัจจุบัน
+CONGRATULATIONS_RETRIEVE_PASSW,ขอแสดงความยินดีความสำเร็จดึงรหัสผ่าน!
+CONGRATULATIONS_RETRIEVE_TRANS,ขอแสดงความยินดีดึงความสำเร็จรหัสผ่านกองทุน!
+CONGRATULATIONS_THE_UPGRADE_WA,ขอแสดงความยินดีการอัพเกรดสำเร็จแล้วรุ่นปัจจุบัน
+OFFICIAL_INFORMATION_ONLINE_CU,ข้อมูลอย่างเป็นทางการบริการลูกค้าออนไลน์และปรับปรุงการปฏิบัติตาม
+YOU_NEED_TO_ENTER_A_PASSWORD_W,คุณต้องป้อนรหัสผ่านเมื่อเข้ามาในการทำธุรกรรม
+OTHERWISE_IT_WILL_CAUSE_DISLOC,มิฉะนั้นจะทำให้เกิดระดับความคลาดเคลื่อนสมาชิก
+BACKGROUND_INCREASE_ONLINE_CUS,พื้นหลังเพิ่มฟังก์ชั่นการกำหนดค่าลูกค้าออนไลน์
+FOR_BACKGROUND_DISPLAY_CONFIGU,(สำหรับชื่อการกำหนดค่าการแสดงผลพื้นหลัง)
+CONTACT_CUSTOMER_SERVICE_SITE_,บริการติดต่อลูกค้าเว็บไซต์ System Admin
+WELCOME_TO_VISIT_THE_WEBSITE_B,ยินดีต้อนรับเข้าสู่ระบบการจัดการพื้นหลังของเว็บไซต์
+OPERATORS_FORCE_CONTRACT_MININ,ผู้ประกอบการกำลังทำสัญญาขุดเพื่อส่งเสริมการประกาศผลประกอบการ
+CALCULATED_BASED_ON_THE_LAST_T,คำนวณตามธุรกรรมล่าสุดเมื่อวานนี้
+INVITE_PEOPLE_FIRST_INVITATION,เชิญคน: รหัสเชิญแรก:
+ENTER_THE_UNLOCK_PASSWORD_OR_L,ป้อนรหัสผ่านปลดล็อคหรือรหัสผ่านเข้าสู่ระบบ
+DISPLAY_DOUBLE_AUTHENTICATION_,แสดงรหัสการรับรองความถูกต้องสองครั้งเมื่อออกเงิน
+STATISTICAL_REPORTING_SYSTEM_T,ระบบการรายงานทางสถิติวันเวลาเวลา
+YOU_NEED_TO_ENTER_LOGIN_ACCOUN,คุณต้องป้อนรหัสผ่านเข้าสู่ระบบบัญชี
+DOCKING_STATION_FORMAL_PRESENT,แท่นวางจำหน่ายงานนำเสนออย่างเป็นทางการ litecoin wallet
+RELATED_DATABASE_UPDATE_SCRIPT,ตำแหน่งสคริปต์การปรับปรุงฐานข้อมูลที่เกี่ยวข้อง
+JIANGXI_XINGSHUO_INFORMATION_T,เจียงซี Xingshuo ข้อมูลเทคโนโลยี จำกัด
+INCOME_OF_PEOPLE_THE_FIRST_TIM,รายได้ของผู้คน: รายได้ครั้งแรก
+TWOFACTOR_AUTHENTICATION_TURNE,เปิด / ปิดการรับรองความถูกต้อง 2FA:
+SEND_A_CONSISTENT_MESSAGE_WITH,ส่งหน้ากลับและภาพถ่ายของคุณถือบัตรประจำตัวประชาชนที่ออกโดยรัฐบาล
+THE_TOTAL_GLOBAL_MARKET_CAPITA,มูลค่ารวมตลาดรวมทั่วโลกของเต็มรูปแบบการเข้ารหัสเต็มรูปแบบ
+DIGITAL_ASSETS_EQUAL_TO_HOW_MU,สินทรัพย์ดิจิตอลเท่ากับเท่าใดหยวน
+FOR_TWO_PACKETS_LEFT_MENU,(สำหรับเมนูที่เหลือสองแพ็คเก็ต)
+PLEASE_FILL_IN_YOUR_USERNAME_P,กรุณากรอกชื่อผู้ใช้ของคุณโปรดกรอกรหัสผ่าน
+ENTER_THE_GOOGLE_VERIFICATION_,ป้อนรหัสยืนยัน Google และยืนยัน
+EACH_TRANSACTION_TRANSACTION_P,รหัสผ่านกองทุนที่จำเป็นสำหรับการทำธุรกรรมแต่ละครั้ง
+CALCULATED_ACCORDING_TO_THE_SI,คำนวณตามค่าธรรมเนียมการทำธุรกรรมครั้งเดียว
+SELECT_THE_USER_NAME_INPUT_FIE,เลือกการเริ่มต้นการป้อนข้อมูลชื่อผู้ใช้ชื่อผู้ใช้
+WHEN_THERE_ARE_PENDING_CAN_NOT,เมื่อมีการแก้ไขที่รอดำเนินการไม่สามารถแก้ไขได้
+CONGRATULATIONS_YOU_HAVE_SUCCE,ขอแสดงความยินดีคุณได้ลงทะเบียนเรียบร้อยแล้ว!
+OTHERWISE_THE_PROPORTION_OF_FE,มิฉะนั้นสัดส่วนการตั้งค่าค่าธรรมเนียมไม่ถูกต้อง
+THE_CURRENT_NUMBER_OF_PENDING_,หมายเลขปัจจุบันของคำสั่งซื้อที่รอดำเนินการเท่านั้น
+REINITIALIZE_THE_CURRENT_MARKE,Re: เริ่มต้นสถิติของตลาดในปัจจุบัน
+REINITIALIZE_THE_CURRENT_CURRE,เริ่มต้นสถิติสกุลเงินปัจจุบันอีกครั้ง
+BUTTON_TO_SELECT_THE_FILE_OPTI,ปุ่มเพื่อเลือกไฟล์ ไม่จำเป็น.
+POSITIVE_AND_NEGATIVE_PHOTO_SC,เอกสารหรือชิ้นส่วนสแกนภาพถ่ายบวกและลบ
+AFTER_THE_REGISTRATION_CERTIFI,หลังจากหมายเลขใบรับรองการลงทะเบียนไม่สามารถแก้ไขได้
+END_HOME_PARTICLES_OUT_OF_THE_,จบอนุภาคหน้าแรกออกจากคำถาม
+END_BANK_CARD_TO_ADD_VALIDATIO,ท้ายบัตรธุดธนาคารเพื่อเพิ่มข้อผิดพลาดการตรวจสอบ
+REGISTRATION_WILL_BE_ASSIGNED_,การลงทะเบียนจะได้รับการกำหนดรวมบัญชี
+BITCOIN_USER_BASE_RISING,ฐานผู้ใช้ Bitcoin เพิ่มขึ้น
+WITHIN_EACH_INTEREST_PERIOD_PR,ภายในแต่ละช่วงเวลาที่น่าสนใจนำเสนอจุนบวก
+LOCAL_FILES_INVOLVED_IN_THIS_U,ไฟล์ท้องถิ่นที่เกี่ยวข้องในการปรับปรุงนี้
+CHANGING_THE_REALNAME_AUTHENTI,การเปลี่ยนการไหลของข้อมูลการรับรองความถูกต้องชื่อจริง:
+YOUR_ACCOUNT_HAS_BEEN_BOUND_AL,บัญชีของคุณถูกผูกไว้ Alipay
+YOUR_ACCOUNT_HAS_BEEN_ENABLED_,บัญชีของคุณได้รับการตรวจสอบโทรศัพท์
+YOU_HAVE_RUN_OUT_OF_OPPORTUNIT,คุณหมดโอกาสในการลอตเตอรีในวันนี้
+THE_BACKUP_IS_COMPLETE_CLICK_O,การสำรองข้อมูลเสร็จสมบูรณ์ให้คลิกที่การสำรองข้อมูลอีกครั้ง
+_UNABLE_TO_ENTER_THE_NEXT_STEP,. ไม่สามารถป้อนขั้นตอนต่อไป กรุณาที่
+_SET_TO_THE_MAXIMUM_NUMBER_OF_,ตั้งค่าจำนวนสูงสุดของการซื้อ
+FOR_SEQUENTIALLY_DISPLAYING_TH,(สำหรับการแสดงแพ็กเก็ตตามลำดับ)
+USERNAME_NO_CONTENT,ชื่อผู้ใช้ไม่มีเนื้อหา
+NO_IMAGE_TO_DISPLAY_THE_DEFAUL,ไม่มีภาพในการแสดงภาพเริ่มต้น
+ADD_AN_EVENT_SUCCESSFUL_RESPON,เพิ่มไฟล์ตอบกลับเหตุการณ์ที่ประสบความสำเร็จ
+LOAD_FAILED_LOAD_PICTURE_REMOV,โหลดโหลดโหลดล้มเหลวแล้ว
+ADDING_ATTRIBUTES_TO_ACHIEVE_M,การเพิ่มแอตทริบิวต์เพื่อให้บรรลุแผนที่มัลติฟังก์ชั่น
+ENTER_THE_TRANSACTION_PASSWORD,ป้อนรหัสผ่านกองทุนและยืนยัน
+PROCESSING_IMAGE_UPLOAD_ADDRES,ที่อยู่อัปโหลดรูปภาพการประมวลผล
+ENGLISH_CONTACT_NAME_CHART,แผนภูมิชื่อผู้ติดต่อภาษาอังกฤษ
+LOGIN_FORM_GETS_FOCUS_DISCOLOR,แบบฟอร์มเข้าสู่ระบบได้รับการเปลี่ยนสีโฟกัส
+INSIDE_THE_ACTUAL_USER_ACCOUNT,ภายในยอดคงเหลือในบัญชีผู้ใช้จริง
+REMOVE_THE_PRINCIPAL_TO_PAY_IN,ลบเงินต้นเพื่อชำระเงินล่วงหน้า
+CONFIRM_THE_NUMBER_OF_ROLLOUT_,ยืนยันจำนวนการถอนต้องเสร็จสิ้น
+BATCH_DELETE_UNRECOVERABLE_DED,แบทช์ลบการหักที่ไม่สามารถกู้คืนได้
+DO_NOT_SET_TOO_LARGE_FOR_SAFET,อย่าตั้งค่าขนาดใหญ่เกินไปสำหรับความปลอดภัย
+PLEASE_DO_NOT_MODIFY_DURING_OP,กรุณาอย่าปรับเปลี่ยนระหว่างการดำเนินการ
+PLEASE_ENTER_YOUR_USER_NAME_OR,กรุณาใส่ชื่อผู้ใช้หรือหมายเลขโทรศัพท์ของคุณ
+PLEASE_ENTER_THE_CORRECT_BANK_,โปรดป้อนบัญชีธนาคารที่ถูกต้อง
+COLOR_TABLE_FORM_GETS_FOCUS,รูปแบบตารางสีได้รับการโฟกัส
+LOG_IN_TO_CHECK_IMMEDIATELY_PR,ลงชื่อเข้าใช้เพื่อตรวจสอบตอนนี้
+LOG_DISPLAY_DUAL_AUTHENTICATIO,บันทึกการแสดงผลคู่การรับรองความถูกต้องคู่
+IPS_TOPORDER_DETAILS,รายละเอียดการสั่งซื้อของ IPS
+SCRIPT_IS_LOADING_PLEASE_WAIT,สคริปต์กำลังโหลดโปรดรอสักครู่
+ORDERS_MERCHANT_PAYMENT_INTERF,สั่งซื้อมาตรฐานการชำระเงินของผู้ค้า
+VIEW_ONLINE_CUSTOMER_SERVICE_T,ดูการบริการลูกค้าออนไลน์เพื่อดูสินค้า
+THE_UPDATED_DATABASE_CHANGES,การเปลี่ยนแปลงฐานข้อมูลที่อัปเดตแล้ว
+THE_UPDATED_DOCUMENT_INVOLVED,เอกสารที่อัปเดตที่เกี่ยวข้อง:
+A_NEW_VERSION_OF_THE_SERVER_US,ชื่อผู้ใช้เซิร์ฟเวอร์เวอร์ชันใหม่
+THE_PROPORTION_OF_FEE_IN_ADVAN,สัดส่วนของค่าธรรมเนียมล่วงหน้าเพื่อรับเงินต้น
+LABOR_DAY_HOLIDAY_ARRANGEMENTS,การเตรียมการวันหยุดวันแรงงานเพื่อแจ้งให้ทราบ
+WORKING_HOURS_MONDAY_TO_SUNDAY,เวลาทำงาน: วันจันทร์ถึงวันอาทิตย์
+YOU_NEED_TO_USE_THE_TIME_TO_CA,คุณต้องใช้เวลาในการเงินสด
+BEFORE_YOU_INSTALL_THE_UPDATE_,ก่อนที่คุณจะติดตั้งการอัปเดตโปรด
+OR_LIKELY_TO_CAUSE_CONFUSION_G,หรือมีแนวโน้มที่จะก่อให้เกิดเกรดความสับสน
+SELLER_USER_NAME_SELLER_FEES,ผู้ขายชื่อผู้ใช้ชื่อผู้ขาย
+LOAD_LOAD_PICTURE_REMOVED_SUCC,โหลดโหลดรูปภาพเรียบร้อยแล้ว
+CLOSE_ABOUT_US_ONLINE_CUSTOMER,ใกล้กับเราฝ่ายบริการลูกค้าออนไลน์
+THE_WHOLE_STATION_IS_ONLY_A_RE,สถานีทั้งหมดเป็นเพียงโครงการแนะนำ
+MARGIN_WALLET_HOT_AND_COLD_ISOL,"ระยะขอบ, กระเป๋าสตางค์ร้อนและเย็น"
+MEMBER_FOREGROUND_INTO_THE_ADD,สมาชิกเบื้องหน้าในสกุลเงินที่อยู่
+FROM_THE_TOP_OF_THE_APPLICATIO,จากด้านบนของแอปพลิเคชันเรียกการโพลีเมอไรเซชัน
+BUYER_THE_BUYERS_NAME_FEE,ผู้ซื้อค่าธรรมเนียมชื่อผู้ซื้อ
+PLEASE_ENTER_A_USER_NAME_CHANG,โปรดป้อนการเปลี่ยนชื่อผู้ใช้
+OTHERWISE_THE_FILE_CAN_NOT_BE_,มิฉะนั้นจะไม่สามารถเพิ่มไฟล์ได้
+DID_NOT_RECEIVE_RESEND,ไม่ได้รับ? ส่งซ้ำ
+SCAN_THE_QR_CODE_TO_MAKE_TRANS,สแกน QR
+YOU_NEED_TO_UPGRADE_THE_CURREN,คุณต้องอัพเกรดเวอร์ชันปัจจุบัน
+WE_WILL_RECEIVE_THE_MONEY,เรามักจะดำเนินการตามคำขอภายใน 24 ชั่วโมงจากการยืนยันการชำระเงิน
+ACCOUNT_NAME_ACCOUNT_ADDRESS,บัญชีชื่อบัญชีที่อยู่:
+OFFICIAL_WEBSITE_ALIPAY_ACCOUN,บัญชี Alipay
+CLICK_HERE_TO_SEND_ME_A_MESSAG,คลิกที่นี่เพื่อส่งข้อความถึงฉัน
+ADD_A_NEW_ADDRESS_TO_CASH,+ เพิ่มที่อยู่ใหม่
+LESS_THAN_THIS_NUMBER_AUTOMATI,น้อยกว่าหมายเลขนี้การถอนโดยอัตโนมัติ
+RECHARGE_AMOUNT_OF_OFFLINE_BON,เติมเงินจำนวนโบนัสออฟไลน์
+THIS_NUMBER_IS_GREATER_THAN_TH,หมายเลขนี้มากกว่าการตรวจสอบพื้นหลัง
+A_PLURALITY_OF_SEPARATED_BY_CO,ส่วนใหญ่ของคั่นด้วยเครื่องหมายจุลภาค
+PRELOADED_NONTRADABLE,ก่อนโหลดไม่ใช่ซื้อขาย
+HOME_SHOWS_THE_CUMULATIVE_TURN,แสดงผลประกอบการทั้งหมดบนด้านหน้า
+AFTER_ENTERING_THE_SUCCESSFUL_,หลังจากป้อนคำสั่งชาร์จที่ประสบความสำเร็จ
+PLEASE_INPUT_CORRECT_PASSWORD_,กรุณาใส่รหัสผ่านที่ถูกต้อง
+PLEASE_LOGIN_PASSWORD_REGULARL,โปรดอัปเดตรหัสผ่านเข้าสู่ระบบเป็นประจำ
+PLEASE_UPDATE_YOUR_PASSWORD_RE,โปรดอัปเดตรหัสผ่านของคุณเป็นประจำ
+CHECK_USER_REGISTRATION_AGREEM,ตรวจสอบข้อตกลงการลงทะเบียนผู้ใช้
+WARNING_DO_NOT_NEED_TO_DELETE,คำเตือน: ไม่จำเป็นต้องลบ
+APPLICATION_FOCUSING_BLOCK_CHA,แอพลิเคชันโฟกัสโซ่บล็อก
+EDIT_YUAN_RECHARGE_MODE,แก้ไขโหมดเติมเงินหยวน
+DRAW_FIBONACCI_RETRACEMENT,วาด retracement fibonacci
+WANT_TO_EMPTY_DATA,ต้องการข้อมูลที่ว่างเปล่าหรือไม่
+THE_CHINESE_DIFFICULT_TO_READ_,จีนอ่านยากดังนั้น
+ADD_THE_YUAN_RECHARGE_MODE,เพิ่มโหมดเติมเงินหยวน
+SIGN_INTO_THE_ADDRESS_FROM_WHI,ที่อยู่จากเงินฝากที่ทำ
+DOCUMENTS_RELATED_TO_THIS_UPDA,เอกสารที่เกี่ยวข้องกับการปรับปรุงนี้
+THE_LATEST_HOTTEST_TOPIC_OF_DI,หัวข้อล่าสุดของการอภิปราย
+EVENING_DOWNTIME_UPGRADE_ANNOU,ประกาศการอัพเกรดการหยุดทำงานตอนเย็น
+FILENAME_INTEGER_SUCH_AS_FILLI,จำนวนเต็มชื่อไฟล์เช่นการเติม
+SCAN_DIRECT_ACCESS_TO_THE_PHON,สแกนการเข้าถึงโดยตรงไปยังรุ่นโทรศัพท์
+YOUR_EXCLUSIVE_PROMOTION_OF_TW,รหัสลิงค์ Affiliate QR
+YOU_CAN_RECORD_KEY,คุณสามารถบันทึกคีย์
+YOU_DO_NOT_HAVE_THE_OPPORTUNIT,คุณไม่มีโอกาสที่จะวาดวันนี้
+MULTIFACETED_UNDERSTANDING_OF_,ความเข้าใจหลายแง่มุมของการเปลี่ยนแปลงของอุตสาหกรรม
+BACKUP_FILE_LOCATION,ตำแหน่งไฟล์สำรอง:
+FILL_REASON_DID_NOT_PASS_CERTI,เติมเหตุผลไม่ผ่านการรับรอง
+BASED_ON_THE_LATEST_MAJOR_BROW,ขึ้นอยู่กับเบราว์เซอร์ที่สำคัญล่าสุด
+CAPTCHA_CODE_CAN_NOT_BE_EMPTY,รหัส CAPTCHA ไม่สามารถว่างเปล่า
+ALLOWING_ONLY_SELECT_A_PICTURE,อนุญาตให้เลือกไฟล์รูปภาพเท่านั้น
+TODAY_THE_BIGGEST_SELLING_TRAD,ราคาขายสูงสุด
+TODAY_THE_MINIMUM_PURCHASE_PRI,ซื้อขั้นต่ำ Price
+USD_RECHARGE_MODE_LIST,วิธีการเติมเงิน
+STRICT_PROJECT_ACCESS_THRESHOL,เกณฑ์การเข้าถึงโครงการที่เข้มงวด
+DOWNLOAD_THE_FILE_LOCATION,ดาวน์โหลดตำแหน่งไฟล์
+THE_DOWNLOAD_IS_COMPLETE_COMPA,การดาวน์โหลดเสร็จสมบูรณ์เปรียบเทียบไฟล์
+ANNOUNCEMENT_CURRENCY_LONG_NET,[ประกาศ] การอัพเกรดเครือข่ายที่ยาวนานของสกุลเงิน
+BELONGING_TO_THE_PREVIOUS_MENU,(เป็นของเมนูก่อนหน้า)
+PLEASE_ENTER_THE_VERIFICATION_,โปรดป้อน SMS รหัสยืนยัน
+THE_CURRENT_SYSTEM_VERSION_NUM,หมายเลขรุ่นของระบบปัจจุบัน
+THE_PAGE_IS_ABOUT_TO_AUTOMATIC,หน้ากำลังจะกระโดดโดยอัตโนมัติ
+PLEASE_ENTER_THE_CAPTCHA_CODE,โปรดป้อนรหัส CAPTCHA
+I_UNDERSTAND_THESE_RISKS,ฉันเข้าใจ
+DETERMINE_IN_ADVANCE_THE_PRINC,กำหนดล่วงหน้าสกัดหลัก
+USERS_TO_SWITCH_FROM_SITE,ผู้ใช้ที่จะเปลี่ยนจากเว็บไซต์
+CONFIGURATION_MODULE_VERIFICAT,2FA ที่จำเป็นสำหรับ:
+THE_VALUE_OF_EACH_SCROLL_NUMBE,ค่าของแต่ละหมายเลขเลื่อน
+USERS_TURN_TO_THE_SITE,ผู้ใช้หันไปหาเว็บไซต์
+CLICK_TO_VIEW_THE_PROMOTION_AW,ดูรางวัลของฉัน
+ADD_A_WALLET_ADDRESS,เพิ่มที่อยู่กระเป๋าเงิน
+ADD_A_CONTACT_ADDRESS,เพิ่มที่อยู่ติดต่อ
+NEW_CURRENCY_INOPERABLE,สกุลเงินใหม่ไม่สามารถใช้งานได้
+A_LIST_OF_NAMES_TO_CASH_WITHDR,รายการชื่อเพื่อถอนเงินสด
+MEMBERS_OF_THE_AUTHORIZED_EDIT,สมาชิกของหน้าแก้ไขที่ได้รับอนุญาต
+THE_CURRENT_SIZE_OF_THE_DATA_C,ขนาดปัจจุบันของแคชข้อมูล
+IF_YOU_WANT_TO_CHARGE_A_FEE,หากคุณต้องการเรียกเก็บค่าธรรมเนียม
+NATIONAL_TOLL_FREE,โทรฟรีแห่งชาติ
+TRANSACTION_PASSWORD_INPUT_SET,การตั้งค่าความต้องการรหัสผ่านของกองทุน
+DO_NOT_FILL_NOT_DISPLAYED_BY_D,อย่ากรอกข้อมูลที่ไม่ได้แสดงโดยค่าเริ่มต้น
+A_KEY_TO_CHECK_ALL_WALLET,กุญแจสำคัญในการตรวจสอบกระเป๋าเงินทั้งหมด
+PAGE_CLOSE_THE_SITE,หน้าปิดเว็บไซต์
+YOU_NEED_TO_ENTER_A_PASSWORD,คุณต้องป้อนรหัสผ่าน
+TO_RETURN_TO_AUTOMATIC_UPGRADE,เพื่อกลับไปที่บ้านอัพเกรดอัตโนมัติ
+ENTER_A_PASSWORD_LOCK_SCREEN,ป้อนหน้าจอล็อครหัสผ่าน
+PLEASE_ENTER_YOUR_OLD_PASSWORD,กรุณาใส่ธุรกรรมรหัสผ่านเก่าของคุณ
+PLEASE_ENTER_A_NEW_PASSWORD,กรุณากรอกรหัสผ่านใหม่
+PLEASE_ENTER_A_NEW_PHONE_NUMBE,โปรดป้อนหมายเลขโทรศัพท์ใหม่
+PLEASE_ENTER_A_NEW_TRANSACTION,กรุณากรอกรหัสผ่านกองทุนใหม่
+PLEASE_ENTER_ALIPAY_ACCOUNT,กรุณาใส่บัญชี Alipay
+CERTIFICATE_TYPE,ประเภทใบรับรอง:
+ICO_PAGE_RISK_WARNING,คำเตือนความเสี่ยงของหน้า ICO
+ORDERS_TO_PAY_ENCRYPTION,คำสั่งซื้อการเข้ารหัส
+RULES_ARE_AUTOMATICALLY_UPGRAD,กฎจะถูกอัพเกรดโดยอัตโนมัติเป็น
+DRAW_FIBONACCI_EXTENSION,วาดนามสกุล Fibonacci
+ACCUMULATIVE_ROLLOUT_OF_DIGITA,การถอนเงินรวมของเหรียญ
+THE_CUMULATIVE_TRANSFER_OF_DIG,การโอนเงินทั้งหมด
+NOW_GO_TO_WITHDRAW_IMMEDIATELY,ตอนนี้ไปถอนทันที
+ENSURE_USER_SECURITY_FUNDS,ตรวจสอบให้แน่ใจเงินปลอดภัยของผู้ใช้
+PLATFORM_TO_ENSURE_THE_INTERES,แพลตฟอร์มเพื่อให้แน่ใจว่าผลประโยชน์ของผู้ใช้
+USERS_GET_AFTER_PURCHASE,ผู้ใช้รับหลังจากซื้อ
+USER_NAME_USER_COMMUNICATION,ชื่อผู้ใช้การสื่อสารผู้ใช้
+CLICK_HERE_TO_VIEW_CLICK_SETTI,คลิกที่นี่เพื่อดูการตั้งค่าคลิก
+SUCCESSFUL_ACTIVATION_MAY_BE_L,การเปิดใช้งานที่ประสบความสำเร็จอาจมีขนาดใหญ่ขึ้น
+ADDING_A_BANK_ADDRESS,การเพิ่มที่อยู่ของธนาคาร
+ADD_A_WITHDRAWAL_ADDRESS,เพิ่มที่อยู่ถอน
+THE_MINIMUM_AMOUNT_FOR_EACH_PU,การซื้อจำนวนเงินขั้นต่ำคือ
+THE_MAXIMUM_NUMBER_FOR_EACH_PU,จำนวนสูงสุดสำหรับการซื้อแต่ละครั้ง
+DAILY_DEAL_END_TIME,เวลาสิ้นสุดการจัดการรายวัน
+DAILY_TRADING_START_TIME,เวลาเริ่มต้นการซื้อขายรายวัน
+SENDING_BACKUP_REQUEST,ส่งคำขอการสำรองข้อมูล
+FORMAT_SIZE_DOES_NOT_EXCEED,รูปแบบขนาดไม่ควรเกิน
+STYLE_CLASS_NAME_COLUMN_NAME,ชื่อคอลัมน์ชื่อคลาสสไตล์
+UPDATE_FILE_LOCATION,อัปเดตตำแหน่งไฟล์
+FILE_RECEIVING_SERVER,เซิร์ฟเวอร์รับไฟล์
+RECORD_NUMBERS_WITHDRAW_ASSETS,ตัวเลขบันทึกกลายเป็นสินทรัพย์
+DIGITAL_ASSETS_INTO_RECORD,สินทรัพย์ดิจิทัลเป็นบันทึก
+DIGITAL_REPRESENTATIVES_OF_SEV,ตัวแทนดิจิตอลของรางวัลอื่น ๆ อีกมากมาย
+BUS_KEEP_THE_LINKS_IN_THE,รถบัส: เก็บลิงก์ไว้ใน
+MASTER_ALL_KINDS_OF_EVENT_INFO,ปริญญาโททุกชนิดของข้อมูลเหตุการณ์
+SWEEPSTAKES_HAS_ENDED,การชิงโชคได้สิ้นสุดลงแล้ว
+A_LIST_OF_PUBLIC_INVESTMENT_ST,รายการสไตล์การลงทุนสาธารณะ
+TECHNICAL_INDICATORS_PARAMETER,การตั้งค่าพารามิเตอร์ทางเทคนิค
+SCAN_ATTENTION_OFFICIAL_MICRO_,สแกนจดหมายไมโครอย่างเป็นทางการ
+LIST_OF_USER_GROUPS_BELONG,รายชื่อกลุ่มผู้ใช้อยู่
+MICROCHANNEL_PUBLIC_NUMBER_TWO,รหัสไมโครช่องสาธารณะหมายเลขสองมิติ
+THE_LATEST_VERSION_OF_THE_CURR,รุ่นล่าสุดของรีโมตปัจจุบัน
+THE_CURRENT_ICO_HAS_E,ICO ปัจจุบันได้สิ้นสุดลงแล้ว
+CURRENT_NUMBER_OF_DIGITAL_ASSE,สมดุล
+MENU_ON_THE_LEFT_SHOW_HIDE,เมนูบนรายการด้านซ้ายซ่อน
+OFFICIAL_WEBSITE_RECEIVING_BAN,ข้อมูลธนาคาร QR
+BACKUP_FILE_STORAGE_LOCATION,ตำแหน่งที่เก็บไฟล์สำรอง
+TYRANT_CREDITS_LINE_STYLE_FIG,เครดิตเผด็จการรูปแบบบรรทัด
+STATISTICS_ONLY_PART_OF_THE_RE,สถิติเพียงส่วนหนึ่งของ RENMINBI
+THE_ORIGINAL_FILE_LOCATION,ตำแหน่งไฟล์ต้นฉบับ
+INTEREST_GIFT_TO_WHICH_CURRENC,ดอกเบี้ยของขวัญที่สกุลเงิน
+CATEGORY_AUTHORIZED_TO_EDIT_PA,หมวดหมู่ที่ได้รับอนุญาตให้แก้ไขหน้า
+ENTER_THE_NEW_PASSWORD_AGAIN,ป้อนรหัสผ่านใหม่อีกครั้ง:
+GLOBAL_FONT_COLOR_SETTING,การตั้งค่าสีตัวอักษรทั่วโลก
+SAVE_TRANSACTION_PASSWORD_SETT,บันทึกการตั้งค่ารหัสผ่านกองทุน
+THE_ABOVE_INFORMATION_IS,ข้อมูลข้างต้นคือ
+ONLY_DEVELOPER_MODE_DISPLAY,แสดงเฉพาะโหมดนักพัฒนาเท่านั้น
+DEVELOPER_MODE_ONLY_VISIBLE,โหมดนักพัฒนาสามารถมองเห็นได้เท่านั้น
+TRADING_ENCRYPTION_RETURN,การเข้ารหัสการซื้อขายกลับ
+UNDER_INHERIT_FONT_SIZE,ภายใต้มรดกขนาดตัวอักษร
+ADDED_TIME_AFTER_THE_FIRST,เก่าก่อน
+ALL CATEGORIES,ทุกประเภท
+To make purchases you are one click away,เพื่อทำการสั่งซื้อคุณจะคลิกเพียงครั้งเดียว
+ADDED_TIME_FROM_THE_FIRST_TO_T,ใหม่ล่าสุดแรก
+A_LINE_IMAGE_LINK,ลิงค์รูปภาพบรรทัด
+MENU_DETAIL,(รายละเอียดเมนู)
+PLEASE_ENTER_YOUR_QUERY,กรุณากรอกแบบสอบถามของคุณ
+PLEASE_ENTER_THE_PHONE_NUMBER,เข้าสู่มือถือ
+HIDDEN_UNDER_THE_PICTURE_TO,ซ่อนอยู่ภายใต้รูปภาพเพื่อ
+FOR_THIS_USE_CASE_ONLY,สำหรับกรณีการใช้งานนี้เท่านั้น
+SEND_SMS_VERIFICATION_CODE,ส่งรหัส SMS
+PLEASE_ENTER_YOUR_PASSWORD,ใส่รหัสผ่าน
+CLICK_TO_SEND_A_VERIFICATION_C,คลิกเพื่อส่งรหัสยืนยัน
+THE_METHOD_TO_BE_EXECUTED,วิธีการที่จะดำเนินการ
+PLEASE_ENTER_THE_CONFIRMATION_,โปรดป้อนรหัสยืนยัน
+ENTER_A_NAME_REMARKS,ป้อนคำพูดชื่อ
+OFFICIAL_FEES_ADDRESS,ค่าธรรมเนียมอย่างเป็นทางการที่อยู่
+USERNAME_ANY_NUMBER,ชื่อผู้ใช้หมายเลขใด ๆ
+THE_NUMBER_OF_INVITED_RANKINGS,การจัดอันดับการอ้างอิง
+PLEASE_ENTER_IDENTIFICATION_NU,กรุณาใส่หมายเลขประจำตัว
+THE_CLASSIFICATION_NO_DATA,ไม่มีบันทึก
+JUMP_IN_THE_OPERATION_WAS_SUCC,กระโดดในการดำเนินการประสบความสำเร็จ
+THE_MINIMUM_SELLING_PRICE_OF_T,ราคาขายขั้นต่ำของการทำธุรกรรม
+THE_MAXIMUM_SELLING_PRICE_OF_T,ราคาขายสูงสุดของการทำธุรกรรม
+SELL_​​AT_THIS_PRICE,ขายในราคานี้
+BUY_AT_THIS_PRICE,ซื้อในราคานี้
+THE_MINIMUM_PURCHASE_PRICE_OF_,ราคาซื้อขั้นต่ำของการทำธุรกรรม
+THE_MAXIMUM_PURCHASE_PRICE_OF_,ราคาซื้อสูงสุดของการทำธุรกรรม
+WALLET_SERVER_PORT,พอร์ตเซิร์ฟเวอร์ Wallet
+WALLET_SERVER_PASSWORD,รหัสผ่านเซิร์ฟเวอร์ WALLET
+REEDIT_THIS_CURRENCY,แก้ไขสกุลเงินนี้อีกครั้ง
+OUT_OF_PROPORTION_FEE,ออกจากค่าสัดส่วน
+THE_PROPORTION_OF_TRANSFER_FEE,สัดส่วนของค่าธรรมเนียมการโอน
+PLEASE_ENTER_THE_BANK_ACCOUNT_,โปรดป้อนหมายเลขบัญชีธนาคาร
+PLEASE_ENTER_THE_WALLET_LOGO,กรุณาใส่โลโก้กระเป๋าเงิน
+PLEASE_ENTER_THE_ADDRESS_WALLE,โปรดป้อนกระเป๋าสตางค์ที่อยู่
+PLEASE_ENTER_A_SELECT,กรุณากรอกตัวเลือก
+PLEASE_ENTER_THE_NUMBER_OF_ROL,โปรดป้อนจำนวนการถอน
+PLEASE_TYPE_YOUR_PHONE_NUMBER,กรุณาพิมพ์หมายเลขโทรศัพท์ของคุณ
+ENTER_ACCOUNT_BRANCH,ป้อนสาขาบัญชี
+EXPRESSION_STORED_PATH,นิพจน์ที่เก็บไว้เส้นทาง
+CONTACT_THE_ADMINISTRATOR_TO_M,ติดต่อผู้ดูแลระบบเพื่อแก้ไข
+ASSIGNED_TO_THE_CONTROL,มอบหมายให้กับการควบคุม
+NO_WALLET_SERVER,ไม่มีเซิร์ฟเวอร์ Wallet
+WALLET_SERVER_INFORMATION,ข้อมูลเซิร์ฟเวอร์กระเป๋าสตางค์
+DATA_HAS_BEEN_LOADED,โหลดข้อมูลแล้ว
+REFER_A_FRIEND_TO_GET_REWARD,แนะนำเพื่อนเพื่อรับรางวัล
+PERFECT_CREDENTIALS,ข้อมูลประจำตัวที่สมบูรณ์แบบ
+TO_FILL_THIS_OFFICE_CAN_BE,เพื่อเติมเต็มสำนักงานนี้สามารถ
+SINGLE_MINIMUM_TURNOVER,ผลประกอบการขั้นต่ำเดียว
+THE_SINGLE_LARGEST_TURNOVER,การหมุนเวียนที่ใหญ่ที่สุดเดี่ยว
+FRONTEND_TITLE_OF_THE_WINNING_TI,ชื่อเรื่องของเวลาที่ชนะ
+HOME_THUMBNAIL_DISPLAY,หน้าจอแสดงภาพขนาดย่อ
+PERMISSION_TO_REINITIALIZE,การอนุญาตให้เริ่มต้นอีกครั้ง
+REPEAT_TRANSACTION_PASSWORD,ทำซ้ำรหัสผ่านกองทุน:
+ENTER_EMAIL_OR_CELL_PHONE,ใส่ E-mail หรือโทรศัพท์มือถือ
+OUT_OF_A_TOTAL_FEE,ออกจากค่าธรรมเนียมทั้งหมด
+SKIP_THE_DATABASE_UPGRADE,ข้ามการอัพเกรดฐานข้อมูล
+PLEASE_SELECT_THE_ROLLOUT_ADDR,โปรดเลือกที่อยู่ถอน
+PLEASE_SELECT_THE_TYPE_OF_DOCU,โปรดเลือกประเภทของเอกสาร
+PLEASE_SELECT_WITHDRAW_ADDRESS,โปรดเลือกที่อยู่ถอน
+PLEASE_SELECT_THE_RECHARGE_AMO,กรุณาเลือกจำนวนการเติมเงิน
+PLEASE_SELECT_THE_RECHARGE_MOD,โปรดเลือกโหมดเติมเงิน
+PLEASE_CHOOSE_A_PAYMENT_METHOD,โปรดเลือกวิธีการชำระเงิน
+ENTER_GOOGLE_PASSWORD,ป้อนรหัสผ่านของ Google
+PLEASE_ENTER_THE_CERTIFICATE_N,โปรดป้อนหมายเลขใบรับรอง
+PLEASE_ENTER_THE_NUMBER_OF_SUB,โปรดป้อนจำนวน ICO
+PLEASE_ENTER_THE_NAME_OF_THE_M,โปรดป้อนชื่อของเมนู
+PLEASE_ENTER_A_CHAT,กรุณากรอกการแชท
+PLEASE_ENTER_A_LOGIN_PASSWORD,เลือกรหัสผ่านที่ปลอดภัย
+ENTER_THE_WITHDRAWAL_AMOUNT,ป้อนจำนวนเงินที่ถอน
+PLEASE_SIGN_IN_LOTTERY,กรุณาลงชื่อเข้าใช้ลอตเตอรี
+DRAW_FIBONACCI_SURFACE,วาดพื้นผิว Fibonacci
+CUMULATIVE_WITHDRAWALS_YUAN,ถอนสะสมเงินหยวน
+CUMULATIVE_RECHARGE_USD,คำพิพากษาเติมเงินสะสม
+CONFIRM_THE_TRANSACTION_PASSWO,ยืนยันรหัสผ่านกองทุน:
+SMS_INTERFACE_SECURITY_CODE,รหัสความปลอดภัยอินเตอร์เฟส SMS
+USERS_TO_BUY_USED,ผู้ใช้ที่จะซื้อใช้
+HONG_KONG_AND_MACAO_RESIDENTS_,ผู้อยู่อาศัยในฮ่องกงและมาเก๊าอนุญาตให้
+AS_TIME,เป็นเวลา
+REGISTRATION_IS_DEEMED_TO_AGRE,ฉันยอมรับ
+DAILY_LIMIT_PER_ACCOUNT,จำกัด รายวันต่อบัญชี
+NOT_VERIFIED,ไม่ได้ตรวจสอบ
+THE_MAXIMUM_PURCHASE_LIMIT,วงเงินการซื้อสูงสุด
+IT_SHOWS_THE_CUMULATIVE_TURNOV,มันแสดงการหมุนเวียนทั้งหมด
+ADD_A_NEW_ADDRESS,เพิ่มที่อยู่ใหม่
+THE_GREATER_THE_VALUE_THE_MORE,ยิ่งมีค่ามากเท่าไหร่
+ALIPAY_REMITTANCE,การโอนเงิน Alipay
+ALIPAY_RECHARGE_INFORMATION,ข้อมูลการเติมเงิน Alipay
+ALIPAY_ACCOUNT_WITHDRAWALS,ถอนเงินบัญชี Alipay
+USD_FREEZE_WITHDRAWALS,คำพิพากษาตรึงตรึง
+YOUR_WALLET_ADDRESS_IS,ที่อยู่กระเป๋าเงินของคุณคือ
+YOU_HAVE_SUCCESSFULLY_UPLOADED,คุณอัปโหลดเรียบร้อยแล้ว
+HELLO_AND_WELCOME_TO,สวัสดีและยินดีต้อนรับสู่
+QUICK_SHARE_TO_THE_COMMUNITY,สื่อสังคม
+CURRENT_PHONE_NUMBER,มือถือ:
+UPGRADE_TO_RECOMMEND,อัพเกรดเป็นแนะนำ
+ADVERTISING_COUNTDOWN_TIME,เวลานับถอยหลังโฆษณา
+MARKET_MARKET_NAME_LIST,รายการชื่อตลาดตลาด
+IT_HAS_BEEN_VERIFIED,KYC เสร็จสมบูรณ์
+HEAD_ADMINISTRATOR_MENU,เมนูหัวหน้าผู้ดูแลระบบ
+GREATER_THAN_THIS_LEVEL_AVAILA,มากกว่าระดับนี้ที่มีอยู่
+ADDITIONAL_BUSINESSES_PACKET,แพ็คเก็ตธุรกิจเพิ่มเติม
+AND_THEN_TO_PARTICIPATE_IN_SWE,แล้วมีส่วนร่วมในการชิงโชค
+PERMIT_FOR_TAIWAN_RESIDENTS,อนุญาตให้ผู้อยู่อาศัยในไต้หวัน
+TWOFACTOR_AUTHENTICATION_PASSW,รหัส 2FA:
+VERIFY_THE_LOCATION_OF_THE_ORI,ตรวจสอบตำแหน่งของความปลอดภัยดั้งเดิม
+SHARE_TO_SINA_WEIBO,แบ่งปันไปที่ Sina Weibo
+GET_A_FREE_VERIFICATION_CODE,รับรหัสยืนยันฟรี
+ELEMENTS_IT_MAY_BE,องค์ประกอบมันอาจจะเป็น
+SO_THAT_FORM_ELEMENTS,ดังนั้นองค์ประกอบฟอร์ม
+ARE_YOU_SURE_YOU_RECHARGE_IT,คุณแน่ใจหรือว่าคุณเติมเงิน?
+TODAY_LIMITS,วันนี้ จำกัด :
+TODAY_LIMIT_PRICE,วันนี้ จำกัด ราคา:
+TODAY_LIMIT_INCREASE,เพิ่มขีด จำกัด วันนี้:
+TODAY_THE_DAILY_LIMIT_PRICE,วันนี้ราคา จำกัด รายวัน:
+USD_WITHDRAWALS_RECORD,บันทึกการถอนคำพิพากษา
+USD_WITHDRAWALS_INTERFACE,อินเตอร์เฟสถอนคำพิพากษา
+USD_RECHARGE_RECORD,บันทึกการชาร์จคำพิพากษา
+PLEASE_ENTER_TRANSACTION_PASSW_CAN_NOT_BE_SAME,การทำธุรกรรม passsword ไม่สามารถเหมือนกับรหัสผ่านเข้าสู่ระบบ
+PRODUCT_INTRODUCTION,การแนะนำสินค้า
+USD_RECHARGE_MODE,โหมดเติมเงินเฟียต
+USD_RECHARGE_INTERFACE,อินเตอร์เฟซการเติมเงินคำพิพากษา
+PROFESSIONAL_SECURITY,ความปลอดภัยมืออาชีพ
+CLOSE_BUTTON_DOES_NOT_SHOW,ปุ่มปิดไม่แสดง
+THAI_LANGUAGE,ไทย
+MANAGED_IMMEDIATELY,จัดการทันที
+ACTUAL_TRADING_RISK,การมีส่วนร่วมในการค้าอาจมีความเสี่ยงโดยเฉพาะอย่างยิ่งถ้าคุณใช้ตัวเลือกการซื้อขายที่ซับซ้อน
+HERE_IS_WALLET,นี่คือที่อยู่กระเป๋าเงินของคุณโปรดส่งของคุณ
+_SAFER_AND_MORE_AT_EASE,ปลอดภัยและสะดวกสบายมากขึ้น!
+CLICK_ADD_PICTURE,คลิกเพิ่มรูปภาพ
+PLEASE_ENTER_VERIFICATION_CODE,ใส่รหัส
+ADDING_DATA_OBJECT,การเพิ่มวัตถุข้อมูล
+PLEASE_ENTER_PHONE_NUMBER,กรุณาใส่หมายเลขโทรศัพท์
+ICO_TYPE_OF_CURRENCY,ประเภท ICO ของสกุลเงิน
+SEC_CAN_BE_SENT_AGAIN,วินาทีที่จะส่งอีกครั้ง
+SMS_VERIFICATION_CODE,รหัสยืนยัน SMS:
+USER'S_REAL_NAME,ชื่อจริงของผู้ใช้
+DOCKING_WALLET_USE,การใช้กระเป๋าสตางค์
+ROLLOUT_OF_DIGITAL_ASSETS,การถอน crypto
+PLEASE_FILL_IN_THE_VERIFICATIO,ป้อน CAPTCHA
+GET_VERIFICATION_CODE,รับรหัสยืนยัน
+RETRIEVE_PASSWORD,ดึงรหัสผ่าน
+HIGHLIGHT_THE_TOP_MENU,ไฮไลต์เมนูด้านบน
+CONFIRM_PASSWORD_ERROR,ยืนยันข้อผิดพลาดรหัสผ่าน
+THE_MINIMUM_WITHDRAWAL_AMOUNT,จำนวนเงินที่ถอนขั้นต่ำ
+THE_MAXIMUM_AMOUNT_OF_WITHDRAW,จำนวนเงินที่ถอนได้สูงสุด
+CLICK_RESEND,คลิกส่งอีกครั้ง
+ADD_AN_ADDRESS,เพิ่มที่อยู่
+LOCAL_FILE_COMPARISON,การเปรียบเทียบไฟล์ท้องถิ่น
+RETRIEVE_TRANSACTION_PASSWORD,ดึงรหัสผ่านกองทุน
+MARKET_TRANSACTIONS_REPORT,รายงานธุรกรรมตลาด
+CAPTCHA,CAPTCHA:
+RESET_TRANSACTION_PASSWORD,รีเซ็ตรหัสผ่านกองทุน
+ROLLOUT_ADDRESS_MANAGEMENT,การถอนที่อยู่
+SET_TRANSACTION_PASSWORD,ตั้งค่ารหัสผ่านกองทุน
+REMOVE_DETERMINED_IN_ADVANCE,ลบที่กำหนดล่วงหน้า
+USER_REGISTRATION_AGREEMENT,ข้อตกลงการลงทะเบียนผู้ใช้
+VIEW_RIGHTS_MANAGEMENT,ดูการจัดการสิทธิ์
+WITHDRAW_ADDRESS_MANAGEMENT,ถอนการจัดการที่อยู่
+REPAIR_ANY_CONTENT,ซ่อมแซมเนื้อหาใด ๆ
+WALLET_ADDRESS_MANAGEMENT,การจัดการที่อยู่กระเป๋าสตางค์
+WALLET_TRANSACTIONS,ธุรกรรมกระเป๋าสตางค์
+SELECT_WITHDRAWALS_ADDRESS,เลือกที่อยู่ถอน
+INTO_DIGITAL_ASSETS,มัดจำ crypto
+CONTACT_TENCENT_MICROBLOGGING,ติดต่อ Tencent microblogging
+WAITING_FOR_THE_FIRST_PRIZE,รอรางวัลแรก
+USER_REGISTRATION_REPORT,รายงานการลงทะเบียนผู้ใช้
+DETAILED_FINANCIAL_RECORDS,บันทึกทางการเงินโดยละเอียด
+CLICK_FOR_LARGER_IMAGE,คลิกเพื่อดูภาพขนาดใหญ่
+COMPARE_LOCAL_FILE,เปรียบเทียบไฟล์โลคัล
+HERE_DEMO_CLOSE,ที่นี่การสาธิตปิด
+RECORD_AMOUNT,จำนวนเงินบันทึก
+THE_MINIMUM_NUMBER_OF_ROLLOUT,จำนวนขั้นต่ำของการถอน
+THE_MINIMUM_RECHARGE_AMOUNT,จำนวนเงินที่ชาร์จขั้นต่ำ
+THE_MAXIMUM_NUMBER_OF_ROLLOUT,จำนวนสูงสุดของการถอน
+THE_MAXIMUM_AMOUNT_OF_RECHARGE,จำนวนเงินสูงสุดของการชาร์จ
+LAST_LOGIN_TIME,เวลาเข้าสู่ระบบล่าสุด
+NEW_LOGIN_PASSWORD,ใหม่รหัสผ่านเข้าสู่ระบบ:
+NEW_MARKET_COMMISSION,คณะกรรมการตลาดใหม่
+NEW_TRADING_PASSWORD,รหัสผ่านกองทุนใหม่:
+ALIPAY_ACCOUNT,บัญชี Alipay
+FEE_CHART,แผนภูมิค่าธรรมเนียม
+MOBILE_TWODIMENSIONAL_CODE,รหัสสองมิติมือถือ
+ADVERTISING_MANAGEMENT_SECTOR,ภาคการจัดการโฆษณา
+ADVERTISING_SECTOR_LIST,รายชื่อภาคการโฆษณา
+BLOCK_HAS_BEEN_LOADED,บล็อกถูกโหลดแล้ว
+OFFICIAL_LINKS_CUSTOMER_SERVIC,การเชื่อมโยงอย่างเป็นทางการการบริการลูกค้า
+ENTER_SUBMIT_CHAT,ป้อนส่งแชท
+LOGIN_FAILED,การเข้าสู่ระบบล้มเหลว
+USER_DOES_NOT_EXISTS,ผู้ใช้ไม่ได้มีอยู่
+CHANGE_MY_PASSWORD,เปลี่ยนรหัสผ่านของฉัน
+TWO_DECIMAL_PLACES,ทศนิยมสองแห่ง
+MORE_THAN_THE_PAYMENT_AMOUNT,มากกว่าจำนวนเงิน
+MOST_SELL_TODAY,ขายมากที่สุดวันนี้
+TRADING_INTERFACE_DISPLAY,จอแสดงผลอินเตอร์เฟซเทรดดิ้ง
+THE_PROPORTION_OF_SECONDGENERA,สัดส่วนของของขวัญรุ่นที่สอง
+AUDIT_WORKING_DAYS,ตรวจสอบวันทำงาน
+DO_NOT_RESUBMIT,อย่าส่งอีกครั้ง
+THREE_GENERATIONS_PROPORTION_G,สามรุ่นสัดส่วนสัดส่วน
+THE_PROPORTION_OF_A_GENERATION,สัดส่วนของของขวัญรุ่น
+HOME_RISK_WARNING,การเตือนความเสี่ยงในบ้าน
+ESTIMATED_TOTAL_ASSETS,สินทรัพย์รวมโดยประมาณ:
+HIGH_TO_LOW_SALES,ขายสูงถึงต่ำ
+SALES_FROM_LOW_TO_HIGH,ขายต่ำถึงสูง
+WHITE_PAPER_CHAIN_SWIM_SHARES,โซ่กระดาษสีขาวแชร์ว่ายน้ำ
+WALLET_ACCUMULATED_BALANCE,กระเป๋าสตางค์สะสมยอดคงเหลือ
+RESET_TABLE_ELEMENTS,รีเซ็ตองค์ประกอบตาราง
+RESET_FORM_ELEMENTS,รีเซ็ตองค์ประกอบฟอร์ม
+RESET_LIST_ELEMENTS,รายการรีเซ็ตรายการ
+CONFIGURING_AUTHENTICATION,การกำหนดค่าการรับรองความถูกต้อง
+SELECT_THE_RECHARGE_AMOUNT,เลือกจำนวนการเติมเงิน
+CHOOSE_THE_PAYMENT_METHOD,เลือกวิธีการชำระเงิน
+INTO_A_TOTAL_GIFT,เป็นของขวัญทั้งหมด
+TRANSFERRED_TO_THIS_ADDRESS,โอนไปยังที่อยู่นี้:
+DO_NOT_REPEAT_CLICKS,อย่าทำซ้ำการคลิก
+SET_THE_DEFAULT_FONT,ตั้งค่าฟอนต์เริ่มต้น
+SET_THE_AUTHENTICATION_MODE,โหมดการรับรองความถูกต้อง
+SET_UP_TWOFACTOR_AUTHENTICATIO,การตั้งค่า 2FA
+CONTACT_TWITTER,ทวิตเตอร์
+ONLINE_BANKING_REMITTANCE,การชำระเงินธนาคารออนไลน์
+RECHARGE_ONLINE_BANKING_INFORM,เติมเงินข้อมูลธนาคารออนไลน์
+WEBSITE_USERS_HOLD_OUT,ผู้ใช้เว็บไซต์ค้างไว้
+SET_SITE_NAME,ตั้งชื่อไซต์
+NET_OF_TRANSACTION_NOTIFICATIO,สุทธิจากการแจ้งเตือนการทำธุรกรรม
+TEXT_EDITING_TIPS,เคล็ดลับการแก้ไขข้อความ
+EDITING_BACKEND_USERS,การแก้ไขผู้ใช้แบ็กเอนด์
+EDIT_PAYMENT_METHOD,แก้ไขวิธีการชำระเงิน
+UNIFIED_WIDTH_FONT,แบบอักษรความกว้างแบบครบวงจร
+THE_CUMULATIVE_NUMBER_OF_TRANS,จำนวนธุรกรรมทั้งหมด
+RATING_UPGRADE_ORDER,คะแนนอัปเกรดการให้คะแนน
+NO_ACCESS_REASON,ไม่มีเหตุผลการเข้าถึง
+SMS_APPLICATION_ADDRESS,ที่อยู่แอปพลิเคชัน SMS
+SMS_INTERFACE_NAME,ชื่ออินเตอร์เฟส SMS
+TO_DISPLAY_A_SINGLE_PAGE,เพื่อแสดงหน้าเดียว
+FINANCIAL_REWARD_CYCLE,วัฏจักรรางวัลทางการเงิน
+VERSION_NAME_OF_THE_VERSION_NU,ชื่อรุ่นของหมายเลขเวอร์ชัน
+CLICK_SIGN_UP_NOW,สมัครเลย
+SIGN_UP_NOW,ลงชื่อ
+CLICK_HERE_TO_DOWNLOAD,ดาวน์โหลดเดี๋ยวนี้
+LEFT_CLICK_STIPPLED,คลิกซ้ายที่กำหนด
+RIGHTCLICK_ON_CLEAR,ชัดเจนเมื่อคลิกขวา
+CLEAR_FLOAT_EFFECT,ผลการลอยที่ชัดเจน
+CLEAR_INSIDE_AND_OUTSIDE_MARGI,ที่ชัดเจนภายในและภายนอก
+ADD_PAYMENT_METHODS,เพิ่มวิธีการชำระเงิน
+REGISTRATION_OPEN_AWARD,การลงทะเบียนเปิดรางวัล
+REGISTRATION_REWARD_CURRENCY,สกุลเงินรางวัลการลงทะเบียน
+COMPARED_TO_THE_PREVIOUS_RECOR,เมื่อเทียบกับบันทึกก่อนหน้า
+LUCKY_DRAW_OPPORTUNITIES,โอกาสดึงดูดโชคดี
+CHECK_THE_STATE_WALLET,ตรวจสอบกระเป๋าสตางค์ของรัฐ
+CHECK_SYSTEM_STATUS,ตรวจสอบสถานะระบบ
+THE_LATEST_TRANSACTION_RECORDS,ธุรกรรมล่าสุด
+MORE_INFORMATION_COMMISSION,ดูเพิ่มเติม
+LOAD_PICTURE_SHOW,โหลดรูปภาพแสดง
+CLEAR_OBLIGATIONS_SPECIFICATIO,ข้อกำหนดข้อผูกพันที่ชัดเจน
+OLD_PASSWORD,รหัสผ่านเก่า
+OLD_TRADING_PASSWORD,รหัสผ่านกองทุนเก่า:
+NEW_MOBILE_PHONE_NUMBER,ใหม่หมายเลขโทรศัพท์มือถือ:
+TEXT_FORMATTING_ELEMENTS,องค์ประกอบการจัดรูปแบบข้อความ
+COVERING_THE_COMPLETE_FILE,ครอบคลุมไฟล์ที่สมบูรณ์
+DIGITAL_ASSETS_TRANSFERRED_OUT,การถอนสินทรัพย์ดิจิทัล
+DIGITAL_ASSETS_TRANSFERRED,โอนสินทรัพย์ดิจิทัล
+DIGITAL_ASSET_INFORMATION,ข้อมูลสินทรัพย์ดิจิทัล
+DIGITAL_ASSET_NAME,ชื่อสินทรัพย์ดิจิตอล
+PAYMENT_SUCCESSFUL_RETURN,การชำระเงินคืนที่ประสบความสำเร็จ
+PAYMENT_FAILS_TO_RETURN,การชำระเงินล้มเหลวในการคืนสินค้า
+PROMPT_TEXT_LIST,รายการข้อความพร้อมท์
+BANK_ACCOUNT_WITHDRAWALS,การถอนบัญชีธนาคาร
+STATE_BANK_WITHDRAWALS,การถอนธนาคารของรัฐ
+WITHDRAW_BANK_BRANCH,ถอนสาขาธนาคาร
+WITHDRAW_BANK_CITY,ถอนเมืองธนาคาร
+WITHDRAW_CAPTION,ถอนคำบรรยาย
+RECOMMENDED_GIFT_CURRENCY,สกุลเงินที่แนะนำของที่ระลึก
+RECOMMENDED_GIFT,ของขวัญที่แนะนำ
+INDEX_PARAMETER_SETTINGS,การตั้งค่าพารามิเตอร์ดัชนี
+VOTES_NEED_TO_DEDUCT,โหวตจะต้องหักค่าใช้จ่าย
+MOBILE_PHONE_AUTHENTICATION_TI,เวลาการตรวจสอบโทรศัพท์มือถือ
+YOU_ACKNOWLEDGE_THAT_YOU_VOTE,คุณรับทราบว่าคุณโหวต
+YOUR_IDENTITY,ตัวตนของคุณ
+YOU_HAVE_UPLOADED,คุณอัปโหลดแล้ว
+YOU_MUST_BEGIN_WITH_A_LETTER,คุณต้องเริ่มต้นด้วยจดหมาย
+MICROCHANNEL_REMITTANCE,การชำระเงิน WeChat
+ICO_IS_NOT_CURRENTLY_,ICO ไม่ได้มีอยู่ในปัจจุบัน
+OPEN_MASK_CLOSE,เปิดหน้ากากปิด
+ADVERTISING_USER_MANAGEMENT,การจัดการผู้ใช้โฆษณา
+CLICK_ON_THE_AD_DETAILS,คลิกที่รายละเอียดโฆษณา
+MARKET_ASSET_ALLOCATION,การจัดสรรสินทรัพย์ในตลาด
+MARKET_ACTIVITY_REPORT,รายงานกิจกรรมการตลาด
+HIGHLIGHT_THE_MENU_ON_THE_LEFT,ไฮไลต์เมนูทางด้านซ้าย
+THE_OFFICIAL_CURRENCY_ADDRESS,ที่อยู่สกุลเงินอย่างเป็นทางการ
+REWARD_AMOUNT_OFF_THE_ASSEMBLY,จำนวนเงินรางวัลปิดสายการประกอบ
+HEADER_TEXT_MESSAGES,ข้อความส่วนหัว
+FOUNDATION_DOCUMENT_MODEL,รูปแบบเอกสารพื้นฐาน
+LIVE_CHAT_Q__A,แชทสด Q & A
+TYRANT_CURRENCY_CHAT_ROOM,ห้องสนทนาทรราชสกุลเงิน
+PICTURES_CAN_NOT_BE_LOADED,ไม่สามารถโหลดรูปภาพได้
+FOLLOWUP_AND_SO_ON,ติดตามและอื่น ๆ
+USER_MANAGEMENT_BACKGROUND,พื้นหลังการจัดการผู้ใช้
+SYNTHESIS_OF_EXPENSES_DETAILS,รายละเอียดการสังเคราะห์ค่าใช้จ่าย
+AVAILABLE_FIAT,Fiat ที่มีอยู่:
+CANCEL_TWOFACTOR_AUTHENTICATIO,ยกเลิกการรับรองความถูกต้องสองปัจจัย
+SENDING_A_REQUEST_LOTTERY,การส่งลอตเตอรีร้องขอ
+GET_HOME_SELLERS,รับผู้ขายบ้าน
+EXTENDED_DYNAMIC_MENU,เมนูแบบไดนามิกขยาย
+CATEGORY_EXPAND_COLLAPSE,หมวดหมู่ขยายการล่มสลาย
+SHARE_YOUTUBE,แบ่งปัน YouTube
+FREEZE_FIAT,เมื่อสั่งคำพิพากษา:
+GLOBAL_FONT_SIZE,ขนาดตัวอักษรทั่วโลก
+INSUFFICIENT,ไม่เพียงพอ
+MIN_ORDER_QTY,จำนวนการสั่งซื้อขั้นต่ำคือ
+MAX_ORDER_QTY,จำนวนการสั่งซื้อสูงสุดคือ
+INCORRECT_QTY,จำนวนที่ไม่ถูกต้อง
+RECHARGE_CAPTION,คำอธิบายการชาร์จ
+MODIFY_TRANSACTION_PASSWORD,รหัสผ่านกองทุน
+DIGITS_EVERY,ตัวเลขทุก ๆ
+PRICE_HIGH_TO_LOW,ราคาสูงถึงต่ำ
+PRICE_LOW_TO_HIGH,ราคาต่ำถึงสูง
+TODAY_MONETIZATION,การสร้างรายได้ในวันนี้
+TODAY_ALREADY_DRAW,วันนี้วาดแล้ว
+THE_TOTAL_ASSETS_OF,รวมคำพิพากษา
+TRADING_TICKER,ทิกเกอร์การซื้อขาย
+OPEN_TRADING_CHAT,กล่องโทรลล์
+TRANSACTION_PASSWORD_SETTINGS,การตั้งค่ารหัสผ่านกองทุน
+GET_ON_HOME_BUYERS,รับผู้ซื้อบ้าน
+THE_HIGHEST_POINT_IN_HISTORY,จุดสูงสุดในประวัติศาสตร์
+THE_NEXT_INTEREST_RATE_RISE_TI,อัตราดอกเบี้ยที่เพิ่มขึ้นครั้งต่อไป
+SITE_NOTICE,[ประกาศเว็บไซต์]
+HIGHLIGHT_THE_MAIN_NAVIGATION,ไฮไลต์การนำทางหลัก
+HIGHLIGHT_SIDE_NAVIGATION,ไฮไลต์การนำทางด้านข้าง
+ESSENTIAL_PARAMETERS,พารามิเตอร์ที่จำเป็น
+TRANSACTION_PASSWORD,รหัสผ่านกองทุน
+IN_ORDER_TO_HIDE,เพื่อซ่อน
+YOU_CAN_NOT_USE_LOWER,คุณไม่สามารถใช้ต่ำกว่า
+WITHDRAWAL_FEE,ค่าธรรมเนียมการถอน
+REFRESH_CODE,รหัสรีเฟรช
+PLEASE_ENTER_CONTENT,กรุณากรอกเนื้อหา
+POSITIVE_AND_GREATER_THAN,บวกและมากกว่า
+NO_DATA_TEMPORARILY,ไม่มีข้อมูล
+COPY_SUCCESSFUL,คัดลอกสำเร็จ!
+PLEASE_ENTER_A_QUANTITY,กรุณาใส่ปริมาณ
+ORDER_NUMBER,คำสั่ง #
+DO_NOT_FORGET_ORDER_NUMBER,อย่าลืมพูดถึงการสั่งซื้อ # ในขณะที่ถ่ายโอน
+DATABASE_UPGRADE,อัพเกรดฐานข้อมูล
+RECHARGE_AMOUNT,เติมเงินจำนวน
+WALLET_SERVER,เซิร์ฟเวอร์กระเป๋าสตางค์
+PLEASE_SELECT_CURRENCY,กรุณาเลือกสกุลเงิน
+ICO_CURRENCY,ico:
+CONFIRM_PASSWORD,ยืนยันรหัสผ่าน
+ACTUAL_NAME,ชื่อจริง:
+CLICK_TOO_OFTEN,คลิกบ่อยเกินไป
+PAYMENT_AMOUNT,จำนวนเงิน:
+CURRENCY_OF_PAYMENT,สกุลเงินการชำระเงิน:
+INTEGER_MULTIPLE_WITHDRAWALS,จำนวนเต็มถอนหลายครั้ง
+RECEIVING_CODES,รับรหัส
+UPDATE_COMPLETED,อัปเดตเสร็จสมบูรณ์
+MESSAGE_INPUT_BOX,กล่องใส่ข้อความ
+OUT_OF_COMMISSION,ถอนค่าธรรมเนียม:
+ID_NUMBER,หมายเลขประจำตัวประชาชน
+REVENUE_RANKINGS,การจัดอันดับของรายได้
+RECOMMENDED_USERS,ผู้ใช้ที่แนะนำ
+AA,ชื่อ
+THE_OFFICIAL_ACCOUNT,บัญชี:
+SECURE_BROWSER,เบราว์เซอร์ที่ปลอดภัย
+IF_IT_DOES_NOT,ถ้ามันไม่ได้
+ONLINE_CUSTOMER_SERVICE_NUMBER,หมายเลขบริการลูกค้าออนไลน์
+SELLING_FEES,ค่าธรรมเนียมการขาย
+FREE_UPGRADE_TO,อัพเกรดฟรีเป็น
+RECHARGE_WAY,วิธีการเติมเงิน
+USD_RECHARGE,เพิ่ม fiat
+BUY_FEE,ค่าธรรมเนียมซื้อ
+BANK_CARD_MANAGEMENT,การจัดการบัตรธนาคาร
+PLEASE_ENTER_A_PRICE,กรุณาใส่ราคา
+TYPE_OF_CERTIFICATE,ประเภทเอกสาร:
+EXPRESSION_BOX,กล่องนิพจน์
+END_TIME,เวลาสิ้นสุด:
+CUMULATIVE_SUBSCRIBED,ทั้งหมดสมัครเป็นสมาชิก
+CUMULATIVE_TURNOVER,ผลประกอบการทั้งหมด
+ADMINISTRATOR_MANAGEMENT,การจัดการผู้ดูแลระบบ
+LOGIN_PASSWORD,รหัสในการลงชื่อเข้าใช้
+BLANK_DOES_NOT_UPDATE,ว่างเปล่าไม่ได้ปรับปรุง
+TEST_NO_MERCHANTS,หมายเลขทดสอบพ่อค้า
+EACH_COIN_BONUS,แต่ละเหรียญโบนัส
+THE_LATEST_TRANSACTION_PRICE,ราคา
+DATA_IS_LOADED,โหลดข้อมูล
+ALIPAY_BINDING,การผูก Alipay
+TECHNICAL_SCORE,คะแนนทางเทคนิค:
+YOU_CAN_ALSO,นอกจากนี้คุณยังสามารถ:
+MICROCHANNEL_PUBLIC_NUMBER,หมายเลขสาธารณะไมโครช่อง
+STARTING_TIME,เวลาเริ่มต้น:
+APP_RATING,การให้คะแนนของแอพ:
+CURRENCY_NAME,ชื่อสกุลเงิน
+THE_AMOUNT_HAS_BEEN_CREDITED_I,จำนวนเงินที่เครดิตเข้าบัญชี
+MULTIPLE_USERS_,ผู้ใช้หลายคน
+NAME_SYNTHESIS_DETAILS,รายละเอียดการสังเคราะห์ชื่อ
+AVAILABLE_USD,คำพิพากษา
+RELEASE_TIME,วันที่
+TO_THE_FINANCIAL_CENTER,การเงิน
+RATING_OUTLOOK,แนวโน้มอันดับเครดิต:
+RECHARGE_MOBILE,เติมเงินมือถือ:
+ANY_STRING,สตริงใด ๆ
+CURRENCY_PRICE,เหรียญราคา
+VERIFY_AND_ENABLE,ตรวจสอบและเปิดใช้งาน
+TOP_BAR_WARNING,คำเตือนบาร์อันดับต้น ๆ
+DIFFICULTY_ADJUSTMENT,การปรับความยากลำบาก
+LOCK_SCREEN_PROTECTION,การป้องกันหน้าจอล็อค
+BANK_CARD_NUMBER,A / C ไม่
+WALLET_ID,ชื่อกระเป๋าเงิน:
+WALLET_ADDRESS,ที่อยู่กระเป๋าสตางค์
+INTRODUCTION_QUANTUM_CHAIN,บทนำโซ่ควอนตัม
+IMPORTANT_HINT,คำแนะนำที่สำคัญ:
+RIO_PRESENTATION_CURRENCY,สกุลเงินการนำเสนอริโอ
+TURN_PROCESSED,เปิดการประมวลผล
+OUT_OF_VIRTUAL_CURRENCY,การถอนเงินของสกุลเงินเสมือน
+OUT_QUANTITY,ปริมาณการถอน:
+OUT_CURRENCY,สกุลเงินการถอน:
+OUT_ADDRESS,การถอนที่อยู่
+INTO_VIRTUAL_CURRENCY,ฝากสกุลเงินเสมือน
+NUMBER_OF_TRANSFER,จำนวนการโอน:
+INTO_THE_ADDRESS,ที่อยู่เงินฝาก:
+AUTHENTICATOR,ของแท้
+GAN_PUBLIC_ANBEI,Gan สาธารณะ Anbei
+PURCHASE_QUANTITY,ปริมาณการซื้อ
+TOTAL_ASSETS_ACCOUNT,รวม
+BUY_SALE,พิมพ์
+ACCOUNT_BALANCE,ยอดเงินในบัญชี:
+GOOGLE_CHROME,Google Chrome
+PLEASE_SELECT_PROVINCE,กรุณาเลือกจังหวัด
+PLEASE_CHOOSE_THE_CITY,กรุณาเลือกเมือง
+PLEASE_SELECT_A,กรุณาเลือก
+PLEASE_INPUT_YOUR_EMAIL,กรุณาใส่อีเมลของคุณ
+PLEASE_MODIFY_CAUTIOUS,กรุณาปรับเปลี่ยนความระมัดระวัง
+PLEASE_WAIT_FOR_REVIEW,โปรดรอรีวิว
+PLEASE_BACKSTAGE,โปรด Backstage
+EVALUATION_STARS,ดาวประเมินผล:
+PROOF_WAY,วิธีพิสูจน์
+ACCESSING_PHONE,เบอร์ติดต่อ
+PHONE_NUMBER,มือถือ
+APPROVAL_PERIOD,วันที่สมัครสมาชิก
+CERTIFICATION_NAME,ชื่อรับรอง:
+ORDER_TIME,เวลาสั่งซื้อ:
+FIGURE_END_MARKET,รูปตลาดสิ้นสุด
+LITECOIN_INTRODUCTION,บทนำ Litecoin
+ENGLISH_ABBREVIATION,ตัวย่อภาษาอังกฤษ
+AUTOFILL_PRICE,เติมอัตโนมัติ Price
+CONTACT_NUMBER,เบอร์ติดต่อ
+CONTACT_NAME,ชื่อผู้ติดต่อ:
+TRADING_INVESTIGATION,การสอบสวนการซื้อขาย
+WEBSITE_KEYWORD,คำที่ใช้เว็บไซต์
+NET_MENTION_CURRENCY_ANNOUNCEM,ประกาศเหรียญ
+EDIT_ADMINISTRATOR,แก้ไขผู้ดูแลระบบ
+MAINTENANCE_YU_BO,การซ่อมบำรุง:
+BINDING_TIME,เวลาที่มีผลผูกพัน:
+BINDING_ALIPAY,มีผลผูกพัน Alipay
+CUMULATIVE_CHARGES,ค่าใช้จ่ายสะสม
+HAS_SOLD,ขาย:
+THE_CUMULATIVE_TRADING_VOLUME,ปริมาณการซื้อขายรวม
+ADMINISTRATORS_LIST,รายชื่อผู้ดูแลระบบ
+AFTER_SETTING_LEVEL,หลังจากตั้งค่าระดับ
+PENDING_REVIEW,รีวิวที่รอดำเนินการ
+IMMEDIATELY_TO_UPGRADE,ทันทีเพื่ออัพเกรด
+SEND_SECONDS_AGAIN,ส่งวินาทีอีกครั้ง
+LOGIN_AUTHENTICATION_CODE,รหัสการรับรองความถูกต้องเข้าสู่ระบบ
+AUTHORIZED_USER_GROUP,กลุ่มผู้ใช้ที่ได้รับอนุญาต
+DOG_CURRENCY_INTRODUCED,สกุลเงินสุนัขแนะนำ
+SPECIAL_USER_GROUPS,กลุ่มผู้ใช้พิเศษ
+ADDING_CARD,เพิ่มการ์ด
+ADD_ADMINISTRATOR,เพิ่มผู้ดูแลระบบ
+ACTIVITY_TIME,เวลากิจกรรม:
+ACTIVITIES_PRIZES,กิจกรรมรางวัล:
+THE_TOTAL_NUMBER_OF_REGISTERED,ผู้ใช้ทั้งหมด
+NO_ACCOUNT,ไม่มีบัญชี?
+NO_TIME_TO_FILL,Ref ID [ถ้ามี]
+INVALID_PHONE_FORMAT,หมายเลขโทรศัพท์มือถือไม่ถูกต้อง!
+SYSTEM_IN_DEMO_MODE,ระบบนี้กำลังอยู่ในโหมดสาธิต!
+INVALID_USERNAME,รูปแบบชื่อผู้ใช้ไม่ถูกต้อง!
+INVALID_NICKNAME,ชื่อเล่นไม่ถูกต้อง!
+INVALID_PASSWORD,รหัสผ่านไม่ถูกต้อง!
+INVALID_EMAIL,รูปแบบอีเมลไม่ถูกต้อง!
+SAVED_SUCCESSFULLY,บันทึกเรียบร้อยแล้ว!
+COULD_NOT_SAVE,ไม่สามารถบันทึกการเปลี่ยนแปลง!
+INCORRECT_REQ,คำขอไม่ถูกต้อง!
+INCORRECT_TYPE,ประเภทไม่ถูกต้องให้!
+SUCCESSFULLY_DONE,สำเร็จแล้ว!
+ADDED_SUCCESSFULLY,เพิ่มสำเร็จแล้ว!
+FAILED_TO_ADD,ไม่สามารถเพิ่ม!
+INCORRECT_OLD_PWD,รหัสผ่านเก่าที่ไม่ถูกต้อง!
+INCORRECT_NEW_PWD,รหัสผ่านใหม่ไม่ถูกต้อง!
+INVALID_OLD_PWD,รหัสผ่านเก่าไม่ถูกต้อง!
+INVALID_NEW_PWD,รหัสผ่านใหม่ไม่ถูกต้อง!
+LOGIN_PWD_CHANGED,เปลี่ยนรหัสผ่านเข้าสู่ระบบแล้ว
+NO_CHANGES_TO_PWD,ไม่มีการเปลี่ยนแปลงรหัสผ่าน
+YOU_NEED_TO_LOGIN,กรุณาเข้าสู่ระบบ
+INVALID_SMS_CODE,รหัส SMS ไม่ถูกต้อง
+INCORRECT_SMS_CODE,รหัส SMS ที่ไม่ถูกต้อง
+INTRODUCTION_BITS_SHARES,บทนำหุ้นบิต
+BITCOIN_HOUSE,Bitcoin บ้าน
+BILLY_SHARES_INTRODUCTION,Billy แบ่งปันการแนะนำ
+ICO_IS_IN,การขายเปิดให้บริการ!
+LUCKY_DRAW_CHANCE,โอกาสดึงดูดโชคดี
+THE_CORE_ALGORITHM,อัลกอริทึมหลัก
+TAB_NAVIGATION,การนำทางแท็บ
+FIND_ADMINISTRATOR,ค้นหาผู้ดูแลระบบ
+THE_TOTAL_VALUE_OF_A_CERTAIN_C,มูลค่ารวมของสกุลเงินที่แน่นอน
+NOT_BY_REASON,ไม่มีเหตุผล
+SERVER_QUEUE,คิวของเซิร์ฟเวอร์
+MAXIMUM_SELL,ขายสูงสุด:
+MAXIMUM_BUY,ซื้อสูงสุด:
+BEST_SELLING_PRICE,การเสนอราคาที่ดีที่สุด:
+BEST_BID,ดีที่สุดถาม:
+UPDATE_THE_DATABASE,อัปเดตฐานข้อมูล
+SHOW_RECORD_NUMBER,แสดงหมายเลขบันทึก
+YESTERDAYS_CLOSING_PRICE,เมื่อวานปิดราคา
+DIGITAL_JINJIE_SHAO,Digital Jinjie Shao
+STATISTICS_PUT_THE_CODE,สถิติใส่รหัส
+ALIPAY_HEADED,Alipay มุ่งหน้าไป
+ALIPAY_INFORMATION,ข้อมูล Alipay
+SOSO_BITCOIN,bitcoin
+THE_AMOUNT_OF_WITHDRAWALS_IS,จำนวนเงินในทวีคูณ
+WITHDRAWAL_AMOUNT,จำนวนเงินถอน
+WITHDRAW_ADDRESS,ถอนที่อยู่
+RELEASE_DATE,วันที่วางจำหน่าย
+SORT_BY,เรียงตาม:
+DEDUCT_FEES,หักค่าธรรมเนียม
+OWNED_TRADING,การซื้อขายที่เป็นเจ้าของ
+WHERE_THE_PROVINCES,เลือกที่ตั้ง:
+OR_THE_OUTER_CHAIN,หรือห่วงโซ่ด้านนอก)
+I_WAS_SPEAKING_TWO,รีวิวของฉัน
+YOU_ARE_CURRENTLY_AVAILABLE,สมดุล:
+FORGET_PASSWORD,ลืมรหัสผ่าน?
+WECHAT_QR_CODE,รหัส QR WeChat
+ZHANG_CERTIFICATION_PICTURES,KYC Docs
+BANK,ธนาคาร
+ACCOUNT_PROVINCES,ประเทศ:
+BRANCH_ACCOUNT,สาขา:
+ACCOUNT_NAME,ชื่อบัญชี:
+TOTAL_ADVERTISING_PROFITS,ผลกำไรโฆษณาทั้งหมด
+CURRENCY_PEOPLE_ARE_SAYING,ความคิดเห็น
+HAVE_AN_ACCOUNT,มีบัญชี?
+THE_ITALIC_RIGHTING,ฝ่ายทัณฑ์อิตาลี
+IMPORTED_CONTENT,เนื้อหาที่นำเข้า
+IMPORT_FORMAT,รูปแบบการนำเข้า:
+IMPORT_DATABASE,นำเข้าฐานข้อมูล
+SAFE_AND_SECURE,ปลอดภัยและปลอดภัย
+NOTE_NAME,ชื่อหมายเหตุ:
+BACKUP_DATABASE,ฐานข้อมูลสำรอง
+ADDRESS_MARK,เครื่องหมายที่อยู่
+REMARK,สังเกต
+CATEGORIES,หมวดหมู่:
+COMMODITY_PRICES,ราคาสินค้า:
+CYCLE_WITHIN_LIMITS,วงจรภายในขีด จำกัด
+START_PAGE_PICTURE,หน้าเริ่มต้นหน้า
+CAN_BE_EXTRACTED_AT_ANY_TIME,สามารถสกัดได้ตลอดเวลา
+ONLY_DUE_TO_TAKE,เนื่องจากใช้เท่านั้น
+FILL_ONLY_NUMBERS,เติมตัวเลขเท่านั้น
+THE_TOTAL_ISSUED,อุปทานการหมุนเวียน
+KARAT_INTRODUCTION,Karat บทนำ
+SELL_​​RATIO,ขายอัตราส่วน:
+NUMBER_SOLD,จำนวนที่ขาย:
+SALE_NUMBER,ขายจำนวน:
+SELL_​​PRICE,ราคาขาย:
+BLOCK_SPEED,ความเร็วบล็อก
+BLOCK_BONUS,โบนัสบล็อก:
+ANALYTICAL_FUNCTION,ฟังก์ชั่นการวิเคราะห์
+FREEZE_USD,ในการซื้อขาย
+BAXI_DIGITAL_NETWORK,เครือข่ายดิจิตอลของ Baxi
+YUAN_DEBIT_CARDS,หยวนบัตรเดบิต
+BIT_AND_CONFIRM,บิตและยืนยัน
+EXCELLENT_PRESENTATION_CURRENC,การนำเสนอสกุลเงินการนำเสนอที่ยอดเยี่ยม
+ON_BEHALF_OF_NOT_WINNING,ในนามของการไม่ชนะ
+PAYMENT_METHOD,วิธีการชำระเงิน
+PAYMENT_CURRENCY,สกุลเงินการชำระเงิน:
+CASH_WITHDRAWAL,คำพิพากษาถอนตัว
+TRANSACTION_HOUR,ชั่วโมงการทำธุรกรรม
+BUY_RATIO,ซื้ออัตราส่วน:
+BUY_QUANTITY,ซื้อจำนวน:
+PLEASE_LOGIN,กรุณาเข้าสู่ระบบก่อน!
+BUY_PRICE,ซื้อ Price:
+KEY_FEATURES,คุณสมบัติหลัก
+EXCLUSIVE_INVITATION_CODE,รหัสอ้างอิง
+EXCLUSIVE_PROMOTION_OF_LANGUAG,โปรโมชั่นภาษาพิเศษ
+EXCLUSIVE_ADVERTISING_SLOGAN,สโลแกนโฆษณาพิเศษ
+SHORTCOMINGS,ข้อบกพร่อง:
+DO_NOT_AUTOMATICALLY_SHUT_DOWN,อย่าปิดอัตโนมัติ
+IT_DOES_NOT_SHOW_THE_MASK,มันไม่แสดงหน้ากาก
+DO_NOT_DISPLAY_PRICES,อย่าแสดงราคา
+DOWNLOAD_THE_UPDATE_PACKAGE,ดาวน์โหลดแพ็คเกจการอัพเดท
+PULLDOWN_BAR_STYLE,สไตล์บาร์แบบเลื่อนลง
+ADDED_TIME,เวลาเพิ่ม:
+ON_THREE_DIVIDENDS,ในสามเงินปันผล
+WARNINGS,คำเตือน
+HIGHLIGHT_NAVIGATION,การนำทางไฮไลต์
+SUBMIT_FORM,ส่งแบบฟอร์ม
+SEARCH_FUNCTION,ฟังก์ชั่นการค้นหา
+ENTER_SEARCH,ป้อนการค้นหา
+TIPS,เคล็ดลับ
+MENU_HIGHLIGHTS,ไฮไลท์เมนู
+VIEW_DESCRIPTION,ข้อมูล
+FINANCIAL_CENTER,ศูนย์การเงิน
+ADD_TIME,เพิ่มเวลา
+SECURITY_CENTER,บัญชีของฉัน
+ALL_STATES,ทุกรัฐ
+MENU_ON_THE_LEFT,เมนูด้านซ้าย
+RIGHT_OF_THE_CONTENT,ด้านขวาของเนื้อหา
+SEND_DATA,ส่งข้อมูล
+UPLOAD_ERROR,ข้อผิดพลาดในการอัพโหลด
+NORMAL_STATUS,สถานะปกติ
+FROZEN_STATE,รัฐแช่แข็ง
+VERIFIED,ตรวจสอบแล้ว
+REAL_NAME_CAN_NOT_BE_CHANGE,ชื่อจริงต้องเหมือนกับบัญชีถอนและไม่สามารถเปลี่ยนแปลงได้ในภายหลัง
+KYC,เคยซี
+SECURITY,ความปลอดภัย
+INVITE_CODE,คำเชิญ
+APPLICATION_CENTER,แอปพลิเคชันศูนย์
+PROCESSING,กำลังประมวลผล
+Running,วิ่ง
+BAZAAR_COMMISSIONED,Bazaar รับหน้าที่
+ACCESS_AUTHORIZATION,การอนุญาตการเข้าถึง
+ICO_RECORD,บันทึก ICO
+ICO_CENTER,ศูนย์ Ico
+EDIT_TIME,แก้ไขเวลา
+MONEY_NAME,ชื่อเงิน
+SHIPPING_ADDRESS,ที่อยู่จัดส่ง
+OPERATING_TIME,เวลาทำงาน
+MY_TRADING,การซื้อขายของฉัน
+ICON_ADDRESS,ที่อยู่ไอคอน
+THE_STATION'S_RECORD,บันทึกของสถานี
+ARTIFICIAL_ARRIVAL,การมาถึงประดิษฐ์
+DO_NOT_FILL,อย่าเติม
+ACCOUNT_WITHDRAWALS,การถอนคำพิพากษา
+THANK_YOU_FOR_PARTICIPATION,ขอบคุณสำหรับการมีส่วนร่วม
+ICO_NAME,ชื่อ Ico
+AUTO_UPDATE,อัปเดตอัตโนมัติ
+CONFIRM_THE_ACCOUNT,บัญชี
+USER_REGISTRATION,การลงทะเบียน
+FINANCIAL_RECORDS,บันทึกทางการเงิน
+MEMBERS_OF_THE_AUTHORIZED,สมาชิกของผู้มีอำนาจ
+REMARKS_NAME,ชื่อหมายเหตุ
+THE_REMAINING_AMOUNT,จำนวนเงินที่เหลืออยู่
+SUCCESSFUL_RECHARGE,เติมเงินที่ประสบความสำเร็จ
+SECURITY_CODE,รหัสรักษาความปลอดภัย
+LOG_IN_IMMEDIATELY,เข้าสู่ระบบ
+WITHDRAWALS_RECORD,การถอนบันทึก
+DIVIDEND_CENTER,ศูนย์เงินปันผล
+MARKET_PLACE,ตลาด
+FINANCIAL_SECURITY,ความมั่นคงทางการเงิน
+ACCOUNT_FUNDING,เงินฝากคำพิพากษา
+LOG_IN,เข้าสู่ระบบ
+THAWING_TIMES,ละลายครั้ง
+IMMEDIATE_PAYMENT,การชำระเงินทันที
+MONEY_CURRENCY,สกุลเงินเงิน
+FINANCIAL_PERIOD,ระยะเวลาทางการเงิน
+CHECK_THE_WALLET,ตรวจสอบกระเป๋าเงิน
+PROFESSIONAL_SERVICES,บริการระดับมืออาชีพ
+ACTION_TYPE,ชนิดการดำเนินการ
+MY_BONUS,โบนัสของฉัน
+FAST_AND_CONVENIENT,รวดเร็วและสะดวกสบาย
+OPENING_TIME,เปิดเวลา
+CURRENCY_LIST,รายการสกุลเงิน
+COMMISSIONED_BY_TIME,เวลา
+REWARD_CURRENCY,รางวัลสกุลเงิน
+DONGYUEBIGU,dongyuebigu
+CURRENCY_INTEREST,ดอกเบี้ยสกุลเงิน
+FREE_REGISTRATION,ลงชื่อ
+CODE_UPGRADES,การอัพเกรดรหัส
+VERIFY_PHONE,ตรวจสอบโทรศัพท์
+HOME_SHOW,การแสดงที่บ้าน
+MARKET_MARKET,ตลาดตลาด
+LINK_TITLE,ชื่อลิงค์
+LINK_ADDRESS,ที่อยู่เชื่อมโยง
+LINK_NAME,ชื่อลิงค์
+RESET_PASSWORD,รีเซ็ตรหัสผ่าน
+OUT_RECORD,การถอน
+INTO_GIFT,เป็นของขวัญ
+PURCHASE_HISTORY,ประวัติการซื้อ
+ICO_LIMIT,จำกัด ICO
+NUMBER_OF_ICO,จำนวน ICO
+THE_TOTAL_AMOUNT_OF_SUBSCRIPTI,อุปทานรวม
+ICO_LIST,รายการ ICO
+ICO_PRICE,ico ราคา
+APPLE_COMPUTER,คอมพิวเตอร์แอปเปิ้ล
+CONTACT_ADDRESS,ที่อยู่ติดต่อ
+BOUND_PHONE,มือถือ
+MY_LOG,บันทึกของฉัน
+SYSTEM_RELIABILITY,ความน่าเชื่อถือของระบบ
+PENDING,รอดำเนินการ
+SUBSCRIBE_NOW,สมัครสมาชิกตอนนี้
+PROHIBIT_TRANSFER,ห้ามการถ่ายโอน
+BANKING_CENTERS,ศูนย์การธนาคาร
+CURRENT_MODE,โหมดปัจจุบัน
+REGISTER_ACCOUNT,ลงชื่อ
+NORMAL_TRANSFER,การถ่ายโอนปกติ
+THE_NEW_CURRENCY_VOTE,โหวต
+TIP_LOGO,เคล็ดลับโลโก้
+TIP_POSITION,ตำแหน่งเคล็ดลับ
+MY_PROPERTY,ยอดคงเหลือของฉัน
+DIVIDEND_START,เงินปันผลเริ่มต้น
+OPEN_TRADING,เปิดการซื้อขาย
+THE_BOTTOM_OF_THE_DISPLAY,ด้านล่างของจอแสดงผล
+SUBSCRIBED,ออก:
+MILLET_BRACELET,สร้อยข้อมือข้าวฟ่าง
+HOUR_ONLINE,ออนไลน์ชั่วโมง
+OFFICIAL_ANNOUNCEMENT,ประกาศ
+DELEGATED_ADMINISTRATION,คำสั่งซื้อ
+HUAWEI_CELL_PHONE,โทรศัพท์มือถือของหัวเว่ย
+AMOUNT_ARRIVAL,จำนวนการมาถึง
+DIVIDEND_CURRENCY,สกุลเงินปันผล
+DIVIDEND_NAME,ชื่อเงินปันผล
+RECHARGE_TIME,เติมเงินเวลา
+CHANGE_PASSWORD,เปลี่ยนรหัสผ่าน
+COMMISSION_AMOUNT,จำนวนค่านายหน้า
+COMMISSION_RATE,อัตราค่านายหน้า
+RISK_WARNING,คำเตือนความเสี่ยง
+DOWNLOAD_WALLET,ดาวน์โหลดกระเป๋าสตางค์
+INVITE_FRIENDS,โปรแกรมพันธมิตร
+TRANSFER_TIME,โอนเวลา
+THE_NUMBER_OF_TRANSFER,จำนวนการถ่ายโอน
+INTO_SUCCESS,ความสำเร็จของเงินฝาก
+TYPES_OF_FEE,ประเภทของค่าธรรมเนียม
+VOLUME_COST,ต้นทุนปริมาณ
+ACCOUNT_PREVIEW,บัญชี
+PREPAID_RECHARGE,เติมเงินล่วงหน้า
+ICO_TIME,เวลา ICO
+THAW_INTERVAL,ช่วงเวลาของการละลาย
+FORM_SUBMISSION,การส่งแบบฟอร์ม
+TYPE_TITLE,ประเภทประเภท
+ADD_IT_NOW,เพิ่มทันที
+BACKUP_NOW,การสำรองข้อมูลในขณะนี้
+RECHARGE_IMMEDIATELY,เติมเงินตอนนี้
+CONFIRM_ARRIVAL,ยืนยันการมาถึง
+LOG_IN_LOG,บันทึก
+USERNAME,ชื่อผู้ใช้
+THE_TOTAL_AMOUNT_OF_FINANCING,จำนวนเงินทั้งหมดของการจัดหาเงินทุน
+CLICK_SWITCH,คลิกสวิทช์
+SOURCE_DOWNLOAD,ดาวน์โหลดแหล่งที่มา
+CURRENCY_INTEREST_RATE_RISE,อัตราดอกเบี้ยสกุลเงินเพิ่มขึ้น
+PRINCIPAL_CURRENCY,สกุลเงินหลัก
+UPDATED,อัปเดต
+REPLACEMENT_BINDINGS,อัปเดตหมายเลขโทรศัพท์มือถือ
+ARTICLE_TYPE,ประเภทบทความ
+ARTICLE_TITLE,ชื่อบทความ
+OPERATING_AMOUNT,จำนวนเงินที่ใช้งาน
+TEXT_TIPS,เคล็ดลับข้อความ
+WITHDRAW_TIME,ถอนเวลา
+PROMOTION_OF_PEOPLE,โปรโมชั่นของผู้คน
+PROMOTION_LIST,รายการโปรโมชั่น
+FOR_ANOTHER_ONE,สำหรับอีกอัน?
+MY_ICO,ico ของฉัน
+MY_RECOMMENDATION,การอ้างอิงของฉัน
+MY_PROMOTION,โปรโมชั่นของฉัน
+MY_REWARD,รางวัลของฉัน
+TRANSACTION_QUERY,ธุรกรรม
+TRANSACTION_TIME,เวลาการทำธุรกรรม
+THE_NUMBER_OF_TRANSACTIONS,จำนวนธุรกรรม
+ACCOUNT_BRANCH,สาขาบัญชี
+AD_IMAGE,ภาพโฆษณา
+ANNUALIZED_INTEREST_RATES,อัตราดอกเบี้ยต่อปี
+HELP,ช่วย
+IT_HAS_BEEN_PROCESSED,มันได้รับการประมวลผลแล้ว
+FINANCING_AMOUNT_HAS_BEEN,จำนวนเงินที่ได้รับการจัดหาเงินทุน
+EXPORT_SELECTED,การส่งออกที่เลือก
+THE_ACTUAL_ARRIVAL,ที่ได้รับการยืนยัน
+RECURRENCE_PATTERN,รูปแบบการกำเริบ
+THE_NUMBER_OF_COMMISSIONED,ค่าธรรมเนียม
+IF_SUPPORT,ถ้าสนับสนุน
+INCENTIVE_PAYMENTS,การจ่ายแรงจูงใจ
+BONUS_SYSTEM,ระบบโบนัส
+BONUS_TIME,เวลาโบนัส
+BONUS,โบนัส
+REWARD_NAME,ชื่อรางวัล
+PROCESSING_TIME,ระยะเวลาดำเนินการ
+BASIC_CONFIGURATION,การกำหนดค่าพื้นฐาน
+LINKS,ลิงค์
+DIVIDEND_RECORD,บันทึกเงินปันผล
+ON_BEHALF_OF_THE_RECOMMENDED,ในนามของคำแนะนำ
+QUOTES_TODAY,คำพูดวันนี้
+TRANSACTION_TYPE,ประเภทธุรกรรม
+CURRENCY_TRADING,การซื้อขายสกุลเงิน
+TRADING_CENTER,การซื้อขาย
+BUY_NUMBER,จำนวนซื้อ
+LAST_THAW,ละลายครั้งสุดท้าย
+MARKET_PRICE,ราคาตลาด
+LOCK_SCREEN_BREAK,ล็อคหน้าจอแตก
+WALLET_VERSION,เวอร์ชั่นกระเป๋าสตางค์
+WALLET_LOGO,โลโก้กระเป๋าสตางค์
+WALLET_TAG,แท็กกระเป๋าสตางค์
+WALLET_DETAILS,รายละเอียดกระเป๋าเงิน
+THE_TOTAL_WALLET,กระเป๋าเงินทั้งหมด
+WALLET_NAME,ชื่อกระเป๋าสตางค์
+WALLET_INFORMATION,ข้อมูลกระเป๋าเงิน
+WALLET_BALANCE,สมดุลกระเป๋าสตางค์
+AMOUNT_LIST,รายการจำนวนเงิน
+BY_CERTIFICATION,โดยการรับรอง
+CHOOSE_BANK,เลือกธนาคาร
+CHOOSE_A_CURRENCY,เลือกสกุลเงิน
+ENTER_PASSWORD,ใส่รหัสผ่าน
+OUT_DESCRIPTION,คำอธิบายออก
+AUTOMATIC_ROLLOUT,ถอนเงินอัตโนมัติ
+OUT_OF_STATE,ออกจากรัฐ
+OUT_OF_THE_NUMBER_OF,ปริมาณ
+TRANSFER_INSTRUCTIONS,คำแนะนำในการถ่ายโอน
+INTO_THE_STATE,รัฐเงินฝาก
+CURRENCY_TRANSFER,การโอนเงิน
+FUNDS_OUT,การถอน
+PURCHASE_CONFIRMATION,ยืนยันการซื้อ
+PROPERTY_STATISTICS,สถิติอสังหาริมทรัพย์
+ADDRESS,ที่อยู่
+DETAILS,รายละเอียด
+ICO_MANAGEMENT,การจัดการ ICO
+TOTAL_PRICE_OF_ICO,ราคารวมของ ICO
+DECOMMISSIONING,รื้อถอน
+LIST_OF_TABLES,รายการตาราง
+INDUSTRY_NEWS,ข่าวอุตสาหกรรม
+EDIT_ARTICLE,แก้ไขบทความ
+EDIT_AD,แก้ไขโฆษณา
+EDIT_ADDRESS,แก้ไขที่อยู่
+SYSTEM_MESSAGE,ข้อความระบบ
+TYPE_ID,ประเภท ID
+LIST_MANAGEMENT,การจัดการรายการ
+GRADE_REQUIREMENTS,ความต้องการเกรด
+THE_TOTAL_STATION,สถานีทั้งหมด
+SITE_ADDRESS,ที่อยู่ไซต์
+STATIONS_IN_BALANCE,สถานีในสมดุล
+BUY_NOW,ซื้อตอนนี้
+MONEY_NOW,เงินตอนนี้
+PROHIBITED_WITHDRAW,ห้ามเปิดออก
+PROHIBIT_GIFT,ห้ามของขวัญ
+PROHIBITED_TRANSACTION,การทำธุรกรรมต้องห้าม
+CONFIRMATION_NUMBER,หมายเลขยืนยัน
+CONFIRM_DELETE,ยืนยันการลบ
+REQUESTS_FOR_CHANGES,ขอการเปลี่ยนแปลง
+USERS_WALLET,กระเป๋าสตางค์ผู้ใช้
+USER_MANAGEMENT,การจัดการผู้ใช้
+USERS_HOLD_OUT,ผู้ใช้ค้างไว้
+MONEY_AMOUNT,จำนวนเงิน
+FINANCIAL_MODEL,รูปแบบทางการเงิน
+CLICK_TO_DOWNLOAD,คลิกเพื่อดาวน์โหลด
+CLICK_TO_CHANGE,คลิกเพื่อเปลี่ยน
+EMPTY_ADDRESS,ที่อยู่ที่ว่างเปล่า
+ADDING_WALLET,เพิ่มกระเป๋าเงินใหม่
+ADD_ARTICLE,เพิ่มบทความ
+ADD_AD,เพิ่มโฆษณา
+ADD_ADDRESS,เพิ่มที่อยู่
+FLOATING_NAVIGATION,การนำทางลอยน้ำ
+REGISTRATION_TIME,เวลาลงทะเบียน
+NO_DATA,ไม่มีข้อมูล
+EACH_BONUS,แต่ละโบนัส
+THIS_BID_IS,การเสนอราคานี้เป็น
+NORMAL_ROLLOUT,การถอนปกติ
+FORMAT_EXAMPLES,รูปแบบตัวอย่าง
+SECTION_NAME,ชื่อส่วน
+MINIMUM_AMOUNT,จำนวนขั้นต่ำ
+THE_MINIMUM_RECHARGE,การชาร์จขั้นต่ำ
+THE_MINIMUM_PRICE,ราคาขั้นต่ำ
+GREATEST_AMOUNT,จำนวนที่ยิ่งใหญ่ที่สุด
+THE_MAXIMUM_RECHARGE,เติมเงินสูงสุด
+THE_MAXIMUM_PRICE,ราคาสูงสุด
+LAST_LOGIN,เข้าสู่ระบบครั้งล่าสุด
+ARE_WINNING,กำลังชนะ
+SINA_WEIBO,Sina Weibo
+ARTICLE_MANAGER,ผู้จัดการบทความ
+ARTICLE_CONTENT,เนื้อหาบทความ
+DATA_SIZE,ขนาดข้อมูล
+DATASHEETS,แผ่นข้อมูล
+THE_NUMBER_OF_OPERATIONS,จำนวนการดำเนินงาน
+TIPS_CONTENT,เนื้อหาเคล็ดลับ
+WITHDRAW_CONFIGURATION,ถอนการกำหนดค่า
+WITHDRAW_SUCCESS,ถอนความสำเร็จ
+SUBMIT_CHAT,ส่งแชท
+PROMOTION_MANAGEMENT,การจัดการโปรโมชั่น
+KEY_INTERFACE,อินเตอร์เฟซที่สำคัญ
+INTERFACE_NAME,ชื่ออินเตอร์เฟส
+RANK_AUTHORIZATION,การอนุมัติอันดับ
+HOLD_PERCENTAGE,ถือเปอร์เซ็นต์
+NUMBER_HOSTING,หมายเลขโฮสติ้ง
+HOSTING_PRICES,ราคาโฮสติ้ง
+FEE,ค่าธรรมเนียม:
+ALL_ACCOUNTS,บัญชีทั้งหมด
+MY_ASSETS,สินทรัพย์ของฉัน
+I_HOLD_OUT,การถือครอง
+I_PRIZE,โบนัสของฉัน
+MICROCHANNEL_GROUP_NUMBER,กลุ่ม Wechat
+CURRENT_RATES,อัตราปัจจุบัน
+OPENING_PROVINCES,จังหวัดเปิด
+CITIES_ACCOUNT,บัญชีเมือง
+OPENING_ADDRESS,ข้อมูลธนาคาร
+OPEN_GIFT,เปิดของขวัญ
+ADVERTISING_LINKS,ลิงค์โฆษณา
+ADVERTISING_MANAGEMENT,การจัดการโฆษณา
+COMMERCIAL_TIME,เวลาการค้า
+AD_NAME,ชื่อโฆษณา
+AD_CONTENT,เนื้อหาโฆษณา
+MARKET_NAME,ชื่อตลาด
+CURRENCY_TYPE,ประเภทสกุลเงิน
+CURRENCY_MANAGEMENT,การจัดการสกุลเงิน
+THE_AMOUNT_SUBSCRIBED,จำนวนเงินที่สมัครเป็นสมาชิก
+NAVIGATION_MANAGEMENT,การจัดการการนำทาง
+OFFICIAL_ACCOUNTS,บัญชีอย่างเป็นทางการ
+OFFICIAL_FORUMS,ฟอรั่มอย่างเป็นทางการ
+THE_OFFICIAL_MINING,การขุดอย่างเป็นทางการ
+SAFETY_CERTIFICATE,ใบรับรองความปลอดภัย
+HOW_TO_INVITE,วิธีการเชิญ
+IMAGE_LINK,ลิงค์รูปภาพ
+IMAGE_TITLE,ชื่อภาพ
+PICTURE_NAME,ชื่อรูปภาพ
+SYNTHESIS_OF_NAME,การสังเคราะห์ชื่อ
+PARTNER,พันธมิตร
+AVAILABLE_BALANCE,ยอดเงินคงเหลือ
+OF_THE_TOTAL_ISSUED,ของการออกทั้งหมด
+PARAMETER_ERROR,ข้อผิดพลาดพารามิเตอร์
+FOR_UPGRADE,สำหรับการอัพเกรด
+BLOCK_AWARD,รางวัลบล็อก
+LOADING_PROGRESS,กำลังโหลดความคืบหน้า
+THE_REMAINING_FREEZE,แช่แข็งที่เหลืออยู่
+THE_NUMBER_OF_ARRIVAL,จำนวนการมาถึง
+CREATED,สร้าง
+THE_NUMBER_OF_DIVIDEND,จำนวนเงินปันผล
+THE_TOTAL_DIVIDEND,เงินปันผลรวม
+OTHER_CONFIGURATIONS,การกำหนดค่าอื่น ๆ
+ALL_CURRENCIES,ทุกสกุลเงิน
+SELECT_NODE,เลือกโหนด
+THE_TOTAL_SITEWIDE,ไซต์ทั้งหมดกว้าง
+PREPAID_ORDERS,คำสั่งจ่ายล่วงหน้า
+DEPOSIT_METHODS,วิธีการฝากเงิน
+PREPAID_CELL_PHONE,โทรศัพท์มือถือแบบเติมเงิน
+MEMBER_GROUP_NUMBER,หมายเลขกลุ่มสมาชิก
+PRICE_TRENDS,แนวโน้มราคา
+USD,ดอลล่าร์
+TRANSACTION_RATE,อัตราการทำธุรกรรม
+TRADING_PLATFORM,แพลตฟอร์มการซื้อขาย
+FRONTEND_TITLE,ชื่อเรื่อง
+INADEQUATE,ไม่เพียงพอ
+PREVIOUS_MENU,เมนูก่อนหน้า
+THE_DEFAULT_RATING,การให้คะแนนเริ่มต้น
+ORDER_BOOK,ทั้งหมด
+DEFAULT_MARKET,ตลาดเริ่มต้น
+DEFAULT_CURRENCY,สกุลเงินเริ่มต้น
+ADVANCED_SEARCH,ค้นหาขั้นสูง
+PROJECT_PICTURES,รูปภาพโครงการ
+TOP_MENU,เมนูยอดนิยม
+TOP_CLASSIFICATION,หมวดหมู่ผู้ปกครอง
+PAGE_SETTINGS,การตั้งค่า
+NEED_TO_REVIEW,ต้องทบทวน
+RECORD_MART,บันทึกมาร์ท
+MARKET_TRADING,การค้าขายตลาด
+QUEUE_INFORMATION,ข้อมูลคิว
+CONFIGURING_CURRENCY,การกำหนดค่าสกุลเงิน
+CONFIGURATION,การกำหนดค่า
+CONFIGURATION_LIST,รายการการกำหนดค่า
+THE_NUMBER_OF_INVITED,การอ้างอิง
+ENCOUNTER_PROBLEMS,พบปัญหา
+OPTIONS,ตัวเลือก
+SELECT_IMAGE,เลือกภาพ
+ADAPT_TO_CHINESE,ปรับให้เข้ากับจีน
+DELIVERY_ADDRESS,ที่อยู่สำหรับการจัดส่ง
+EXIT_BACKGROUND,พื้นหลังออก
+CONNECT_TITLE,เชื่อมต่อชื่อ
+CONNECTION_NAME,ชื่อการเชื่อมต่อ
+BACK_TO,กลับไปยัง
+WAY_TO_RETURN,วิธีที่จะกลับมา
+BACK_TO_LIST,กลับไปที่รายการ
+CURRENCY_TRANSFER_GUIDE,คู่มือการโอนสกุลเงิน
+TRANSFER_PROCESS,กระบวนการถ่ายโอน
+ROLLOUT_COSTS,ถอนค่าธรรมเนียม
+OUT_OF_TIME,ถอนเวลา
+THE_SUCCESSFUL_ROLLOUT,ถอนที่ประสบความสำเร็จ
+TRANSFER_OR_GIFT,โอนหรือของขวัญ
+PRICE_LIMIT,จำกัด ราคา
+BUY_TIME,ซื้อเวลา
+BUY_GOODS,ซื้อสินค้า
+FINANCIAL_CONFIGURATION,การกำหนดค่าทางการเงิน
+FINANCIAL_DETAILS,รายละเอียดทางการเงิน
+PROPERTY_MANAGEMENT,การจัดการอสังหาริมทรัพย์
+PROPERTY_LIST,รายการอสังหาริมทรัพย์
+ERROR_IS_GREATER_THAN,ข้อผิดพลาดมากกว่า
+DETAILED_RECORD,บันทึกรายละเอียด
+SPECIFICATION,ข้อมูลจำเพาะ
+HE_COMMENTED,เขาแสดงความคิดเห็น
+SETTING_SUCCESS,การตั้งค่าความสำเร็จ
+SETTING_AWARDS,การตั้งค่ารางวัล
+RECORD_LIST,รายการบันทึก
+REMEMBER_ME,จดจำฉัน
+ICO_INSTRUCTIONS,คำแนะนำของ ICO
+THE_TOTAL_ICO,รวม ICO
+ICO_PERIOD,ยุค Ico
+INTRODUCTION_TO_SUBSCRIBE,เกี่ยวกับ ico
+ORDER_DETAILS,รายละเอียดการสั่งซื้อ
+THAWED,ละลาย
+TABLE_ELEMENT,องค์ประกอบตาราง
+FORM_ELEMENTS,องค์ประกอบแบบฟอร์ม
+MARKET_TREND,แนวโน้มตลาด
+MENU_MANAGER,ผู้จัดการเมนู
+SORT_MENU,เรียงเมนู
+SYMBOL_AB,เครื่องหมาย
+AUTOMATIC_LANDING,ลงจอดอัตโนมัติ
+CONTACT_US,ติดต่อเรา
+CHAT_MODE,โหมดแชท
+CHAT_LIST,รายการแชท
+ONLINE_BANKING_ACCOUNT,บัญชีธนาคารออนไลน์
+ONLINE_BANKING_HEADED,มุ่งหน้าธนาคารออนไลน์
+ONLINE_BANKING_INFORMATION,ข้อมูลธนาคารออนไลน์
+SITE_STATUS,สถานะเว็บไซต์
+WEBSITE_TITLE,ชื่อเว็บไซต์
+WEBSITE_BOTTOM,ด้านล่างเว็บไซต์
+SITE_NAME,ชื่อไซต์
+EDIT_LINK,แก้ไขลิงค์
+EDIT_WALLET,แก้ไขกระเป๋าเงิน
+EDIT_PROPERTY,แก้ไขคุณสมบัติ
+EDIT_ICO,แก้ไข ICO
+EDIT_USER,แก้ไขผู้ใช้
+MONEY_EDITOR,เครื่องแก้ไขเงิน
+EDIT_SECTION,แก้ไขส่วน
+EDIT_PERMISSIONS,แก้ไขการอนุญาต
+EDIT_LOG,แก้ไขบันทึก
+EDIT_TEXT,แก้ไขข้อความ
+EDITING_MARKET,ตลาดการแก้ไข
+EDIT_CURRENCY,แก้ไขสกุลเงิน
+EDIT_NAVIGATION,แก้ไขการนำทาง
+WRONG_NUMBER,เลขหมายไม่ถูกต้อง
+STATISTICAL_CURRENCY,สกุลเงินทางสถิติ
+STATISTICAL_CODE,รหัสสถิติ
+STRUCTURAL_ELEMENTS,องค์ประกอบโครงสร้าง
+TIME_LINE,เส้นเวลา
+FIG_LINE_RATIO,อัตราส่วนบรรทัดรูปที่
+TRADITIONAL_CHINESE,ภาษาจีน
+CUMULATIVE_PROFIT,กำไรรวม
+THE_CUMULATIVE_NUMBER_OF,จำนวนทั้งหมดของ
+THE_CUMULATIVE_GAIN,กำไรรวม
+SYSTEM_SETTINGS,การตั้งค่าระบบ
+OPERATORS_FORCE_CONTRACT,ผู้ประกอบการบังคับสัญญา
+SIMPLIFIED_CHINESE,ภาษาจีนตัวย่อ
+LEVEL_CONFIGURATION,การกำหนดค่าระดับ
+THE_HIGHER_THE_LEVEL,ยิ่งระดับสูงกว่า
+LEVEL_MANAGEMENT,การบริหารจัดการระดับ
+LEVEL_NAME,ชื่อระดับ
+WAITING_FOR_CERTIFICATION,รอการรับรอง
+IMMEDIATELY_WITHDRAW,ถอนตอนนี้
+MINIMUM_ICO_REQUIRED,ต้องซื้อ ICO ขั้นต่ำที่จำเป็นคือ
+MAX_ICO_ALLOWED,การซื้อ ICO สูงสุดที่อนุญาตคือ
+IMMEDIATELY_TRANSFERRED,ทำเครื่องหมายเป็นเงินฝาก
+CERTIFIED_IMMEDIATELY,ส่ง KYC
+APPLY_IMMEDIATELY,สมัครทันที
+SYNTHESIS_IMMEDIATELY,การสังเคราะห์ทันที
+NO_ACCESS,ไม่มีการเข้าถึง
+BAN_CHAT,ห้ามแชท
+CONFIRM_WITHDRAW,ยืนยันการถอน
+CONFIRM_ICO,ยืนยัน ico
+CONFIRMATION_OF_RECEIPT,การยืนยันการรับ
+DEVELOPERS,นักพัฒนา
+SMS_CONFIGURATION,SMS การกำหนดค่า
+MULTIPLES,หลาย ๆ
+APPLICATION_TIME,เวลาสมัคร
+USER_DETAILS,รายละเอียดผู้ใช้
+USER_PASSWORD,รหัสผ่านผู้ใช้
+USER_CENTER,ศูนย์ผู้ใช้
+GENERATION_TIME,เวลารุ่น
+NO_MONEY,ไม่มีเงิน
+MONEY_MANAGEMENT,การจัดการเงิน
+MONEY_PROPORTION,สัดส่วนเงิน
+MONEY_TIME,เวลาเงิน
+THE_NUMBER_OF_FINANCIAL,จำนวนการเงิน
+MONEY_LIST,รายการเงิน
+IPS,IPS
+ALL_RIGHTS_RESERVED,สงวนลิขสิทธิ์
+HOT_TOPIC,ประเด็นร้อน
+THE_NUMBER_OF_CLICKS,จำนวนคลิก
+CLICK_LOG,คลิกบันทึก
+CLICK_THE_PLUS_GROUP,คลิกกลุ่มบวก
+CLICK_TO_CLOSE,คลิกเพื่อปิด
+CLEAR_CACHE,ล้างแคช
+CLEAR_THE_CACHE,ล้างแคช
+ADD_A_LINK,เพิ่มการเชื่อมโยง
+ADD_ICO,เพิ่ม ico
+ADD_USER,เพิ่มผู้ใช้
+ADD_MONEY,เพิ่มเงิน
+ADD_PLATE,เพิ่มจาน
+ADD_PERMISSIONS,เพิ่มการอนุญาต
+ADD_LOG,เพิ่มบันทึก
+ADD_TEXT,เพิ่มข้อความ
+ADD_MARKETS,เพิ่มตลาด
+ADD_CURRENCY,เพิ่มสกุลเงิน
+ADD_NAVIGATION,เพิ่มการนำทาง
+LIMIT_INCREASE,เพิ่มขีด จำกัด
+FLOATING_SETTINGS,การตั้งค่าลอย
+TEST_ENVIRONMENT,สภาพแวดล้อมการทดสอบ
+REGISTRATION_GUIDE,คู่มือการลงทะเบียน
+REGISTRATION_AGREEMENT,ข้อตกลงการลงทะเบียน
+LEGAL_DESCRIPTION,คำอธิบายทางกฎหมาย
+BIT_ERA,ยุคบิต
+DAILY_INTEREST,ดอกเบี้ยรายวัน
+FORMAL_ENVIRONMENT,สภาพแวดล้อมที่เป็นทางการ
+NORMAL_BALANCE,สมดุลปกติ
+CONTINENTAL_CROWDFUNDING,คอนติเนน Crowdfunding
+VIEW_DETAILS,ดูรายละเอียด
+SEE_DETAILS,ดูรายละเอียด
+PLATE_PICTURES,รูปภาพจาน
+PLATE_ICON,ไอคอนแผ่น
+SECTION_CONTENT,เนื้อหาส่วน
+PLATE_PRESENTATION,การนำเสนอจาน
+THIS_PAGE,หน้านี้.
+FUTURE_VERSIONS,รุ่นอนาคต
+LATEST_PRICE,ราคาล่าสุด
+RELEASE_NOTES,บันทึกย่อ
+UPDATE_LOG,อัปเดตบันทึก
+DISPLAY_AMOUNT,จำนวนการแสดงผล
+DISPLAY_MARKET,ตลาดแสดงผล
+SHOW_TITLE,แสดงชื่อ
+SHOW_NAME,แสดงชื่อ
+WHETHER_TO_HIDE,ไม่ว่าจะซ่อน
+WHETHER_CERTIFICATION,เคยซี
+WHETHER,ไม่ว่า
+WHETHER_TO_RECOMMEND,ไม่ว่าจะแนะนำ
+LOGGING,การตัดไม้
+UNABLE_TO_RIGHTING,ไม่สามารถถูกต้อง
+ITS_ADVERTISING,โฆษณาของมัน
+BEGINNER'S_GUIDE,คู่มือเริ่มต้น
+NEW_PASSWORD,รหัสผ่านใหม่
+THE_TOTAL_NUMBER_OF_ARTICLES,จำนวนบทความทั้งหมด
+ARTICLE_CATEGORIES,หมวดหมู่บทความ
+FILE_PATH,เส้นทางของแฟ้ม
+DATA_RESTORE,กู้คืนข้อมูล
+DATA_TABLE,ตารางข้อมูล
+DATA_BACKUP,สำรองข้อมูล
+DIGITAL_ASSETS,เหรียญ
+INSTRUCTIONS,คำแนะนำ
+CURRENCY_OPERATIONS,การดำเนินการสกุลเงิน
+ACTION_REMARK,คำพูดการกระทำ
+ACTION_ADDRESS,ที่อยู่การดำเนินการ
+AFTER_THE_OPERATION,หลังจากการดำเนินการ
+BEFORE_OPERATION,ก่อนการผ่าตัด
+TIP_MARK,เครื่องหมายทิป
+BANK_WITHDRAWALS,ถอนเงินธนาคาร
+WITHDRAW_TIPS,ถอนเคล็ดลับ
+REMOVE_AHEAD,ลบไปข้างหน้า
+SUBMIT_COMMENTS,ทบทวน
+SUBMITTED_ADDRESS,ที่อยู่ที่ส่ง
+RECOMMENDED_ITEMS,พนักงานเลือก
+PROMOTION_REBATE,ส่วนลดโปรโมชั่น
+RECEIVING_ADDRESS,รับที่อยู่
+INTERFACE_LOGO,โลโก้อินเตอร์เฟส
+BUTTON_CONTROL,ปุ่มควบคุม
+DESIGNATED_PRIZE,รางวัลที่กำหนด
+CAREERS,อาชีพ
+VOTING_TIPS,เคล็ดลับการลงคะแนน
+TECHNICAL_SPECIFICATIONS,ข้อกำหนดทางเทคนิค
+BATCH_IMPORT,นำเข้าแบทช์
+MOBILE_ACCESS,การเข้าถึงมือถือ
+PHONE,โทรศัพท์
+OWN_GROUPS,กลุ่มของตนเอง
+I_WANT_TO_SUBSCRIBE,ฉันต้องการสมัครสมาชิก
+I_WANT_TO_ENTRUST,ฉันต้องการมอบความไว้วางใจ
+MY_DELEGATION,คำสั่งซื้อที่รอดำเนินการของฉัน
+I_HAVE_MONEY,ฉันได้จ่ายเงิน
+MARK_AS_PAID,ทำเครื่องหมายว่าจ่าย
+GROWING_SUCCESS,ความสำเร็จที่เพิ่มขึ้น
+TRANSACTION_RECORD,บันทึกการทำธุรกรรม
+DEAL_PRICE,ข้อตกลงราคา
+TOTAL_BALANCE,ยอดรวม
+TOTAL_FEE,ค่าธรรมเนียมรวม
+MICROSOFT_ELEGANT_BLACK,Microsoft สีดำสง่างาม
+CURRENT_VERSION,รุ่นปัจจุบัน
+PICTURES,รูปภาพ!
+CHECK_NOW,ตรวจสอบตอนนี้
+START_BACKUP,เริ่มการสำรองข้อมูล
+OPEN_CHAT,เปิดแชท
+OPEN_REWARD,เปิดรางวัล
+DEVELOPER,ผู้พัฒนา
+APPLICATION_MODULE,โมดูลแอปพลิเคชัน
+SHOULD_AID_CENTER,ควรช่วยศูนย์
+AD_LIMIT,ขีด จำกัด โฆษณา
+AD_TITLE,ชื่อโฆษณา
+ADS_LIST,รายการโฆษณา
+LUCKY_LIST,รายชื่อโชคดี
+PLATFORM_OVERVIEW,ภาพรวมแพลตฟอร์ม
+PLATFORM_INTRODUCTION,บทนำแพลตฟอร์ม
+MOST_USED_LINK,ลิงค์ที่ใช้มากที่สุด
+MARKET_STATISTICS,สถิติการตลาด
+THE_CURRENCY_ALLOCATION,การจัดสรรสกุลเงิน
+CURRENCY_COMMENTS,ความคิดเห็นของสกุลเงิน
+CURRENCY_STATISTICS,สถิติสกุลเงิน
+CURRENCY_INTRODUCTION,บทนำสกุลเงิน
+TRANSACTION_VOLUME,ปริมาณธุรกรรม
+HOUR_HOTLINE,สายด่วนชั่วโมง
+DECIMAL_PLACES,ทศนิยมสถานที่
+EXPORT_ALL,ส่งออกทั้งหมด
+CUSTOMER_SERVICE_CONFIGURATION,การกำหนดค่าการบริการลูกค้า
+CUSTOMER_SERVICE_HOTLINE,สายด่วนการบริการลูกค้า
+CUSTOMER_SERVICE_CODE,รหัสบริการลูกค้า
+OFFICIAL_WEBSITE,เว็บไซต์อย่างเป็นทางการ
+OFFICIAL_MICRO_LETTER,จดหมายไมโครอย่างเป็นทางการ
+MEDIA_REPORTS,รายงานสื่อ
+COMMISSIONED_FREEZE,รับหน้าที่แช่แข็ง
+ORDER_PRICE,ราคาสั่งซื้อ
+PRIZE_SETTINGS,การตั้งค่ารางวัล
+PRIZES_NAME,ชื่อรางวัล
+DESCRIPTION_AWARDS,รางวัลคำอธิบาย
+REWARD_TYPE,ประเภทรางวัล
+STATE_AWARD,รางวัลของรัฐ
+HEAD_END,ปลายหัว
+HEADLINE_PROJECT,โครงการพาดหัว
+BACKUP_STATUS,สถานะการสำรองข้อมูล
+BACKUP_TIME,เวลาสำรอง
+BACKUP_NAME,ชื่อสำรอง
+PROCESSING_STATUS,สถานะการประมวลผล
+MA_SET,แม่ตั้ง
+ADDRESS_REMARKS,ที่อยู่ข้อสังเกต
+ONLINE_PAYMENT,ชำระเงินออนไลน์
+ONLINE_CONSULTATION,การให้คำปรึกษาออนไลน์
+SIZE_OF_THE_PICTURE,ขนาดของภาพ
+BUSINESS_CERTIFICATE,ใบรับรองธุรกิจ
+COMMODITY_PRICE,สินค้าโภคภัณฑ์ Price
+LIMIT_CYCLE,วงจร จำกัด
+CYCLE_INTEREST,วงจรดอกเบี้ย
+BACKGROUND_MENU,พื้นหลังของเมนู
+BACKEND_SYSTEM,ระบบแบ็กเอนด์
+SYNTHETICS,การสังเคราะห์
+SYNTHETICALLY,อย่างสังเคราะห์
+SYNTHETIC_CURRENCY,สกุลเงินสังเคราะห์
+SYNTHESIS_CYCLE,วัฏจักรการสังเคราะห์
+LOOK_TO_SELL,ขาย
+LOOK_TO_BUY,การซื้อ
+CANCEL_THE_ICO,ยกเลิก ICO
+DECERTIFICATION,การหลอกลวง
+ISSUE_PRICE,ปัญหา Price
+ABNORMAL,ผิดปกติ
+TWOFACTOR_AUTHENTICATION,การรับรองความถูกต้องสองปัจจัย
+HISTORIC_VERSION,รุ่นเก่า
+SELLER_CURRENCY,สกุลเงินผู้ขาย
+MINIMUM_SINGLE,ขั้นต่ำเดียว
+SINGLE_LARGEST,ใหญ่ที่สุด
+ESCALATION_RULES,กฎการเลื่อนระดับ
+EXCESS_INVENTORY,สินค้าคงคลังส่วนเกิน
+HOME_FRONT,ด้านหน้าบ้าน
+THE_AMOUNT_OF_INTEREST,จำนวนดอกเบี้ย
+INTEREST_RECORD,บันทึกดอกเบี้ย
+LIST_ELEMENTS,องค์ประกอบของรายการ
+FREEZE_BALANCE,แช่แข็งสมดุล
+ABC,abc
+MAKE_PERSISTENT_EFFORTS,พยายามอย่างต่อเนื่อง
+COMPATIBLE_WITH_FIREFOX,เข้ากันได้กับ Firefox
+FIG_OFF_LINE,มะเดื่อออกสาย
+CLOSE_INDICATORS,ตัวบ่งชี้ปิด
+CLOSE_REWARD,ปิดให้รางวัล
+CLOSE_MA,ปิดแม่
+RECHARGE_CONFIGURATION,การประมวลผลการเติมเงิน
+RECHARGE_RECORD,บันทึกการชาร์จ
+TOP_TIPS,เคล็ดลับ
+RECHARGE_GUIDE,คู่มือการเติมเงิน
+RECHARGE_REVIEW,Recharge Review
+MEMBERSHIP_LEVEL,ระดับสมาชิก
+MEMBER_LOGIN,เข้าสู่ระบบ
+MEMBER_LIST,รายชื่อผู้ใช้
+CODE_SECTION,ส่วนรหัส
+PAYMENT_RATIO,อัตราส่วนการชำระเงิน
+NUMBER_OF_PAYMENTS,จำนวนการชำระเงิน
+PAYMENT_SUCCESSFUL,การชำระเงินที่ประสบความสำเร็จ
+PEOPLE_VOTE,โหวต
+TRADING_CHAT,การค้าแชท
+TRADING_RECOMMENDATIONS,คำแนะนำการซื้อขาย
+TRADING_GUIDE,คู่มือการซื้อขาย
+TWO_AT_HOME,สองที่บ้าน
+BUYER_CURRENCY,สกุลเงินผู้ซื้อ
+THEME_TEMPLATE,ธีม
+WINNING_MANAGEMENT,การจัดการที่ชนะ
+WINNING_PRIZES,รางวัลชนะเลิศ
+STRICTLY_FOLLOW,ปฏิบัติตามอย่างเคร่งครัด
+EXCLUSIVE_LINKS,ลิงค์พิเศษ
+DO_NOT_OPERATE,ไม่ทำงาน
+WITHOUT_REVIEW,โดยไม่ต้องตรวจสอบ
+HERE_ARE_THE_TOP,นี่คือด้านบน
+THE_NEXT_INTEREST,ดอกเบี้ยต่อไป
+UNDER_NO_EFFECT,ไม่มีผลกระทบ
+UNDER_THE_TYPE_OF_HOME,พิมพ์
+ONLINE_CURRENCY,สกุลเงินออนไลน์
+MARKET_SHELVES,ชั้นวางตลาด
+ADDED_CURRENCY,สกุลเงินที่เพิ่มเข้ามา
+UPPER_CLASSIFICATION,หมวดหมู่ผู้ปกครอง
+UPLOAD_SUCCESSFUL,อัปโหลดสำเร็จ
+UPLOAD_IMAGE,อัพโหลดภาพ
+THREE_AT_HOME,สามที่บ้าน
+BEGINNERS_GUIDE,คู่มือเริ่มต้น
+ONE_UNDER_THE_HOUSE,ระดับ 1
+RENMINBI,renminbi
+CONTENT_AREA,พื้นที่เนื้อหา
+REVOKED,เพิกถอน
+DEFAULT,ค่าเริ่มต้น
+COMPLETED,สมบูรณ์
+TOTAL_AMOUNT,จำนวนเงินทั้งหมด
+TO_TRADE,ซื้อขาย
+DO_NOT_SHOW,ไม่แสดง
+BECAUSE, เพราะ
+VISITING_THE_MARKET,เยี่ยมชมตลาด
+UNPAID,ค้างชำระ
+VOLUME,ปริมาณ
+UNTREATED,ไม่ได้รับการรักษา
+IN_TRANSACTION,ในการทำธุรกรรม
+THE_NEXT_STEP,ขั้นตอนต่อไป
+USER_GROUP,กลุ่มผู้ใช้
+TYRANT_CURRENCY,สกุลเงินทรราช
+YUAN_IN_CASH,เป็นเงินสด
+DEFAULTS,ค่าเริ่มต้น
+SHOPPING_MALL,ห้างสรรพสินค้า
+ID_CARD,บัตรประจำตัวประชาชน
+DRIVERS_LICENSE,ใบขับขี่
+UTILITY_BILL,ค่าสาธารณูปโภค
+SOCIAL_SECURITY,ประกันสังคม
+OTHERS,คนอื่น
+TELEPHONE_AND,โทรศัพท์และ
+BITCOIN,bitcoin
+NOT_CERTIFIED,ไม่ได้รับการรับรอง
+FEES,ค่าธรรมเนียม
+TOTAL,รวม
+TOTAL_COMMISSION,คณะกรรมการทั้งหมด
+REMITTANCE,การส่งเงิน
+IT_HAS_WITHDRAWALS,แต่ก็มีการถอน
+IT_HAS_BEEN_CREDITED_INTO_ACCOUNT,มันได้รับเครดิตเข้าบัญชี
+SUB_NAVIGATION,การนำทางย่อย
+MOVING_SAID_COINS,ย้ายเหรียญดังกล่าว
+THAWING,การละลาย
+LITECOIN,litecoin
+REMIND_YOU,บันทึก
+TURNOVER,การหมุนเวียน
+DEAL_DONE,จัดการเสร็จแล้ว
+PROCESSED,ที่ได้ดำเนินการแล้ว
+PASSWORD,รหัสผ่าน
+SELL_A_PRICE,ขาย
+SELL_RATIO,ขายอัตราส่วน
+SELL_PRICE,ราคาขาย
+MINUTE_LINE, นาที
+COMPATIBILITY,ความเข้ากันได้
+BUY_A_PRICE,ซื้อ
+VERIFICATION_CODE,รหัสยืนยัน
+CHAIN_TOUR_STOCKS,หุ้นโซ่ทัวร์
+COIN_WALLET,กระเป๋าเงินเหรียญ
+CAROUSEL_FIGURE,รูปม้าหมุน
+SUPER_PRAISE,สรรเสริญมาก
+ANTS_CURRENCY,สกุลเงินมด
+CHATROOM,ห้องสนทนา
+BULLSH_,bullsh *
+RISE_IN_INTEREST_RATES,ขึ้นอัตราดอกเบี้ย
+THE_FIRST_INSPECTION,การตรวจสอบครั้งแรก
+TOTAL_ASSETS,สินทรัพย์รวม
+THE_TOTAL_AMOUNT,จำนวนเงินทั้งหมด
+TOTAL_BLOCK,บล็อกทั้งหมด
+NET_LONG_CURRENCY,สกุลเงินที่ยาวนาน
+ALREADY_APPLIED,ใช้แล้ว
+TURNED_ON,เปิด
+ALREADY_TRANSFER_MONEY,โอนเงินแล้ว
+HOUR_LINE, hr
+TOO_MODERATE,ปานกลาง
+DECEMBER,ธันวาคม
+NOVEMBER,พฤศจิกายน
+LOADING,การโหลด
+THE_FIRST_DIVIDEND,เงินปันผลครั้งแรก
+REPAIR_TABLES,ตารางซ่อม
+TABLE_OPTIMIZATION,การเพิ่มประสิทธิภาพตาราง
+USERS,ผู้ใช้
+AND_GREATER_THAN,และมากกว่า
+SPLIT,แยก
+PREHEATING,ที่มาถึง
+HAZE_CURRENCY,สกุลเงินหมอกควัน
+MONROE_CURRENCY,สกุลเงินมอนโร
+GOLDEN_KEY,กุญแจสีทอง
+RIO_CURRENCY,สกุลเงินริโอ
+MAILBOX,อีเมล
+STILL_NEED,ยังคงต้องการ
+OF_WORLD_CURRENCY,ของสกุลเงินโลก
+GIFT,ของขวัญ
+IN_FAVOR_OF,สนับสนุน
+ACCOUNTS,บัญชี
+ACCOUNT_NUMBER,หมายเลขบัญชี
+DOUBAN,Douban
+PLEASE_CHOOSE,กรุณาเลือก
+FIGURE_QUOTES,รูปคำพูด
+OBTAIN[,รับ[
+ENGLISH,ภาษาอังกฤษ
+HOLIDAYS,วันหยุด
+CUSTOM_PAGE,หน้ากำหนดเอง
+SMALL_WEBSITE,เว็บไซต์ขนาดเล็ก
+ABBREVIATION,ตัวย่อ
+BEFORE_LANDING,ก่อนลงจอด
+DOG_CURRENCY,สกุลเงินสุนัข
+FEATURES,คุณสมบัติ
+ENTHUSIAST,ผู้ที่ชื่นชอบ
+BROWSER,เบราว์เซอร์
+BIT_HELP,ช่วยเหลือบิต
+NORMALIZATION,การทำให้เป็นมาตรฐาน
+FIND,หา
+DID_NOT_PASS,ไม่ผ่าน
+UNBOUND,หลุด
+NOT_LOGGED,ไม่ได้เข้าสู่ระบบ
+INACTIVATED,ไม่หยุดยั้ง
+NOT_BACKED_UP,ไม่ได้สำรองข้อมูล
+UNFILLED,ไม่สำเร็จ
+NO_ARRIVAL,ไม่มาถึง
+NOT_WINNING,ไม่ชนะ
+NOT_UPLOADED,ไม่อัพโหลด
+HIGHEST_PRICE,ราคาสูงสุด
+LOWEST,ต่ำที่สุด
+REGULAR_VERSION,รุ่นปกติ
+TIME_ALLOWED_NEXT,อนุญาตเวลาต่อไป
+DAY_CHANGE,24 ชั่วโมงเปลี่ยน
+BORDERLESS,ไม่มีพรมแดน
+NO_PRIZES,ไม่มีรางวัล
+NEW_INTERFACE,อินเทอร์เฟซใหม่
+THE_AMOUNT_OF_DATA,จำนวนข้อมูล
+DIGITAL_GOLD,ทองคำดิจิตอล
+ALIPAY,Alipay
+DIG_CURRENCY_NET,ขุดสกุลเงินสุทธิ
+FINAL_PRICE,ราคาสุดท้าย
+TOTAL_SALES,ยอดขายทั้งหมด
+TOTAL_SCORE,คะแนนรวม
+APPLICATION_CHAIN,แอพลิเคชันโซ่
+ANNUAL_INTEREST,ดอกเบี้ยประจำปี
+HAT_SHARES,หุ้นหมวก
+PASCAL,ปาสกาล
+CURRENCY_LONGSHARE,สกุลเงินแบ่งปันระยะยาว
+PASSED,ผ่านไป
+RUNNING,วิ่ง
+ENDED,สิ้นสุดแล้ว
+UPCOMING,ที่มาถึง
+OVER,สิ้นสุดแล้ว
+BOUND,ผูกพัน
+SHIPPED,จัดส่ง
+CLOSED,ปิด
+WE_HAVE_BEEN_WINNING,เราชนะแล้ว
+UPLOADED,อัปโหลดแล้ว
+WORKING_DAY,วันทำงาน
+IT_MEANS,มันหมายถึง
+EXPORT_TABLE,ตารางส่งออก
+ANDREWS,แอนดรู
+STOCK,คลังสินค้า
+CASE_NUMBER,หมายเลขเคส
+ENTER_KEY,ใส่รหัส
+BUSINESS_NUMBER,หมายเลขธุรกิจ
+AFTER_REFRESH,สดชื่นใน
+ONLY_SUPPORTS,รองรับเท่านั้น
+PUBLISHER,ผู้เผยแพร่
+AGAINST,ขัดต่อ
+KARAT,กะรัต
+LOAD_LAYER,ชั้นโหลด
+SHARE_TO,ร่วม
+MILITARY_OFFICER,นายทหาร
+COUNTDOWN,การนับถอยหลัง
+INFORMATION,ข้อมูล
+AS_FOLLOWED,ตามมา
+EXCELLENT_DROP_COINS,เหรียญหล่นที่ยอดเยี่ยม
+ETHERNET_SQUARE,จัตุรัสอีเธอร์เน็ต
+ETHEREUM,Etherum
+BILLION_DOLLARS,พันล้านดอลลาร์
+TRADING_VOLUME,ปริมาณการซื้อขาย
+TRADING_RANGE,ช่วงการซื้อขาย
+QR_CODE,คิวอาร์โค้ด
+PRIMARY_NAVIGATION,การนำทางหลัก
+IN_SEARCH,ในการค้นหา
+CONFIRMATION,การยืนยัน
+PROFESSIONAL_EDITION,รุ่นมืออาชีพ
+DO_NOT_NEED,ไม่ต้องการ
+NOT_SUPPORTED,ไม่รองรับ
+NOT_RECOMMENDED,ไม่แนะนำ
+MONTH,เดือน
+STATUS,สถานะ
+HOME,บ้าน
+OPERATING,การกระทำ
+AVAILABLE,มีอยู่
+DISABLE,ปิดการใช้งาน
+EXCEPT,ยกเว้น
+EDIT,แก้ไข
+FREEZE,คำสั่ง
+FORGET,ลืม
+SELL,ขาย
+NORMAL,ปกติ
+SEQUENCE,ลำดับ
+DELETE,ลบ
+BUY,ซื้อ
+OBJECTS,วัตถุ
+CREATE,สร้าง
+UNDO,เลิกทำ
+CARRY_OUT,สมบูรณ์
+ABOUT,เกี่ยวกับ
+REVIEW,ทบทวน
+SHUT_DOWN,ปิด I
+TIME,เวลา
+CURRENCIES,สกุลเงิน
+UNIT_PRICE,ราคาต่อหน่วย
+MORE,มากกว่า
+DISPLAY,แสดง
+QUANTITY,ปริมาณ
+USE,ใช้
+RECHARGE,เติมเงินใหม่
+SUCCESS,ความสำเร็จ
+LUMP_SUM,รวม
+PRICE,ราคา
+RECOMMEND,แนะนำ
+ENABLE,เปิดใช้งาน
+CONTENT,เนื้อหา
+COMPLETE,ทั้งหมด
+STORAGE,พื้นที่จัดเก็บ
+TYPES_OF,ประเภท
+AN_EXAMINATION,การสอบ
+HOUR,ชั่วโมง
+CANCEL,ยกเลิก
+NEW,ใหม่
+PUSH_BUTTON,ปุ่มกด
+FILL_IN,กรอก
+NAME,ชื่อ
+IMPORTANT,สำคัญ
+DETAIL,รายละเอียด
+CONTACT,ติดต่อ
+REGISTERED,ลงทะเบียน
+TITLE,ชื่อ
+NICKNAME,ชื่อเล่น
+DESCRIPTION,คำอธิบาย
+IMAGE,ภาพ
+ICON,ไอคอน
+NAME_AWARD,ชื่อรางวัล
+DROP_OUT,ออกจากระบบ
+LOG_OUT,ออกจากระบบ
+INTO,เข้าไปข้างใน
+DEPOSIT,เงินฝาก
+UNBUNDLING,ลบ
+SYSTEM,ระบบ
+MANAGEMENT,การจัดการ
+DETERMINE,ยืนยัน
+CHANGE,เปลี่ยน
+PROPORTION,อัตราส่วน
+DATE,วันที่
+THE_WAY,วิธีการ
+INCOME,รายได้
+EXPENDITURE,การใช้จ่าย
+SIZE,ขนาด
+OFFICIAL,เป็นทางการ
+COPY,สำเนา
+MINUTE,นาที
+DOWNLOAD,ดาวน์โหลด
+LINK,ลิงค์
+MONEY,เงิน
+REWRITE,เขียนใหม่
+SIDEBAR,แถบด้านข้าง
+WITHDRAW,ถอน
+ACCOUNT,บัญชี
+THAW,ละลาย
+POLYMERIZATION,การโพลิเมอร์
+GROUP,กลุ่ม
+SPACE,ช่องว่าง
+CONFIRM,ยืนยัน
+CLEAR_UP,กำจัด
+NOTE,บันทึก
+ORDER,คำสั่ง
+ACCORDING_TO,ตาม
+LABEL,ฉลาก
+PLATE,จาน
+NOT_IN,ไม่อยู่ใน
+DIVISION,แผนก
+CHARGES,ค่าธรรมเนียม
+SUMMARY,สรุป
+SUBMIT,ส่ง
+CURRENT,หมุนเวียน
+MARKET,ตลาด
+ALREADY_IN,แล้ว
+LEFT,ซ้าย
+DEAL_WITH,จัดการกับ
+MA,แม่
+APRIL,เมษายน
+SEND,ส่ง
+SINGLE_LINE,แถวเดียว
+OCTOBER,ตุลาคม
+SWITCH,สวิตช์
+PACKET,แพ็คเก็ต
+CLASSIFICATION,หมวดหมู่
+JUNE,มิถุนายน
+AUGUST,สิงหาคม
+FREE,ฟรี
+TRANSACTION,ธุรกรรม
+MAY,พฤษภาคม
+FEBRUARY,กุมภาพันธ์
+II,ที่สอง
+SEPTEMBER,กันยายน
+MARCH,มีนาคม
+THREE_GENERATIONS,สามชั่วอายุคน
+JULY,กรกฎาคม
+JANUARY,มกราคม
+GENERATION,รุ่น
+HEIGHT,ส่วนสูง
+STYLE,สไตล์
+PROJECT,โครงการ
+TOP,สูงสุด
+NEED,ความต้องการ
+HIDE,ซ่อน
+LOCK_SCREEN,ล็อกหน้าจอ
+WALLET,กระเป๋าสตางค์
+RESET,รีเซ็ต
+SELECT,เลือก
+REDUCTION,การลดน้อยลง
+RETURN,กลับ
+FRAME,กรอบ
+TURNTABLE,จานเสียง
+APPROVAL,การอนุมัติ
+ASSETS,สินทรัพย์
+RATES,ราคา
+FINANCIAL_AFFAIRS,กิจการทางการเงิน
+EXPLANATION,คำอธิบาย
+LANGUAGE,ภาษา
+DETAILED,มีรายละเอียด
+SCORE,คะแนน
+EVALUATION,การประเมิน
+FORUM,ฟอรั่ม
+FOR_NON,สำหรับผู้ที่ไม่
+RULE,กฎ
+FORMS,รูปแบบ
+RANGE,แนว
+FROM_THE_SALE,จากการขาย
+FROM_BUYING,จากการซื้อ
+WEBSITE,เว็บไซต์
+NUMBERING,การกำหนดหมายเลข
+LEVEL,ระดับ
+EQUAL,เท่ากับ
+DRAWING_A_LINE,วาดเส้น
+POINT,จุด
+FIRE_CURRENCY,สกุลเงิน
+ACTIVATION,การเปิดใช้งาน
+MANCANG,มานกลาง
+ADD_TO,เพิ่ม
+INCREASE,เพิ่มขึ้น
+SEEK,แสวงหา
+COMPETENCE,ความสามารถ
+ORDINARY,สามัญ
+DAILY,วัน
+MINING,การขุด
+HOLD_OUT,จับ
+PASSPORT,หนังสือเดินทาง
+CONVERT,แปลง
+FOLD,พับ
+CONGRATULATION,การแสดงความยินดี
+IN_SHORT,สั้น
+OPEN,เปิด
+APPLICATION,แอปพลิเคชัน
+NO,เลขที่.
+EQUALITY,ความเสมอภาค
+TOOL,เครื่องมือ
+EXPANSION,การขยาย
+SMALL_COINS,เหรียญเล็ก ๆ
+LESS_THAN,น้อยกว่า
+LOGARITHM,ลอการิทึม
+WIDTH_HEIGHT,ความกว้างความสูง
+WIDTH,ความกว้าง
+REGULARLY,เป็นประจำ
+TIMES_NEW_ROMAN,Times New Roman
+INSTALLATION,การติดตั้ง
+SAFETY,ความปลอดภัย
+MEMORY,หน่วยความจำ
+AWARDS,รางวัล
+PRIZE,รางวัล
+REWARD,รางวัล
+CITY,เมือง
+ONLINE,ออนไลน์
+IN,ใน
+CYCLE,วัฏจักร
+SUNDAY,วันอาทิตย์
+THURSDAY,วันพฤหัสบดี
+ON_SATURDAY,วันเสาร์
+FRIDAY,วันศุกร์
+ON_TUESDAY,ในวันอังคาร
+ON_WEDNESDAY,ในวันพุธ
+ON_MONDAY,ในวันจันทร์
+WRITABLE,เปิ่น
+OPPOSITION,ฝ่ายค้าน
+UNINSTALL,ถอนการติดตั้ง
+VOLUMES,เล่ม
+SELLERS,ผู้ขาย
+REFRESH,รีเฟรช
+ARRIVAL,การมาถึง
+PAGING,การเพจจิ้ง
+ERROR,ข้อผิดพลาด
+OTHER,อื่น ๆ
+FULL_SITE,เว็บไซต์เต็มรูปแบบ
+BUY_ALL,ซื้อทั้งหมด
+ACCOUNTED_FOR,คิดเป็น
+CONVENIENT,สะดวก
+MEMBER,สมาชิก
+CROWDFUNDING,การระดมทุน
+AS_WELL_AS,เช่นเดียวกับ
+INTRODUCTION,บทนำ
+NUMBER_OF_PEOPLE,จำนวนคน
+TO_UNDERSTANDING,เกี่ยวกับ
+BUYERS,ผู้ซื้อ
+CHINESE,ภาษาจีน
+NEXT_IS,ถัดไปคือ
+UPPER_LAYER,ชั้นบน
+SUPPORT_HEAD_ACCORDING_TO_THE_DOCUMENT_HOLDING_GOODS,สนับสนุนหัวตามเอกสารที่ถือเอกสาร
+ACCORDING_TO_THE_STATE_FIVE_MINISTRIES,ตามที่รัฐห้ากระทรวง
+NOT_YET,ยัง
+ANY_NUMBER,จำนวนใด ๆ
+MORE_PEOPLE,ผู้คนมากขึ้น
+USERS_EXCHANGE,แลกเปลี่ยนผู้ใช้
+SUMMARY_GRAPH,กราฟสรุป
+INTEREST,ความสนใจ
+POSITIVE_CHUN,จุนบวก
+COMPOUND,สารประกอบ
+TIMES,เวลา
+SET,ชุด
+WHICH_IS,ซึ่งเป็น
+RECORD,บันทึก
+PURCHASE,ซื้อ
+ADD,เพิ่ม
+PLUS,บวก
+RUN,วิ่ง
+SHIFT,กะ
+CARE,การดูแล
+OR,หรือ
+CROSS,ข้าม
+KEY,กุญแจ
+INTRODUCE,แนะนำ
+SEARCH,ค้นหา
+SECONDARY,รอง
+REAR,หลัง
+NUMBER,ตัวเลข
+ENTER,เข้า
+ONE,หนึ่ง
+GRAPH,กราฟ
+TRADE,ซื้อขาย
+EXCHANGE,แลกเปลี่ยน
+SIGN_UP,ลงชื่อ
+FINANCE,การเงิน
+"Unable to send SMS Code, Retry in sometime",ไม่สามารถส่งรหัส SMS ลองอีกครั้งในบางครั้ง
+BALANCE,สมดุล
+THE TRANSACTION PRICE EXCEEDS A PRICE LIMIT TODAY!,ราคาการทำธุรกรรมเกินขีด จำกัด ราคาวันนี้!
+YOUR_WITHDRAWAL_MESSAGE,ข้อความถอนเงินของคุณ
+YOUR_RECHARGE_MESSAGE,ข้อความเติมเงินของคุณ
+Least sale bid suggested:,เสนอราคาเสนอขายน้อยที่สุด:
+User,บัญชี
+Vote,โหวต
+ICO,ico
+Store,เก็บ
+SHOP,เก็บ
+News,บล็อก
+SIGNUP,ลงชื่อ
+SIGNIN,เข้าสู่ระบบ
+Launchpad,ยิงจรวดขีปนาวุธ
+Health,สุขภาพ
+24H_CHANGES,การเปลี่ยนแปลง 24 ชั่วโมง
+THE NUMBER OF TRANSACTIONS IS MALFORMED,โปรดระบุปริมาณที่ถูกต้อง
+THE TRANSACTION PRICE IS MALFORMED,โปรดระบุราคาที่ถูกต้อง
+CUSTOMER_SUPPORT,สนับสนุนลูกค้า
+PENDING_NEEDS_CONFIRMATION,[รอดำเนินการ] การยืนยันที่จำเป็น:
+COINNAME,เหรียญ
+AMOUNT,จำนวน
+SYSTEM HEALTH,สุขภาพของระบบ
+VERIFY_EMAIL,Email ตรวจสอบ
+SEND VIA EMAIL,ส่งทางอีเมล
+USERNAME_OR_EMAIL,ชื่อผู้ใช้ / อีเมล
+TRADING FEES,ค่าธรรมเนียมการซื้อขาย
+REFERRAL,การอ้างอิง
+COINS HEALTH,เหรียญสุขภาพ
+FROM,จาก
+AIRDROP,อากาศ
+STACKING,ที่ทำให้เกิดการปักหลัก
+FAUCET,ก๊อกน้ำ
+LAB,ห้องแล็บ
+INVEST,ลงทุน
+RANKING,การจัดอันดับ
+MY PREVIOUS ORDERS,คำสั่งของฉัน
+MY OPEN ORDERS,คำสั่งที่ใช้งานอยู่
+RECENT TRADES,การซื้อขายล่าสุด
+TX PWD,กองทุน PWD
+TYPE,พิมพ์
+PAYBYEMAIL,ชำระเงินทางอีเมล
+RECHARGE AMOUNT CAN NOT BE LESS THAN,จำนวนเงินฝากที่อนุญาต
+Recharge amount can not exceed,จำนวนเงินฝากสูงสุดที่อนุญาต
+Individual,รายบุคคล
+Institutional,เกี่ยวกับสถาบัน
+Under Review,ภายใต้การทบทวน
+Subscribe,ติดตาม
+Subscribe Now,สมัครสมาชิกตอนนี้
+Subscription,การสมัครสมาชิก
+Your KYC along with Document has been submitted,ส่ง KYC ของคุณพร้อมกับเอกสารแล้ว
+Your KYC requested is being reviewed by our team.,KYC ของคุณร้องขอกำลังได้รับการตรวจสอบโดยทีมงานของเรา
+No actions required currently.,ไม่จำเป็นต้องดำเนินการใด ๆ ในปัจจุบัน
+KYC Submitted,KYC ส่ง
+Submitted,ส่ง
+Being Reviewed,กำลังตรวจสอบแล้ว
+KYC_REQ_INDIVIDUAL,โปรดส่งเอกสารต่อไปนี้ 4 เอกสาร <br/> -Document Front <br/> -Document ด้านหลัง <br/> -Selfie พร้อมเอกสารใกล้กับ <br/> -ProoD ของ Residence <br/> เฉพาะรูปแบบ JPG หรือ PNG หรือ PDF [สูงสุด 4MB ต่อไฟล์สูงสุด]
+KYC_REQ_INSTITUTIONAL,โปรดส่งต่อไป 7 เอกสาร <br/> -Director เอกสารด้านหน้า <br/> -Director เอกสารหลัง <br/> -Director เซลฟีด้วยเอกสารหลักฐานหลัง <br/> -Director ของที่อยู่อาศัย <br/> งบ -Company <br / > ใบรับรอง -Company ของสำนักงานพาณิชย์ <br/> ที่อยู่ของสำนักงานจดทะเบียน -Proof <br/> เท่านั้น JPG หรือ PNG รูปแบบ [ไม่เกิน 4MB ต่อไฟล์สูงสุด]
+Individual Account,บัญชีบุคคล
+Institutional Account,บัญชีสถาบัน
+PLEASE_ENTER_EMAIL,กรุณาใส่อีเมล
+INVALID_FORMAT,รูปแบบไม่ถูกต้อง
+IN_FREEZE,ตามคำสั่ง
+WITHDRAWAL_RECORDS, การถอนบันทึก
+PAYEE EMAIL,อีเมลผู้รับเงิน
+RECIPIENT EMAIL ON EXCHANGE!,อีเมลผู้รับที่ลงทะเบียนในการแลกเปลี่ยน!
+SENDING FEES,ค่าธรรมเนียมการทำธุรกรรม
+OTC CODE,รหัส OTP
+Request OTP,คลิกที่นี่เพื่อรับรหัส OTP ในอีเมล์
+Favor,ความกรุณา
+ADDRESSES,ที่อยู่
+Upvote,โหวต
+Downvote,ดาวน์โค้ด
+View,ดู
+STACK_NOW,สัดส่วน
+Currency,สกุลเงิน
+ICO RECORDS,บันทึก ICO
+OTC RECORDS,บันทึก OTC
+STAKE,สัดส่วน
+Daily,รายวัน
+Mining Reward,รางวัลการขุด
+Contract Duration,ระยะเวลาสัญญา
+BOUGHTS,คำสั่งซื้อ

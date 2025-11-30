@@ -1,0 +1,318 @@
+<include file="Public:header" />
+<!-- <script src="./jquery.js"></script> -->
+<style>
+  .h6-class {
+    font-size: 0.8em;
+    padding: 0 0 0.5em;
+    color: #919191;
+  }
+  .figure-class {
+    margin: 0 auto;
+    max-width: 1100px;
+    position: relative;
+  }
+  .row-class {
+  }
+  @keyframes expand {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    @keyframes expand {
+      from {
+        width: 0%;
+      }
+      to {
+        width: calc(100% - 75px);
+      }
+    }
+  }
+  .chart {
+    overflow: hidden;
+    width: 0%;
+    animation: expand 1.5s ease forwards;
+  }
+  .row-class + .row-class .chart {
+    animation-delay: 0.2s;
+  }
+  .row-class + .row-class + .row-class .chart {
+    animation-delay: 0.4s;
+  }
+  .block-class {
+    display: block;
+    height: 25px;
+    color: #fff;
+    font-size: 0.75em;
+    float: left;
+    background-color: #59ce8f;
+    position: relative;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity, 0.3s ease;
+    cursor: pointer;
+  }
+
+  .block-class img {
+    /* margin-left: -30px; */
+  }
+
+  .block-class:nth-of-type(2) {
+    background-color: #ef6d6d;
+  }
+
+  .block-class:hover {
+    opacity: 0.65;
+  }
+  .value {
+    display: block;
+    line-height: 1em;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  @media screen and (min-width: 768px) {
+    .h6-class {
+      padding: 0;
+      width: 75px;
+      float: left;
+      line-height: 100px;
+    }
+    .block {
+      font-size: 1em;
+    }
+  }
+</style>
+<div class="page-top-banner">
+  <div
+    class="filter"
+    style="
+      background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');
+    "
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-8 mt-3">
+          <h1>{$page_title}</h1>
+          <h2>{$prompt_text}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="voting">
+  <div class="container">
+    <div class="row mt-3 mb-3">
+      <include file="User:top_bar" />
+      <div class="col-9 col-md-6 order-1 order-md-2 float-right">
+        <ul class="text-right breadcrumbs list-unstyle">
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+          </li>
+          <li class="btn btn-warning btn-sm active">{:l('Vote')}</li>
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('Vote/log')}">{:l('Logs')}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h1>{:l('THE_NEW_CURRENCY_VOTE')}</h1>
+      </div>
+      <div class="col-md-12">
+        <div class="home-markets">
+          <div class="row">
+            <volist name="list" id="vo">
+              <div class="col-md-6 col-lg-3">
+                <div class="card vote-item">
+                  <div
+                    class="top d-flex align-items-center justify-content-center flex-column w-100"
+                  >
+                    <div class="avatar center d-flex">
+                      <img class="" src="{$vo['img']}" alt="" />
+                    </div>
+                    <h4 class="mt-3">{$vo['name']}</h4>
+                    <div class="row-class w-100 mt-3">
+                      <div class="">
+                        <span class="block-class" id="first-item">
+                          <span class="value"
+                            >{$vo['zongji'] / $vo['zhichi'] * 100 |round}%</span
+                          >
+                        </span>
+                        <span class="block-class">
+                          <span class="value"
+                            >{$vo['fandui'] / $vo['zhichi'] * 100| round}%</span
+                          >
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bottom">
+                    <div class="line">
+                      <span
+                        ><button
+                          onclick="Update(1,'{$vo['name']}','{$vo['assumnum']}','{$vo['votecoin']}','{$vo['id']}');"
+                          class="btn btn-success btn-sm"
+                        >
+                          <i class="ion ion-md-thumbs-up"></i> {:l('Upvote')}
+                        </button></span
+                      >
+                      <span
+                        ><button
+                          onclick="Update(2,'{$vo['name']}','{$vo['assumnum']}','{$vo['votecoin']}','{$vo['id']}');"
+                          class="btn btn-danger btn-sm pull-right"
+                        >
+                          <i class="ion ion-md-thumbs-down"></i>
+                          {:l('Downvote')}
+                        </button></span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </volist>
+          </div>
+          <table
+            class="table vote-list table-striped table-hover"
+            id="investLog_content"
+          >
+            <thead>
+              <tr>
+                <th scope="col">{:l('SYMBOL_AB')}</th>
+                <th scope="col">{:l('Name')}</th>
+                <th scope="col">{:l('Upvote')}</th>
+                <eq name="is_down_vote_allowed" value="1"
+                  ><th>{:l('Downvote')}</th></eq
+                >
+                <!--<th scope="col">{:l('TOTAL')}</th>-->
+                <th scope="col">{:l('Result')}</th>
+                <th scope="col" width="200" class="text-right">
+                  {:l('OPERATING')}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+			  <volist name="list" id="vo">
+			  
+                <tr>
+                  <td>
+                    <div class="pair-name">
+                      <div
+                        class="icon"
+                        style="background-image: url('{$vo['img']}')"
+                      ></div>
+                      <div class="name">{$vo['name']}</div>
+                    </div>
+                  </td>
+                  <td>{$vo['title']}</td>
+                  <td><font class="green">{$vo['zhichi']}</font></td>
+                  <eq name="is_down_vote_allowed" value="1"
+                    ><td><font class="red">{$vo['fandui']}</font></td></eq
+                  >
+                  <!--<td>{$vo['zongji']}</td> -->
+                  <!-- <td>
+                    {$vo['zhichi']} ,{$vo['fandui']} ,{$vo['zongji']
+                    },{$vo['zongji'] / $vo['zhichi'] * 100
+                    |round},{$vo['fandui'] / $vo['zhichi'] * 100| round}
+                  </td>-->
+                  <td>
+                    <div class="row-class">
+                      <div class="">
+                        <span class="block-class">
+                          <span class="value"
+                            > <php>echo round($vo['zhichi'] * 100 /($vo['zhichi']+$vo['fandui']))</php>%</span
+                          >
+                        </span>
+                        <span class="block-class">
+                          <span class="value"
+                            ><php>echo round($vo['fandui'] * 100 /($vo['zhichi']+$vo['fandui']))</php>%</span
+                          >
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-right">
+                    <a
+                      onclick="Update(1,'{$vo['name']}','{$vo['assumnum']}','{$vo['votecoin']}','{$vo['id']}');"
+                      href="javascript:void(0)"
+                      class="btn btn-success"
+                      ><i class="ion ion-md-thumbs-up"></i> {:l('Upvote')}</a
+                    >
+                    <eq name="is_down_vote_allowed" value="1">
+                      <a
+                        onclick="Update(2,'{$vo['name']}','{$vo['assumnum']}','{$vo['votecoin']}','{$vo['id']}');"
+                        href="javascript:void(0)"
+                        class="btn btn-danger"
+                        ><i class="ion ion-md-thumbs-down"></i>
+                        {:l('Downvote')}</a
+                      >
+                    </eq>
+                  </td>
+                </tr>
+              </volist>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript">
+  function Update(type, coinname, assumnum, votecoin, id) {
+    layer.confirm(
+      "Voting will cost " + votecoin + " " + assumnum + ", do you confirm it?",
+      {
+        btn: ["Confirm", "Cancel"], //PUSH_BUTTON
+        shade: false, //it does not show shadow
+        title: "Voting Price ",
+      },
+      function (index) {
+        $.post(
+          "/Vote/up",
+          {
+            type: type,
+            id: id,
+          },
+          function (data) {
+            if (data.status == 1) {
+              layer.msg(data.info, { icon: 1 });
+              window.setTimeout("window.location='/Vote/index'", 1000);
+            } else {
+              layer.msg(data.info, { icon: 2 });
+              if (data.url) {
+                window.setTimeout("window.location=" + data.url, 1000);
+              }
+            }
+          },
+          "json"
+        );
+
+        layer.close(index);
+      },
+      function (index) {
+        layer.close(index);
+      }
+    );
+  }
+</script>
+<script>
+  function getPercantages(votes, total) {
+    console.log("I ran");
+    console.log(235, (votes / total) * 100);
+    return (votes / total) * 100;
+  }
+
+  $(".value").each(function () {
+    var text = $(this).text();
+    $(this).parent().css("width", text);
+  });
+
+  //   $(".block-class").tooltip();
+</script>
+<include file="Public:footer_minimal" />

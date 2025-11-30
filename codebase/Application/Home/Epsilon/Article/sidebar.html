@@ -1,0 +1,23 @@
+
+                            <div class="filter-group white-bg">
+                                <h5 class="filter-title">{:l('Search')}</h5>
+                                <form action="#">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="" type="text">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="icon ion-ios-search"></i></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="filter-group white-bg">
+                                <h5 class="filter-title">{:l('Categories')}</h5>
+                                
+                                <div class="caregorie-list">
+                                    <ul>
+                                        <volist name="ArticleTypeList" id="atl">
+                                            <li <eq name="shang['name']" value="$key">class="active"</eq>> <a href="{:U('Article/cat',array('name'=>clean($atl['name'])))}"> {$atl.title}</a></li>                        
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>

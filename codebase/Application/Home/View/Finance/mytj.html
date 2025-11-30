@@ -1,0 +1,195 @@
+<include file="Public:header" />
+		<!-- Page content -->
+		<div class="page-container">	
+	
+<include file="Finance:left" />
+
+		<!-- Main content -->
+			<div class="content-wrapper">
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h1>
+					<span>{:l('INVITE_FRIENDS')}</span>
+					<span><a class="right" onclick="$('#hints').slideToggle();">
+						<i class="fa fa-hand-o-right move fz_14 mr5"></i>
+						<span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span>
+					</a>
+					</span>
+				</h1>
+			<div id="hints" class="mytips" style="display:none;">
+				<p>
+						<notempty name="prompt_text">
+								{$prompt_text}
+						</notempty>
+				</p>
+			</div>
+			</div>
+			<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-6">
+			<!-- Share affiliate -->
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h3 class="">{:l('EXCLUSIVE_INVITATION_CODE')}</h3>
+							</div>
+
+							<div class="panel-body">
+								
+								<div class="col-xs-12 col-md-8">
+									<div class="form-group">
+										<input name="enter-message" id="invite-inputa" class="form-control mb-15" rows="3" cols="1" value="{:SITE_URL}Login/register?invite={$user['invit']}"/>
+									</div>
+								</div>
+								<div class="col-xs-12 col-md-4 text-center">
+									<div class="form-group">
+										<input name="enter-message" id="invite-code" class="form-control mb-15" rows="3" cols="1" value="{$user['invit']}"/>
+									</div>
+								</div>
+
+									<div class="row">
+			                    		<div class="col-xs-12 col-md-3 text-center">
+				                        	<ul class="icons-list icons-list-extended mt-10">
+				                                <li><a href="javascript:;" title="{:l('Facebook')}" class="wlb_facebook" data-container="body" title="Facebook"><i class="icon-facebook"></i></a></li>
+				                            	<li><a href="javascript:;" title="{:l('Twitter')}" class="wlb_twitter" title="Twitter"><i class="icon-twitter"></i></a></li>
+				                                <li><a href="javascript:;" title="{:l('Facebook')}" class="wlb_googleplus" title="GooglePlus"><i class="icon-google-plus"></i></a></li>
+				                            </ul>
+			                    		</div>
+
+			                    		<div class="col-xs-12 col-md-9 text-center">
+										<button type="button" data-clipboard-target="invite-inputa" id="copy_button2" onclick="copyfunc1()" class="btn btn-primary btn-sm">Copy URL</button>
+											<button type="button" data-clipboard-target="invite-code" id="copy_button1" onclick="copycode()" class="btn btn-primary btn-sm">Copy Code </button>
+				                            
+			                    		</div>
+			                    	</div>
+		                    	
+								
+	                    	</div>
+						</div>
+						<!-- /Affiliate -->
+			</div>
+			<div class="col-sm-6 text-center">
+			<div id="qrcode-wallet" class="panel bg-white " style="display: inline-block;" width="100">
+				<saon id="codeaa"></saon>
+				<p id="qrcode-t"  class="text-center">{:l('YOUR_EXCLUSIVE_PROMOTION_OF_TW')}</p>
+			</div>
+			</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+       <script type="text/javascript" >
+       $('#codeaa').qrcode({
+         render: "table", //table
+         size:150,
+         text: "{:SITE_URL}Login/register?invite={$user['invit']}" ////Any content
+       }); //ANY_STRING
+       </script>
+	   
+	   
+<script type="text/javascript" src="__PUBLIC__/Home/js/ZeroClipboard.min.js"></script>
+<script>
+	var client = new ZeroClipboard(document.getElementById("copy-button"));
+	client.on("ready", function (readyEvent) {
+		client.on("aftercopy", function (event) {
+			event.target.style.display = "none";
+		});
+	});
+	ZeroClipboard.config({swfPath:'__PUBLIC__/Home/js/ZeroClipboard.swf'});
+	var clip = new ZeroClipboard(document.getElementById("copy"));
+	var _share_title = encodeURI("{:l('INVITE_FRIENDS')}");
+	var _share_content = encodeURI("{$C['invit_text_txt']}");
+	var _share_url = encodeURIComponent("{:SITE_URL}Login/register?invite={$user['invit']}");
+	var _share_pic = '/';
+	$(document).ready(function () {
+		var clip1 = new ZeroClipboard(document.getElementById("copy_button1"));
+		var clip2 = new ZeroClipboard(document.getElementById("copy_button2"));
+		var clip3 = new ZeroClipboard(document.getElementById("copy_button3"));
+		clip1.on("copy", function (e) {
+			layer.msg('Copy successful', {icon: 1});
+		});
+		clip2.on("copy", function (e) {
+			layer.msg('Copy successful', {icon: 1});
+		});
+		clip3.on("copy", function (e) {
+			layer.msg('Copy successful', {icon: 1});
+		});
+		$(".wlb_facebook").click(function () {
+			window.open("https://www.facebook.com/sharer/sharer.php?u=" + _share_url + "&title=" + _share_content);
+		});
+		$(".wlb_twitter").click(function () {
+			window.open("http://twitter.com/share?text=" + _share_content+"&url=" + _share_url );
+		});
+		$(".wlb_googleplus").click(function () {
+			window.open("https://plus.google.com/share?url=" + _share_url + "&title=" + _share_title + "&pics=" + _share_pic + "&desc=" + _share_content);
+		});
+	});
+</script>
+
+
+
+<script>
+function copyfunc1() {
+  /* Get the text field */
+  var copyText = document.getElementById("invite-inputa");
+
+  /* Select the text field */
+  copyText.select();
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
+function copycode() {
+  /* Get the text field */
+  var copyText = document.getElementById("invite-code");
+
+  /* Select the text field */
+  copyText.select();
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the code: " + copyText.value);
+}
+function copyfunc3() {
+  /* Get the text field */
+  var copyText = document.getElementById("invite-textarea");
+
+  /* Select the text field */
+  copyText.select();
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
+
+function copyfunc2() {
+  /* Get the text field */
+  var copyText = document.getElementById("invite-input");
+
+  /* Select the text field */
+  copyText.select();
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_invit').addClass('active');
+</script>	
+	
+<include file="Public:footer_minimal"/>

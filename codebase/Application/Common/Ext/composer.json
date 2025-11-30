@@ -1,0 +1,9 @@
+{
+    "require": {
+        "jaggedsoft/php-binance-api": "^0.5.26",
+        "kornrunner/ethereum-token": "^0.1.0",
+		"kornrunner/ethereum-offline-raw-tx": "^0.3.0",
+        "web3p/rlp": "^0.3.3",
+		"mongodb/mongodb": "^1.11"
+    }
+}

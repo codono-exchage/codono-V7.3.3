@@ -1,0 +1,24 @@
+<div class="icowithprogress">
+                  <div class="crowd_time">
+                     <eq name="issue['status']" value="0">
+                        <div class="dowebok_move">
+                           <p class="crowd_con_lp " style="text-align: center;font-size: 22px;letter-spacing: 1px;line-height: 70px;">{:l('THE_CURRENT_ICO_HAS_E')}</p>
+                        </div>
+                     </eq>
+                     <eq name="issue['status']" value="1">
+                        <div class="dowebok_move">
+                           <p class="crowd_con_lp " style="text-align: center;font-size: 22px;letter-spacing: 1px;line-height: 70px;">{:l('ICO_IS_IN')}</p>
+                        </div>
+                     </eq>
+                     <eq name="issue['status']" value="2">
+                        <div class="dowebok_move">
+                           <p class="crowd_con_lp " style="text-align: center;font-size: 22px;letter-spacing: 1px;line-height: 70px;">{:l('UPCOMING')} ICO</p>
+                        </div>
+                     </eq>
+                  </div>
+                  <div class="progress">
+                     
+					 <div class="progress-bar bg-info" role="progressbar" style="width: {$issue['bili']}%" aria-valuenow="{$issue['bili']}" aria-valuemin="0" aria-valuemax="100">{$issue['bili']}%</div>
+
+                  </div>
+               </div>

@@ -1,0 +1,311 @@
+<include file="Public:header" />
+	
+		<!-- Page content -->
+		<div class="page-container">	
+	
+		<include file="Finance:left" />
+
+		<!-- Main content -->
+			
+		<div class="panel panel-flat">
+		
+					<div class=" panel-heading" >
+					<div class="btn-group btn-group-justified">
+					<span class="btn-group">	
+						<a href="{:U('Finance/mytx')}" class="btn btn-flat  active current ">{:l('WITHDRAW')}</a>
+                    </span>
+					<span class="btn-group">	
+						<a href="{:U('Finance/outlog')}" class="btn btn-flat ">{:l('LOG_IN_LOG')}</a>
+					</span>
+										<span class="btn-group">	
+						<a href="{:U('Finance/bank')}" class="btn btn-flat ">{:l('ADDRESSES')}</a>
+                    </span>
+				</div>
+				<span>
+												<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+				</h1>
+						<div id="hints" style="display:none;">
+								<div class="table-responsive">
+						
+							<table class="table table-bordered">
+							<tbody>
+											<tr>
+												<td >{:l('AVAILABLE')} {$coin |strtoupper}
+													
+												</td>
+												<td >
+													{$user_coin['fiat']|NumToStr}
+												</td>
+											</tr>
+											<tr>
+											<td >{:l('THE_MINIMUM_WITHDRAWAL_AMOUNT')}</td>
+											<td >{:C('mytx_min')}</td>
+											</tr>
+											<tr>
+											<td >{:l('THE_MAXIMUM_AMOUNT_OF_WITHDRAW')}</td>
+											<td >{:C('mytx_max')}</td>
+											</tr>
+											<tr>
+											<td >{:l('THE_AMOUNT_OF_WITHDRAWALS_IS')}</td>
+											<td >{:C('mytx_bei')}</td>
+											</tr>
+
+										</tbody>
+							</table>
+					
+					</div>
+						
+						</div>
+			</div>
+				
+				
+				
+				
+			
+	
+			<div class="panel-body">
+					<!--Form starts-->
+					
+				<div class="row">
+							<fieldset class="col-xs-12">
+								
+								
+												<div class="form-group">
+									<label class="control-label">{:l('FIAT')}</label>
+									<div class="">
+										<div class="row">
+											<div class="col-md-6">
+
+												<select name="select" class="form-control" id="coin-select">
+										<volist name="fiatcoins" id="vo">
+										<eq name="vo['name']" value="$coin">
+											<option value="{$vo.name}" selected="selected">{$vo.name|strtoupper}</option>
+											<else/>
+												<option value="{$vo.name}">{$vo.name|strtoupper}</option>
+											</eq>
+			                             </volist>
+			                            </select>
+													<div class="label-block">
+													<span class="label label-danger"></span></div>
+												</div>
+											
+										</div>
+									</div>
+								</div>		
+								
+						<div class="form-group">
+									<label class="control-label">{:l('WITHDRAW_ADDRESS')}</label>
+									<div class="">
+										<div class="row">
+												<div class="label-block">
+													<span id="bank_info_hint" class="label hide"></span>
+												</div>
+											<div class="col-md-6">
+												<select id="out_bank" class="form-control">
+									<option value="">--{:l('SELECT_WITHDRAWALS_ADDRESS')}--</option>
+									
+									<volist name="userBankList" id="vo">
+										<option value="{$vo.id}" data-bank="{$vo.bankcard} @ {$vo.bank}">{$vo.name}</option>
+									</volist>
+									
+									 <option value="addnew">{:l('ADD_A_NEW_ADDRESS_TO_CASH')}</option>
+								</select>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+						
+						
+						<div class="form-group">
+									<label class="control-label">{:l('WITHDRAWAL_AMOUNT')}</label>
+									<div class="">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="label-block">
+													<span class="label  pull-left">{:l('Available')}  {$user_coin.fiat} {$coin|strtoupper}</span>
+													<span class="label pull-right">{:l('WITHDRAWAL_FEE')}  <notempty name="withdrawal_fee_percent"> {$withdrawal_fee_percent*1}% </notempty> <notempty name="withdrawal_fee_flat"><notempty name="withdrawal_fee_percent">+<notempty> {$withdrawal_fee_flat*1} {$coin} </notempty></span>
+												</div>	
+												<input type="text" class="form-control" id="out_num" maxlength="12" value="">
+																						<span class="label pull-left hide" id="receivable">{:l('Receivable')}  <span id="receivable_hint">--</span> {$coin|strtoupper}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+						<div class="form-group">
+								
+									<label class="control-label " for="out_paypassword">{:l('TRANSACTION_PASSWORD')}</label>
+									<div class="">
+										<div class="row">
+											<div class="col-md-6">
+
+								<input type="password" class="form-control" id="out_paypassword"  value="">
+												<div class="label-block pull-right">
+
+													<span class="label "><a href="{:U('Findpwd/findpwd')}" class=" text-link">{:l('FORGET')}?</a></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							<div class="form-group">
+									<label class="control-label "></label>
+									<div class="">
+										<div class="row">
+											<div class="col-md-6">
+												<input type="button" class="btn btn-info form-control disabled" value="{:l('WITHDRAW')}" id="withdraw_button" onclick="out_up()">
+												<div class="label-block">
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+					</fieldset>
+
+				<!--Form Ends-->
+				</div>
+			</div>
+		
+	</div>
+</div>
+
+<script>
+	$("#out_bank").change(function () {
+		var type = $("#out_bank option:selected").val();
+		if (type == 'addnew') {
+			window.location = "{:U('Finance/bank')}";
+		}
+	});
+	function send_new() {
+		$(".step6").hide();
+		$(".step5").show();
+	}
+	function send_cellphone_out(type) {
+		$.post("{:U('Verify/mytx')}", {
+			type: type,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$(".step5").hide();
+				$(".step6").show();
+				$("#out_cellphone_verify").focus();
+				$('#cellphone_new').attr("disabled", "disabled");
+				var obj      = $('#reg_cellphone_new');
+				var wait     = 60;
+				var interval = setInterval(function () {
+					obj.html(wait + "{:l('SEC_CAN_BE_SENT_AGAIN')}");
+					wait--;
+					if (wait < 0) {
+						clearInterval(interval);
+						$(".reloadverify_new").click();
+						$("#verify_new").val('');
+						obj.html('<a class="move" onclick="send_new()">{:l('DID_NOT_RECEIVE_RESEND')}</a>');
+					}
+					;
+				}, 1000);
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function out_up() {
+		var num          = $("#out_num").val();
+		var paypassword  = $("#out_paypassword").val();
+		var cellphone_verify = $("#out_cellphone_verify").val();
+		var bank         = $('#out_bank option:selected').val();
+		var coinname         = $('#coin-select option:selected').val();
+		<eq name="M_ONLY" value="1">
+		if (cellphone_verify == "" || cellphone_verify == null) {
+			layer.msg('Enter SMS verification code', {
+				icon: 2
+			});
+			return false;
+		}
+		</eq>
+		if (num == "" || num == null) {
+			layer.tips('Withdrawal Amount', '#out_num', {tips: 2});
+			return false;
+		}
+		if (bank == "" || bank == null) {
+			layer.tips('Choose withdraw address', '#out_bank', {tips: 2});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Provide Trans Password', '#out_paypassword', {tips: 2});
+			return false;
+		}
+		
+		{
+			$.post("{:U('Finance/mytxUp')}", {
+				num: num,
+				paypassword: paypassword,
+				cellphone_verify: cellphone_verify,
+				type: bank,
+				coinname:coinname,
+			}, function (data) {
+				if (data.status == 1) {
+					layer.msg(data.info, {icon: 1});
+					window.location = '/Finance/outlog';
+				} else {
+					layer.msg(data.info, {icon: 2});
+					if (data.url) {
+						window.location = data.url;
+					}
+				}
+			}, "json");
+		}
+	}
+</script>
+<script>
+$("#coin-select").change(function () {
+		var coin        = $("#coin-select option:selected").val();
+		window.location = '/Finance/mytx/coin/' + coin + '';
+	});
+	
+	$('.finan_out').addClass('active');
+	$("#out_bank").change(function() {
+	$("#bank_info_hint").removeClass('hide');
+    $("#bank_info_hint").html($(this).find("option:selected").attr('data-bank'));
+	
+	//alert($(this).find('option:selected').attr('data-bank'));
+
+});
+	$("#out_num").change(function() {
+	let amount =$("#out_num").val();
+	let fee_percent={$withdrawal_fee_percent};
+	let fee_flat={$withdrawal_fee_flat};
+    let fee_for_percent=(amount/100)*fee_percent;
+	let fee_for_flat=fee_flat;
+	let total_fee=fee_for_percent+fee_for_flat;
+	let receivable=amount-total_fee;
+if(receivable<=0){
+	$("#receivable_hint").html(0);
+	}else{
+	$("#receivable_hint").html(receivable);
+	$("#withdraw_button").removeClass("disabled");
+	}
+	$("#receivable").removeClass('hide');
+
+	
+	//alert($(this).find('option:selected').attr('data-bank'));
+
+});
+</script>
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_out').addClass('active');
+</script>	
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,60 @@
+<include file="Public:header" />
+<eq name="RECAPTCHA" value="1">
+<include file="Login:widget_login_user_recaptcha"/>
+<else/>
+<include file="Login:widget_login_user"/>
+</eq>
+<script>
+    function footer_user_login() {
+        var username = $("#username").val();
+        var password = $("#login_password").val();
+<eq name="RECAPTCHA" value="1">
+        var verify = $("#g-recaptcha-response").val();
+<else/>
+        var verify = $("#login_verify").val();
+
+</eq>
+        if (username == "" || username == null) {
+            layer.tips("Username", '#username', {tips: 2});
+            return false;
+        }
+        if (password == "" || password == null) {
+            layer.tips("Enter password", '#login_password', {tips: 2});
+            return false;
+        }
+        
+        if (verify == "" || verify == null) {
+            layer.tips("Captcha", '.recaptcha', {tips: 2});
+            return false;
+            
+        }
+        $.post("/Login/submit", {
+            username: username,
+            password: password,
+            verify: verify,
+            //login_token: "",
+        }, function (data) {
+            if (data.status == 1) {
+                $.cookies.set('username', username);
+                layer.msg(data.info, {icon: 1});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    window.location = "/";
+                }
+            } else {
+                layer.msg(data.info, {icon: 2});
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+
+    function choose_lang(lang) {
+        $.cookies.set("lang", lang);
+        window.location.reload();
+    }
+</script>
+
+<include file="Public:footer_minimal" />

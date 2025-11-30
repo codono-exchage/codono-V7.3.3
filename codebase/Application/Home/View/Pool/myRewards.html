@@ -1,0 +1,131 @@
+<include file="Public:header" />
+<div class="page-container">
+<div class="row">
+	<div class="navbar navbar-default navbar-xs navbar-component">
+	<ul class="nav navbar-nav no-border visible-xs-block">
+									<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-filter"><i class="icon-circle-down2"></i></a></li>
+								</ul>
+					<div class="navbar-collapse collapse" id="navbar-filter">
+						<p class="navbar-text">Filter:</p>
+						<ul class="nav navbar-nav">
+							<li class="dropdown ">
+								<a  class="text-info" href="{:U('Pool/index')}" >Mining </a>
+							</li>
+							<li class="dropdown ">
+								<a class="text-info" href="{:U('Pool/myMachines')}" >My Machines </a>
+							</li>
+							<li class="dropdown active">
+								<a class="" href="{:U('Pool/myRewards')}" >My Rewards </a>
+							</li>
+						</ul>
+
+						
+					</div>
+				</div>
+
+
+</div>
+			
+				<div class="row">
+					<div class="panel">
+						<div class="panel-body">
+						<table class="table table-striped table-info" id="investLog_content">
+						<thead>
+							<tr>
+								<th id="sublist-grid_c1">PoolID</th>
+								<th id="sublist-grid_c2">RentID</th>
+								<th id="sublist-grid_c3">{:L('Coin')}</th>
+								<th id="sublist-grid_c4">{:L('Reward')}</th>
+								<th id="sublist-grid_c5">Mining Hash</th>
+								<th id="sublist-grid_c6">{:L('Time')}</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<volist name="list" id="vo">
+							<tr>
+								
+								<td>{$vo['poolid']} </td>
+								<td>{$vo['logid']} </td>
+								<td>{$vo['coinname']}</td>
+								<td>{$vo['amount']*1}</td>
+								<td>{$vo['hash']}</td>
+								<td>{$vo['addtime']|addtime}</td>
+								<td>
+								<switch name="vo.status">
+    <case value="0"><span onclick="startpool('{$vo['id']}')" class="btn btn-sm btn-info">Start Mining</span></case>
+    <case value="1">Running Currently</case>
+	<case value="2">Mining Completed</case>
+	</switch>
+														<include file="Pool:buyform" />
+
+								</td>
+							</tr>
+							</volist>
+						</tbody>
+					</table>
+					</div>
+					<div class="panel-footer"><div class="pages">{$page}</div></div>
+					</div>
+				</div>
+			
+		
+</div>
+<br>
+<script>
+function buypool(id) {
+ var ele = document.getElementsByName(id+'tian'); 
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               var tian =ele[i].value; 
+            } 
+	var amount=$("input[id='pool_box"+id+"']").val();
+	if(amount==null || amount <=0){
+	layer.tips('Enter Amount', "input[id='pool_box"+id+"']", {tips: 1});
+	return false;
+	}
+	var days=tian>1?'days':'day';
+	
+	var msg = ' Mine '+amount+' '+ ' for '+tian+' '+days+'!';
+	
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.post("/Pool/rentMachine/",{id:id,num:amount} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+						window.location.href = "{:U('Pool/myMachines')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+
+        }, 'json');
+		});
+    }
+
+	function startpool(id){
+		$.post("{:U('Pool/startMachine')}",{id:id},function(data){
+			if(data.status==1){
+				layer.msg(data.info,{icon:1});
+				window.setTimeout("window.location='{:U('Pool/myMachines')}'",1000);
+			}else{
+				layer.msg(data.info,{icon:2});
+			}
+		});
+	}
+	$('.receiving').click(function(){
+		$.post("{:U('Pool/receiving')}",{id:$(this).attr('id'),},function(data){
+			if(data.status==1){
+				layer.msg(data.info,{icon:1});
+				window.setTimeout("window.location='{:U('Pool/myMachines')}'",1000);
+			}else{
+				layer.msg(data.info,{icon:2});
+			}
+		});
+	});
+</script>
+
+<include file="Public:footer" />

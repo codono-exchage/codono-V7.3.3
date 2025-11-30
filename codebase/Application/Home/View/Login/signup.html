@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="Keywords" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_keywords')}">
+<meta name="Description" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_description')}">
+<link rel="stylesheet" href="__PUBLIC__/vuetrade/assets/css/vendor.bundle.css?ver=192">
+<link rel="stylesheet" href="__PUBLIC__/vuetrade/assets/css/style-libertas.css?ver=192" id="changeTheme">
+<script type="text/javascript" src="__PUBLIC__/assets/js/core/libraries/jquery.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/vuetrade/assets/css/theme.css?ver=192">
+<script src="__PUBLIC__/vuetrade/assets/js/jquery.bundle.js?ver=192"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/jquery.cookies.2.2.0.js"></script>
+
+</head>
+   
+
+
+    <body class="nk-body body-wider bg-light-alt">
+
+	<div class="nk-wrap">
+    
+        <main class="nk-pages nk-pages-centered bg-theme">
+            <div class="ath-container">
+                <div class="ath-header text-center">
+                    <a href="/" class="logo-link">
+								<img  srcset="__UPLOAD__/public/{$C['web_logo']} 2x" alt="logo">
+							</a>
+                </div>
+                <div class="ath-body bg-dark tc-light">
+                    <h3 class="ath-heading ">{:l('SIGN_UP_NOW')}</h3>
+					
+                        <div class="field-item">
+                            <div class="field-wrap">
+								<input type="text" class="input-bordered" placeholder="Username" id="username" onblur="check_username()">
+                            </div>
+							<span id="username_help" class="" style=""></span>
+                        </div>
+						<div class="field-item">
+                            <div class="field-wrap">
+								<input type="text" class="input-bordered" placeholder="Email" id="email" onblur="check_email()">
+                            </div>
+							<span id="email_help" class="" style=""></span>
+                        </div>
+						
+                        <div class="field-item">
+                            <div class="field-wrap">
+                                <input type="password" class="input-bordered" placeholder="{:l('PLEASE_ENTER_A_LOGIN_PASSWORD')}" id="email_password" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="d-flex field-item">
+								<eq name="RECAPTCHA" value="1">
+									<include file="Public:recaptcha"/>
+												<else/>
+									<include file="Public:image_captcha"/>
+									</eq>
+						</div>
+						<div class="field-item">
+							<div class=""></div>
+                            <div class="field-wrap">
+                                <input id="email_invit" placeholder="{:l('INVITE_CODE')}" type="text" class="input-bordered" autocomplete="off">
+                            </div>
+                        </div>	
+						<div class="row" id="account_type">
+									<div class="justify-content-between align-items-center col-6">
+									<label class="radio-inline radio-right">
+										<input type="radio" name="accounttype" value="1">
+									<small>	{:l('Individual Account')}</small>
+									</label>
+									
+									</div>
+									<div class="justify-content-between align-items-center col-6">
+									<label class="radio-inline radio-right">
+										<input type="radio" name="accounttype" value="2">
+										<small>{:l('Institutional Account')}</small>
+									</label>
+									</div>
+								</div>
+						
+						<div class="d-flex justify-content-between align-items-center">
+                        <button class="btn btn-grad btn-full btn-md col-12"  onclick="reg_email();">{:l('SIGN_UP_NOW')}</button>
+						</div>
+               
+                    <div class="sap-text"><span class="bg-dark">Or </span></div>
+
+                    <ul class="row gutter-20px gutter-vr-20px">
+                        <li class="col-5"><a href="{:U('Login/login')}" class="btn btn-sm btn-info">{:l('LOG_IN')}</a></li>
+                        <li class="col-7"><a href="{:U('Login/findpwd')}" class="btn btn-sm btn-warning"><span>{:l('FORGET_PASSWORD')}</span></a></li>
+                    </ul>
+                </div>
+                <div class="text-center tc-info">
+                    <p>{:C('web_icp')}</p>
+                </div>
+            </div>
+        </main>
+    
+	</div>
+	
+<script>
+	$(function () {
+	var inviteurl = new URL(window.location.href);
+	var invitecode = inviteurl.searchParams.get("invite");
+	document.getElementById("email_invit").value =invitecode;
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+		$('#email_step2').height(height);
+		$("#cellphone").focus();
+	});
+	function regWeb() {
+		layer.open({
+			type: 2,
+			skin: 'layui-layer-rim', //frame
+			area: ['800px', '600px'], // width height
+			title: 'User Agreement', // title
+			content: "{:U('Login/webreg')}"
+		});
+	}
+	
+	function showB() {
+		$("#step1").hide();
+		$("#step2").hide();
+		$("#verify").focus();
+	}
+	function showE() {
+		$("#email_step1").hide();
+		$("#email_step2").hide();
+		$("#everify").focus();
+	}
+		function check_username() {
+		var username  = $('#username').val();
+		if (username == "" || username == null) {
+			layer.tips("Please choose username", '#username', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_username", {
+			username: username,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.tips("Good!!", '#username', {tips: 2});
+				return true;
+			} else {
+				layer.tips(data.info, '#username', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	function check_email() {
+		var email  = $('#email').val();
+		if (email == "" || email == null) {
+			layer.tips("{:l('PLEASE_ENTER_email')}", '#email', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_email", {
+			email: email,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				$("#email_step1").show();
+				$("#email_step2").show();
+				$("#everify").focus();
+				layer.tips("{:l('Good!')}", '#email', {tips: 2});
+			} else {
+				layer.tips(data.info, '#email', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	
+	function verify_ups() {
+		$('#verify_up').attr('src', "/Ajax/verify?t=" + Math.random());
+	}
+	function new_send() {
+		$("#step1").show();
+		$("#step2").show();
+		$("#verify").focus();
+	}
+	function new_send_email() {
+		$("#email_step1").show();
+		$("#email__step2").show();
+		$("#everify").focus();
+	}
+	
+	
+	function validateEmail(sEmail){
+       var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
+
+  if(!sEmail.match(reEmail)) {
+    alert("Invalid email address");
+    return false;
+  }
+
+  return true;
+
+}
+function reg_email() {
+		var username        = $("#username").val();
+		var email        = $("#email").val();
+		<eq name="RECAPTCHA" value="1">
+		var verify =$("#g-recaptcha-response").val();
+				<else/>
+		var verify = $("#login_verify").val();
+		</eq>
+		var password     = $("#email_password").val();
+		var invit        = $("#email_invit").val();
+		var accounttype =$("input[name='accounttype']:checked").val();
+		if (email == "" || email == null || validateEmail(email)== false) {
+			layer.tips("{:l('PLEASE_ENTER_VALID_EMAIL')}", '#email', {tips: 2});
+			return false;
+		}
+		if (username == "" ||username == null) {
+			layer.tips("Please enter username", '#username', {tips: 2});
+			return false;
+		}
+		
+		if (password == "" || password == null) {
+			layer.tips("{:l('PLEASE_ENTER_YOUR_PASSWORD')}", '#email_password', {tips: 2});
+			return false;
+		}
+		if (verify == "" || verify == null) {
+			layer.tips("{:l('Please enter Captcha')}", '#login_verify', {tips: 2});
+			return false;
+		}
+		if (accounttype == "" || accounttype == null) {
+			layer.tips("{:l('Please Choose acount type')}", '#account_type', {tips: 2});
+			return false;
+		}
+		if (!$("#emailregweb").is(':checked')) {
+			layer.tips("{:l('CHECK_USER_REGISTRATION_AGREEM')}", '#emailregweb', {tips: 3});
+		//	return false;
+		}
+		$.post("/Login/emailsignup", {
+			email: email,
+			username: username,
+			verify: verify,
+			password: password,
+			invit: invit,
+			accounttype:accounttype,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$.cookies.set('exchange_email', email);
+					window.location = '/Login/thankyou';
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+<Style>
+#rc-imageselect {transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;}
+</style>
+
+
+<script src="__PUBLIC__/vuetrade/assets/js/scripts.js?ver=192"></script>
+</body>
+</html>

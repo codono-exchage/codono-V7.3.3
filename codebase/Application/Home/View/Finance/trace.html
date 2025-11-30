@@ -1,0 +1,109 @@
+<include file="Public:header" />
+	
+	
+
+<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">	
+	
+<include file="Finance:left" />
+
+		<!-- Main content -->
+			<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="safe_center clear">
+				<h1>
+					<span>{:l("Trace Payment")}</span>
+				</h1>
+			</div>
+			
+			<div class="form-horizontal">
+				<div class="pwtrade  pw  mt50">
+								<div class="form-group">
+<label class="control-label col-lg-2">{:l('Network')}</label>
+<div class="col-lg-10">
+									<select name="type" id="coin-select" class="form-control"> 	
+										<volist name="coin_list" id="vo">
+											<if condition="$vo['type'] eq 'esmart'">
+												<option value="{$vo['name']}">{$vo.title} ({$vo['name']|strtoupper})</option>
+											</if>
+										</volist>
+									 </select>
+									 </div>
+									</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2">{:l('Txid')}</label>
+									<div class="col-lg-10">
+										<input id="txid" class="form-control" value="" placeholder="{:l('Transaction Id')}">
+									</div>
+								</div>
+									<div class="form-group">
+									<label class="control-label col-lg-2"></label>
+									<div class="col-lg-10">
+									<input type="button" class="btn btn-info btn-md" value="{:l('Trace')}" onclick="trace()">
+									</div>
+								</div>
+								
+						
+				</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+
+</div>
+</div>
+<script>
+	function trace() {
+		var txid = $("#txid").val();
+		var coin         = $('#coin-select option:selected').val();
+		if (txid == "" || txid == null) {
+			layer.tips('Enter the txid', '#txid', {
+				tips: 2
+			});
+			return false;
+		}
+		if (coin == "" || coin == null) {
+			layer.tips('Select Currency', '#coin-select', {
+				tips: 2
+			});
+			return false;
+		}
+	{
+	layer.load(0, {shade: [0.5,'#8F8F8F']});
+        setTimeout(function () {
+            layer.closeAll('loading');
+            trans_lock = 0;
+        }, 10000);
+			$.post("{:U('Finance/doTrace')}", {
+				chain:coin,
+				txid:txid,
+			}, function (data) {
+			  layer.closeAll('loading');
+            trans_lock = 0;
+				if (data.status == 1) {
+					layer.msg(data.info, {
+						icon: 1
+					});
+				} else {
+					layer.msg(data.info, {
+						icon: 2
+					});
+					if (data.url) {
+					//	window.location = data.url;
+					}
+				}
+			}, "json");
+		}
+	}
+</script>
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+</script>
+<include file="Public:footer_minimal"/>

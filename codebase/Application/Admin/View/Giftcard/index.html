@@ -1,0 +1,106 @@
+<include file="Public:header" />
+<div id="main-content">
+ <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+  <button class="close fixed" style="margin-top: 4px;">&times;</button>
+  <div class="alert-content">{:l('Warnings')}</div>
+ </div>
+ <div id="main" class="main">
+  <div class="main-title-h">
+   <span class="d-sm-flex align-items-center justify-content-between h4">{$Title}</span>
+   <notempty name="name"> <span class="h2-title">>><a href="{:U('Invit/index')}">{:l('Giftcard list')}</a></span> </notempty>
+  </div>
+  <div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+   <div class="fl">
+				<button class="ajax-post btn btn-info " url="{:U('Giftcard/status',array('type'=>'active'))}" target-form="ids">{:l('Enable')}</button>
+				<button class="ajax-post btn btn-warning confirm" url="{:U('Giftcard/status',array('type'=>'consumed'))}" target-form="ids">{:l('Used')}</button>
+				<button class="ajax-post btn btn-info" url="{:U('Giftcard/status',array('type'=>'inactive'))}" target-form="ids">{:l('Disable')}</button>
+				<button class="ajax-post btn btn-danger confirm" url="{:U('Giftcard/status',array('type'=>'delete'))}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i></button>
+			</div>
+   
+   </div>
+   <div class="search-form fr cf">
+    <div class="sleft">
+     <form name="formSearch" id="formSearch" method="get" name="form1" action="{:U('Giftcard/index')}">
+      <input type="text" name="publiccode" class="form-control" value="{$publiccode}" placeholder="Please enter Public code"> <a class="sch-btn" href="javascript:;" id="search"><i class="btn-search"></i></a>
+     </form>
+     <script>
+						//Search function
+						$(function(){
+							$('#search').click(function(){
+								$('#formSearch').submit();
+							});
+						});
+						//Enter search
+						$(".search-input").keyup(function(e){
+							if(e.keyCode===13){
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+    </div>
+   </div>
+
+  <div class="card card-body mt-2 table-responsive">
+   <table class="table table-sm emptyx">
+    <thead class="table-light">
+     <tr>
+      <th class="row-selected row-selected"><input class="check-all" type="checkbox" /></th>
+      <th class="">{:l('ID')}</th>
+      <th class="">{:l('Owner')}</th>
+	  
+      <th class="">{:l('Value')}</th>
+      <th class="">{:l('CardImg')}</th>
+      <th class="">{:l('Public Code')}</th>
+      <th class="">{:l('SecretCode')}</th>
+      
+      <th class="">{:l('Created')}</th>
+	  <th class="">{:l('Consumer')}</th>
+	  <th class="">{:l('Used')}</th>
+	  <th class="">{:l('Status')}</th>
+     </tr>
+    </thead>
+    <tbody>
+     <notempty name="list"> <volist name="list" id="vo">
+     <tr>
+      <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+      <td>{$vo.id}</td>
+      <td>{$vo['owner_name']}</td>
+      <td>{$vo['value']*1} {$vo.coin}</td>
+      <td><img src="{$vo.image}" width="30px" alt=""/></td>
+      <td>{$vo.public_code}</td>
+      <td>{$vo['secret']}</td>
+      
+      <td>{$vo.addtime|addtime}</td>
+	  <td>{$vo['consumer_name']}</td>
+	  <td>{$vo.usetime|addtime}</td>
+	  <td>
+	  <switch name="vo.status">
+    <case value="0">Invalid</case>
+    <case value="1">Active</case>
+	<case value="2">Used</case>
+	<default />
+	</switch>
+	  </td>
+     </tr>
+     </volist> <else />
+     <td colspan="12" class="text-center">{:l('No contents!')}</td>
+     </notempty>
+    </tbody>
+   </table>
+   <div class="page">
+    <div>{$page}</div>
+   </div>
+  </div>
+ </div>
+</div>
+  </div>
+<script type="text/javascript">
+	$(function(){
+		//Highlight the main navigation
+		$('.invit-box').addClass('current');
+		//Highlight side navigation
+		$('.invit-index').addClass('current');
+	});
+</script>
+<include file="Public:footer" />

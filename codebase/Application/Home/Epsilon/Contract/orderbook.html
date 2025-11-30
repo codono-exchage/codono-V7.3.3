@@ -1,0 +1,33 @@
+<div class="col-md-4 col-lg-3 col-pd">
+                    <div class="graph-desc">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="small-head">Order Book</h4>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="table-responsivex table-height-one mytable-1 all-tables" id="theorderbook">
+                                    <table class="table table-hover buyselltable">
+									<thead>
+									  <th scope="col">{:l('Price')} ({$rmb|strtoupper})</th>
+                                            <th scope="col">{:l('Amount')}</th>
+                                            <th scope="col">{:l('Total')} ({$rmb|strtoupper})</th>
+									</thead>
+
+										<tbody id="sellorderlist" class="orderlist obtext"></tbody>
+										</table>
+
+											<div class="activeMiddleBar"> <span id="activexnb" class="OK">--</span>  || <span id="activesign" class="OK"></span>     <span id="activermb" class="OK">--</span></div>
+											<table class="table table-hover buyselltable">
+											<tbody id="buyorderlist" class="orderlist obtext"></tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>

@@ -1,0 +1,406 @@
+<include file="Public:header"/>
+
+<link href="__THEME__/index_js/morris-js/morris.css" rel="stylesheet">
+<script src="__THEME__/index_js/morris-js/morris.min.js" type="text/javascript"></script>
+<script src="__THEME__/index_js/morris-js/raphael-min.js" type="text/javascript"></script>
+<script src="__THEME__/assets/libs/apexcharts/apexcharts.min.js"></script>
+<div id="main-content">
+    <if condition="$google_2fa eq 0">
+
+    
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <small>{:l('You should consider securing the account')} <strong><a href="{:U('User/google_2fa')}">{:l('Activate 2FA')}</a></strong> {:l('now !')}</small>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</if>
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-medium">{:l('Users')}</p>
+                            <h4 class="mb-0"><a href="{:U('User/index')}">{$arr['reg_sum']}</a></h4>
+                        </div>
+
+                        <div class="flex-shrink-0 align-self-center">
+                            <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
+                                <span class="avatar-title">
+                                    <i class="bx bx-user font-size-24"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-medium">{:l('Markets')}</p>
+                            <h4 class="mb-0"><a href="{:U('Trade/market')}">{$arr['markets']}</a></h4>
+                        </div>
+
+                        <div class="flex-shrink-0 align-self-center ">
+                            <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
+                                <span class="avatar-title rounded-circle bg-primary">
+                                    <i class="bx bx-book font-size-24"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-medium">{:l('Coins')}</p>
+                            <h4 class="mb-0"><a href="{:U('Config/coin')}">{$arr['coins']}</a></h4>
+                        </div>
+                          
+                        <div class="flex-shrink-0 align-self-center">
+                            <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
+                                <span class="avatar-title rounded-circle bg-primary">
+                                    <i class="bx bx-bitcoin font-size-24"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-medium">{:l('Activity Monitor')}</p>
+                            <h4 class="mb-0"><a href="{:U('Tools/safety')}">{$arr['activity']}</a></h4>
+                        </div>
+                          
+                        <div class="flex-shrink-0 align-self-center">
+                            <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
+                                <span class="avatar-title rounded-circle bg-primary">
+                                    <i class="bx bx-laptop font-size-24"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="wrapper">
+     <div class="row">
+        <div class="col-xl-5">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">{:l('Top Market Analytics')}</h4>
+                    
+                    <div>
+                        <div id="trade-log" data-colors='["--bs-primary", "--bs-success", "--bs-danger"]' class="apex-charts"></div>
+                    </div>
+
+             
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-7">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">{:l('1 Year Deposit Overview')}</h4>
+        
+                                                <div>
+            <div id="overview-chart" data-colors='["--bs-warning", "--bs-primary", "--bs-info"]' class="apex-charts" dir="ltr"></div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <include file="Index:sub_charts"/>
+        
+        </div>
+        <div class="row">
+            <include file="Index:sub_crons"/>
+            <include file="Index:sub_server"/>
+        </div>
+    </section>
+
+
+    <script type="text/javascript">
+        var months = <?php echo json_encode($arr['deposits']['months']); ?>;
+        var coinsData = <?php echo json_encode($arr['deposits']['coinsData']); ?>;
+    
+        var options = {
+            series: [],
+            chart: {
+                height: 240,
+                type: "line",
+                toolbar: {
+                    show: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: "smooth",
+                width: 2,
+                dashArray: [0, 0, 3]
+            },
+            fill: {
+                type: "solid",
+                opacity: [.15, .05, 1]
+            },
+            xaxis: {
+                categories: months
+            },
+            yaxis: {
+            labels: {
+                formatter: function(value) {
+                    return value.toFixed(2); // Format to 2 decimal places
+                }
+            }
+        },
+            colors: [
+                        '#41cac0',
+                        '#ff6c60',
+                        '#2f4154',
+                        '#8075c4',
+                        '#6883a3'
+                    ] // Assuming this variable is defined as in your initial sample
+        };
+    
+        for (var coin in coinsData) {
+            options.series.push({
+                type: "area",
+                name: coin,
+                data: coinsData[coin]
+            });
+        }
+    
+        var chartOverview = new ApexCharts(document.querySelector("#overview-chart"), options);
+        chartOverview.render();
+    </script>
+    
+    <!-- end row -->
+        <div id="morris">
+        
+            <style>
+                .version a {
+                    animation: myfirst 2s;
+                    -moz-animation: myfirst 2s; /* Firefox */
+                    -webkit-animation: myfirst 2s; /* Safari and Chrome */
+                    -o-animation: myfirst 2s; /* Opera */
+                }
+
+                @keyframes myfirst {
+                    from {
+                        color: #2f4154;
+                    }
+                    to {
+                        color: green;
+                    }
+                }
+
+                @-moz-keyframes myfirst /* Firefox */
+                {
+                    from {
+                        color: #2f4154;
+                    }
+                    to {
+                        color: green;
+                    }
+                }
+
+                @-webkit-keyframes myfirst /* Safari and Chrome */
+                {
+                    from {
+                        color: #2f4154;
+                    }
+                    to {
+                        color: green;
+                    }
+                }
+
+                @-o-keyframes myfirst /* Opera */
+                {
+                    from {
+                        color: #2f4154;
+                    }
+                    to {
+                        color: green;
+                    }
+                }
+            </style>
+           
+       
+    </section>
+</div>
+
+<script>
+    var Script = function () {
+        $(function () {
+            show_cztx({$cztx});
+            show_reg({$reg});
+
+            //system Recharge/withdraw summary graph
+            function show_cztx(data) {
+                Morris.Line({
+                    element: 'hero-graph',
+                    data: data,
+                    xkey: 'date',
+                    ykeys: [
+                        'charge',
+                        'withdraw'
+                    ],
+                    labels: [
+                        'Recharge',
+                        'withdraw'
+                    ],
+                    lineColors: [
+                        '#8075c4',
+                        '#6883a3'
+                    ],
+                    xLabels: 'day',
+                    postUnits: ' {$syscoin}'
+                });
+            }
+
+            //User Registration Report
+            function show_reg(data) {
+                Morris.Bar({
+                    element: 'hero-bar',
+                    data: data,
+                    xkey: 'date',
+                    ykeys: ['sum'],
+                    labels: ['Users'],
+                    barRatio: 0.4,
+                    xLabelAngle: 35,
+                    hideHover: 'auto',
+                    barColors: ['#6883a3'],
+                    xLabels: 'day',
+                    postUnits: ' U',
+                });
+            }
+
+            //Market Transactions Report
+            function show_trance(data) {
+                Morris.Area({
+                    element: 'hero-area',
+                    data: [
+                        {date: '2017-10-24', btc: 2666, msc: null, ltc: 2647},
+                        {date: '2017-10-25', btc: 2778, msc: 2294, ltc: 2441},
+                        {date: '2017-10-26', btc: 4912, msc: 1969, ltc: 2501},
+                        {date: '2017-10-27', btc: 3767, msc: 3597, ltc: 5689},
+                        {date: '2017-10-28', btc: 3767, msc: 3597, ltc: 5689},
+                        {date: '2017-10-29', btc: 3767, msc: 3597, ltc: 5689},
+                        {date: '2017-10-30', btc: 3767, msc: 3597, ltc: 5689},
+                        {date: '2017-10-31', btc: 3767, msc: 3597, ltc: 5689},
+                        {date: '2017-11-1', btc: 3767, msc: 3597, ltc: 5689},
+                        {date: '2017-11-2', btc: 3767, msc: 3597, ltc: 5689},
+                    ],
+
+                    xkey: 'date',
+                    ykeys: [
+                        'btc',
+                        'msc',
+                        'ltc'
+                    ],
+                    labels: [
+                        'Bitcoin',
+                        'Mastercoin',
+                        'Litecoin'
+                    ],
+                    hideHover: 'auto',
+                    lineWidth: 1,
+                    pointSize: 10,
+                    lineColors: [
+                        '#4a8bc2',
+                        '#ff6c60',
+                        '#a9d86e'
+                    ],
+                    fillOpacity: 0.5,
+                    smooth: true,
+                    postUnits: ' {$syscoin}',
+                    xLabels: 'day',
+                });
+            }
+
+            //Market activity report
+            function show_active() {
+                Morris.Donut({
+                    element: 'hero-donut',
+                    data: [
+                        {label: '{$syscoin}', value: 10450},
+                        {label: 'Total', value: 8440},
+                    ],
+                    colors: [
+                        '#41cac0',
+                        '#ff6c60',
+                        '#FF6C60'
+                    ],
+                    formatter: function (y) {
+                        return y + "In short"
+                    }
+                });
+            }
+        });
+
+    }();
+
+
+var trade_log = <php>echo json_encode($arr['trade_log'])</php>;
+// Extracting market names and number of trades
+var labels = trade_log.map(function(item) {
+    return item.market;
+});
+var series = trade_log.map(function(item) {
+    return Number(item.number_of_trades);
+});
+
+// Donut chart configuration
+var options = {
+    series: series,
+    chart: {
+        type: "donut",
+        height: 262
+    },
+    labels: labels,
+    colors: ['#FF5733', '#33FF57', '#3357FF', '#FF33F6'], // Assuming donutchartColors is defined elsewhere
+    legend: {
+        show: true // Set to false if you do not want to display the legend
+    },
+    plotOptions: {
+        pie: {
+            donut: {
+                size: "70%"
+            }
+        }
+    }
+};
+
+// Initializing the chart
+var chart = new ApexCharts(document.querySelector("#trade-log"), options);
+chart.render();
+
+</script>
+
+
+<include file="Public:footer"/>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //Highlight navigation
+        highlight_subnav("{:U('Index/index')}");
+    </script>
+</block>

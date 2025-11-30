@@ -1,0 +1,385 @@
+<include file="Public:header" />
+<!-- Swap Start -->
+
+	<main class="wrapper">
+		<!-- Swap Start -->
+		<section class="pt-3 dark-bg pb-3">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 page-top-header white">
+						<h1 class="main-title text-white">Easy Buy/Sell</h1>
+						<h6 class="desc text-white">Your buy-sell transactions on Codono are instant, lightning Express, with one click!</h6>
+					</div>
+	
+					<div class="col-12 text-center m-b-30">
+						<a href="deposit-money-eft.html" class="btn btn-3">Investment</a>
+					</div>
+					<div class="col-12">
+						<div class="easytrade-form-wrapper">
+							<div class="easytrade-form-inner">
+								<form action="#">
+									<div class="easy-trade-from">
+										<select id="swapFrom" class="bootstrap-select" data-live-search="true" data-live-search-placeholder="Ara" data-width="100%">
+											<volist name="CoinList" id="ac">
+												<option   value="{$ac['name']|strtoupper}" data-value="{$ac['name']|strtoupper}"  data-title="{$ac['title']}" data-balance="{$ac['balance']}" data-subtitle="{$ac['name'] |strtoupper}" data-content="<img src='__UPLOAD__/coin/{$ac['img']}'> {$ac['title']} <span>{$ac['name']|strtoupper}</span> <span class='value'>{$ac['price']} <span class='{$ac['color']}'>{$ac['change']}%</span></span>"></option>
+												</volist>
+										</select>
+										<ul class="nav nav-pills nav-fill m-t-40" role="tablist">
+											<li class="nav-item">
+												<a aria-selected="true" class="nav-link active" data-toggle="pill" href="#easy-trade-buy" role="tab"><span class="coin-name etrade cointitle"></span> {:("Buy")}</a>
+											</li>
+											<li class="nav-item">
+												<a aria-selected="false" class="nav-link" data-toggle="pill" href="#easy-trade-sell" role="tab"><span class="coin-name etrade cointitle"></span> {:("Sell")}</a>
+											</li>
+										</ul>
+										<div class="tab-content">
+											<div class="tab-pane fade show active p-t-15" role="tabpanel" id="easy-trade-buy">
+												<div class="input-group quantity">
+													<input class="form-control" placeholder="Amount in [{$base_coin}] you want to spend" type="number" id="buyamount" value="{$balance}">
+													<div class="input-group-append">
+														<button style="min-width: 2.5rem" class="btn btn-increment" type="button" tabindex="0" data-toggle="tooltip" data-html="true" title="{$balance} {$base_coin|strtoupper}" ><strong>{$base_coin|strtoupper}</strong>
+															</button>
+													</div>
+												</div>
+												<div class="form-bottom p-0 m-t-30">
+													<div class="bottom-left">Available balance</div>
+													<div class="bottom-right">
+														{$balance} {$base_coin|strtoupper}
+													</div>
+												</div>
+												<div class="form-bottom p-0">
+													<div class="bottom-left">Price</div>
+													<div class="bottom-right" id="easy-trade-buy-info">
+														<span class="swap-from-price">1</span> <span class="swap-from-text">BTC</span> =
+														<span class="swap-to-price">{$balance} {$base_coin|strtoupper}</span>
+														<span class="swap-to-text">TRY</span>
+														<div class="exchange-icon"></div>
+													</div>
+												</div>
+													<div class="form-bottom p-0">
+													<div class="bottom-left">Commission:</div>
+													<div class="bottom-right">
+														0.0012 BTC
+													</div>
+												</div>
+												<div class="form-bottom p-0">
+													<div class="bottom-left">To be transferred to the account:</div>
+													<div class="bottom-right">
+														0.1231321 BTC
+													</div>
+												</div>
+												<button id="buybutton" class="btn buy d-block w-100" onclick="trade(1);">
+													<span class="coin-name etrade cointitle">--</span> {:l("Buy")}
+												</button>
+												
+											</div>
+											<div class="tab-pane fade p-t-15" role="tabpanel" id="easy-trade-sell">
+												<div class="input-group quantity">
+													<input class="form-control" placeholder="Enter the amount you have want to sell." type="number">
+													<div class="input-group-append">
+														<button style="min-width: 2.5rem" class="btn btn-increment" type="button" tabindex="0" data-toggle="tooltip" data-html="true" title="0.00000000 <span class='etrade'>BTC</span>">
+															<strong>+</strong></button>
+													</div>
+												</div>
+												<div class="form-bottom p-0 m-t-30">
+													<div class="bottom-left">Available balance</div>
+													<div class="bottom-right">
+														0.1231321 TRY
+													</div>
+												</div>
+												<div class="form-bottom p-0">
+													<div class="bottom-left">Price</div>
+													<div class="bottom-right" id="easy-trade-sell-info">
+														<span class="swap-from-price">1</span> <span class="swap-from-text">BTC</span> =
+														<span class="swap-to-price">0.51381150</span>
+														<span class="swap-to-text">TRY</span>
+														<div class="exchange-icon"></div>
+													</div>
+												</div>
+												<div class="form-bottom p-0">
+													<div class="bottom-left">To be transferred to the account:</div>
+													<div class="bottom-right">
+														0.1231321 BTC
+													</div>
+												</div>
+												<button class="btn sell d-block w-100" role="button"  onclick="trade(2);">
+													<span class="coin-name etrade cointitle">--</span> {:l("Sell")}
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6">
+						<iframe style="border-style: none;" width="50%" height="100%" border="0" id="market_chartx" src="/Trade/tradingview/market/btc_usdt"></iframe>
+					</div>
+					<div class="col-md-6">
+						<div class="text-center" style="    width: 70%;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;">
+					<div class="row text-center w-100">
+						<div class="col-md-6 card">
+							<div class="easy-form-box-flex">
+								<p>From</p>
+								<p>Balance : -- BNB</p>
+							</div>
+						</div>
+					</div>
+					<div class="row text-center w-100">
+						<div class="col-md-6 card">
+							<div class="easy-form-box-flex pb-3">
+								<input
+										aria-describedby="inputGroup-sizing-sm"
+										class="form-control"
+										style="width: 50%; border: none;"
+										placeholder="Search"
+										type="text"
+										id="searchFilter"
+										/>
+								<select class="form-control" data-width="100%" id="decimalplaces" style="width: 30%;">
+								<option value="8" >0.00000001</option>
+								<option value="7" >0.0000001</option>
+								<option value="6">0.0000001</option>
+								<option value="5">0.000001</option>
+								<option value="4">0.00001</option>
+								<option value="3">0.0001</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row text-center w-100">
+					<div class="col-md-5 card">
+						<h1 class="text-center">Swap</h1>
+						</div>
+						</div>
+				<div class="text-center" style="    width: 70%;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;">
+					<div class="row text-center w-100">
+						<div class="col-md-6 card">
+							<div class="easy-form-box-flex">
+								<p>From</p>
+								<p>Balance : -- BNB</p>
+							</div>
+						</div>
+					</div>
+					<div class="row text-center w-100">
+						<div class="col-md-6 card">
+							<div class="easy-form-box-flex pb-3">
+								<input
+										aria-describedby="inputGroup-sizing-sm"
+										class="form-control"
+										style="width: 50%; border: none;"
+										placeholder="Search"
+										type="text"
+										id="searchFilter"
+										/>
+								<select class="form-control" data-width="100%" id="decimalplaces" style="width: 30%;">
+								<option value="8" >0.00000001</option>
+								<option value="7" >0.0000001</option>
+								<option value="6">0.0000001</option>
+								<option value="5">0.000001</option>
+								<option value="4">0.00001</option>
+								<option value="3">0.0001</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- Swap End -->
+		<!-- Footer Start -->
+	
+	</main>
+	<!-- order confirm modal start -->
+	<div class="modal fade" id="confirmOrderModal" tabindex="-1" role="dialog" aria-labelledby="Order confirmation" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header  d-flex align-items-center">
+					<h5>Order Confirmation</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12 col-md-12">
+							<div class="card">
+								<div class="card-body">
+									<ul>
+										<li class="d-flex justify-content-between">
+											<label class="f-w-600">BNB/BUSD</label> <span class="green">Stop-limit - Buy</span>
+										</li>
+										<li class="d-flex justify-content-between">
+											<label>Stop</label> <span>500.0000</span>
+										</li>
+										<li class="d-flex justify-content-between">
+											<label>Limit</label> <span>502.0000</span>
+										</li>
+										<li class="d-flex justify-content-between">
+											<label>Amount</label> <span>1.00 BNB</span>
+										</li>
+										<li class="d-flex justify-content-between">
+											<label>Total</label> <span>502.0000 BUSD</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div><!--/col-md-6-->
+					</div><!--/row-->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-1" data-dismiss="modal">Cancel</button>
+					<a href="#!" class="btn-2">Approve</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- order confirm modal end -->
+
+
+	<section class="swap-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="easytrade-form-wrapper">
+						<div class="easytrade-form-inner">
+							<h1 class="text-center m-b-30">{:l("Easy Buy/Sell")} </h1>
+							
+								<div class="easy-trade-from">
+									<select id="swapFrom" class="bootstrap-select selectpicker" data-live-search="true" data-live-search-placeholder="{:l("Search")}" data-width="100%">
+
+									<volist name="CoinList" id="ac">
+									<option   value="{$ac['name']|strtoupper}" data-value="{$ac['name']|strtoupper}"  data-title="{$ac['title']}" data-balance="{$ac['balance']}" data-subtitle="{$ac['name'] |strtoupper}" data-content="<img src='__UPLOAD__/coin/{$ac['img']}'> {$ac['title']} <span>{$ac['name']|strtoupper}</span> <span class='value'>{$ac['price']} <span class='{$ac['color']}'>{$ac['change']}%</span></span>"></option>
+									</volist>
+									</select>
+									<ul class="nav nav-pills nav-fill m-t-40" role="tablist">
+										<li class="nav-item">
+											<a aria-selected="true" class="nav-link active" data-toggle="pill" href="#easy-trade-buy" role="tab"><span class="coin-name etrade cointitle"></span> {:("Buy")}</a>
+										</li>
+										<li class="nav-item">
+											<a aria-selected="false" class="nav-link" data-toggle="pill" href="#easy-trade-sell" role="tab"><span class="coin-name etrade cointitle"></span> {:("Sell")}</a>
+										</li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane fade show active p-t-15" role="tabpanel" id="easy-trade-buy">
+											<div class="input-group">
+												<input class="form-control" placeholder="Amount in [{$base_coin}] you want to spend" type="number" id="buyamount" value="{$balance}">
+												<div class="input-group-append">
+													<button style="min-width: 2.5rem" class="btn btn-increment" type="button" tabindex="0" data-toggle="tooltip" data-html="true" title="{$balance} {$base_coin|strtoupper}" ><strong>{$base_coin|strtoupper}</strong>
+														</button>
+												</div>
+											</div>
+											<button id="buybutton" class="btn buy d-block w-100" onclick="trade(1);">
+												<span class="coin-name etrade cointitle">--</span> {:l("Buy")}
+											</button>
+										</div>
+										<div class="tab-pane fade p-t-15" role="tabpanel" id="easy-trade-sell">
+											<div class="input-group">
+												<input class="form-control" placeholder="{:l("Amount you want to sell")} ({$base_coin|strtoupper})" type="number" value="" id="sellamount">
+												<div class="input-group-append">
+													<button style="min-width: 2.5rem" class="btn btn-increment" type="button" tabindex="0" data-toggle="tooltip" data-html="true" title="<span class='etrade coinname'></span>" >
+														<strong class="coinname"></strong></button>
+												</div>
+											</div>
+											<input type="hidden" name="selectedcoin" value=""/>
+											<button class="btn sell d-block w-100" onclick="trade(2);">
+												<span class="coin-name etrade cointitle" >--</span> {:l("Sell")}
+											</button>
+										</div>
+									</div>
+								</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script>
+jQuery(document).ready(function ($) {
+var base_coin_name =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+var base_coin_title =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-title');
+var base_coin_balance =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-balance');
+$(".coinname").html(base_coin_name);
+$(".cointitle").html(base_coin_title);
+$("#selectedcoin").val(base_coin_name);
+$("#sellamount").val(base_coin_balance);
+	document.querySelector('select#swapFrom').onchange = function(){   
+		var base_coin_name =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+		var base_coin_title =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-title');
+		var base_coin_balance =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-balance');
+		$(".coinname").html(base_coin_name);
+$(".cointitle").html(base_coin_title);
+$("#selectedcoin").val(base_coin_name);
+$("#sellamount").val(base_coin_balance);
+	};
+});
+function trade(type){
+if(type==1){
+  var amount=$("#buyamount").val();
+  if(amount=='' || amount==0)
+	{
+	layer.tips('Please enter amount!', '#buyamount', {tips: 3});
+	return false;
+	}
+}
+if(type==2){
+  var amount=$("#sellamount").val();
+	if(amount=='' || amount==0)
+	{
+	layer.tips('Please enter amount!', '#sellamount', {tips: 3});
+	return false;
+	}
+}
+   
+   
+   var coin =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+if(coin=='' || coin==null)
+{
+layer.tips('Please select coin!', '#swapFrom', {tips: 3});
+return false;
+}
+
+layer.load(0, {shade: [0.5,'#8F8F8F']});
+$.post("{:U('Easy/doTrade')}", {
+			coin: coin,
+			amount: amount,
+			type:type,
+			
+		}, function (data) {
+		layer.closeAll('loading');
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+	</script>
+	
+	<include file="Public:footer_minimal"/>
+	<script>
+	<if condition="$Think.get.coin neq ''">
+	$('.selectpicker').selectpicker('val', '{$Think.get.coin}');
+</if>
+<if condition="$Think.get.amount neq ''">
+	$('#buyamount').val({$Think.get.amount});
+	layer.tips('{:l("Click Here")}', '#buybutton', {tips: 3});
+</if>
+
+	</script>
+
+	

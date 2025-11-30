@@ -1,0 +1,128 @@
+<div class="market-pairs mb15" id="CryptoPriceTable">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm"
+        ><i class="icon ion-md-search"></i
+      ></span>
+    </div>
+    <input
+      aria-describedby="inputGroup-sizing-sm"
+      class="form-control"
+      placeholder="Search"
+      type="text"
+      id="searchFilter"
+    />
+  </div>
+  <ul class="nav nav-pills" role="tablist" id="crypt-tab">
+    <li class="nav-item">
+      <a
+        aria-selected="true"
+        class="nav-link"
+        data-toggle="pill"
+        href="#STAR"
+        role="tab"
+        ><i class="icon ion-md-star"></i> {:l("Fav")}</a
+      >
+    </li>
+    <volist name="activated_base_markets" id="v">
+      <li class="nav-item">
+        <a
+          aria-selected="true"
+          class="nav-link"
+          href="#{$v}"
+          data-toggle="pill"
+          id="id{$v |strtolower}"
+          data-target="#{$v | strtolower}"
+          >{$v}</a
+        >
+      </li>
+    </volist>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade show" id="STAR" role="tabpanel">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <span class="coin">Tokenler</span>
+            </th>
+            <th>
+              <span class="val">Fiyat</span>
+            </th>
+            <th>
+              <span class="degree">Degisiklik</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="white-bg">
+          <tr>
+            <td>
+              <span class="coin"
+                ><i class="icon ion-md-star add-to-favorite"></i> ETH/BTC</span
+              >
+            </td>
+            <td>
+              <span class="val">0.00020255</span>
+            </td>
+            <td class="red">
+              <span class="degree">-2.58%</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="coin"
+                ><i class="icon ion-md-star add-to-favorite"></i> KCS/BTC</span
+              >
+            </td>
+            <td>
+              <span class="val">0.00013192</span>
+            </td>
+            <td class="green">
+              <span class="degree">+5.6%</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="coin"
+                ><i class="icon ion-md-star add-to-favorite"></i> ETH/BTC</span
+              >
+            </td>
+            <td>
+              <span class="val">0.00020255</span>
+            </td>
+            <td class="red">
+              <span class="degree">-2.58%</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="coin"
+                ><i class="icon ion-md-star add-to-favorite"></i> KCS/BTC</span
+              >
+            </td>
+            <td>
+              <span class="val">0.00013192</span>
+            </td>
+            <td class="green">
+              <span class="degree">+5.6%</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <volist name="activated_base_markets" id="v">
+      <div class="tab-pane" id="{$v |strtolower}" role="tabpanel">
+        <table class="table">
+          <thead>
+            <tr class="d-flex w-100 justify-content-between">
+              <th  scope="col">{:l("Market")}</th>
+              <th  scope="col">{:l("Price")}</th>
+              <th  scope="col">{:l("Change")}</th>
+            </tr>
+          </thead>
+          <tbody id="coinleftmenu-{$v |strtolower}"></tbody>
+        </table>
+      </div>
+    </volist>
+  </div>
+</div>

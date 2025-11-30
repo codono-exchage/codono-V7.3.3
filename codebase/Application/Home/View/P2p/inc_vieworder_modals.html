@@ -1,0 +1,199 @@
+<!-- Receipt confirm and release modal Starts-->
+<div class="modal fade new-ads-modal" id="receiptConfirmModal" tabindex="-1" role="dialog" aria-labelledby="{:l('Release Payment')}" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			
+				<div class="modal-header  d-flex align-items-center">
+					<h5 class="modal-title">
+						<div class="coin-title d-flex align-items-center">
+							<div class="title">
+								{:l('Release Payment')}
+							</div>
+						</div>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>
+						{:l('Please confirm payment has been received by you!')} </p>
+					<div class="bankInfo p-l-30">
+						<ul>
+							<li class="f-w-700">
+								{:l('Bank Transfer')}
+							</li>
+																<li>
+																	<span>{:l("Name")}:</span> {$truename}
+																</li>
+																<li>
+																<span>{:l("Total")}:</span>
+																{$order.fiat_qty|NumToStr} {$order.fiat|strtoupper}
+																</li>
+						</ul>
+					</div>
+					<div class="alert alert-warning">
+						<p class="m-b-0">
+							{:l('WARNING! If you click "Release" system will release the funds to seller immediately.')} </p>
+					</div>
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input icheck" type="checkbox" name="confirm_receipt" id="confirm_receipt">
+							<label class="form-check-label red" for="confirm_receipt">{:l('I understand that the payment has been sent to me and system will release the payment to the seller.')}.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-2" onclick="releasePayment({$order.id})" disabled>{:l('Release Payment')}</button>
+				</div>
+			
+		</div>
+	</div>
+</div>
+<!-- Receipt confirm and release modal ends -->
+<!-- Dispute  modal Starts-->
+<div class="modal fade new-ads-modal" id="disputeModal" tabindex="-1" role="dialog" aria-labelledby="{:l('Dispute Payment')}" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form action="p2p-coin-buy-confirmed.html" method="post">
+				<div class="modal-header  d-flex align-items-center">
+					<h5 class="modal-title">
+						<div class="coin-title d-flex align-items-center">
+							<div class="title">
+								{:l('Dispute Payment')}
+							</div>
+						</div>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>This trade will be marked as disputed and will be checked by our team</p>
+					
+					<div class="alert alert-warning">
+						<p class="m-b-0">
+							{:l('WARNING! If you click "Create Dispute" payments will be frozen until resolved.')} </p>
+					</div>
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input icheck" type="checkbox" name="confirm_dispute" id="confirm_dispute">
+							<label class="form-check-label red" for="confirm_dispute">{:l('I understand that the payments will unfreeze when dispute is resolved.')}.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-danger btn" onclick="dispute({$order.id})" disabled>{:l('Create Dispute')}</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Receipt confirm and release modal ends -->
+<!-- payment confirm modal start -->
+<div class="modal fade new-ads-modal" id="paymentConfirmModal" tabindex="-1" role="dialog" aria-labelledby="{:l('Confirm Payment')}" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form action="p2p-coin-buy-confirmed.html" method="post">
+				<div class="modal-header  d-flex align-items-center">
+					<h5 class="modal-title">
+						<div class="coin-title d-flex align-items-center">
+							<div class="title">
+								{:l('Confirm Payment')}
+							</div>
+						</div>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>
+						{:l('Please confirm payment has been made to the seller. Misleading clicks will cause the account to be frozen.')} </p>
+					<div class="bankInfo p-l-30" id="bankinfo">
+						<ul>
+							<li class="f-w-700">
+								{:l('Bank Transfer')}
+							</li>
+																<li>
+																	<span>{:l("Name")}</span> {$truename}
+																</li>
+																<li>
+																	<span>{:l('Bank account/card number')}</span> {$payinfo.bankcard}
+																</li>
+																<li>
+																	<span>{:l('Bank Name')}</span> {$payinfo.bank}
+																</li>
+																<li>
+																<span>{:l("Total")}</span>
+																{$order.fiat_qty|NumToStr} {$order.fiat|strtoupper}
+																</li>
+						</ul>
+					</div>
+					<div class="alert alert-warning">
+						<p class="m-b-0">
+							{:l('WARNING! If you click "Transferred, Next" without making the payment (you have to send the money to the seller account only): Your account will be suspended. The platform reserves the right to make a claim against the damages caused.')} </p>
+					</div>
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input icheck" type="checkbox" name="confirm_payment" id="confirm_payment">
+							<label class="form-check-label red" for="confirm_payment">{:l('I understand that the payment must be made by me personally and exchange will not automatically transfer the money for me.')}.</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-2" onclick="markaspaid({$order.id})" disabled>{:l('Transfer, Next step')}</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- payment confirm modal start -->
+<!-- order cancel modal start -->
+<div class="modal fade new-ads-modal" id="orderCancelModal" tabindex="-1" role="dialog" aria-labelledby="{:l('Cancel Order')}" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+
+				<div class="modal-header  d-flex align-items-center">
+					<h5 class="modal-title">
+						<div class="coin-title d-flex align-items-center">
+							<div class="title">
+								{:l('Cancel Order')}
+							</div>
+						</div>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-warning">
+						<h4>{:l('Tips')}</h4>
+						<p class="m-b-5">1. {:l('Please do not cancel the order if you have already paid the seller.')}</p>
+						<p class="m-b-0">2. {:l('Canceling 3 orders in one day will cause you to be unable to trade for the rest of the day.')}</p>
+					</div>
+					<h5 class="m-b-20">{:l('Why do you want to cancel the order?')}</h5>
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input icheck" type="radio" name="asset" id="reason_1" value="1" checked> <label class="form-check-label" for="reason_1">{:l('I dont want to make this trade')}</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input icheck" type="radio" name="asset" id="reason_2" value="2"> <label class="form-check-label" for="reason_2">{:l('Seller asks for extra commission')}</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input icheck" type="radio" name="asset" id="reason_3" value="3"> <label class="form-check-label" for="reason_3">{:l('Other reasons')}</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" onclick="confirmCancel('{$order.id}')" class="btn btn-danger" >{:l('Cancel Order')}</button>
+				</div>
+			
+		</div>
+	</div>
+</div>
+<!-- order cancel modal start -->

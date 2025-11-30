@@ -1,0 +1,140 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Wallet Info')}</span>
+			<span class="h2-title">>><a href="{:U('Config/coin')}">{:l('Coin List')}</a></span>
+		</div>
+
+		<div class="card">
+
+			<div class="card-body">
+				<form id="form" action="" method="post" class="form-horizontal">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<tr class="controls">
+									<td class="item-label">{:l('Wallet name')}:</td>
+									<td></td>
+									<td class="item-note">{$data.coin|default="0"}</td>
+								</tr>
+								<eq name="data.b.connection" value="0">	
+								<tr class="controls">
+									<td class="item-label">{:l('Connection Status')}:</td>
+									<td></td>
+									<td class="item-note">{$data['b']['connection']}</td>
+								</tr>
+								</eq>
+
+								<tr class="controls">
+									<td class="item-label">{:l('Wallet version')}:</td>
+									<td></td>
+									<td class="item-note">{$data.c.walletversion|default="0"}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Wallet transactions')}:</td>
+									<td></td>
+									<td class="item-note">{$data.c.txcount|default="0"}</td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label">{:l('Total block')}:</td>
+									<td></td>
+									<td class="item-note">{$data.a.headers|default="0"}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Blocks loaded')}:</td>
+									<td></td>
+									<td class="item-note">{$data.a.blocks|default="0"}</td>
+								</tr>
+							
+								<tr class="controls">
+									<td class="item-label">{:l('Blockchain Total')}:</td>
+									<td></td>
+									<td class="item-note">{$data['bal']}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('System Total')}:</td>
+									<td></td>
+									<td class="item-note">{$data['num']}</td>
+								</tr>
+								
+								<if condition="$data['b']['paytxfee']">
+								<tr class="controls">
+									<td class="item-label">{:l('Current Fees')}:</td>
+									<td></td>
+									<td class="item-note">{$data['b']['paytxfee']}</td>
+								</tr>
+								</if>
+
+								<volist name="data['b']" id="vo">
+									<?php if(is_array($vo)){ ?>
+									<tr class="controls">
+										<td class="item-label">{$key}:</td>
+										<td></td>
+										<td class="item-note" style="display:inline-table">{$vo | json_encode}</td>
+									</tr>
+									<?php }else{ ?>
+									<tr class="controls">
+										<td class="item-label">{$key}:</td>
+										<td></td>
+										<td class="item-note" style="display:inline-table">{$vo}</td>
+									</tr>
+									<?php }?>
+								</volist>
+								<volist name="data['wallet']" id="vo">
+									<?php if(is_array($vo)){ ?>
+									<tr class="controls">
+										<td class="item-label">{$key}:</td>
+										<td></td>
+										<td class="item-note" style="display:inline-table">{$vo | json_encode}</td>
+									</tr>
+									<?php }else{ ?>
+									<tr class="controls">
+										<td class="item-label">{$key}:</td>
+										<td></td>
+										<td class="item-note" style="display:inline-table">{$vo}</td>
+									</tr>
+									<?php }?>
+								</volist>
+									<volist name="data['blockchain']" id="vo">
+									<?php if(is_array($vo)){ ?>
+									<tr class="controls">
+										<td class="item-label">{$key}:</td>
+										<td></td>
+										<td class="item-note" style="display:inline-table">{$vo | json_encode}</td>
+									</tr>
+									<?php }else{ ?>
+									<tr class="controls">
+										<td class="item-label">{$key}:</td>
+										<td></td>
+										<td class="item-note" style="display:inline-table">{$vo}</td>
+									</tr>
+									<?php }?>
+								</volist>
+							</table>
+						</div>
+					</div>
+					<br>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function(){
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Config/coin')}");
+	</script>
+</block>

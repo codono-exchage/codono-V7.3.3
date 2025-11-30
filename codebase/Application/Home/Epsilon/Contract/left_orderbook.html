@@ -1,0 +1,66 @@
+			<!-- Order Book Start -->
+			<div class="order-book mb15">
+				<h2 class="heading white-bg">Order Book</h2>
+				<div class="action-tools">
+					<div class="filter-buttons">
+						<button data-bn-type="button" id="defaultModeButton" class="active">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M11 21v-8H3v8h8zm-6-2v-4h4v4H5z" fill="#2EBD85"></path>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M11 11V3H3v8h8zM5 9V5h4v4H5z" fill="#F6465D"></path>
+								<path fill="currentColor" d="M13 3h8v2h-8zM13 19h8v2h-8zM13 11h8v2h-8v-2zM13 7h8v2h-8V7zM13 15h8v2h-8v-2z"></path>
+							</svg>
+						</button>
+						<button data-bn-type="button" id="buyModeButton" class="">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M11 21V3H3v18h8zm-6-2V5h4v14H5z" fill="#2EBD85"></path>
+								<path fill="currentColor" d="M13 3h8v2h-8zM13 19h8v2h-8zM13 11h8v2h-8v-2zM13 7h8v2h-8V7zM13 15h8v2h-8v-2z"></path>
+							</svg>
+						</button>
+						<button data-bn-type="button" id="sellModeButton" class="">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M11 21V3H3v18h8zm-6-2V5h4v14H5z" fill="#F6465D"></path>
+								<path fill="currentColor" d="M13 3h8v2h-8zM13 19h8v2h-8zM13 11h8v2h-8v-2zM13 7h8v2h-8V7zM13 15h8v2h-8v-2z"></path>
+							</svg>
+						</button>
+					</div>
+					<div class="order-book-drop">
+						<select class="form-control" data-width="100%" id="decimalplaces">
+						    <option value="8" >0.00000001</option>
+							<option value="7" >0.0000001</option>
+							<option value="6">0.0000001</option>
+							<option value="5">0.000001</option>
+							<option value="4">0.00001</option>
+							<option value="3">0.0001</option>
+						</select>
+					</div>
+				</div>
+				<div id="bsorders">
+				<table class="table buysellorders">
+					   <thead >
+						<tr class="d-flex w-100 justify-content-between">
+							<th  scope="col">Price (USDT)</th>
+							<th scope="col">Amount</th>
+							<th scope="col">Total (USDT)</th>
+						</tr>
+                                    </thead>
+					<tbody class="selling" id="sellorderlist">
+					</tbody>
+					<tbody class="ob-heading">
+					
+						<td class="contractPrice col-4">
+							 <span id="activexnb" >--</span>
+						</td>
+						<td class="marketPrice col-4">
+							<span style="margin-right: 4px;"></span> <span id="activesign" class="OK"></span>
+						</td>
+						<td class="red rate col-4">
+							<span id="activermb" class="OK">--</span>
+						</td>
+					</tr>
+					</tbody>
+					<tbody class="buying" id="buyorderlist">
+					</tbody>
+				</table>
+				</div>
+			</div>
+			<!-- Order Book End -->

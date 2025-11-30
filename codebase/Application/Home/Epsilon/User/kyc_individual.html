@@ -1,0 +1,473 @@
+<include file="Public:header" />
+<!-- Page content -->
+<main class="wrapper">
+  <div class="full-box row">
+    <include file="User:sidebar" />
+  <div class="col-10">
+  <!-- Account Heading Start -->
+  <div class="page-title my-account">
+    <div class="container">
+      <div class="row">
+        <include file="User:top_bar" />
+        <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+          <ul class="text-right breadcrumbs list-unstyle">
+            <li>
+              <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+            </li>
+            <li>
+              <a href="{:U('/user/index')}" class="btn btn-warning btn-sm"
+                >{:l('User')}</a
+              >
+            </li>
+            <li class="btn btn-warning btn-sm active">{:l('Authentication')}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="row">
+          <div class="col-xl-12 col-md-12">
+            <div class="card">
+			              <div class="card-header">
+                <h4 class="card-title">{:l("KYC Application")}</h4>
+              </div>  
+			  <div class="card-body">
+                <div class="settings-profile">
+                  <div class="row">
+                    <div class="col-md-6 m-b-20">
+  <!-- Account Heading End -->
+        <neq name="user['idcardauth']" value='1'>
+						<eq name="user['idcardauth']" value='0'>
+                  <div class="band_succ move" style="color: red !important;">	
+                     <i class="fa fa-check mr5"></i>	 
+                     {:l('Please submit KYC Documents')}
+                  </div>
+                  </eq>
+				  <eq name="user['idcardauth']" value='2'>
+            <div class="table-responsive">
+              <table class="table table-bordered default-table no-hover">
+                <tbody>
+                  <tr>
+                    <td colspan="3"><h6>{:l('Authentication Process Status')}</h6></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center" width="50px">
+                      <i class="fa fa-shield"></i>
+                    </td>
+                    <td>
+                      <div class="media-body">
+                        <div class="f-w-600">{:l('KYC Form')}</div>
+                        <div><i class="fa fa-check-circle green m-r-5"></i><span class="text-muted">{:l("KYC Submitted")}</span></div>
+                      </div>
+                    </td>
+                    <td class="col-6">
+                      <div>
+                       
+                       <b>{$user.truename}</b>, {:l("Your KYC along with Document has been submitted")} ID Number:<b>{$user.idcard}</b>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <div class="alert alert-warning m-b-0" role="alert">
+                        <h6 class="alert-heading"><i class="fa fa-hourglass-half m-r-10"></i>{:l('In review!')}</h6>
+
+                        <p>{:l("Your credentials are under review by our teams. After this process is completed, you will be informed via e-mail/sms")}</p>
+                      </div>
+                    </td>													
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+                
+				</eq>
+				<eq name="user['idcardauth']" value='3'>
+          <div class="table-responsive">
+            <table class="table table-bordered default-table no-hover">
+              <tbody>
+                <tr>
+                  <td colspan="3"><h6>{:l('Authentication Process Status')}</h6></td>
+                </tr>
+                <tr>
+                  <td class="text-center" width="50px">
+                    <i class="fa fa-shield"></i>
+                  </td>
+                  <td>
+                    <div class="media-body">
+                      <div class="f-w-600">{:l('KYC Form')}</div>
+                      <div><i class="fa fa-check-circle green m-r-5"></i><span class="text-muted">{:l("KYC Submitted")}</span></div>
+                    </div>
+                  </td>
+                  <td class="col-6">
+                    <div>
+                     
+                     <b>{$user.truename}</b>, {:l("Your KYC along with Document has been submitted")} ID Number:<b>{$user.idcard}</b>
+                    </div>
+                  </td>
+                </tr>
+              	<tr>
+                  <td colspan="3">
+                    <div class="alert alert-danger m-b-0" role="alert">
+                      <h6 class="alert-heading"><i class="fa fa-times-circle m-r-10"></i>{:l('Your Credentials Could Not Be Verified!')}</h6>
+                      <p>As a result of investigation, your identity could not be verified </p>
+                      <p>KYC Feedback:{$user['kyc_comment']}</p>
+                    </div>
+                  </td>													
+                </tr>								
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="col-12 text-right m-t-15 p-0">
+            <span class="btn theme-bg btn-block bold btn-sm"  onclick="deletekyc();" id="updatebutton" /><i class="icon icon-undo"></i> {:l('Resubmit')}</span>
+          </div>
+
+				</eq>
+			
+               <else/>
+               <div class="table-responsive">
+                <table class="table table-bordered default-table no-hover">
+                  <tbody>
+                    <tr>
+                      <td colspan="3"><h6>{:l('Authentication Process Status')}</h6></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center" width="50px">
+                        <i class="fa fa-shield"></i>
+                      </td>
+                      <td>
+                        <div class="media-body">
+                          <div class="f-w-600">{:l('KYC Form')}</div>
+                          <div><i class="fa fa-check-circle green m-r-5"></i><span class="text-muted">{:l("KYC Submitted")}</span></div>
+                        </div>
+                      </td>
+                      <td class="col-6">
+                        <div>
+                         
+                         <b>{$user.truename}</b>, {:l("Your KYC along with Document has been submitted")} ID Number:<b>{$user.idcard}</b>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    	<tr>
+                        <td colspan="3">
+                          <div class="alert alert-success m-b-0" role="alert">
+                            <h6 class="alert-heading"><i class="fa fa-check-circle m-r-10"></i>{:l('Your Credentials Have Been Confirmed!')}</h6>
+
+                            <p>{:l('Your identity has been verified. You can start trading with account limits specific to you and advantageous commission rates.')}</p>
+                          </div>
+                        </td>													
+                      </tr>											
+                    
+                  </tbody>
+                </table>
+              </div>
+		
+               </neq>	
+		
+                  <eq name="user['idcardinfo']" value=''>
+				  <table class="table table-condensed">
+                        <tr>
+                           <th>{:l('ACTUAL_NAME')}</th>
+                           <td><input class="form-control" type="text" id="regtruename" value="{$user.truename}" placeholder="{:l('ACTUAL_NAME')}"/></td>
+                        </tr>
+						<tr>
+                        <th>{:l('CERTIFICATE_TYPE')}</th>
+                        <td>
+						
+							 <select
+                          name="regidinfo"
+                          id="regidinfo"
+                          title="{:l('Select one')}"
+                          class="form-control bootstrap-select"
+                        >
+                          <option value="nationalid">{:l('National ID')}</option>
+                          <option value="passport">{:l('Passport')}</option>
+                          <option value="drivers_license">{:l('Drivers License')}</option>
+                          <option value="others">
+                            {:l('Other Identity document')}
+                          </option>
+                        </select>
+						</td>
+                        </tr>
+                        <tr>
+                           <th>{:l('ID_NUMBER')}:</th>
+                           <td><input class="form-control" type="text" id="regidcard" value="" placeholder="{:l('ID Number')}" /></td>
+                        </tr>
+              
+                        <tr>
+                           <th>{:l('APPROVAL_PERIOD')}</th>
+                           <td><input class="form-control" placeholder="{$user['addtime']|addtime}" disabled/></td>
+                        </tr>
+                        
+              <tr>
+			  <td colspan="2">
+            <eq name="user['idcardimg1']" value=''>
+               <eq name="allowImg" value="true">
+                  <div class="pwtrade" id="shang_qq_chuandiv">
+
+                     <div class="band_succ move" style="color: red !important;">
+                     </div>
+                     
+                     <div class="set_verify">
+                        <ul>
+                           <li>
+                              <button class="btn theme-bg btn-block form-control" id="up_img" onclick="getElementById('inputfile').click()"><i class="fa fa-image"></i> Upload Document Front </button>
+                              <input onchange="this.value=sanitizeFilename(this.value)" type="file" accept="image/gif, image/jpeg, image/jpg, image/png,application/pdf" id="inputfile" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </eq>
+               <else/>
+               <input class="btn theme-bg btn-block" type="button" value="{:l('DELETE KYC')}" onclick="deletekyc();" id="updatebutton" />
+            </eq>
+            <input class="btn theme-bg btn-block" type="button" value="{:l('SUBMIT KYC')}" onclick="Update();" id="updatebutton" style="display:none"/>
+			</td>	
+			</tr>    </table>
+
+				</eq>
+               </div>
+			   <div class="col-md-6 m-b-20">
+
+					           <eq name="user['idcardauth']" value='0'>
+							   				     <div class="alert alert-danger no-border">
+                        <button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-check mr5"></i> {:l('KYC_REQ_INDIVIDUAL')}
+                     </div>
+                           <neq name="userimg" value=''>
+                              <tr>
+                                 <th></th>
+                                 <td >
+                                    <div id="imagesubmited">{$userimg}</div>
+                                 </td>
+                              </tr>
+                           </neq>
+                        </eq>
+               <div class="set_upload_img" style="display:none;">
+               </div>
+ 
+			</div>
+			</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div></div>
+  <!-- Account Content Start -->
+</main>
+<script>
+  var hints = "0";
+  if (hints == 1) {
+    $("#hints").show();
+  }
+
+  $(document).ready(function () {
+    //ADD_AN_EVENT_SUCCESSFUL_RESPON
+    if ($("#imagesubmited").find("embed").length >= 4) {
+      alert(
+        "You have successfully uploaded 4 docs , Please fill in other details and submit for KYC"
+      );
+      $("#updatebutton").show();
+    }
+    $("#inputfile").change(function () {
+      //CREATE FormData OBJECTS
+      var data = new FormData();
+      //FormData ADDING DATA OBJECT
+      $.each($("#inputfile")[0].files, function (i, file) {
+        data.append("upload_file" + i, file);
+      });
+      //SEND_DATA
+      $.ajax({
+        url: "/Ajax/imgUser",
+        type: "POST",
+        data: data,
+        cache: false,
+        contentType: false, //ESSENTIAL_PARAMETERS
+        processData: false, //ESSENTIAL_PARAMETERS
+        success: function (data) {
+          if (data) {
+            if (data == "error") {
+              alert("{:l('PLEASE_SELECT_THE_CORRECT_FILE')}");
+              return false;
+            }
+            if (data == "error2") {
+              alert("Invalid number of documents");
+              return false;
+            }
+
+            $("<embed />", {
+              src: "/Upload/idcard/" + data,
+              width: "150px",
+              height: "auto",
+            }).appendTo($(".set_upload_img"));
+            $(".set_upload_img").show();
+
+            if ($(".set_upload_img").find("embed").length == 1) {
+              $("#up_img").html("Upload  Document Rear");
+            }
+            if ($(".set_upload_img").find("embed").length == 2) {
+              $("#up_img").html("Upload Selfie with Document near");
+            }
+            if ($(".set_upload_img").find("embed").length == 3) {
+              $("#up_img").html("Upload Proof of Residence");
+            }
+            if ($(".set_upload_img").find("embed").length >= 4) {
+              $("#shang_qq_chuandiv").hide();
+              alert(
+                "You have successfully uploaded All 4 files , make sure to fill in other details and submit for KYC"
+              );
+              $("#updatebutton").show();
+            }
+
+            //$('#up_img').attr("src", '/Upload/idcard/' + data);
+            //$('#up_img').attr("height", '100px');
+            //$('#up_img').attr("width", '300px');
+            //$('#up_img').attr("disabled", 'true');
+            //$('#up_img').show();
+          }
+        },
+        error: function () {
+          alert("Uploading Error");
+          $(".set_upload_img").hide();
+          //$(".loading").hide();	//load failed remove picture
+        },
+      });
+    });
+  });
+</script>
+<script>
+  $(".user_truename").addClass("active");
+  function formMsg(o, status, msg) {
+    $("#" + o + "-msg")
+      .attr("class", "form_explain_" + (status ? "pass" : "error"))
+      .html((typeof msg == "undefined" ? "" : msg) + "<em></em>")
+      .show();
+    return true;
+  }
+
+  function Update() {
+    var truename = $("#regtruename").val();
+    var idcard = $("#regidcard").val();
+    var idcardinfo = $("#regidinfo").val();
+
+    if (truename == "" || truename == null) {
+      //formMsg('regtruename', 0, 'Enter Actual Name');
+      layer.tips("Enter Realname", "#regtruename", { tips: 3 });
+      return false;
+    }
+    if (idcard == "" || idcard == null) {
+      //formMsg('regidcard', 0, 'Please enter ID Number');
+      layer.tips("Please enter ID Number", "#regidcard", { tips: 3 });
+      return false;
+    }
+    if (idcardinfo == "" || idcardinfo == null) {
+      layer.tips("Please enter ID Type", "#regidinfo", { tips: 3 });
+      //	formMsg('idcardinfo', 0, 'Please enter ID Type');
+      return false;
+    }
+
+    $.post(
+      "{:U('User/kyc')}",
+      { truename: truename, idcard: idcard, idcardinfo: idcardinfo },
+      function (data) {
+        if (data.status == 1) {
+          layer.msg(data.info, { icon: 1 });
+          window.location = data.url;
+        } else {
+          layer.msg(data.info, { icon: 2 });
+          if (data.url) {
+            window.location = data.url;
+          }
+        }
+      },
+      "json"
+    );
+  }
+
+  function deletekyc() {
+    layer.prompt(
+      {
+        title: "Type DELETE to remove Previous Kyc",
+        formType: 1,
+        btn: ["Delete", "Cancle"], //Push button
+      },
+      function (pass) {
+        if (!pass || pass != "DELETE") {
+          layer.msg("Type DELETE!");
+        } else {
+          $.post(
+            "{:U('User/deletekyc')}",
+            { pass: pass },
+            function (data) {
+              layer.msg(data.info);
+              layer.close();
+              if (data.status) {
+                window.location.href = "{:U('User/index')}";
+              }
+            },
+            "json"
+          );
+        }
+      }
+    );
+  }
+  function sanitizeFilename(filename) {
+  // Split filename into base name and extension
+  const index = filename.lastIndexOf('.');
+  const extension = filename.slice(index);
+  const baseName = filename.slice(0, index);
+
+  // Add timestamp to base name and encode in Base64
+  const timestamp = Date.now();
+  const encodedBaseName = btoa(`${baseName}_${timestamp}`);
+
+  // Remove special characters from encoded base name
+  const sanitizedBaseName = encodedBaseName.replace(/[^a-zA-Z0-9]/g, '');
+
+  // Join sanitized base name and original extension
+  const sanitizedFilename = `${sanitizedBaseName}${extension}`;
+
+  // Return first 10 characters of sanitized filename
+  return sanitizedFilename.substring(0, 10);
+}
+</script>
+<style>
+  .set_verify ul {
+    padding-left: 0px !important;
+  }
+.file {
+                                 position: relative;
+                                 display: inline-block;
+                                 background: #D0EEFF;
+                                 border: 1px solid #99D3F5;
+                                 border-radius: 4px;
+                                 padding: 4px 12px;
+                                 overflow: hidden;
+                                 color: #1E88C7;
+                                 text-decoration: none;
+                                 text-indent: 0;
+                                 line-height: 20px;
+                                 }
+                                 .file input {
+                                 position: absolute;
+                                 font-size: 100px;
+                                 right: 0;
+                                 top: 0;
+                                 opacity: 0;
+                                 }
+                                 .file:hover {
+                                 background: #AADFFD;
+                                 border-color: #78C3F3;
+                                 color: #004974;
+                                 text-decoration: none;
+                                 }
+                                 .sv_text p {
+                                 padding-left: 5px;
+                                 }
+</style>
+<include file="Public:footer_minimal" />

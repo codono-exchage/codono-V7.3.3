@@ -1,0 +1,264 @@
+<div class="market-trade">
+  <ul class="nav nav-pills" role="tablist">
+    <li class="nav-item">
+      <span class="nav-link active" onclick="OrderType('limit')" role="tab"
+        >{:l("Limit")}</span
+      >
+    </li>
+    <li class="nav-item">
+      <span class="nav-link active" onclick="OrderType('market')" role="tab"
+        >{:l("Market")}</span
+      >
+    </li>
+    <li class="nav-item">
+      <span class="nav-link active" onclick="OrderType('stop')" role="tab"
+        >{:l("Stop-Limit")}</span
+      >
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div
+      class="tab-pane fade show active"
+      id="pills-trade-limit"
+      role="tabpanel"
+    >
+      <div class="d-flex justify-content-between">
+        <div class="market-trade-buy">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="w-full">
+              {:l('BALANCE')}:
+              <span
+                ><span id="base_coin">{$base_coin*1}</span>
+                {$rmb|strtoupper}</span
+              >
+              <span class="pull-right"
+                ><a
+                  href="#!"
+                  data-toggle="modal"
+                  data-target="#depositTLModal"
+                  class="green"
+                  ><i class="fa fa-download"></i> {:l('Deposit')}</a
+                ></span
+              >
+            </p>
+          </div>
+          <div class="input-group" id="buystop" style="display: none">
+            <input
+              class="form-control"
+              placeholder="{:l('Stop')}"
+              type="number"
+              id="buy_stop"
+              name="stop"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$rmb|strtoupper}</span>
+            </div>
+          </div>
+          <div class="input-group" id="buypricebox">
+            <input
+              class="form-control"
+              placeholder="{:l('Price')}"
+              type="number"
+              id="buy_price"
+              name="price"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$rmb|strtoupper}</span>
+            </div>
+          </div>
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="{:l('Qty')}"
+              type="number"
+              id="buy_num"
+              name="num"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$xnb|strtoupper}</span>
+            </div>
+          </div>
+          <input type="text" name="buy_range" id="buy_range" />
+          <ul class="market-trade-list">
+            <li>
+              <a href="#!" onclick="Percentage('25','buy')">25%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('50','buy')">50%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('75','buy')">75%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('25','buy')">100%</a>
+            </li>
+          </ul>
+          <div id="stopbuybutton" style="display: none">
+            <button
+              value="{:l('STOP BUY')}"
+              onclick="stopadd_buy();"
+              class="btn buy"
+            >
+              {:l('STOP BUY')}
+            </button>
+          </div>
+          <div id="limitbuybutton">
+            <button
+              value="{:l('BUY')}"
+              onclick="tradeadd_buy('limit');"
+              class="btn buy"
+            >
+              {:l('BUY')}
+            </button>
+          </div>
+          <div id="marketbuybutton" style="display: none">
+            <button
+              value="{:l('BUY')}"
+              onclick="tradeadd_buy('market');"
+              class="btn buy"
+            >
+              {:l('BUY')}
+            </button>
+          </div>
+        </div>
+        <div class="market-trade-sell">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="w-full">
+              {:l('BALANCE')}:
+              <span
+                ><span id="user_coin">{$user_coin*1}</span>
+                {$xnb|strtoupper}</span
+              >
+
+              <span class="pull-right">
+                <a
+                  href="#!"
+                  data-toggle="modal"
+                  data-target="#depositTLModal"
+                  class="red"
+                  ><i class="fa fa-download"></i> {:l('Deposit')}</a
+                >
+              </span>
+            </p>
+          </div>
+          <div class="input-group" id="sellstop" style="display: none">
+            <input
+              class="form-control"
+              placeholder="{:l('Stop')}"
+              type="number"
+              id="sell_stop"
+              name="sellstop"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$rmb|strtoupper}</span>
+            </div>
+          </div>
+          <div class="input-group" id="sellpricebox">
+            <input
+              class="form-control"
+              placeholder="{:l('Price')}"
+              type="number"
+              id="sell_price"
+              name="price"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$rmb|strtoupper}</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="{:l('Qty')}"
+              type="number"
+              id="sell_num"
+              name="num"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$xnb|strtoupper}</span>
+            </div>
+          </div>
+          <input type="text" name="sell_range" id="sell_range" />
+          <ul class="market-trade-list">
+            <li>
+              <a href="#!" onclick="Percentage('25','sell')">25%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('50','sell')">50%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('75','sell')">75%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('100','sell')">100%</a>
+            </li>
+          </ul>
+
+          <div id="stopsellbutton" style="display: none">
+            <button
+              value="{:l('STOP SELL')}"
+              onclick="stopadd_sell();"
+              class="btn sell"
+            >
+              {:l('STOP SELL')}
+            </button>
+          </div>
+          <div id="limitsellbutton">
+            <button onclick="tradeadd_sell('limit');" class="btn sell">
+              {:l('SELL')}
+            </button>
+          </div>
+          <div id="marketsellbutton" style="display: none">
+            <button onclick="tradeadd_sell('market');" class="btn sell">
+              {:l('SELL')}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="buy_fees" value="{$buy_fees|NumToStr}" />
+<input type="hidden" id="sell_fees" value="{$sell_fees|NumToStr}" />

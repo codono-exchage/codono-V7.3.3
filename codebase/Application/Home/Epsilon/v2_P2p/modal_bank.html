@@ -1,0 +1,51 @@
+	<!-- add payment method modal start -->
+	<div class="modal fade" id="add-bank" tabindex="-1" role="dialog" aria-labelledby="{:l('Add new Bank')}" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header  d-flex align-items-center">
+					<h5 class="modal-title">
+						<div class="coin-title d-flex align-items-center">
+							<div class="title">{:l("Add New Bank")}</span>
+							</div>
+						</div>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12 col-md-12">
+							<div class="card">
+								<div class="card-body">
+									<form action="#">
+										<div class="form-group">
+											<label>{:l("Your Full Name")}</label> <input type="text" class="form-control" id="bank_username" readonly placeholder="{$truename}">
+										</div>
+										<div class="form-group">
+											<label>{:l('Bank account/card number/IBAN')} </label> <input id="bank_bankcard" type="text" class="form-control" placeholder="{:l('Bank account/card number')}">
+										</div>
+										<div class="form-group">
+											<label>{:l('Bank Name')} </label> <input type="text" class="form-control" id="bank_bank" placeholder="{:l('Bank Name')}">
+										</div>
+										<div class="form-group">
+											<label>{:l('SWIFT/IFSC')} [Optional] </label> <input id="bank_bankaddr" type="text" class="form-control" placeholder="{:l('Branch where account was opened [Optional]')} ">
+										</div>
+									</form>
+									<div class="alert alert-info">
+										<h5>{:l("Tips")}</h5>
+										<p> {:l("Tip: When you sell your crypto, the added payment method will be shown to the buyer during the transaction to accept the fiat transfer. Please make sure the information is correct.")}.</p>
+									</div>
+								</div>
+							</div>
+						</div><!--/col-md-6-->
+					</div><!--/row-->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-1" data-dismiss="modal">{:l("Cancel")}</button>
+					<button onclick="bank_up();"class="btn-2">{:l("Appove")}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--add payment method modal end -->

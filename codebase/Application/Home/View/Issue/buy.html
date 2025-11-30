@@ -1,0 +1,325 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/media/fancybox.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/js/pages/gallery.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/static/css/issue.css"/>
+<div class="page-container">
+<div class="content-wrapper">   
+	<div class="com-sm-12">
+   <div class="panel panel-flat ">
+      <div class="panel-body" >
+         <div class="safe_center clear">
+            <h1>
+               <span>
+               {$issue['name']}			</span>
+               <span>
+               <a href="/issue/index" id="step1" class="step fz_12 ml50 pd6 active">{:l('ICO_LIST')}</a>
+               <a href="/issue/log" id="step3" class="step fz_12 ml20 pd6 ">{:l('Boughts')}</a>
+               </span>
+               <span>
+               <a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+               </span>
+            </h1>
+         </div>
+         <div id="hints" class="mytips" style="display:none;">
+            <p>
+               <notempty name="prompt_text">
+                  {$prompt_text}
+               </notempty>
+            </p>
+         </div>
+         <div class="clear">
+            <div class="crowd_con_lx col-md-6 ">
+			<include file="Issue:profile2"/>
+               <include file="Issue:buy-widget"/>
+            </div>
+            <div class="crowd_con_rx col-md-6">
+               
+               <!-- Stats1 -->
+               <include file="Issue:stats-1"/>
+               <!-- /Stats1 -->
+               <!-- Stats2 -->
+			   <include file="Issue:stats-2"/>
+			   <!-- /stats2 -->
+			   <include file="Issue:progress"/>
+			   <include file="Issue:aio-ico-social"/>
+            </div>
+         </div>
+		 <hr/>
+		 <include file="Issue:video"/>
+		 <hr/>
+         <div class="clear">
+            <include file="Issue:invite_tier"/>
+            <!-- Large size -->
+            <div class="blog-preview ">
+                     <div class="content-group-sm">
+                        <h3 class="blog-title text-semibold">
+                           {:l('INTRODUCTION_TO_SUBSCRIBE')}
+                        </h3>
+                     </div>
+                     {$issue['content']|htmlspecialchars_decode}								
+                  </div>
+            <!-- /large size -->
+         </div>
+      </div>
+   </div>
+   </div>
+   </div>
+</div>
+<style>.font14{font-size:14px !important;font-weight:800 !important;}
+.nopadding{
+padding:0px;
+margin:0px;}
+   .disableddiv {
+   pointer-events: none;
+   opacity: 0.4;
+   }
+   .modal-open {
+   overflow: hidden;
+   }
+   .modal {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 10000;
+   display: none;
+   overflow: hidden;
+   -webkit-overflow-scrolling: touch;
+   outline: 0;
+   }
+   .modal.fade .modal-dialog {
+   -webkit-transition: -webkit-transform .3s ease-out;
+   -o-transition:      -o-transform .3s ease-out;
+   transition:         transform .3s ease-out;
+   -webkit-transform: translate(0, -25%);
+   -ms-transform: translate(0, -25%);
+   -o-transform: translate(0, -25%);
+   transform: translate(0, -25%);
+   }
+   .modal.in .modal-dialog {
+   -webkit-transform: translate(0, 0);
+   -ms-transform: translate(0, 0);
+   -o-transform: translate(0, 0);
+   transform: translate(0, 10%);
+   /*transform: translate(0, 0);*/
+   }
+   .modal-open .modal {
+   overflow-x: hidden;
+   overflow-y: auto;
+   }
+   .modal-dialog {
+   position: relative;
+   width: auto;
+   margin: 10px;
+   }
+   .modal-content {
+   position: relative;
+   background-color: #fff;
+   -webkit-background-clip: padding-box;
+   background-clip: padding-box;
+   border: 1px solid #999;
+   border: 1px solid rgba(0, 0, 0, .2);
+   border-radius: 6px;
+   outline: 0;
+   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+   box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+   }
+   .modal-backdrop {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 1040;
+   background-color: #000;
+   }
+   .modal-backdrop.fade {
+   filter: alpha(opacity=0);
+   opacity: 0;
+   }
+   .modal-backdrop.in {
+   filter: alpha(opacity=50);
+   opacity: .5;
+   }
+   .modal-header {
+   min-height: 16.42857143px;
+   padding: 15px;
+   }
+   .modal-header .close {
+   margin-top: -2px;
+   }
+   .modal-title {
+   margin: 0;
+   line-height: 1.42857143;
+   }
+   .modal-body {
+   position: relative;
+   padding: 15px;
+   }
+   .modal-footer {
+   padding: 5px 0 20px 0;
+   text-align: center;
+   }
+   .modal-footer .btn + .btn {
+   margin-bottom: 0;
+   margin-left: 5px;
+   }
+   .modal-footer .btn-group .btn + .btn {
+   margin-left: -1px;
+   }
+   .modal-footer .btn-block + .btn-block {
+   margin-left: 0;
+   }
+   .modal-scrollbar-measure {
+   position: absolute;
+   top: -9999px;
+   width: 50px;
+   height: 50px;
+   overflow: scroll;
+   }
+   @media (min-width: 768px) {
+   .modal-dialog {
+   width: 600px;
+   margin: 0px auto;
+   }
+   .modal-content {
+   -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+   box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+   }
+   .modal-sm {
+   width: 300px;
+   }
+   }
+   @media (min-width: 992px) {
+   .modal-lg {
+   width: 900px;
+   }
+   }
+   .modal-footer:before,
+   .modal-footer:after {
+   display: table;
+   content: " ";
+   }
+   .modal-footer:after {
+   clear: both;
+   }
+</style>
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="text-align: center;display: none;padding-right: 16px;">
+   <div class="modal-dialog" style="width:640px;text-align:center;">
+      <div id="autoCenter" class="modal-content" style="padding: 10px 30px 10px; height: auto; margin-top: 164px;">
+         <div class="modal-header" style="border:none;text-align:left;margin-left:20px;">
+            <h3 class="modal-title" id="myModalLabel" style="font-size:18px;">
+               {$C['web_name']} {:l('REMIND_YOU')}:
+            </h3>
+         </div>
+         <div class="modal-body" style="font-size:18px;width: 550px;margin-top:-30px;">
+            <div class="paragraph paragraph_news" style="font-size:14px;text-indent:2em;line-height: 30px;text-align:left;">
+               {$C['issue_warning']}              
+            </div>
+         </div>
+         <div class="modal-footer" style="border:none;">
+            <button type="button" style="cursor:pointer;font-family:sans-serif !important;font-size:18px;background: #009200;width:250px;height:40px;border:0px;color:white" class="btn btn-warning" data-dismiss="modal" id="yes_sure">
+            {:l('I_UNDERSTAND_THESE_RISKS')},{:l('CONFIRM_ICO')}
+            </button>
+            <button type="button" style="cursor:pointer;font-family:sans-serif !important;font-size:18px;background: #f60;width:250px;height:40px;border:0px;color:white" class="btn btn-warning" data-dismiss="modal" id="no_sure">
+            {:l('I_UNDERSTAND_THESE_RISKS')},{:l('CANCEL_THE_ICO')}
+            </button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal-backdrop fade in" style="display:none;"></div>
+<script>
+   $("#yes_sure").click(function(){
+   	$('#myModal').css('display','none');
+   	$('.modal-backdrop').css('display','none');
+   	buy_up();
+   });
+   
+   
+   $("#no_sure").click(function(){
+   	$('#myModal').css('display','none');
+   	$('.modal-backdrop').css('display','none');
+   });
+   
+   function codono_buy_up_tishi(){
+   	var num         = $('#num').val();
+   	var paypassword = $('#paypassword').val();
+	var selected_coin=document.querySelector('select#show_coins').selectedOptions[0].value;
+   	if (num == "" || num == null) {
+   		layer.tips('Enter number of ICOs', '#num', {tips: 3});
+   		return false;
+   	}
+   	if (paypassword == "" || paypassword == null) {
+   		layer.tips('Fund Password Required', '#paypassword', {tips: 3});
+   		return false;
+   	}
+	if (selected_coin == "" || selected_coin == null) {
+   		layer.tips('Select Payment coin', '#show_coins', {tips: 3});
+   		return false;
+   	}
+   	$('#myModal').css('display','block');
+   	$('.modal-backdrop').css('display','block');
+   
+      }
+   
+   
+</script>
+<script>
+   function buy_up() {
+   	var id          = "{$issue['id']}";
+   	var num         = $('#num').val();
+   	var paypassword = $('#paypassword').val();
+	var selected_coin=document.querySelector('select#show_coins').selectedOptions[0].value;
+   	if (num == "" || num == null) {
+   		layer.tips('Enter number of ICOs', '#num', {tips: 3});
+   		return false;
+   	}
+   	if (paypassword == "" || paypassword == null) {
+   		layer.tips('Fund Password Required', '#paypassword', {tips: 3});
+   		return false;
+   	}
+	if (selected_coin == "" || selected_coin == null) {
+   		layer.tips('Select Payment coin', '#show_coins', {tips: 3});
+   		return false;
+   	}
+   	$.post("{:U('Issue/upbuy')}", {
+   		id: id,
+   		num: num,
+   		paypassword: paypassword,
+   		selected_coin:selected_coin
+   	}, function (data) {
+   		if (data.status == 1) {
+   			layer.msg(data.info, {icon: 1});
+   			window.location = "/issue/log";
+   		} else {
+   			layer.msg(data.info, {icon: 2});
+   			if (data.url) {
+   				window.location = data.url;
+   			}
+   		}
+   	}, "json");
+   }
+</script>
+<script>
+   var hints = "0";
+   if(hints == 1){
+   	$('#hints').show();
+   }
+   $('#Issue_box').addClass('active');
+   
+   function goumai(_this) {
+   	window.location = "/issue/buy/id/" + $(_this).attr('data');
+   }
+   <php>if (!userid()){</php>
+   $("#issuebuybox").addClass("disableddiv");
+   $('#pleaselogin').show();
+   <php>}else{</php>
+   $("#issuebuybox").removeClass("disableddiv");
+   $('#pleaselogin').hide();
+   <php>}</php>
+   
+   
+</script>	
+<include file="Public:footer_minimal"/>

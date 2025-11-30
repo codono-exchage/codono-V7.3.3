@@ -1,0 +1,32 @@
+ <div class="col-md-3">
+        <div class="market-pairs">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm"><i class="icon ion-md-search"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Search" id="searchFilter" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <ul class="nav nav-pills" role="tablist" id="crypt-tab">
+			   <volist name="activated_base_markets" id="v">		
+							<li lass="nav-item"><a class="nav-link" href="#{$v}" id="id{$v |strtolower}" data-toggle="tab" data-target="#{$v | strtolower}">{$v}</a></li>
+							</volist>	
+          </ul>
+          <div class="tab-content" id="CryptoPriceTable">
+            <volist name="activated_base_markets" id="v">	
+            <div class="tab-pane fade show" id="{$v |strtolower}" role="tabpanel">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Pairs</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                  </tr>
+                </thead>
+                <tbody id="coinleftmenu-{$v |strtolower}" class="">
+                </tbody>
+              </table>
+            </div>
+            </volist>
+          </div>
+        </div>
+      </div>

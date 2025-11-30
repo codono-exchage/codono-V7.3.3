@@ -1,0 +1,284 @@
+<include file="Public:header" />
+
+<style>
+	.yb-item {
+    overflow-x: hidden;
+    width: 82%;
+    float: none;
+    display: inline-flex;
+    cursor: pointer;
+}
+
+</style>
+	
+
+		<!-- Page content -->
+		<div class="page-container">	
+	
+		<include file="Finance:left" />
+
+		<!-- Main content -->
+			<div class="panel panel-flat">
+	
+			<div class="panel-heading">
+				<h1>
+					<div class="btn-group btn-group-justified">
+					<span class="btn-group">	
+						<a href="{:U('Finance/myzc')}" class="btn btn-flat  ">{:l('WITHDRAW')}</a>
+                    </span>
+					<span class="btn-group">	
+						<a href="{:U('Finance/coinoutlog')}" class="btn btn-flat  ">{:l('LOG_IN_LOG')}</a>
+					</span>
+										<span class="btn-group">	
+						<a href="{:U('Finance/addnew')}" class="btn btn-flat active current ">{:l('ADDRESSES')}</a>
+                    </span>
+				</div>
+					<span>
+			<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+					</span>
+				</h1>
+			</div>
+			<div id="hints" class="mytips" style="display:none;">
+
+				<p>
+				
+				<notempty name="prompt_text">
+					{$prompt_text}
+				</notempty>
+				
+				</p>			
+			</div>
+		<div class="panel-body page-container">
+			<div class="mytable-body pb20">
+				<div class="f_body  table-responsive">
+							<div class="form-group col-xs-12 col-sm-6">		
+								
+							<select name="type" id="coinnam-select" class="form-control">
+									<option value="">--{:l('ALL_CURRENCIES')}--</option>
+										<volist name="coin_list" id="vo">
+											<eq name="xnb" value="$key">
+												<option value="{$vo['name']}" selected="selected">{$vo.title} ({$vo['name']|strtoupper})</option>
+												<else/>
+												<option value="{$vo['name']}">{$vo.title} ({$vo['name']|strtoupper})</option>
+											</eq>
+										</volist>
+									 </select>
+								
+							</div>
+<div class="form-group col-xs-12 col-sm-6">		
+						<div class="form-control" data-toggle="modal" data-target="#outmodal" data-whatever="@mdo" >
+								<i class="icon-plus3"></i> {:l('ADDING_WALLET')}
+								
+							</div>
+							</div>							
+
+				</div>
+			</div>
+			<div class="row">
+			<div class="col-xs-12">
+<volist name="userWalletList" id="vo">
+<!--Crypto Out-->
+	<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="panel panel-info">
+							<div class="panel-body text-center">
+							<h2 class="content-group"><i class="icon-profile text-info position-left"></i> {$vo.name}</h2>
+								<h3 class="content-group">
+									<span class="label label-flat label-rounded label-icon border-grey text-grey mr-10">
+										<notempty name="coin_list[$vo['coinname']]['img']">
+											<img src="/Upload/coin/{$coin_list[$vo['coinname']]['img']}" class="img-responsive" width="16px"/>
+										</notempty>
+									</span>
+										{$coin_list[$vo['coinname']]['title']}({$vo.coinname})
+								</h3>
+
+								
+								<i class="icon-credit-card text-success position-left"></i><span class="content-group yb-item" onclick="show_addr('{$vo.addr}','{$vo.dest_tag}')">{$vo.addr}</span>
+							</div>
+
+
+
+							<div class="panel-footer text-center">
+							<a href="{:U('Finance/myzr','coin='.$vo['coinname'])}" class="btn btn-success btn-sm"  data-fun="C"><span>{:l('DEPOSIT')}</span></a>
+							<a href="{:U('Finance/myzc','coin='.$vo['coinname'])}" class="btn btn-warning btn-sm"  data-fun="Pay"><span>{:l('WITHDRAW')}</span></a>
+							<a href="javascript:void(0)" class="btn btn-danger btn-sm" data-align="{$vo.id}" data="{$vo.id}" onclick="del(this)"><span><i class="fa fa-trash"></i></span></a>
+							</div>
+						</div>
+			</div>
+
+</volist>									
+
+
+									
+													
+						
+						<div class="pages">{$page}</div>
+					
+				<div class="yb-arrows">
+					<div id="bank_pre_btn" class="yb-ico-left i-hide"></div>
+					<div id="bank_next_btn" class="yb-ico-right i-hide"></div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="outmodal" id="outmodal">
+<div class="modal-dialog" role="document">
+<div class="panel panel-flat">
+	 <div class="modal-header">
+	 <button type="button" class="close text-info" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	 <h4>{:l('ADD_A_WALLET_ADDRESS')}</h4></div>
+	<div class="modal-body">
+	<form id="form-wallet" >
+		<div class="form-group">
+			<div class="control-label">{:l('CURRENCY_NAME')}</div>
+			<select name="bank" id="wallet_coinname" class="form-control">
+				<option value="" selected="selected">--{:l('CHOOSE_A_CURRENCY')}--</option>
+					<volist name="coin_list" id="vo">
+
+							<option value="{$vo['name']}">{$vo.title} ({$vo['name']|strtoupper})<eq name="vo.type" value="eth"><neq name="vo.name" value="eth">[ERC20 only]</neq></eq></option>
+
+					</volist>
+				 </select>
+		</div>
+		
+		<div class="form-group">
+			<div class="control-label">{:l('WALLET_ID')}</div>
+			<input id="wallet_name" class="form-control" type="text">
+		</div>
+		<div class="form-group">
+			<div class="control-label">{:l('WALLET_ADDRESS')}</div>
+			<input id="wallet_addr" class="form-control" type="text" placeholder="Enter address" autocomplete="off" />
+		</div>
+				<div class="form-group">
+			<div class="control-label">DestTag/Payid</div>
+			<input id="wallet_dest_tag" class="form-control" type="text"> <span>[If Any]</span>
+		</div>
+		<div class="form-group">
+			<div class="control-label">{:l('TRANSACTION_PASSWORD')}</div>
+			<input id="wallet_paypassword" class="form-control" type="password"><a href="/findpwd/findpwd" class="move ml5">{:l('FORGET')}?</a>
+		</div>
+		<div class="form-group">
+			<input type="button" class="btn btn-info btn-sm" value="{:l('ADD_IT_NOW')}" onclick="wallet_up();">
+		</div>
+	</form>
+	</div>
+	</div>
+	</div>
+	
+</div>
+<div id="step2" class="all_mask" style="height: 0px;display: none;"></div><script>
+	$("#coinnam-select").val("{$xnb}");
+	$("#coinnam-select").change(function () {
+		var coinname = $("#coinnam-select option:selected").val();
+		var url      = '{:U('Finance/addnew')}';
+		if (coinname) {
+			url += '/coin/' + coinname;
+		}
+		window.location = url;
+	});
+	function show_addr(addr,dest_tag) {
+	if (dest_tag > 0 || dest_tag !=0 || dest_tag!= null) {
+	addr=addr+ ' <br/><span style="color:blue">dest_tag: ' + dest_tag+'</span>';
+	}
+		layer.alert(addr, {title: "{:l('YOUR_WALLET_ADDRESS_IS')}"});
+	}
+	function del(o) {
+		var id = $(o).attr('data-align');
+		layer.config({
+			extend: 'extend/layer.ext.js'
+		});
+		layer.ready(function () {
+			layer.prompt({
+				title: 'Enter Fund Pwd',
+				formType: 1
+			}, function (val) {
+				if (val) {
+					$.post("{:U('User/delwallet')}", {
+						id: id,
+						paypassword: val
+					}, function (data) {
+						if (data.status == 1) {
+							layer.msg(data.info, {icon: 1});
+							location.reload();
+						} else {
+							layer.msg(data.info, {icon: 2});
+							if (data.url) {
+								window.location = data.url;
+							}
+						}
+					}, "json");
+				}
+				;
+			});
+		});
+	}
+	$(function () {
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+	});
+	function showA() {
+		$("#step1").show();
+		$("#step2").show();
+	}
+	function showB() {
+		$("#step1").hide();
+		$("#step2").hide();
+	}
+	function wallet_up() {
+		var coinname    = $("#wallet_coinname option:selected").val();
+		var name        = $('#wallet_name').val();
+		var addr        = $('#wallet_addr').val();
+		var dest_tag        = $('#wallet_dest_tag').val();
+		var paypassword = $('#wallet_paypassword').val();
+		if (coinname == "" || coinname == null) {
+			layer.tips('Select Currency', '#wallet_coinname', {tips: 2});
+			return false;
+		}
+		if (name == "" || name == null) {
+			layer.tips('Enter Wallet Logo', '#wallet_name', {tips: 2});
+			return false;
+		}
+		if (addr == "" || addr == null) {
+			layer.tips('Enter wallet address', '#wallet_addr', {tips: 2});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Provide Trans Password', '#wallet_paypassword', {tips: 2});
+			return false;
+		}
+		$.post("{:U('User/upwallet')}", {
+			coin: coinname,
+			name: name,
+			addr: addr,
+			dest_tag:dest_tag,
+			paypassword: paypassword
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+
+
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finan_coinout').addClass('active');
+	$('.finan_coinout').addClass('active');
+</script>	
+<include file="Public:footer_minimal"/>

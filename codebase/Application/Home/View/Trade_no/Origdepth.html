@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{$market} Depth</title>
+</head>
+<body style="margin: 0px auto;">
+<div class="k-line-wrap" id="depth_chart" style="margin: 0;width: 100%;" data-highcharts-chart="0" align="left">
+	<div class="highcharts-container" id="highcharts-0" style="position: relative; overflow: hidden; width: auto; height:auto; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+		<div class="highcharts-tooltip" style="position: absolute; left: 416px; top: -9999px; opacity: 0; visibility: visible;">
+			<span style="position: absolute; font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 12px; white-space: nowrap; color: rgb(0, 0, 0); margin-left: 0px; margin-top: 0px; left: 8px; top: 8px;">0.21 <br>Sell Orders:184172.9132</span>
+		</div>
+	</div>
+</div>
+<p id="market" hidden="hidden">{$market}</p>
+<script src="__PUBLIC__/Home/js/jquery-2.0.js"></script>
+<script src="__PUBLIC__/Home/js/highcharts.js"></script>
+<script>
+	$(function () {
+		var d = "";
+		var window_height=$(window).height();
+		document.getElementById('depth_chart').style.height=$(window).height()+"px";
+		$(window).resize(function(){
+			document.location.reload();
+		});
+		$('#depth_chart').highcharts({
+			global: {useUTC: !1},
+			lang: {loading: "Loading...", numericSymbols: ["k", "M", "G", "T", "P", "E"]},
+			credits: {
+				enabled: 1,
+				text: "",
+				href: "#",
+				position: {align: "right", x: -10, verticalAlign: "bottom", y: -5},
+				style: {cursor: "pointer", color: "#909090", fontSize: "10px"}
+			},
+			colors: ["#058DC7", "#50B432", "#ED561B", "#DDDF00", "#24CBE5", "#64E572", "#FF9655", "#FFF263", "#6AF9C4"],
+			height:window_height/100*60,
+			chart: {
+				backgroundColor: "#131722",
+				borderColor: "transparent",
+				borderWidth: 1,
+				borderRadius: 0,
+				plotBackgroundColor: "#202943",
+				plotShadow: !0,
+				plotBorderWidth: 0,
+				type: "area",
+			},
+			title: {text: ""},
+			subtitle: {text: ""},
+			xAxis: {
+				gridLineWidth: 0,
+				lineColor: "#000",
+				tickColor: "#000",
+				labels: {style: {color: "#fff", font: "11px Consolas, monospace"}},
+				title: {text: ""},
+				labels: {
+					formatter: function () {
+						return d + this.value
+					}
+				}
+			},
+			yAxis: {
+			gridLineWidth: 0,
+				minorTickInterval: "auto",
+				lineColor: "#fff",
+				lineWidth: 0,
+				tickWidth: 0,
+				tickColor: "#fff",
+				labels: {style: {color: "#888", font: "11px Consolas, monospace"}},
+				title: {text: ""},
+				startOnTick: !1,
+				endOnTick: !1,
+				opposite: !1
+			},
+			legend: {
+				backgroundColor: "#fff",
+				borderWidth: 0,
+				itemStyle: {font: "11px Trebuchet MS, Verdana, sans-serif", color: "#565656"},
+				symbolHeight: 12,
+				symbolWidth: 14,
+				itemHoverStyle: {color: "#fefefe"},
+				itemHiddenStyle: {color: "#fefefe"},
+				align: "center",
+				verticalAlign: "top",
+				y: 2,
+				x: -10,
+				floating: 0
+			},
+			labels: {style: {color: "#fff"}},
+			plotOptions: {area: {marker: {enabled: !1, symbol: "circle", radius: 2, states: {hover: {enabled: !0}}}}},
+			navigation: {buttonOptions: {theme: {stroke: "#CCCCCC"}}},
+			tooltip: {
+				crosshairs: [!0, !0],
+				useHTML: !0,
+				formatter: function () {
+					return d + this.x + " <br />" + this.series.name + ":" + this.y.toFixed(4)
+				},
+				backgroundColor: "rgba(240,240,240,.6)",
+				borderColor: "#fff",
+				borderWidth: 1,
+				borderRadius: 0,
+				style: {color: "#000"}
+			},
+			series: [{name: "Buy Orders", data: [], color: "rgb(155, 206, 133)"}, {
+				name: "Sell Orders",
+				data: [],
+				color: "rgb(252, 137, 141)"
+			}]
+		})
+		function n(t, e) {
+			return t[0] - e[0]
+		}
+		function m(t, e) {
+			return e[0] - t[0]
+		}
+		function a(t, e) {
+			var n, a = [];
+			if ("array" !== {}.toString.call(t).slice(8, -1).toLowerCase() || !t.length)
+				return a;
+			for (var r = 0, o = t.length; o > r; r++)
+				n = e(t[r], r), n === !0 && a.push(t[r]);
+			return a
+		}
+		function update(t, r) {
+			r = r.sort(n);
+			var deepChart = $('#depth_chart').highcharts();
+			t = a(t, function (t) {
+				return true;
+				return 0 != t
+			}), r = a(r, function (t) {
+				return true;
+				return 0 != t
+			});
+			var o, i, l, s = t.length < r.length ? t.length : r.length, c = [], d = [];
+			for (t = t.slice(0, s), r = r.slice(0, s), l = 0, o = i = 0; s > l; ++l)
+				o += parseFloat(t[l][1]), c.push([t[l][0], o]), i += parseFloat(r[l][1]), d.push([r[l][0], i]);
+			if (c.length && d.length) {
+				var u = c[s - 1][0], h = d[s - 1][0];
+				deepChart.axes[0].setExtremes(u, h)
+			}
+			deepChart.series[0].setData(c.sort(n));
+			deepChart.series[1].setData(d.sort(n));
+		}
+		var depthData = {"depth": {"buy": [], "sell": []}}
+		function getDepth(obj) {
+			var getDepth_tlme = null;
+			var market = $("#market").text();
+			var result;
+			if (trade_moshi = obj) {
+				$.ajax({
+					dataType: 'json',
+					url: "/Ajax/getDepth?market=" + market + "&trade_moshi="+ trade_moshi+"&t=" + Math.random(),
+					async: false,
+					success: function (data) {
+						result = data;
+					}
+				});
+			}
+			return result;
+		}
+			function run() {
+			var buy = getDepth(3);
+			var sell = getDepth(4);
+			depthData.depth.buy = buy.depth.buy;
+			depthData.depth.sell = sell.depth.sell;
+			update(depthData.depth.buy, depthData.depth.sell);
+		}
+		run();
+		var getDepth_tlme = requestAnimationFrame (function () {
+			run();
+		});
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<div class="row">
+					<div class="col-sm-6 col-md-3">
+						<div class="panel panel-body panel-body-accent">
+							<div class="media no-margin">
+								<div class="media-left media-middle">
+									<i class="icon-man icon-3x text-success-400"></i>
+								</div>
+
+								<div class="media-body text-right">
+									<h6 class="no-margin text-semibold">{$user['truename']}</h6>
+									<span class="text-uppercase text-size-mini text-muted">{:l('FULL NAME')}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-3">
+						<div class="panel panel-body">
+							<div class="media no-margin">
+								<div class="media-left media-middle">
+									<i class="icon-mailbox icon-3x text-indigo-400"></i>
+								</div>
+
+								<div class="media-body text-right">
+									<h6 class="no-margin text-semibold">{$user['email']}</h6>
+									<span class="text-uppercase text-size-mini text-muted">{:l('EMAIL')}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-3">
+						<div class="panel panel-body">
+							<div class="media no-margin">
+								<div class="media-body">
+									<h6 class="no-margin text-semibold"><neq name="user['idcardauth']" value='1'>{:l('NOT_CERTIFIED')}<else/>{:l('VERIFIED')}</neq></h6>
+									<span class="text-uppercase text-size-mini text-muted">{:l('KYC')}</span>
+								</div>
+
+								<div class="media-right media-middle">
+									<i class="icon-<neq name="user['idcardauth']" value='1'>cross2<else/>checkmark</neq> icon-3x text-blue-400"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-3">
+						<div class="panel panel-body">
+							<div class="media no-margin">
+								<div class="media-body">
+									<h6 class="no-margin text-semibold"><a href="/user/nameauth">{:l('Apply')}</a></h6>
+									<span class="text-uppercase text-size-mini text-muted"><a href="/user/nameauth">{:l('Status')}</a></span>
+								</div>
+
+								<div class="media-right media-middle">
+									<a href="/user/nameauth"><i class="icon-profile icon-3x text-danger-400"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>

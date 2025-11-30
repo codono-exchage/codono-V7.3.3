@@ -1,0 +1,32 @@
+	<!-- Graph Start -->
+	<div class="graph graph-padding d-none d-md-block hide-mobile">
+		<div class="container-fluid">
+			<div class="row margin-balance">
+			<volist name="top5markets" id="top">
+				<div class="col-lg-2 col-6">
+					<a href="{:U('Trade/index',array('market'=>$top['name']))}" class="graph-item-block">
+						<div class="graph-item">
+							<div class="graph-heading">
+								<div class="icon" style="background-image: url('__UPLOAD__/coin/{$top.xnbimg}')"></div>
+								<h5>{$top.pairname}</h5>
+								<div class="rate {$top.change-class}">{$top.change}%</div>
+							</div>
+							<div class="graph-content">
+								<div class="left-side">
+									<div class="lastprice">
+										<span class="price-change">{$top['new_price']|NumToStr}</span>
+									</div>
+									<span class="volume">Vol {$top['volume']|NumToStr}</span>
+								</div>
+								<div class="graph-chart">
+									<span class="{$top.chart-class}">{$top.string}</span>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				</volist>
+			</div>
+		</div>
+	</div>
+	<!-- Graph End -->

@@ -1,0 +1,93 @@
+﻿<include file="Public:header"/>
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/forms/selects/select2.min.js"></script>
+	
+	<script type="text/javascript" src="__PUBLIC__/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/assets/js/pages/datatables_advanced.js"></script>
+	<!-- /theme JS files -->
+	<!-- Page length options -->
+<div class="breadcrumb-line breadcrumb-line-component content-group-lg">
+						<ul class="breadcrumb">
+							<li><a href="/"><i class="icon-home2 position-left"></i> {:l('HOME')}</a></li>
+
+							<li class="active">{:l('COIN HEALTH')}</li>
+							
+						</ul>
+					</div>
+	<div class="container">
+				<div class="panel panel-flat">
+					<div class="panel-heading">
+						<h5 class="panel-title">{$page_title} </h5>
+						<div class="heading-elements">
+							<ul class="icons-list">
+		                		<li><a data-action="collapse"></a></li>
+		                		<li><a data-action="reload"></a></li>
+		                		<li><a data-action="close"></a></li>
+		                	</ul>
+	                	</div>
+					</div>
+
+					<div class="panel-body">
+						Being on the forefront of the industry, we want to be as open as it’s possible at the moment. That’s why we created <code>System Health.</code>
+					</div>
+
+					<table class="table datatable-show-all">
+						<thead>
+							<tr>
+								<th>Coin</th>
+								<th>Title</th>
+								<th>Deposit</th>
+								<th>Withdrawals</th>
+								<th>Type</th>
+								<th>Confirmations</th>
+								<th>Withdrawal Fees</th>
+							</tr>
+						</thead>
+						<tbody>
+						
+					<notempty name="data"> <volist name="data" id="vo">
+							<tr>
+								<td>{$vo.name}</td>
+								<td>{$vo.title}</td>
+								<td>
+								<eq name="vo.zr_jz" value="1"><span class="label label-success">{:L('Online')}</span>
+									<else/>
+								                           <span class="label label-danger">{:L('Offline')}</span>
+								</eq>
+								</td>
+								<td>
+								<eq name="vo.zc_jz" value="1"><span class="label label-success">{:L('Online')}</span>
+									<else/>
+								                           <span class="label label-danger">{:L('Offline')}</span>
+								</eq>
+								</td>
+								
+								<php>
+			switch($vo['type']){
+			case 'rgb':
+			$type='ICO';
+						break;
+			case 'qbb':
+			$type='Coin';
+						break;
+			case 'rmb':
+			$type='Fiat';
+						break;
+			default:
+			$type='Coin';}
+		</php>
+								<td>{$type}</td>
+								<td>{$vo.zr_dz}</td>
+								<td>{$vo.zc_fee}% <if condition="$vo.zc_flat_fee gt 0">+{$vo['zc_flat_fee']*1} {$vo.name}</if></td>
+							</tr>
+							</volist> <else />
+						<tr><td colspan="7" class="text-center">No Data at the moment!</td></tr>
+     </notempty>
+						</tbody>
+					</table>
+				</div>
+		</div>
+				<!-- /page length options -->
+<include file="Public:footer_minimal"/>

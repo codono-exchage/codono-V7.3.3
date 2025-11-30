@@ -1,0 +1,40 @@
+<include file="Publicnew:header" />
+<section class="transfer-page">
+		<div class="container">	
+		<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">{:l("Transfer History")}</h4>
+							</div>
+							<div class="card-body">
+								<table class="table last-login-table table-striped table-hover">
+									<thead>
+									<tr>
+										<th scope="col">{:l("Coin")}</th>
+										<th scope="col">{:l("Amount")}</th>
+										<th scope="col" class="text-center" width="150">{:l("From")}</th>
+										<th scope="col" class="text-center">{:l("To")}</th>
+										<th scope="col" class="text-right">{:l("Time")}</th>
+									</tr>
+									</thead>
+									<tbody>
+									
+									<volist name="transfers" id="transfer">
+									<tr>
+										<td>{$transfer['coin'] | strtoupper}</td>
+										<td>{$transfer['amount']| NumToStr}</td>
+										<td class="text-center">{$transfer['from_account'] | strtoupper}</td>
+										<td class="text-center">{$transfer['to_account'] | strtoupper}</td>
+										<td class="text-right">{$transfer['created_at'] | addtime}</td>
+									</tr>
+									</volist>
+									
+									</tbody>
+								</table>
+								<div class="pages">{$page}</div>
+							</div>
+						</div>
+					</div>
+	</div>
+</div>
+<include file="Publicnew:footer_minimal"/>

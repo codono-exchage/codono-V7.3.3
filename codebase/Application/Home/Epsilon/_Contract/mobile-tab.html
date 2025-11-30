@@ -1,0 +1,257 @@
+<div class="d-sm-none fixed-bottom">
+<ul class="nav nav-tabs mb-nav-tabs xtabs">
+        <li class="nav-item "><a onclick="mobiletabs('show_graphs')" href="#charts-div" data-toggle="tab" aria-expanded="true" class="active">Charts</a></li>
+		<li class="nav-item"><a onclick="mobiletabs('show_instruments')" href="#market-div" data-toggle="tab" aria-expanded="true" >Markets</a></li>
+        <li class="nav-item"><a onclick="mobiletabs('show_orderbook')" href="#order-div" data-toggle="tab"  aria-expanded="true">Orders</a></li>
+        <li class="nav-item"><a onclick="mobiletabs('show_history')" href="#history-div" data-toggle="tab" aria-expanded="true">History</a></li>
+		<li class="nav-item "><a onclick="mobiletabs('show_buysell')" href="#trade-div" data-toggle="tab" aria-expanded="true">Trade</a></li>
+    </ul>
+</div>
+<script>
+function mobiletabs(ShowMe){
+console.log(ShowMe);
+var hideclass="mobilehide" 
+var all_tabs = [ "show_instruments","show_graphs", "show_history", "show_buysell","show_orderbook"];
+var index = all_tabs.indexOf(ShowMe);
+console.log(index);
+if (index !== -1) all_tabs.splice(index, 1);
+document.getElementById(ShowMe).classList.remove(hideclass);
+all_tabs.forEach(element => document.getElementById(element).classList.add(hideclass));
+}
+</script>
+<style>
+@media(max-width:767px) {
+	body{margin-top:58px}	
+	#bottomOrdersList{height:100%;}
+	.buy-btn, .sell-btn{margin-bottom:10px;font-size:16px;}
+	.graph-nav li a{font-size:22px;}
+	.buy-list{font-size:15px;}
+	.graph-nav li a{font-size:15px;}
+	.mobilehide{display:none;}
+	.btn-xs{
+		font-size:16px;
+	}
+	.all-tables tbody td{
+		font-size:15px !important;
+	}
+	.mytable-2 tbody td:nth-child(2){font-size:15px !important;}
+	.mytable-2 thead th, .mytable-3 thead th{font-size:15px;}
+	.mytable-1 tr td, .mytable-1 thead tr th, .mytable-3 tr td{font-size:15px;}
+	ul.buy-list{
+		padding-bottom:4px;
+	}
+	.mb-nav-tabs li {
+        display: block;
+        width: 25%;
+        text-align: center;
+        border-left: 1px solid #4f4f4f;
+    }
+	
+        .mb-nav-tabs li a {
+			font-size:16px;
+            color: gray;
+            padding-top: 13px !important;
+            padding-bottom: 13px !important;
+            font-weight: 500;
+        }
+
+            .mb-nav-tabs li a:hover {
+                background: none !important;
+                border: none !important;
+            }
+
+    .mb-nav-tabs > li.active > a {
+        background: none !important;
+        border: none !important;
+        border-top: 2px solid #5a81ea !important;
+        border-radius: 0px !important;
+        box-shadow: none !important;
+        color: #5a81ea !important;
+    }
+
+	#entrust_over tr td{
+		padding-bottom:1px !important;
+	}
+	.lg-navtabs li:nth-last-child(1) a{
+		text-align:right;
+	}
+	.table-crunched tr td{
+		font-size:11px !important;
+		padding:2px !important;
+	}
+	#recent-trades table thead tr th{
+		font-size:11px !important;
+		padding:1px !important;
+	}
+	.table-height-two{
+		height:177px !important;
+	}
+	.mytable-2{
+		margin-bottom: 0px !important;
+	}
+    .table-responsive {
+        border: none !important;
+    }
+
+    .lg-navtabs li {
+        width: 50%;
+        float: left;
+        height: 34px;
+    }
+
+    .carousel-sec {
+        margin-bottom: 0px;
+        margin-top: 85px;
+    }
+
+    .footer-cont p {
+        margin-bottom: 4px;
+        font-size: 14px;
+    }
+
+    .box-1 img {
+        width: 80px !important;
+    }
+
+    .get-btn {
+        margin-left: 15px;
+        margin-bottom: 20px;
+    }
+
+    #slider-1 {
+        margin-top: 25px;
+    }
+
+    .sec-one {
+        margin-top: 45px;
+    }
+
+    .footer {
+        padding: 50px 0px 26px 8px;
+    }
+
+    .list-para {
+        margin-top: 30px;
+    }
+
+    .inline-text {
+        color: white;
+        display: inline-block;
+        font-size: 20px;
+        margin-left: 5px;
+    }
+
+    .trade-btn {
+        text-align: center;
+    }
+
+    .top-btntext {
+        display: initial;
+    }
+
+    .display-block {
+        width: 100%;
+    }
+
+    .top-btntext img, .top-btntext h2 {
+        display: inline-block;
+    }
+
+    .sec-cont {
+        margin-bottom: 20px;
+    }
+
+    .mar-row {
+        margin-bottom: 30px;
+    }
+
+    .security-box, .ledger-box, .api-box {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .sec-one {
+        padding: 20px 0px;
+    }
+
+
+    .sec-four-cont {
+        padding: 0px;
+    }
+
+    .my-list-2 li {
+        margin-bottom: 20px;
+    }
+
+    .sec-four-img {
+        margin: 0px auto;
+    }
+
+    .sec-four-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .box h1 {
+        font-size: 25px;
+        line-height: 36px;
+    }
+
+    .hide-small {
+        display: none !important;
+    }
+
+    .navbar-inverse .navbar-toggle {
+        background-color: #4c5261 !important;
+    }
+
+    .box-1 {
+        height: 162px;
+    }
+
+    .bottom-margin {
+        margin-bottom: 10px;
+    }
+
+    .box-1 h1 {
+        font-size: 28px;
+    }
+
+    .box-1 {
+        padding: 40px 20px 20px 20px;
+    }
+	.lg-navtabs li{
+		width:auto !important;
+	}
+	.lg-navtabs li a{
+		padding:5px 3px !important;
+		font-size:9px;
+	}
+	#bottomOrdersList table tr td{
+		font-size:10px;
+		padding:3px;
+	}
+	#bottomOrdersList table thead th{
+		font-size:10px;
+		padding:3px;
+	}
+	.graph-desc {
+        margin-bottom: 2px !important;
+    }
+	ul.buy-list{
+		margin-top:4px !important;
+		margin-bottom:0px !important;
+	}
+	ul.xtabs li {
+		width:20%;
+}
+ul.xtabs li.nav-item {
+    text-align: center;
+    border-right: 1px solid darkkhaki;
+}
+.activeby2{height:auto;}
+.activeby2buy{height:auto !important}
+
+}
+
+</style>

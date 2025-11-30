@@ -1,0 +1,92 @@
+<include file="Public:header"/>
+<div class="page-container" style=" ">
+   <div class="wraphtml">
+		<include file="Shop:sub_menu"/>
+        <notempty name="prompt_text">
+				<div class="alert alert-primary no-border">
+									<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+									{$prompt_text}
+				</div>
+        </notempty>
+    </div>
+<div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="f_body mt5">
+                    <div class="f_body_main">
+                        <div class="f_tab_body">
+                            <div>
+                                <table class="table table-responsive" id="investLog_content">
+                                    <thead>
+                                    <tr>
+                                        <th>{:l('BUY_TIME')}</th>
+                                        <th>{:l('BUY_GOODS')}</th>
+                                        <th>{:l('COMMODITY_PRICE')}</th>
+                                        <th>{:l('PURCHASE_QUANTITY')}</th>
+                                        <th>{:l('TOTAL_AMOUNT')}</th>
+                                        <th>{:l('PAYMENT_METHOD')}</th>
+                                        <th>{:l('NUMBER_OF_PAYMENTS')}</th>
+                                        <th>{:l('SHIPPING_ADDRESS')}</th>
+                                        <th class="">{:l('STATUS')}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <tr>
+                                            <td>{$vo.addtime|addtime}</td>
+                                            <td><a href="{:U('Shop/view?id='.$vo['shopid'])}" class="btn btn-xs btn-info">{:l('View Product')}</a></td>
+                                            <td>{$vo['price']|Num}</td>
+                                            <td>{$vo['num']|Num}</td>
+                                            <td>{$vo['mum']|Num}</td>
+                                            <td>{$vo['coinname']}</td>
+                                            <td>{$vo['xuyao']|Num}</td>
+                                            <td>{$vo['addr']}</td>
+                                            <td>
+                                                <eq name="vo.status" value="1">{:l('COMPLETED')}</eq>
+                                                <eq name="vo.status" value="2">{:l('REVOKED')}</eq>
+                                                <eq name="vo.status" value="0">{:l('UNFILLED')}</eq>
+                                                <eq name="vo.status" value="3">{:l('SHIPPED')}
+													 <a onclick="reward({$vo['id']})" class="btn btn-xs btn-success">{:l('CONFIRMATION_OF_RECEIPT')}</a>
+												</eq>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                                <div class="pages">{$page}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+<script>
+    //MENU_HIGHLIGHTS
+    $('#shop_box').addClass('active');
+	
+	function reward(id){
+	
+		$.post("/Shop/reward", {
+			id: id
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location = "/Shop/log";
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+</script>
+<include file="Public:footer_minimal"/>

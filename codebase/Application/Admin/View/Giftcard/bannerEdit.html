@@ -1,0 +1,156 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4"><a href="{:U('Giftcard/banner')}">{:l('Banners')}</a> >></span>
+            <span class="d-sm-flex align-items-center justify-content-between h4"><empty name="data">{:l('Add a banner')}<else/>{:l('Edit banner')}</empty></span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('Giftcard/bannerEdit')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+							
+								<tr class="controls">
+									<td class="item-label">{:l('Banner Title')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="title" value="{$data.title}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								
+								
+								
+								
+								<tr class="controls">
+									<td class="item-label">{:l('Banner Image')}:</td>
+									<td>
+										<div id="addpicContainer">
+											<notempty name="data.image">
+												<!--Noimagedisplaydefaultimage-->
+												<img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:400px;" title="Click to change banner" alt="Click to change banner" src="__UPLOAD__/giftcard/{$data.image}">
+												<else/>
+												<!--Noimagedisplaydefaultimage-->
+												<img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:400px;" title="Click to change banner" alt="Click to change banner" src="__THEME__/images/addimg.png">
+											</notempty>
+											<input type="hidden" id="image" name="image" value="{$data.image}">
+											<input type="file" id="inputfile" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+										</div>
+									</td>
+									<td class="item-note">Ratio of 735 x 439</td>
+								</tr>
+							
+								<tr class="controls">
+									<td class="item-label">{:l('Added')}:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="addtime" value="{$data['addtime']|addtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Sort')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="sort" value="{$data.sort}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Status')}:</td>
+									<td><select name="status" class="form-select input-10x">
+										<option value="1"
+										<eq name="data.status" value="1">{:l('selected')}</eq>
+										>{:l('Enabled')}</option>
+										<option value="0"
+										<eq name="data.status" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+					
+					
+					
+					$(document).ready(function () {
+						//The response fileAdd tosuccessevent
+						$("#inputfile").change(function () {
+							//createFormDataObjects
+							var data = new FormData();
+							//forFormDataAdding Data Object
+							$.each($('#inputfile')[0].files, function (i, file) {
+								data.append('upload_file' + i, file);
+							});
+
+
+							//send data
+							$.ajax({
+								url: '/Admin/Giftcard/bannerimage',
+								type: 'POST',
+								data: data,
+								cache: false,
+								contentType: false,		//Essential parameters
+								processData: false,		//Essential parameters
+								success: function (data) {
+									if (data) {
+										$('#up_img').attr("src", '/Upload/giftcard/' + data);
+										$('#image').val(data);
+										$('#up_img').show();
+									}
+								},
+								error: function () {
+									alert('Upload error');
+									$(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+								}
+							});
+
+						});
+					});
+					
+					
+					
+					
+					
+					
+					
+					
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Giftcard/banner')}");
+	</script>
+</block>

@@ -1,0 +1,91 @@
+		    <!-- Header @s -->
+			<div class="header-main">
+				<div class="header-container container container-xxl">
+					<div class="header-wrap">
+						<!-- Logo @s -->
+						<div class="header-logo logo animated" data-animate="fadeInDown" data-delay=".6">
+							<a href="./" class="logo-link">
+								<img class="logo-dark" src="__UPLOAD__/public/{$C['web_logo']}" srcset="__UPLOAD__/public/{$C['web_logo']} 2x" alt="logo">
+								<img class="logo-light" src="__UPLOAD__/public/{$C['web_logo']}" srcset="__UPLOAD__/public/{$C['web_logo']} 2x" alt="logo">
+							</a>
+						</div>
+
+						<!-- Menu Toogle @s -->
+						<div class="header-nav-toggle">
+							<a href="#" class="navbar-toggle" data-menu-toggle="header-menu">
+                                <div class="toggle-line">
+                                    <span></span>
+                                </div>
+                            </a>
+						</div>
+
+						<!-- Menu @s -->
+						<div class="header-navbar animated" data-animate="fadeInDown" data-delay=".6">
+							<nav class="header-menu" id="header-menu">
+								<ul class="menu">
+				<volist name="navigation" id="vo">  
+					<if condition="$vo.dropdown eq 1">
+					<li class="nav-item dropdown" id="{$vo['name']}_box">
+					<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">{:l($vo['title'])}</a>
+					<div class="dropdown-menu">
+						<div class="dropdown-body">
+						<volist name="vo.submenu" id="submenu">
+						
+									<if condition="$submenu['is_external']">
+							<a class="dropdown-item" href="{$submenu.url}">
+							<else/>
+							<a class="dropdown-item" href="/{$submenu.url}">
+						</if>
+								<div class="content">
+									{$submenu.title}
+								</div>
+							</a> 
+							</volist>
+						</div>
+					</div>
+				</li>
+				<else/>
+					
+                    <li id="{$vo['name']}_box" class="nav-item">
+                        
+							<if condition="$vo['is_external']">
+							<a href="{$vo['url']}" class="nav-link">
+							<else/>
+							<a href="/{$vo['url']}" class="nav-link">
+						</if>
+						<if condition="$vo['ico']">
+						<div class="icon">
+								<i class="icon {$vo['ico']}"></i>
+							</div>
+						</if>  {:l($vo['title'])} </a>
+                    </li>
+					</if>
+                </volist>
+
+									
+					<gt name="Think.session.userId" value="0">
+									<li class="menu-item has-sub">
+										<a class="menu-link nav-link menu-toggle" href="#">{$Think.session.userName}</a>
+										<ul class="menu-sub menu-drop">
+											<li class="menu-item"><a class="menu-link nav-link" href="{:U('Finance/index')}">{:l('FINANCE')}</a></li>
+                                            <li class="menu-item"><a class="menu-link nav-link" href="{:U('User/index')}">{:l('ACCOUNT')}</a></li>
+                                            <li class="menu-item"><a class="menu-link nav-link" href="{:U('Login/loginout')}">{:l('LOG_OUT')}</a></li>
+										</ul>
+									</li>
+				</gt>
+				<include file="Index:lang-bar"/>
+								</ul>
+								
+									
+					<php>if (!userid()){</php>
+						<ul class="menu-btns">
+									<li><a href="{:U('Login/register')}" class="btn btn-md btn-thin btn-info btn-auto no-change"><span>{:l('SIGNUP')}</span></a></li>
+									<li><a href="{:U('Login/login')}" class="btn btn-md btn-thin btn-outline btn-info btn-auto no-change"><span> {:l('SIGNIN')}</span></a></li>
+								</ul>
+					<php>}</php>
+					
+							</nav>
+						</div><!-- .header-navbar @e -->
+					</div>                                                
+				</div>
+			</div><!-- .header-main @e -->

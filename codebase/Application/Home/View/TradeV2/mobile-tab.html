@@ -1,0 +1,21 @@
+<div class="visible-xs-block">
+<ul class="nav nav-tabs mb-nav-tabs">
+        <li class=""><a onclick="mobiletabs('show_instruments')" data-toggle="tab" href="#market-div" aria-expanded="true">Markets</a></li>
+		<li class=""><a onclick="mobiletabs('show_graphs')" href="#charts-div" aria-expanded="false">Charts</a></li>
+        <!--<li class=""><a onclick="mobiletabs('show_orderbook')" href="#order-div" aria-expanded="false">Orderbook</a></li>-->
+        <li class=""><a onclick="mobiletabs('show_history')" href="#history-div" aria-expanded="false">History</a></li>
+		<li class="active"><a onclick="mobiletabs('show_buysell')" href="#trade-div" aria-expanded="true">Trade</a></li>
+    </ul>
+</div>
+<script>
+function mobiletabs(ShowMe){
+console.log(ShowMe);
+var hideclass="mobilehide" 
+var all_tabs = [ "show_instruments","show_graphs", "show_history", "show_buysell"];
+var index = all_tabs.indexOf(ShowMe);
+console.log(index);
+if (index !== -1) all_tabs.splice(index, 1);
+document.getElementById(ShowMe).classList.remove(hideclass);
+all_tabs.forEach(element => document.getElementById(element).classList.add(hideclass));
+}
+</script>

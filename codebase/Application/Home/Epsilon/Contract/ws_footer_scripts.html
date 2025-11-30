@@ -1,0 +1,143 @@
+<script>
+ws = new WebSocket("{:SOCKET_WS_URL}");
+ function wsshow(){
+   //     ws.send('heart beat\n');
+    }
+ws.onopen = function(e){
+        console.info(e);
+        ws.send('Initialize WS');//Is equivalent to sending an initialization message
+        console.info("Send a heartbeat packet string to the server");
+     //   setInterval(wsshow,5000);
+}
+ ws.onmessage = function(e){
+
+        // json data into js object
+        var data = JSON.parse(e.data);
+        console.log(data);
+
+        var type = data.type || '';
+
+        switch(type){
+            case 'depth':
+                ws_depth(data)
+                break
+		   case 'newprice':
+                ws_newprice(data)
+                break	
+			case 'tradelog':
+                ws_tradelog(data)
+                break	  
+            case 'break':
+           //     console.log(data.info);
+                break
+            default :
+             //   console.log(data);
+
+        }
+    };
+
+function ws_tradelog(data) {
+				if(data.market!=""){	return false;}
+				if (data.type=='tradelog') {
+					elementupdate("#activexnb",data.price) ;
+					elementupdate("#market_sell_price",data.price) ;
+					if(data.trade_type==1){var typeclass='green'; var ttype="Buy";}
+					else{var typeclass='red';var ttype="Sell";}
+							$('#market_sell_price').removeClass();
+							$('#activexnb').removeClass();
+					$('#market_sell_price').addClass(typeclass);
+					$('#activexnb').addClass(typeclass);
+					var total=toNum(data.num*data.price,6);
+					 $('#dealrecordbody tr:first').before('<tr id="tl'+data.id+'"><td>'+unixTime(data.time)+'</td><td class="'+typeclass+'">'+data.price+'</td><td>'+data.num+'</td></tr>');
+					 $('#recent-orders-list tr:first').before('<tr id="tll'+data.id+'"><td>'+unixTime(data.time)+'</td><td class="'+typeclass+'">'+ttype+'</td><td class="'+typeclass+'">'+data.price+'</td><td>'+data.num+'</td><td>'+total+'</td></tr>');
+			    }
+				justblinkme('#tl'+data.id);
+    }
+	function justblinkme(idselector){
+	   $(idselector).hide(300);
+       $(idselector).show(1000);
+	}	
+ 
+    
+	function randomrange(start,end){
+	return (Math.floor(Math.random() * end) + start) ;
+	}
+	function ws_depth(data) {
+		  
+			var decimals=6;
+			
+				if(data.market!="{:MARKETS_WS_SOCKET[$market]}"){	return false;}
+	            if (data.type=='depth') {
+                        var list = '';
+                        var sellk = data.sell.length;
+                        if (data.sell) {
+                            for (i = 0; i < data.sell.length; i++) {
+                                  list += '<tr title="Buy at this price" class="topmost" id="activesell'+i+'" style="background:linear-gradient(to left, rgba(240, 80, 110, 0.2) '+(data.sell[i]['quantity'] * 100 / data['sellvol'])+'%, transparent 0%)" onclick="autotrust(this,\'sell\',1)"><td class="red">' + data.sell[i]['price'] + '</td><td >' + (data.sell[i]['quantity']).toFixed(decimals) + '</td><td>' + (data.sell[i]['price']*data.sell[i]['quantity']).toFixed(decimals) + '</td></tr>';
+                            bestselloffer= data.sell[i]['price'];
+							}
+
+                        }
+                        $("#sellorderlist").html(list);
+                        list = '';
+                        if (data.buy) {
+                            for (i = 0; i < data.buy.length; i++) {
+                                list += '<tr title="Sell at this price" class="topmost" id="activebuy'+i+'" style="background:linear-gradient(to left, rgba(103, 153, 1, 0.2) '+(data.buy[i]['quantity'] * 100 / data['buyvol'])+'%, transparent 0%)" onclick="autotrust(this,\'buy\',1)"><td class="green"  >' + data.buy[i]['price'] + '</td><td  >' + (data.buy[i]['quantity']).toFixed(decimals)+ '</td><td  >' + (data.buy[i]['price']*data.buy[i]['quantity']).toFixed(decimals) + '</td></tr>';
+                            }
+
+                        }
+						
+						if(data.buy){
+						bestbuyoffer= data.buy[0]['price'];
+						}else{ bestbuyoffer='';}
+                        $("#buyorderlist").html(list);
+                 
+                }
+				blinkme('#activebuy');
+				blinkme('#activebuy');
+				blinkme('#activesell');
+				blinkme('#activesell');
+				
+    }
+	
+	function ws_newprice(data) {
+		  if(decimals == null){
+			var decimals=6;
+			}
+				if(data.market!="{:MARKETS_WS_SOCKET[$market]}"){	return false;}
+	            if (data.type=='newprice') {
+                elementupdate("#market_sell_price",data.open) ;
+				elementupdate("#market_buy_price",data.close) ;
+				elementupdate("#market_change",data.change+"%") ;
+				elementupdate("#market_max_price",data.max_price) ;
+				elementupdate("#market_min_price",data.min_price) ;
+				elementupdate("#market_volume",toNum(data.volume,2)) ;
+				elementupdate("#activexnb",data.open) ;
+				elementupdate("#activermb",data.close) ;
+                }
+				
+    }
+	function unixTime(unixtime) {
+
+    var u = new Date(unixtime*1000);
+
+      return ('0' + u.getUTCMonth()).slice(-2) +
+        '-' + ('0' + u.getUTCDate()).slice(-2) + 
+        ' ' + ('0' + u.getUTCHours()).slice(-2) +
+        ':' + ('0' + u.getUTCMinutes()).slice(-2) +
+        ':' + ('0' + u.getUTCSeconds()).slice(-2) 
+    }
+	  
+
+	
+	function blinkme(idselector){
+	var randselect=randomrange(1,19);
+	var actualselector=idselector+randselect;
+		$(actualselector).css("background-color","#F0B90B");
+	   $(actualselector).hide(1500);
+        $(actualselector).show(1500);
+        $(actualselector).css("background-color","none");
+	}
+	function elementupdate(idselector,content){
+	$(idselector).html(content);
+	}
+</script>

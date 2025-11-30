@@ -1,0 +1,43 @@
+	<!-- add payment method modal start -->
+    <div class="modal fade" id="add-{$pm.unique_identifier}" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header  d-flex align-items-center">
+                    <h5 class="modal-title">
+                        <div class="coin-title d-flex align-items-center">
+                            <div class="title">{:l("Add")} {$pm.name}</span>
+                            </div>
+                        </div>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                                    <div >
+                                        <div class="form-group">
+                                            <label>{:l("Your Full Name")}</label> <input type="text" class="form-control" readonly value="{$truename}">
+                                        </div>
+										<input name="unique_identifier" value="{$pm.unique_identifier}" type="hidden"/>
+                             
+                                        <div class="form-group">
+                                            <label>{$pm.name} {:l('Account')} </label> 
+                                            <textarea name="information_{$pm.unique_identifier}" id="information_{$pm.unique_identifier}" type="text" class="form-control" placeholder="{$pm.name} {:l(' Account')}" ></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info">
+                                        <p> {:l("Tips:")} {$pm.instructions}</p>
+                                    </div>
+                                
+                        </div><!--/col-md-6-->
+                    </div><!--/row-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-1" data-dismiss="modal">{:l("Cancel")}</button>
+                    <button onclick="add_method('{$pm.unique_identifier}');"class="btn-2">{:l("Add")} {$pm.name}</button>
+                </div>
+            </div>
+        </div>
+    </div>

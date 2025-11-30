@@ -1,0 +1,28 @@
+<div class="crypt-market-status" id="show_instruments">
+                    <div>
+                        <ul class="nav nav-tabs" id="crypt-tab">
+                            <volist name="activated_base_markets" id="v">		
+							<li ><a href="#{$v}" id="id{$v |strtolower}" data-toggle="tab" data-target="#{$v | strtolower}">{$v}</a></li>
+							</volist>	
+							<li  class="ml-auto"><input type="text" value="" placeholder="search" id="searchFilter"/></li>
+                        </ul>
+						  
+                        <div class="tab-content crypt-tab-content" id="CryptoPriceTable">
+						<volist name="activated_base_markets" id="v">		                          
+						  <div role="tabpanel" class="tab-pane" id="{$v |strtolower}">
+                                <table class="mb-0 table table-striped table-over " >
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Coin</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Change</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="" id="coinleftmenu-{$v |strtolower}">
+                                    </tbody>
+                                </table>
+                            </div>
+							</volist>	
+                        </div>
+                    </div>
+                </div>

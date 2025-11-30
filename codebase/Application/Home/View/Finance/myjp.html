@@ -1,0 +1,70 @@
+﻿<include file="Public:header" />
+
+
+		<!-- Page content -->
+		<div class="page-container">	
+	
+<include file="Finance:left" />
+
+		<!-- Main content -->
+			<div class="content-wrapper">
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<div class="safe_center clear ">
+					<h1>{:l('MY_REWARD')}  <a class="right" onclick="$('#hints').slideToggle();"> <i class="fa fa-hand-o-right move fz_14 mr5"></i> <span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span> </a> 					</h1>
+				</div>
+				<div id="hints" class="mytips" style="display:none;">
+					
+					<p>
+					<notempty name="prompt_text">
+					{$prompt_text}
+					</notempty>
+					
+					</p>				</div>
+			</div>	
+				<div class="panel-body ">
+					<div class="f_body  table-responsive">
+						<table class="table table-condensed" id="investLog_content">
+							<thead>
+							<tr>
+								<th>{:l('USERNAME')}</th>
+								<th>{:l('REWARD_TYPE')}</th>
+								<th>{:l('AMOUNT')}</th>
+								<th>{:l('REWARD')}</th>
+								<th>{:l('TIME')}</th>
+								<th>{:l('STATE_AWARD')}</th>
+							</tr>
+							</thead>
+							<tbody>
+														
+								 <volist name="list" id="vo">
+								 <tr>
+								  <td>{$vo.invit|substr_replace='****',3,4}</td>
+								  <td>{$vo.type}</td>
+								  <td>{$vo['mum']|NumToStr} {$vo.name}</td>
+								  <td>{$vo['fee']|NumToStr} {$vo.name}</td>
+								  <td>{$vo.addtime|addtime}</td>
+								  <td><eq name="vo.status" value="0"> <font class="sell">{:l('NO_ARRIVAL')} </font></eq> <eq name="vo.status" value="1"> <font class="buy">{:l('CREDITED')} </font></eq></td>
+								 </tr>
+								 </volist>					
+								
+							</tbody>
+						</table>
+						<div class="pages">{$page}</div>
+					</div>
+				</div>
+			
+		</div>
+	</div>
+</div>
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_award').addClass('active');
+</script>	
+	
+<include file="Public:footer_minimal"/>

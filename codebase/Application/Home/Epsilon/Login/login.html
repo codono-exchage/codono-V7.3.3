@@ -1,0 +1,359 @@
+<include file="Public:header"/>
+<body class="nk-body body-wider bg-light-alt" id="uniqueScope">
+  <style>
+  .verification-bar {
+    background-color: var(--trade-pro); /* Light gray background color */
+    padding: 10px 10px; /* Padding around the content */
+    border: 1px solid  var(--trade-pro); /* Border around the bar */
+    text-align: center; /* Vertically center the content */
+}
+.verification-text {
+    font-weight: 600;
+    display: inline-flex;
+    align-items: baseline;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+  .iti-mobile-select{
+    position: absolute !important;
+    bottom: 0 !important;
+  }
+  .intl-tel-input .selected-flag {
+    z-index: 1 !important;
+    position: relative !important;
+    width: 38px !important;
+    padding: 0px 10px 0 4px !important;
+    margin: 20px 4px !important;
+    height: 30px !important;
+    top: 0px !important;
+  }
+  .flag-dropdown .dropdown-menu{
+    max-width: 100% !important;
+  }
+</style>
+  <div class="nk-wrap">
+
+          <main class="wrapper  h-100-vh login">
+            <div class="container">
+              
+              <div class="row">    
+                <div class="col-md-12 col-lg-12 col-xl-12 pl-0 pr-0">
+                <div class="verification-bar">
+                <!-- Text -->
+                <div class="verification-text">
+                  <span class="theme-color">&#128274;</span>  {:l('URL Verification')}: <span class="pl-2 theme-color">{$url_scheme['scheme']}://</span>{$url_scheme['host']}
+                </div>
+              </div>
+            </div></div>
+              <div class="row justify-content-center inner-wrapper">
+                <div class="col-md-12 col-lg-12 col-xl-12">
+             
+                  <div class="form-wrapper">
+                    <div class="row align-items-center me-5">
+                      <eq name="MOBILE_LAUNCHED" value="0">
+                        <div class="col-sm-3 col-md-3 col-lg-3"></div>
+                        </eq>
+                      <div class="col-sm-5 col-md-5 col-lg-5">
+                        <div
+                          
+                          class="needs-validation"
+                          id="login-form"
+                        >
+                          <eq name="GOOGLE_LOGIN_ALLOWED" value="1">
+                            
+                            <a href="{:U('Login/googleLogin')}" class="btn google-button btn-block btn-lg" data-onsuccess="onSignIn">
+                              
+                            <span><img src='__EPSILON__/img/redesign/google-icon.svg'/> {:l('Google Login')} </span></a>
+                            
+                          </eq>
+
+
+                          <br/>
+
+                          <ul
+                            id="login-tabs"
+                            class="nav nav-pills nav-fill"
+                            role="tablist"
+                          >
+                            <li class="nav-item">
+                              <a
+                                aria-selected="true"
+                                class="nav-link "
+                                data-toggle="pill"
+                                href="#mobile-login"
+                                data-target="#mobile-login"
+                                role="tab"
+                              >
+                                <span>{:l('Phone Login')}</span></a>
+                            </li>
+                            <li class="nav-item">
+                              <a
+                                aria-selected="false"
+                                class="nav-link active"
+                                data-toggle="pill"
+                                href="#email-login"
+                                data-target="#email-login"
+                                role="tab"
+                              >
+                                <span >{:l('E-mail Login')} </span></a
+                              >
+                            </li>
+                          </ul>
+                       
+                          <div class="tab-content">
+                            <div
+                              class="tab-pane fade"
+                              role="tabpanel"
+                              id="mobile-login"
+                            >
+                              <div class="form-group">
+                                <label for="cellphone" class="mb-24">{:l('Phone number')}</label>
+                                <div class="input-group">
+                        
+                                  <input type="text" id="cellphones" class="texts" style="display: none;"> 
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <input
+                                    class="pl-5 form-control"
+                                    placeholder="{:l('Phone number')}"
+                                    type="text"
+                                    id="cellphone"
+                                    required
+                                  />
+                              </div>
+                              <div class="form-group">
+                                <label for="enterPW1">{:l('Password')}</label>
+                                <input
+                                  class="form-control"
+                                  placeholder="{:l('Password')}"
+                                  type="password"
+                                  id="enterPW1"
+                                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+                                  autocomplete="no"
+                                  required
+                                />
+                                <span class="input-inner-right"
+                                  ><i class="fa fa-eye" id="eye-1" onclick="hideShowPass('enterPW1','eye-1')"></i
+                                ></span>
+                                <div class="invalid-feedback">
+                                  Your password must contain at least 6 characters, 1
+                                  uppercase letter, 1 lowercase letter and numbers.
+                                </div>
+                              </div>
+                              <link rel="stylesheet" href="__EPSILON__/addons/intltelinput.css">
+					
+          <script src="__EPSILON__/addons/intlTelInput.js"></script>
+					<script>
+						$("#cellphones").intlTelInput({
+							autoHideDialCode: false,
+							defaultCountry: "tr",
+							nationalMode: false,
+							preferredCountries: ['tr', 'us', 'uk','in','cn','hk', 'tw', 'mo','it'],
+						});
+					</script>
+                            </div>
+                            <div
+                              class="tab-pane fade  show active"
+                              role="tabpanel"
+                              id="email-login"
+                            >
+                              <div class="form-group">
+                                <label for="username">{:l('Email')}</label>
+                                <input
+                                  class="form-control"
+                                  id="username"
+                                placeholder="{:l('USERNAME_OR_EMAIL')}"
+                                  type="email"
+                                  required autocomplete="true"
+                                />
+                              </div>
+                              <div class="form-group">
+                                <label for="login_password">{:l('Password')}</label>
+                                <input
+                                  class="form-control"
+                                  type="password"
+                                  id="login_password"
+                                  placeholder="{:l('PLEASE_ENTER_YOUR_PASSWORD')}"
+                                  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+                                  autocomplete="no"
+                                  required
+                                />
+                                <span class="input-inner-right"
+                                  ><i class="fa fa-eye" id="eye-2" onclick="hideShowPass('login_password','eye-2')"></i
+                                ></span>
+                                <div class="invalid-feedback">
+                                  {:l('Your password must contain at least 6 characters, 1 uppercase letter, 1 lowercase letter and numbers.')}
+                                </div>
+                              </div>
+                              <eq name="RECAPTCHA" value="0">
+                              <div class="form-group">
+                                <label for="enterPW1">{:l('Captcha')}</label>
+                                <div class="d-flex align-items-center" style="border: 1px solid #ced4da; border-radius: .25rem; overflow: hidden;">
+                                  <input id="login_verify" type="text" class="form-control" placeholder="{:l('Enter Code')}" autocomplete="off" style="border: none; height: 38px; line-height: 38px; flex-grow: 1;">
+                                  <img id="login_verify_up" class="img-fluid codeImg reloadverify"  onclick="this.src=this.src+'?t='+Math.random()" style="height: 38px; width: auto; display: block;"   src="{:U('Verify/code')}" title="{:l('REFRESH')}">
+                                </div>
+                              </div>
+                              <else/>
+
+                              
+                              <div class="form-group">
+                                <label for="login_verify">{:l('Captcha')}</label>
+                          
+                                <div class="invalid-feedback">
+                                  {:l('Code must not be empty')}
+                                </div>
+                                <div class="justify-content-between">
+                                    <include file="Public:recaptcha"/>
+                                </div>
+                              </div>
+                              </eq>
+                            </div>
+                          </div>
+                          <button  onclick="footer_user_login();" class="btn btn-2 d-block w-100 m-t-20"><strong>{:l('LOG_IN')}</strong></button>
+                          <div class="other-link">
+                            <a href="{:U('Login/findpwd')}">{:l('Forgot password?')}</a> 
+                            <a href="{:U('Login/register')}" class="float-right">{:l('Sign up')}</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-1"></div>
+                      <eq name="MOBILE_LAUNCHED" value="1">
+                      <div class="col-sm-6 col-md-4 col-lg-5">
+                        <div class="qr-login">
+                          <div class="h3 heading-padding mb-4">{:l('Scan code to log in')}</div>
+                         <div class="row">
+                          <div class="col-md-6 col-12  ">
+                            <div class="qr-box" id="qrcode1">
+                          <img src="" class="img-fluid"/>
+                        </div>
+                          </div>
+                          <div class="col-md-6 text-center d-none d-md-block">
+                          <img class="qr-tip" src="__EPSILON__/img/scan.png" alt="">
+                        </div>
+                        </div>
+                          <p class="">{:l('Open App')}</p>
+                          <p class="">
+                            {:l('For instant login with the mobile app scan this code.')}
+                          </p>
+                        </div>
+                      </div>
+                    </eq>
+                    </div>
+                  </div>
+                <!-- </div> -->
+              </div>
+              <!--/row-->
+            </div>
+          </main>
+    
+	</div>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+<script>
+    function footer_user_login() {
+        
+        var username = $("#username").val();
+        var password = $("#login_password").val();
+<eq name='RECAPTCHA' value='1'>
+        var verify = $("#g-recaptcha-response").val();
+<else/>
+        var verify = $("#login_verify").val();
+
+</eq>
+        if (username == "" || username == null) {
+            layer.tips("Username", '#username', {tips: 2});
+            return false;
+        }
+        if (password == "" || password == null) {
+            layer.tips("Enter password", '#login_password', {tips: 2});
+            return false;
+        }
+        
+        if (verify == "" || verify == null) {
+            layer.tips("Captcha", '.recaptcha', {tips: 2});
+            return false;
+            
+        }
+        
+        $.post("{:U('Login/submit')}", {
+            username: username,
+            password: password,
+            verify: verify,
+            
+        }, function (data) {
+
+            if (data.status == 1) {
+                $.cookies.set('username', username);
+                layer.msg(data.info, {icon: 1});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    window.location = "{:SITE_URL}";
+                }
+            } else {
+                layer.msg(data.info, {icon: 2});
+				        
+                <eq name="RECAPTCHA" value="1">
+                  grecaptcha.reset();
+                  <else/>
+                  $("#login_verify_up").click();
+                </eq>
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+
+    function choose_lang(lang) {
+        $.cookies.set("lang", lang);
+        window.location.reload();
+    }
+      
+		$('#qrcode1').qrcode({
+                        render: "table", //table
+                        size: 150,
+                        text: '{$qrhash}', //Any content
+						            background: "#ffffff",
+                        class:"img-fluid"
+                    }); 
+                    let imgcontent	=$('#qrcode1').html();
+  function checkme() {
+		$.get("{:U('Login/checkQr')}", function (data) {
+			if (data.status == 1) {
+        console.log(data)
+        layer.msg(data.info, {icon: 1});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    window.location = "{:SITE_URL}";
+                }
+			} else {
+        
+			}
+		}, "json");
+	}
+	setInterval(checkme, 3000);
+</script>
+<eq name='GOOGLE_LOGIN_ALLOWED' value='1'>
+<script>
+function onSignIn(googleUser) {
+// Get user's ID token and basic profile information
+var id_token = googleUser.getAuthResponse().id_token;
+var profile = googleUser.getBasicProfile();
+
+$.post("/verify-google-token", { id_token: id_token }, function(result) {
+if (result.success) {
+  // Update UI to show user is signed in
+  // ...
+} else {
+  // Show error message
+  // ...
+}
+});
+}
+</script>
+</eq>
+
+<include file="Public:footer_minimal"/>

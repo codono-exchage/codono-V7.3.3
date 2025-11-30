@@ -1,0 +1,84 @@
+﻿<include file="Public:header" />
+
+<div class="container wallet-page">
+  <div class="full-box row">
+    <include file="User:sidebar" />
+    <!-- Main content -->
+    <div class="col-10">
+      <div class="row mt-3 mb-3">
+        <include file="User:top_bar" />
+        <div class="col-9 col-md-6 order-1 order-md-2 float-right">
+          <ul class="text-right breadcrumbs list-unstyle">
+            <li>
+              <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+            </li>
+            <li>
+              <a class="btn btn-warning btn-sm" href="{:U('/finance/index')}"
+                >{:l('Finance')}</a
+              >
+            </li>
+            <li class="btn btn-warning btn-sm active">{:l('My Rewards')}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h1 class="f-s-24">{:l('MY_REWARD')}</h1>
+          <div id="hints" class="mytips" style="display: none">
+            <p>
+              <notempty name="prompt_text"> {$prompt_text} </notempty>
+            </p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="f_body table-responsive">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>{:l('USERNAME')}</th>
+                  <th>{:l('REWARD_TYPE')}</th>
+                  <th>{:l('AMOUNT')}</th>
+                  <th>{:l('REWARD')}</th>
+                  <th>{:l('TIME')}</th>
+                  <th>{:l('STATE_AWARD')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="list" id="vo">
+                  <tr>
+                    <td>{$vo.invit|substr_replace='****',3,4}</td>
+                    <td>{$vo.type}</td>
+                    <td>{$vo['mum']|NumToStr} {$vo.name}</td>
+                    <td>{$vo['fee']|NumToStr} {$vo.name}</td>
+                    <td>{$vo.addtime|addtime}</td>
+                    <td>
+                      <eq name="vo.status" value="0">
+                        <font class="sell">{:l('NO_ARRIVAL')} </font></eq
+                      >
+                      <eq name="vo.status" value="1">
+                        <font class="buy">{:l('CREDITED')} </font></eq
+                      >
+                    </td>
+                  </tr>
+                </volist>
+              </tbody>
+            </table>
+            <div class="pages">{$page}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+</div>
+</div>
+
+<script>
+  var hints = "0";
+  if (hints == 1) {
+    $("#hints").show();
+  }
+  $("#finance_box").addClass("active");
+  $(".finan_award").addClass("active");
+</script>
+
+<include file="Public:footer_minimal" />

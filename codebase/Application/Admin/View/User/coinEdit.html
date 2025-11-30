@@ -1,0 +1,90 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">{:l('Edit property')}</h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{:U('User/coin')}">{:l('Balance List')}</a></li>
+                            <li class="breadcrumb-item active">{:l('Edit property')}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+
+            <div class="card-body">
+                <form id="form" action="{:U('User/coinEdit')}" method="post" class="form-horizontal">
+                    <div id="tab" class="tab-pane in tab">
+                        <div class="form-item cf">
+                            <table class="table">
+								<tr><td colspan="4">{:l('Please modify with caution')}</td></tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('UserId')} :</td>
+                                    <td>{$data.userid}</td>
+                                    <td class="item-note"></td>
+									<td></td>
+                                </tr>
+
+                                <volist name=":C('coin')" id="v">
+                                    <tr class="controls">
+                                        <td class="item-label">Available {$v['title']} [{$v['name']}] :</td>
+										<td><span id="input_{$v['name']}">{$data[$v['name']]}</span></td>
+                                        <td><span onclick="javascript:modify('{$v['name']}','{$data[$v['name']]}');" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></span></td>
+										<td><span class="btn btn-info btn-sm" onclick='showtx("<?php echo $data[$v['name'].'b'];?>")'><?php echo msubstr($data[$v['name'].'b'],0,10);?></span></td>
+                                    </tr>
+                                </volist>
+
+                                <tr class="controls">
+                                    <td class="item-label"></td>
+                                    <td>
+                                        <div class="form-item cf">
+                                            <button class="btn submit-btn ajax-post btn-info" id="submit" type="submit"
+                                                    target-form="form-horizontal">{:l('Submit')}</button>
+                                            <a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+                                            <notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+                                            </notempty>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+function showtx(tx){
+	layer.alert(tx, {title: "Blockchain address",btn: ['Ok']});
+	}
+	
+function modify(coinname,value){
+var inputhtml="<input type='text' class='form-control input-3x' name='"+coinname+"' value='"+value+"'>";
+$("#input_"+coinname).html(inputhtml);
+
+}
+    //submit Form
+    $('#submit').click(function () {
+        $('#form').submit();
+    });
+</script>
+
+<include file="Public:footer"/>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //Highlight navigation
+        highlight_subnav("{:U('User/coin')}");
+    </script>
+</block>

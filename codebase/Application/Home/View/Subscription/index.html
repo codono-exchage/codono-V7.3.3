@@ -1,0 +1,70 @@
+<include file="Public:header"/>
+
+<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">	
+		<include file="User:left"/>
+	<div class="row pricing-table">
+	<volist name="plans" id="vo">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="panel text-center <eq name="vo['is_popular']" value='1'>bg-pink-400</eq>">
+                            <div class="panel-body">
+                                <h4>{$vo.name}</h4>
+                                <h1 class="pricing-table-price"><span>{$vo.coin| strtoupper}</span>{$vo.price}</h1>
+                                <ul class="list-unstyled content-group">
+                                    <li><strong>Benefits</strong></li>
+                                    <li><strong>{$vo.discount}%</strong> discounts on Trading fees</li>
+                                    <li>Validity <strong>{$vo.duration} months</strong> Months</li>
+                                    <li>KYC Requirements <strong><i class="fa fa-check-square-o"></i></strong></li>
+                                    <li><strong>Unlimited </strong>Trades</li>
+                                    <li>{$vo.condition}</li>
+
+                                </ul>
+                                <a onclick='Buy("{$vo.id}","{$vo.name}","{$vo.coin}","{$vo.price}");' href="javascript:void(0)"  class="btn <eq name="vo['is_popular']" value='1'>bg-pink-800<else/>bg-success-400</eq> btn-lg text-uppercase text-size-small text-semibold">Join Now</a>
+<eq name="vo['is_popular']" value='1'><div class="ribbon-container">
+									<div class="ribbon bg-white">Popular</div>
+								</div></eq>
+                                
+                            </div>
+                        </div>
+                    </div>
+				</volist>
+                </div>
+		</div>
+		</div>
+</div>
+		<!-- Main content -->
+			<script type="text/javascript">
+	function Buy(id,name,coin,price) {
+		layer.confirm('Subscribe to '+name+',it will cost '+coin+price+' confirm?', 
+		{
+			btn: ['Confirm','Cancel'], //PUSH_BUTTON
+			shade: false, //it does not show shadow
+			title:'Subscription Change'
+		}, function(index){
+			$.post("/Subscription/buy", {
+				id : id
+			}, function (data) {
+				if (data.status == 1) {
+					layer.msg(data.info, {icon: 1});
+					window.setTimeout("window.location='/User/index'", 1000);
+				} else {
+					layer.msg(data.info, {icon: 2});
+					if (data.url) {
+						window.setTimeout("window.location=" + data.url, 1000);
+					}
+				}
+			}, "json");
+		
+			layer.close(index);
+		},function(index){
+			layer.close(index);
+		}
+		
+		);
+
+	}
+</script>
+<include file="Public:footer_minimal"/>

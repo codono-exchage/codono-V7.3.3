@@ -1,0 +1,40 @@
+<style>
+	p.maingreen {
+    font-weight: 800;
+    color: #06c633;
+    font-size: 16px;
+	}
+	.greenstats{
+		font-weight:800;
+		font-size:14px;
+		color:#000;
+	}
+</style>
+<div class="market-trade" id="marketStatsBox">
+						<div class="row sm-gutters">
+						<div class="col-4  pl-10 pr-0">
+						                                    <p class="d-sm-none d-md-block maingreen">{:l('LAST PRICE')}</p>
+                                    <div class="stat-major"><span class="sellpricex crypt-down greenstats">{$rmb|strtoupper} <span id="market_sell_price" class="crypt-down">--</span></span> <span class="buypricex">/ <span id="market_buy_price" class="crypt-up greenstats">--</span></span></div>
+						</div>
+						 <div class="col-2 pl-0 pr-0">
+							 <p class="maingreen">{:l('DAY_CHANGE')}</p>
+                                    <p  id="market_change" class="greenstats">--</p>
+                                </div>
+
+                        <div class="col-2 pl-0 pr-0">
+							<p class="maingreen">24H {:l('VOLUME')}</p>
+                            <p class="crypt-down greenstats" id="market_volume">--</p>
+                        </div>
+						<div class="col-2 pl-0 pr-0">
+							<p class="maingreen">{:l('Market Cap')}</p>
+                            <p class="greenstats">{$C['coin'][$xnb]['cs_cl']}</p>
+                        </div>
+
+						<div class="col-2 pl-0 pr-0">
+							<p class="maingreen">Circulating Shares</p>
+                            <p class="crypt-down greenstats" >{$C['coin'][$xnb]['cs_zl']}</p>
+                        </div>
+						
+					</div>
+
+                </div>

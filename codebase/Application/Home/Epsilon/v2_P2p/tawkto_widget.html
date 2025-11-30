@@ -1,0 +1,40 @@
+<gt name="Think.session.userId" value="0">
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+	Tawk_API.visitor = {
+	name  : '{$truenamefull}-{$order.orderid}',
+    email : '{$emailaddress}',
+	hash : '{$sha_mac}'
+};
+
+Tawk_API.onLoad = function(){
+
+
+    Tawk_API.setAttributes({
+        'uid'    : '{$userinfo.id}',
+		'peer'    : '{$ad_info.peername}',
+		'orderid'    : '{$order.id}',
+		'mytpe'    : '{$ad_info.mytype}',
+		'is_merchant'    : '{$ad_info.is_merchant}',
+		'ad_id'    : '{$order.ad_id}',
+		'total_crypto'    : '{$order.coin}{$order.coin_qty}',
+		'total_fiat'    : '{$order.fiat}{$order.fiat_qty}',
+		'time_limit'    : '{$order.time_limit}',
+		'order_status'    : '{$order.status}'
+    }, function(error){});
+};
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='{:TAWK_TO_EMBED_URL}';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+
+function help(){
+	console.log("Help-Load");
+		    Tawk_API.popup();
+	}
+</script>
+</gt>

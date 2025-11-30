@@ -1,0 +1,29 @@
+<div id="show_graphs">
+<div id="allchartsinone" class="crypt-market-status">
+
+<div class="ShowGraph2 hideme h-40 " id="marketchartbox">
+<iframe style="border-style: none;" border="0" width="100%" height="350px" id="market_chart" src="/Trade/ordinary?market={$market}"></iframe>
+</div>
+<div class="ShowGraph3  h-40 " id="tradingviewbox">
+<iframe style="border-style: none;" border="0" width="100%" height="350px" id="market_chartx" src="/Trade/tradingview/market/{$market}"></iframe>
+</div>
+</eq>
+
+
+
+
+</div>
+<neq name="ext_charts" value="1">
+<div class="crypt-market-status mt-2 pb-2">
+<div id="depthurl" style="display:none">{:SITE_URL}Ajax/getDepthNew?market={$market}</div>
+<div id="depthmarket" style="display:none">{$market}</div>
+
+<div id="depthchart" class="depthchart ">
+
+</div>
+</div>
+</neq>
+</div> <!--Middle Column Ends-->
+<div class="mt-2">
+<include file="Contract:buysellwidget"/>
+</div>

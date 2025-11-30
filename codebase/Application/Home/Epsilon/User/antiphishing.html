@@ -1,0 +1,130 @@
+﻿<include file="Public:header" />
+<!-- Page content -->
+<section class="generic">
+  <div class="container">
+    <div class="full-box row">
+			<include file="User:sidebar" />
+      <div class="col-10">
+    <div class="row mb-3 mt-3">
+      <include file="User:top_bar" />
+      <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+        <ul class="text-right breadcrumbs list-unstyle">
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+          </li>
+          <li>
+            <a href="{:U('/user/index')}" class="btn btn-warning btn-sm"
+              >{:l('User')}</a
+            >
+          </li>
+          <li>
+            <a href="{:U('/user/security')}" class="btn btn-warning btn-sm"
+              >{:l('Security')}</a
+            >
+          </li>
+          <li class="btn btn-warning btn-sm active">{:l('Antiphishing')}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="row">
+          <div class="col-xl-12 col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">{:l('Set the anti-phishing code')}</h4>
+              </div>
+              <div class="card-body">
+                <div class="settings-profile">
+                  <div class="row p-b-40">
+                    <div class="col-md-12 m-b-20">
+                      <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading"></h4>
+                        <p>
+                          <i class="ion ion-md-information-circle-outline"></i> {:l('Please do not tell anyone, including our customer service, your password, Google or SMS verification code.')}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <h5>{:l('Set the anti-phishing code')}</h5>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="{:l('Please set your anti-phishing code')}"
+                          id="antiphishing"
+                          value="{$antiphishing}"
+                        />
+                      </div>
+                      <p>
+                        Please enter word of
+                        <span class="green">4-15 letters</span> atleast without
+                        special characters and do not set public passwords as
+                        anti-phishing codes
+                      </p>
+                      <button
+                        type="submit"
+                        class="btn btn-warning mt-3"
+                        onclick="confirm();"
+                      >
+                        {:l("Save")}
+                      </button>
+                    </div>
+                    <div class="col-12">
+                      <hr />
+                      <h5>{:l('What is the anti-phishing code?')}</h5>
+                      <p>{:l('An anti-phishing code is a string of characters set by you that can help you identify the website or email that is spoofing.')}</p>
+                      <h5 class="m-t-30">
+                        {:l('Where will the anti-phishing code appear?')}
+                      </h5>
+                      <p>
+                        {:l('After the anti-phishing code is successfully set, the
+                        anti-phishing code logo is added to the email you
+                        receive from us.')}
+                      </p>
+                      <p>
+                        {:l('If it is not displayed or is displayed incorrectly, it  means that you may have received a phishing email from a scammer.')}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+<script>
+  function confirm() {
+    var antiphishing = $("#antiphishing").val();
+    if (antiphishing == "" || antiphishing == null) {
+      layer.tips("Enter Antiphishing code", "#antiphishing", { tips: 3 });
+      return false;
+    }
+    layer.confirm(
+      antiphishing + " will be saved as antiphishing code",
+      {
+        btn: ['{:l("Confirm")}', '{:l("Cancel")}'],
+      },
+      function () {
+        $.post(
+          "{:U('User/saveAntiPhishing')}",
+          { antiphishing: antiphishing },
+          function (data) {
+            trans_lock = 0;
+            if (data.status == 1) {
+              layer.msg(data.info, { icon: 1 });
+              window.location.href = "{:U('User/antiphishing')}";
+            } else {
+              layer.msg(data.info, { icon: 2 });
+            }
+            //	window.location.href = "{:U('User/antiphishing')}";
+          },
+          "json"
+        );
+      }
+    );
+  }
+</script>
+<include file="Public:footer_minimal" />

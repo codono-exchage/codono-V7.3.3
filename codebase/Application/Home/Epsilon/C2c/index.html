@@ -1,0 +1,763 @@
+<include file="Public:header"/>
+<style>
+	.now{line-height:0;height:auto}
+	.now>div{float:right;line-height:10px;}
+	.now>div>a{padding:0 10px;color:#eee;border-right:1px solid #ddd;display:inline-block;height:10px;}
+	.now>div>a.active{color:#f00;}
+	.now>div>a:last-child{border:0;}
+	.bk-onekey {width: 100%;max-width: 1136px;margin: 0 auto;padding:30px 20px 0;}
+	.trader_oper input,.trader_oper select
+		{background:#262a42;font-size:16px;padding: 10px; width: 92%;transition:all 2s ease-out 0s;
+		transform: translate(0,0);transition:all .3s ease-in 0s;}	
+
+	[type="button"]{height:50px;font-weight:bold;text-align: center;line-height:24px;margin-left:6px;}
+
+	#form-buy input:hover,
+	#form-buy select:hover{background:#e3493c;}
+	#form-sell input:hover,
+	#form-sell select:hover{background:#0075a9;}
+	.trader_oper{overflow: hidden;}
+	
+	#footer h4{	color: #eee;}
+	#footer{background: #222731;}
+	.bk-tabList .notecont{border: 4px #0092ce38 solid;padding: 10px;color: #eee;text-align: left;font-size: 14px;background: #262a42;}
+	.bk-tabList .notecont h5{line-height:25px;font-size:14px;}
+	.ft_box{width: 50%;border:0;}
+	.ft_box dt{margin: 0 0 0 43px;font-size: 20px;font-weight:bold;text-align:left;}
+	/* Buying and selling price */
+	.PlateTitle{font-size: 16px;margin-bottom: 10px;}
+	.trader_box>div{width:calc(50% - 5px);}
+	.trader_box p>*,.trader_box>div{display:inline-block;vertical-align:top;color:#eee;}
+	.trader_box b{background:#262a42;line-height:32px;height:32px;text-align:center;margin-bottom:2px;}
+	.trader_box b:nth-child(1){width:29%;color:#e3493c;padding:0 5px;text-align:left;}
+	.trader_box b:nth-child(2),.trader_box b:nth-child(3){width:19%;}
+	.trader_box b:nth-child(4),.trader_box b:nth-child(5){width:15%;}
+	.sd_box{width: 100%;
+		height: auto;
+		margin: 10px auto;
+		position: relative;
+	}
+	.sd_box>p{
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		font-size: 16px;
+		font-weight: bold;
+		color: #fe334d;
+		padding-left: 35px;
+	}
+
+	.sd_box span{
+		width: 100%;
+		height: 30px;
+		line-height: 30px;
+		font-size: 14px;
+		color: #1eae57;
+	}
+	.sd_buy>span{
+		color: #F9505D;
+	}
+	.sd_box th{
+		text-align: left;
+		height: 26px;
+		font-size: 14px;
+	}
+	.sd_box td{
+		height: 26px;
+		font-size: 14px;
+		text-align: left;
+	}
+	.sd_box td>a{
+		display: block;
+		background: #F9505D;
+		color: #fff;
+		text-align: center;
+	}
+	.sd_buy td>a{
+		background: #1eae57;
+	}
+	.sd_sell{
+		float: left;
+		width: 46%;
+		height: 240px;
+		margin: 10px 15px;
+	}
+	.sd_buy{
+		float: right;
+		width: 46%;
+		height: 240px;
+		margin: 10px 15px;
+	}
+	.bs_but{
+		width: 100%;
+		height:100%;
+		background:rgba(100,100,100,0.5);
+		position:fixed;
+		left: 0;
+		top:0;z-index:1;
+		display: none;
+	}
+	.bs_but>div>p{margin-top:12px;}
+	.bs_but>div{
+		background:rgb(10, 23, 34);
+		width: 600px;
+		margin: 173px auto;
+		padding: 30px;
+	}
+
+	.ft_box dd p{font-size: 16px;color:#eee;width:112px;}
+	.trader_btn{width: 100%;height:45px;}
+	.bs_but p>span{width:100px;text-align:right;display:inline-block;color:#eee;}
+	.bs_but button{margin-left:100px;border:0;width:350px;height:42px;line-height:42px;font-size:16px;font-weight:600;border-radius:5px;}
+	.bs_but label{margin-right:15px;color:#eee;}
+	.bs_but [type="radio"]{vertical-align:middle;margin-right:5px;}
+	.bs_but .close{float:right;font-size:18px;background: #e3493c;color: #fff;margin: -30px;padding: 6px;}
+</style>
+	<div class="container">
+			<div class="breadcrumb-line breadcrumb-line-component content-group-lg">
+						<ul class="breadcrumb">
+							<li><a href="/"><i class="icon-home2 position-left"></i> {:l('HOME')}</a></li>
+
+							<li class="active">{:l('C2C')}</li>
+							
+						</ul>
+					</div>
+<include file="C2c:inc_coins"/>
+		<div class="now">
+			<div>
+				<a class="tab active" href="{:U('C2c/index')}">C2C Transactions</a>
+				<a class="tab " href="{:U('C2c/index', ['coin' => 'usdt'])}">USDT Transactions</a>
+				<a role="button" href="{:U('Finance/bank')}"><i class="fa fa-credit-card fa-fw"></i>Payment Methods</a>
+			</div>
+		</div>
+		<div class="finance-rd" style="width:100%; margin-left:0;">
+			<div class="bk-tabList">
+				<div class="fast_tr clear" style="background: none">
+					
+					<!--Manual matching-->
+					<div class="sd_box">
+						<p style="display: none">Verified merchant</p>
+						<div class="sd_sell" style="display: none">
+							<span>Merchant sell order</span>
+							<table>
+								<tr>
+									<th>Merchant</th>
+									<th>Quantity to buy</th>
+									<th>Sold</th>
+									<th>Payment Types</th>
+									<th>Option</th>
+								</tr>
+                                <neq name="sell_list" value="0">
+                                    <volist name="sell_sj" id="vo">
+                                        <tr>
+                                            <td style="width: 191px;height: 16px">{$vo['username']}</td>
+                                            <td>{$vo['num']}</td>
+                                            <td>{$vo['deal']}</td>
+                                            <td><eq name="vo.paytype" value="0" >Online banking<else/>Alipay</eq></td>
+                                            <td>
+                                                <a onclick="trade(1, {$vo['id']},'business')">Buy</a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    <else/>
+                                    <tr>
+                                        <td colspan="5"><div style="text-align: center;color: #fe334d;font-size: 18px;margin-top: 30px">Please make a matching transaction from above</div></td>
+                                    </tr>
+                                </neq>
+							</table>
+						</div>
+						<div class="sd_buy" style="display: none">
+							<span>Merchant buy order</span>
+							<table>
+								<tr>
+									<th>Merchant</th>
+									<th>Quantity sold</th>
+									<th>Quantity</th>
+									<th>Payment Types</th>
+									<th>Option</th>
+								</tr>
+								<neq name="buy_list" value="0">
+									<volist name="buy_sj" id="voo">
+										<tr>
+											<td style="width: 191px;height: 16px">{$voo['username']}</td>
+											<td>{$voo['num']}</td>
+											<td>{$voo['deal']}</td>
+											<td><eq name="voo.paytype" value="0">Online banking<else/>Alipay</eq></td>
+											<td><a onclick="trade(2, {$voo['id']},'business')">Sell</a></td>
+										</tr>
+									</volist>
+									<else/>
+									<tr>
+										<td colspan="5"><div style="text-align: center;color: #1eae57;font-size: 18px;margin-top: 30px">Please make a matching transaction from above</div></td>
+									</tr>
+								</neq>
+							</table>
+						</div>
+						<div class="bs_but">
+							<div id="buy_box">
+								<b class="close">&times;</b>
+								<p style="display: none"><input type="hidden" name="sell_id" value=""></p>
+								<p style="display: none"><input type="hidden" name="buy_order" value=""></p>
+								<p style="margin-top: 27px;"><span>Amount:</span><input type="text" name="buy_num" value=""></p>
+								<p><span>Funding Password:</span><input type="password" name="buy_paypwd" value=""></p>
+								<p><button id="buy" class="bg_red">Buy</button></p>
+							</div>
+							<div id="sell_box">
+								<b class="close">&times;</b>
+								<p style="display: none"><input type="hidden" name="buy_id" value=""></p>
+								<p style="display: none"><input type="hidden" name="sell_order" value=""></p>
+								<p style="margin: 5px 0 3px 105px;font-size:20px;color: red;">Please reserve the handling fee in the account balance!</p>
+								<p><span>Amount:</span><input type="text" id="deal" name="sell_num" value=""></p>
+								<p><span>Funding Password:</span><input type="password" name="sell_paypwd" value=""></p>
+								<p><button id="sell" class="bg_green">Sell</button></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+<style>
+	/*Bullet frame*/
+	.close{float:right;}
+	.main-bd{padding:10px 20px;border:none;background:rgba(255,255,255,0.85);font-size: 14px;line-height: 28px;
+		display:inline-block;position:relative;top:15%;left:43%;}
+	.main-bd>div{border:2px solid #999; margin:5px;padding:10px;vertical-align:top;display:none;}
+	.takeFun{display:inline-block!important;}
+	.all_maskT{border-bottom:1px solid #ccc;height:30px;}
+	.imgBox{width:226px;height:200px;overflow: hidden;display: inline-block;vertical-align: middle;padding-left: 10px;}
+	.imgBox>img{position:relative;}
+	/* Pagination */
+	.page{min-width:100%!important}
+	.page *{float:none!important;}
+	.page a, .page span{width:54px;height:40px;}
+	td.time{line-height:18px;}
+</style>
+<!--View details -->
+<div class="page-container">
+<div class="all_mask">
+	<div class="main-bd" id="main-bd" >
+		<p class="all_maskT">View order details:<button class="close minBtn bg_red">&times;</button></p>
+		<h3 class="red" >
+			<b id="store"></b><span id="cellphone"></span>
+		</h3>
+		<!-- Alipay -->
+		<div id="ZFB">
+			<h4><b class="paytype"></b><span class="red"  id="c2c_ZFB"></span></h4>
+			<!-- Name -->
+			<p><b class="name1"></b>:<span class="name"></span></p>
+			<!-- 支付宝账号 -->
+			<p><s id="ZFB_num">Alipay account:</s><span id="ZFB_number"></span></p>
+			<!-- QR -->
+			<p><s id="ZFB_img">QR code :</s>
+				<span class="imgBox"><img id="ZFB_images" src=""/></span>
+			</p>
+			<!-- Transfer Amount -->
+			<p><s>Transfer Amount:</s><span class="tadeNum red"></span></p>
+			<p ><s>Order Id:</s><b class="tradeno red"></b></p>
+			<p><s>Status:</s><span class="status red"></span></p>
+			<P>Confirm payment method:
+				<button class="paytypes minBtn bg_red typeOk"></button>
+				<b class="red">Please click this button if the payment is successful</b>
+			</P>
+		</div>
+		<!-- WeChat -->
+		<div id="WX">
+			<h4><b class="paytype"></b><span class="red" id="c2c_WX"></span></h4>
+			<!-- Name -->
+			<p><b class="name1"></b><span class="name"></span></p>
+			<!--WeChat account -->
+			<p><s id="WX_num">WeChat account:</s><span id="WX_number"></span></p>
+			<!-- QR code -->
+			<p><s id="WX_img">QR code :</s>
+				<span class="imgBox"><img id="WX_images" style="top:-7%" src="" /></span></p>
+			<!-- Transfer Amount -->
+			<p><s>Transaction Amount:</s><span class="tadeNum red"></span></p>
+			<p><s>Order Number:</s><b class="tradeno red"></b></p>
+			<p><s>Status:</s><span class="status red"></span></p>
+			<P>
+				Confirm payment method:
+				<button class="paytypes minBtn bg_red typeOk"></button>
+				<b class="red">Please click this button if the payment is successful</b></P>
+		</div>
+		<!-- Online banking -->
+		<div id="WY">
+			<h4><b class="paytype"></b><span class="red" id="c2c_WY"></span></h4>
+			<!-- Name -->
+			<p><b class="name1"></b><span class="name"></span></p>
+			<p><s id="bankaddr1"></s><span id="bankaddr"></span></p>
+			<!-- Account Number: -->
+			<p><s id="bankcard1"></s><span id="bankcard"></span></p>
+			<p><s>Transacaction Amount:</s><span class="tadeNum red"></span></p>
+			<p><s>Order Number:</s><b class="tradeno red"></b></p>
+			<p><s>Status:</s><span class="status red"></span></p>
+			<P>
+				Confirm payment method:
+				<button class="paytypes minBtn bg_red typeOk"></button>
+				<b class="red">Please click this button if the payment is successful</b>
+			</P>
+		</div>
+<p class="red">Reminder: If you have any questions, please contact online customer service or check the help center. </p>
+<h5 class="red">1. Please note the Order Number when remittance, otherwise the account will not be received;</h5>
+<h5 class="red">2. Buyers should pay in time after matching; sellers should "confirm the payment" in time after receiving the payment; transactions will be suspended for many times overdue;</h5>
+<h5>3. Please carefully check the receipt and payment account of the other party before proceeding with the option such as receipt and payment;</h5>
+<h5>4. Both the buyer and the seller have passed the real-name authentication and can transfer funds with confidence;</h5>
+<h5>5. If you have any questions about the order, you can directly contact the other party for negotiation. If the negotiation is invalid, you can contact the platform customer service to intervene;</h5>
+	</div>
+</div>
+</div>
+
+<script>
+	$('.close').click(function () {
+		if($(this).attr('class').search(/reload/i)>0){
+			location.reload();
+		}else{
+			$('.all_mask').hide(500);
+			$('.bs_but').hide(500);
+		}
+    })
+	//Show popup
+	function show(id,paytype,dataAll){
+		if(paytype=="auto"){
+			tradeFun(dataAll,'Seller');
+			// Close button special treatment: there is this reload class to indicate refresh
+			$('#main-bd .close').addClass('reload');
+		}
+		else{
+			$('#main-bd .close').remove('reload');
+			$.post("/C2c/alert_tip", { id: id,paytype:paytype},function (data) {
+				if(data.type==2){
+					tradeFun([data],'Buyer');
+				}
+				else if(data.type==1){
+					tradeFun([data],'Seller');
+				}
+			},'json');
+		}
+		$('#main-bd').css({marginLeft:- $('.takeFun').length * 150});
+    }
+	//Internal method of the bullet frame
+	var tradeId="";
+	function tradeFun(data,t){
+		$('.typeOk').parent('p').hide();
+		$('.all_mask').show(200);
+		$('.tadeNum').html(data[0].num);//Amount
+		$('.tradeno').html(data[0].tradeno+'(Please fill in)');
+		$('.name').html(data[0].name);
+		$('.status').html(data[0].status);
+		$('.paytype').html('Transaction Method:');
+
+		$('.paytypes').html('I have Paid');
+		$('.name1').html(t+" Name:");
+		$('#store').html(t+' Phone number:');
+		$('.takeFun').removeClass('takeFun');
+		
+		for(var i=0;i<data.length;i++){
+			if(data[i].paytype==0){
+				$('#WY').addClass('takeFun');
+				$('#c2c_WY').html('Online banking')
+				$('#bankaddr1').html("Account Bank:");
+				$('#bankaddr').html(data[i].bankaddr);
+				$('#bankcard1').html("Bank Account number:");
+				$('#bankcard').html(data[i].bankcard);
+				$('#bankcard1').parent('p').show();
+				$('#bankaddr').parent('p').show();
+				$('.typeOk').attr('name',1);
+			}else{
+				$('#bankcard1').parent('p').hide();
+				$('#bankaddr').parent('p').hide();
+			}
+			if(data[i].paytype==1){
+				$('#WX').addClass('takeFun');
+				$('#c2c_WX').html('Wechat');
+				$('#WX_num').html('WeChat account:');
+				$('#WX_number').html(data[i].bankaddr);
+				$('#WX_images').css({top:'0px'})
+				$('#WX_images').attr('src','__DOMAIN__/Upload/public/'+data[i].image);
+				$('.typeOk').attr('name',2);
+			}
+			if(data[i].paytype==2){
+				$('#ZFB').addClass('takeFun');
+				$('#c2c_ZFB').html('Alipay');
+				$('#ZFB_num').html('Alipay account:');
+				$('#ZFB_number').html(data[i].bankaddr);
+				$('#ZFB_images').css({top:'-35%'})
+				$('#ZFB_images').attr('src','__DOMAIN__/Upload/public/'+data[i].image);
+				$('.typeOk').attr('name',3);
+			}
+			if(data[i].paytype!=0&&data[i].paytype!=1&&data[i].paytype!=2){
+				$('#WY').addClass('takeFun');
+				$('#c2c_WY').html('other');
+			}
+			
+			
+		}
+		if(t=="buyer"){ //Seller information hiding
+			$('.imgBox').parent('p').hide();
+			$('#bankaddr').parent('p').hide();
+			$('#bankcard').parent('p').hide();
+			$('#WX_num').parent('p').hide();
+			$('#ZFB_num').parent('p').hide();
+		}else{
+			$('.imgBox').parent('p').show();
+			$('#store').parent('h3').show();
+			$('.typeOk').parent('p').show();
+			$('#bankaddr').parent('p').show();
+			$('#bankcard').parent('p').show();
+			
+		}
+		// Special account handling
+		if(data[0].buyid==28830||data[0].buyid==28831||data[0].sellid==5392){
+			$('#store').html('');
+			$('#cellphone').html('');
+			$('#store').parent('h3').hide();
+
+		}else{
+			$('#store').parent('h3').show();
+			$('#cellphone').html(data[0].cellphone);
+		}
+		tradeId=data[0].tradeId
+	};
+	// Confirm Payment Types
+	$('.typeOk').click(function(el){
+		$.post('/C2c/pay',{tradeId:tradeId,status:$(this).attr('name')},function(data){
+			if (data.status == 1||data.status == 3){
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+			}
+		});
+	})
+    //I have paid
+	function pay(id) {
+        $.post("/C2c/pay", {
+            id: id,
+        }, function (data) {
+            if (data.status == 1) {
+                layer.msg(data.info, {icon: 1});
+                location.reload()
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+        }, 'json');
+    }
+    //Reminders
+    function reminder(id,el) {
+        $.post("/C2c/reminder", {
+            id: id,
+        }, function (data) {
+			var timed=data.url+300;
+			if(timed){
+				var move=setInterval(function(){
+					var TimeIng=parseInt(new Date().getTime()/1000);
+					if(TimeIng<timed){
+						$(el).hide().siblings('.Time').html(parseInt((timed-TimeIng)/60)+':'+(timed-TimeIng)%60+'<p class="red">You can click the reminder later</p>').show();
+					}else{
+						$(el).show().siblings('.Time').hide();
+						clearInterval(move);
+					}
+				},1000)
+			}
+            if (data.status == 1) {
+                layer.msg(data.info, {icon: 1});
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+        }, 'json');
+    }
+    //confirmed paid
+	function confirm(id) {
+        layer.confirm('<p style="font-weight: bold;text-align: center;font-size: 18px;">Have you received the payment?</p><p style="color: red;">(If you have not received the payment, please click "Not received Payment" and click "Confirm Payment" to complete the transaction)</p>', {
+            btn: ['Confirm Payment','Not received'] //Button
+        }, function(){
+            $.post("/C2c/confirm", {
+                id: id,
+            }, function (data) {
+                if (data.status == 1) {
+                    layer.msg(data.info, {icon: 1});
+                    location.reload();
+                } else {
+                    layer.msg(data.info, {icon: 2});
+                }
+            }, 'json');
+		})
+    }
+    //Buyer cancels the order
+	function c2cUndo(id) {
+		var num=0;
+        layer.confirm('<p style="font-weight: bold;text-align: center;font-size: 18px;">Do you need to Cancel?</p><p style="color: red;">(Each user can only revoke peer-to-peer transactions twice a day, and users who exceed two times are prohibited from peer-to-peer transactions on the same day)</p>', {
+            btn: ['Confirm cancellation','Do not cancle'] //Button
+        }, function(){
+			num++;
+            if(num!=1){return false;}
+			UndoAjax(id);
+		})
+    }
+
+	//Buyer cancellation request function
+	function UndoAjax(id){
+		$.post("/C2c/c2cUndo", {
+			id: id,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else{
+				layer.msg(data.info, {icon: 2});
+			}
+		}, 'json');
+	}
+//Buy
+    function c2c_buy(el) {
+        var buy_price = $('#buy_price').val(),
+        	buy_card  = $('#buy_card').val(),
+        	buy_type  = $('#buy_type').val(),
+			buy_coin  = $('#buy_coin').val(),
+        	paytype   = $("input[name = 'buypay']:checked").val(),
+        	buy_paypassword   = $("#buy_paypassword").val();
+        if (!buy_price) {
+			layer.tips('Please enter the Amount', '#buy_price', {tips:2,time: 2000})
+            return false;
+        }
+        if (!buy_paypassword) {
+        	layer.tips('{:L(\'YOU_DO_NOT_NEED_TO_ENTER_THE_T\')}', '#buy_paypassword', {tips:2});
+            return false;
+        }
+		el.disabled=true;
+		
+        $.post("/C2c/trade", {
+            price: buy_price,
+            bankid:buy_card,
+            type:buy_type,
+            coin:buy_coin,
+			paytype:paytype,
+            buy_paypassword:buy_paypassword
+        }, function (data) {
+			
+            if (data.status == 1) {
+                layer.msg(data.info, {icon: 1, time: 2000}, function () {
+                    location.reload();
+                });
+            } else {
+				data.info.search("Incorrect Funding Password")>-1?layer.tips('Incorrect Funding Password', '#buy_paypassword', {tips:2}):layer.msg(data.info, {icon: 2, time: 1500});
+            }
+			setTimeout(function(){el.disabled=false;},600)
+        }, 'json');
+    }
+
+    layer.config({
+        extend: 'extend/layer.ext.js'
+    });
+//Sell
+    function c2c_sell(el) {
+		var sell_price = $('#sell_price').val(),
+			sell_card = $('#sell_card').val(),
+			sell_type = $('#sell_type').val(),
+			sell_coin = $('#sell_coin').val(),
+			sltype = $("input[name = 'sltype']:checked").val(),
+			paytype = $("input[name = 'sellpay']:checked").val(),
+			sell_paypassword = $('#sell_paypassword').val();
+		if (!sell_price) {layer.tips('Please enter Sell Amount', '#sell_price', {tips:2,time: 2000});return false;}
+			//else if(sell_price % 100 !=false){layer.tips("Please enter Sell Amount(Multiple of 100)",{icon: 2,time: 2000});return false;}
+       	if (!sell_paypassword) {
+			layer.tips('{:L(\'YOU_DO_NOT_NEED_TO_ENTER_THE_T\')}', '#sell_paypassword', {tips:2});
+			return false;
+		};
+		var sum=0;
+        layer.prompt({title: 'Please enter the minimum number of matches (integer multiples of 100) and confirm', formType:2}, function(text, index){
+			sum++;
+			if(sum>1){return false;}
+			$.post("/C2c/trade", {
+				price: sell_price,
+				bankid: sell_card,
+				type: sell_type,
+				coin: sell_coin,
+				paytype: paytype,
+				selltype:sltype,
+				sell_paypassword: sell_paypassword,
+				min_num : text
+			}, function (data) {
+				if (data.status == 1) {
+					layer.msg(data.info, {icon: 1, time: 1000}, function () {
+						location.reload();
+					});
+				} else {
+					data.info.search("Incorrect Funding Password")>-1?layer.tips('Incorrect Funding Password', '#sell_paypassword', {tips:2}):layer.msg(data.info, {icon: 2, time: 1500});
+				}
+			}, 'json');
+	       
+        })
+    }
+
+    //Manual matchmaking button
+	function trade(type,id,order,num,t,el) {
+        var id = id;
+		var type = type;
+		var ordre = order;
+		$('.bs_but').show(200);
+		if (type == 1){ //Buy
+			$('#buy_box').show(200);
+            $('#sell_box').hide(200);
+            $('input[name = "sell_id"]').val(id);
+            $('input[name = "buy_order"]').val(order);
+			$('input[name="buy_num"]').val($('#id'+id).html());
+		}else{ //type == 2 Sell
+			$('#sell_box').show();
+            $('#buy_box').hide();
+            $('input[name = "buy_id"]').val(id);
+            $('input[name = "sell_order"]').val(order);
+            if (order == 'user'){
+                $('#deal').attr('readonly','readonly');
+                $('#deal').val(num);
+			}else{
+                $('#deal').removeAttr('readonly');
+                $('#deal').val('');
+			}
+		}
+		t=='te'?$('#buy').addClass('te'):$('.te').removeClass('te');
+	}
+    //Manually match orders
+	$('#buy').click(function () {
+		var buy_num   = parseFloat($("#buy_box input[name = buy_num]").val());
+		if(buy_num % 100!=0){
+			$('#buy').attr("disabled",false);
+			layer.msg('Please enter an integer multiple of 100', {icon: 2,time:2000});
+			return false;
+		}
+		// console.log($("select[name = buy_card]"),$("input[name = buy_paytype]:checked"))
+		var buy_card  = $("select[name = buy_card]").val(); //undefined
+        var type      = 1;
+        var coin  = '{$coin}';
+        var paytype   = $("input[name = buy_paytype]:checked").val(); //undefined
+        var paypwd    = $("input[name = buy_paypwd]").val();
+        var id        = $("input[name =  sell_id]").val();
+		var order        = $("input[name =  buy_order]").val();
+
+		if($(this).attr('class').match('te')){
+			// console.log('Enter the special account unregister_hand');
+			// console.log(buy_num);
+			$.post('/C2c/unregister_hand',
+				{
+					price      : buy_num,
+					card_id  : buy_card,
+					type     : type,
+					coin     : coin,
+					paytype  : paytype,
+					paypwd   : paypwd,
+					id       : id,
+					order    : order
+				},
+				function (data) {
+					if (data.status) {
+						show('','auto',data.data);
+						layer.msg(data.msg, {icon: 1, time: 5000});
+						// console.log('Enter the t account unregister_hand'+data);
+					} else {
+						layer.msg(data.msg, {icon: 2, time: 2000});
+					}
+			},'json');
+		}else{
+			$.post('/C2c/hand_trade',
+				{
+					price    : buy_num,
+					card_id  : buy_card,
+					type     : type,
+					coin     : coin,
+					paytype  : paytype,
+					paypwd   : paypwd,
+					id       : id,
+					order    : order
+				},
+				function (data) {
+					// console.log('Into the p account')	
+					if (data.status) {
+						show('','auto',data.data);
+						layer.msg(data.msg, {icon: 1, time: 5000});
+						// console.log('Enter p account unregister_hand'+data);
+					} else {
+						layer.msg(data.info, {icon: 2, time: 2000});
+					}
+			},'json');
+		}
+		
+    })
+    $('#sell').click(function () {
+        var sell_num   = $("#sell_box input[name = 'sell_num']").val(),
+        	sell_card  = $("select[name = 'sell_card']").val(),
+        	type       = 2,
+        	coin       = '{$coin}',
+        	paytype    = $("input[name = sell_paytype]:checked").val(),
+        	paypwd     = $("input[name = sell_paypwd]").val(),
+        	id         = $("input[name = buy_id]").val(),
+        	order      = $("input[name =  sell_order]").val(),
+			that=this;
+			if(!paypwd){layer.tips('Please enter funding password', '[name=sell_paypwd]', {tips:2})}
+			that.disabled=true;
+       		$.post('/C2c/hand_trade',{
+                price      : sell_num,
+                card_id  : sell_card,
+                type     : type,
+                coin     : coin,
+                paytype  : paytype,
+                paypwd   : paypwd,
+				id       : id,
+                order    : order
+            },function (data) {
+				that.disabled=false;
+                if (data.status == 1) {
+                    layer.msg(data.msg, {icon: 1, time: 2000}, function () {
+                        location.reload();
+                    });
+                } else {
+					data.info.search("Funding Password")>-1?
+					layer.tips('Incorrect Funding Password', '[name=sell_paypwd]', {tips:2}):
+					layer.msg(data.info, {icon: 2,time:1500});			
+                }
+            },'json');
+	});
+	//searching feature
+	function SChange(el){
+		$.ajax({
+			type:"get",
+			url:"{:U('C2c/getList')}",
+			data:{tradeno:$(el).siblings('input').val()},
+			async:false,
+			success:function(data){
+				$('#sellBox').html(data);
+				//2 hours to cancel the order after obtaining the list
+				TwoH();
+			}
+		});
+	}
+	SChange();
+	function user(id){ //The user function name must be consistent with the third parameter in the action. There are 3 above
+		var id = id;
+		$.get("{:U('C2c/getList')}", {'p':id}, function(data){ //Use the get method to send information to the user method in UserAction
+			// $("#user").replaceWith("<div id='user'>"+data+"</div>"); //User must be the same as in tpl
+			$('#sellBox').html(data);
+			//2 hours to cancel the order after obtaining the list
+			TwoH();
+		});
+	}
+	// Automatically cancel the order after 2 hours
+	function TwoH(){
+	    setInterval(function(){
+			var elArr=$('.time');
+				Time= parseInt(new Date().getTime() /1000);
+			for(var i=0;i<elArr.length;i++){
+				tCuo=elArr[i].getAttribute('time')-Time;
+				elArr[i].innerHTML= parseInt(tCuo / 3600) +':'+ parseInt(tCuo / 60>=59? tCuo / 60 -60:tCuo / 60) + ':'+ parseInt(tCuo % 60 )+'<p class="red"> Automatically cancel the order afterwards</p>';
+				if(tCuo < 0){
+					elArr[i].innerHTML='';
+					elArr[i].setAttribute('class','');
+					UndoAjax(elArr[i].getAttribute('name'));
+				}
+			}
+		},1000);
+	}
+	$('#C2CTransaction_box').addClass('active');
+</script>
+<include file="Public:footer_minimal" />

@@ -1,0 +1,51 @@
+	<!-- add payment method modal start -->
+    <div class="modal fade" id="add-paypal" tabindex="-1" role="dialog" aria-labelledby="{:l('Add new paypal')}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header  d-flex align-items-center">
+                    <h5 class="modal-title">
+                        <div class="coin-title d-flex align-items-center">
+                            <div class="title">{:l("Add Paypal")}</span>
+                            </div>
+                        </div>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            
+                                    <div >
+                                        <input name="unique_identifier" value="{$pm.unique_identifier}" type="hidden"/>
+                                        <div class="form-group">
+                                            <label>{:l("Your Full Name")}</label> <input type="text" class="form-control" id="bank_username" readonly value="{$truename}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{:l("Supported Coin")}</label>
+                                            <select id="coin" name="coin" class="bootstrap-select" data-live-search="true" data-live-search-placeholder="{:l('Search')}" >
+                                                <volist name="FiatList" id="fiatcoin">
+                                                    <option  data-value="{$fiatcoin['name']| strtoupper}" data-content="{$fiatcoin['name']| strtoupper}" >{$fiatcoin['name']| strtoupper}</option>
+                                                </volist>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{:l('Paypal Address')} </label> <input id="information" type="text" class="form-control" placeholder="{:l('Enter Paypal address')}">
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info">
+                                        <p> {:l("Tips: When you sell your crypto, the added payment method will be shown to the buyer during the transaction to accept the fiat transfer. Please make sure the information is correct.")}.</p>
+                                    </div>
+                                
+                        </div><!--/col-md-6-->
+                    </div><!--/row-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-1" data-dismiss="modal">{:l("Cancel")}</button>
+                    <button onclick="add_paypal();"class="btn-2">{:l("Add Paypal")}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--add payment method modal end -->

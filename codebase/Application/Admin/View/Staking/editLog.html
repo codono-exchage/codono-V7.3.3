@@ -1,0 +1,136 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" >
+		<button class="close fixed" style="margin-top: 0px;">&times;</button>
+		<php>if(!isset($_GET['id'])){</php>
+		<div class="alert-content">{:l('Careful! It adds investment to user account without reducing user balance')}</div>
+		<php>}else{</php>
+		<div class="alert-content">{:l('Careful! You are editing existing investment')}</div>
+		<php>}</php>
+	</div>
+<div id="main" class="main">
+        <div class="main-title-h" style="font-size: 24px;">
+            <span class="d-sm-flex align-items-center justify-content-between h4">{:l('Add/Edit Investment Log')}</span>
+                        <i class="ca"></i>[<a href="/Admin/Staking/stakingLog"> List</a> ]        </div>
+        <div class="card">
+            <div class="card-body">
+                <form id="form" action="/Admin/Staking/editLog" method="post" class="form-horizontal">
+                    <div id="tab" class="tab-pane in tab">
+                        <div class="form-item cf">
+                            <table class="table">
+                                <tbody><tr class="controls">
+                                                <td class="item-label">{:l('ID')} :</td>
+                                                <td>
+                                                    <input type="text" class="form-control" value="{$id}" disabled="disabled" style="background-color: #ECECEC;min-width: 400px;color: red;" name="id"/>
+													<notempty name="id"><input type="hidden" name="id" value="{$id}"/></notempty>
+													
+                                                </td>
+                                                <td class="item-note"></td>
+                                            </tr>
+											
+											<tr class="controls">
+                                                <td class="item-label">{:l('staking log  ID')} :</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="staking_id" value="{$staking_id}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('Id of Staking')} </td>
+                                            </tr>
+											<tr class="controls">
+                                                <td class="item-label">{:l('Period')}:</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="period" value="{$period}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('Number of days')} </td>
+                                            </tr>
+																						<tr class="controls">
+												<td class="item-label">{:l('Number of days')} :</td>
+												<td>
+													<input type="text" class="form-control  input-10x " name="begintime" value="{$data['begintime']|addtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+												</td>
+												<td class="item-note"></td>
+											</tr>
+
+											<tr class="controls">
+												<td class="item-label">{:l('End time')} :</td>
+												<td>
+													<input type="text" class="form-control  input-10x " name="endtime" value="{$data['endtime']|addtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+												</td>
+												<td class="item-note"></td>
+											</tr>
+											<tr class="controls">
+                                                <td class="item-label">{:l('Investment Amount')}:</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="amount" value="{$amount}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('Investment amount')} </td>
+                                            </tr>
+											<tr class="controls">
+                                                <td class="item-label">{:l('Maturity Amount')}:</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="maturity" value="{$maturity}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('Maturity receivable amount')} </td>
+                                            </tr>
+											
+
+											
+
+											<tr class="controls">
+                                                <td class="item-label">{:l('Userid')} :</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="userid" value="{$userid}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('Userid of investor')}</td>
+                                            </tr>
+												<tr class="controls">
+									<td class="item-label">{:l('Status')} :</td>
+									<td><select name="status" class="form-select input-10x">
+									'Premature Withdrawn', 'Active', 'Reject', 'Completed'
+										<option value="1"
+										<eq name="status" value="1">{:l('selected')}</eq>
+										>{:l('Active')}</option>
+										<option value="0"
+										<eq name="status" value="0">{:l('selected')}</eq>
+										>{:l('Premature Withdrawn')}</option>
+										
+										<option value="2"
+										<eq name="status" value="2">{:l('selected')}</eq>
+										>{:l('Rejected')}</option>
+										<option value="3"
+										<eq name="status" value="3">{:l('selected')}</eq>
+										>{:l('Completed')}</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+											
+											<tr class="controls" style="margin: 10px 0px;height: 80px;">
+                                    <td class="item-label"></td>
+                                    <td>
+                                        <button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal" autocomplete="off">{:l('Submit')}</button>
+                                        <a class="btn btn-return btn-warning" href="{:U('Admin/Invest/')}">{:l('Back')}</a>
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                            </tbody></table>
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    //submit Form
+                    $('#submit').click(function () {
+                        $('#form').submit();
+                    });
+                </script>
+            </div>
+        </div>
+    	</div>
+</div>
+
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Staking/editLog')}");
+	</script>
+</block>

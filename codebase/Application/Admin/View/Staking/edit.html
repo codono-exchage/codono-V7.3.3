@@ -1,0 +1,236 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+<div id="main" class="main">
+        <div class="main-title-h" style="font-size: 24px;">
+            <span class="d-sm-flex align-items-center justify-content-between h4">{:l('Staking')}</span>
+                        <i class="ca"></i>[<a href="{:U('Staking/index')}"> {:l('Staking Plans')}</a> ]        </div>
+        <div class="card">
+            <div class="card-body">
+                <form id="form" action="{:U('Staking/edit')}" method="post" class="form-horizontal">
+                    <div id="tab" class="tab-pane in tab">
+                        <div class="form-item cf">
+                            <table class="table">
+                                <tbody><tr class="controls">
+                                                <td class="item-label">{:l('ID')} :</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="id" value="{$id}" disabled="disabled" style="background-color: #ECECEC;min-width: 400px;color: red;">
+													
+                                                </td>
+                                                <td class="item-note"></td>
+                                            </tr><input type="hidden" name="id" value="{$id}" class="text input-large">
+											
+											<tr class="controls">
+                                                <td class="item-label">{:l('Staking Title')}:</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="title" value="{$title}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('Title For Marketing Purpose')}</td>
+                                            </tr>
+											
+											<tr class="controls">
+											    <td class="item-label">{:l('Coin')} :</td>
+                                                  <td><select name="coinname" class="form-select input-10x">
+                                                    
+										<volist name="coin_list" id="coin_l">
+										
+											<option value="{$coin_l}">{$coin_l|strtoupper}</option>
+										</volist>
+									</select></td>
+                                    
+                                                </td>
+                                                <td class="item-note">{:l('Select Coin for Staking')} </td>
+                                            </tr>
+                                            <tr class="controls">
+                                                <td class="item-label">{:l('Period & Percentage')}:</td>
+                                                <td>
+                                                    <div style="width: 500px;text-align: left">
+                                                        <volist name="appCon.period" id="period">
+                                                            <div style="margin-bottom: 10px;">
+                                                                <label>{$period.value} days:</label>
+                                                                <input type="checkbox" name="periods[]" value="{$period.value}"
+                                                                       <if condition="$period.flag eq 1">checked="checked"</if>
+                                                                       onchange="togglePercentageInput(this);" />
+                                                                <!-- Display the percentage input field with its value if it exists -->
+                                                                <input type="text" class="form-control" name="percentages[{$period.value}]" placeholder="Percentage" style="width: 100px; display: <if condition="$period.flag eq 1">inline<else/>none</if>;" value="{$period.percentage}" />
+                                                            </div>
+                                                        </volist>
+                                                    </div>
+                                                </td>
+                                                <td class="item-note">{:l('Define percentage for selected periods')}</td>
+                                            </tr>
+                                            
+                                            <tr class="controls">
+											    <td class="item-label">{:l('Penalty Coin')} :</td>
+                                                  <td><select name="penalty_coin" class="form-select input-10x">
+                                                    <option value="">Select if applicable</option>
+                                                    <volist name="C['coin_list']" id="v">
+									
+											<option value="{$v['name']}"
+											<eq name="data['penalty_coin']" value="$v['name']">{:l('selected')}</eq>
+											>{$v['title']}</option>
+										</volist>
+									</select></td>
+                                                </td>
+                                                <td class="item-note">{:l('Penalty Coin')} </td>
+                                            </tr>
+                                            <tr class="controls">
+                                                <td class="item-label">Penalty Amount :</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="penalty_amount" value="{$penalty_amount}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('Fix Amount')}  Example 5.2</td>
+                                            </tr>
+                                            
+											<tr class="controls">
+                                                <td class="item-label">{:l('Minvest')}:</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="minvest" value="{$minvest}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('Double')} </td>
+                                            </tr>
+											<tr class="controls">
+                                                <td class="item-label">{:l('Maxvest')}:</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="maxvest" value="{$maxvest}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('Double')}</td>
+                                            </tr><tr class="controls">
+                                                <td class="item-label">{:l('creatorid')} :</td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="creatorid" value="{$creatorid}" style="min-width: 400px;">
+                                                </td>
+                                                <td class="item-note">{:l('userid integrer')} </td>
+                                            </tr><tr class="controls">
+                                                <td class="item-label">{:l('Coin Conditions')} :</td>
+                                                <td>
+                                                   	<input type="text" class="form-control" name="actionxcoinname" value=
+													'{$actionx.coin.name}' style="min-width: 200px;" placeholder="Coin name required ">
+													<input type="text" class="form-control" name="actionxcoinvalue" value=
+													'{$actionx.coin.value}' style="min-width: 200px;" placeholder="Coin Balance required">
+                                                </td>
+                                                <td class="item-note">{:l('Allow people to stack only if they have above coin balance')} </td>
+                                            </tr>
+											<tr class="controls">
+                                                <td class="item-label">{:l('Market Conditions')}:</td>
+                                                <td>
+                                                   	<input type="text" class="form-control" name="actionxmarketname" value=
+													'{$actionx.market.name}' style="min-width: 400px;" placeholder="Marketname">
+													<input type="text" class="form-control" name="actionxmarketbuy" value=
+													'{$actionx.market.buy}' style="min-width: 400px;" placeholder="Number of buy orders">
+													<input type="text" class="form-control" name="actionxmarketsell" value=
+													'{$actionx.market.sell}' style="min-width: 400px;" placeholder="Number of sell orders">
+                                                </td>
+                                                <td class="item-note">{:l('Market,   # of Buy orders,# of Sell orders')}</td>
+                                            </tr>
+                                            <tr class="controls">
+                                                <td class="item-label">{:l('Bonus 1st Tier')}:</td>
+                                                <td>
+                                                    <input type="text" class="form-control  input-10x " name="invite_1"
+                                                        value="{$data['invite_1']}">
+                                                </td>
+                                                <td class="item-note">%</td>
+                                            </tr>
+                                            <tr class="controls">
+                                                <td class="item-label">{:l('Bonus 2nd Tier')}:</td>
+                                                <td>
+                                                    <input type="text" class="form-control  input-10x " name="invite_2"
+                                                        value="{$data['invite_2']}">
+                                                </td>
+                                                <td class="item-note">%</td>
+                                            </tr>
+                                            <tr class="controls">
+                                                <td class="item-label">{:l('Bonus 3rd Tier')}:</td>
+                                                <td>
+                                                    <input type="text" class="form-control  input-10x " name="invite_3"
+                                                        value="{$data['invite_3']}">
+                                                </td>
+                                                <td class="item-note">%</td>
+                                            </tr>
+											<tr class="controls">
+                                                <td class="item-label">{:l('Status')} :</td>
+                                                <td>
+                                                    <select name="status" class="form-select" style="min-width: 400px;">
+                                                        <option value="0">{:l('Submitted')} </option><option value="1" selected="">{:l('Approved')}</option><option value="2">{:l('Reject')} </option><option value="3">{:l('Completed')}</option><option value="4">{:l('Upcoming')}</option>                                                    </select>
+                                                </td>
+                                                <td class="item-note">{:l('Status')}</td>
+                                            </tr>
+											<tr class="controls">
+                                                <td class="item-label">{:l('Allow withdrawal')}:</td>
+                                                <td>
+                                                    <select name="allow_withdrawal" class="form-select" style="min-width: 400px;">
+                                                        <option value="0" selected="">{:l('Do not allow')} </option>
+														<option value="1" >{:l('Allow')}</option>
+													 </select>
+                                                </td>
+                                                <td class="item-note">{:l('If allowed users can do premature withdrawals')}</td>
+                                            </tr>
+											
+											<tr class="controls" style="margin: 10px 0px;height: 80px;">
+                                    <td class="item-label"></td>
+                                    <td>
+                                        <button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal" autocomplete="off">{:l('Submit')}</button>
+                                        <a class="btn btn-return btn-warning" href="{:U('Staking/index')}">{:l('Back')}</a>
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                            </tbody></table>
+                        </div>
+                    </div>
+                </form>
+             
+            </div>
+        </div>
+    	</div>
+</div>
+<script type="text/javascript" src="__THEME__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('input[type="checkbox"][name="periods[]"]').each(function () {
+        togglePercentageInput(this);
+    });
+});
+     //submit Form
+     $('#submit').click(function () {
+                        $('#form').submit();
+                    });
+	var editor;
+	KindEditor.ready(function (K) {
+		editor = K.create('textarea[name="content"]', {
+			width: '500px',
+			height: '250px',
+			allowPreviewEmoticons: false,
+			allowImageUpload: true,
+			items: [
+				'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons',  'link', 'fullscreen'],
+			afterBlur: function () {
+				this.sync();
+			}
+		});
+	});
+	
+
+	
+function togglePercentageInput(checkbox) {
+    var input = $(checkbox).next('input');
+    if ($(checkbox).is(':checked')) {
+        input.show();
+    } else {
+        input.hide().val('');
+    }
+}
+
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Staking/index')}");
+	</script>
+</block>

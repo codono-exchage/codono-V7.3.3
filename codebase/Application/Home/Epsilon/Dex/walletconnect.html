@@ -1,0 +1,125 @@
+<include file="Public:header"/>
+
+       <script type="text/javascript" src="https://unpkg.com/web3@1.5.2/dist/web3.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.4/dist/index.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.6.5/dist/umd/index.min.js"></script>
+	
+    <script type="text/javascript" src="https://unpkg.com/fortmatic@2.2.1/dist/fortmatic.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/notifications/sweet_alert.min.js"></script>	
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/award/css/sweet-alert.css">
+  <!--<script type="text/javascript" src="__PUBLIC__/Home/web3/web3-provider.js"></script>-->
+{$script}
+<link rel="stylesheet" href="__EPSILON__/otc/otc.css"/>
+<style>
+	#allinonenavs{
+	display:none;}
+	.divdisabled {
+		pointer-events: none;
+		opacity: 0.4;
+	}
+		#prepare {
+		display:block;
+	}
+	
+	#connected {
+		display:none;
+	}
+	
+	#network {
+		display:none;
+	}
+	#selected-account{font-size:9px;}
+	#btn-disconnect{
+		border: 0px;
+		margin-top: 10px;
+		opacity: 70%;
+	}	
+		</style>
+	
+<body><div id="WEB3_CONNECT_MODAL_ID"></div>
+    <div id="root"></div>
+
+
+
+<div class="" >
+
+	<main class="wrapper">
+		<!-- Swap Start -->
+		<section class="swap-page dark-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="trade-confirmation-wrapper">
+							<div class="trade-confirmation-inner white-bg">
+							  <h1 class="title dark-text">Transaction Confirmation </h1>
+							  <div class="col-12 amount-wrapper">
+								<i class="icon ion-md-checkmark-circle"></i>
+								<div class="amount">{$record.qty} <span> {$record.buy_coin|strtoupper}</span></div>
+							  </div>
+							  <div class="quoteContent-wrap" id="with_orderx">
+				
+								<div class="quoteContent-MiddleWrap">
+								
+								<div class="quoteContent-LabelRow dark-text"><div>{:L('Buy')}</div><div class="text-bold dark-text">{$record.qty} {$record.buy_coin|strtoupper}</div></div>
+								<div class="quoteContent-LabelRow dark-text"><div>{:l('Price')}</div><div class="text-bold dark-text">{$record.price} {$record.spend_coin|strtoupper}</div></div>
+								<div class="quoteContent-LabelRow dark-text"><div>{:l('Paying Total')}</div><div class="text-bold dark-text">{$record.total} {$record.spend_coin|strtoupper}</div></div>
+								<div class="quoteContent-LabelRow dark-text"><div>{:l('Required Network')}</div><div class="text-bold dark-text">{$coin|strtoupper} over {$network|strtoupper} network</div></div>
+							<div id="network">
+								<div class="quoteContent-LabelRow dark-text"><div>Network        				
+						  </div><div class="text-bold dark-text"><span id="network-name"></span></div></div>
+								<div class="quoteContent-LabelRow dark-text"><div>{:l('Your account')}</div><div class="text-bold dark-text"><span id="selected-account"></span></div></div>
+									<span class="row"> <button data-bn-type="button" id="btn-payment" class="quote-button">{:l('Paynow')}</button></span>
+									
+									<span id="connected" class="text-right pull-right"  >
+						  <button data-bn-type="button"  id="btn-disconnect" class="text-danger">{:l('[Disconnect]')}</button></span>
+								</div>
+								<div>              <p id="thankyou"></p></div>
+				
+									<div id="prepare" >
+									<span class="row"> <button data-bn-type="button"  id="btn-connect" class="btn btn-2 btn-block">{:l('Connect')}</button></span>
+									</div>            
+				 
+							</div>	
+									
+									
+									
+									
+								</div>   
+ 
+							</div>
+						</div>
+					  
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Swap End -->
+	</main>
+
+</div>
+</div>
+</div>
+<script>
+function pleasewait(){
+  swal({
+            title: "Waiting For Confirmation",
+            text: "Confirm this transaction in your wallet, Do not close , refresh or click back on this page",
+			type:"info",
+            confirmButtonColor: "#2196F3",
+			closeOnConfirm: false,
+            timer: 1200000,
+			showLoaderOnConfirm: true
+        },
+		  function() {
+            setTimeout(function() {
+                swal({
+                    title: "Your page will automatically redirect on completion!",
+                    confirmButtonColor: "#2196F3"
+                });
+            }, 1200000);
+        });
+}
+</script>
+<include file="Public:footer_minimal"/>

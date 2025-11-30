@@ -1,0 +1,814 @@
+<include file="Index:mv_html_head" />
+<body style="background: #222426" id="{$Think.cookie.themeMode}">
+  <include file="Public:mv_menu" />
+  <main class="dark:bg-dark bg-white">
+    <section class=" h-full 1300px:pb-[5rem] pb-[5rem] lg:pt-[4.5rem] pt-[4rem] dark:bg-dark">
+      <include file="Index:mv_home_slider" />
+      <include file="Index:multiverse_announcements" />
+      <div class="sm:hidden grid grid-cols-4 gap-2 p-4 pb-1">
+        <a href="/content/market" class="bg-element flex flex-col items-center justify-center gap-2 p-2 rounded-md">
+          <span class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" fill="none"
+              viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M13.05 16.25h-1.88c-1.33 0-2.42-1.12-2.42-2.5 0-.41.34-.75.75-.75s.75.34.75.75c0 .55.41 1 .92 1h1.88c.39 0 .7-.35.7-.78 0-.54-.15-.62-.49-.74l-3.01-1.05c-.64-.22-1.5-.69-1.5-2.16 0-1.25.99-2.28 2.2-2.28h1.88c1.33 0 2.42 1.12 2.42 2.5 0 .41-.34.75-.75.75s-.75-.34-.75-.75c0-.55-.41-1-.92-1h-1.88c-.39 0-.7.35-.7.78 0 .54.15.62.49.74l3.01 1.05c.64.22 1.5.69 1.5 2.16 0 1.26-.99 2.28-2.2 2.28Z">
+              </path>
+              <path fill="currentColor"
+                d="M12 17.25c-.41 0-.75-.34-.75-.75v-9c0-.41.34-.75.75-.75s.75.34.75.75v9c0 .41-.34.75-.75.75Z">
+              </path>
+              <path fill="currentColor"
+                d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12S6.07 1.25 12 1.25c.41 0 .75.34.75.75s-.34.75-.75.75C6.9 2.75 2.75 6.9 2.75 12S6.9 21.25 12 21.25s9.25-4.15 9.25-9.25c0-.41.34-.75.75-.75s.75.34.75.75c0 5.93-4.82 10.75-10.75 10.75Z">
+              </path>
+              <path fill="currentColor"
+                d="M21 7.75h-4c-.41 0-.75-.34-.75-.75V3c0-.41.34-.75.75-.75s.75.34.75.75v3.25H21c.41 0 .75.34.75.75s-.34.75-.75.75Z">
+              </path>
+              <path fill="currentColor"
+                d="M17 7.75c-.19 0-.38-.07-.53-.22a.754.754 0 0 1 0-1.06l5-5c.29-.29.77-.29 1.06 0 .29.29.29.77 0 1.06l-5 5c-.15.15-.34.22-.53.22Z">
+              </path>
+            </svg></span>
+          <div class="text-xs font-semibold text-navColor">{:l('Deposit')}</div>
+        </a>
+        <a href="/Trade" class="bg-element flex flex-col items-center justify-center gap-2 p-2 rounded-md">
+          <span class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" fill="none"
+              viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M15.5 15.75c-.18 0-.38-.01-.57-.02a.751.751 0 0 1-.7-.69c-.22-2.79-2.49-5.05-5.27-5.27a.751.751 0 0 1-.69-.7c-.01-.19-.02-.38-.02-.57 0-4 3.25-7.25 7.25-7.25s7.25 3.25 7.25 7.25-3.25 7.25-7.25 7.25ZM9.75 8.36c2.98.52 5.37 2.91 5.89 5.89a5.755 5.755 0 0 0 5.61-5.75c0-3.17-2.58-5.75-5.75-5.75-3.12 0-5.67 2.5-5.75 5.61Z">
+              </path>
+              <path fill="currentColor"
+                d="M8.5 22.75c-4 0-7.25-3.25-7.25-7.25a7.255 7.255 0 0 1 7.82-7.23c3.53.28 6.39 3.14 6.66 6.65.01.2.02.39.02.58 0 4-3.25 7.25-7.25 7.25Zm0-13c-3.17 0-5.75 2.58-5.75 5.75s2.58 5.75 5.75 5.75a5.757 5.757 0 0 0 5.73-6.22c-.22-2.77-2.48-5.04-5.27-5.26-.14-.01-.3-.02-.46-.02ZM3 7.34a1.737 1.737 0 0 1-1.75-1.75V3c0-.96.79-1.75 1.75-1.75h2.59a1.752 1.752 0 0 1 1.24 2.99L4.24 6.83c-.34.33-.78.51-1.24.51Zm0-4.59c-.14 0-.25.11-.25.25v2.59c0 .15.1.21.15.23.06.02.17.05.27-.05l2.59-2.59c.1-.1.08-.21.05-.27-.03-.06-.09-.15-.23-.15H3v-.01ZM20.999 22.749h-2.59a1.752 1.752 0 0 1-1.24-2.99l2.59-2.59c.5-.5 1.25-.65 1.91-.38.66.27 1.08.91 1.08 1.62v2.59c0 .96-.79 1.75-1.75 1.75Zm-.01-4.59a.24.24 0 0 0-.17.08l-2.59 2.59c-.1.1-.08.21-.05.27.03.06.09.15.23.15h2.59c.14 0 .25-.11.25-.25v-2.59c0-.15-.1-.21-.15-.23a.36.36 0 0 0-.11-.02Z">
+              </path>
+            </svg></span>
+          <div class="text-xs font-semibold text-navColor">{:l('Spot')}</div>
+        </a>
+        <a href="/Invite/index" class="bg-element flex flex-col items-center justify-center gap-2 p-2 rounded-md">
+          <span class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" fill="none"
+              viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M15 22.75H9c-5.43 0-7.75-2.32-7.75-7.75V9c0-5.43 2.32-7.75 7.75-7.75h6c5.43 0 7.75 2.32 7.75 7.75v6c0 5.43-2.32 7.75-7.75 7.75Zm-6-20C4.39 2.75 2.75 4.39 2.75 9v6c0 4.61 1.64 6.25 6.25 6.25h6c4.61 0 6.25-1.64 6.25-6.25V9c0-4.61-1.64-6.25-6.25-6.25H9Z">
+              </path>
+              <path fill="currentColor"
+                d="M17.5 10.07H6.97c-.41 0-.75-.34-.75-.75s.34-.75.75-.75H17.5c.41 0 .75.34.75.75s-.34.75-.75.75ZM17.52 14.07h-2.77c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h2.77c.41 0 .75.34.75.75s-.34.75-.75.75ZM17.52 17.5h-2.77c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h2.77c.41 0 .75.34.75.75s-.34.75-.75.75ZM9.607 12.43l1.183 1.15c.899.875.918 2.31.044 3.208l-1.15 1.183a.623.623 0 0 1-.875.012.623.623 0 0 1-.012-.875l1.15-1.183a1.032 1.032 0 0 0-.02-1.458l-1.182-1.15a.623.623 0 0 1-.012-.875.623.623 0 0 1 .874-.012Z">
+              </path>
+            </svg></span>
+          <div class="text-xs font-semibold text-navColor">{:l('Affiliates')}</div>
+        </a>
+        <a href="/Wallet/cryptodeposit"
+          class="bg-element flex flex-col items-center justify-center gap-2 p-2 rounded-md">
+          <span class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" fill="none"
+              viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M6.5 22.75c-.41 0-.75-.34-.75-.75v-7c0-.41.34-.75.75-.75s.75.34.75.75v7c0 .41-.34.75-.75.75ZM6.5 5.75c-.41 0-.75-.34-.75-.75V2c0-.41.34-.75.75-.75s.75.34.75.75v3c0 .41-.34.75-.75.75ZM17.5 22.75c-.41 0-.75-.34-.75-.75v-3c0-.41.34-.75.75-.75s.75.34.75.75v3c0 .41-.34.75-.75.75ZM17.5 9.75c-.41 0-.75-.34-.75-.75V2c0-.41.34-.75.75-.75s.75.34.75.75v7c0 .41-.34.75-.75.75Z">
+              </path>
+              <path fill="currentColor"
+                d="M7.5 15.75h-2c-1.72 0-2.75-1.03-2.75-2.75V7c0-1.72 1.03-2.75 2.75-2.75h2c1.72 0 2.75 1.03 2.75 2.75v6c0 1.72-1.03 2.75-2.75 2.75Zm-2-10c-.89 0-1.25.36-1.25 1.25v6c0 .89.36 1.25 1.25 1.25h2c.89 0 1.25-.36 1.25-1.25V7c0-.89-.36-1.25-1.25-1.25h-2ZM18.5 19.75h-2c-1.72 0-2.75-1.03-2.75-2.75v-6c0-1.72 1.03-2.75 2.75-2.75h2c1.72 0 2.75 1.03 2.75 2.75v6c0 1.72-1.03 2.75-2.75 2.75Zm-2-10c-.89 0-1.25.36-1.25 1.25v6c0 .89.36 1.25 1.25 1.25h2c.89 0 1.25-.36 1.25-1.25v-6c0-.89-.36-1.25-1.25-1.25h-2Z">
+              </path>
+            </svg></span>
+          <div class="text-xs font-semibold text-navColor">{:l('Market')}</div>
+        </a>
+      </div>
+      <div class=" flex flex-col items-center md:p-5 p-2">
+        <div class="1300px:w-[1300px] md:px-5 px-2 lg:w-[1024px] md:w-[768px] sm:w-[720px] w-full">
+          <include file="Index:multiverse_small_banner" />
+        </div>
+      </div>
+    </section>
+    <include file="Index:mv_home_markets" />
+    <section>
+      <div class="flex justify-center">
+        <div class="1300px:w-[1300px] lg:w-[1024px] md:w-[768px] sm:w-[640px] w-full py-20">
+          <div class="w-full">
+            <h3
+              class="font-light flex gap-2 justify-center 1300px:text-[2.3rem] lg:text-[1.8rem] sm:text-[1.5rem] text-[1.2rem] sm:p-5 p-3 dark:text-white text-dark">
+              <span>A</span><span class="font-medium">Trustworthy</span><span>Crypto Exchange</span>
+            </h3>
+            <div class="md:flex justify-center lg:gap-5 gap-2 p-3 overflow-hidden">
+
+              <div
+                class="border dark:border-gray-50/20 rounded-lg lg:w-[450px] min-h flex flex-col items-center lg:p-5 lg:px-10 p-3 mb:mb-0 mb-2 mb:px-3 lg:space-y-4 space-y-2">
+                <div
+                  class="dark:bg-[rgb(39,39,41)] bg-primary rounded-full lg:w-[60px] w-[50px] lg:h-[60px] h-[50px] flex justify-center items-center text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="none" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M12 22.76c-1.09 0-2.17-.32-3.02-.95l-4.3-3.21c-1.14-.85-2.03-2.62-2.03-4.04V7.12c0-1.54 1.13-3.18 2.58-3.72l4.99-1.87c.99-.37 2.55-.37 3.54 0l5 1.87c1.45.54 2.58 2.18 2.58 3.72v7.43c0 1.42-.89 3.19-2.03 4.04l-4.3 3.21c-.84.64-1.92.96-3.01.96ZM10.75 2.94 5.76 4.81c-.86.32-1.61 1.4-1.61 2.32v7.43c0 .95.67 2.28 1.42 2.84l4.3 3.21c1.15.86 3.1.86 4.25 0l4.3-3.21c.76-.57 1.42-1.9 1.42-2.84V7.12c0-.91-.75-1.99-1.61-2.32l-4.99-1.87c-.66-.24-1.82-.24-2.49.01Z">
+                    </path>
+                    <path fill="currentColor"
+                      d="M12 13.25c-1.52 0-2.75-1.23-2.75-2.75S10.48 7.75 12 7.75s2.75 1.23 2.75 2.75-1.23 2.75-2.75 2.75Zm0-4a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5Z">
+                    </path>
+                    <path fill="currentColor"
+                      d="M12 16.25c-.41 0-.75-.34-.75-.75v-3c0-.41.34-.75.75-.75s.75.34.75.75v3c0 .41-.34.75-.75.75Z">
+                    </path>
+                  </svg>
+                </div>
+                <h2 class="lg:text-lg md:text-md text-[1.1rem] font-regular dark:text-white text-dark">
+                  Top-notch Account Security
+                </h2>
+                <p class="text-subTitleColor text-center font-light text-[1rem]">
+                  {:SHORT_NAME} strives to be the most secure exchange in the world by implementing robust security
+                  systems and 24/7 monitoring to ensure your account stays secure.
+                </p>
+              </div>
+              <div
+                class="border dark:border-gray-50/20 rounded-lg lg:w-[450px] min-h flex flex-col items-center lg:p-5 lg:px-10 p-3 mb:mb-0 mb-2 mb:px-3 lg:space-y-4 space-y-2">
+                <div
+                  class="dark:bg-[rgb(39,39,41)] bg-primary rounded-full lg:w-[60px] w-[50px] lg:h-[60px] h-[50px] flex justify-center items-center text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="none" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M5 23.75c-1.66 0-3.22-.88-4.06-2.31C.49 20.72.25 19.87.25 19c0-2.62 2.13-4.75 4.75-4.75S9.75 16.38 9.75 19c0 .87-.24 1.72-.69 2.45-.84 1.42-2.4 2.3-4.06 2.3Zm0-8c-1.79 0-3.25 1.46-3.25 3.25 0 .59.16 1.17.47 1.67.59 1 1.63 1.58 2.78 1.58s2.19-.59 2.78-1.57c.31-.51.47-1.08.47-1.68 0-1.79-1.46-3.25-3.25-3.25Z">
+                    </path>
+                    <path fill="currentColor"
+                      d="M4.43 20.74c-.19 0-.38-.07-.53-.22l-.99-.99a.755.755 0 0 1 0-1.06c.29-.29.77-.29 1.06 0l.48.48 1.6-1.48c.3-.28.78-.26 1.06.04s.26.78-.04 1.06l-2.13 1.97c-.15.13-.33.2-.51.2ZM6.19 7.81c-.24 0-.46-.11-.61-.31a.735.735 0 0 1-.06-.78c.17-.34.41-.67.72-.97l3.25-3.26a4.28 4.28 0 0 1 6.02 0l1.75 1.78C18 5 18.45 5.98 18.5 7.02a.752.752 0 0 1-.87.78c-.2-.03-.41-.04-.63-.04H7c-.24 0-.47.02-.7.05h-.11Zm1.67-1.56h8.96c-.13-.34-.34-.65-.62-.93l-1.76-1.78c-1.07-1.06-2.82-1.06-3.9 0L7.86 6.25Z">
+                    </path>
+                    <path fill="currentColor"
+                      d="M17 22.75H7.63c-.32 0-.6-.2-.71-.49-.11-.3-.02-.63.22-.83.24-.2.46-.46.62-.74.32-.51.48-1.09.48-1.68 0-1.79-1.46-3.25-3.25-3.25-.93 0-1.82.4-2.44 1.11-.21.23-.54.32-.83.21a.757.757 0 0 1-.49-.7V12c0-3.08 1.9-5.31 4.85-5.68.27-.04.58-.07.9-.07h10c.24 0 .55.01.87.06 2.95.34 4.88 2.58 4.88 5.69v5c.02 3.44-2.29 5.75-5.73 5.75Zm-7.82-1.5H17c2.58 0 4.25-1.67 4.25-4.25v-5c0-2.34-1.37-3.95-3.59-4.21-.24-.04-.45-.04-.66-.04H7c-.24 0-.47.02-.7.05-2.2.28-3.55 1.88-3.55 4.2v2.82c.68-.37 1.46-.57 2.25-.57 2.62 0 4.75 2.13 4.75 4.75 0 .79-.2 1.57-.57 2.25Z">
+                    </path>
+                    <path fill="currentColor"
+                      d="M22 17.25h-3c-1.52 0-2.75-1.23-2.75-2.75s1.23-2.75 2.75-2.75h3c.41 0 .75.34.75.75s-.34.75-.75.75h-3a1.25 1.25 0 0 0 0 2.5h3c.41 0 .75.34.75.75s-.34.75-.75.75Z">
+                    </path>
+                  </svg>
+                </div>
+                <h2 class="lg:text-lg md:text-md text-[1.1rem] font-regular dark:text-white text-dark">
+                  Secure Asset Storage
+                </h2>
+                <p class="text-subTitleColor text-center font-light text-[1rem]">
+                  {:SHORT_NAME}’s industry-leading encryption with EAL7 certification ensure that your assets are always
+                  safe and secure.
+                </p>
+              </div>
+              <div
+                class="border dark:border-gray-50/20 rounded-lg lg:w-[450px] min-h flex flex-col items-center lg:p-5 lg:px-10 p-3 mb:mb-0 mb-2 mb:px-3 lg:space-y-4 space-y-2">
+                <div
+                  class="dark:bg-[rgb(39,39,41)] bg-primary rounded-full lg:w-[60px] w-[50px] lg:h-[60px] h-[50px] flex justify-center items-center text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="none" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12S6.07 1.25 12 1.25 22.75 6.07 22.75 12 17.93 22.75 12 22.75Zm0-20C6.9 2.75 2.75 6.9 2.75 12S6.9 21.25 12 21.25s9.25-4.15 9.25-9.25S17.1 2.75 12 2.75Z">
+                    </path>
+                    <path fill="currentColor"
+                      d="M12 15.25c-.41 0-.75-.34-.75-.75v-6c0-.41.34-.75.75-.75s.75.34.75.75v6c0 .41-.34.75-.75.75Z">
+                    </path>
+                    <path fill="currentColor"
+                      d="M12 16.25c-.19 0-.38-.07-.53-.22l-3-3a.754.754 0 0 1 0-1.06c.29-.29.77-.29 1.06 0L12 14.44l2.47-2.47c.29-.29.77-.29 1.06 0 .29.29.29.77 0 1.06l-3 3c-.15.15-.34.22-.53.22Z">
+                    </path>
+                  </svg>
+                </div>
+                <h2 class="lg:text-lg md:text-md text-[1.1rem] font-regular dark:text-white text-dark">
+                  24/7 Customer Support
+                </h2>
+                <p class="text-subTitleColor text-center font-light text-[1rem]">
+                  Your questions, answered. Contact {:SHORT_NAME} customer support with your questions at any time.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-[#E6E6E6] p-2 flex justify-center min-h-[350px] bg-cover bg-center">
+        <div
+          class="1300px:w-[1300px] lg:w-[1024px] md:w-[768px] sm:w-[640px] w-full flex gap-2 xl:flex-row flex-col items-center justify-center">
+          <div class="flex flex-col gap-2 m items-center justify-center">
+            <h1 class="1300px:text-[2.5rem] lg:text-[2rem] text-[1.5rem] flex gap-2">
+              <span class="font-light">{:SHORT_NAME}<span class="font-medium">{:l('Card')}</span></span>
+            </h1>
+            <h2 class="font-regular 1300px:text-2xl lg:text-xl text-md">
+              Earn up to 5% cash back**
+            </h2>
+            <p class="text-center md:w-[700px] text-secondaryText w-full font-light text-md leading-tight">
+              {:SHORT_NAME}Card is a digital payment solution that allows users
+              to make purchases using their cryptocurrency holdings. Earn
+              cash back in crypto on every purchase you make with your
+              {:SHORT_NAME}Card. {:SHORT_NAME}Card holders will have the opportunity to
+              take part in many Card holder benefits.
+            </p>
+            <p class="text-center md:w-[700px] text-secondaryText w-full mb-5 font-light text-md leading-tight">
+              Restrictions Apply**
+            </p>
+          </div>
+          <div class="">
+            <img src="__EPSILON__/multiverse/imgs/company_card.png" alt="card" class="" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="flex justify-center pb-10 overflow-hidden">
+      <div class="1300px:w-[1300px] lg:w-[1024px] md:w-[768px] sm:w-[640px] w-full lg:p-10 p-5">
+        <div class="flex flex-col">
+          <h1 class="1300px:text-[2.6rem] lg:text-[1.5rem] text-[1.3rem] mb-5 dark:text-white font-light">
+            Explore <span class="font-medium">{:l('Our Product')}</span>
+          </h1>
+          <div class="w-full lg:flex gap-5 hidden">
+            <div class="flex flex-col gap-3 dark:text-white">
+              <a href="" role="dialog">
+                <div
+                  class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                  <div
+                    class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                    <img src="__EPSILON__/multiverse/imgs/card-top.svg"
+                      class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                      alt="" />
+                  </div>
+                  <div class="space-y-2 flex flex-col">
+                    <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                      Future Trading
+                      <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></span>
+                    </h2>
+                    <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                      An advanced platform, featuring up to 125X leverage,
+                      constant access, and superior risk management.
+                    </p>
+                    <div class="font-semibold md:flex hidden">
+                      <a class="1300px:mt-5 mt-3 text-sm flex gap-2" href="/Trade">Trade Now
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                          stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></a>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a href="" role="dialog">
+                <div
+                  class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                  <div
+                    class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                    <img src="__EPSILON__/multiverse/imgs/card.svg"
+                      class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                      alt="" />
+                  </div>
+                  <div class="space-y-2 flex flex-col">
+                    <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                      Buy crypto via card
+                      <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></span>
+                    </h2>
+                    <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                      Purchase digital _assets with ease using credit cards
+                      or over 60 fiat currencies, simplifying entry into
+                      crypto world.
+                    </p>
+                    <div class="font-semibold md:flex hidden">
+                      <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="#">Buy Now
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                          stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></a>
+                    </div>
+                  </div>
+                </div>
+              </a><a href="" role="dialog">
+                <div
+                  class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                  <div
+                    class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                    <img src="__EPSILON__/multiverse/imgs/robo.svg"
+                      class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                      alt="" />
+                  </div>
+                  <div class="space-y-2 flex flex-col">
+                    <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                      Trading Bot
+                      <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></span>
+                    </h2>
+                    <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                      Enhance trading strategies; automate and optimize
+                      trades for maximizing market opportunities.
+                    </p>
+                    <div class="font-semibold md:flex hidden">
+                      <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="/Trade">Trade Now
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                          stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></a>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="flex flex-col gap-3 dark:text-white">
+              <a href="" role="dialog">
+                <div
+                  class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                  <div
+                    class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                    <img
+                      src="data:image/svg+xml,%3csvg%20width=&#39;100&#39;%20height=&#39;100&#39;%20viewBox=&#39;0%200%20144%20108&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cpath%20d=&#39;M84.592%2038.2265L78.4165%2041.0634L78.9402%2042.2088C71.4337%2049.8245%2069.7752%2063.6922%2075.667%2076.5232C81.5588%2089.3542%2093.1678%2097.1228%20103.839%2096.3809L104.363%2097.5263L110.538%2094.6894C122.627%2089.1358%20126.62%2071.9841%20119.452%2056.3927C112.284%2040.8013%2096.6701%2032.6621%2084.581%2038.2265H84.592Z&#39;%20fill=&#39;%23EBE9E9&#39;%20stroke=&#39;black&#39;%20stroke-width=&#39;0.7&#39;%20stroke-miterlimit=&#39;10&#39;/%3e%3cpath%20d=&#39;M84.2873%2088.5576C90.0809%2093.9475%2097.1401%2096.8393%20103.839%2096.381L104.363%2097.5264L110.538%2094.6895C118.678%2090.9472%20123.118%2081.9567%20122.987%2071.7334L84.2764%2088.5688L84.2873%2088.5576Z&#39;%20fill=&#39;black&#39;%20stroke=&#39;black&#39;%20stroke-width=&#39;0.7&#39;%20stroke-miterlimit=&#39;10&#39;/%3e%3cpath%20d=&#39;M122.54%2067.5282L115.741%2070.0278L114.65%2066.2867L121.934%2064.103L122.54%2067.5282Z&#39;%20fill=&#39;black&#39;/%3e%3cpath%20d=&#39;M104.003%2097.7339C116.093%2092.1784%20120.085%2075.0335%20112.919%2059.4396C105.753%2043.8457%2090.1435%2035.7081%2078.0538%2041.2636C65.9642%2046.8191%2061.9727%2063.964%2069.1385%2079.5578C76.3043%2095.1517%2091.9138%20103.29%20104.003%2097.7339Z&#39;%20fill=&#39;%237284DA&#39;/%3e%3cpath%20d=&#39;M78.417%2041.0629C69.012%2045.3836%2064.5168%2056.7089%2066.3389%2068.8634L114.542%2086.7131C117.87%2078.9993%20117.695%2068.8306%20113.277%2059.2291C106.108%2043.6378%2090.4951%2035.4985%2078.4061%2041.0629H78.417Z&#39;%20fill=&#39;white&#39;/%3e%3cpath%20d=&#39;M104.221%2062.4482L95.9943%2067.129C94.1177%2068.1982%2092.8412%2066.9872%2093.1467%2064.445L94.4996%2053.294L92.6884%2052.4976L91.3354%2063.6485C91.0299%2066.1907%2089.6007%2066.2011%2088.1605%2063.6698L81.854%2052.5849L80.403%2053.4139L86.7093%2064.4993C88.1495%2067.0197%2087.4076%2068.2414%2085.0618%2067.2158L74.7839%2062.688L74.5439%2064.6522L84.8218%2069.1801C87.1676%2070.2166%2087.5494%2071.9296%2085.6728%2072.9988L77.4461%2077.6795L78.5591%2079.6326L86.7857%2074.9519C88.6623%2073.8826%2089.9389%2075.0937%2089.6334%2077.6358L88.2805%2088.7756L90.0916%2089.5721L91.4446%2078.4323C91.7501%2075.8901%2093.1794%2075.8792%2094.6196%2078.4105L100.926%2089.4959L102.377%2088.6664L96.0707%2077.581C94.6305%2075.0606%2095.3724%2073.8389%2097.7182%2074.8645L107.996%2079.3923L108.236%2077.4286L97.9582%2072.9008C95.6124%2071.8643%2095.2306%2070.1513%2097.1072%2069.082L105.334%2064.4013L104.221%2062.4482Z&#39;%20fill=&#39;black&#39;/%3e%3cpath%20d=&#39;M104.003%2097.7339C116.093%2092.1784%20120.085%2075.0335%20112.919%2059.4396C105.753%2043.8457%2090.1435%2035.7081%2078.0538%2041.2636C65.9642%2046.8191%2061.9727%2063.964%2069.1385%2079.5578C76.3043%2095.1517%2091.9138%20103.29%20104.003%2097.7339Z&#39;%20stroke=&#39;black&#39;%20stroke-width=&#39;0.7&#39;%20stroke-miterlimit=&#39;10&#39;/%3e%3c/svg%3e"
+                      class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                      alt="" />
+                  </div>
+                  <div class="space-y-2 flex flex-col">
+                    <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                      Spot Trading
+                      <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></span>
+                    </h2>
+                    <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                      A user-friendly platform with real-time market
+                      access and 600 crypto pairs, ensuring seamless
+                      transactions.
+                    </p>
+                    <div class="font-semibold md:flex hidden">
+                      <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="/Trade">Trade Now
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                          stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></a>
+                    </div>
+                  </div>
+                </div>
+              </a><a href="" role="dialog">
+                <div
+                  class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                  <div
+                    class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                    <img src="__EPSILON__/multiverse/imgs/piggy-bank.svg"
+                      class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                      alt="" />
+                  </div>
+                  <div class="space-y-2 flex flex-col">
+                    <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                      Earn/Saving
+                      <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></span>
+                    </h2>
+                    <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                      Earn passive income on your digital _assets, and
+                      ensure your financial future with our Crypto Savings
+                      feature.
+                    </p>
+                    <div class="font-semibold md:flex hidden">
+                      <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="#">Start Earning
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                          stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></a>
+                    </div>
+                  </div>
+                </div>
+              </a><a href="" role="dialog">
+                <div
+                  class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                  <div
+                    class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                    <img src="__EPSILON__/multiverse/imgs/wallet.svg"
+                      class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                      alt="" />
+                  </div>
+                  <div class="space-y-2 flex flex-col">
+                    <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                      Demo Trading
+                      <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></span>
+                    </h2>
+                    <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                      Hone trading skills without risk and learn trading
+                      strategies using virtual funds in a simulated
+                      environment.
+                    </p>
+                    <div class="font-semibold md:flex hidden">
+                      <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="/Trade">Trade Now
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                          stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                        </svg></a>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+
+
+
+          <!-- SWIPER BEGIN -->
+          <div class="w-full swiper lg:hidden">
+            <div class="glide__track" data-glide-el="track">
+
+              <div class="glide__slides">
+
+                <div class="glide__slide">
+                  <div class="flex flex-col gap-3 dark:text-white">
+                    <a href="" role="dialog">
+                      <div
+                        class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                        <div
+                          class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                          <img src="__EPSILON__/multiverse/imgs/card-top.svg"
+                            class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                            alt="" />
+                        </div>
+                        <div class="space-y-2 flex flex-col">
+                          <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                            Future Trading
+                            <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></span>
+                          </h2>
+                          <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                            An advanced platform, featuring up to 125X
+                            leverage, constant access, and superior risk
+                            management.
+                          </p>
+                          <div class="font-semibold md:flex hidden">
+                            <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="/Trade">Trade Now
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></a>
+                          </div>
+                        </div>
+                      </div>
+                    </a><a href="" role="dialog">
+                      <div
+                        class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                        <div
+                          class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                          <img src="__EPSILON__/multiverse/imgs/card.svg"
+                            class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                            alt="" />
+                        </div>
+                        <div class="space-y-2 flex flex-col">
+                          <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                            Buy crypto via card
+                            <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></span>
+                          </h2>
+                          <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                            Purchase digital _assets with ease using credit
+                            cards or over 60 fiat currencies, simplifying
+                            entry into crypto world.
+                          </p>
+                          <div class="font-semibold md:flex hidden">
+                            <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="#">Buy Now
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></a>
+                          </div>
+                        </div>
+                      </div>
+                    </a><a href="" role="dialog">
+                      <div
+                        class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                        <div
+                          class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                          <img src="__EPSILON__/multiverse/imgs/robo.svg"
+                            class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                            alt="" />
+                        </div>
+                        <div class="space-y-2 flex flex-col">
+                          <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                            Trading Bot
+                            <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></span>
+                          </h2>
+                          <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                            Enhance trading strategies; automate and
+                            optimize trades for maximizing market
+                            opportunities.
+                          </p>
+                          <div class="font-semibold md:flex hidden">
+                            <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="/Trade">Trade Now
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></a>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+
+
+                <!-- SWIPER SLIDE -->
+                <div class="glide__slide">
+                  <div class="flex flex-col gap-3 dark:text-white">
+                    <a href="" role="dialog">
+                      <div
+                        class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                        <div
+                          class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                          <img
+                            src="data:image/svg+xml,%3csvg%20width=&#39;100&#39;%20height=&#39;100&#39;%20viewBox=&#39;0%200%20144%20108&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cpath%20d=&#39;M84.592%2038.2265L78.4165%2041.0634L78.9402%2042.2088C71.4337%2049.8245%2069.7752%2063.6922%2075.667%2076.5232C81.5588%2089.3542%2093.1678%2097.1228%20103.839%2096.3809L104.363%2097.5263L110.538%2094.6894C122.627%2089.1358%20126.62%2071.9841%20119.452%2056.3927C112.284%2040.8013%2096.6701%2032.6621%2084.581%2038.2265H84.592Z&#39;%20fill=&#39;%23EBE9E9&#39;%20stroke=&#39;black&#39;%20stroke-width=&#39;0.7&#39;%20stroke-miterlimit=&#39;10&#39;/%3e%3cpath%20d=&#39;M84.2873%2088.5576C90.0809%2093.9475%2097.1401%2096.8393%20103.839%2096.381L104.363%2097.5264L110.538%2094.6895C118.678%2090.9472%20123.118%2081.9567%20122.987%2071.7334L84.2764%2088.5688L84.2873%2088.5576Z&#39;%20fill=&#39;black&#39;%20stroke=&#39;black&#39;%20stroke-width=&#39;0.7&#39;%20stroke-miterlimit=&#39;10&#39;/%3e%3cpath%20d=&#39;M122.54%2067.5282L115.741%2070.0278L114.65%2066.2867L121.934%2064.103L122.54%2067.5282Z&#39;%20fill=&#39;black&#39;/%3e%3cpath%20d=&#39;M104.003%2097.7339C116.093%2092.1784%20120.085%2075.0335%20112.919%2059.4396C105.753%2043.8457%2090.1435%2035.7081%2078.0538%2041.2636C65.9642%2046.8191%2061.9727%2063.964%2069.1385%2079.5578C76.3043%2095.1517%2091.9138%20103.29%20104.003%2097.7339Z&#39;%20fill=&#39;%237284DA&#39;/%3e%3cpath%20d=&#39;M78.417%2041.0629C69.012%2045.3836%2064.5168%2056.7089%2066.3389%2068.8634L114.542%2086.7131C117.87%2078.9993%20117.695%2068.8306%20113.277%2059.2291C106.108%2043.6378%2090.4951%2035.4985%2078.4061%2041.0629H78.417Z&#39;%20fill=&#39;white&#39;/%3e%3cpath%20d=&#39;M104.221%2062.4482L95.9943%2067.129C94.1177%2068.1982%2092.8412%2066.9872%2093.1467%2064.445L94.4996%2053.294L92.6884%2052.4976L91.3354%2063.6485C91.0299%2066.1907%2089.6007%2066.2011%2088.1605%2063.6698L81.854%2052.5849L80.403%2053.4139L86.7093%2064.4993C88.1495%2067.0197%2087.4076%2068.2414%2085.0618%2067.2158L74.7839%2062.688L74.5439%2064.6522L84.8218%2069.1801C87.1676%2070.2166%2087.5494%2071.9296%2085.6728%2072.9988L77.4461%2077.6795L78.5591%2079.6326L86.7857%2074.9519C88.6623%2073.8826%2089.9389%2075.0937%2089.6334%2077.6358L88.2805%2088.7756L90.0916%2089.5721L91.4446%2078.4323C91.7501%2075.8901%2093.1794%2075.8792%2094.6196%2078.4105L100.926%2089.4959L102.377%2088.6664L96.0707%2077.581C94.6305%2075.0606%2095.3724%2073.8389%2097.7182%2074.8645L107.996%2079.3923L108.236%2077.4286L97.9582%2072.9008C95.6124%2071.8643%2095.2306%2070.1513%2097.1072%2069.082L105.334%2064.4013L104.221%2062.4482Z&#39;%20fill=&#39;black&#39;/%3e%3cpath%20d=&#39;M104.003%2097.7339C116.093%2092.1784%20120.085%2075.0335%20112.919%2059.4396C105.753%2043.8457%2090.1435%2035.7081%2078.0538%2041.2636C65.9642%2046.8191%2061.9727%2063.964%2069.1385%2079.5578C76.3043%2095.1517%2091.9138%20103.29%20104.003%2097.7339Z&#39;%20stroke=&#39;black&#39;%20stroke-width=&#39;0.7&#39;%20stroke-miterlimit=&#39;10&#39;/%3e%3c/svg%3e"
+                            class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                            alt="" />
+                        </div>
+                        <div class="space-y-2 flex flex-col">
+                          <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                            Spot Trading
+                            <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></span>
+                          </h2>
+                          <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                            A user-friendly platform with real-time market
+                            access and 600 crypto pairs, ensuring seamless
+                            transactions.
+                          </p>
+                          <div class="font-semibold md:flex hidden">
+                            <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="/Trade">Trade Now
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></a>
+                          </div>
+                        </div>
+                      </div>
+                    </a><a href="" role="dialog">
+                      <div
+                        class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                        <div
+                          class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                          <img src="__EPSILON__/multiverse/imgs/piggy-bank.svg"
+                            class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                            alt="" />
+                        </div>
+                        <div class="space-y-2 flex flex-col">
+                          <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                            Earn/Saving
+                            <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></span>
+                          </h2>
+                          <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                            Earn passive income on your digital _assets,
+                            and ensure your financial future with our
+                            Crypto Savings feature.
+                          </p>
+                          <div class="font-semibold md:flex hidden">
+                            <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="#">Start Earning
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></a>
+                          </div>
+                        </div>
+                      </div>
+                    </a><a href="" role="dialog">
+                      <div
+                        class="1300px:w-[600px] min-h-max flex gap-6 border dark:hover:border-[rgb(44,44,46)] dark:border-gray-50/20 group transition-all hover:bg-[#f5f5f5] dark:hover:bg-[rgb(44,44,46)] duration-300 1300px:p-8 p-4 rounded-md">
+                        <div
+                          class="1300px:min-w-[130px] 1300px:h-[130px] md:min-w-[120px] min-w-[80px] md:h-[120px] h-[80px] rounded-md group-hover:bg-white dark:group-hover:bg-[#3a3a3c] transition-colors duration-300 bg-[#f5f5f5] dark:bg-[rgb(44,44,46)] flex justify-center items-center">
+                          <img src="__EPSILON__/multiverse/imgs/wallet.svg"
+                            class="1300px:w-[100%] 1300px:h-full md:w-[150px] w-[120px] -translate-x-5 -translate-y-3"
+                            alt="" />
+                        </div>
+                        <div class="space-y-2 flex flex-col">
+                          <h2 class="1300px:text-xl text-md font-semibold md:block flex justify-between">
+                            Demo Trading
+                            <span class="md:hidden font-bold"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></span>
+                          </h2>
+                          <p class="font-light md:grow leading-tight text-subTitleColor 1300px:text-md text-sm mb-10">
+                            Hone trading skills without risk and learn
+                            trading strategies using virtual funds in a
+                            simulated environment.
+                          </p>
+                          <div class="font-semibold md:flex hidden">
+                            <a role="button" class="1300px:mt-5 mt-3 text-sm flex gap-2" href="/Trade">Trade Now
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                              </svg></a>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="flex justify-center mt-2 gap-2 lg:hidden dark:text-white glide__arrows"
+              data-glide-el="controls">
+              <button
+                class="w-[35px] h-[35px] border rounded-full flex justify-center items-center glide__arrow glide__arrow--left"
+                data-glide-dir="<">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18">
+                  </path>
+                </svg></button>
+
+              <button
+                class="w-[35px] h-[35px] border rounded-full flex justify-center items-center glide__arrow glide__arrow--right"
+                data-glide-dir=">">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3">
+                  </path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="dark:bg-[rgb(44,44,46)] bg-[#f5f5f5] flex justify-center">
+        <div class="1300px:w-[1300px] lg:w-[1024px] md:w-[768px] sm:w-[640px] xw-full lg:p-10 p-5">
+          <div class="w-full flex justify-between">
+            <div class="w-full">
+              <h1 class="dark:text-white 1300px:text-[2.6rem] lg:text-[2rem] text-2xl space-x-2 1300px:mb-5 mb-2">
+                <span>{:l('Access')}</span><span class="font-medium">{:l('Anywhere, Anytime')}</span>
+              </h1>
+              <p
+                class="text-subTitleColor/80 font-light 1300px:text-xl lg:text-lg sm:text-md text-[1rem] mb-4 leading-tight">
+                Deposit , withdraw and Trade 24/7 on {:SHORT_NAME} mobile Apps
+                for IOS and Android
+              </p>
+              <div class="flex flex-wrap gap-3 mb-5">
+                <div onclick="window.open('{$C['google_play']}', '_blank');"
+                  class="dark:bg-[#3a3a3c] dark:bg-[rgb(58,58,60)] bg-white flex items-center gap-2 px-4 py-2 rounded-md"
+                  style="cursor: pointer">
+                  <img
+                    src="data:image/svg+xml,%3csvg%20width=&#39;24&#39;%20height=&#39;25&#39;%20viewBox=&#39;0%200%2024%2025&#39;%20fill=&#39;none&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cpath%20fill-rule=&#39;evenodd&#39;%20clip-rule=&#39;evenodd&#39;%20d=&#39;M3.90478%202.80541C3.67978%203.04691%203.55078%203.41891%203.55078%203.90241V21.0944C3.55078%2021.5779%203.67978%2021.9499%203.91328%2022.1829L3.97428%2022.2344L13.6073%2012.6014V12.3849L3.96578%202.75391L3.90478%202.80541Z&#39;%20fill=&#39;url(%23paint0_linear_508_4739)&#39;%3e%3c/path%3e%3cpath%20fill-rule=&#39;evenodd&#39;%20clip-rule=&#39;evenodd&#39;%20d=&#39;M16.8107%2015.8249L13.5977%2012.6109V12.3859L16.8117%209.17188L16.8812%209.21488L20.6827%2011.3754C21.7712%2011.9889%2021.7712%2012.9999%2020.6827%2013.6219L16.8812%2015.7824C16.8802%2015.7819%2016.8107%2015.8249%2016.8107%2015.8249Z&#39;%20fill=&#39;url(%23paint1_linear_508_4739)&#39;%3e%3c/path%3e%3cpath%20fill-rule=&#39;evenodd&#39;%20clip-rule=&#39;evenodd&#39;%20d=&#39;M16.8808%2015.7796L13.5983%2012.4961L3.9043%2022.1901C4.2583%2022.5706%204.8543%2022.6136%205.5203%2022.2416L16.8808%2015.7796Z&#39;%20fill=&#39;url(%23paint2_linear_508_4739)&#39;%3e%3c/path%3e%3cpath%20fill-rule=&#39;evenodd&#39;%20clip-rule=&#39;evenodd&#39;%20d=&#39;M16.8808%209.21443L5.5203%202.76093C4.8553%202.38043%204.2583%202.43193%203.9043%202.81243L13.5973%2012.4969L16.8808%209.21443Z&#39;%20fill=&#39;url(%23paint3_linear_508_4739)&#39;%3e%3c/path%3e%3cdefs%3e%3clinearGradient%20id=&#39;paint0_linear_508_4739&#39;%20x1=&#39;19.3463&#39;%20y1=&#39;-2.89542&#39;%20x2=&#39;-1.44208&#39;%20y2=&#39;2.64757&#39;%20gradientUnits=&#39;userSpaceOnUse&#39;%3e%3cstop%20stop-color=&#39;%23047ED6&#39;%3e%3c/stop%3e%3cstop%20offset=&#39;1&#39;%20stop-color=&#39;%2350E6FF&#39;%3e%3c/stop%3e%3c/linearGradient%3e%3clinearGradient%20id=&#39;paint1_linear_508_4739&#39;%20x1=&#39;22.1004&#39;%20y1=&#39;12.4976&#39;%20x2=&#39;11.323&#39;%20y2=&#39;12.4976&#39;%20gradientUnits=&#39;userSpaceOnUse&#39;%3e%3cstop%20stop-color=&#39;%23FFDA1C&#39;%3e%3c/stop%3e%3cstop%20offset=&#39;1&#39;%20stop-color=&#39;%23FEB705&#39;%3e%3c/stop%3e%3c/linearGradient%3e%3clinearGradient%20id=&#39;paint2_linear_508_4739&#39;%20x1=&#39;15.0931&#39;%20y1=&#39;14.2804&#39;%20x2=&#39;2.70744&#39;%20y2=&#39;35.1298&#39;%20gradientUnits=&#39;userSpaceOnUse&#39;%3e%3cstop%20stop-color=&#39;%23D9414F&#39;%3e%3c/stop%3e%3cstop%20offset=&#39;1&#39;%20stop-color=&#39;%238C193F&#39;%3e%3c/stop%3e%3c/linearGradient%3e%3clinearGradient%20id=&#39;paint3_linear_508_4739&#39;%20x1=&#39;1.46243&#39;%20y1=&#39;-2.91676&#39;%20x2=&#39;6.98772&#39;%20y2=&#39;6.39583&#39;%20gradientUnits=&#39;userSpaceOnUse&#39;%3e%3cstop%20stop-color=&#39;%2333C481&#39;%3e%3c/stop%3e%3cstop%20offset=&#39;1&#39;%20stop-color=&#39;%2361E3A7&#39;%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e"
+                    class="sm:min-w-[30px] min-w-[25px]" alt="google Play" />
+                  <div class="">
+                    <span class="text-xs font-light leading-tight text-subTitleColor whitespace-nowrap">Download
+                      from</span>
+                    <div
+                      class="lg:text-lg sm:text-md text-xs leading-tight dak:text-white font-medium dark:text-white text-black">
+                      Google Play
+                    </div>
+                  </div>
+                </div>
+                <div onclick="window.open('{$C['apple_store']}', '_blank');"
+                  class="dak:bg-[#3a3a3c] dark:bg-[rgb(58,58,60)] bg-white flex items-center gap-2 px-4 py-2 rounded-md"
+                  style="cursor: pointer">
+                  <img src="__EPSILON__/multiverse/imgs/app_store.svg" class="sm:min-w-[30px] min-w-[25px]"
+                    alt="google Play" />
+                  <div class="">
+                    <span class="text-xs font-light leading-tight text-subTitleColor whitespace-nowrap">Download
+                      from</span>
+                    <div
+                      class="lg:text-lg sm:text-md text-xs leading-tight dak:text-white font-medium dark:text-white text-black">
+                      App Store
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="lg:flex items-center gap-3 hidden">
+                <div class="rounded-md overflow-hidden">
+                  <img src="__UPLOAD__/public/{$C['contact_app_img']}"
+                    class="lg:w-max w-[200px] rounded-md md:block hidden" alt="" />
+                </div>
+                <div class="dark:text-white">
+                  <p class="font-medium text-sm">{:l('Scan now to download')}</p>
+                  <p class="font-medium text-sm">{:l('IOS &amp; Andriod')}</p>
+                </div>
+              </div>
+            </div>
+            <figure>
+              <img src="__EPSILON__/multiverse/imgs/phone.png" class="lg:w-max w-[200px] md:block hidden" alt="" />
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center lg:p-16 p-5">
+        <div
+          class="1300px:w-[1300px] lg:w-[1024px] md:w-[768px] sm:w-[640px] w-full grid md:grid-cols-2 grid-cols-1 gap-10 justify-between">
+          <div class="lg:space-y-5 space-y-3 w-full">
+            <span class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                class="lg:w-[3em] w-[1.8em]">
+                <path fill="currentColor"
+                  d="M12.41 1.51C7.543 1.28 3.5 5.178 3.5 10v5.75c0 1.436 1.133 2.595 2.542 2.708C6.157 20.419 7.762 22 9.75 22h.507c.228.301.587.5.993.5h1.5c.689 0 1.25-.56 1.25-1.25S13.439 20 12.75 20h-1.5c-.406 0-.765.198-.993.5H9.75c-1.163 0-2.072-.874-2.2-2h1.2a.75.75 0 0 0 .75-.75v-5.5a.75.75 0 0 0-.75-.75H5V10a6.987 6.987 0 0 1 7.339-6.992C16.096 3.184 19 6.43 19 10.218V11.5h-3.75a.75.75 0 0 0-.75.75v5.5a.75.75 0 0 0 .75.75h2.5c1.51 0 2.75-1.24 2.75-2.75V10.219c0-4.558-3.51-8.494-8.09-8.71ZM5 13h3v4H6.25C5.55 17 5 16.449 5 15.75V13Zm11 0h3v2.75c0 .699-.55 1.25-1.25 1.25H16v-4Z">
+                </path>
+              </svg></span>
+            <div class="lg:space-y-5 space-y-3 dark:text-white">
+              <h2 class="1300px:text-3xl md:text-xl text-md font-medium">
+                24/7 customer support
+              </h2>
+              <p class="lg:text-lg text-sm font-light text-subTitleColor leading-tight mb-4">
+                Our customer service assistants will work with you via
+                24/7 live chat to reach a quick and efficient resolution
+              </p>
+              <span class="mb-4">
+                <a href="#chat" class="sm:text-md text-sm font-medium bg-primary p-[5px] rounded px-5">{:l('Chat Now →')}</a>
+              </span>
+            </div>
+          </div>
+          <div class="lg:space-y-5 space-y-3 w-full">
+            <span class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                class="lg:w-[3em] w-[1.8em]">
+                <path fill="currentColor"
+                  d="M12.41 1.51C7.543 1.28 3.5 5.178 3.5 10v5.75c0 1.436 1.133 2.595 2.542 2.708C6.157 20.419 7.762 22 9.75 22h.507c.228.301.587.5.993.5h1.5c.689 0 1.25-.56 1.25-1.25S13.439 20 12.75 20h-1.5c-.406 0-.765.198-.993.5H9.75c-1.163 0-2.072-.874-2.2-2h1.2a.75.75 0 0 0 .75-.75v-5.5a.75.75 0 0 0-.75-.75H5V10a6.987 6.987 0 0 1 7.339-6.992C16.096 3.184 19 6.43 19 10.218V11.5h-3.75a.75.75 0 0 0-.75.75v5.5a.75.75 0 0 0 .75.75h2.5c1.51 0 2.75-1.24 2.75-2.75V10.219c0-4.558-3.51-8.494-8.09-8.71ZM5 13h3v4H6.25C5.55 17 5 16.449 5 15.75V13Zm11 0h3v2.75c0 .699-.55 1.25-1.25 1.25H16v-4Z">
+                </path>
+              </svg></span>
+            <div class="lg:space-y-5 space-y-3 dark:text-white">
+              <h2 class="1300px:text-3xl md:text-xl text-mdfont-medium">
+                FAQs
+              </h2>
+              <p class="lg:text-lg text-sm font-light text-subTitleColor leading-tight mb-4">
+                Our FAQs are loaded with in-depth articles to help you
+                troubleshoot issues or learn more.
+              </p>
+              <span class="mb-4">
+                <a href="#view" class="sm:text-md text-sm font-medium bg-primary p-[5px] rounded px-5 ">{:l('View More →')}</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-black p-5 flex justify-center items-center">
+        <div
+          class="1300px:w-[1300px] lg:w-[1024px] md:w-[768px] sm:w-[640px] w-full flex flex-col md:flex-row gap-5 md:gap-0 justify-between items-center">
+          <h1 class="space-x-2 text-white lg:text-3xl text-xl">
+            <span class="text-navColor font-light">{:l('Get your first coin and')}</span><span class="font-medium">start
+              trading!</span>
+          </h1>
+          <a role="button" class="bg-primary p-[5px] rounded px-5 text-dark font-medium font-medium px-12">Trade
+            Now</a>
+        </div>
+      </div>
+    </section>
+    <include file="Index:multiverse_footer_nav" />
+  </main>
+
+  <script type="module" src="__EPSILON__/multiverse/index.js?v=11" crossorigin></script>
+  <script src="__EPSILON__/multiverse/glide.min.js?v=5"></script>
+  <script src="__EPSILON__/multiverse/useglide.js?v=2"></script>
+  <script src="__EPSILON__/multiverse/sidebar.js"></script>
+  <script>
+    function easytrade() {
+      var coin = $("select#easycoin").find("option:selected").attr('data-value');
+      var amount = $("input#easyamount").val();
+      var url = '{:U("Easy/index")}';
+      if (!coin) {
+        layer.tips('{:l("Please select coin!")}', '#easycoin', { tips: 3 });
+        return false;
+      }
+      if (!amount) {
+        layer.tips('{:l("Please enter amount")}', '#easyamount', { tips: 3 });
+        return false;
+      }
+      coin = coin.toUpperCase();
+      url = url + '?coin=' + coin + '&amount=' + amount;
+      console.log(url);
+      window.location = url;
+    }
+  </script>
+
+  <script>
+    window.onload = function () {
+      // Select the element with the ID "trade_moshi" and click it
+      var element = document.querySelectorAll(".trade_moshi")[0];
+      if (element) {
+        element.click();
+      }
+    };
+  </script>
+  <eq name="SOCKET_WS_ENABLE" value='1'>
+    <include file="Index:mv_socket_script" />
+  </eq>
+</body>
+</html>

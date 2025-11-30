@@ -1,0 +1,121 @@
+2024-05-06 06:38:23 pid:1 ParseError: syntax error, unexpected '}', expecting ')' in C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\AsyncTcpConnection.php:191
+Stack trace:
+#0 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\composer\ClassLoader.php(322): Composer\Autoload\includeFile('C:\\dev\\www\\codo...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Workerman\\Conne...')
+#2 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\redis\src\Client.php(317): spl_autoload_call('Workerman\\Conne...')
+#3 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\redis\src\Client.php(265): Workerman\Redis\Client->connect()
+#4 C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php(31): Workerman\Redis\Client->__construct('redis://127.0.0...')
+#5 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(2413): {closure}(Object(Workerman\Worker))
+#6 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1414): Workerman\Worker->run()
+#7 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1357): Workerman\Worker::forkWorkersForWindows()
+#8 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#9 C:\dev\www\codonoExchange\codebase\socketbot.php(48): Workerman\Worker::runAll()
+#10 {main}
+2024-05-06 06:38:24 pid:1 Worker process terminated
+2024-05-06 06:41:07 pid:1 ArgumentCountError: Too few arguments to function writeToLog(), 1 passed in C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php on line 43 and exactly 2 expected in C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php:12
+Stack trace:
+#0 C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php(43): writeToLog('Failed to authe...')
+#1 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\redis\src\Client.php(398): {closure}(false, Object(Workerman\Redis\Client))
+#2 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\TcpConnection.php(660): Workerman\Redis\Client->Workerman\Redis\{closure}(Object(Workerman\Connection\AsyncTcpConnection), Array)
+#3 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(245): Workerman\Connection\TcpConnection->baseRead(Resource id #41)
+#4 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(212): React\EventLoop\StreamSelectLoop->waitForStreamActivity(498293)
+#5 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(254): React\EventLoop\StreamSelectLoop->run()
+#6 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(137): Workerman\Events\React\Base->run()
+#7 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(2428): Workerman\Events\React\Base->loop()
+#8 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1414): Workerman\Worker->run()
+#9 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1357): Workerman\Worker::forkWorkersForWindows()
+#10 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#11 C:\dev\www\codonoExchange\codebase\socketbot.php(48): Workerman\Worker::runAll()
+#12 {main}
+2024-05-06 06:41:07 pid:1 Worker process terminated
+2024-11-12 06:53:12 pid:1 DivisionByZeroError: Modulo by zero in C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php:113
+Stack trace:
+#0 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\TcpConnection.php(954): {closure}(Object(Workerman\Connection\AsyncTcpConnection))
+#1 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\AsyncTcpConnection.php(370): Workerman\Connection\TcpConnection->destroy()
+#2 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(253): Workerman\Connection\AsyncTcpConnection->checkConnection(Resource id #43)
+#3 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(212): React\EventLoop\StreamSelectLoop->waitForStreamActivity(1000000)
+#4 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(254): React\EventLoop\StreamSelectLoop->run()
+#5 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(137): Workerman\Events\React\Base->run()
+#6 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(2428): Workerman\Events\React\Base->loop()
+#7 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1414): Workerman\Worker->run()
+#8 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1357): Workerman\Worker::forkWorkersForWindows()
+#9 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#10 C:\dev\www\codonoExchange\codebase\socketbot.php(48): Workerman\Worker::runAll()
+#11 {main}
+2024-11-12 06:53:12 pid:1 Worker process terminated
+2024-11-12 06:56:15 pid:1 DivisionByZeroError: Modulo by zero in C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php:162
+Stack trace:
+#0 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\TcpConnection.php(954): {closure}(Object(Workerman\Connection\AsyncTcpConnection))
+#1 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\AsyncTcpConnection.php(370): Workerman\Connection\TcpConnection->destroy()
+#2 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(253): Workerman\Connection\AsyncTcpConnection->checkConnection(Resource id #43)
+#3 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(212): React\EventLoop\StreamSelectLoop->waitForStreamActivity(1000000)
+#4 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(254): React\EventLoop\StreamSelectLoop->run()
+#5 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(137): Workerman\Events\React\Base->run()
+#6 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(2428): Workerman\Events\React\Base->loop()
+#7 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1414): Workerman\Worker->run()
+#8 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1357): Workerman\Worker::forkWorkersForWindows()
+#9 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#10 C:\dev\www\codonoExchange\codebase\socketbot.php(48): Workerman\Worker::runAll()
+#11 {main}
+2024-11-12 06:56:15 pid:1 Worker process terminated
+2024-11-12 06:58:09 pid:1 DivisionByZeroError: Modulo by zero in C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php:149
+Stack trace:
+#0 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\TcpConnection.php(954): {closure}(Object(Workerman\Connection\AsyncTcpConnection))
+#1 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\AsyncTcpConnection.php(370): Workerman\Connection\TcpConnection->destroy()
+#2 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(253): Workerman\Connection\AsyncTcpConnection->checkConnection(Resource id #43)
+#3 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(212): React\EventLoop\StreamSelectLoop->waitForStreamActivity(1000000)
+#4 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(254): React\EventLoop\StreamSelectLoop->run()
+#5 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(137): Workerman\Events\React\Base->run()
+#6 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(2428): Workerman\Events\React\Base->loop()
+#7 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1414): Workerman\Worker->run()
+#8 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1357): Workerman\Worker::forkWorkersForWindows()
+#9 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#10 C:\dev\www\codonoExchange\codebase\socketbot.php(48): Workerman\Worker::runAll()
+#11 {main}
+2024-11-12 06:58:09 pid:1 Worker process terminated
+2024-11-12 07:03:47 pid:1 DivisionByZeroError: Modulo by zero in C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php:150
+Stack trace:
+#0 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\TcpConnection.php(954): {closure}(Object(Workerman\Connection\AsyncTcpConnection))
+#1 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\AsyncTcpConnection.php(370): Workerman\Connection\TcpConnection->destroy()
+#2 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(253): Workerman\Connection\AsyncTcpConnection->checkConnection(Resource id #43)
+#3 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(212): React\EventLoop\StreamSelectLoop->waitForStreamActivity(1000000)
+#4 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(254): React\EventLoop\StreamSelectLoop->run()
+#5 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(137): Workerman\Events\React\Base->run()
+#6 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(2428): Workerman\Events\React\Base->loop()
+#7 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1414): Workerman\Worker->run()
+#8 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1357): Workerman\Worker::forkWorkersForWindows()
+#9 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#10 C:\dev\www\codonoExchange\codebase\socketbot.php(48): Workerman\Worker::runAll()
+#11 {main}
+2024-11-12 07:03:47 pid:1 Worker process terminated
+2024-11-12 07:10:51 pid:1 DivisionByZeroError: Modulo by zero in C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php:181
+Stack trace:
+#0 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\TcpConnection.php(954): {closure}(Object(Workerman\Connection\AsyncTcpConnection))
+#1 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\AsyncTcpConnection.php(370): Workerman\Connection\TcpConnection->destroy()
+#2 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(253): Workerman\Connection\AsyncTcpConnection->checkConnection(Resource id #43)
+#3 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(212): React\EventLoop\StreamSelectLoop->waitForStreamActivity(1000000)
+#4 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(254): React\EventLoop\StreamSelectLoop->run()
+#5 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(137): Workerman\Events\React\Base->run()
+#6 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(2428): Workerman\Events\React\Base->loop()
+#7 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1414): Workerman\Worker->run()
+#8 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1357): Workerman\Worker::forkWorkersForWindows()
+#9 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#10 C:\dev\www\codonoExchange\codebase\socketbot.php(48): Workerman\Worker::runAll()
+#11 {main}
+2024-11-12 07:10:51 pid:1 Worker process terminated
+2024-11-12 07:13:21 pid:1 DivisionByZeroError: Modulo by zero in C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php:86
+Stack trace:
+#0 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\TcpConnection.php(954): {closure}(Object(Workerman\Connection\AsyncTcpConnection))
+#1 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Connection\AsyncTcpConnection.php(370): Workerman\Connection\TcpConnection->destroy()
+#2 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(253): Workerman\Connection\AsyncTcpConnection->checkConnection(Resource id #43)
+#3 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\react\event-loop\src\StreamSelectLoop.php(212): React\EventLoop\StreamSelectLoop->waitForStreamActivity(1000000)
+#4 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(254): React\EventLoop\StreamSelectLoop->run()
+#5 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Events\React\Base.php(137): Workerman\Events\React\Base->run()
+#6 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(2428): Workerman\Events\React\Base->loop()
+#7 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1414): Workerman\Worker->run()
+#8 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(1357): Workerman\Worker::forkWorkersForWindows()
+#9 C:\dev\www\codonoExchange\codebase\SocketBot\vendor\workerman\workerman\Worker.php(542): Workerman\Worker::forkWorkers()
+#10 C:\dev\www\codonoExchange\codebase\socketbot.php(48): Workerman\Worker::runAll()
+#11 {main}
+2024-11-12 07:13:21 pid:1 Worker process terminated
+2024-11-13 11:12:37 pid:1 Worker process terminated with ERROR: E_ERROR "Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in C:\dev\www\codonoExchange\codebase\SocketBot\SocketCode\start_huobiv4.php on line 92"

@@ -1,0 +1,10 @@
+This is highly experimental and not being used, Only for developer future reference
+
+use codono
+db.createUser(
+  {
+    user: "bf487fg48",
+    pwd:  "y4875g47fg478f",   // or cleartext password
+    roles: [ { role: "readWrite", db: "codono" }]
+  }
+)

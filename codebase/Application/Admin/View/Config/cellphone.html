@@ -1,0 +1,63 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="alert alert-info no-border">
+									<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">{:l('Close')}</span></button>
+									<span class="text-semibold">{:l('Heads up!')}</span> {:l('Currently using Nexmo SMS, It can be switched to other SMS gateway too.')}</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('SMS Configuration')}</span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('Config/cellphoneEdit')}" method="post" class="form-horizontal">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<td class="item-label">{:l('From Number')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" id="cellphone_url" name="cellphone_url" value="{$C['cellphone_url']}">
+									</td>
+									<td class="item-note">{:l('Nexmo Signup')}:<a href="https://dashboard.nexmo.com/sign-up" target="_blank">{:l('Get €2.00 SMS Credit')}
+									</a>
+									</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Key')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" id="cellphone_user" name="cellphone_user" value="{$C['cellphone_user']}">
+									</td>
+									<td class="item-note">{:l('Nexmo Key')}[<a href="https://dashboard.nexmo.com/getting-started-guide" target="_blank">{:l('Check Here')}</a>]</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Secret')}:</td>
+									<td>
+										<input type="password" class="form-control input-10x" id="cellphone_pwd" name="cellphone_pwd" value="{$C['cellphone_pwd']}">
+									</td>
+									<td class="item-note">{:l('Nexmo Secret')}[<a href="https://dashboard.nexmo.com/getting-started-guide" target="_blank">{:l('Check Here')}</a>]</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Save')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>

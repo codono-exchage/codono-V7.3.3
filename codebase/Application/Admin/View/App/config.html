@@ -1,0 +1,188 @@
+<include file = "Public:header" />
+<div id = "main-content" >
+    <div id = "top-alert" class = "fixed alert alert-error" style = "display: none;" >
+        <button class = "close fixed" style = "margin-top: 4px;" >&times;</button >
+        <div class = "alert-content" >Warnings</div >
+    </div >
+    <div id = "main" class = "main" >
+       <div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">APP Config</h4>
+        </div>
+    </div>
+</div>
+
+        <div class = "tab-wrap" >
+            <div class = "tab-content" >
+                <form id = "form" action = "{:U('App/config')}" method = "post" class = "form-horizontal" >
+                    <div id = "tab" class = "tab-pane in tab" >
+                        <div class = "form-item cf" >
+                            <table class="table">
+                                <input type = "hidden" class = "form-control" name = "id" value = "{$appCon['id']}" ></td>
+                                <tr class = "controls" >
+                                    <td class = "item-label" >APP Show name :</td >
+                                    <td >
+                                        <input type = "text" class = "form-control" name = "web_name" value = "{$appCon['web_name']}" >
+                                    </td >
+                                    <td class = "item-note" ></td >
+                                </tr >
+
+                                <tr class = "controls" >
+                                    <td class = "item-label" >APP Show Title :</td >
+                                    <td >
+                                        <input type = "text" class = "form-control" name = "web_title" value = "{$appCon['web_title']}" >
+                                    </td >
+                                    <td class = "item-note" ></td >
+                                </tr >
+                                <tr class = "controls" >
+                                    <td class = "item-label" >APP Copyright text:</td >
+                                    <td >
+                                        <input type = "text" class = "form-control" name = "web_icp" value = "{$appCon['web_icp']}" >
+                                    </td >
+                                    <td class = "item-note" ></td >
+                                </tr >
+
+                                <tr class = "controls" >
+                                    <td class = "item-label" >APP Start page picture :</td >
+                                    <td >
+                                        <textarea name = "index_img" class = "form-control" style = "width: 300px;" >{$appCon['index_img']}</textarea >
+                                    </td >
+                                    <td class = "item-note" >1 Image url per line</td >
+                                </tr >
+
+                                <!--//AlipayRechargeinformation-->
+                                <tr class = "controls" >
+                                    <td class = "item-label" >Alipay Information :</td >
+                                    <td >
+                                        Alipay headed:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type = "text" class = "" name = "pay[alipay][name]" value = "{$appCon['pay']['alipay']['name']}" >
+                                        Alipay account:&nbsp;<input type = "text" class = "" name = "pay[alipay][value]" value = "{$appCon['pay']['alipay']['value']}" >
+                                    </td >
+                                    <td class = "item-note" >Leave Blank=does not display</td >
+                                </tr >
+
+                                <!--//Recharge online banking information-->
+                                <tr class = "controls" >
+                                    <td class = "item-label" >Bank info :</td >
+                                    <td >
+                                        Bank Name:&nbsp;<input type = "text" class = "" name = "pay[bank][name]" value = "{$appCon['pay']['bank']['name']}" >
+                                        Account Number:&nbsp;&nbsp;&nbsp;&nbsp;<input type = "text" class = "" name = "pay[bank][value]" value = "{$appCon['pay']['bank']['value']}" >
+                                    </td >
+                                    <td class = "item-note" >Leave Blank=does not display</td >
+                                </tr >
+
+                                <tr><td>&nbsp;</td></tr>
+                                <tr class = "controls" >
+                                    <td class = "item-label" >Withdraw caption :</td >
+                                    <td >
+                                        <textarea name = "withdraw_notice" class = "form-control" style = "height: 80px;" >{$appCon['withdraw_notice']}</textarea >
+                                    </td >
+                                    <td class = "item-note" ></td >
+                                </tr >
+                                <tr><td>&nbsp;</td></tr>
+                                <tr class = "controls" >
+                                    <td class = "item-label" >Recharge caption :</td >
+                                    <td >
+                                        <textarea name = "charge_notice" class = "form-control" style = "height: 80px;" >{$appCon['charge_notice']}</textarea >
+                                    </td >
+                                    <td class = "item-note" ></td >
+                                </tr >
+                                <tr><td>&nbsp;</td></tr>
+                                <tr class = "controls" style="border: solid 1px red;">
+                                    <td class = "item-label" >APP Currencies :</td >
+                                    <td >
+                                        <div style="width: 500px;text-align: left">
+                                            <volist name = "appCon.show_coin" id = "show_coin" >
+                                                <label style="margin-left: 15px;"><input name="show_coin[]" type = "checkbox"
+                                                    <eq name = "show_coin.flag" value = "1" >checked</eq >
+                                                    value="{$show_coin['id']}"/>{$show_coin['name']} </label >
+                                            </volist >
+                                        </div>
+                                    </td >
+                                    <td class = "item-note" ></td >
+                                </tr >
+                                <tr><td>&nbsp;</td></tr>
+                                <tr class = "controls" style="border: solid 1px green;margin-top: 10px" >
+                                    <td class = "item-label" >APP Markets :</td >
+                                    <td >
+                                        <div style="width: 500px;text-align: left">
+                                            <volist name = "appCon.show_market" id = "show_market" >
+                                                <label style="margin-left: 15px;"><input name="show_market[]" type = "checkbox"
+                                                    <eq name = "show_market.flag" value = "1" >checked</eq >
+                                                    value="{$show_market['id']}"/>{$show_market['name']} </label >
+                                            </volist >
+                                        </div>
+                                    </td >
+                                    <td class = "item-note" ></td >
+                                </tr >
+
+
+                                <tr class = "controls" >
+                                    <td class = "item-label" ></td >
+                                    <td >
+                                        <div class = "form-item cf" >
+                                            <button class = "btn submit-btn  ajax-post" target-form = "form-horizontal" id = "submit" type = "submit" >Submit</button >
+                                            <a class = "btn btn-return btn-warning" href = "{$Think.server.HTTP_REFERER}" >Back</a >
+                                        </div >
+                                    </td >
+                                </tr >
+                            </table >
+                        </div >
+                    </div >
+                </form >
+                <script type = "text/javascript" >
+                    //submit Form
+                    $('#submit').click(function () {
+                        $('#form').submit();
+                    });
+                </script >
+            </div >
+        </div >
+    </div >
+</div >
+<script type = "text/javascript" src = "__THEME__/kindeditor/kindeditor-min.js" ></script >
+<script type = "text/javascript" >
+
+    var editor;
+    KindEditor.ready(function (K) {
+        editor = K.create('textarea[name="web_reg"]', {
+            width: '465px',
+            height: '60px',
+            items: [
+                'source',
+                'fontname',
+                'fontsize',
+                '|',
+                'forecolor',
+                'hilitecolor',
+                'bold',
+                'italic',
+                'underline',
+                'removeformat',
+                '|',
+                'justifyleft',
+                'justifycenter',
+                'justifyright',
+                'insertorderedlist',
+                'insertunorderedlist',
+                '|',
+                'emoticons',
+                'link',
+                'fullscreen'
+            ],
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+</script >
+<script type = "text/javascript" >
+    $(function () {
+        //Highlight the main navigation
+        $('.config-box').addClass('current');
+        //Highlight side navigation
+        $('.config-index').addClass('current');
+    });
+</script >
+<include file = "Public:footer" />

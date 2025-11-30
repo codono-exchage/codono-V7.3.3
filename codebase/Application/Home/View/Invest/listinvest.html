@@ -1,0 +1,109 @@
+<include file="Public:header" />
+<div class="page-container">
+<div class="row">	<include file="Invest:smallmenu" /></div>
+	<div class="row">
+	
+		<div class="panel panel-flat">
+		<div class="panel-heading">
+						<h5 class="panel-title">MY INVESTMENTS</h5>
+
+	     </div>
+		<div class="panel-body">
+		<div class="table-responsive">
+		<table class="table">
+						<thead>
+							<tr>
+							<th>Invest ID</th>
+								<th>Locked</th>
+								<th>Estimated Annual Yield</th>
+								<th>Duration</th>
+								<th>Limit</th>
+								<th>Duration</th>
+								<th>Paid</th>
+								<th>Status</th>
+								<th>Option</th>
+							</tr>
+						</thead>
+						<tbody>
+						<notempty name="list">	
+						<volist name="list" id="vo">
+						<tr>
+						<td>{$vo.docid}</td>
+						<td>{$vo['amount']*1} {$vo['coinname']|strtoupper}</td>
+							<td>{$vo['percentage']*1}%/yr</td>
+								<td><switch name="vo.period"><case value="1">1 Day</case><case value="7">1 Week</case><case value="30">1 Month</case><default />{$vo.period} days</switch> </td>
+							<td><i class="fa fa-info" title="Min {$vo.minvest} / Max {$vo.maxvest}"></i></td>
+								
+								
+								<td>{$vo.begintime|date="Y-m-d",###} to {$vo.endtime|date="Y-m-d",###}</td>
+								<td>{$vo['credited']*1}</td>
+								<td>
+								<switch name="vo.status">
+									<case value="0"><span class="label label-danger">Withdrawn</span></case>
+									<case value="1"><span class="label label-success">Active</span></case>
+									<case value="2"><span class="label label-warning">Rejected<span></case>
+									<case value="3"><span class="label label-info">Completed<span></case>
+									<default />NA
+								</switch>
+								</td>
+								<td class="text-center">
+								<eq name="vo['allow_withdrawal']" value='1'>	
+									<switch name="vo.status">
+									<case value="0">on {$vo.withdrawn|date="Y-m-d",###}</case>
+									<case value="1"><li><button class="btn btn-sm btn-danger btn-block" onclick="withdraw('{$vo.docid}');"><i class="icon-exit"></i> Withdraw</button></li></case>
+									<case value="2">on {$vo.withdrawn|date="Y-m-d",###}</case>
+									<case value="3">{$vo.endtime|date="Y-m-d",###}</case>
+									<default />NA
+									</switch>
+									<else/>
+									<switch name="vo.status">
+									<case value="0">on {$vo.withdrawn|date="Y-m-d",###}</case>
+									<case value="1"><li><button class="btn btn-sm btn-info btn-block" onclick="info('{$vo.docid}');" id="out-{$vo.docid}"><i class="icon-exclamation"></i> Info</button></li></case>
+									<case value="2">on {$vo.withdrawn|date="Y-m-d",###}</case>
+									<case value="3">{$vo.endtime|date="Y-m-d",###}</case>
+									<default />NA
+									</switch>
+								</eq>
+								</td>
+							</tr>
+					</volist>	
+					<else/>
+						<p class="text-center font_gray font_16">No Data</p>
+					</notempty>	
+							
+						</tbody>
+					</table>
+			</div>
+			<div class="pages"> {$page}</div>
+			<br/>
+		</div>
+	</div>
+</div>
+
+<script>
+function info(docid){
+layer.tips('It will be automatically withdrawn to your account upon completion', '#out-'+docid, {tips: 1});
+}
+function withdraw(docid) {
+	var msg = 'If you premature withdraw this investment you will loose any interest earned on it last price ';
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.get("/Invest/withdraw/docid/"+docid,  function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+						window.location.href = "{:U('Invest/listinvest')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+
+        }, 'json');
+		});
+    }
+</script>	
+<include file="Invest:include" />
+</div>
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,39 @@
+<div class="crowd_myx mt-20" id="issuebuybox">
+                  <div class="alert alert-warning" style="display:none" id="pleaselogin">{:l('PLEASE_LOGIN')}</div>
+                  <div class="form-group has-feedback has-feedback-left">
+                     <div class="font14"><i class="icon-cash3"></i>  <span class="badge bg-danger pull-right font14">{:l('PRICE')}: 1 {$issue['coinname']|strtoupper}= {$issue['price']} {$issue['buycoin']|strtoupper}</span> </div>
+                  </div>
+
+                  <div class="form-group has-feedback has-feedback-left">
+                     <input type="text" class="form-control" placeholder="{:l('NUMBER_OF_ICO')}" title="{:l('NUMBER_OF_ICO')}" id="num" >
+                     <div class="form-control-feedback">
+                        <i class="icon-cart-add text-muted"></i>
+                     </div>
+                  </div>
+                  <div class="form-group has-feedback has-feedback-left">
+                     <input type="password" class="form-control" placeholder="{:l('TRANSACTION_PASSWORD')}" title="{:l('TRANSACTION_PASSWORD')}" id="paypassword">
+                     <div class="form-control-feedback">
+                        <i class="icon-key text-muted"></i>
+                     </div>
+                  </div>
+				                    <div class="form-group has-feedback has-feedback-left">
+									
+                       <select name="show_coin" id="show_coins" class="form-control">
+				<option value="" selected="selected">--{:l('CHOOSE_A_CURRENCY')}--</option>
+				<volist name="show_coins" id="vo">
+								<option value="{$vo.name}" >1 {$issue['coinname']|strtoupper} &cong; {$vo.price} {$vo.name|strtoupper} <span class="pull-right">[Balance:{$vo.balance|format_num} {$vo.name|strtoupper}]</span></option>
+				</volist>
+				 </select>
+                     <div class="form-control-feedback">
+                        <i class="icon-key text-muted"></i>
+                     </div>
+                  </div>
+				
+                  <div class="form-group">
+                     <eq name="issue['status']" value='1'>
+                        <button type="submit" class="btn bg-blue btn-block" onclick="codono_buy_up_tishi()">{:l('SUBSCRIBE_NOW')}<i class="icon-circle-right2 position-right"></i></button>
+                        <else/>
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal" disabled='disabled'>{:l('ICO_IS_NOT_CURRENTLY_')}</button>
+                     </eq>
+                  </div>
+               </div>

@@ -1,0 +1,210 @@
+	<!-- Home Market Start -->
+	<section class="home-market">
+		<div class="container p-t-20">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="home-markets">
+						<div class="d-flex justify-content-between align-items-center"id="market-tab-box">
+							<ul class="nav nav-pills trade_qu_list" role="tablist">
+								
+								<volist name="codono_jiaoyiqu" id="v">		
+	<li  class=" nav-link trade_moshi trade_qu_pai <eq name="key" value="0">
+	current</eq>" data="{$key}" onclick="trade_qu(this)">
+	<a href="#highlighted-justified-tab1" class="<eq name="key" value="0">active</eq>" data-toggle="tab">{$v}</a>
+	</li>
+	</volist>	
+							</ul>
+
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="daily-top-winners" role="tabpanel">
+								<div class="table-responsive">
+									<table class="table coin-list ">
+										<thead class="price_today_ull">
+										<tr>
+                                    <th scope="col" data-sort="0" style="cursor: default;">{:l('PAIR')}</th>
+                                    <th scope="col"class="click-sort" data-sort="1" data-flaglist="0" data-toggle="0">{:l('PRICE')} </th>
+									
+                                    <th scope="col" class="click-sort d-none d-md-table-cell"  data-sort="2" data-flaglist="0" data-toggle="0">{:l('Buy')}</th>
+                                    <th scope="col" class="click-sort d-none d-md-table-cell" data-sort="3" data-flaglist="0" data-toggle="0">{:l('Sell')}</th>
+                                    <th scope="col" class="click-sort d-none d-md-table-cell" data-sort="6" data-flaglist="0" data-toggle="0">24H {:l('Vol')}</th>
+                                    <th scope="col"  class="click-sort d-none d-md-table-cell" data-sort="4" data-flaglist="0" data-toggle="0">24H {:l('Total')}</th>
+                                    <th scope="col" class="click-sort" data-sort="7" data-flaglist="0" data-toggle="0">{:l('CHANGE')}</th>
+									<th scope="col"></th>
+										</tr>
+									
+										</thead>
+										<tbody id="price_today_ul"></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Home Market End -->
+	<script>
+	$('.price_today_ull > .click-sort').each(function () {
+		$(this).click(function () {
+			click_sortList(this);
+		})
+	});
+	function allcoin_callback(priceTmp) {
+		for (var i in priceTmp) {
+			var c = priceTmp[i][8];
+			if (typeof (trends[c]['data']) && typeof (trends[c]['data']) != 'null') {
+				if (typeof (trends[c]) != 'undefined' && typeof (trends[c]['data']) != 'undefined') {
+				
+				}
+			}
+		}
+	}
+	function click_sortList(sortdata) {
+		var a = $(sortdata).attr('data-toggle');
+		var b = $(sortdata).attr('data-sort');
+		$(".price_today_ull > th").find('.fa-angle-up').css('border-bottom-color', '#848484');
+		$(".price_today_ull > th").find('.fa-angle-down').css('border-top-color', '#848484');
+		$(".price_today_ull > th").attr('data-flaglist', 0).attr('data-toggle', 0);
+		$(".price_today_ull > th").css('color', '');
+		$(sortdata).css('color', '#1a81d6');
+		if (a == 0) {
+			priceTmp = priceTmp.sort(sortcoinList('dec', b));
+			$(sortdata).find('.fa-angle-down').css('border-top-color', '#1a81d6');
+			$(sortdata).find('.fa-angle-up').css('border-bottom-color', '#848484');
+			$(sortdata).attr('data-flaglist', 1).attr('data-toggle', 1)
+		}
+		else if (a == 1) {
+			$(sortdata).attr('data-toggle', 0).attr('data-flaglist', 2);
+			$(sortdata).find('.fa-angle-up').css('border-bottom-color', '#1a81d6');
+			$(sortdata).find('.fa-angle-down').css('border-top-color', '#848484');
+			priceTmp = priceTmp.sort(sortcoinList('asc', b));
+		}
+		renderPage(priceTmp);
+		change_line_bg('price_today_ul', 'li');
+	//	allcoin_callback(priceTmp);
+	}
+	function trends() {
+		$.getJSON("{:U('Ajax/top_coin_menu')}?t=" + rd(), function (d) {
+			trends = d;
+			allcoin();
+		});
+	}
+	function allcoin(cb) {
+		var trade_qu_id = $('.trade_qu_list .current').attr('data');
+		$.get("{:U('Ajax/allcoin_a')}/id/" + trade_qu_id + '?t=' + rd(), cb ? cb : function (data) {
+	//		console.log(97,data);
+			var d;
+			if (data.status == 1) {
+				d = data.url;
+			}
+			ALLCOIN  = d;
+			var t    = 0;
+			var img  = '';
+			priceTmp = [];
+			for (var x in d) {
+				if (typeof(trends[x]) != 'undefined' && parseFloat(trends[x]['yprice']) > 0) {
+					rise1 = (((parseFloat(d[x][4]) + parseFloat(d[x][5])) / 2 - parseFloat(trends[x]['yprice'])) * 100) / parseFloat(trends[x]['yprice']);
+					rise1 = rise1.toFixed(2);
+				} else {
+					rise1 = 0;
+				}
+				img = d[x].pop();
+				d[x].push(rise1);
+				d[x].push(x);
+				d[x].push(img);
+				priceTmp.push(d[x]);
+			}
+			$('.price_today_ull > .click-sort').each(function () {
+				var listId = $(this).attr('data-sort');
+				if ($(this).attr('data-flaglist') == 1 && $(this).attr('data-sort') !== 0) {
+					priceTmp = priceTmp.sort(sortcoinList('dec', listId))
+				} else if ($(this).attr('data-flaglist') == 2 && $(this).attr('data-sort') !== 0) {
+					priceTmp = priceTmp.sort(sortcoinList('asc', listId))
+				}
+			});
+			renderPage(priceTmp);
+		//	allcoin_callback(priceTmp);
+			change_line_bg('price_today_ul', 'li');
+			//t = setTimeout('allcoin()', 5000);
+		}, 'json');
+	}
+	function rd() {
+		return Math.random()
+	}
+	var socket_array=[];
+
+	function renderPage(ary) {
+		
+		
+		var html = '';
+		for (var i in ary) {
+		
+			var coinfinance = 0;
+			if (typeof FINANCE == 'object') coinfinance = parseFloat(FINANCE.data[ary[i][8] + '_balance']);
+			let total_24=ary[i][4] * ary[i][6];
+			html += '<tr id="m_' + ary[i][15] + '"><td><a href="/trade/index/market/' + ary[i][8] + '/">' + ary[i][12] + '</a></td><td class="tc-warning">' + formatCount(ary[i][1]) + '</td><td class="d-none d-md-table-cell">' + formatCount(ary[i][2]) + '</td><td class="d-none d-md-table-cell">' + formatCount(ary[i][3]) + '</td><td class="d-none d-md-table-cell">' + formatCount(ary[i][6]) + '</td><td  class="d-none d-md-table-cell">' + formatCount(total_24) + '</td><td class="' + (ary[i][7] >= 0 ? 'green' : 'red') + '" >' + (parseFloat(ary[i][7]) < 0 ? '' : '') + ((parseFloat(ary[i][7]) < 0.01 && parseFloat(ary[i][7]) > -0.01) ? "0.00" : (parseFloat(ary[i][7])).toFixed(2)) + '%</td><td class="text-right"><a href=\'/trade/index/market/' + ary[i][8] + '/\'" class="btn-2"> {:l("TO_TRADE")}</a></td></tr>'
+			socket_array[i]=ary[i][15];
+		}
+	//	console.log(148,socket_array);
+		$('#price_today_ul').html(html);
+	}
+	function formatCount(count) {
+    // Convert to a number and handle non-numeric values
+    if (isNaN(count) || count === null || count === undefined) {
+        return count; // or any other placeholder for invalid numbers
+    }
+
+    // Parse count as a float with a maximum precision of 8 decimal places
+    count = parseFloat(parseFloat(count).toFixed(8));
+
+    // Constants to represent the numerical thresholds
+    const BILLION = 1e9;
+    const MILLION = 1e6;
+
+    // Helper function to format the number with 2 decimal places and a suffix
+    function formatWithSuffix(value, suffix) {
+        return parseFloat(value.toFixed(2)) + ' ' + suffix;
+    }
+
+    // Return formatted output based on the numerical value
+    if (count >= BILLION) {
+        return formatWithSuffix(count / BILLION, 'bl');
+    } else if (count >= MILLION) {
+        return formatWithSuffix(count / MILLION, 'ml');
+    } else {
+        // Return the count directly with 2 decimal places for uniformity
+        return parseFloat(count.toFixed(2));
+    }
+}
+	function change_line_bg(id, tag, nobg) {
+		var oCoin_list = $('#' + id);
+		var oC_li      = oCoin_list.find(tag);
+		var oInp       = oCoin_list.find('input');
+		var oldCol     = null;
+		var newCol     = null;
+		if (!nobg) {
+			for (var i = 0; i < oC_li.length; i++) {
+				oC_li.eq(i).css('background-color', i % 2 ? '#f8f8f8' : '#fff');
+			}
+		}
+		oCoin_list.find(tag).hover(function () {
+			oldCol = $(this).css('backgroundColor');
+			$(this).css('background-color', '#eaedf4');
+		}, function () {
+			$(this).css('background-color', oldCol);
+		})
+	}
+	function sortcoinList(order, sortBy) {
+		var ordAlpah = (order == 'asc') ? '>' : '<';
+		var sortFun  = new Function('a', 'b', 'return parseFloat(a[' + sortBy + '])' + ordAlpah + 'parseFloat(b[' + sortBy + '])? 1:-1');
+		return sortFun;
+	}
+	function trade_qu(o){
+		$('.trade_qu_pai').removeClass('current');
+		$(o).addClass('current');
+		allcoin();
+	}
+	trends();
+</script>

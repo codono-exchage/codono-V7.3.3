@@ -1,0 +1,49 @@
+<include file="Public:header" />
+
+<div id="main-content">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">{:l('List Fee Configurations')}</h4>
+            </div>
+        </div>
+    </div>
+    
+    <div id="main" class="main">
+        <div class="card card-body mt-2 mb-2 table-responsive">
+            <div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+				<a class="btn btn-success  " href="{:U('Fees/addFees')}">{:l('Add Coin Fees')}</a>
+                <a class="btn btn-info  " href="{:U('Fees/config')}">{:l('Wallet Config')}</a>
+					</div>
+            
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User ID</th>
+                                <th>TID</th>
+                                <th>Amount</th>
+                                <th>Coin</th>
+                                <th>Add Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <foreach name="earnings" item="earning">
+                                <tr>
+                                    <td>{$earning.id}</td>
+                                    <td>{$earning.userid}</td>
+                                    <td>{$earning.tid}</td>
+                                    <td>{$earning.amount}</td>
+                                    <td>{$earning.coin}</td>
+                                    <td>{:date('Y-m-d H:i:s', $earning.addtime)}</td>
+                                    <td>{$earning.status}</td>
+                                </tr>
+                            </foreach>
+                        </tbody>
+                    </table>
+    </div>
+    </div>
+</div>
+
+<include file="Public:footer" />

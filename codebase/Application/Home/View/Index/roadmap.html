@@ -1,0 +1,92 @@
+<include file="Index:html_header"/>
+    <body class="nk-body body-wider bg-theme mode-onepage">
+	<div class="nk-wrap">
+		<header class="nk-header is-sticky is-dark" id="header">
+		<include file="Index:top_menu"/>	
+		</header>
+        <main class="nk-pages tc-light">
+			<section class="section bg-theme tc-light pdb-0">
+                <div class="container">
+                    <div class="section-head text-center wide-auto tc-light">
+                        <h2 class="title title-s4 animated" data-animate="fadeInUp" data-delay=".1" title="Problem">The Major Problem</h2>
+                        <p class="animated" data-animate="fadeInUp" data-delay=".2">The Cryptocurrency industry is one of the Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                    <!-- Block @s -->
+					<notempty name="roadmap">
+                    <div class="boxed boxed-xl bg-theme-dark round-lg animated" data-animate="fadeIn" data-delay=".3">
+                        <div class="row gutter-vr-30px">
+                            <volist name="roadmap" id="vo">
+							<div class="col-lg-6">
+                                <div class="feature feature-inline feature-s11 animated" data-animate="fadeInUp" data-delay=".5">
+                                    <div class="feature-icon feature-icon-lg-s3">
+                                        <img src="images/icons/icon-k.png" alt="feature">
+                                    </div>
+                                    <div class="feature-text">
+                                        <h5 class="title title-md">{$vo.year}</h5>
+                                        <ul class="list list-dot">
+                                            {$vo.text}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+							</volist>
+                            <div class="col-lg-6">
+                                <div class="feature feature-inline feature-s11 animated" data-animate="fadeInUp" data-delay=".6">
+                                    <div class="feature-icon feature-icon-lg-s3">
+                                        <img src="images/icons/icon-l.png" alt="feature">
+                                    </div>
+                                    <div class="feature-text">
+                                        <h5 class="title title-md">Centralize Network</h5>
+                                        <ul class="list list-dot">
+                                            <li>What is the crypto tech? Lorem ipsum dolor sit amet, consectetur.</li>
+                                            <li>Natural Language Understanding</li>
+                                            <li>How to network with other investors / like-minded people?</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-6">
+                                <div class="feature feature-inline feature-s11 animated" data-animate="fadeInUp" data-delay=".7">
+                                    <div class="feature-icon feature-icon-lg-s3">
+                                        <img src="images/icons/icon-m.png" alt="feature">
+                                    </div>
+                                    <div class="feature-text">
+                                        <h5 class="title title-md">Crypto Developers</h5>
+                                        <ul class="list list-dot">
+                                            <li>What is the crypto tech? Lorem ipsum dolor sit amet, consectetur.</li>
+                                            <li>Natural Language Understanding</li>
+                                            <li>How to network with other investors / like-minded people?</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                            <div class="col-lg-6">
+                                <div class="feature feature-inline feature-s11 animated" data-animate="fadeInUp" data-delay=".8">
+                                    <div class="feature-icon feature-icon-lg-s3">
+                                        <img src="images/icons/icon-n.png" alt="feature">
+                                    </div>
+                                    <div class="feature-text">
+                                        <h5 class="title title-md">General Payment</h5>
+                                        <ul class="list list-dot">
+                                            <li>What is the crypto tech? Lorem ipsum dolor sit amet, consectetur.</li>
+                                            <li>Natural Language Understanding</li>
+                                            <li>How to network with other investors / like-minded people?</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                    </div><!-- .block @s -->
+					</roadmap>
+                </div>
+            </section>
+            <!-- // -->
+         </main>
+        <footer class="nk-footer ov-h has-ovm">
+            <include file="Index:footer_menu"/> 
+        </footer>
+        <div class="nk-ovm nk-ovm-repeat nk-ovm-fixed shape-i">
+            <div class="ovm-line"></div>
+        </div>
+	</div>
+<include file="Index:html_footer"/>	

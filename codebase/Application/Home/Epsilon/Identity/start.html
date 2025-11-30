@@ -1,0 +1,315 @@
+<include file="Public:header" />
+
+<!-- Page content -->
+<!-- Page container -->
+
+
+<div class="container wallet-page">
+    <div class="full-box row">
+        <include file="User:sidebar" />
+        <!-- Main content -->
+        <div class="col-10">
+            <div class="row mt-3 mb-3">
+                <include file="User:top_bar" />
+                <div class="col-9 col-md-6 order-1 order-md-2 float-right">
+                    <ul class="text-right breadcrumbs list-unstyle">
+                        <li>
+                            <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-warning btn-sm" href="{:U('User/index')}">{:l('User')}</a>
+                        </li>
+                        <li class="btn btn-warning btn-sm active">{:l('Identity')}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="safe_center clear ">
+                        <h1>{:l('IDENTITY')}</h1>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <div class="form-group">
+                        <label for="userType">Are you an Individual or Institution?</label>
+                        <div>
+                            <input type="radio" class="btn-check" name="userType" id="individualRadio"
+                                value="individual" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="individualRadio">Individual</label>
+
+                            <input type="radio" class="btn-check" name="userType" id="institutionRadio"
+                                value="institution" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="institutionRadio">Institution</label>
+                        </div>
+                    </div>
+
+                    <div id="institution" style="display:none">
+                        <div class="form-group">
+                            <label for="company_name">Company Name:</label>
+                            <input type="text" class="form-control" id="company_name" name="company_name"
+                                value="{$user_show.truename}" required>
+                            <div class="invalid-feedback">
+                                Please enter your Company name.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="businessCategory">Business Category</label>
+                            <select class="form-control border" id="businessCategory" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <!-- Categories will be populated here -->
+                                <volist name="business_activities" id="category">
+                                    <option value="{$category.business_category_id}">
+                                        {$category.labels.0.label} <!-- Adjust as per your language preference -->
+                                    </option>
+                                </volist>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="businessActivity">Business Activity</label>
+                            <select class="form-control border" id="businessActivity" required>
+                                <option value="">Select an activity</option>
+                                <!-- Activities will be populated based on the selected category -->
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="registration_country">Registration Country:</label>
+                            <select class="form-control" id="registration_country" name="registration_country" required>
+                                <foreach name="countries" key="symbol" item="country">
+                                    <option <if condition="$user_show.country eq $symbol">selected</if>
+                                        value="{$symbol}">{$country}</option>
+                                </foreach>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select your residence country.
+                            </div>
+                        </div>
+
+
+                        <button id="submitKYB" class="btn btn-primary">Initiate KYB</button>
+                    </div>
+                    <div id="individual" style="display:none">
+                        <div class="form-group">
+                            <label for="first_name">First Name:</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name"
+                                value="{$user_show.firstname}" required>
+                            <div class="invalid-feedback">
+                                Please enter your first name.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name"
+                                value="{$user_show.lastname}" required>
+                            <div class="invalid-feedback">
+                                Please enter your last name.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dob">Date of Birth:</label>
+
+
+                            <input type="date" class="form-control" id="dob" name="dob" value="<?php echo isset($user_show['dob']) ? $user_show['dob'] : ''; ?>" required>
+
+                            <div class="invalid-feedback">
+                                Please enter your date of birth.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="residence_country">Residence Country:</label>
+                            <select class="form-control" id="residence_country" name="residence_country" required>
+                                <foreach name="countries" key="symbol" item="country">
+                                    <option <if condition="$user_show.country eq $symbol">selected</if>
+                                        value="{$symbol}">{$country}</option>
+                                </foreach>
+                                <!-- Add other options here -->
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select your residence country.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nationality">Nationality:</label>
+                            <select class="form-control" id="nationality" name="nationality" required>
+                                <foreach name="countries" key="symbol" item="country">
+                                    <option <if condition="$user_show.country eq $symbol">selected</if>
+                                        value="{$symbol}">{$country}</option>
+                                </foreach>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please enter your nationality.
+                            </div>
+                        </div>
+
+                        <button id="submitKYC" class="btn btn-primary">Initiate KYC</button>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#submitKYC').on('click', function (event) {
+            event.preventDefault(); // Prevent default button behavior
+
+            // Gather input data
+            var firstName = $('#first_name').val();
+            var lastName = $('#last_name').val();
+            var dob = $('#dob').val();
+            var residenceCountry = $('#residence_country').val();
+            var nationality = $('#nationality').val();
+
+            // Simple validation
+            if (!firstName || !lastName || !dob || !residenceCountry || !nationality) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            layer.load(0, { shade: [0.5, '#8F8F8F'] });
+
+            $.ajax({
+                url: '{:U("Identity/startKyc")}', // Adjust the URL as per your routing
+                type: 'POST',
+                data: {
+                    first_name: firstName,
+                    last_name: lastName,
+                    dob: dob,
+                    residence_country: residenceCountry,
+                    nationality: nationality,
+                },
+                success: function (response) {
+                    // Handle success response
+                    layer.closeAll('loading');
+                    if (response.url) {
+                        window.location.href = response.url;
+                    }
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    layer.closeAll('loading');
+                    layer.alert(data.info, { title: "Info", btn: ['Ok'] });
+                    //alert('There was an error initiating the KYC.');
+                    console.error(xhr, status, error);
+                }
+            });
+        });
+
+
+
+        $('#submitKYB').on('click', function (event) {
+            event.preventDefault(); // Prevent default button behavior
+
+            // Gather input data
+            var company_name = $('#company_name').val();
+            var business_activity_id = $('#businessActivity').val();
+
+            var registration_country = $('#registration_country').val();
+
+            // Simple validation
+            if (!company_name || !business_activity_id || !registration_country) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            $.ajax({
+                url: '{:U("Identity/startKyb")}', // Adjust the URL as per your routing
+                type: 'POST',
+                data: {
+                    company_name: company_name,
+                    business_activity_id: business_activity_id,
+                    registration_country: registration_country,
+                },
+                success: function (response) {
+                    // Handle success response
+
+                    if (response.url) {
+                        window.location.href = response.url;
+                    }
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    alert('There was an error initiating the KYC.');
+                    console.error(xhr, status, error);
+                }
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var userType = <php>echo (int)$user_show['accounttype']</php>;
+
+        if (userType == 1) {
+            $('#individualRadio').click(); // Simulate click to toggle
+
+        } else if (userType == 2) {
+            $('#institutionRadio').click(); // Simulate click to toggle
+
+        }
+    });
+</script>
+<script>
+    document.querySelectorAll('input[name="userType"]').forEach(function (el) {
+        el.addEventListener('change', function () {
+            var individualDiv = document.getElementById('individual');
+            var institutionDiv = document.getElementById('institution');
+
+            if (this.value === 'individual') {
+                individualDiv.style.display = 'block';
+                institutionDiv.style.display = 'none';
+            } else if (this.value === 'institution') {
+                institutionDiv.style.display = 'block';
+                individualDiv.style.display = 'none';
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var businessActivities = <php> echo json_encode($business_activities); </php>;
+
+        $('#businessCategory').change(function () {
+            var selectedCategoryId = $(this).val();
+            var activitiesDropdown = $('#businessActivity');
+
+            // Clear the activity dropdown
+            activitiesDropdown.empty();
+            activitiesDropdown.append('<option value="" disabled selected>Select an activity</option>');
+
+            // Find and append the activities for the selected category
+            var categoryFound = false;
+            $.each(businessActivities, function (index, category) {
+                if (category.business_category_id === selectedCategoryId) {
+                    categoryFound = true;
+                    $.each(category.activities, function (index, activity) {
+                        var activityLabel = activity.labels[0].label; // Defaulting to the first label (English)
+                        activitiesDropdown.append('<option value="' + activity.business_activity_id + '">' + activityLabel + '</option>');
+                    });
+                    return false; // Break the loop after finding the category
+                }
+            });
+
+            // If no activities were found for the selected category, you can handle it here
+            if (!categoryFound) {
+                activitiesDropdown.append('<option value="" disabled>No activities available</option>');
+            }
+
+            // Refresh bootstrap-select to show the new options
+            activitiesDropdown.selectpicker('refresh');
+        });
+    });
+
+</script>
+<include file="Public:footer_minimal" />

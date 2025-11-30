@@ -1,0 +1,45 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="__PUBLIC__/otc/otc.css"/>
+<div class="page-container">
+<div class="row">
+
+<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+<!-- rightbox starts -->
+<div class="rightbox">
+	<div class="QuoteLayout-Wrap">
+		<div class="QuoteLayout-Title" id="quotebox">Transaction Issues</div>
+		<div class="QuoteLayout-Body">
+			
+			<div class="quoteContent-wrap" id="with_orderx">
+				<div class="quoteContent-TopWrap">
+					<div class="quoteContent-CryptoTitle" id="tradetype_final"><i class="fa  fa-window-close fa-3x text-danger"></i></div>
+				
+				</div>
+				<div class="quoteContent-MiddleWrap">
+				
+				<div class="quoteContent-LabelRow"><div>There were some issues processing your Transaction!!</div></div>
+					
+				</div>
+
+				<div class="quoteContent-button" id="quotefinal">
+					
+					<span class="row"> <button data-bn-type="button"  id="approve-button" class="quote-button" onclick="tryagain()">Try Again</button></span>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- Rightbox ends -->
+</div>
+</div>
+</div>
+<script type = "text/javascript" >
+function tryagain(){
+window.location="{:U('Dex/order', array('qid' => $record['qid']))}";
+}
+function fresh(){
+window.location="{:U('Dex/index')}";
+}
+</script >
+<include file="Public:footer_minimal"/>

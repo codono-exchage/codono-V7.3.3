@@ -1,0 +1,116 @@
+<include file="Public:header" />
+
+
+<div class="container wallet-page">
+  <div class="full-box row">
+    <include file="User:sidebar" />
+    <div class="col-10">
+      
+
+              <div class="row mt-3 p-l-30 p-r-30 mb-3">
+                <include file="User:top_bar" />
+                <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+                  <ul class="text-right breadcrumbs list-unstyle">
+                    <li>
+                      <a
+                        class="btn btn-warning btn-sm"
+                        href="{:U('/issue/index')}"
+                        >{:l('Launchpad')}</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="btn btn-warning btn-sm"
+                        href="{:U('Issue/alllogs')}"
+                        >{:l('Subscriptions')}</a
+                      >
+                    </li>
+                    <li class="btn btn-warning btn-sm active">{:l('Logs')}</li>
+                  </ul>
+                </div>
+              </div>
+            <div class="row justify-content-center">
+              <div class="col-xl-11 card p-20">
+                <h1 class="page-title f-s-24">{:l('ICO')} {:l('Orders')}</h1>
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>{:l('ICO NAME')}</th>
+                      <th>{:l('ICO PRICE/ICO')}</th>
+                      <th>{:l('BOUGHT')}</th>
+                      <th>{:l('TOTAL PAID')}</th>
+                      <th>{:l('ICO TIME')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <volist name="list" id="vo">
+                      <tr>
+                        <td>{$vo['name']}</td>
+                        <td>
+                          {$vo['price'] |NumToStr} {$vo['buycoin']} @
+                          {$vo['convert_price']|NumToStr} {$vo['convertcurrency']}
+                        </td>
+                        <td>{$vo['num']|NumToStr } {$vo['coinname']}</td>
+                        <td>{$vo['mum']|NumToStr} {$vo['convertcurrency']}</td>
+                        <td>{$vo.addtime|date='m-d H:i:s',###}</td>
+                        <td style="display: none">
+                          {$vo.endtime|date='m-d H:i:s',###}
+                        </td>
+                        <td style="display: none">
+                          {$vo['unlock']}/{$vo['ci']}
+                        </td>
+                        <td style="display: none">{$vo['shen']| NumToStr}</td>
+                        <td style="display: none">
+                          <eq name="vo.status" value="1"
+                            ><font color="#0096dd">{:l('COMPLETED')}</font>
+                            <else />
+                            <font color="#23a800">{:l('THAWING')}</font></eq
+                          >
+                        </td>
+                        <td style="display: none">
+                          <eq name="vo.status" value="0">
+                            <a
+                              class="unlock"
+                              id="{$vo.id}"
+                              href="javascript:void(0)"
+                              >{:l('THAW')}</a
+                            >
+                          </eq>
+                        </td>
+                      </tr>
+                    </volist>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        
+       </div>
+  </div>
+</div>
+<script>
+  $(".unlock").click(function () {
+    $.post(
+      "{:U('Issue/unlock')}",
+      { id: $(this).attr("id") },
+      function (data) {
+        if (data.status == 1) {
+          layer.msg(data.info, { icon: 1 });
+          location.reload();
+        } else {
+          layer.msg(data.info, { icon: 2 });
+          if (data.url) {
+            window.location = data.url;
+          }
+        }
+      },
+      "json"
+    );
+  });
+
+  var hints = "0";
+  if (hints == 1) {
+    $("#hints").show();
+  }
+  $("#Issue_box").addClass("active");
+</script>
+<include file="Public:footer_minimal" />

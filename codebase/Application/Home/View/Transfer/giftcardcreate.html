@@ -1,0 +1,159 @@
+<include file="Publicnew:header"/>
+	<!-- Wallet Content Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12 m-t-30">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">{:l('Send Gift Card')}</h4>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6 col-12">
+								<div class="slider slider-for m-b-30">
+								<volist name="giftcard_images" id="images">
+									<div>
+										<img src="__UPLOAD__/giftcard/{$images.image}" class="img-fluid" alt="{$images.title}" data-value="{$images.id}">
+									</div>
+								</volist>
+								</div>
+								<div class="slider slider-nav">
+								<volist name="giftcard_images" id="images">
+									<div>
+										<img src="__UPLOAD__/giftcard/{$images.image}" class="img-fluid" alt="{$images.title}" data-value="{$images.id}">
+									</div>
+								</volist>
+								</div>
+							</div>
+							<div class="col-md-6 col-12">
+								<div class="create-gift-card-form">
+										<div class="form-group">
+											<label for="coin">{:l("Coin")}</label>
+											<select id="coin" class="bootstrap-select" data-live-search="true" data-live-search-placeholder='{:l("Search")}' data-width="100%">
+												<option>{:l("PLEASE_CHOOSE")}</option>
+													<volist name="coins" id="coin">
+														<option data-subtitle="{$coin['title']}" data-value="{$coin['balance']|NumToStr}" data-coin="{$coin['name'] | strtoupper}" data-content="<img src='__UPLOAD__/coin/{$coin['img']}'> {$coin['title']} <span>{$coin['name'] | strtoupper}</span> <span class='value'>{$coin['balance']|NumToStr}</span>"></option>
+													</volist>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="amount">{:l("Amount")}</label> <input id="amount" class="form-control" placeholder="{:l('Please enter amount')}" type="number">
+										
+											<input type="text" id="my_range" name="my_range" value="" />
+											<input type="hidden" id="selected_coin" name="selected_coin" value="" />
+											<input type="hidden" id="selected_coin_bal" name="selected_coin_bal" value="" />
+											<input type="hidden" id="nonce" name="nonce" value="{$nonce}" />
+											<input type="hidden" id="selected_img" name="selected_img" value="" />
+											
+										</div>
+										<p>
+											{:l("Available Balance")} <span class="balance f-w-600" id="coinbalance">0.0</span>
+										</p>
+										<div class="form-group d-flex justify-content-between align-items-center m-t-30">
+											<span>
+												<p>{:l("Fee")}: <span class="price f-w-700" id="fee_coin"></span></p>
+											</span> <button onclick="buygiftcard();" class="btn-2">{:l("Create")}</button>
+										</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Wallet Content End -->
+<include file="Publicnew:footer_minimal"/>
+	<script>
+	document.querySelector('select#coin').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+   var coin=this.selectedOptions[0].getAttribute('data-coin'); 
+   
+   $("#selected_coin_bal").val(value);
+   $("#selected_coin").val(coin);
+   $("#coinbalance").html(value);
+   $("#fee_coin").html('0 '+coin);
+	$("#amount").val(value.toString());
+	};
+	 $("#my_range").ionRangeSlider({
+        
+		step: 1,
+		min:0,
+		max:100,
+        from: 100,
+		grid:true,
+		skin:"round",
+        onChange: function (data) {
+            var percent=data.from;
+			var avail=$("#selected_coin_bal").val();
+			var calc_buy=(avail*percent)/100;
+			$("#coinbalance").html(calc_buy.toString());
+			$("#amount").val(calc_buy.toString());
+		
+        }
+    });
+	$('.slider-for').slick({
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		arrows: false,
+		fade: true,
+		asNavFor: '.slider-nav'
+	});
+	$('.slider-nav').slick({
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		asNavFor: '.slider-for',
+		dots: true,
+		arrows: false,
+		centerMode: false,
+		focusOnSelect: true
+	});
+	  var $selected_img = $('#selected_img');
+
+	  $('.slider-for').on('afterChange', function(event, slick, currentSlide) {
+    // get the active slide 
+    var $activeImg = $("[data-slick-index='" +  currentSlide + "']").children('img');
+    // update input value
+    $selected_img.val( $activeImg.attr('data-value') );
+  });    
+  
+function buygiftcard(){
+   var amount=$("#amount").val();
+   var coin=$("#selected_coin").val();
+   var nonce=$("#nonce").val();
+   var bannerid=$('#selected_img').val();
+if(coin=='' || coin==null)
+{
+layer.tips('Please select coin!', '#coin', {tips: 3});
+return false;
+}
+if(amount=='' || amount==0)
+{
+
+layer.tips('Please enter amount!', '#amount', {tips: 3});
+return false;
+}
+
+$.post("{:U('Transfer/doBuy')}", {
+			coin: coin,
+			amount: amount,
+			nonce:nonce,
+			bannerid:bannerid,
+		}, function (data) {
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+				window.location="{:U('Transfer/giftcard')}";
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+$(document).ready(function(){
+ var $selected_img = $('#selected_img');
+ var selected_banner=$('.slick-active img').attr('data-value');
+ 
+    $selected_img.val( selected_banner );
+  });    
+	
+</script>

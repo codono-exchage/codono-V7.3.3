@@ -1,0 +1,157 @@
+<include file="Public:header" />
+<main class="wrapper voting-page">
+	<!-- Vote Content Start -->
+	<section class="voting">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 text-center">
+					<h1 class=" page-title">{:l('Competition')}</h1>
+					<div class=" section-desc">{:l('Pick the best one to list')}</div>
+
+				</div>
+				<div class="col-12 text-center">
+					
+					<notempty name="featured">
+					<h4 class=" m-t-30">{:l('Featured')}</h4>
+					<div class="row justify-content-center">
+						<div class="col-sm-8 col-md-6 col-lg-5 col-xl-4 active-voting">
+							<div class="title">{$featured.coin_1|strtoupper} vs {$featured.coin_2|strtoupper}</div>
+							<div class="row align-items-center">
+								<div class="col-5">
+									<div class="avatar">
+										<img src="{:SITE_URL}/{$featured.img_1}" alt="" class="img-fluid">
+									</div>
+									
+								</div>
+								<div class="col-2">
+									<div>
+										<img src="__EPSILON__/img/redesign/vs.png" alt="" class="img-fluid">
+									</div>									
+								</div>
+								<div class="col-5">
+									<div class="avatar">
+										<img src="{:SITE_URL}/{$featured.img_2}" alt="" class="img-fluid">
+									</div>
+								</div>
+							</div>
+
+							<div class="times m-t-30">
+								<strong class="times-title">{:l('End Time')}</strong>
+								<div class="time-wrapper">
+									<div>
+										<span id="counterDay"></span>
+										<p>{:l('Day')}</p>
+									</div>
+									<div>:</div>
+									<div>
+										<span id="counterHour"></span>
+										<p>{:l('Hour')}</p>
+									</div>
+									<div>:</div>
+									<div>
+										<span id="counterMinute"></span>
+										<p>{:l('Minute')}</p>
+									</div>
+									<div>:</div>
+									<div>
+										<span id="counterSecond"></span>
+										<p>{:l('Second')}</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<a href="{:U('Competition/view/id/'.$featured['id'])}" class="btn btn-3 m-t-15">{:l('Vote')}</a>
+								
+							</div>
+						</div>
+					</div>
+					</notempty>
+					</div>
+				<div class="col-12">
+					<notempty name="list">
+					<h4 class=" m-t-30">{:l('Running')}</h4>
+					<div class="row">
+					<volist name="list" id="vo">
+						<div class="col-md-6 col-lg-4">
+							<a href="{:U('Competition/view/id/'.$vo['id'])}" class="card vote-item">
+								<div class="top">
+									<div class="avatar">
+										<img src="{:SITE_URL}/{$vo['img_1']}" alt="">
+									</div>
+									<div class="avatar right">
+										<img src="{:SITE_URL}/{$vo['img_2']}" alt="">
+									</div>
+								</div>
+								<div class="bottom">
+									<div class="line"><span>{$vo['coin_1']|strtoupper} vs {$vo['coin_2']|strtoupper}</span><span class="pull-right">{$vo['coin_1']|strtoupper} & {$vo['coin_2']|strtoupper}</span></div>
+									<div class="line"><span>{:l('End time')}</span><span class="pull-right">{$vo['end_date']|addtime}</span></div>
+								</div>
+							</a>
+						</div>
+						
+						</volist>
+				</div>
+				</notempty>
+				</div>
+								<div class="col-12">
+					<notempty name="previous">
+					<h4 class=" m-t-30">{:l('Previous')}</h4>
+					<div class="row">
+					<volist name="previous" id="vo">
+						<div class="col-md-6 col-lg-4">
+							<a href="{:U('Competition/view/id/'.$vo['id'])}" class="card vote-item">
+								<div class="top">
+									<div class="avatar">
+										<img src="{:SITE_URL}/{$vo['img_1']}" alt="">
+									</div>
+									<div class="avatar right">
+										<img src="{:SITE_URL}/{$vo['img_2']}" alt="">
+									</div>
+								</div>
+								<div class="bottom">
+									<div class="line"><span>{$vo['coin_1']|strtoupper} vs {$vo['coin_2']|strtoupper}</span><span class="pull-right">{$vo['coin_1']|strtoupper} & {$vo['coin_2']|strtoupper}</span></div>
+									<div class="line"><span>{:l('End time')}</span><span class="pull-right">{$vo['end_date']|addtime}</span></div>
+								</div>
+							</a>
+						</div>
+						
+						</volist>
+				</div>
+				</notempty>
+				</div>
+			</div>
+
+		</div>
+	</section>
+	<!-- Vote Content End -->
+
+</main>
+  <script>
+  function secondsToDhms(seconds) {
+    seconds = Number(seconds);
+    var d = Math.floor(seconds / (3600 * 24));
+    var h = Math.floor((seconds % (3600 * 24)) / 3600);
+    var m = Math.floor((seconds % 3600) / 60);
+    var s = Math.floor(seconds % 60);
+
+    document.getElementById("counterDay").innerHTML = d;
+    document.getElementById("counterHour").innerHTML = h;
+    document.getElementById("counterMinute").innerHTML = m;
+    document.getElementById("counterSecond").innerHTML = s;
+  }
+<notempty name="featured">
+  let end_time = {$featured['end_date']};
+  let ok_time=Math.floor(Date.now() / 1000);
+  if(ok_time>end_time){
+    $("#countdown-box").hide();
+  }  
+  let time=end_time-ok_time;
+  
+
+  setInterval(() => {
+    time = time - 1;
+    secondsToDhms(time);
+  }, 1000);
+ </notempty>
+ </script>
+<include file="Public:footer_minimal" />

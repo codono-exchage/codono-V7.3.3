@@ -1,0 +1,50 @@
+<if condition="$faucet['invit_1'] || $faucet['invit_2'] || $faucet['invit_3']">
+<div class="panel panel-body border-top-warning">
+							<ul class="list-feed media-list">
+							<if condition="$faucet['invit_1']">
+								<li class="media">
+									<div class="media-body">
+										Tier 1: Invite your friends and get {$faucet['invit_1']}% Bonus in {$faucet['invit_coin']}
+									</div>
+
+									<div class="media-right">
+										<ul class="icons-list icons-list-extended text-nowrap">
+											<li>
+												<a href="{:U('Finance/mytj')}"><i class="icon-circle-right2"></i></a>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</if>	
+							<if condition="$faucet['invit_2']">
+								<li class="media">
+									<div class="media-body">
+										Tier 2: Invite your friends and get {$faucet['invit_2']}% Bonus in {$faucet['invit_coin']}
+									</div>
+
+									<div class="media-right">
+										<ul class="icons-list icons-list-extended text-nowrap">
+											<li>
+												<a href="{:U('Finance/mytj')}"><i class="icon-circle-right2"></i></a>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</if>	
+							<if condition="$faucet['invit_3']">
+								<li class="media">
+									<div class="media-body">
+										Tier 3: Invite your friends and get {$faucet['invit_3']}% Bonus in {$faucet['invit_coin']}
+									</div>
+
+									<div class="media-right">
+										<ul class="icons-list icons-list-extended text-nowrap">
+											<li>
+												<a href="{:U('Finance/mytj')}"><i class="icon-circle-right2"></i></a>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</if>	
+							</ul>
+						</div>

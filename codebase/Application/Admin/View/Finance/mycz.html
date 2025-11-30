@@ -1,0 +1,137 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('USD recharge')}</span>
+		</div>
+		<div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+			<div class="fl">
+				<button class="btn ajax-post confirm btn-danger" url="{:U('Finance/myczStatus',array('type'=>'del'))}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i></button>
+			</div>
+			<div class="search-form fr cf">
+				<div class="sleft">
+					<form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+						<select name="status" class="form-select form-control">
+							
+							<option value="6"
+							<eq name="Think.get.status" value="6">{:l('selected')}</eq>
+							>{:l('All [Except Cancel]')}</option>
+							<option value="1"
+							<eq name="Think.get.status" value="1">{:l('selected')}</eq>
+							>{:l('Unpaid')}</option>
+							<option value="2"
+							<eq name="Think.get.status" value="2">{:l('selected')}</eq>
+							>{:l('Success')}</option>
+							<option value="3"
+							<eq name="Think.get.status" value="3">{:l('selected')}</eq>
+							>{:l('Marked as paid')}</option>
+							<option value="5"
+							<eq name="Think.get.status" value="5">{:l('selected')}</eq>
+							>{:l('Cancelled')}</option>
+						</select>
+						<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-select">
+							<option value="username"
+							<eq name="Think.get.field" value="username">{:l('selected')}</eq>
+							>{:l('Username')}</option>
+							<option value="tradeno"
+							<eq name="Think.get.field" value="tradeno">{:l('selected')}</eq>
+							>{:l('order number')}</option>
+						</select>
+						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//Search function
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//Enter search
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="card card-body mt-2 table-responsive">
+			<table class="table table-sm emptyx">
+				<thead class="table-light">
+				<tr>
+					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+					<th class="">{:l('ID')}</th>
+					<th class="">{:l('Username')}</th>
+					<th class="">{:l('Deposit amount')}</th>
+					<th width="">{:l('Amount')}</th>
+					<th width="">{:l('Method')}</th>
+					<th width="">{:l('Order')}</th>
+					<th class="">{:l('Time')}</th>
+					<th class="">{:l('Remark')}</th>
+					<th width="">{:l('Status')}</th>
+					<th width="">{:l('Option')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td>{$vo.id}</td>
+							<td>{$vo['username']}
+							</td>
+							<td>{$vo.coin|strtoupper} {$vo.num}</td>
+							<td><if condition="$vo['mum']">{$vo.coin|strtoupper} {$vo.mum}<else/>--</if></td>
+							<td>{$vo.type}</td>
+							<td>{$vo.tradeno}</td>
+							<td>{$vo.addtime|addtime}</td>
+							<td>{$vo.remark}</td>
+							<td>
+								<eq name="vo.status" value="0">{:l('Unpaid')}</eq>
+								<eq name="vo.status" value="1">{:l('Successful Deposit')}</eq>
+								<eq name="vo.status" value="2">{:l('Manual Deposit')}</eq>
+								<eq name="vo.status" value="3">{:l('Marked as Paid')}</eq>
+								<eq name="vo.status" value="4">{:l('GatewayPaid')}</eq>
+							</td>
+							<td>
+								<eq name="vo.status" value="0">
+									<a href="{:U('Finance/myczConfirm?id='.$vo['id'])}" class="ajax-get btn btn-primary btn-sm">{:l('Confirm Deposit')}</a>
+								</eq>
+								<eq name="vo.status" value="3">
+									<a href="{:U('Finance/myczConfirm?id='.$vo['id'])}" class="ajax-get btn btn-danger btn-sm">{:l('Confirm Deposit')}</a>
+								</eq>
+								<eq name="vo.status" value="4">
+									<a href="{:U('Finance/myczConfirm?id='.$vo['id'])}" class="ajax-get btn btn-primary btn-sm">{:l('Confirm Deposit')}</a>
+								</eq>
+							</td>
+						</tr>
+					</volist>
+					<else/>
+					<td colspan="12" class="text-center">{:l('No contents!')}</td>
+				</notempty>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Finance/mycz')}");
+	</script>
+</block>
+<style>
+.payment-list ul {
+    padding-left: 0px !important;
+}</style>

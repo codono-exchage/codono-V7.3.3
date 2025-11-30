@@ -1,0 +1,164 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Dex Config')}</span>
+		</div>
+
+		<div class="card">
+
+			<div class="card-body">
+				<form id="form" action="{:U('Hybrid/configEdit')}" method="post" class="form-horizontal" >
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+
+								<tr class="controls">
+									<td class="item-label">{:l('Default Coin')}:</td>
+									<td><select name="coin" class="input-small">
+										<option value="eth" <eq name="data.coin" value="eth">{:l('selected')}</eq> >{:l('ETH')}</option>
+										<option value="bnb" <eq name="data.coin" value="bnb">{:l('selected')}</eq> >{:l('BNB')}</option>
+									</select></td>									</select> </td>
+									<td class="item-note">{:l('Select Main Coin For Dex')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Default Network')}:</td>
+									<td><select name="network" class="input-small">
+										<option value="mainnet" <eq name="data.network" value="mainnet">{:l('selected')}</eq> >{:l('Mainnet')}</option>
+										<option value="testnet" <eq name="data.network" value="testnet">{:l('selected')}</eq> >{:l('TestNet')}</option>
+										<option value="ropsten" <eq name="data.network" value="ropsten">{:l('selected')}</eq> >{:l('Ropsten')}</option>
+									</select></td>									</select> </td>
+									<td class="item-note">Select Network type For Dex{:l('Select Network type For Dex')}</td>
+								</tr>								
+								<tr class="controls">
+									<td class="item-label">{:l('Main address')}:</td>
+									<td><input type="text" class="form-control input-10x" name="receiver" value="{$data['receiver']}"></td>
+									<td class="item-note">{:l('Main address of chain')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Private Key')}:</td>
+									<td><input type="text" class="form-control input-10x" name="receiver_priv" value=""></td>
+									<td class="item-note">{:l('Private Key for Main address [Not shown for security]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Token Name')}:</td>
+									<td><input type="text" class="form-control input-10x" name="token_name" value="{$data['token_name']}"></td>
+									<td class="item-note">{:l('Name of token')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Token Symbol')}:</td>
+									<td><input type="text" class="form-control input-10x" name="token_symbol" value="{$data['token_symbol']}"></td>
+									<td class="item-note">{:l('Symbol of token ,small letters')}</td>
+								</tr>
+								                                <tr class="controls">
+                                    <td class="item-label">{:l('Image')}:</td>
+                                    <td>
+                                        <div id="addpicContainer">
+                                           <notempty name="data.token_image">
+                                                <!--Noimagedisplaydefaultimage-->
+                                                <img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:500px;" title="Click Add Picture" alt="Click Add Picture" src="/Upload/coin/{$data.token_image}">
+                                                <else/>
+                                                <!--Noimagedisplaydefaultimage-->
+                                                <img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:500px;" title="Click Add Picture" alt="Click Add Picture" src="__THEME__/images/addimg.png">
+                                            </notempty>
+                                            <input type="hidden" id="token_image" name="token_image" value="{$data.token_image}">
+                                            <input type="file" id="inputfile" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+                                        </div>
+                                    </td>
+                                    <td class="item-note">80px*80px</td>
+                                </tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Token Decimals')}:</td>
+									<td><input type="text" class="form-control input-10x" name="token_decimals" value="{$data['token_decimals']}"></td>
+									<td class="item-note">Decimal of token </td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Contract Address')}:</td>
+									<td><input type="text" class="form-control input-10x" name="token_address" value="{$data['token_address']}"></td>
+									<td class="item-note">{:l('Contract Address of token')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Token Minimum')}:</td>
+									<td><input type="text" class="form-control input-10x" name="token_min" value="{$data['token_min']}"></td>
+									<td class="item-note">{:l('Minimum Amount of token user can buy')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Token Maximum')}:</td>
+									<td><input type="text" class="form-control input-10x" name="token_max" value="{$data['token_max']}"></td>
+									<td class="item-note">{:l('Maximum Amount of token user can buy')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class= "btn submit-btn ajax-post btn-info"  target-form="form-horizontal" id="submit" type="submit">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+										</div>
+									</td>
+								</tr>
+
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function(){
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		//Highlight the main navigation
+		$('.config-box').addClass('current');
+		//Highlight side navigation
+		$('.config-contact').addClass('current');
+	});
+	 $(document).ready(function () {
+		
+	
+	});
+        //The response fileAdd tosuccessevent
+        $("#inputfile").change(function () {
+            //createFormDataObjects
+            var data = new FormData();
+            //forFormDataAdding Data Object
+            $.each($('#inputfile')[0].files, function (i, file) {
+                data.append('upload_file' + i, file);
+            });
+
+
+            //send data
+            $.ajax({
+                url: '/Admin/Hybrid/coinImage',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,		//Essential parameters
+                processData: false,		//Essential parameters
+                success: function (data) {
+                    if (data) {
+                        $('#up_img').attr("src", '/Upload/coin/' + data);
+                        $('#token_image').val(data);
+                        $('#up_img').show();
+                    }
+                },
+                error: function () {
+                    alert('Upload error');
+                    $(".loading").hide();	//plus Upload failed shift except plus Load image
+                }
+            });
+
+        });
+
+</script>
+<include file="Public:footer" />

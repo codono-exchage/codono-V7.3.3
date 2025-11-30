@@ -1,0 +1,109 @@
+<include file="Public:header" />
+<style>
+	       html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Set body and html to full height */
+            overflow: hidden; /* Prevent scrolling */
+        } 
+	       iframe {
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            border: none; /* Remove border */
+			min-height: 650px !important;
+        }
+		</style>
+		<!-- Page content -->
+	<!-- Page container -->
+
+
+	<div class="container wallet-page">
+		<div class="full-box row">
+			<if condition="$formLink neq false">
+				<iframe src='{$formLink}' width="100%" height/>
+			<else/>	
+			<include file="User:sidebar" />
+		<!-- Main content -->
+			<div class="col-10">
+				<div class="row mt-3 mb-3">
+					<include file="User:top_bar" />
+					<div class="col-9 col-md-6 order-1 order-md-2 float-right">
+					  <ul class="text-right breadcrumbs list-unstyle">
+						<li>
+						  <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+						</li>
+						<li>
+						  <a class="btn btn-warning btn-sm" href="{:U('User/index')}"
+							>{:l('User')}</a
+						  >
+						</li>
+						<li class="btn btn-warning btn-sm active">{:l('Identity')}</li>
+					  </ul>
+					</div>
+				  </div>
+			<div class="card">
+				<div class="card-header">
+					<div class="safe_center clear ">
+						<h1>{:l('IDENTITY')}</h1>
+					</div>
+					</div>
+					<div class="card-body ">
+						<div class="col-6">
+						<h2>KYC Verification</h2>
+						<if condition="$error neq false">
+							<p>{$error}</p>
+							<a href="{:U('Identity/index')}" class="btn btn-primary btn-block">Try Again</a>
+							<else/>
+							<iframe src='{$formLink}' width="100%"/>
+						</if>
+					</div>
+					</div>
+				
+			</div>
+		</div>
+	</if>
+	</div>
+	</div>
+	<script>
+	$(document).ready(function() {
+    $('#submitKYC').on('click', function(event) {
+        event.preventDefault(); // Prevent default button behavior
+
+        // Gather input data
+        var firstName = $('#first_name').val();
+        var lastName = $('#last_name').val();
+        var dob = $('#dob').val();
+        var residenceCountry = $('#residence_country').val();
+        var nationality = $('#nationality').val();
+
+        // Simple validation
+        if (!firstName || !lastName || !dob || !residenceCountry || !nationality ) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        $.ajax({
+            url: '{:U("Identity/index")}', // Adjust the URL as per your routing
+            type: 'POST',
+            data: {
+                first_name: firstName,
+                last_name: lastName,
+                dob: dob,
+                residence_country: residenceCountry,
+                nationality: nationality,
+            },
+            success: function(response) {
+                // Handle success response
+                alert('KYC initiated successfully.');
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                alert('There was an error initiating the KYC.');
+                console.error(xhr, status, error);
+            }
+        });
+    });
+});
+</script>
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,22 @@
+<div class="col-xl-12">				
+    <div class="card user-method-item">
+        <div class="card-header">
+            <h4 class="card-title">{:l("Payment Methods")}</h4>
+        </div>
+        <div class="card-body">
+            <volist name="user_methods" id="um">	
+            <div class="row" id="um_{$um.id}">
+                <div class="col-sm-2"><span>{:l("Method")}:</span> {$um.method}</div>
+                <div class="col-sm-3"><span>{:l("Account")}:</span> {$um.information}</div>
+                <div class="col-sm-3"><span></span> {$um.addtime|addtime}</div>
+                <div class="col-sm-2">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><button class="btn btn-danger btn-sm" onclick="removeMethod('{$um.id}','{$um.information}')" data-toggle="modal" data-target="#removePaymentMethodModal_{$um.id}" role="button" class="red">{:l("Delete")}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr/>
+        </volist>			
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+
+<div class="row ">
+
+<link href="__PUBLIC__/Home/landing/css/login.css" rel="stylesheet" type="text/css">
+
+<div id="all_mask" class="all_mask" style="height: 0px;"></div>
+
+<div id="all_mask_loginbox" class="all_mask_loginbox">
+    <div class="login_title pl20">
+        <span style="text-align: center;margin-left: 15px;cursor:pointer;" class="text-semibold text-white">{:l('MEMBER_LOGIN')}</span>
+		<eq name="Think.session.codono_already" value="1"><font color="#ff0000" size="1px;">{:l('YOUR_ACCOUNT_LOGIN_IN_OTHER_PL')}</font></eq>
+    </div>
+    
+    <form id="form-login" class="mask_wrap_login">
+		<div class="form-group has-feedback has-feedback-left" >
+            <input id="username" type="text" class="form-control" placeholder="{:l('USERNAME_OR_EMAIL')}" value="">
+            <div class="form-control-feedback">
+                <i class="icon-user text-muted"></i>
+            </div>
+        </div>
+        
+		<div class="form-group has-feedback has-feedback-left">
+            <input id="login_password" type="password" class="form-control" placeholder="{:l('PLEASE_ENTER_YOUR_PASSWORD')}" autocomplete="off">
+            <div class="form-control-feedback">
+                <i class="icon-lock2 text-muted"></i>
+            </div>
+        </div>
+        	<div class="form-group row  has-feedback has-feedback-left recaptcha">
+		<div class="col-sm-6"><input id="login_verify"  type="text" class="form-control" placeholder="{:l('PLEASE_ENTER_VERIFICATION_CODE')}" autocomplete="off"></div>
+		<div class="col-sm-6"><img id="login_verify_up" class="codeImg reloadverify hg40" src="{:U('Verify/code')}"
+                     title="{:l('REFRESH')}" onclick="this.src=this.src+'?t='+Math.random()" width="80%" height="80%"></div>
+		</div>
+
+        <div class="row mt-5">
+            <div class="col-md-12" style="position:inherit">
+                <button type="button" class="btn bg-success btn-block" onclick="footer_user_login();">{:l('LOG_IN')} <i class="icon-circle-right2 position-right"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row text-center mt-10">    
+    <a href="{:U('Login/findpwd')}" class="text-white" style="color:#969696">{:l('FORGET_PASSWORD')}</a>
+</div>
+</div>

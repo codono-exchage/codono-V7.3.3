@@ -1,0 +1,36 @@
+					<div class="col-sm-6 col-md-4 col-lg-4">
+						<div class="thumbnail" >
+							<div class="thumb" style="min-height:200px;">
+								<a data-toggle="modal" href="/Faucet/buy/id/{$vo.id}"> <img src="__UPLOAD__/faucet/{$vo.image}" class="img-responsive">
+									<span class="zoom-image"><i class="icon-play3"></i></span>
+								</a>
+							</div>
+
+							<div class="caption">
+								<div class="content-group-sm media">
+									<div class="media-body">
+										<h6 class="text-semibold no-margin"><a href="#" class="text-default">{$vo.name}</a></h6>
+										<small class="text-muted">Coin: {$vo.coinname}</small>
+									</div>
+									<h6 class="text-success media-right no-margin-bottom text-semibold">{$vo.buycoin}{$vo['price']*1}</h6>
+								</div>
+
+								<div class="progress_codono progressstyle1 progress-striped active m_b_10">
+													<div class="progress-bar" style="width: {$vo.bili}%;"></div>
+												</div>
+							</div>
+
+							<div class="panel-footer panel-footer-transparent">
+								<div class="heading-elements text-center">
+										<div class="col-sm-4" title="{:l('Bought')}"><i class="icon-cart position-left" ></i> {$vo.deal}</div>
+										<div class="col-sm-4" title="{:l('TOTAL')}"><i class="icon-store position-left"></i> {$vo.num}</div>
+										<div class="col-sm-4" title="{:l('CARRY_OUT')}"><i class="icon-percent position-left"></i> {$vo.bili}%</div>
+									
+								</div>
+								<div class="Final-Button" style="margin:0 5px;">
+						<a class="btn btn-block btn-info" href="/Faucet/buy/id/{$vo.id}">{$vo.zhuangtai}</a>
+								</div>
+							</div>
+						</div>
+					</div>	
+		

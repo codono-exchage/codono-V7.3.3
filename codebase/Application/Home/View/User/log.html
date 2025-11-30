@@ -1,0 +1,94 @@
+<include file="Public:header" />
+
+<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">	
+	
+<include file="User:left" />
+<div class="col-sm-9">
+
+		<!-- Main content -->
+			<div class="">
+
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h1>
+					<span>
+						{:l('LOG_IN_LOG')}					</span>
+					<span>
+												<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+				</h1>
+			</div>
+			
+			<div class="panel-body">
+<div id="hints" class="mytips" style="display:none;">
+				
+				<p>
+				
+            <notempty name="prompt_text">
+                    {$prompt_text}
+            </notempty>
+				
+				</p>			</div>			
+			<div class="f_body table-responsive">
+					<table class="table table-condensed" id="investLog_content">
+						<thead>
+						<tr>
+							<th>{:l('OPERATING_TIME')}</th>
+							<th>{:l('ACTION_TYPE')}</th>
+							<th>{:l('ACTION_REMARK')}</th>
+							<th>{:l('OPERATING')}ip</th>
+							<th>{:l('ACTION_ADDRESS')}</th>
+							<th>{:l('STATUS')}</th>
+						</tr>
+						</thead>
+						<tbody>
+						
+						
+						
+						<volist name="list" id="vo">
+						<tr>
+							<td>{$vo.addtime|addtime}</td>
+							<td>{$vo.type}</td>
+							<td>{$vo.remark}</td>
+							<td>{$vo.addip}</td>
+							<td>{$vo.addr} </td>
+							<td>
+								 
+								 
+								<eq name="vo.status" value="0">
+									<font color="violet">{:l('ERROR')}</font>
+								</eq>
+								<eq name="vo.status" value="1"> <font class="green">{:l('NORMAL')}</font></eq>
+								<eq name="vo.status" value="2">
+									<font color="red">{:l('ABNORMAL')}</font>
+								</eq>
+
+								 </td>
+						</tr>
+											
+						</volist>						
+												
+												
+												
+					    </tbody>
+					</table>
+					<div class="pages">{$page}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+<script>
+$('.user_log').addClass('active');
+</script>
+
+
+
+
+<include file="Public:footer_minimal"/>

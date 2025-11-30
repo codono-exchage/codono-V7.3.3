@@ -1,0 +1,126 @@
+<include file="Public:header"/>
+
+		<!-- Page content -->
+		<div class="page-container">	
+	<div class="row">
+<include file="User:left" />
+
+<div class="col-sm-9">			
+			<div class="panel panel-flat">
+        <div class="panel-heading">
+            <div class="panel-title" >
+                <h1 >{:l('ALIPAY_BINDING')}</h1>
+            </div>
+
+<notempty name="prompt_text">
+                    <div class="mytips">
+                        <h6 style="color: #ff8000;">{:l('TIPS')}</h6>
+                        {$prompt_text}
+                    </div>
+                </notempty>
+            </div>
+		<div class="panel-body">
+            <empty name="user['alipay']">
+                <div id="msg-box"></div>
+                <form class="pwtrade mart30">
+                    <dl>
+                        <dt>{:l('ALIPAY_ACCOUNT')}</dt>
+                        <dd>
+                            <input type="text" id="alipay">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>{:l('TRANSACTION_PASSWORD')}</dt>
+                        <dd>
+                            <input type="password" id="paypassword">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt></dt>
+                        <dd>
+                            <input type="button" value="{:l('BINDING_ALIPAY')}" id="btn-up" onclick="Update()"/>
+                        </dd>
+                    </dl>
+                </form>
+                <else/>
+                <div class="sj" style="top: 40px; left: 60px;"></div>
+                <form id="form-mobilebind" class="pwtrade mart30">
+                    <div class="band_succ" style="margin-bottom: 20px;margin-left: 130px;">
+                        <em></em>{:l('YOUR_ACCOUNT_HAS_BEEN_BOUND_AL')}
+                    </div>
+                    <dl>
+                        <dt>{:l('ALIPAY_ACCOUNT')}</dt>
+                        <dd title="{:l('CONTACT_THE_ADMINISTRATOR_TO_M')}">
+                            <input type="text" value="{$user.alipay}" readonly>
+                        </dd>
+                    </dl>
+                </form>
+				</div>
+            </empty>
+		</div>
+    </div>
+</div>
+</div>
+</div>
+<script>
+    $('input').focus(function () {
+        var t = $(this);
+        if (t.attr('type') == 'text' || t.attr('type') == 'password')
+            t.css({
+                'box-shadow': '0px 0px 3px #1583fb',
+                'border': '1px solid #1583fb',
+                'color': '#333'
+            });
+        if (t.val() == t.attr('placeholder'))
+            t.val('');
+    });
+    $('input').blur(function () {
+        var t = $(this);
+        if (t.attr('type') == 'text' || t.attr('type') == 'password')
+            t.css({
+                'box-shadow': 'none',
+                'border': '1px solid #e1e1e1',
+                'color': '#333'
+            });
+        if (t.attr('type') != 'password' && !t.val())
+            t.val(t.attr('placeholder'));
+    });
+
+
+    function Update() {
+        var alipay = $("#alipay").val();
+        var paypassword = $("#paypassword").val();
+
+
+        if (alipay == "" || alipay == null) {
+            layer.tips('Enter Alipay', '#alipay', {tips: 3});
+            return false;
+        }
+
+        if (paypassword == "" || paypassword == null) {
+            layer.tips('Provide Trans Password', '#paypassword', {tips: 3});
+            return false;
+        }
+        $.post("{:U('User/upalipay')}", {
+            alipay: alipay,
+            paypassword: paypassword
+        }, function (data) {
+            if (data.status == 1) {
+                layer.msg(data.info, {icon: 1});
+                window.location = "{:U('User/alipay')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+</script>
+<script>
+    //Highlight the top menu
+    $('#user_box').addClass('active');
+    $('#user_alipay').addClass('active');
+    $('#user_alipay i').attr('class', 'coin_menu_op_6');
+</script>
+<include file="Public:footer_minimal"/>

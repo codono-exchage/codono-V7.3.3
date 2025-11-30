@@ -1,0 +1,51 @@
+<div class="market-history mb-3">
+  <ul class="nav nav-pills" role="tablist">
+    <li class="nav-item">
+      <a
+        aria-selected="true"
+        class="nav-link active"
+        data-toggle="pill"
+        href="#latest-trades"
+        role="tab"
+        >Margin {$market|strtoupper}
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content pl-3" id="DealRecordTable">
+    <div class="row">
+      <div class="col-6">
+        <p>Total funds</p>
+        <p><b>-- {$data.s1|strtoupper}</b></p>
+        <p>--</p>
+      </div>
+      <div class="col-6">
+        <p>Liquidation price</p>
+        <p><b> -- {$data.s2|strtoupper}</b></p>
+      </div>
+      <div class="col-6">
+        <p>Risk Rate --</p>
+      </div>
+    </div>
+    <div class="row">
+      <php>dump($bow)</php>
+      <div class="col-8">Borrowed {$data.s1|strtoupper}</div>
+      <div class="col-4"><if condition="$bow['borrow'] neq ''">{$bow['borrow']}<else />--</if></div>
+    </div>
+    <div class="row">
+      <div class="col-8">Available to borrow {$data.s1|strtoupper}</div>
+      <div class="col-4">0</div>
+    </div>
+    <div class="row">
+      <div class="col-8">Borrowed {$data.s2|strtoupper}</div>
+      <div class="col-4">                                        <if condition="$bow['p_borrow'] neq ''">
+        {$bow['p_borrow']}
+    <else />
+        --
+    </if></div>
+    </div>
+    <div class="row pb-3">
+      <div class="col-8">Available to borrow USDT</div>
+      <div class="col-4">0</div>
+    </div>
+  </div>
+</div>

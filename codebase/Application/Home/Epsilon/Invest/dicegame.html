@@ -1,0 +1,60 @@
+<div class="panel">
+							<div class="card-body text-center">
+								<h5 class="content-group">
+										<i class="icon-dice icon-2x"></i> DICE GAME: <i id="stbutton" onclick="TipDice()" class="icon-exclamation"></i> 
+								</h5>
+					
+
+							
+
+							
+									
+									<label class="bold control-label border">Bet {$basecoin| strtoupper} [<small><i>{:L('Balance')}: {$user_bal*1} {$basecoin| strtolower}</i></small>] </label>
+									
+									<select class="select form-control" name="diceamount" id="diceamount">
+											<volist name="allowed_bids" id="vo">
+											<option value="{$vo}">{$vo}</option>
+											</volist>
+										
+									</select>
+	
+							</div>
+
+							<hr class="no-margin">
+
+							<div class="card-body text-center ">
+																	<button class="btn btn-info btn-sm" onclick="diceroll('low');">R < 48</button>
+									<button class="btn btn-info btn-sm" onclick="diceroll('high');">R > 52</button>
+							</div>
+						</div>
+
+
+<script>
+function TipDice(){
+            layer.tips('Choose necessary bet and press Roll < 48 or Roll > 52.Watch result in Dice Histroy..', '#stbutton', {tips: 1});
+}
+
+function diceroll(call) {
+	var time=<php>echo time()</php>;
+	var amount=$("#diceamount").val();
+	var msg = 'You want to roll '+call+' and bet '+amount+' {$basecoin| strtoupper}';
+	
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.post("/Invest/highlow/",{call:call,amount:amount,time:time} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+						
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+			window.location.href = "{:U('Invest/dicerolls')}";
+        }, 'json');
+		});
+    }
+
+</script>

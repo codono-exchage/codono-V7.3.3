@@ -1,0 +1,180 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+     
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">{$page_title}</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">{:l('Email')}</a></li>
+                                            <li class="breadcrumb-item active">{$page_title}</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Left sidebar -->
+                                <div class="email-leftbar card">
+                                    
+                                    <div class="mail-list mt-4">
+                                        <a href="{:U('Email/index')}"><i class="mdi mdi-email-outline me-2"></i> {:l('Email List')}<span class="ms-1 float-end">({$count})</span></a>
+                                        <a href="{:U('Email/users')}"><i class="mdi mdi-star-outline me-2"></i>{:l('Users')}</a>
+                                        <a href="{:U('Email/admin')}"><i class="mdi mdi-diamond-stone me-2"></i>{:l('Admin')}</a>
+                                        <a href="{:U('Email/unsent')}"><i class="mdi mdi-file-outline me-2"></i>{:l('Unsent')}</a>
+                                        
+                                    </div>
+    
+                                </div>
+                                <!-- End Left sidebar -->
+        
+        
+                                <!-- Right Sidebar -->
+                                <div class="email-rightbar mb-3">
+                                    
+                                    <div class="card">
+                                        <div class="p-3 border-bottom">
+                                            <form method="GET" action="{:U('Email/index')}">
+                                                <div class="row g-3">
+                                                    <div class="col-auto">
+                                                        <input type="text" name="search" class="form-control" placeholder="Search...">
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <select name="status" class="form-control">
+                                                            <option value="3">All Statuses</option>
+                                                            <option value="1">Sent</option>
+                                                            <option value="0">Unsent</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button class="btn btn-primary" type="submit">Filter</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                        <div class="btn-toolbar p-3" role="toolbar">
+                                            <div class="btn-group me-2 mb-2 mb-sm-0">
+                                                <!-- Delete Button -->
+                                                <button type="button" class="btn btn-primary waves-light waves-effect ajax-post confirm" 
+                                                        url="{:U('Email/status?method=delete')}" 
+                                                        target-form="ids">
+                                                    <i class="far fa-trash-alt" title="Delete"></i> Delete
+                                                </button>
+                                        
+                                                <!-- Select All Checkbox styled as Button -->
+                                                <button type="button" id="select-all-btn" class="btn btn-outline-primary waves-light waves-effect ms-2">
+                                                    <input type="checkbox" id="select-all" class="me-2" style="pointer-events: none;"> Select All
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <ul class="message-list">
+										<volist name="list" id="mail">
+                                            <li
+                                            <if condition="$mail.status eq 0">class="unread"</if>
+                                            >
+                                                <div class="col-mail col-mail-1">
+                                                    <div class="checkbox-wrapper-mail">
+                                                            <input class="ids" type="checkbox" name="id[]" value="{$mail.id}" id="ck-{$mail.id}"/>
+                                                            <label for="ck-{$mail.id}" class="toggle"></label>
+
+
+                                                    </div>
+                                                    <if condition="$mail.status eq 1">
+                                                        <button class="btn btn-sm btn-primary resend-email" data-id="{$mail.id}">Resend</button>
+                                                    </if>
+                                                    <a href="{:U('Email/view',array('id'=>$mail['id']))}" class="title">{$mail.to_email}</a>
+                                                    
+                                                </div>
+                                                <div class="col-mail col-mail-2">
+                                                    <a href="{:U('Email/view',array('id'=>$mail['id']))}" class="subject">
+                                                        <span class="teaser">{$mail.subject|msubstr=0,105}</span>
+                                                    </a>
+                                                    <div class="date"><php>echo addtime($mail['addtime'],'m-d H:i')</php></div>
+                                                    
+                                                </div>
+                                            </li>
+										</volist>
+                                            
+                                            
+        
+                                        </ul>
+        
+                                    </div><!-- card -->
+
+                                    <div class="row">
+                                          <div class="page">
+												<div>{$page}</div>
+										</div>
+                                    </div>
+        
+                                </div> <!-- end Col-9 -->
+        
+                            </div>
+        
+                        </div><!-- End row -->
+
+                    </div> <!-- container-fluid -->
+                
+                <!-- End Page-content -->
+</div>
+
+<include file="Public:footer"/>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //Highlight navigation
+        highlight_subnav("{:U('Email/index')}");
+        highlight_submenu("{:U($controllerAction)}")
+        function highlight_submenu(url){
+		$('.mail-list').find('a[href="'+url+'"]').addClass('active');
+	}
+    $(document).ready(function() {
+        $('.resend-email').click(function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: "{:U('Email/resendEmail')}",
+                type: "POST",
+                data: {id: id},
+                success: function(data) {
+                    if (data.status === 'success') {
+                        alert('Email will be resend.');
+                        location.reload();  // Reload the page to update the status visually
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+        });
+        // Toggle all checkboxes when "Select All" button is clicked
+        $('#select-all-btn').click(function() {
+            var allChecked = $('.ids').prop('checked');
+            $('.ids').prop('checked', !allChecked);
+            $('#select-all').prop('checked', !allChecked);  // Keep the checkbox state updated
+        });
+
+        // Update "Select All" button based on individual checkbox selections
+        $('.ids').change(function() {
+            if ($('.ids:checked').length === $('.ids').length) {
+                $('#select-all').prop('checked', true);
+            } else {
+                $('#select-all').prop('checked', false);
+            }
+        });
+
+    });
+    </script>
+</block>

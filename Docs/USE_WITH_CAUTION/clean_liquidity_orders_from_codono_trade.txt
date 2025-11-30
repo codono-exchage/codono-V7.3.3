@@ -1,0 +1,36 @@
+/*********DONOT USE THIS CODE UNTIL YOU KNOW WHAT IT DOES *****************
+DONOT USE THIS CODE
+This code basically removes records from codono_trade where userid=0 efficiently.
+*/
+
+
+Paste following code to phpMyAdmin after selecting database
+
+DELIMITER //
+
+CREATE PROCEDURE SwapTradeTables()
+BEGIN
+    -- Step 1: Copy table codono_trade to new_trade where userid != 0
+    CREATE TABLE new_trade LIKE codono_trade;
+    INSERT INTO new_trade SELECT * FROM codono_trade WHERE userid != 0;
+
+    -- Step 2: Rename codono_trade to old_trade
+    RENAME TABLE codono_trade TO old_trade;
+
+    -- Step 3: Rename new_trade to codono_trade
+    RENAME TABLE new_trade TO codono_trade;
+END //
+
+DELIMITER ;
+
+
+
+
+After creating this stored procedure, you can execute it by calling the procedure name:
+
+CALL SwapTradeTables();
+
+
+Make sure to run this code within your MySQL database management tool (e.g., phpMyAdmin, MySQL command-line tool) while connected to your database.
+
+/*********DONOT USE THIS CODE UNTIL YOU KNOW WHAT IT DOES ******************/

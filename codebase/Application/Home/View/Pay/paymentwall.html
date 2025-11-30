@@ -1,0 +1,47 @@
+<div class="wrapper">
+	<div class="register" style="border-radius: 15px; margin-bottom: 20px;">
+		<h3 style="color: #ff7420; font-size: 30px; text-align: center; padding-top: 50px;">{:l('IPS_TOPORDER_DETAILS')}</h3>
+		<table style="">
+			<tbody>
+				<tr>
+					<th align="right" style="font-size: 14px;">{:l('ORDER_TIME')}</th>
+					<td><div class="formbody" style="text-align: left; font-size: 18px;">
+							<span>{$mycz.addtime|addtime}</span>
+						</div></td>
+				</tr>
+				<tr>
+					<th align="right" style="font-size: 14px;">{:l('ORDER_NUMBER')}</th>
+					<td><div class="formbody" style="text-align: left; font-size: 18px;">
+							<span id="invite-input">{$mycz.tradeno}</span>
+						</div></td>
+				</tr>
+				<tr>
+					<th align="right" style="font-size: 14px;">{:l('RECHARGE_AMOUNT')}</th>
+					<td><div class="formbody" style="text-align: left; font-size: 18px; color: #ff8000;">
+							$
+							<span id="invite-inputa" style="width: 150px;">{$mycz.num}</span>
+						</div></td>
+				</tr>
+				<tr>
+					<th align="right" style="font-size: 14px;"></th>
+					<td><div class="w2">
+				<input type="button" class="btn-cztx" id="btn-submit" value="{:l('IMMEDIATE_PAYMENT')}" title="{:l('IMMEDIATE_PAYMENT')}" style="margin-bottom: 20px;margin-top:20px;float: left;">
+					
+					
+					</div></td>
+				</tr>
+				
+				
+				<tr>
+					<th align="right"></th>
+					<td><hr> <span style="float: left; margin-top: 50px;">
+							{:l('PAYMENT_SUCCESSFUL')}
+							<a href="{:U('Finance/mycz')}" target="_blank">{:l('VIEW')}</a>
+						</span></td>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<include file="Public:footer_minimal"/>

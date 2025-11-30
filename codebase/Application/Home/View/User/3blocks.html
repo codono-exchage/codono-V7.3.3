@@ -1,0 +1,104 @@
+<div class="table-responsive">
+								<table class="table table-xlg text-nowrap">
+									<tbody>
+									<tr>
+											<td class="col-md-2">
+												{:l('Api Key')}
+											</td>
+
+											<td class="col-md-7">
+												Preview API Keys
+											</td>
+
+											<td class="text-right col-md-3">
+												<a href="javascript:checkapi();" class="btn btn-info"><i class="icon-key position-left"></i>{:l('Preview API Key')}</a>
+											</td>
+										</tr>
+										<tr>
+											<td class="col-md-2">
+												{:l('LOGIN_PASSWORD')}
+											</td>
+
+											<td class="col-md-7">
+												{:l('YOU_NEED_TO_ENTER_LOGIN_ACCOUN')}
+											</td>
+
+											<td class="text-right col-md-3">
+												<a href="/user/password" class="btn btn-info"><i class="icon-key position-left"></i>{:l('CHANGE_PASSWORD')}</a>
+											</td>
+										</tr>
+												<tr>
+											<td class="col-md-2">
+												{:l('TRANSACTION_PASSWORD')}
+											</td>
+
+											<td class="col-md-7">
+												{:l('YOU_NEED_TO_ENTER_A_PASSWORD_W')}
+											</td>
+
+											<td class="text-right col-md-3">
+												<a href="/user/paypassword" class="btn btn-info"><i class="icon-piggy-bank position-left"></i>{:l('CHANGE_PASSWORD')}</a>
+											</td>
+										</tr>
+												<tr>
+											<td class="col-md-2">
+											{:l('KYC')}
+											</td>
+
+											<td class="col-md-7">
+											{:l('AND_SUBJECT_TO_NATIONAL_REQUIR')}
+											</td>
+
+											<td class="text-right col-md-3">
+
+												<switch name="user['idcardauth']" >
+													<case value="0"><a href="/user/nameauth" class="btn btn-danger">
+														<i class="icon-person position-left"></i>
+														{:l('CERTIFIED_IMMEDIATELY')}
+													</a></case>
+													<case value="1"><a href="/user/nameauth" class="btn btn-success">{:l('VERIFIED')}:{:l('REQUESTS_FOR_CHANGES')}</a></case>
+													<case value="2"><a href="/user/nameauth" class="btn btn-warning"><i class="icon-loop position-left"></i>{:l('Under Review')}</a></case>
+													<case value="3"><a href="/user/nameauth" class="btn btn-danger">{:l('KYC Rejected!')}</a></case>
+													<default />Check
+												</switch>
+
+
+											</td>
+										</tr>
+										<eq name="ENABLE_SUBS" value="1">
+										<tr>
+											<td class="col-md-2">
+											{:l('Subscription')}
+											</td>
+
+											<td class="col-md-7">
+											Avail the benefits by subscribing to our plans
+											</td>
+								<td class="text-right col-md-3"><eq name="user['usertype']" value='0'>
+								<a href="/subscription/index" class="btn btn-danger">
+								<i class="icon-person position-left"></i>
+									{:l('SUBSCRIBE NOW')}
+								<else/>
+								<eq name="user['usertype']" value='1'>
+								<span class="btn btn-success">
+								<i class="icon-check position-left"></i>
+									{:l('PREMIUM')} {:l('Subscription')}</span>
+									<else/>
+								<span class="btn btn-success">
+								<i class="icon-check position-left"></i>
+									{:l('PREMIUM PLUS')} {:l('Subscription')}</span>
+									</eq>
+								</eq>
+								</a>
+											</td>
+										</tr>
+										</eq>
+									</tbody>
+								</table>
+</div>
+<script>
+function checkapi(){
+	apikey=' <table class="table table-bordered table-striped"><tr><td>Note</td><td>Do not share this information </td></tr><tr><td>ID</td><td>{$user["id"]} </td></tr><tr><td>Token</td><td>{$user["apikey"]} </td></tr></table>';
+		layer.alert(apikey, {title: "Api Key" ,area: ['550px', '300px'],btn: ['I Understand']});	
+}
+</script>

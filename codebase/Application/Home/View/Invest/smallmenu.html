@@ -1,0 +1,19 @@
+	<div class="navbar navbar-default navbar-xs navbar-component">
+					<div class="navbar-collapse collapse" id="navbar-filter">
+						<p class="navbar-text">Filter:</p>
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								<a  class="text-info" href="{:U('Invest/index')}" >Plans </a>
+							</li>
+							<li class="dropdown">
+								<a class="text-info" href="{:U('Invest/listinvest')}" >My Investments </a>
+							</li>
+							<eq name="DICE_ENABLE" value="1"><li class="">
+								<a class="text-info"  href="{:U('Invest/dicerolls')}" >Dice Rolls </a>
+							</li></eq>
+						</ul>
+
+						
+					</div>
+				</div>
+				<!-- /tasks options -->

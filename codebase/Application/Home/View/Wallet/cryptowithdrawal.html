@@ -1,0 +1,411 @@
+<include file="Public:header" />
+	<div class="page-container">
+<include file="Finance:left" />
+		<!-- Page content -->
+				
+		<div class="row justify-content-center">			
+			<div class="panel panel-flat">
+				<div class="panel-heading">
+				<h1>
+					<div class="btn-group btn-group-justified">
+					<span class="btn-group">	
+						<a href="{:U('Finance/myzc')}" class="btn btn-flat active current ">{:l('WITHDRAW')}</a>
+                    </span>
+					<span class="btn-group">	
+						<a href="{:U('Finance/coinoutlog')}" class="btn btn-flat ">{:l('LOG_IN_LOG')}</a>
+					</span>
+										<span class="btn-group">	
+						<a href="{:U('Finance/addnew')}" class="btn btn-flat ">{:l('ADDRESSES')}</a>
+                    </span>
+				</div>
+				</h1>
+				
+			</div>
+				<div class="panel-body withdraw-tab">
+					
+
+					<div class="crypto"  id="crypto">
+								
+									<div class="row">
+
+										<div class="col-sm-6">
+										<div class="form-group">
+												<label> Select Coin</label>
+						<select id="withdrawCyrpto" class="form-control input-sm" data-live-search="true" data-live-search-placeholder={:l("Search")} data-width="100%">
+						<volist name="coin_list" id="kolist">
+											<eq name="xnb" value="$key">
+												<option selected="selected" value="{$kolist['name']}" data-value="{$kolist['name']}" data-content="<img src='{$kolist['img']}' height='20px'/> {$kolist['name'] |strtoupper}"> <img src='{$kolist['img']}' height='20px'/>{$kolist['name'] |strtoupper}</option>
+											<else/>
+													<option value="{$kolist['name']}" data-value="{$kolist['name']}" data-content="<img src='{$kolist['img']}' height='20px'/> {$kolist['name'] |strtoupper}">{$kolist['name'] |strtoupper}</option>
+											</eq>
+								
+							</volist>
+							
+						</select>
+											</div>
+											<div class="form-group">
+			<label>Network</label>
+						
+						<select id="selectNetwork" class="form-control input-sm" data-live-search="true" data-live-search-placeholder={:l("Search")} data-width="100%">
+						<option value="" selected="selected">Please select network</option>	
+						<volist name="infocoin" id="network">
+							<eq name="selectednetwork" value="$key">
+							<option selected="selected" value="{$network.name}" data-value="{$network.name}" data-content="<span>{$network.title}</span>"> {$network.title} <if condition="$network['network']">[{$network.network}]</if></option>
+							<else/>
+							<option value="{$network.name}" data-value="{$network.name}" data-content="<span>{$network.title} <if condition="$network['network']">[{$network.network}]</if> </span>"> {$network.title} <if condition="$network['network']">[{$network.network}]</if></option>
+							</eq>
+						</volist>
+						</select>
+						
+												<small>Make sure the double check the withdrawal network or your assets may be lost.</small>
+											</div>
+
+										<div class="form-group">
+											<label for="">{$xnb |strtoupper} {:L('OUT_ADDRESS')}</label>
+								
+											<select id="crypto-address" class="form-control input-sm" data-live-search="true" data-live-search-placeholder="Search" data-width="100%" title="{:l('SELECT_WITHDRAWALS_ADDRESS')}">
+											<option value="">-{:l('SELECT_WITHDRAWALS_ADDRESS')}-</option>
+												 <volist name="userWalletList" id="vo">
+                                            <option data-value="{$vo.addr}" data-dest="{$vo.dest_tag}" data-content="{$vo.dest_tag} <span class='m-r-5'>[ {$vo.addr} ] [{$vo.name}]</span>">{$vo.name}</option>
+                                        </volist>
+											
+												<option value="new-address" class="green">{:l('ADD_A_NEW_ADDRESS_TO_CASH')}</option>		
+											</select>
+										</div>
+											
+											<div class="form-group">
+												<label>Amount</label> 
+												<input class="form-control" placeholder="" type="number" id="usdout_num" required="">
+												<span class="hint">Available balance: <strong>{$user_coin[$xnb]|Num} {$xnb|strtoupper}</strong> 	<small>[&#8776 {$user_coin['converted']} {$user_coin['conversion_coin']}]</small></span>												  
+											</div>
+											<eq name="is_ga" value="1">
+					<div class="form-group">
+						<label >{:l('Google 2FA Code')}:</label>
+						
+							<input type="text" class="form-control input-sm" id="gacode"  value="" name="gacode">
+						
+					</div>
+					</eq>
+											<div class="form-group">
+												<label>{:l('TRANSACTION_PASSWORD')} </label> <input type="text" id="usdout_paypassword" name="fundpassword" class="form-control hidepwd" required>
+												<span class="pull-right"><a href="{:U('findpwd/findpwd')}" class="green m-t-5 d-inline-block">I forgot my password?</a></span>
+											</div>
+											<label for="otp">{:l('OTP Code')}:</label>
+
+												<div class="form-group input-group">
+												
+													
+											<input type="text" class="form-control" id="otp"  value="">
+											<span class="input-group-btn">
+												<button onclick="requestOTP()" class="btn btn-info">{:l('Request OTP')}</button>
+											</span>
+													
+												</div>
+											
+											<span class="summary">
+											
+											<if condition="$selectednetwork">
+												<span>{:l('OUT_OF_COMMISSION')}<span id="perfee">{$infocoin[$selectednetwork]['zc_fee']}</span>%<eq name="coin_list[$xnb]['type']" value="coinpay">+ network fees</eq>
+							<if condition="$infocoin[$selectednetwork]['zc_flat_fee']">+ <span id="flatfee">{$infocoin[$selectednetwork]['zc_flat_fee']*1}</span>{$xnb|strtoupper} </if></span>
+											</if>
+												<span class="pull-right">Amount You Will Get: <span id="receiveable">0.00</span> <span>{$xnb|strtoupper}</span></span>
+											</span>
+											
+											<empty name="zc_jz">
+											<button class="btn btn-info btn-block text-center" onclick="coinout_up()">Request Withdrawal</button>
+											<else/>
+											<button class="btn btn-4 text-center">Withdrawals are disabled </button>
+											</empty>
+										</div>
+									</div>
+							
+
+				</div>
+			</div>						
+			</div>
+
+
+		</div>
+	
+	<!-- add payment method modal start -->
+<div class="modal fade" id="addPaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="{:l('Add new payment method')}" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content page-header-inverse">
+			<div class="modal-header  d-flex align-items-center">
+				<h5 class="modal-title">
+					<div class="coin-title d-flex align-items-center">
+						<div class="h3">Add your withdrawal address</div>
+					</div>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12">
+
+								
+									<div class="row">
+										<div class="col-12 col-sm-6">
+											<div class="form-group">
+												<label>Crypto</label>
+												<span id="selectedCoin" class="form-control"></span>
+											</div>
+										</div>
+										<div class="col-12 col-sm-6">
+											<div class="form-group">
+												<label>Network</label>
+												<span id="selectedChain" class="form-control"></span>
+											</div>
+										</div>
+										<div class="col-12">
+											<div class="form-group">
+												<label>{:l('OUT_ADDRESS')}</label> >
+												<input id="wallet_addr" class="form-control" type="text" placeholder="Enter address" autocomplete="off" />
+											</div>
+										</div>
+										<div class="col-12">
+											<div class="form-group">
+												<label>Dest Tag [if any] </label> <input type="text" id="wallet_dest_tag" class="form-control" placeholder="Enter the Dest tag if any">
+											</div>
+										</div>
+										<div class="col-12">
+											<div class="form-group">
+												<label>Funding Password </label> <input type="text" id="wallet_paypassword" class="form-control hidepwd" placeholder="Enter the Dest tag if any">
+											</div>
+										</div>
+										
+										<div class="col-12">
+											<div class="form-group">
+												<label>Address Label </label> <input type="text" id="wallet_name" class="form-control" placeholder="Enter the address label">
+											</div>
+										</div>
+
+									</div>
+								
+					</div><!--/col-md-6-->
+				</div><!--/row-->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+				<button onclick="wallet_up();" class="btn btn-success btn-sm">Approve</button>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	.hidepwd{
+	-webkit-text-security: disc;
+-moz-text-security: disc;
+text-security: disc;
+
+}
+</style>
+<!--add payment method modal end -->
+	<script>
+	document.querySelector('select#withdrawCyrpto').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+	var prefix="coin";
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+};
+document.querySelector('select#selectNetwork').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+	var prefix="network";
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+};
+
+	$('#crypto-address').change(function() {
+    var opval = $(this).val();
+	console.log(opval);
+	var coinname =document.querySelector('select#withdrawCyrpto').selectedOptions[0].getAttribute('data-content');
+	var network =document.querySelector('select#selectNetwork').selectedOptions[0].getAttribute('data-content');
+	if (network == "" || network == null) {
+			layer.tips('Please choose network', '#selectNetwork', {tips: 2});
+			return false;
+	}
+	$("#selectedCoin").html(coinname);
+	$("#selectedChain").html(network);
+    if(opval=="new-address"){
+        $('#addPaymentMethodModal').modal("show");
+    }
+});
+function wallet_up() {
+		var coinname    = document.querySelector('select#selectNetwork').selectedOptions[0].getAttribute('data-value');
+		var name        = $('#wallet_name').val();
+		var addr        = $('#wallet_addr').val();
+		var dest_tag        = $('#wallet_dest_tag').val();
+		var paypassword = $('#wallet_paypassword').val();
+		if (coinname == "" || coinname == null) {
+			layer.tips('Select Currency', '#selectedCoin', {tips: 2});
+			return false;
+		}
+		if (name == "" || name == null) {
+			layer.tips('Enter Wallet label', '#wallet_name', {tips: 2});
+			return false;
+		}
+		if (addr == "" || addr == null) {
+			layer.tips('Enter wallet address', '#wallet_addr', {tips: 2});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Provide Trans Password', '#wallet_paypassword', {tips: 2});
+			return false;
+		}
+		$.post("/User/upwallet", {
+			coin: coinname,
+			name: name,
+			addr: addr,
+			dest_tag:dest_tag,
+			paypassword: paypassword
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+/* Withdrawal function */
+	function coinout_up() {
+		var otp         = $("#otp").val();
+		var num          = $("#usdout_num").val();
+		var gacode          = $("#gacode").val();
+		var paypassword  = $("#usdout_paypassword").val();
+		var cellphone_verify = $("#usdout_cellphone_verify").val();
+		var bank         = document.querySelector('select#crypto-address').selectedOptions[0].getAttribute('data-value');
+		var dest_tag =document.querySelector('select#crypto-address').selectedOptions[0].getAttribute('data-dest');
+		var coin         = document.querySelector('select#withdrawCyrpto').selectedOptions[0].getAttribute('data-value');
+		var network =	document.querySelector('select#selectNetwork').selectedOptions[0].getAttribute('data-value');
+		if (num == "" || num == null) {
+			layer.tips('Enter the amount for transfer', '#usdout_num', {
+				tips: 2
+			});
+			return false;
+		}
+		if (otp == "" || otp == null) {
+			layer.tips('Enter the OTP you received on email', '#otp', {
+				tips: 2
+			});
+			return false;
+		}
+		if (bank == "" || bank == null) {
+			layer.tips('Transfer Address', '#usdout_bank', {
+				tips: 2
+			});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Provide Trans Password', '#usdout_paypassword', {
+				tips: 2
+			});
+			return false;
+		}
+		if (coin == "" || coin == null) {
+			layer.tips('Select Currency', '#coin-select', {
+				tips: 2
+			});
+			return false;
+		}
+		
+	
+	layer.load(0, {shade: [0.5,'#8F8F8F']});
+        setTimeout(function () {
+            layer.closeAll('loading');
+            trans_lock = 0;
+        }, 10000);
+			$.post("{:U('wallet/upCryptoWithdrawal')}", {
+				coin:coin,
+				network:network,
+				otp:otp,
+				num: num,
+				paypassword: paypassword,
+				cellphone_verify: cellphone_verify,
+				addr: bank,
+				dest_tag:dest_tag,
+				gacode:gacode
+			}, function (data) {
+			  layer.closeAll('loading');
+            trans_lock = 0;
+				if (data.status == 1) {
+					layer.msg(data.info, {
+						icon: 1
+					});
+					window.location = "{:U('Finance/coinoutlog')}/coin/"+coin;
+				} else {
+					layer.msg(data.info, {
+						icon: 2
+					});
+					if (data.url) {
+						window.location = data.url;
+					}
+				}
+			}, "json");
+		
+	}
+	function requestOTP() {
+		
+
+		var amount        = $('#usdout_num').val();
+		var coinname        = document.querySelector('select#withdrawCyrpto').selectedOptions[0].getAttribute('data-value');
+		var address        = document.querySelector('select#crypto-address').selectedOptions[0].getAttribute('data-value');
+		if (amount == "" || amount == null) {
+			layer.tips("Please enter amount  to withdraw first !", '#usdout_num', {tips: 2});
+			return false;
+		}
+		if (coinname == "" || coinname == null) {
+			layer.tips("Please choose currency to withdraw first !", '#coinname', {tips: 2});
+			return false;
+		}
+		if (address == "" || address == null) {
+			layer.tips("Please choose currency to withdraw first !", '#usdout_bank', {tips: 2});
+			return false;
+		}
+		
+		$.post("{:U('Finance/requestOTP')}", {
+			amount: amount,
+			coinname: coinname,
+			address: address,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				
+			} else {
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+	function calcpay(){
+	var amt=$("#usdout_num").val();
+						var percent_fee=$("#perfee").html();
+						var flatfee=$("#flatfee").html();
+						var payable = (amt* (100-percent_fee)/100)-flatfee;
+						var mux=100000000;
+						var floor=Math.trunc(payable*mux)/mux;
+						if(floor <0 ){
+						$("#receiveable").html("[Try a bigger amount");
+						}else{
+						$("#receiveable").html(floor);
+						}
+}
+$(document).ready(function(){
+                        //The response fileAdd tosuccessevent
+                        $("#usdout_num").change(function(){
+					calcpay();
+
+});
+});
+</script>
+	<include file="Public:footer_minimal"/>

@@ -1,0 +1,104 @@
+<include file="Public:header" />
+<div class="page-container">
+		<div class="row"><include file="Invest:smallmenu" /></div>
+	<div class="row">
+
+		<div class="panel panel-flat">
+		<div class="panel-heading">
+						<h5 class="panel-title"> Locked Staking</h5>
+	     </div>
+		<div class="panel-body">
+			
+		<table class="table datatable-sorting">
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Coin</th>
+								<th>APY %</th>
+								<th class="hidden-xs">Lock Period</th>
+								<th class="hidden-xs">Minimum Amt</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+						<notempty name="list">	
+						<volist name="list" id="vo">					
+						<tr>	<td>{$vo.title}</td>
+								<td><span class="stake_img"><img src="__UPLOAD__/coin/{$vo.img}" alt="" style="width: 20px; "></span> {$vo['coinname'] |strtoupper}</td>
+								<td>{$vo['percentage'] * 1}%</td>
+								<td class="hidden-xs">
+								<div class="btn-gap" data-toggle="buttons">
+								<volist name="vo.period" id="period">
+								<label class="btn  btn-sm">
+						<input type="radio" name="{$vo.id}period" id="option{$period}" value="{$period}">{$period}</label>
+								</volist>
+								</div>
+
+								</td>
+								<td class="hidden-xs"><a href="#" onclick="$('#inv_box{$vo.id}').val('{$vo.minvest}').trigger('change'); return false;">{$vo['minvest'] * 1}</a></td>
+								
+								<td class="text-center">
+									<switch name="vo.status">
+									<case value="1"><li><button class="btn btn-sm btn-info btn-block" data-toggle="modal" data-target="#stackingform_{$vo.id}">{:l("STACK_NOW")}</button></li>
+								</td></case>
+									<case value="4">Upcoming</case>
+									<default />--
+								</switch>
+								<include file="Invest:buyform" />
+								</td>
+							</tr>
+					</volist>	
+					<else/>
+						<p class="text-center font_gray font_16">No Data</p>
+					</notempty>		
+							
+						</tbody>
+					</table>
+			<div class="pages"> {$page}</div>
+		</div>
+		<div class="panel-footer"></div>
+	</div>
+<include file="Invest:faq" />
+<script>
+function investnow(id,coinname,allowed_withdrawal) {
+ var ele = document.getElementsByName(id+'period'); 
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               var period =ele[i].value; 
+            } 
+
+	if(period==null || period <=0){
+	layer.tips('Choose Period', "div[id='xperiod"+id+"']", {tips: 1});
+	return false;
+	}
+	var amount=$("input[id='inv_box"+id+"']").val();
+	if(amount==null || amount <=0){
+	layer.tips('Enter Amount', "input[id='inv_box"+id+"']", {tips: 1});
+	return false;
+	}
+	var days=period>1?'days':'day';
+	var staking_type=allowed_withdrawal?'Flexible':'Locked';
+	var msg = staking_type+' Stake '+amount+' '+coinname+ ' for '+period+' '+days+'!';
+	
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.post("/Invest/makeinvest/",{id:id,amount:amount,period:period} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+						window.location.href = "{:U('Invest/listinvest')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+
+        }, 'json');
+		});
+    }
+</script>	
+<include file="Invest:include" />
+</div>
+</div>
+<include file="Public:footer_minimal"/>

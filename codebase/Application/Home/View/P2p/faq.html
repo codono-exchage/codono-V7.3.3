@@ -1,0 +1,42 @@
+<include file="Publicnew:header"/>
+
+<div class="container m-t-20">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="row">
+					<div class="col-xl-12 col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">{$main_title}</h4>
+							</div>
+							<div class="card-body">
+								<div class="global-content">
+									<div class="row p-t-15 p-b-40">
+										<div class="col-md-9 m-b-20">
+											<h2 class="heading-color-yellow"><i class="fa fa-question-circle-o"></i> {$main_title}</h2>
+											<ul class="faq-listing">
+											<volist name="list" id="cats">
+											
+												<li>{$cats.category}
+													
+													<ul>
+													<volist name="cats.data" id="arts">
+														<li><a href="{:U('Article/detail','id='.$arts['id'])}"><i class="fa fa-angle-right"></i>{$arts.title}</a></li>
+													</volist>	
+													</ul>
+												</li>
+												</volist>
+											</ul>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--remove payment method modal end -->
+<include file="Publicnew:footer_minimal" />

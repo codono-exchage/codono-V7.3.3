@@ -1,0 +1,48 @@
+<div class="col-sm-6 col-lg-4">
+
+						<!-- User details (with sample pattern) -->
+						<div class="content-group">
+							<div class="card-body bg-blue border-radius-top text-center" style="background-image: url({$vo.image}); background-size: contain;border:1px solid #ddd">
+								<div class="content-group-sm">
+									<h5 class="text-semibold no-margin-bottom">
+										{$vo.name}
+									</h5>
+
+									<span class="display-block"></span>
+								</div>
+
+									<img src="{$vo.image}" class="img-circle img-responsive" alt="" style="width: 120px; height: 120px;">
+								
+
+							
+							</div>
+
+							<div class="panel card-body no-border-top no-border-radius-top">
+								<div class="form-group mt-5 no-margin-bottom">
+									<label class="text-semibold text-center">{$vo.name}</label>
+								</div>
+
+								<div class="form-group no-margin-bottom">
+									<label class="text-semibold">{:L("HOLDING")}:</label>
+									<span class="pull-right-sm">{$vo.coinname}</span>
+								</div>
+
+								<div class="form-group no-margin-bottom">
+									<label class="text-semibold">{:L("AIRDROP")}:</label>
+									<span class="pull-right-sm">{$vo['num']*1} {$vo.coinjian} </span>
+								</div>
+
+								<div class="form-group no-margin-bottom">
+									<label class="text-semibold">{:L("START DATE")}:</label>
+									<span class="pull-right-sm">{$vo.beginTime}</span>
+								</div>
+								<div class="form-group no-margin-bottom">
+									<label class="text-semibold">{:L("END DATE")}:</label>
+									<span class="pull-right-sm">{$vo.endTime}</span>
+								</div>
+							</div>
+						</div>
+						<!-- /user details (with sample pattern) -->
+
+
+					</div>

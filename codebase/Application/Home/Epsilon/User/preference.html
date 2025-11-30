@@ -1,0 +1,123 @@
+﻿<include file="Public:header" />
+
+<!-- Page content -->
+<section class="generic">
+  <div class="container">
+    <div class="row mt-3 mb-3">
+      <include file="User:top_bar" />
+      <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+        <ul class="text-right breadcrumbs list-unstyle">
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+          </li>
+          <li>
+            <a href="{:U('/user/index')}" class="btn btn-warning btn-sm"
+              >{:l('User')}</a
+            >
+          </li>
+          <li class="btn btn-warning btn-sm active">{:l('Preferences')}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">
+              <font style="vertical-align: inherit"
+                ><font style="vertical-align: inherit">{:l('Preferences')}</font></font
+              >
+            </h4>
+          </div>
+          <div class="card-body">
+            <form action="#" class="settings-form" id="settings-form">
+              <div class="settings">
+                <div class="row align-items-center">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                    <font style="vertical-align: inherit"
+                      ><font style="vertical-align: inherit">
+                        Changing Theme
+                      </font></font
+                    >
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                    <div class="setting-parameter">
+                      <div class="input-group">
+                        <div class="icheck-inline">
+                          <label>
+                            <input
+                              type="radio"
+                              name="theme-color"
+                              checked
+                              class="icheck"
+                              value="light"
+                            />
+                            Light
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              name="theme-color"
+                              class="icheck"
+                              value="dark"
+                            />
+                            Dark
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="settings">
+                <div class="row align-items-center">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                    <font style="vertical-align: inherit"
+                      ><font style="vertical-align: inherit">
+                        Local Currency
+                      </font></font
+                    >
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                    <div class="setting-parameter">
+                      <div class="input-group">
+                        <select id="selectCurrency" class="wide">
+                          <option selected="">TRY</option>
+                          <option>USD</option>
+                          <option>EUR</option>
+                          <option>GBP</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="settings">
+                <div class="row align-items-center">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+                    Local Language
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                    <div class="setting-parameter">
+                      <div class="input-group">
+                        <select id="selectLanguage" class="wide">
+                          <option selected="">Türkçe</option>
+                          <option>English</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  $("#whichpage").html("{:l('Preferences')}");
+</script>
+<include file="Public:footer_minimal" />

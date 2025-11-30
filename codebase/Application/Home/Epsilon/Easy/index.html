@@ -1,0 +1,199 @@
+<include file="Public:header" />
+<!-- Swap Start -->
+
+	<section class="wallet-page">
+		<div class="container">
+			<div class="row justify-content-center inner-wrapper">
+				<div class="col-12">
+					<div class="easytrade-form-wrapper">
+						<div class="easytrade-form-inner">
+							<h1 class="text-center m-b-30">{:l("Easy Buy/Sell")} </h1>
+							
+								<div class="easy-trade-from">
+									
+									<select id="swapFrom" class="bootstrap-select selectpicker" data-live-search="true" data-live-search-placeholder="{:l("Search")}" data-width="100%">
+
+									<volist name="CoinList" id="ac">
+									<option   value="{$ac['name']|strtoupper}" data-value="{$ac['name']|strtoupper}"  data-title="{$ac['title']}" data-balance="{$ac['balance']}" data-subtitle="{$ac['name'] |strtoupper}" data-content="<img src='__UPLOAD__/coin/{$ac['img']}'> {$ac['title']} <span>{$ac['name']|strtoupper}</span> <span class='value'>{$ac['price']|NumToStr} <span class='{$ac['color']}'>{$ac['change']}%</span></span>"></option>
+									</volist>
+									</select>
+									<ul class="nav nav-pills nav-fill m-t-40" role="tablist">
+										<li class="nav-item">
+											<a aria-selected="true" class="nav-link active" data-toggle="pill" href="#easy-trade-buy" role="tab"><span class="coin-name etrade cointitle"></span> {:("Buy")}</a>
+										</li>
+										<li class="nav-item">
+											<a aria-selected="false" class="nav-link" data-toggle="pill" href="#easy-trade-sell" role="tab"><span class="coin-name etrade cointitle"></span> {:("Sell")}</a>
+										</li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane fade show active p-t-15" role="tabpanel" id="easy-trade-buy">
+											<div class="input-group">
+												<input class="form-control" placeholder="Amount in [{$base_coin}] you want to spend" type="number" id="buyamount" value="{$balance}">
+												<div class="input-group-append">
+													<button style="min-width: 2.5rem" class="nav-link active" type="button" tabindex="0" data-toggle="modal" data-target="#bottomModal" title="{$balance} {$base_coin|strtoupper}" ><strong>{$base_coin|strtoupper} </strong>
+														</button>
+													
+												</div>
+											</div>
+											<button id="buybutton" class="btn buy d-block w-100" onclick="trade(1);">
+												<span class="coin-name etrade cointitle">--</span> {:l("Buy")}
+											</button>
+										</div>
+										<div class="tab-pane fade p-t-15" role="tabpanel" id="easy-trade-sell">
+											<div class="input-group">
+												<input class="form-control" placeholder="{:l("Amount you want to sell")} ({$base_coin|strtoupper})" type="number" value="" id="sellamount">
+												<div class="input-group-append">
+													<button style="min-width: 2.5rem" class="nav-link active" type="button" tabindex="0" data-toggle="tooltip" data-html="true" title="<span class='etrade coinname'></span>" >
+														<strong class="coinname"></strong></button>
+												</div>
+											</div>
+											<input type="hidden" name="selectedcoin" value=""/>
+											<button class="btn sell d-block w-100" onclick="trade(2);">
+												<span class="coin-name etrade cointitle" >--</span> {:l("Sell")}
+											</button>
+										</div>
+									</div>
+								
+											 
+								</div>
+								<div class="col-auto pull-right">
+								<button data-toggle="modal" data-target="#bottomModal" class="btn btn-sm">
+									<div class="d-flex align-items-center">
+									  <span>{:l('Switch Market')}</span>
+									  <div class="nav-icon ml-2">
+										<i class="icon-size switch-button"></i>
+									  </div>
+									</div>
+								  </button>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Bottom Modal START-->	
+<div class="modal modal-top fade" id="bottomModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-body">
+			<div class="container">
+				<div class="row align-items-center">
+				<div class="col">
+					<ul class="nav nav-pills nav-fill amount-buttons" role="button-list">
+						<volist name="base_pairs" id="vo">    
+						<li class="nav-item ">
+							<button aria-selected="false" onclick="switchMarket('{$vo}')" class="nav-link <if condition="$vo eq $base_coin">active</if>" data-toggle="pill" >
+								<span>{$vo|strtoupper}</span></button>
+						</li>
+						</volist>
+				
+					</ul>
+					
+				</div>
+				<div class="col-auto">
+					
+					<button type="button" class="btn btn-4 m-auto" data-dismiss="modal">{:l('Cancel')}</button>
+				</div>
+		  </div>
+		  </div>
+		</div>
+  
+	  </div>
+	</div>
+  </div>
+  <!-- Bottom  Modal END -->
+  
+	<script>
+jQuery(document).ready(function ($) {
+var base_coin_name =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+var base_coin_title =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-title');
+var base_coin_balance =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-balance');
+$(".coinname").html(base_coin_name);
+$(".cointitle").html(base_coin_name);
+$("#selectedcoin").val(base_coin_name);
+$("#sellamount").val(base_coin_balance);
+	document.querySelector('select#swapFrom').onchange = function(){   
+		var base_coin_name =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+		var base_coin_title =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-title');
+		var base_coin_balance =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-balance');
+		$(".coinname").html(base_coin_name);
+$(".cointitle").html(base_coin_name);
+$("#selectedcoin").val(base_coin_name);
+$("#sellamount").val(base_coin_balance);
+	};
+});
+function switchMarket(market){
+
+  if(market=='' || market==0)
+	{
+	layer.tips('Please enter amount!', '#bottomModal', {tips: 3});
+	return false;
+	}
+	console.log("Easy/index/market/"+market);
+	window.location = "{:SITE_URL}Easy/index/market/"+market;
+	
+}
+function trade(type){
+if(type==1){
+  var amount=$("#buyamount").val();
+  if(amount=='' || amount==0)
+	{
+	layer.tips('Please enter amount!', '#buyamount', {tips: 3});
+	return false;
+	}
+}
+if(type==2){
+  var amount=$("#sellamount").val();
+	if(amount=='' || amount==0)
+	{
+	layer.tips('Please enter amount!', '#sellamount', {tips: 3});
+	return false;
+	}
+}
+   
+   
+   var coin =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+if(coin=='' || coin==null)
+{
+layer.tips('Please select coin!', '#swapFrom', {tips: 3});
+return false;
+}
+
+layer.load(0, {shade: [0.5,'#8F8F8F']});
+$.post("{:U('Easy/doTrade')}", {
+			coin: coin,
+			amount: amount,
+			type:type,
+			
+		}, function (data) {
+		layer.closeAll('loading');
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+	</script>
+
+<php>
+$coin = isset($_GET['coin']) ? $_GET['coin'] : '';
+$amount = isset($_GET['amount']) ? $_GET['amount'] : '';
+</php>
+
+<if condition="$coin neq ''">
+    <script>
+        $('.selectpicker').selectpicker('val', '{$coin}');
+    </script>
+</if>
+
+<if condition="$amount neq ''">
+    <script>
+        $('#buyamount').val({$amount});
+        layer.tips('{:l("Click Here")}', '#buybutton', {tips: 3});
+    </script>
+</if>
+	
+	<include file="Public:footer_minimal"/>
+	

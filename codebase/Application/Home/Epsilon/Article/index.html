@@ -1,0 +1,66 @@
+<include file="Public:header" />
+<link rel="stylesheet" href="__PUBLIC__/static/css/article.css"/>
+<div class="">
+    <main class="wrapper blog-page ">
+        <!-- Account Heading Start -->
+        <div class="page-top-banner">
+            <div class="filter" style="background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-8 mt-3">
+                            <h1>{$page_title}</h1>
+                            <notempty name="prompt_text">
+                                <h2>{$prompt_text}</h2>
+                            </notempty>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="blog">
+            <div class="container">
+                
+                
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12">
+                        <div class="row">
+                            
+                            <volist name="list" id="vo">   
+
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                                <div class="blog-grid">
+                                    <span  class="card">
+                                        <figure>
+                                            <a href="{:U('Article/detail','id='.$vo['id'])}">
+                                        <if condition="$vo.img neq ''">
+                                            <img class="img-fluid" src="__UPLOAD__/article/{$vo['img']}" alt="{$vo.title}">
+                                            <else/>
+                                            <img class="img-fluid" src="__UPLOAD__/article/default.jpg" alt="{$vo.title}">
+                                        </if>
+                                        </a>
+                                        </figure>
+                                        <div class="card-body">
+                                                
+                                                <h6><a class="color-dark-link" href="{:U('Article/detail','id='.$vo['id'])}">{$vo.title}</a></h6>
+                                                <span class="date">{$vo.addtime|addtime}</span>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </volist>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+							<include file="Article:sidebar" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+
+
+
+<include file="Public:footer_minimal" />

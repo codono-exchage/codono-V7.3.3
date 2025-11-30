@@ -1,0 +1,57 @@
+<!-- rightbox starts -->
+<div class="col-md-6 col-sm-12">
+<div class="rightbox">
+	<div class="QuoteLayout-Wrap">
+		<div class="QuoteLayout-Title" id="quotebox">
+		<img class="quoteLayout-arrowBack" src="__PUBLIC__/static/images/arrow-back.svg">Current Quote</div>
+		<div class="QuoteLayout-Body">
+			
+			<div class="QuoteEmpty-Wrap" id="blank_order">
+				<div class="QuoteEmpty-Body">
+					<p><i class="fa fa-undo fa-4x"></i></p>
+					
+					<div class="QuoteEmpty-Title">Please fill in an amount on the left to receive a quote.</div>
+				</div>
+				
+			</div>
+			
+			<div class="quoteContent-wrap" id="with_order">
+				<div class="quoteContent-TopWrap">
+					<div class="quoteContent-CryptoTitle" id="tradetype_final">I want to buy</div>
+					<div class="quoteContent-CryptoWrap">
+						<div class="quoteContent-StyledTargetAmount" id="tradecoin_qty">--</div>
+						<div class="quoteContent-CryptoCoin" id="tradecoin_name">--</div>
+					</div>
+				</div>
+				<div class="quoteContent-MiddleWrap">
+					<div class="quoteContent-LabelRow"><div>Price per Coin</div><div>Total Proceeds</div></div>
+					<div class="quoteContent-CoinRow">
+						<div class="quoteContent-FiatPerCoin" id="received_price">-- --</div>
+						<div class="quoteContent-FiatTotal" id="received_total">-- --</div>
+					</div>
+					<div class="quoteContent-CountdownWrap">
+						<div class="quoteContent-CountdownInfo">
+							Quote expires in<div class="quoteContent-CountdownNumber" id="expiretime">--s</div>
+						</div>
+						<div class="progress-Wrap">
+							<div class="progress-BaseLine"></div>
+							<div class="progress-ActiveLine" style="width: 100%;" id="progressbar"></div>
+						</div>
+					</div>
+				</div>
+				<div class="quoteContent-StyledError" id="quoteerror">
+					<img class="quoteContent-ErrorIcon" src="__PUBLIC__/static/images/home-errorIcon.svg"><span id="quoteerror2">Insufficient funds! This quote is indicative only</span>
+				</div>
+				<div class="quoteContent-button row" id="quotefinal">
+					<div class="col-xs-12">
+					<div class="col-xs-6"> <button data-bn-type="button"  id="reject-button" class="btn btn-md btn-default btn-block" onclick="rejectQuote()">Reject </button></div>
+					<div class="col-xs-6"> <button data-bn-type="button"  id="approve-button" class="btn btn-md btn-info btn-block" onclick="approveQuote()">Approve </button></div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+</div>
+<!-- Rightbox ends -->

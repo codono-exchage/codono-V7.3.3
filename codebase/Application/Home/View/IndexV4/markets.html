@@ -1,0 +1,532 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><neq name="page_title" value=''>{$page_title} |</neq> {:C('web_description')} </title>
+    <link rel="shortcut icon" type="image/x-icon" href="__PUBLIC__/template/milky/assets/img/favi.png">
+    <meta name="keywords" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_keywords')}">
+    <meta name="description" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_description')}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/template/milky/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/jquery.cookies.2.2.0.js"></script>
+<style>
+.dropdown-menu div:last-child {
+    display: none;
+}
+.f-textx{min-width:120px !important;}
+.d-blockx img{padding-right:6px;}
+</style>
+</head>
+<body>
+    <div class=" navbar-fixed-top">
+        <div class="container nav-container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="#">
+                            <img class="img-fluid mr-md-4" src="__UPLOAD__/public/{$C['web_logo']}" srcset="__UPLOAD__/public/{$C['web_logo']} 2x" width="140">
+								
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse menu-list" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+							<volist name="navigation" id="vo">  
+								<if condition="$vo.dropdown eq 1">	
+                                <li class="nav-item dropdown" id="{$vo['name']}_box">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {:l($vo['title'])}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<volist name="vo.submenu" id="submenu">
+                                        <a class="dropdown-item" href="/{$submenu.url}">
+                                            <span class="t1">{$submenu.title}</span>
+                                            <if condition="$vo['ico']">
+											<em> <i class="fa {$vo['ico']}"></i> </em>
+											</if>
+											
+                                        </a>
+										<div class="dropdown-divider"></div>
+
+										</volist>
+
+                                    </div>
+                                </li>
+								<else/>
+									
+                                <li class="nav-item" id="{$vo['name']}_box">
+                                    <a class="nav-link" href="/{$vo['url']}">{:l($vo['title'])}</a>
+                                </li>
+								</if>
+								</volist>
+
+                                
+                                
+                            </ul>
+                            <ul class="navbar-nav ml-auto">
+												<php>if (!userid()){</php>
+                                <li class="nav-item">
+                                    <a class="btn btn-primary mr-lg-3 ml-lg-3 mt-md-0 mt-4  text-white"  href="{:U('Login/register')}">{:l('SIGNUP')} →</a>
+                                </li>
+
+
+                                <li>
+                                    <a class="nav-link" href="{:U('Login/login')}">
+                                        {:l('SIGNIN')} 
+                                    </a>
+                                </li>
+					<php>}</php>
+	<gt name="Think.session.userId" value="0">
+									       <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Hello {$Think.session.userName}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item"  href="{:U('Finance/index')}">
+                                            <span class="t1">{:l('FINANCE')}</span>
+                                            <span class="t2">Deposits/Withdrawals</span>
+                                            <em> <i class="fa fa-calendar-o"></i> </em>
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{:U('User/index')}">
+                                            <span class="t1">{:l('ACCOUNT')}</span>
+                                            <span class="t2">User Account</span>
+                                            <em> <i class="fa fa-user-o"></i> </em>
+                                        </a>
+										<div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{:U('Login/loginout')}">
+                                            <span class="t1">{:l('LOG_OUT')}</span>
+											<span class="t2">&nbsp;</span>
+                                            <em> <i class="fa fa-user-o"></i> </em>
+                                        </a>
+										
+                                    </div>
+                                </li>
+				</gt>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="__PUBLIC__/assets/images/flags/<notempty name="Think.cookie.lang"> {$Think.cookie.lang}<else/>{:C('DEFAULT_LANG')}</notempty>.png" class="position-left" alt="">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-lang" aria-labelledby="navbarDropdown">
+                                        	<spanonclick="choose_lang('tr')"><a class="dropdown-item" class="Turkish"><img src="__PUBLIC__/assets/images/flags/tr.png" alt=""> Turkish</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('en')"><a class="dropdown-item"  class="english"><img src="__PUBLIC__/assets/images/flags/gb.png" alt=""> English</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('es')"><a class="dropdown-item"  class="espana"><img src="__PUBLIC__/assets/images/flags/es.png" alt=""> España</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('nl')"><a class="dropdown-item"  class="deutsch"><img src="__PUBLIC__/assets/images/flags/nl.png" alt=""> Dutch</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('iw')"><a class="dropdown-item"  class="Hebrew"><img src="__PUBLIC__/assets/images/flags/iw.png" alt=""> Hebrew</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('de')"><a class="dropdown-item"  class="german"><img src="__PUBLIC__/assets/images/flags/de.png" alt=""> German</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('ko')"><a class="dropdown-item"  class="Korean"><img src="__PUBLIC__/assets/images/flags/ko.png" alt=""> Korean</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('ja')"><a class="dropdown-item"  class="Japanese"><img src="__PUBLIC__/assets/images/flags/ja.png" alt=""> Japanese</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('pt')"><a class="dropdown-item"  class="portuguese"><img src="__PUBLIC__/assets/images/flags/pt.png" alt=""> Portuguese</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('ru')"><a class="dropdown-item"  class="russian"><img src="__PUBLIC__/assets/images/flags/ru.png" alt=""> Русски</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('vi')"><a class="dropdown-item"  class="vietnamese"><img src="__PUBLIC__/assets/images/flags/vi.png" alt=""> Vietnamese</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('zhtw')"><a class="dropdown-item"  class="Traditional Chinese"><img src="__PUBLIC__/assets/images/flags/zhtw.png" alt=""> Traditional</a></span><div class="dropdown-divider"></div>
+	<spanonclick="choose_lang('zhcn')"><a class="dropdown-item"  class="Simplified Chinese"><img src="__PUBLIC__/assets/images/flags/zhcn.png" alt=""> Simplified</a></span><div class="dropdown-divider"></div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <section class="pt-5">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <h1 class="title1 pt-md-5">
+                        Assets
+                    </h1>
+                    <p class="pb-4 pt-4 f18 text-center">
+                        Buy Bitcoin, Ethereum, and 175 other digital assets instantly with Euros.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="pt-5 mt-md-5 pb-md-5 pb-4">
+        <div class="container">
+  <div class="row justify-content-center text-center">
+                        <div class="col-lg-12">
+                            <div class="section-head-s2" id="market-tab-box">
+            
+<ul class="nav nav-tabs trade_qu_list">
+<volist name="codono_jiaoyiqu" id="v">		
+	<li  class=" trade_moshi trade_qu_pai nav-item <eq name="key" value="0">
+	current active</eq>" data="{$key}" onclick="trade_qu(this)">
+	<a href="#highlighted-justified-tab1" class="nav-link <eq name="key" value="0">active</eq>" data-toggle="tab">{$v}</a>
+	</li>
+	</volist>	
+</ul>
+                            </div>
+                        </div>
+                    </div>
+            <div class="row">
+
+
+                <div class="col-md-12">
+                    <div class="table-responsive" >
+                        <table class="table table-bordered-none table2" id="markettable">
+                       <thead class="price_today_ull ">
+                                <tr>
+                                    <th scope="col" data-sort="0" style="cursor: default;">{:l('PAIR')}</th>
+                                    <th scope="col"class="click-sort" data-sort="1" data-flaglist="0" data-toggle="0">{:l('THE_LATEST_TRANSACTION_PRICE')} </th>
+                                    <th scope="col" class="click-sort" data-sort="2" data-flaglist="0" data-toggle="0">{:l('Buy')}</th>
+                                    <th scope="col" class="click-sort" data-sort="3" data-flaglist="0" data-toggle="0">{:l('SELL_A_PRICE')}</th>
+                                    <th scope="col" class="click-sort" data-sort="6" data-flaglist="0" data-toggle="0">24H {:l('Vol')}</th>
+                                    <th scope="col"  class="click-sort" data-sort="4" data-flaglist="0" data-toggle="0">24H {:l('Total')}</th>
+                                    <th scope="col" class="click-sort" data-sort="7" data-flaglist="0" data-toggle="0">24H {:l('CHANGE')}</th>
+									
+									<th scope="col" data-sort="0">{:l('OPERATING')}</th>
+									
+                                </tr>
+                            </thead>	
+
+                            <tbody id="price_today_ul">
+
+</tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        <section class="mt-md-5 pt-md-5 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-6 offset-lg-3">
+                    <div class="box text-center">
+
+                        <h4>
+                            Found the Asset You're Looking For?
+
+                        </h4>
+                        <p class="pt-2 pb-4">
+                            Add it to your portfolio today.
+                        </p>
+						<php>if (!userid()){</php>
+                        <a href="{:U('Login/register')}" class="btn btn-1">
+                            Sign Up & Buy
+                        </a>
+						<php>}else{</php>
+						<a href="{:U('Trade/index')}" class="btn btn-1">
+                            Trade Now
+                        </a>
+						<php>}</php>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="pt-md-4">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-md-3">
+
+					<img src="__UPLOAD__/public/{$C['web_logo']}" srcset="__UPLOAD__/public/{$C['web_logo']}"  class="img-fluid mb-4" alt="{:SHORT_NAME}" width="140px"/>
+											
+                    <p>
+                       
+                        {:C('web_title')}
+                    </p>
+          
+
+                </div>
+
+                <div class="col-md-3">
+                    <h4 class="pb-4">
+                        {:L('Service')}
+                    </h4>
+
+                    <ul class="list-inline footer-ul">
+                         <li><a href="{:SITE_URL}Content/fees" class="tt-c" >{:L('Trading Fees')}</a></li>
+		  <li><a href="{:SITE_URL}Content/referral" class="tt-c">{:L('Referral')}</a></li>
+		  <li><a href="{:SITE_URL}Content/health" class="tt-c">{:L('Coins Health')}</a></li>
+
+                    </ul>
+
+                </div>
+
+					<volist name="footerArticleType" id="vo">		
+      <div class="col-md-3">
+	   <h4 class="pb-4">
+                        {$vo['title']}
+                    </h4>
+					
+					                    <ul class="list-inline footer-ul">
+                        <volist name="footerArticle[$vo['name']]" id="vvo">
+						<li>
+                            <a href="{:U('Article/type',array('id'=>$vvo['id']))}">
+                                {$vvo['title']}
+
+                            </a>
+                        </li>
+						</volist>
+                    </ul>
+                       
+                            </div>
+	  </volist>
+				
+                <div class="col-md-3">
+                   
+                    <div class="social">
+                        <a href="{$C['contact_linkedin']}"> <i class="fa fa-linkedin"></i> </a>
+                        <a href="{$C['contact_twitter']}"> <i class="fa fa-twitter"></i> </a>
+                        <a href="{$C['contact_facebook']}"> <i class="fa fa-facebook"></i> </a>
+                        <a href="{$C['contact_instagram']}"> <i class="fa fa-instagram"></i> </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row pt-3">
+                <div class="col-md-12 text-center">
+                    <hr />
+                    <p>
+                       {:C('web_icp')}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+    <script>
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $(".navbar-fixed-top");
+                $nav.toggleClass('scrolled', $(this).scrollTop() > 490);
+            });
+        });
+    </script>
+
+
+
+    <script>
+        $('.slider1').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            dosts: true,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+    </script>
+
+    <script>
+        $('.slider2').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            dosts: true,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $(".collapse.show").each(function () {
+                $(this).prev(".card-header").find(".fa").addClass("fa-minus").removeClass("fa-plus");
+            });
+
+            $(".collapse").on('show.bs.collapse', function () {
+                $(this).prev(".card-header").find(".fa").removeClass("fa-plus").addClass("fa-minus");
+            }).on('hide.bs.collapse', function () {
+                $(this).prev(".card-header").find(".fa").removeClass("fa-minus").addClass("fa-plus");
+            });
+        });
+    </script>
+<script>
+	$('.price_today_ull > .click-sort').each(function () {
+		$(this).click(function () {
+			click_sortList(this);
+		})
+	});
+	function allcoin_callback(priceTmp) {
+		for (var i in priceTmp) {
+			var c = priceTmp[i][8];
+			if (typeof (trends[c]['data']) && typeof (trends[c]['data']) != 'null') {
+				if (typeof (trends[c]) != 'undefined' && typeof (trends[c]['data']) != 'undefined') {
+				
+				}
+			}
+		}
+	}
+	function click_sortList(sortdata) {
+		var a = $(sortdata).attr('data-toggle');
+		var b = $(sortdata).attr('data-sort');
+		$(".price_today_ull > th").find('.fa-angle-up').css('border-bottom-color', '#848484');
+		$(".price_today_ull > th").find('.fa-angle-down').css('border-top-color', '#848484');
+		$(".price_today_ull > th").attr('data-flaglist', 0).attr('data-toggle', 0);
+		$(".price_today_ull > th").css('color', '');
+		$(sortdata).css('color', '#1a81d6');
+		if (a == 0) {
+			priceTmp = priceTmp.sort(sortcoinList('dec', b));
+			$(sortdata).find('.fa-angle-down').css('border-top-color', '#1a81d6');
+			$(sortdata).find('.fa-angle-up').css('border-bottom-color', '#848484');
+			$(sortdata).attr('data-flaglist', 1).attr('data-toggle', 1)
+		}
+		else if (a == 1) {
+			$(sortdata).attr('data-toggle', 0).attr('data-flaglist', 2);
+			$(sortdata).find('.fa-angle-up').css('border-bottom-color', '#1a81d6');
+			$(sortdata).find('.fa-angle-down').css('border-top-color', '#848484');
+			priceTmp = priceTmp.sort(sortcoinList('asc', b));
+		}
+		renderPage(priceTmp);
+		change_line_bg('price_today_ul', 'li');
+	//	allcoin_callback(priceTmp);
+	}
+	function trends() {
+		$.getJSON('{:U('Ajax/top_coin_menu')}?t=' + rd(), function (d) {
+			trends = d;
+			allcoin();
+		});
+	}
+	function allcoin(cb) {
+		var trade_qu_id = $('.trade_qu_list .current').attr('data');
+		$.get('{:U('Ajax/allcoin_a')}/id/' + trade_qu_id + '?t=' + rd(), cb ? cb : function (data) {
+			var d;
+			if (data.status == 1) {
+				d = data.url;
+			}
+			ALLCOIN  = d;
+			var t    = 0;
+			var img  = '';
+			priceTmp = [];
+			for (var x in d) {
+				if (typeof(trends[x]) != 'undefined' && parseFloat(trends[x]['yprice']) > 0) {
+					rise1 = (((parseFloat(d[x][4]) + parseFloat(d[x][5])) / 2 - parseFloat(trends[x]['yprice'])) * 100) / parseFloat(trends[x]['yprice']);
+					rise1 = rise1.toFixed(2);
+				} else {
+					rise1 = 0;
+				}
+				img = d[x].pop();
+				d[x].push(rise1);
+				d[x].push(x);
+				d[x].push(img);
+				priceTmp.push(d[x]);
+			}
+			$('.price_today_ull > .click-sort').each(function () {
+				var listId = $(this).attr('data-sort');
+				if ($(this).attr('data-flaglist') == 1 && $(this).attr('data-sort') !== 0) {
+					priceTmp = priceTmp.sort(sortcoinList('dec', listId))
+				} else if ($(this).attr('data-flaglist') == 2 && $(this).attr('data-sort') !== 0) {
+					priceTmp = priceTmp.sort(sortcoinList('asc', listId))
+				}
+			});
+			renderPage(priceTmp);
+		//	allcoin_callback(priceTmp);
+			change_line_bg('price_today_ul', 'li');
+			//t = setTimeout('allcoin()', 5000);
+		}, 'json');
+	}
+	function rd() {
+		return Math.random()
+	}
+	function renderPage(ary) {
+		var html = '';
+		for (var i in ary) {
+			var coinfinance = 0;
+			if (typeof FINANCE == 'object') coinfinance = parseFloat(FINANCE.data[ary[i][8] + '_balance']);
+			html += '<tr id="m_' + ary[i][15] + '"><td><p class="f-textx"><a href="/trade/index/market/' + ary[i][8] + '/"><span class="d-blockx">' +
+					'<img src="/Upload/coin/' + ary[i][9] + '" width="20px">' + ary[i][12] + '</span></a></p></td><td class="tc-warning">' + ary[i][1] + '</td><td >' + ary[i][2] + '</td><td >' + ary[i][3] + '</td><td >' + formatCount(ary[i][6]) + '</td><td >' + formatCount(ary[i][4]) + '</td><td class="' + (ary[i][7] >= 0 ? 'text-success' : 'text-danger') + '" >' + (parseFloat(ary[i][7]) < 0 ? '' : '') + ((parseFloat(ary[i][7]) < 0.01 && parseFloat(ary[i][7]) > -0.01) ? "0.00" : (parseFloat(ary[i][7])).toFixed(2)) + '%</td><td><a class="blueText" href=\'/trade/index/market/' + ary[i][8] + '/\' >  {:l('Buy')} <i class="fa fa-arrow-right" aria-hidden="true"></i></a></td></tr>'
+		}
+		$('#price_today_ul').html(html);
+	}
+	function formatCount(count) {
+		var countokuu = (count / 1000000000).toFixed(3);
+		var countwan  = (count / 1000000).toFixed(3);
+		if (count > 1000000000)
+			return countokuu.substring(0, countokuu.lastIndexOf('.') + 3) + ' bl';
+		if (count > 1000000)
+			return countwan.substring(0, countwan.lastIndexOf('.') + 3) + ' ml';
+		else
+			return count;
+			
+	}
+	function change_line_bg(id, tag, nobg) {
+		var oCoin_list = $('#' + id);
+		var oC_li      = oCoin_list.find(tag);
+		var oInp       = oCoin_list.find('input');
+		var oldCol     = null;
+		var newCol     = null;
+		if (!nobg) {
+			for (var i = 0; i < oC_li.length; i++) {
+				oC_li.eq(i).css('background-color', i % 2 ? '#f8f8f8' : '#fff');
+			}
+		}
+		oCoin_list.find(tag).hover(function () {
+			oldCol = $(this).css('backgroundColor');
+			$(this).css('background-color', '#eaedf4');
+		}, function () {
+			$(this).css('background-color', oldCol);
+		})
+	}
+	function sortcoinList(order, sortBy) {
+		var ordAlpah = (order == 'asc') ? '>' : '<';
+		var sortFun  = new Function('a', 'b', 'return parseFloat(a[' + sortBy + '])' + ordAlpah + 'parseFloat(b[' + sortBy + '])? 1:-1');
+		return sortFun;
+	}
+	function trade_qu(o){
+		$('.trade_qu_pai').removeClass('current');
+		$(o).addClass('current');
+		allcoin();
+	}
+	trends();
+</script>
+
+</body>
+</html>

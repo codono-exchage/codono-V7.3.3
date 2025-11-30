@@ -1,0 +1,28 @@
+<div class="row">
+<div class="col-sm-6">
+<div class="panel panel-body border-top-teal">
+<div class="panel-heading"><a href="/Article/index/id/{$indexArticleType[1]['id']}" target="_blank">{$indexArticleType[1]['title']}</a></li></div>
+							<ul class="list-feed">
+								<volist name="indexArticle[1]" id="vo" offset="0" length="4">
+								<li>
+									<a href="{:U('Article/detail','id='.$vo['id'])}">Read</a> {$vo['title']|msubstr=0,60}
+									<div class="text-muted">{$vo['addtime']|date='Y-m-d',###}</div>
+								</li>
+								</volist>
+							</ul>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="panel panel-body border-top-teal">
+<div class="panel-heading"><a href="/Article/index/id/{$indexArticleType[0]['id']}" target="_blank">{$indexArticleType[0]['title']}</a></div>
+							<ul class="list-feed">
+								<volist name="indexArticle[0]" id="vo" offset='0' length='4'>
+								<li>
+									<a href="{:U('Article/detail','id='.$vo['id'])}">Read</a> {$vo['title']|msubstr=0,60}
+									<div class="text-muted">{$vo['addtime']|date='Y-m-d',###}</div>
+								</li>
+								</volist>
+							</ul>
+</div>
+</div>
+</div>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>{$title} BackOffice</title>
+	<link href="__THEME__/images/favicon.ico" type="image/x-icon" rel="shortcut icon">
+	<!-- Loading Bootstrap -->
+
+	
+        <!-- Bootstrap Css -->
+        <link href="__THEME__/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="__THEME__/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="__THEME__/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+	
+	<link rel="stylesheet" type="text/css" href="__THEME__/css/common.css" media="all">
+	<script src="__THEME__/assets/libs/jquery/jquery.min.js"></script>	
+</head>
+<body data-sidebar="dark" data-layout-mode="light">
+	<div id="layout-wrapper">
+		<header id="page-topbar">
+			<div class="navbar-header">
+				<div class="d-flex">
+					<!-- LOGO -->
+					<div class="navbar-brand-box">
+						<a href="{:U('Index/index')}" class="logo logo-dark">
+							<span class="logo-sm">
+								<img src="__UPLOAD__/public/{:C('web_logo')}" alt="" height="22">
+							</span>
+							<span class="logo-lg">
+								<img src="__UPLOAD__/public/{:C('web_logo')}" alt="" height="17">
+							</span>
+						</a>
+
+						<a href="{:U('Index/index')}" class="logo logo-light">
+							<span class="logo-sm">
+								<img src="__UPLOAD__/public/{:C('web_logo')}" alt="" height="22">
+							</span>
+							<span class="logo-lg">
+								<img src="__UPLOAD__/public/{:C('web_logo')}" alt="" height="19">
+							</span>
+						</a>
+					</div>
+
+					<button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
+						<i class="fa fa-fw fa-bars"></i>
+					</button>
+
+					<!-- App Search-->
+					
+					
+				</div>
+
+				<div class="d-flex">
+
+
+					<div class="dropdown d-none d-lg-inline-block ms-1">
+						<button type="button" class="btn header-item noti-icon waves-effect"
+						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="bx bx-customize"></i>
+						</button>
+						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+							<div class="px-lg-2">
+								<div class="row g-0">
+									<div class="col">
+										<a class="dropdown-icon-item" href="{:U('Config/index')}">
+											<i class="bx bx-md bx-cog"></i>
+											<span>Basic Config</span>
+										</a>
+									</div>
+									<div class="col">
+										<a class="dropdown-icon-item" href="{:U('Config/coin')}">
+											<i class="bx bx-md bx-bitcoin"></i>
+											<span>Coins</span>
+										</a>
+									</div>
+									<div class="col">
+										<a class="dropdown-icon-item" href="{:U('Trade/market')}">
+											<i class="bx bx-md bx-transfer-alt"></i>
+											<span>Markets</span>
+										</a>
+									</div>
+
+								</div>
+
+								<div class="row g-0">
+									<div class="col">
+										<a class="dropdown-icon-item" href="{:U('Finance/myzr')}">
+											<i class="bx bx-md bx-box"></i>
+											<span>Deposits</span>
+										</a>
+									</div>
+									<div class="col">
+										<a class="dropdown-icon-item" href="{:U('Finance/myzc')}">
+											<i class="bx bx-md bx-archive-out"></i>
+											<span>Withdrawals</span>
+										</a>
+									</div>
+									<div class="col">
+										<a class="dropdown-icon-item" href="{:U('Email/index')}">
+											<i class="bx bx-md bx-mail-send"></i>
+											<span>Emails</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="dropdown d-none d-lg-inline-block ms-1">
+						<button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+							<i class="bx bx-fullscreen"></i>
+						</button>
+					</div>
+					<div class="dropdown d-none d-lg-inline-block ms-1">
+						<button tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Clear Admin Cache" type="button" class="btn header-item noti-icon waves-effect" onclick="clearCache();">
+							<i class="bx bx-trash-alt" alt="Clear Admin Cache"></i>
+						</button>
+					</div>
+					<div class="dropdown d-inline-block">
+						<button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
+						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="bx bx-list-check bx-tada"></i>
+							<span class="badge bg-danger rounded-pill">{$todos['count']}</span>
+						</button>
+						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+							aria-labelledby="page-header-notifications-dropdown">
+							<div class="p-3">
+								<div class="row align-items-center">
+									<div class="col">
+										<h6 class="m-0" key="t-notifications"> Todo's </h6>
+									</div>
+
+								</div>
+							</div>
+							<div data-simplebar style="max-height: 260px;">
+								<if condition="$todos.pending_crypto_withdrawals gt 0"></if>
+								<a href="{:U('Finance/myzc',['field'=>'status','name'=>0])}" class="text-reset notification-item">
+									<div class="d-flex">
+										<div class="avatar-xs me-3">
+											<span class="avatar-title bg-primary rounded-circle font-size-16">
+												<i class="bx bx-upload"></i>
+											</span>
+										</div>
+										<div class="flex-grow-1">
+											<h6 class="mb-1" key="t-your-order">Pending Crypto Withdrawals</h6>
+											<div class="font-size-12 text-muted">
+												<p class="mb-1" key="t-grammer">{$todos['pending_crypto_withdrawals']} Pending Withdrawal</p>
+											</div>
+										</div>
+									</div>
+								</a>
+								</if>
+								<if condition="$todos.fiat_in_pending gt 0">
+									<a href="{:U('Finance/mycz',['status'=>3])}" class="text-reset notification-item">
+										<div class="d-flex">
+											<div class="avatar-xs me-3">
+												<span class="avatar-title bg-primary rounded-circle font-size-16">
+													<i class="bx bx-dollar-circle"></i>
+												</span>
+											</div>
+											<div class="flex-grow-1">
+												<h6 class="mb-1">Fiat Deposit</h6>
+												<div class="font-size-12 text-muted">
+													<p class="mb-1" key="t-simplified">{$todos['fiat_in_pending']} Pending Fiat Deposit</p>
+													
+												</div>
+											</div>
+										</div>
+									</a>
+									</if>
+									<if condition="$todos.fiat_out_pending gt 0">
+										<a href="{:U('Trade/Finance/mytz/status/1')}" class="text-reset notification-item">
+											<div class="d-flex">
+												<div class="avatar-xs me-3">
+													<span class="avatar-title bg-primary rounded-circle font-size-16">
+														<i class="bx bx-send"></i>
+													</span>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="mb-1">Fiat Withdrawal</h6>
+													<div class="font-size-12 text-muted">
+														<p class="mb-1" key="t-simplified">{$todos['fiat_out_pending']} Pending Fiat Withdrawals</p>
+														
+													</div>
+												</div>
+											</div>
+										</a>
+										</if>
+	
+								<if condition="$todos.p2p_disputes gt 0">
+								<a href="{:U('P2p/disputes')}" class="text-reset notification-item">
+									<div class="d-flex">
+										<div class="avatar-xs me-3">
+											<span class="avatar-title bg-primary rounded-circle font-size-16">
+												<i class="bx bx-user-voice"></i>
+											</span>
+										</div>
+										<div class="flex-grow-1">
+											<h6 class="mb-1">P2p Disputes</h6>
+											<div class="font-size-12 text-muted">
+												<p class="mb-1" key="t-simplified">{$todos['p2p_disputes']} P2p Disputes</p>
+												
+											</div>
+										</div>
+									</div>
+								</a>
+								</if>
+								<if condition="$todos.kyc_reviews gt 0">
+								<a href="{:U('User/index?status=6')}" class="text-reset notification-item">
+									<div class="d-flex">
+										<div class="avatar-xs me-3">
+											<span class="avatar-title bg-primary rounded-circle font-size-16">
+												<i class="bx bx-user-check"></i>
+											</span>
+										</div>
+										<div class="flex-grow-1">
+											<h6 class="mb-1">KYC Reviews required</h6>
+											<div class="font-size-12 text-muted">
+												<p class="mb-1" key="t-simplified">{$todos['kyc_reviews']} KYC reviews required</p>
+												
+											</div>
+										</div>
+									</div>
+								</a>
+								</if>
+							<if condition="$todos.liq_pending_fill gt 0">
+								<a href="{:U('Trade/liqlog')}" class="text-reset notification-item">
+									<div class="d-flex">
+										<div class="avatar-xs me-3">
+											<span class="avatar-title bg-primary rounded-circle font-size-16">
+												<i class="bx bx-cube"></i>
+											</span>
+										</div>
+										<div class="flex-grow-1">
+											<h6 class="mb-1">Liquidity Pending Fill</h6>
+											<div class="font-size-12 text-muted">
+												<p class="mb-1" key="t-simplified">{$todos['liq_pending_fill']} Pending Fill</p>
+												
+											</div>
+										</div>
+									</div>
+								</a>
+								</if>
+
+							</div>
+							<if condition="$todos.count eq 0">
+								<div class="p-2 border-top d-grid">
+									<a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+										<i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">All Set</span> 
+									</a>
+								</div>
+
+							</if>	
+						</div>
+					</div>
+
+					<div class="dropdown d-inline-block">
+						<button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img class="rounded-circle header-profile-user" src="__THEME__/assets/images/users/hero.png"
+								alt="Header Avatar">
+							<span class="d-none d-xl-inline-block ms-1" key="t-henry">{:strtoupper(session('admin_username'))}</span>
+							<i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+						</button>
+						<div class="dropdown-menu dropdown-menu-end">
+							<!-- item-->
+							<a class="dropdown-item" href="{:U('User/admin')}"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">{:l('Manage Admin')}</span></a>
+							<a class="dropdown-item" href="{:U('User/google_2fa')}"><i class="bx bx-key font-size-16 align-middle me-1"></i> <span key="t-profile">{:l('Google 2FA')}</span></a>
+							
+							<a class="dropdown-item d-block" href="{:U('User/setpwd')}"><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">{:l('Change Password')}</span></a>
+							<a class="dropdown-item" href="{:U('Tools/index')}""><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">{:l('Clear Cache')}</span></a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item text-danger" href="{:U('Login/loginout')}"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">{:l('Logout')}</span></a>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+		</header>
+	<include file="Public:sidebar"/>
+	<div class="main-content">
+
+		<div class="page-content">
+			<div class="container-fluid">

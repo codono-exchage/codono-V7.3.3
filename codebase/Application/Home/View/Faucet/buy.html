@@ -1,0 +1,460 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/media/fancybox.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/js/pages/gallery.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/static/css/faucet.css"/>
+<div class="autobox">
+<div class="breadcrumb-line breadcrumb-line-component content-group-lg">
+					<ul class="breadcrumb">
+						<li><a href="/"><i class="icon-home2 position-left"></i> {:l('HOME')}</a></li>
+						<li><a href="/faucet/index">{:l('ICO_CENTER')}</a></li>
+						<li class="active">{:l('SUBSCRIBE_NOW')}</li>
+					</ul>
+</div>
+	<div class="panel panel-flat mb20">
+		<div class=" assets_content" style="min-height:30px;">
+			<div class="safe_center clear">
+				<h1>
+					<span>
+						{:l('SUBSCRIBE_NOW')}					</span>
+	                <span>
+                        <a href="/faucet/index" id="step1" class="step fz_12 ml50 pd6 active">{:l('ICO_LIST')}</a>
+                        <a href="/faucet/faucetlogs" id="step2" class="step fz_12 ml20 pd6 ">{:l('ICO_RECORD')}</a>
+						<a href="/faucet/log" id="step3" class="step fz_12 ml20 pd6 ">{:l('MY_ICO')}</a>
+	                </span>
+					<span>
+												<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+				</h1>
+			</div>
+			<div id="hints" class="mytips" style="display:none;">
+				
+				<p>
+					<notempty name="prompt_text">
+						{$prompt_text}
+					</notempty>
+				
+				</p>			
+			</div>
+			<div class="crowd_con clear">
+				<div class="crowd_con_lx col-md-6 ">
+					<div class="crowd_bi clear">
+						
+						<h2 class="pull-left">{$faucet['name']}</h2>
+						 <div class="thumbnail clear pull-right">
+							<div class="thumb">
+								<img src="__UPLOAD__/coin/{$faucet['img']}" alt="" class="img-rounded" style="max-width:200px;max-height:100px">
+								<div class="caption-overflow">
+									<span>
+										<a href="__UPLOAD__/coin/{$faucet['img']}" data-popup="lightbox" rel="gallery" class="btn border-white text-white btn-flat btn-icon btn-rounded"><i class="icon-plus3"></i></a>
+									</span>
+								</div>
+							</div>
+						</div>
+			                       
+					</div>
+							<!-- Stats -->
+						<div class="panel panel-body">
+							<div class="row text-center">
+								<div class="col-xs-3">
+									<p><i class="icon-users2 icon-2x display-inline-block text-info"></i></p>
+									<h5 class="text-semibold no-margin">{$faucet['num']*1}</h5>
+									<span class="text-muted text-size-small">{:l('THE_TOTAL_AMOUNT_OF_SUBSCRIPTI')}</span>
+								</div>
+								<div class="col-xs-3">
+									<p><i class="icon-cash3 icon-2x display-inline-block text-success"></i></p>
+									<h5 class="text-semibold no-margin">{$faucet['deal']*1}	</h5>
+									<span class="text-muted text-size-small">{:l('CUMULATIVE_SUBSCRIBED')}</span>
+								</div>
+								<div class="col-xs-3">
+									<p><i class="icon-point-up icon-2x display-inline-block text-warning"></i></p>
+									<h5 class="text-semibold no-margin">{$faucet['price']*1}		{$faucet['buycoin']|strtoupper}</h5>
+									<span class="text-muted text-size-small">{:l('ICO_PRICE')}</span>
+								</div>
+								<div class="col-xs-3">
+									<p><i class="icon-cash3 icon-2x display-inline-block text-info"></i></p>
+									<h5 class="text-semibold no-margin">{$faucet['limit']*1}	</h5>
+									<span class="text-muted text-size-small">{:l('ICO_LIMIT')}</span>
+								</div>
+					
+			
+							</div>
+						</div>
+						<!-- /Stats -->
+						<div class="icowithprogress">
+					<div class="crowd_time">
+					<eq name="faucet['status']" value="0">	
+					
+						<div class="dowebok_move">
+							<p class="crowd_con_lp " style="text-align: center;font-size: 22px;letter-spacing: 1px;line-height: 70px;">{:l('THE_CURRENT_ICO_HAS_E')}</p>
+						</div>
+					</eq>	
+						
+					<eq name="faucet['status']" value="1">	
+					
+						<div class="dowebok_move">
+							<p class="crowd_con_lp " style="text-align: center;font-size: 22px;letter-spacing: 1px;line-height: 70px;">{:l('ICO_IS_IN')}</p>
+						</div>
+					</eq>	
+						
+						
+					<eq name="faucet['status']" value="2">	
+					
+						<div class="dowebok_move">
+							<p class="crowd_con_lp " style="text-align: center;font-size: 22px;letter-spacing: 1px;line-height: 70px;">{:l('UPCOMING')} ICO</p>
+						</div>
+					</eq>	
+					</div>
+					<div class="crowd_pro">
+						<progress value="{$faucet['bili']}" max="100"></progress>
+						<span>{$faucet['bili']}%</span>
+					</div>
+					</div>
+				</div>
+				<div class="crowd_con_rx col-md-6">
+					<div class="crowd_myx" id="faucetbuybox">
+						<div class="alert alert-warning" style="display:none" id="pleaselogin">{:l('PLEASE_LOGIN')}</div>
+						<div class="form-group has-feedback has-feedback-left">
+							<a href="#" class="list-group-item"><i class="icon-cash3"></i>  <span class="badge bg-danger pull-right">{:l('PRICE')}:{$faucet['price']*1} {$faucet['buycoin']|strtoupper}</span> {:l('YOU_ARE_CURRENTLY_AVAILABLE')} {$user_coin[$faucet['buycoin']]*1} {$faucet['buycoin']|strtoupper}</a>
+						</div>
+								<div class="form-group has-feedback has-feedback-left">
+									<input type="text" class="form-control" placeholder="{:l('NUMBER_OF_ICO')}" title="{:l('NUMBER_OF_ICO')}" id="num" >
+									<div class="form-control-feedback">
+										<i class="icon-cart-add text-muted"></i>
+									</div>
+								</div>
+
+								<div class="form-group has-feedback has-feedback-left">
+									<input type="password" class="form-control" placeholder="{:l('TRANSACTION_PASSWORD')}" title="{:l('TRANSACTION_PASSWORD')}" id="paypassword">
+									<div class="form-control-feedback">
+										<i class="icon-key text-muted"></i>
+									</div>
+								</div>
+						
+								<div class="form-group">
+								<eq name="faucet['status']" value='1'>
+								<button type="submit" class="btn bg-blue btn-block" onclick="basic_buy_up_tishi()">{:l('SUBSCRIBE_NOW')} <i class="icon-circle-right2 position-right"></i></button>
+						    <else/>
+									
+									<button type="button" class="btn btn-default btn-block" data-dismiss="modal" disabled='disabled'>{:l('ICO_IS_NOT_CURRENTLY_')}</button>
+									</eq>
+								</div>
+					</div>
+										<!-- Simple text stats with icons -->
+						<div class="panel panel-body">
+							<div class="row text-center">
+								<div class="col-sm-4">
+									<p><i class="icon-calendar icon-2x display-inline-block text-info"></i></p>
+									<h5 class="text-semibold no-margin">{$faucet['time']}</h5>
+									<span class="text-muted text-size-small">{:l('STARTING_TIME')}</span>
+								</div>
+
+								<div class="col-sm-4">
+									<p><i class="icon-racing icon-2x display-inline-block text-warning"></i></p>
+									<h5 class="text-semibold no-margin">{$faucet['endtime']}</h5>
+									<span class="text-muted text-size-small">{:l('END_TIME')}</span>
+								</div>
+
+								<div class="col-sm-4">
+									<p><i class="icon-coins icon-2x display-inline-block text-success"></i></p>
+									<h5 class="text-semibold no-margin">{$faucet['buycoin']|strtoupper}</h5>
+									<span class="text-muted text-size-small">{:l('COIN')}</span>
+								</div>
+							</div>
+						</div>
+						<!-- /simple text stats with icons -->
+				</div>
+				
+			</div>
+<div class="clear">
+						<!-- Large size -->
+						<div class="panel panel-flat blog-horizontal blog-horizontal-3 blog-horizontal-lg">
+							<div class="panel-body">
+								<div class="blog-preview ">
+									<div class="content-group-sm">
+										<h3 class="blog-title text-semibold">
+											{:l('INTRODUCTION_TO_SUBSCRIBE')}
+										</h3>
+
+									</div>
+								{$faucet['content']|htmlspecialchars_decode}								
+									</div>
+							</div>
+						</div>
+						<!-- /large size -->
+
+					</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<style>
+.disableddiv {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+.modal.fade .modal-dialog {
+    -webkit-transition: -webkit-transform .3s ease-out;
+    -o-transition:      -o-transform .3s ease-out;
+    transition:         transform .3s ease-out;
+    -webkit-transform: translate(0, -25%);
+    -ms-transform: translate(0, -25%);
+    -o-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+}
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 10%);
+    /*transform: translate(0, 0);*/
+}
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+}
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+}
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+}
+.modal-backdrop.fade {
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+.modal-backdrop.in {
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+.modal-header {
+    min-height: 16.42857143px;
+    padding: 15px;
+}
+.modal-header .close {
+    margin-top: -2px;
+}
+.modal-title {
+    margin: 0;
+    line-height: 1.42857143;
+}
+.modal-body {
+    position: relative;
+    padding: 15px;
+}
+.modal-footer {
+    padding: 5px 0 20px 0;
+    text-align: center;
+}
+.modal-footer .btn + .btn {
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+.modal-footer .btn-group .btn + .btn {
+    margin-left: -1px;
+}
+.modal-footer .btn-block + .btn-block {
+    margin-left: 0;
+}
+.modal-scrollbar-measure {
+    position: absolute;
+    top: -9999px;
+    width: 50px;
+    height: 50px;
+    overflow: scroll;
+}
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 600px;
+        margin: 0px auto;
+    }
+    .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    }
+    .modal-sm {
+        width: 300px;
+    }
+}
+@media (min-width: 992px) {
+    .modal-lg {
+        width: 900px;
+    }
+}
+
+.modal-footer:before,
+.modal-footer:after {
+    display: table;
+    content: " ";
+}
+.modal-footer:after {
+    clear: both;
+}
+
+
+
+</style>
+
+
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="text-align: center;display: none;padding-right: 16px;">
+	<div class="modal-dialog" style="width:640px;text-align:center;">
+		<div id="autoCenter" class="modal-content" style="padding: 10px 30px 10px; height: auto; margin-top: 164px;">
+			
+			
+			<div class="modal-header" style="border:none;text-align:left;margin-left:20px;">
+				
+				<h3 class="modal-title" id="myModalLabel" style="font-size:18px;">
+					{$C['web_name']} {:l('REMIND_YOU')}:
+				</h3>
+			</div>
+			<div class="modal-body" style="font-size:18px;width: 550px;margin-top:-30px;">
+				<div class="paragraph paragraph_news" style="font-size:14px;text-indent:2em;line-height: 30px;text-align:left;">
+                      {$C['faucet_warning']}              
+				</div>
+
+			</div>
+			<div class="modal-footer" style="border:none;">
+				<button type="button" style="cursor:pointer;font-family:sans-serif !important;font-size:18px;background: #009200;width:250px;height:40px;border:0px;color:white" class="btn btn-warning" data-dismiss="modal" id="yes_sure">
+				{:l('I_UNDERSTAND_THESE_RISKS')},{:l('CONFIRM_ICO')}
+				</button>
+				
+				<button type="button" style="cursor:pointer;font-family:sans-serif !important;font-size:18px;background: #f60;width:250px;height:40px;border:0px;color:white" class="btn btn-warning" data-dismiss="modal" id="no_sure">
+				{:l('I_UNDERSTAND_THESE_RISKS')},{:l('CANCEL_THE_ICO')}
+				</button>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-backdrop fade in" style="display:none;"></div>
+
+<script>
+
+	$("#yes_sure").click(function(){
+		$('#myModal').css('display','none');
+		$('.modal-backdrop').css('display','none');
+		buy_up();
+	});
+	
+	
+	$("#no_sure").click(function(){
+		$('#myModal').css('display','none');
+		$('.modal-backdrop').css('display','none');
+	});
+
+	function basic_buy_up_tishi(){
+		var num         = $('#num').val();
+		var paypassword = $('#paypassword').val();
+		if (num == "" || num == null) {
+			layer.tips('Enter number of ICOs', '#num', {tips: 3});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Fund Password Required', '#paypassword', {tips: 3});
+			return false;
+		}
+		$('#myModal').css('display','block');
+		$('.modal-backdrop').css('display','block');
+
+    }
+
+
+</script>
+<script>
+	function buy_up() {
+		var id          = "{$faucet['id']}";
+		var num         = $('#num').val();
+		var paypassword = $('#paypassword').val();
+		if (num == "" || num == null) {
+			layer.tips('Enter number of ICOs', '#num', {tips: 3});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Fund Password Required', '#paypassword', {tips: 3});
+			return false;
+		}
+		$.post("{:U('Faucet/upbuy')}", {
+			id: id,
+			num: num,
+			paypassword: paypassword,
+			token:""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location = "/faucet/log";
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#Faucet_box').addClass('active');
+	
+	function goumai(_this) {
+		window.location = "/faucet/buy/id/" + $(_this).attr('data');
+	}
+	<php>if (!userid()){</php>
+	$("#faucetbuybox").addClass("disableddiv");
+	$('#pleaselogin').show();
+	<php>}else{</php>
+	$("#faucetbuybox").removeClass("disableddiv");
+	$('#pleaselogin').hide();
+	<php>}</php>
+
+	
+</script>	
+
+<include file="Public:footer_minimal"/>

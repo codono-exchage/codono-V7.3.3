@@ -1,0 +1,460 @@
+<include file="Publicnew:header"/>
+<include file="P2p:inc_common_banner"/>
+	<!-- P2P Content Start -->
+	<div class="container p2p_page">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="card invite-code-wrapper">
+					<include file="P2p:inc_mid_nav"/>
+					<div class="card-body">
+						<h1 class="f-s-24">{:l('Post a New Ad')}</h1>
+						<div id="smartwizard" class="new-ads-wizard">
+							<ul class="nav">
+								<li>
+									<a class="nav-link" href="#step-1">{:l('Set Type & Price')}</a>
+								</li>
+								<li>
+									<a class="nav-link" href="#step-2">{:l('Set Total Amount & Payment Method')}</a>
+								</li>
+								<li>
+									<a class="nav-link" href="#step-3">{:l('Set Remarks & Automatic Response')}</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div id="step-1" class="tab-pane" role="tabpanel">
+									<div class="new-ads-form">
+										<div class="form-group">
+											<div class="no-checkedselector">
+												<div class="toggle-container">
+													<input id="want-to-buy" class="toggle toggle-left" name="toggle" type="radio" value="1" checked="checked"/>
+													<label for="want-to-buy" class="">{:l('I want to buy')}</label>
+													<input id="want-to-sell" class="toggle toggle-right" name="toggle" type="radio" value="2" />
+													<label for="want-to-sell" class="">{:l('I want to sell')}</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="green" id="assets">{:l("Asset")}</label>
+											<div class="clearfix"></div>
+											<div class="row">
+											<volist name="allow_cryptos" id="ac">
+											<div class="col-lg-2 col-md-3 col-sm-4 col-4">
+													<div class="form-check form-check-inline" >
+														<input class="form-check-input " type="radio" name="crypto" id="allowed_{$ac |strtoupper}" value="{$ac |strtoupper}" onclick="grabValue()" >
+														<label class="form-check-label" for="allowed_{$ac |strtoupper}">{$ac |strtoupper}</label>
+													</div>
+												</div>
+											</volist>
+											</div>
+										</div>
+										<div class="form-group">
+											<hr/>
+										</div>
+										<div class="form-group">
+											<label class="green" id="fiats">{:l("with Cash")}</label>
+											<div class="clearfix"></div>
+											<div class="row">
+											<volist name="FiatList" id="vo">
+											<div class="col-lg-2 col-md-3 col-sm-4 col-4">
+													<div class="form-check form-check-inline">
+														<input class="form-check-input " onclick="grabValue()" type="radio" name="fiat" id="fiat_{$vo['name']| strtoupper}" value="{$vo['name']| strtoupper}" >
+														<label class="form-check-label" for="fiat_{$vo['name']| strtoupper}">{$vo['name']| strtoupper}</label>
+													</div>
+												</div>
+											</volist>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-lg-2 col-md-3 col-sm-4">
+													<label>{:l("Your Price")}</label>
+													<div class="customer-price" ><span id="fiatSymbol1"></span><span id="yourprice">-</span></div>
+													<input id="actualPrice" type="hidden"/>
+													<input id="selectedPrice" type="hidden"/>
+												</div>
+												<div class="col-lg-4 col-md-6 col-sm-8">
+													<label>{:l("MARKET_PRICE")}</label>
+													<div class="max-order-price" ><span id="fiatSymbol2"></span><span id="highestprice">-</span></div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="green">{:l("Price Type")}</label>
+											<div class="row price-type-selector">
+												<div class="col-lg-2 col-md-3 col-sm-4 col-4">
+													<div class="form-check form-check-inline">
+														<input class="form-check-input icheck" type="radio" name="price-type" id="static" value="1" checked>
+														<label class="form-check-label text-capitalize" for="static">{:l("Fixed")}</label>
+													</div>
+												</div>
+												<div class="col-lg-2 col-md-3 col-sm-4 col-4">
+													<div class="form-check form-check-inline">
+														<input class="form-check-input icheck" type="radio" name="price-type" id="wave" value="2">
+														<label class="form-check-label text-capitalize" for="wave">{:l("Floating")}</label>
+													</div>
+												</div>
+											</div>
+											<div class="static-price">
+												<div class="row">
+													<div class="col-lg-3 col-md-4 col-sm-8 col-12">
+														<input type="number" id="user_fixed" value="" data-decimals="2" min="0" step="0.01" class="inputSpinner"/>
+													</div>
+												</div>
+											</div>
+											<div class="wave-price" style="display: none">
+												<div class="row">
+													<div class="col-lg-3 col-md-4 col-sm-8 col-12">
+														<input type="number" id="user_float"  value="100.00" data-suffix="%" data-decimals="2" min="50" max="200" step="0.1" class="inputSpinner" disabled/>
+													</div>
+													<div class="col-12 p-t-15">
+														<p>
+															{:l('Price Formula')} : price * 100.00%  </p>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="step-2" class="tab-pane" role="tabpanel">
+									<div  class="new-ads-form p-b-40">
+									
+										<div class="form-group">
+											<label class="green">{:l('Total Amount')} <span class="cryptoname"></span></label>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-12 col-12 total-input">
+													<input type="number" value="0" min="0" step="1" class="inputSpinner" name="total"/>
+												</div>
+												<div class="col-12 p-t-10">
+													<p class="f-s-12">
+														{:l('Available')}: <span class="f-w-600" id="balance"></span>  </p>
+												</div>
+											</div>
+										</div>
+										<div class="form-group m-b-0">
+											<label class="green">{:l('Order Limit')} <span class="fiatname"></span></label>
+										</div>
+										<div class="row">
+											<div class="col-lg-6 col-md-6 col-sm-12 col-12 total-input">
+												<div class="row">
+													<div class="col-sm-6 col-12">
+														<div class="form-group">
+															<div class=" total-input">
+																<input type="number" value="100" min="100" step="1" class="inputSpinner fiatname" name="order-min" id="order-min"/>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6 col-12">
+														<div class="form-group">
+															<div class=" total-input">
+																<input type="number" value="100" min="100" step="1" class="inputSpinner fiatname" name="order-max" id="order-max"/>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+									<label class="green">{:l('Payment Method')}</label>
+									<div class="clearfix"></div>
+									<div id="sellmethods" style="display:none">
+									<volist name="SellMethods" id="ub">
+											<div class="custom-control custom-switch custom-control-inline">
+												<input type="checkbox" class="custom-control-input" id="SellMethod_{$ub.id}" name="bankList" value="{$ub.id}" >
+												<label class="custom-control-label" for="SellMethod_{$ub.id}">{$ub.bank} <small>[{$ub.bankcard}]</small></label>
+											</div>
+									</volist>
+										</div>
+									<div id="buymethods" >
+									<volist name="BuyMethods" id="bm">
+											<div class="custom-control custom-switch custom-control-inline">
+												<input type="checkbox" class="custom-control-input" id="BuyMethod_{$bm.id}" name="buymethods" value="{$bm.id}" checked="checked">
+												<label class="custom-control-label" for="BuyMethod_{$bm.id}">{$bm.name} </label>
+											</div>
+									</volist>
+										</div>	
+									</div>
+										<div class="clearfix"></div>
+										<div class="form-group">
+											<label class="green">{:l('Payment Time Limit')}</label>
+											<div class="clearfix"></div>
+											<select id="payment-time" class="wide f-s-12" name="payment-time">
+												<volist name="release_time" id="rt">
+												<option value="{$rt.value}" >{$rt.title} <if condition="$rt.type eq 'm'">{:l("Mins")}<else/>{:l("Hour")}</if></option>
+												</volist>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div id="step-3" class="tab-pane" role="tabpanel">
+									<div class="new-ads-form p-b-40">
+										<div class="form-group">
+											<label class="green">{:l("Remarks")} ({:l("Optional")})</label>
+											<textarea class="form-control" id="description" name="description" placeholder="{:l('Please do not include any crypto-related words, such as crypto, P2P, C2C, BTC, USDT, ETH etc.')}"></textarea>
+										</div>
+										<div class="form-group">
+											<label class="green">{:l("Autoreply")} ({:l("Optional")})</label>
+											<textarea class="form-control" id="autoreply" name="autoreply" placeholder="{:l('Auto reply message will be sent to the counterparty once the order is created')}"></textarea>
+										</div>
+										<div class="form-group">
+											<label class="green">{:l('Counterparty Conditions')}</label>
+										</div>
+										<div class="form-group">
+											<div class="form-check form-check-inline">
+												<input class="form-check-input icheck" type="checkbox" name="kyc-is-completed" id="kyc-is-completed">
+												<label class="form-check-label text-capitalize" for="kyc-is-completed">{:l('Completed KYC')}</label>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="form-check form-check-inline input-prepend input-append">
+												<input class="form-check-input icheck" type="checkbox" name="kyc-record-time" id="kyc-record-time">
+												<label class="form-check-label text-capitalize" for="kyc-record-time">{:l('Registered')}</label>
+												<input id="day" type="text" class="form-control"><span class="add-on"> {:l('days Ago')}</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="form-check form-check-inline input-prepend input-append">
+												<input class="form-check-input icheck" type="checkbox" name="min-balance" id="min-balance">
+												<label class="form-check-label text-capitalize" for="min-balance">{:l('Holdings more than')}</label>
+												<input id="min-balance-input" type="text" class="form-control"><span class="add-on"> BTC</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="green">{:l('Status')}</label>
+											<div class="row">
+												<div class="col-lg-2 col-md-3 col-sm-4 col-12">
+													<div class="form-check form-check-inline">
+														<input class="form-check-input icheck" type="radio" name="online-status" id="online" value="1" checked>
+														<label class="form-check-label text-capitalize" for="online">{:l('Online right now')}</label>
+													</div>
+												</div>
+												<div class="col-lg-5 col-md-7 col-sm-8 col-12">
+													<div class="form-check form-check-inline">
+														<input class="form-check-input icheck" type="radio" name="online-status" id="offline" value="2">
+														<label class="form-check-label text-capitalize" for="offline">{:l('Offline, manually later')}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- P2P Content End -->
+<script src="__PUBLIC__/template/v6/js/jquery.smartWizard.js"></script>
+<script src="__PUBLIC__/template/v6/js/bootstrap-input-spinner.js"></script>
+
+
+<script>
+
+		$('input[type=radio][name=toggle]').on('change', function() { 
+		var type=$('input[type=radio][name=toggle]:checked').val();
+		if(type==1){
+			$('#sellmethods').hide();
+			$('#buymethods').show();
+			}else{
+			$('#sellmethods').show();
+			$('#buymethods').hide();
+			}
+		});
+		
+$(".sw-btn-next").prop("disabled", true);
+function grabValue(){
+var crypto=$('input[type=radio][name=crypto]:checked').val();
+var fiat=$('input[type=radio][name=fiat]:checked').val();
+	
+$('.fiatname').html('['+fiat+']');
+$('.cryptoname').html('['+crypto+']');
+
+if(crypto=='' || crypto==null)
+{
+layer.tips('Please select crypto!', '#assets', {tips: 3});
+return false;
+}
+if(fiat=='' || fiat==null)
+{
+layer.tips('Please select fiat!', '#fiats', {tips: 3});
+return false;
+}
+
+layer.load(0, {shade: [0.5,'#8F8F8F']});
+$.post("{:U('P2p/grabPrice')}", {
+			crypto: crypto,
+			fiat: fiat,
+			
+		}, function (data) {
+		layer.closeAll('loading');
+		$(".sw-btn-next").prop("disabled", false);
+			if (data.status == 1) {			
+				$('#yourprice').html(data.value);
+				$('#actualPrice').val(data.value);
+				$('#selectedPrice').val(data.value);
+				
+				$('#highestprice').html(data.value);
+				$("#user_fixed").val(data.value);
+				$("#user_fixed").data('max',data.value*2);
+				$('#fiatSymbol1').html(data.symbol);
+				$('#fiatSymbol2').html(data.symbol);
+				$('#balance').html(data.balance);
+				//layer.msg(data.info, {icon: 1});
+			} else {
+				//layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+
+
+	$(document).ready(function () {
+	
+	$("#user_fixed").on("input", function() {
+	let price=this.value;
+		$('#yourprice').html(price);
+		$('#selectedPrice').val(price);
+	});
+	
+	var $changedInput = $("#user_float");
+
+		$changedInput.on("input", function(event) {
+		 
+		var price =$('#highestprice').html();
+		var newprice=(price * $changedInput.val()) / 100;
+		$('#yourprice').html(newprice.toFixed(2));
+		$('#selectedPrice').val(newprice.toFixed(2));
+	});
+
+	  $("main").addClass("p2p-page");
+
+		// Submit the ad
+		var btnFinish = $('<button></button>').text('{:l("Publish")}')
+			.addClass('btn btn-info sw-btn-group-extra d-none')
+			.on('click', function () {
+					
+		var crypto=$('input[type=radio][name=crypto]:checked').val();
+		var fiat=$('input[type=radio][name=fiat]:checked').val();
+		var user_price=$('#selectedPrice').val();
+		var user_float=$('#user_float').val();
+		var price_type=$('input[type=radio][name=price-type]:checked').val();
+		var user_total=$('input[type=number][name=total]').val();
+		var order_min=$('input[type=number][name=order-min]').val();
+		var order_max=$('input[type=number][name=order-max]').val();
+		var bankList = $("input:checkbox[name=bankList]:checked").map(function(){return $(this).val()}).get();
+		var buymethods = $("input:checkbox[name=buymethods]:checked").map(function(){return $(this).val()}).get();
+		var payment_time=$('select#payment-time').find(":selected").val();
+		var description=$('#description').val();	
+		var autoreply=$('#autoreply').val();	
+		var kyc_required=$('#kyc-is-completed').is(":checked");
+		var reg_time_required=$('#kyc-record-time').is(":checked");
+		var balance_required=$('#min-balance').is(":checked");
+		var reg_time=$('#day').val();	
+		var min_balance=$('#min-balance-input').val();	
+		var online=$('input[type=radio][name=online-status]:checked').val();
+		var type=$('input[type=radio][name=toggle]:checked').val();
+		
+		if(type==1){
+		sendMethod=buymethods;
+		}else{
+		sendMethod=bankList;
+		}
+
+			layer.load(0, {shade: [0.5,'#8F8F8F']});
+			$.post("{:U('P2p/doNewAd')}", {
+			crypto: crypto,
+			fiat: fiat,
+			user_price:user_price,
+			user_float:user_float,
+			price_type:price_type,
+			user_total:user_total,
+			order_min:order_min,
+			order_max:order_max,
+			bankList:sendMethod,
+			payment_time:payment_time,
+			description:description,
+			autoreply:autoreply,
+			kyc_required:kyc_required,
+			reg_time_required:reg_time_required,
+			balance_required:balance_required,
+			reg_time:reg_time,
+			min_balance,min_balance,
+			online:online,
+			type:type
+		}, function (data) {
+		layer.closeAll('loading');
+		$(".sw-btn-next").prop("disabled", false);
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+				window.location = "{:U('P2p/myads')}";
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+
+
+			
+				
+		});
+		$('#smartwizard').smartWizard({
+			theme: 'dots',
+			cycleSteps: false,
+			anchorSettings: {
+				removeDoneStepOnNavigateBack: true
+			},
+			lang: { // Language variables for button
+				next: '{:l("Next")}',
+				previous: '{:l("Previous")}'
+			},
+			toolbarSettings: {
+				toolbarPosition: 'bottom', // none, top, bottom, both
+				toolbarButtonPosition: 'right', // left, right, center
+				showNextButton: true, // show/hide a Next button
+				showPreviousButton: true, // show/hide a Previous button
+				toolbarExtraButtons: [btnFinish] // Extra buttons to show on toolbar, array of jQuery input/buttons elements
+			}
+		});
+		//The code for the final step
+		$('#smartwizard').on("leaveStep", function (e, anchorObject, stepNumber, stepDirection) {
+			if (stepDirection == "2") //here is the final step: Note: 0,1,2
+			{
+				$('.sw-btn-group-extra').removeClass('d-none');
+			} else {
+				$('.sw-btn-group-extra').addClass('d-none');
+			}
+		});
+		$('.no-checkedselector').on('change', 'input[type="radio"].toggle', function (event) {
+			if ($(event.target).val() == "1" && $(event.target).is(":checked")) {
+				$("#want-to-sell").attr("checked", false);
+				$("#want-to-buy").attr("checked", true);
+			} else {
+				$("#want-to-buy").attr("checked", false);
+				$("#want-to-sell").attr("checked", true);
+			}
+			if (this.checked) {
+				$('input[name="' + this.name + '"].checked').removeClass('checked');
+				$(this).addClass('checked');
+				$('.toggle-container').addClass('force-update').removeClass('force-update');
+			}
+		});
+		$('.no-checkedselector input[type="radio"].toggle:checked').addClass('checked');
+		var fiat=$('input[type=radio][name=fiat]:checked').val();
+		var props = {
+		}
+		$("input.inputSpinner").inputSpinner();
+		
+		$('.price-type-selector input').on('ifChanged', function (e) {
+			if ($(e.target).val() == "1" && $(e.target).is(":checked")) {
+				$(".static-price").show().find(":input").prop("disabled", false);
+				$(".wave-price").hide().find(":input").prop("disabled", true);
+			} else {
+				$(".wave-price").show().find(":input").prop("disabled", false);
+				$(".static-price").hide().find(":input").prop("disabled", true);
+			}
+		});
+	});
+	$("#allowed_USDT").prop('checked',true);
+	
+</script>
+<include file="Publicnew:footer_minimal" />

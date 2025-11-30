@@ -1,0 +1,133 @@
+    <div class="col-xl-7">
+        <div class="card">
+            <div class="card-header bg-transparent border-bottom">
+                <div class="d-flex flex-wrap align-items-start">
+                    <ul class="nav nav-tabs nav-tabs-custom card-header-tabs ms-auto" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#server" role="tab"> {:l('Server')}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#config" role="tab"> {:l('Config')}</a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+            <div class="card-body">
+
+                <div data-simplebar style="max-height: 250px;">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="server" role="tabpanel">
+                            <table class="table">
+                                <tr>
+                                    <th>{:l('System Version')}</th>
+                                    <td>
+                                        <font class="version" style="color: green">
+                                            {$Think.const.CODONO_VERSION}
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{:l('Server OS')}</th>
+                                    <td>{$Think.const.PHP_OS}</td>
+                                </tr>
+                                <tr>
+                                    <th>{:l('Operating environment')}</th>
+                                    <td>{$Think.server.SERVER_SOFTWARE}</td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('PHP Version')}</td>
+                                    <td>{$Think.PHP_VERSION}</td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('Mysql Version')}</td>
+                                    <td>
+                                        <php>$system_info_mysql = M()->query("select version() as v;");</php>
+                                        {$system_info_mysql.0.v}
+                                    </td>
+                                </tr>
+
+                                   <tr>
+                                    <td>{:l('ONLY_FULL_GROUP_BY')}</td>
+                                    <td><eq name="ONLY_FULL_GROUP_BY" value="1">
+                                        <b style="color:blue">{:l('You need to turn off ONLY_FULL_GROUP_BY in mysql sql_mode')}</p></b><else/><b style="color:green">Current value:0 :)</b></eq></td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('Your IP')}</td>
+                                    <td>{$_SERVER['REMOTE_ADDR']}</td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('Server Port')}</td>
+                                    <td>{$_SERVER['SERVER_PORT']}</td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('Document Root')}</td>
+                                    <td>{$_SERVER['DOCUMENT_ROOT']}</td>
+                                </tr>
+                                  <tr>
+                                    <td>{:l('CODONO LICENSE')}</td>
+                                    <td>{:CODONOLIC}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- end tab pane -->
+
+                        <div class="tab-pane" id="config" role="tabpanel">
+                            
+                            <table class="table">
+                                <tr>
+                                    <td>{:l('RECAPTCHA')}</td>
+                                    <td>{:RECAPTCHA}</td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('Default Maler')}:</td>
+                                    <td>{:DEFAULT_MAILER} [{:GLOBAL_EMAIL_SENDER}]</td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('KYC Optional')}:</td>
+                                    <td>{:KYC_OPTIONAL} [KYC_OPTIONAL in pure_config]</td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('REDIS Caching')}</td>
+                                     <td><eq name="REDIS_ENABLED" value="0">
+                                        <b style="color:blue">{:l('Current value:0 [Alert:Install and configure it for better performance]')}</p></b><else/><b style="color:green">{:l('Current value')}:1 :)</b></eq>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('Website domain')}</td>
+                                    <td>{$_SERVER['SERVER_NAME']}</td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('Customization')}</td>
+                                    <td>
+                                        <a target="_blank" href="https://codono.com" target="_blank">{:l('Get Quote')}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>MOBILE DEMO OFF</td>
+                                    <td><eq name="MOBILE_CODE" value="1">
+                                        <b style="color:red">{:l('Current value:1 [Alert:Change it in pure config to 0]')} </p></b><else/><b style="color:green"> {:l('Current value')} :0 :)</b></eq>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('Debug Mode')} </td>
+                                    <td>
+                                    <eq name="M_DEBUG" value="1">
+                                        <b style="color:red">{:l('M_DEBUG:1 [Alert:Site in debugging mode]')}</p></b><else/><b style="color:green">{:l('M_DEBUG')} :0 :)</b></eq>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('Risk warning')}</td>
+                                    <td>{:l('To ensure product safety take a regular backup')}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- end tab pane -->
+                    </div>
+                    <!-- end tab content -->
+                </div>
+            </div>
+        </div>
+    </div>
+    

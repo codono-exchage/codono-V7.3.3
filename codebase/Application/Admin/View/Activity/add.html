@@ -1,0 +1,174 @@
+<include file="Public:header" />
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">Warnings</div>
+    </div>
+    <div id="main" class="main">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">{:l('Add Activity')} </h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/Admin/Activity/index">{:l('List')}</a></li>
+                            <li class="breadcrumb-item active">{:l('Add')} </li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <div class="card">
+            <div class="card-body">
+                <form id="form" class="form-horizontal">
+                    <div id="tab" class="tab-pane in tab">
+                        <div class="form-item cf">
+                            <table class="table">
+                                <tbody>
+                                    <input type="hidden" name="hash" value="{$hash}" class="text input-large">
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('UserID')}:</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="userid" value="{$userid}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Title')}</td>
+                                    </tr>
+
+
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Type')}:</td>
+                                        <td>
+                                            <select name="type" class="form-select">
+                                                <option value="1" selected="">{:l('Income')}</option>
+                                                <option value="2">{:l('Spend')}</option>
+                                            </select>
+                                        </td>
+                                        <td class="item-note">{:l('*Income adds deposit to user & Spend will withdraw')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Wallet')}:</td>
+                                        <td>
+                                            <select name="account" class="form-select">
+                                                <foreach name="account_types" item="baltype" key="bal_key">	
+                                            <option value="{$bal_key}">{$baltype|formatstring} Wallet</option>
+                                        </foreach>
+                                        </select>
+                                        </td>
+                                        <td class="item-note">{:l('*Choose Wallet type ie Spot , P2p, Staking etc ')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Coin')}:</td>
+                                        <td><select name="coin" class="form-select input-10x">
+                                                <volist name="C['coin_list']" id="v">
+
+                                                    <option value="{$v['name']}" <eq name="data['coin']"
+                                                        value="$v['name']">{:l('selected')}</eq>
+                                                        >{$v['name']|strtoupper} [{$v['title']}]</option>
+                                                </volist>
+                                            </select></td>
+
+                                        <td class="item-note">{:l('Currencies')}</td>
+                                    </tr>
+
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Amount')}:</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="amount" value="{$amount}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Enter amount to add /reduce')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Txid')}:</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="memo" value="{$hash}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Enter Txid from blockchain [or leave blank if not available]')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Internal Note')}:</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="internal_note"
+                                                value="{$internal_note}" style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Note for internal team')}</td>
+                                    </tr>
+
+
+
+                                    <tr class="controls" style="margin: 10px 0px;height: 80px;">
+                                        <td class="item-label"></td>
+                                        <td>
+                                            <span class="btn btn-info " id="submitnow"
+                                                onclick="submitnow();">{:l('Submit')}</span>
+
+                                            <a class="btn btn-return btn-warning" href="{:U('Admin/Invest/')}">{:l('Back')}</a>
+                                        </td>
+                                        <td class="item-note"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    //submit Form
+
+                    function submitnow() {
+                        //alert('This will change user balance instantly Use carefully!');
+                        var userid = document.getElementsByName("userid")[0].value;
+                        var type = document.getElementsByName("type")[0].value;;
+                        var coin = document.getElementsByName("coin")[0].value;;
+                        var amount = document.getElementsByName("amount")[0].value;
+                        var memo = document.getElementsByName("memo")[0].value;
+                        var internal_note = document.getElementsByName("internal_note")[0].value;
+                        var account = document.getElementsByName("account")[0].value;    
+                        if (amount == '' || userid == '' || coin == '' || memo == '' ) {
+                            alert('Fill all inputs');
+                            return false;
+                        }
+                        if (type == 1) {
+                            var action = 'add';
+                        } else {
+                            var action = 'spend';
+                        }
+                        var msg = 'You want ' + action + ' ' + amount + ' ' + coin + ' to userid ' + userid;
+                        layer.confirm(msg, {
+                            btn: ['Confirm', 'Cancel'] //PUSH_BUTTON
+                        }, function () {
+                            $.post("/Admin/Activity/add", { userid: userid, amount: amount, coin: coin, type: type,account:account, memo: memo, internal_note: internal_note }, function (data) {
+                                layer.closeAll('loading');
+                                trans_lock = 0;
+                                if (data.status == 1) {
+
+                                    layer.msg(data.info, { icon: 1 });
+                                    window.location.href = "/Admin/Activity/index";   
+                                } else {
+                                    layer.msg(data.info, { icon: 2 });
+                                }
+                                
+                            }, 'json');
+                        });
+                    }
+
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="Public:footer" />
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //Highlight navigation
+        highlight_subnav("{:U('Activity/index')}");
+    </script>
+</block>

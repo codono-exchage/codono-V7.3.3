@@ -1,0 +1,35 @@
+	<div class="card-header d-flex p-t-0 p-b-0 p-l-15 p-r-15">
+						<ul class="list-inline p2p-left-menu">
+	<li class="list-inline-item active" id="p2p_index"><a href="{:U('P2p/index')}">P2P {:l("Account")}</a></li>
+							<li class="list-inline-item" id="p2p_quick"><a href="{:U('P2p/quick')}">{:l("Quick")}</a></li>
+						</ul>
+						<ul class="list-inline p2p-right-menu">
+							<li class="list-inline-item m-r-15">
+								<a href="https://www.youtube.com/watch?v=K4TOrB7at0Y" data-fancybox class="fancybox"><i class="ion ion-ios-play-circle"></i> {:l("Video")}</a></li>
+							<li class="list-inline-item m-r-15">
+								<div class="dropdown">
+								<a href="#!"  data-toggle="dropdown" id="OrderDropDown" aria-haspopup="true" aria-expanded="true"><i class="icon ion-ios-document"></i> {:l("Orders")}</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="OrderDropDown">
+										<a class="dropdown-item" href="{:U('P2p/orders')}"> <i class="fa fa-download"></i> {:l("Placed Orders")}</a>
+										<a class="dropdown-item" href="{:U('P2p/received')}" > <i class="fa fa-upload"></i> {:l("Received Orders")}</a>
+										
+									</div>
+							</li>
+							
+							<li class="list-inline-item">
+								<div class="dropdown">
+									<a href="#!" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="ion ion-md-more"></i> {:l("More")}</a>
+									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+										
+										<a class="dropdown-item" href="{:U('P2p/paymentsettings')}">{:l("Payment Settings")}</a>
+										<a class="dropdown-item" href="{:U('P2p/newad')}" >{:l("Post a New Ad")}</a>
+										<a class="dropdown-item" href="{:U('P2p/myads')}">{:l("My Ads")}</a>
+										<a class="dropdown-item" href="{:U('Finance/assets/type/p2p')}">P2P {:l("Wallet")}</a>
+										<a class="dropdown-item" href="{:U('P2p/apply')}">{:l("Become a Merchant")}</a>
+										<a class="dropdown-item" href="{:U('P2p/faq')}">P2P {:l("Trading FAQ")}</a>
+										
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>

@@ -1,0 +1,101 @@
+<div class="mobile_logout" id="mobile-menu-footer" style="display:none;">
+	<nav class="nav-bottom">
+        <!-- Existing links -->
+        <a href="{:U('Index/index')}" class="nav__link_bottom" >
+            <div class="nav-icon">
+                <i class="icon-size home-two"></i>
+              </div>
+			<span class="nav__text">{:l('Home')}</span></a>
+        <a href="{:U('Content/market')}" class="nav__link_bottom">
+			<div class="nav-icon">
+                <i class="icon-size stock-market"></i>
+              </div>
+			<span class="nav__text">{:l('Markets')}</span></a>
+        <a href="{:U('Finance/index')}" class="nav__link_bottom">
+			<div class="nav-icon">
+                <i class="icon-size wallet-one"></i>
+              </div>
+			<span class="nav__text">{:l('Wallet')}</span></a>
+        <a href="{:U('Trade/tradepro')}" class="nav__link_bottom">
+			<div class="nav-icon">
+                <i class="icon-size chart-stock"></i>
+              </div>
+			<span class="nav__text">{:l('Trade')}</span></a>
+        <a href="{:U('User/index')}" class="nav__link_bottom">
+			<div class="nav-icon">
+                <i class="icon-size dashboard-one"></i>
+              </div>
+			<span class="nav__text">{:l('Dashboard')}</span></a>
+    </nav>
+
+</div>
+<style>
+#mobile-menu-footer{
+
+}
+@media (max-width: 767px){
+	#accordion{
+		display: none;
+	}
+	.show_chart, .show_mytrades, .show_ob, .show_recenttrades {
+        display: none;
+    }
+    .show_toolbox {
+        display: block;
+    }
+	td.mobile-hide {
+    display: none !important;
+}
+.mobile_logout {
+    display: block !important;
+}
+.footer-section{
+	display: none;
+}
+.nav-bottom {
+    position: fixed !important;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+    background-color: var(--common-bg);
+    display: flex;
+    overflow-x: auto;
+    z-index: 999999;
+}
+.nav__link_bottom:hover {
+    color: #7b7b7b;
+}
+.nav__icon_bottom {
+    font-size: 18px;
+}
+.nav__link_bottom {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: sans-serif;
+    font-size: 0.75rem;
+    color: var(--common-text);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.1s ease-in-out;
+}
+
+}
+@media (max-width: 576px) {
+
+.total-amt {
+  display: none !important;
+}
+.buysellorders td, .buysellorders th {
+  display: inline-block !important;
+  /* Adjust width as necessary */
+  width: 48% !important;
+}
+
+}
+</style>

@@ -1,0 +1,142 @@
+<include file="Public:header" />
+<div class="container wallet-page">
+  <div class="full-box row">
+    <include file="User:sidebar" />
+  <div class="col-10">
+    <div class="container">
+    <div class="row">
+        <include file="User:top_bar" />
+        <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+          <ul class="text-right breadcrumbs list-unstyle">
+            <li>
+              <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+            </li>
+            <li>
+              <a class="btn btn-warning btn-sm" href="{:U('/finance/index')}"
+                >{:l('Finance')}</a
+              >
+            </li>
+            <li class="btn btn-warning btn-sm active">{:l('Trace')}</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h1 class="f-s-24">{:l('Deposit not credited')}?</h1>
+      </div>
+      <p>
+        {:l('Auto detection Tool to detect the missing deposits')}
+      </p>
+      <div class="row">
+        <div class="col-12 col-sm-8 col-md-7 col-lg-6 card p-20">
+          <div class="alert alert-warning">
+            <h4 class="alert-heading">
+              <i class="ion ion-md-information-circle-outline"></i>
+            </h4>
+            <p class="m-b-0">
+              {:l('Once detected funds will be automatically created to your Account.')}
+            </p>
+          </div>
+          <div class="uncredited-deposit-form">
+            <div class="form-group">
+              <label
+                for="coin"
+                tabindex="0"
+                data-toggle="tooltip"
+                title="Please select correct network of deposit"
+                >{:l('Network')}</label
+              >
+              <div class="clearfix"></div>
+              <select
+                id="coin-select"
+                class="bootstrap-select"
+                data-live-search="true"
+                data-live-search-placeholder="Search"
+                data-width="100%"
+              >
+                <volist name="coin_list" id="vo">
+                  <if condition="$vo['type']">
+                    <option value="{$vo['name']}">
+                      {$vo.title} [{$vo['name']|strtoupper} <if condition="$vo.network">{$vo.network}</if>]
+                    </option>
+                  </if>
+                </volist>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label
+                for="txid"
+                tabindex="0"
+                data-toggle="tooltip"
+                title="The transaction hash (TxID) is a unique identifier that identifies each blockchain transaction. You can find your TxID in your shooting log. If you can't find it, contact your shooting platform. Please make sure your TxID matches the block transaction information. Other than TxID (Transaction Hash), deposit and withdrawal address, account number or e-mail address etc. Do not enter any information."
+                >{:l('Txid')}</label
+              >
+              <div class="clearfix"></div>
+              <input
+                id="txid"
+                class="form-control"
+                value=""
+                placeholder="{:l('Transaction Id')}"
+              />
+            </div>
+            <button onclick="trace()" class="btn-2">{:l('Trace Deposit')}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  
+</div>
+<script>
+  function trace() {
+    var txid = $("#txid").val();
+    var coin = $("#coin-select option:selected").val();
+    if (txid == "" || txid == null) {
+      layer.tips("Enter the txid", "#txid", {
+        tips: 2,
+      });
+      return false;
+    }
+    if (coin == "" || coin == null) {
+      layer.tips("Select Currency", "#coin-select", {
+        tips: 2,
+      });
+      return false;
+    }
+    {
+      layer.load(0, { shade: [0.5, "#8F8F8F"] });
+      
+      $.post(
+        "{:U('Finance/doTrace')}",
+        {
+          chain: coin,
+          txid: txid,
+        },
+        function (data) {
+          layer.closeAll("loading");
+          trans_lock = 0;
+          if (data.status == 1) {
+            layer.msg(data.info, {
+              icon: 1,
+            });
+          } else {
+            layer.msg(data.info, {
+              icon: 2,
+            });
+            return false;
+          }
+        },
+        "json"
+      );
+    }
+  }
+</script>
+
+<script>
+  var hints = "0";
+  if (hints == 1) {
+    $("#hints").show();
+  }
+</script>
+<include file="Public:footer_minimal" />

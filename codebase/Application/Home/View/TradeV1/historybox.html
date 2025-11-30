@@ -1,0 +1,80 @@
+<div class="row sm-gutters">
+
+      <div class="col-md-12">
+        <div class="market-history market-order mt15">
+          <ul class="nav nav-pills" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="pill" href="#recent-trades" role="tab" aria-selected="true">Recent Trades</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#active-orders" role="tab" aria-selected="false">Active
+                Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#order-history" role="tab" aria-selected="false">Order
+                history</a>
+            </li>
+
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active table-responsive" id="recent-trades" role="tabpanel">
+               <table class="table">
+                                        <thead>
+                                            <tr >
+                                                <th >Time</th>
+                                                <th >Type</th>
+                                                <th >Price</th>
+                                                <th >Quantity</th>
+                                                <th >Total</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody id="recent-orders-list"></tbody>
+				</table>
+
+                                </div>
+            
+            <div class="tab-pane fade" id="active-orders" role="tabpanel">
+              <div class="no-orders text-center" id="loginrequired" style="display:none"><img src="{:SITE_URL}/Public/trade-white/images/empty.png" alt="Please login"></div>
+									<table class="table table-striped" id="entrust_over">
+                                        <thead>
+                                            <tr>
+											    <th scope="col">Market</th>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Price</th>
+												<th scope="col">Stop</th>
+												<th scope="col">Condition</th>
+                                                <th scope="col">Qty</th>
+                                                <th scope="col">Dealt</th>
+												<th scope="col">Total</th>
+												<th scope="col">Trade Type</th>
+                                                <th scope="col">Option</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="entrustlist">
+                                            
+                                        </tbody>
+                                    </table>
+            </div>
+            <div class="tab-pane fade" id="order-history" role="tabpanel">
+              <div class="no-orders text-center" id="loginrequired2" style="display:none"><img src="{:SITE_URL}/Public/trade-white/images/empty.png" alt="Please login"></div>
+									<table class="table table-striped" id="entrust_over2">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Qty</th>
+												<th scope="col">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="closedorderslist">
+                                            
+                                        </tbody>
+                                    </table>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>

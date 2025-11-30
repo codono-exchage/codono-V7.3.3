@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg">
+		<a class="navbar-brand" href="/"><img alt="" src="__UPLOAD__/public/{$C['web_logo']}"></a>
+		<button aria-controls="headerNavMenu" aria-expanded="false" aria-label="Toggle Menu" class="navbar-toggler" data-target="#headerNavMenu" data-toggle="collapse" type="button">
+			<i class="icon ion-md-menu"></i>
+		</button>
+		<div class="collapse navbar-collapse" id="headerNavMenu">
+		
+			<ul class="navbar-nav mr-auto">
+				
+				  <volist name="navigation" id="vo">  
+					<if condition="$vo.dropdown eq 1">
+					<li class="nav-item dropdown" id="{$vo['name']}_box">
+					<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">{:l($vo['title'])}</a>
+					<div class="dropdown-menu">
+						<div class="dropdown-body">
+						<volist name="vo.submenu" id="submenu">
+						
+							<a class="dropdown-item" href="/{$submenu.url}">
+								<div class="icon">
+									<i class="icon {$submenu.ico}"></i>
+								</div>
+								<div class="content">
+									{$submenu.title} <if condition="$vo['name']"><span>{:l($vo['name'])}</span></if>
+								</div>
+							</a> 
+							</volist>
+						</div>
+					</div>
+				</li>
+				<else/>
+					
+                    <li id="{$vo['name']}_box" class="nav-item">
+                        <a href="/{$vo['url']}" class="nav-link"><if condition="$vo['ico']">
+						<div class="icon">
+								<i class="icon {$vo['ico']}"></i>
+							</div>
+						</if>  {:l($vo['title'])} </a>
+                    </li>
+					</if>
+                </volist>
+				
+				
+				
+			</ul>
+			<ul class="navbar-nav ml-auto align-items-center">
+				<eq name="Think.session.userId" value="0">
+			 <li class="nav-item"> <a class="nav-link" href="{:U('Login/register')}" ><i class="glyphicon glyphicon-user"></i> {:l('SIGNUP')}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{:U('Login/login')}" ><i class="icon-lock"></i> {:l('SIGNIN')}</a></li>	
+				</eq>
+			
+			<include file="Publicnew:lang_bar"/>	
+
+			<gt name="Think.session.userId" value="0">
+						<li class="nav-item dropdown userMenu header-custom-icon">
+					<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">{$Think.session.userName} </a>
+					<div class="dropdown-menu">
+						<div class="dropdown-header d-flex align-items-center justify-content-between">
+							<p class="font-weight-medium">{$emailaddress}</p>
+						</div>
+						<div class="dropdown-body">
+							<a class="dropdown-item" href="{:U('User/index')}"> <span>{:l("User Center")}</span></a>
+							<a class="dropdown-item" href="{:U('Finance/index')}"><span>{:l('FINANCE')}</span></a>
+							<a class="dropdown-item" href="{:U('Login/loginout')}"><span>{:l("Logout")}</span> </a>
+						</div>
+					</div>
+				</li>
+			<else/>
+			</gt>
+			</ul>
+		</div>
+	</nav>

@@ -1,0 +1,208 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="__PUBLIC__/otc/otc.css"/>
+<div class="container">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-6 col-lg-6 col-sm-6">
+			<h1 class="text-white">Codono Convert</h1>
+		</div>
+		<div class="col-md-6 col-lg-6 col-sm-6 text-right">
+			<button class="btn btn-primary">Conversion history</button>
+		</div>
+	</div>
+<div class="">
+	<div class="head-tabs-1" style="margin-top: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+		<div class="head-tabs-1-1">
+			<div class="head-tabs-title" style="color: #fff;" id="wanttobuy" onclick="changetype('buy')">Market</div>
+			<div class="head-tabs-title" style="color: rgb(146, 154, 165);" id="wanttosell" onclick="changetype('sell')">Limit</div>
+		</div>
+		<!-- <div class="head-tabs-1-2" style="width: 100px;">
+			<div class="BaseLine"></div>
+		</div> -->
+	</div>
+<div class="row" id="wrapper">
+ <!-- leftbox Starts -->
+<div id="left-box-id" class="col-md-8 col-sm-12">
+<div class="leftbox">
+	<iframe style="border-style: none;" width="100%" height="100%" border="0" id="market_chartx" src="/Trade/tradingview/market/btc_usdt"></iframe>
+	<div class="col-md-5">
+
+	</div>
+	</div>
+</div>
+<!-- Leftbox ends -->
+<!-- rightbox starts -->
+<div id="right-box-id" class="col-md-4 col-sm-12">
+<div class="rightbox">
+	
+<div class="left-title-1">
+	<!--buytab starts-->
+	<div class="coinwrap buytab" style="margin-top: 25px;">
+		<div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+			<p class="text-white">From</p>
+			<p class="text-white">Balance : -- BNB</p>
+		</div>
+	<div class="coin-input-div">
+		<!-- <div class="coin-input-label" id="input1text">Buy</div> -->
+			<input placeholder="Enter Amount" class="input-box-css" value=""  id="change1stInput">
+		<div class="coin-input-split"></div>
+		<div class="coin-input-coinwrap" id="showbuyoptions">
+	   
+			<a class="dropdown-toggle xbuyoption" data-toggle="dropdown" href="#">
+				<h6 class="text-white">Select one</h6>
+				</a>
+				<ul class="dropdown-menu">
+					<volist name="CoinList" id="ac">
+					<li role="option">
+					<div class="CoinInput-Option"><a href="javascript:void(0);"><img class="CoinInput-Logo"  src='__UPLOAD__/coin/{$ac['img']}' />{$ac['title']}</a></div>
+					</li>
+					</volist>    
+				</ul>	
+	
+		</div>
+	</div> 
+	
+	<div class="coinInput-error" id="input1error"></div>
+	
+	</div>
+	<div  style="width: 100%; display: flex; align-items: center; justify-content: center;">
+		<svg width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="css-1iztezc"><path d="M7.5 3h3v18.5l-7-7h4V3zM16.5 21h-3V2.5l7 7h-4V21z" fill="currentColor"></path></svg>
+		</div>
+	
+		<!--buytab ends-->
+	<div class="coinwrap selltab">
+		<div>
+			<div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+			<p class="text-white">From</p>
+			<p class="text-white">Balance : -- BNB</p>
+		</div>
+	<div class="coin-input-div">
+			<input placeholder="Enter Amount" class="input-box-css" value="" id="change2ndInput">
+		<div class="coin-input-split"></div>
+		<div class="coin-input-coinwrap" id="showselloptions">
+	   
+			<a class="dropdown-toggle xselloption" data-toggle="dropdown" href="#">
+			<h6 class="text-white">Select one</h6>
+			</a>
+			<ul class="dropdown-menu">
+				<volist name="CoinList" id="ac">
+				<li role="option">
+				<div class="CoinInput-Option"><a href="javascript:void(0);"><img class="CoinInput-Logo"  src='__UPLOAD__/coin/{$ac['img']}' />{$ac['title']}</a></div>
+				</li>
+				</volist>    
+			</ul>	
+	
+		</div>
+	</div> 
+		</div>
+	
+		<div class="coinInput-error" id="input2error"></div>
+	</div>
+	
+	
+		<input name="tradetype" id="tradetype" value="buy" type="hidden"/>
+		<input name="trade_coin" id="trade_coin" value="{$default_coin_trade.symbol}" type="hidden"/>
+		<input name="base_coin" id="base_coin" value="{$default_coin_base.symbol}" type="hidden"/>
+		<input name="min_req" id="min_req" value="" type="hidden"/>
+		<input name="max_req" id="max_req" value="" type="hidden"/>
+		<input name="qid" id="qid" value="" type="hidden"/>
+		<button data-bn-type="button" disabled="" id="quote-button" class="btn btn-primary btn-block" onclick="requestQuote()">Convert</button>
+	
+</div>
+</div>
+<!-- Rightbox ends -->
+</div>
+</div>
+</div>
+
+<script>
+	$("#left-box-id").hide();
+	$("#wrapper").css({"display": "flex", "justify-content": "center"})
+	
+	function changetype(type){
+if(type !='buy' && type !='sell'){ return false;}
+  $("#tradetype").val(type);
+if(type=='buy'){
+// $("#input1text").html('Buy');
+// $("#input2text").html('Spend');
+$("#wanttobuy").css("color","#fff");
+$("#wanttobuy").css("border-bottom","2px solid white");
+$("#wanttosell").css("color","rgb(146, 154, 165)");
+$("#wanttosell").css("border-bottom","0px");
+$("#left-box-id").hide();
+}else{
+	$("#left-box-id").show();
+// $("#input1text").html('Sell');
+// $("#input2text").html('Receive');
+$("#wanttosell").css("color","#fff");
+$("#wanttosell").css("border-bottom","2px solid white");
+$("#wanttobuy").css("color","rgb(146, 154, 165)");
+$("#wanttobuy").css("border-bottom","0px");
+}
+
+}
+</script>
+
+<script>
+	function trade(type){
+if(type==1){
+  var amount=$("#buyamount").val();
+  if(amount=='' || amount==0)
+	{
+	layer.tips('Please enter amount!', '#buyamount', {tips: 3});
+	return false;
+	}
+}
+if(type==2){
+  var amount=$("#sellamount").val();
+	if(amount=='' || amount==0)
+	{
+	layer.tips('Please enter amount!', '#sellamount', {tips: 3});
+	return false;
+	}
+}
+   
+   
+   var coin =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+if(coin=='' || coin==null)
+{
+layer.tips('Please select coin!', '#swapFrom', {tips: 3});
+return false;
+}
+
+layer.load(0, {shade: [0.5,'#8F8F8F']});
+$.post("{:U('Easy/doTrade')}", {
+			coin: coin,
+			amount: amount,
+			type:type,
+			
+		}, function (data) {
+		layer.closeAll('loading');
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+
+$("#showbuyoptions li a").click(function () {
+    var selText = $(this).text();
+    var imgSource = $(this).find('img').attr('src');
+	console.log(191, imgSource)
+    var img = '<img class="coin-input-coinimage" src="' + imgSource + '"/>';        
+	var source =img+'<span class="coinInput-CoinText">'+selText+'</span> <span class="caret"></span>';
+    $('.xbuyoption').html(source);
+	$("#trade_coin").val(selText);
+});
+
+$("#showselloptions li a").click(function () {
+    var selText = $(this).text();
+	
+    var imgSource = $(this).find('img').attr('src');
+    var img = '<img class="coin-input-coinimage" src="' + imgSource + '"/>';        
+	var source =img+'<span class="coinInput-CoinText">'+selText+'</span> <span class="caret"></span>';
+    $('.xselloption').html(source);
+	$("#base_coin").val(selText);
+	
+});
+</script>

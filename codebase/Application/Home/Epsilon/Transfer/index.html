@@ -1,0 +1,248 @@
+<include file="Public:header" />
+<style>
+	@keyframes fadeOutIn {
+		0% {
+			opacity: 1;
+		}
+
+		50% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	.animated {
+		animation: fadeOutIn 1s ease;
+	}
+</style>
+<div class="container wallet-page">
+
+	<div class="full-box row">
+<include file="User:sidebar" />
+<div class="col-10">
+	<div class="row mt-3 mb-3">
+		<include file="User:top_bar" />
+		<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+			<ul class="text-right breadcrumbs list-unstyle">
+				<li>
+					<a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+				</li>
+				<li>
+					<a href="{:U('/finance/index')}" class="btn btn-warning btn-sm">{:l('Finance')}</a>
+				</li>
+				<li class="btn btn-warning btn-sm active">{:l('Transfer')}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="transfer-form-wrapper">
+		<div class="transfer-form-inner">
+			<div class="row">
+				<div class="col-6">
+					<h4 class="f-s-16">{:l("Wallet Transfer")}</h4>
+				</div>
+				<div class="col-6 text-right"><a href="{:U('Transfer/history')}" class="green"><i
+							class="fa fa-history"></i> {:l("Transfer History")}</a></div>
+				<div class="col-12 m-t-15">
+					<div class="alert alert-info">
+						<p class="text-muted m-b-0"><i class="fa fa-info-circle"></i> {:l("Make instant transfers between your different wallets")}.</p>
+					</div>
+				</div>
+			</div>
+
+
+			<form action="#" method="post">
+				<div class="transfer-from-to">
+					<div class="from-to-inputs">
+						<div>
+							<label>{:l("From")}:</label>
+							<div class="fromInput" id="fromInput">
+
+							</div>
+						</div>
+
+						<img src="__EPSILON__/img/swap.png" id="swapImage" onclick="swap()">
+						<div>
+							<label>{:l("To")}:</label>
+							<div class="toInput" id="toInput">
+
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="coin">{:l('Coin')}</label>
+						<select id="coin" class="form-control select-md amount bootstrap-select" data-live-search="true"
+							data-live-search-placeholder="{:l('Search')}" data-width="100%">
+							<option>{:l("PLEASE_CHOOSE")} {$from} {:l('Wallet')}</option>
+
+							<volist name="coins" id="coin">
+								<option data-subtitle="{$coin['title']}"
+									data-value="{$coin['balance'] |NumToStr}"
+									data-coin="{$coin['name'] | strtoupper}"
+									data-content="<img src='__UPLOAD__/coin/{$coin['img']}'> {$coin['title']} <span>{$coin['name'] | strtoupper}</span> <span class='value'>{$coin['balance']|NumToStr}</span>">
+								</option>
+							</volist>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="amount">{:l("Amount")}</label>
+						<div class="amount form-control">
+							<input id="amount" class="form-control" placeholder="{:l(" Please enter amount")}" type="text" required>
+							<div class="balance">{:l("Available balance")}: <span class="current_balance"
+									id="coinbalance">0 --</span></div>
+
+							<input type="hidden" id="selected_coin" name="selected_coin" value="" />
+							<input type="hidden" id="selected_coin_bal" name="selected_coin_bal" value="" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<input type="text" id="my_range" name="my_range" value="" />
+					</div>
+
+					<div class="form-grpup">
+						<button type="button" class="btn-2 w-100"
+							onclick="dotransfer();">{:l("Send")}</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div></div>
+<script>
+	$(document).ready(function () {
+
+		if ('spot' == '{$from}') {
+			insertDropdown(2);
+			console.log(108);
+		} else {
+			insertDropdown(1);
+			console.log(111);
+		}
+
+
+		$("#my_range").ionRangeSlider({
+
+			step: 1,
+			min: 0,
+			max: 100,
+			from: 100,
+			grid: true,
+			skin: "round",
+			onChange: function (data) {
+				var percent = data.from;
+				var avail = $("#selected_coin_bal").val();
+				var calc_buy = (avail * percent) / 100;
+
+				$("#amount").val(calc_buy.toFixed(8));
+
+			}
+		});
+	});
+	document.querySelector('select#coin').onchange = function () {
+		var value = this.selectedOptions[0].getAttribute('data-value');
+		var coin = this.selectedOptions[0].getAttribute('data-coin');
+
+		$("#selected_coin_bal").val(value);
+		$("#selected_coin").val(coin);
+		$("#coinbalance").html(value);
+		$("#fee_coin").html('0 ' + coin);
+		$("#amount").val(value.toString());
+	};
+	function swap() {
+
+		var swapImage = document.getElementById('swapImage');
+		swapImage.classList.add('animated');
+
+		// Set a timeout to delay the redirection
+		setTimeout(function () {
+			window.location = "{:U('Transfer/index')}/from/{$to}/to/{$from}";
+		}, 1000); // Delay in milliseconds, adjust to match your animation duration
+
+		// Optional: Remove the animation class after animation ends
+		swapImage.addEventListener('animationend', function () {
+			swapImage.classList.remove('animated');
+		});
+	}
+
+	function dotransfer() {
+		var from = "{$from}";
+		var to = "{$to}";
+		var amount = $("#amount").val();
+		var coin = $("#selected_coin").val();
+		if (coin == '' || coin == null) {
+			layer.tips('Please select coin!', '#coin', { tips: 3 });
+			return false;
+		}
+		if (amount == '' || amount == 0) {
+
+			layer.tips('Please enter amount!', '#amount', { tips: 3 });
+			return false;
+		}
+
+		$.post("{:U('Transfer/doTransfer')}", {
+			coin: coin,
+			amount: amount,
+			from: from,
+			to: to,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, { icon: 1 });
+				window.location.reload();
+			} else {
+				layer.alert(data.info, { title: "Info", btn: ['Ok'] });
+			}
+		}, "json");
+	}
+	function insertDropdown(type = 1) {
+
+		let dropdownHTML1 = `<div class="dropdown">
+												<button class="btn-1 btn-sm btn-block btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													 <if condition="$from eq ''">{:l("Select Wallet")}<else/>{$from|formatString} {:l("Wallet")}</if>
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												  
+												  <volist name="baltypes" id="baltype"> 
+												  <a class="dropdown-item" href="{:U('Transfer/index/from/'.$baltype.'/to/spot')}" <if condition="$baltype eq $from">selected</if>>{$baltype|formatString} {:l("Wallet")}</a>
+												  </volist>
+												</div>
+						 </div>`;
+		let dropdownHTML2 = `<div class="dropdown">
+												<button class="btn-1 btn-sm btn-block btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													 <if condition="$from eq ''">{:l("Select Wallet")}<else/>{$to|formatString} {:l("Wallet")}</if>
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												  
+												  <volist name="baltypes" id="baltype"> 
+												  <a class="dropdown-item" href="{:U('Transfer/index/from/spot/to/'.$baltype)}" <if condition="$baltype eq $to">selected</if>>{$baltype|formatString} {:l("Wallet")}</a>
+												  </volist>
+												</div>
+						 </div>`;
+
+
+		let SpotHTML = `<div class="dropdown">
+													<span class="btn-1 btn-sm btn-block btn-secondary " type="button" id="dropdownMenuButtonx">
+														 Spot {:l('Wallet')}
+													</span>
+												 </div>`;
+		const fromInput = document.getElementById('fromInput');
+		const toInput = document.getElementById('toInput');
+		if (type == 1) {
+			fromInput.innerHTML = dropdownHTML1;
+			toInput.innerHTML = SpotHTML;
+		} else {
+			fromInput.innerHTML = SpotHTML;
+			toInput.innerHTML = dropdownHTML2;
+		}
+
+	}
+
+	// Example usage of SwitchType function
+	// This would dynamically create and add links for transferring from any wallet to a P2P wallet
+	// SwitchType('any', 'p2p');
+
+</script>
+<include file="Public:footer_minimal" />

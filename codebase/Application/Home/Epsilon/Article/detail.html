@@ -1,0 +1,44 @@
+<include file="Public:header" />
+<link rel="stylesheet" href="__PUBLIC__/static/css/article.css"/>
+<main class="wrapper blog-page ">
+        <!-- Account Heading Start -->
+        <div class="page-top-banner">
+            <div class="filter" style="background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-8 mt-3">
+                            <h1>{$page_title}</h1>
+                            <notempty name="prompt_text">
+                                <h2>{$prompt_text}</h2>
+                            </notempty>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container p-t-30">
+            <h2 class="f-s-30 f-w-700 m-b-30">
+                <a href="{:U('Article/cat',['name'=>clean($data['type'])])}"><i class="ion ion-md-arrow-round-back"></i> {$data['type']|formatString}</a>
+            </h2>
+            <div class="row col-12">
+                <div class="col-lg-9 col-md-9 col-sm-12 card p-20">
+                <div >
+                    <h1 class="date f-w-600 text-muted f-s-14 text-small">{:l('RELEASE_TIME')}:{$data.addtime|date="Y-m-d H:i:s",###}</h1>
+                    <span class="date f-w-600 text-muted f-s-14 text-small"></span>
+					<notempty name="data.img">
+					<figure>
+                        <img class="img-fluid" src="/Upload/article/{$data['img']}"  >
+                    </figure>
+					</notempty>
+                    <div class="articletext" ><p>{$data['content']}</p></div>
+                </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                <include file="Article:sidebar" />
+                </div>
+            </div>
+        </div>
+    </main>
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,75 @@
+<!-- view payment method modal start -->
+<div class="modal fade" id="viewPaymentMethodModal_{$vo.id}" tabindex="-1" role="dialog" aria-labelledby="{:l('Payment method')}" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header  d-flex align-items-center">
+				<h5 class="modal-title">
+					<div class="coin-title d-flex align-items-center">
+						<div class="title">{:l("Payment method")}</span>
+						</div>
+					</div>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12">
+						<div class="card">
+							<div class="card-body">
+								
+									<div class="form-group">
+										<label>{:l("Name")}</label> <input type="text" class="form-control" readonly value="{$truename}">
+									</div>
+									<div class="form-group">
+										<label>{:l('Bank account/card number')} </label> <input type="text" class="form-control" value="{$vo.bankcard}" readonly>
+									</div>
+									<div class="form-group">
+										<label>{:l('Bank Name')} </label> <input type="text" class="form-control" readonly value="{$vo.bank}">
+									</div>
+									<div class="form-group">
+										<label>{:l('Branch where account was opened [Optional]')} </label> <input type="text" readonly class="form-control" readonly value="{$vo.bankaddr}">
+									</div>
+								<div class="alert alert-info">
+									<h5>{:l("Tips")}</h5>
+									<p> {:l("Tip: When you sell your crypto, the added payment method will be shown to the buyer during the transaction to accept the fiat transfer. Please make sure the information is correct.")}.</p>
+								</div>
+							</div>
+						</div>
+					</div><!--/col-md-6-->
+				</div><!--/row-->
+			</div>
+
+		</div>
+	</div>
+</div>
+<!--view payment method modal end -->
+<!-- remove payment method modal start -->
+<div class="modal fade" id="removePaymentMethodModal_{$vo.id}" tabindex="-1" role="dialog" aria-labelledby="Ödeme yöntemini sil" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header  d-flex align-items-center">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12">
+						<div class="card">
+							<div class="card-body text-center">
+								<img src="__PUBLIC__/template/v6/img/logo-icon.png" class="img-fluid m-auto m-b-40">
+								<h3>{:l('Are you sure you want to delete this payment method?')} </h3>
+							</div>
+						</div>
+					</div><!--/col-md-6-->
+				</div><!--/row-->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn-1" data-dismiss="modal">{:l("Cancel")}</button>
+				<button href="javascript:void(0)"  data="{$vo.id}" onclick="bank_del(this)" class="btn-2">{:l("Appove")}</a>
+			</div>
+		</div>
+	</div>
+</div>

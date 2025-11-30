@@ -1,0 +1,165 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Dex Coins Management')}</span><small><blink style="color:red">{:l('If you ever change Coins make sure to clear cache')}</blink></small>
+		</div>
+		<div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+			<div class="fl">
+				<a class="btn btn-success " href="{:U('Hybrid/coinEdit')}">{:l('Add')}</a>
+				<button class="btn ajax-post confirm btn-danger " url="{:U('Hybrid/coinStatus',array('type'=>'delete'))}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i></button>
+			</div>
+			<div class="search-form fr cf">
+				<div class="sleft">
+					<form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+						<select  name="status" class="form-select">
+							<option value=""
+							<empty name="Think.get.status">{:l('selected')}</empty>
+							>{:l('All states')}</option>
+							<option value="1"
+							<eq name="Think.get.status" value="1">{:l('selected')}</eq>
+							>{:l('Disabled')}</option>
+							<option value="2"
+							<eq name="Think.get.status" value="2">{:l('selected')}</eq>
+							>{:l('Enabled')}</option>
+						</select>
+						<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-select">
+							<option value="name"
+							<eq name="Think.get.field" value="name">{:l('selected')}</eq>
+							>{:l('Symbol')}</option>
+						</select>
+						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//Search function
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//Enter search
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="card card-body mt-2 table-responsive">
+			<table class="table table-sm emptyx">
+				<thead class="table-light">
+				<tr>
+					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+					<th class="">{:l('ID')}</th>
+					<th class="">{:l('Name')}</th>
+					<th class="">{:l('Symbol')}</th>
+					<th class="">{:l('Contract Address')}</th>
+					<th class="">{:l('Decimals')}</th>
+					<th class="">{:l('Price')}</th>
+					<th class="">{:l('Min Buy')}</th>
+					<th class="">{:l('Max Buy')}</th>
+					<th class="">{:l('Is Token')}</th>
+					<th class="">{:l('Status')}</th>
+					<th class="">{:l('Is Default')}</th>
+					<th class="">{:l('Options')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td>{$vo.id}</td>
+							<td>{$vo.name}</td>
+							<td><img src="__UPLOAD__/coin/{$vo.img}" height="18px"/> {$vo['symbol']|strtoupper}</td>
+							<td>{$vo.contract_address}</td>
+							<td>
+							{$vo.decimals}
+							</td>
+							<td>
+							{$vo.price}
+							</td>
+							<td>
+							{$vo['buy_min']}
+							</td>
+							<td>
+							{$vo['buy_max']}
+							</td>
+							<td>
+							<switch name="vo.is_token">
+								<case value="1">{:l('Token')}</case>
+								<case value="0">{:l('Main')}</case>
+								<default />
+							</switch>
+							</td>
+							<td>
+								<eq name="vo.status" value="1"><span style="color:green" class="fa fa-check" aria-hidden="true" title="Enabled"></span>
+									<else/>
+											<span class="fa fa-times-circle" aria-hidden="true" title="Disabled"></span>
+								</eq>
+							</td>
+							<td>
+								<eq name="vo.is_default" value="1">
+								<span style="color:green" class="fa fa-info-circle" aria-hidden="true" title=""></span>
+									<else/>
+								-
+								</eq>
+							</td>
+							<td>
+									<a href="{:U('Hybrid/coinEdit?id='.$vo['id'])}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+							</td>
+						</tr>
+					</volist>
+					<else/>
+					<td colspan="12" class="text-center">{:l('No contents!')}</td>
+				</notempty>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function chk_wallet() {
+		window.location.href = "{:U('Tools/wallet')}";
+	}
+	
+	   function coinEmpty(coinname){
+		layer.prompt({
+   		title: 'Type DELETE to User assigned '+coinname+' addresses',
+   		formType: 4,
+   		btn: ['Delete','Cancle'] //Push button
+   	}, function(pass,elem){
+   		if(!pass || pass !='DELETE'){
+   			layer.msg('Type DELETE!');
+   		}else{
+		
+   			$.get("coinEmpty?coin="+coinname,function(data){
+   				layer.msg(data.info);
+   				layer.close();
+   				if(data.status){
+   					window.location.href = "{:U('Config/coin')}";
+   				}
+   			},'json');
+   		}
+   	});
+   
+   }
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Config/coin')}");
+	</script>
+</block>

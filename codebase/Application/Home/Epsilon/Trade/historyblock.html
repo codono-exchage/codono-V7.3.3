@@ -1,0 +1,74 @@
+<div>
+                    <div class="crypt-market-status" id="bottomOrdersList">
+                        <div>
+                            <ul class="nav nav-tabs">
+                                <li role="presentation"><a href="#recent-trades" class="active" data-toggle="tab">{:l('RECENT TRADES')}</a></li>
+                                <li role="presentation"><a href="#closed-orders" data-toggle="tab">{:l('My Orders')}</a></li>
+								<li role="presentation"><a href="#opened-orders" data-toggle="tab">{:l('Active Orders')}</a></li>
+                                
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="recent-trades">
+                                    
+                                 
+								 <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">{:l('Time')}</th>
+                                                <th scope="col">{:l('Type')}</th>
+                                                <th scope="col">{:l('Price')}</th>
+                                                <th scope="col">{:l('Quantity')}</th>
+                                                <th scope="col">{:l('Total')}</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody id="recent-orders-list"><tr></tr></tbody>
+									</table>
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="opened-orders">
+                                    <div class="no-orders text-center table-responsive" id="loginrequired" style="display:none"><img src="{:SITE_URL}/Public/trade-white/images/empty.png" alt="Please login"></div>
+									<table class="table table-striped" id="entrust_over">
+                                        <thead>
+                                            <tr>
+											    <th scope="col">{:l('Market')}</th>
+                                                <th scope="col">{:l('Time')}</th>
+                                                <th scope="col">{:l('Type')}</th>
+                                                <th scope="col">{:l('Price')}</th>
+												<th scope="col">{:l('Stop')}</th>
+												<th scope="col">{:l('Condition')}</th>
+                                                <th scope="col">{:l('Qty')}</th>
+                                                <th scope="col">{:l('Dealt')}</th>
+												<th scope="col">{:l('Total')}</th>
+												<th scope="col">{:l('Trade Type')}</th>
+                                                <th scope="col">{:l('Option')}</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="entrustlist">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+								<div role="tabpanel" class="tab-pane" id="closed-orders">
+                                    <div class="no-orders text-center" id="loginrequired2" style="display:none"><img src="{:SITE_URL}/Public/trade-white/images/empty.png" alt="Please login"></div>
+									<table class="table table-striped" id="entrust_over2">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">{:l('Time')}</th>
+                                                <th scope="col">{:l('Type')}</th>
+                                                <th scope="col">{:l('Price')}</th>
+                                                <th scope="col">{:l('Qty')}</th>
+												<th scope="col">{:l('Total')}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="closedorderslist">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

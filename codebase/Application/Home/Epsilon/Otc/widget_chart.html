@@ -1,0 +1,84 @@
+<div class="page-container">
+<div class="col-sm-6 col-sm-offset-3">
+							<div class="col-sm-4 text-center">	<a href="#btc-tab" data-toggle="tab" class="xbutton btn btn-rounded btn-md border-white text-white btn-flat"><img src="__PUBLIC__/otc/img/btc.png" height="24px"/> Bitcoin</a></div>
+							<div class="col-sm-4 text-center">	<a href="#eth-tab" data-toggle="tab" class="xbutton btn btn-rounded btn-md border-white text-white btn-flat"><img src="__PUBLIC__/otc/img/eth.png" height="24px"/> Ethereum</a></div>
+							<div class="col-sm-4 text-center"> <a href="#xrp-tab" data-toggle="tab" class=" xbutton btn btn-rounded btn-md border-white text-white btn-flat"><img src="__PUBLIC__/otc/img/xrp.png" height="24px"/> Ripple</a></div>
+							</div>
+<script src="__PUBLIC__/otc/x4-crypto-charts.js?ver=2.1.4" data-entry="x4-crypto-charts"  async></script>
+				<div class="page-container">
+					<div class="col-md-12">
+						<div class="card">
+					
+							<div class="card-body">
+								<div class="tabbable"><div class="tab-content">
+										<div class="tab-pane active" id="btc-tab">
+										<div class="pricebox"></div><br/>
+										<div id="btc-widget"></div><script>window.X4CryptoCharts=window.X4CryptoCharts||[];window.X4CryptoCharts.push({"type":"lineChart","selector":"#btc-widget","subtheme":"outlined","margins":{"left":0,"right":0},"colors":{"primary":"rgba(255,255,255,1)","accent":"rgba(244,67,54,1)"},"controls":{"lineChart":{"height":300,"crosshair":{"visible":false,"dotted":true},"watermark":{"visible":false},"loader":{"visible":false,"colorize":false},"colors":{"coin1":"rgba(245,165,34,1)","coin2":"rgba(245,165,34,1)"}},"fiatSelect":{"label":false,"top":[],"strategy":"exclude_all","except":["united-states-dollar","euro","south-african-rand","serbian-dinar"]},"periodSelect":{"colors":{"accent":"rgba(63,81,181,1)","primary":"rgba(33,150,243,1)"}}},"values":{"fiat":"south-african-rand","coin1":"bitcoin","period":15552000000},"selections":{"period":[{"value":"157680000000","title":"All Time"},{"value":31536000000,"title":"Year"},{"value":2592000000,"title":"Month"},{"value":604800000,"title":"Week"},{"value":86400000,"title":"Day"}]}});</script>
+										</div>
+
+										<div class="tab-pane" id="eth-tab">
+										<div class="pricebox"></div><br/>
+										<div id="eth-widget"></div><script>window.X4CryptoCharts=window.X4CryptoCharts||[];window.X4CryptoCharts.push({"type":"lineChart","selector":"#eth-widget","subtheme":"outlined","margins":{"left":0,"right":0},"colors":{"primary":"rgba(255,255,255,1)","accent":"rgba(244,67,54,1)"},"controls":{"lineChart":{"height":300,"crosshair":{"visible":false,"dotted":true},"watermark":{"visible":false},"loader":{"visible":false,"colorize":false},"colors":{"coin1":"rgba(245,165,34,1)","coin2":"rgba(245,165,34,1)"}},"fiatSelect":{"label":false,"top":[],"strategy":"exclude_all","except":["united-states-dollar","euro","south-african-rand","serbian-dinar"]},"periodSelect":{"colors":{"accent":"rgba(63,81,181,1)","primary":"rgba(33,150,243,1)"}}},"values":{"fiat":"south-african-rand","coin1":"ethereum","period":15552000000},"selections":{"period":[{"value":"157680000000","title":"All Time"},{"value":31536000000,"title":"Year"},{"value":2592000000,"title":"Month"},{"value":604800000,"title":"Week"},{"value":86400000,"title":"Day"}]}});</script>
+										</div>
+
+										<div class="tab-pane" id="xrp-tab">
+										<div class="pricebox"></div><br/>
+										<div id="xrp-widget"></div><script>window.X4CryptoCharts=window.X4CryptoCharts||[];window.X4CryptoCharts.push({"type":"lineChart","selector":"#xrp-widget","subtheme":"outlined","margins":{"left":0,"right":0},"colors":{"primary":"rgba(255,255,255,1)","accent":"rgba(244,67,54,1)"},"controls":{"lineChart":{"height":300,"crosshair":{"visible":false,"dotted":true},"watermark":{"visible":false},"loader":{"visible":false,"colorize":false},"colors":{"coin1":"rgba(245,165,34,1)","coin2":"rgba(245,165,34,1)"}},"fiatSelect":{"label":false,"top":[],"strategy":"exclude_all","except":["united-states-dollar","euro","south-african-rand","serbian-dinar"]},"periodSelect":{"colors":{"accent":"rgba(63,81,181,1)","primary":"rgba(33,150,243,1)"}}},"values":{"fiat":"south-african-rand","coin1":"ripple","period":15552000000},"selections":{"period":[{"value":"157680000000","title":"All Time"},{"value":31536000000,"title":"Year"},{"value":2592000000,"title":"Month"},{"value":604800000,"title":"Week"},{"value":86400000,"title":"Day"}]}});</script>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					
+				</div>
+				<!-- /rounded solid tabs -->
+</div>
+<script>
+
+valuerefresh();
+	function valuerefresh(){
+	$.get( "https://api.coincap.io/v2/assets?ids=bitcoin,ethereum,ripple", function( data ) {
+	console.log(data['data'][0]);
+	//(Math.round(data['data'][0]['priceUsd'] * 100) / 100).toFixed(2);
+	var btcprice=(Math.round(data['data'][0]['priceUsd'] * 100) / 100).toFixed(2);
+	var ethprice=(Math.round(data['data'][1]['priceUsd'] * 100) / 100).toFixed(2);
+	var xrpprice=(Math.round(data['data'][2]['priceUsd'] * 100) / 100).toFixed(2);
+	$("#btc-tab .pricebox").html('USD '+btcprice);
+	$("#eth-tab .pricebox").html('USD '+ethprice);
+	$("#xrp-tab .pricebox").html('USD '+xrpprice);
+
+	});
+	}
+</script>
+<style>
+.xbutton{
+min-height: 38px;
+    min-width: 20px;
+    padding: 8px 16px;
+    font-size: 16px;
+    line-height: 1.5;
+    background: 0 0;
+    color: #fff;
+    font-weight: 800;
+    border: 1px solid #fff;
+    margin: 8px;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.pricebox{
+    float: right;
+	font-weight:400;
+    font-size: 16px;
+}
+.x4-controls {
+    width: 126px;margin-top:-73px}
+.x4-period-select {
+    margin-left: 26%;margin-top:-53px;}
+ .x4-borders .x4-border2 .x4-shape3{border:0px !important}
+ .x4-borders .x4-border2 .x4-shape1{border:0px !important}
+ .x4-app{margin-bottom:0px !important}
+</style>

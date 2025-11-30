@@ -1,0 +1,106 @@
+<include file="Public:header" />
+<div class="page-container">
+		<div class="row"><include file="Invest:smallmenu" /></div>
+	<div class="row">
+
+		<div class="panel panel-flat">
+		<div class="panel-heading">
+						<h5 class="panel-title"> HODL &amp; EARN.</h5>
+	     </div>
+		<div class="panel-body">
+			
+		<table class="table datatable-sorting">
+						<thead>
+							<tr>
+								<th>Coin</th>
+								<th>Percent</th>
+								<th>Lock Period</th>
+								<th>MinInvest</th>
+								<th>MaxInvest</th>
+								<th>Action</th>
+								<th>Status</th>
+								<th>Amount</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+						<notempty name="list">	
+						<volist name="list" id="vo">					
+						<tr>
+								<td>{$vo.coinname}</td>
+								<td>{$vo.percentage}%</td>
+								<td>
+								<switch name="vo.period">
+									<case value="1">1 Day</case>
+									<case value="7">1 Week</case>
+									<case value="30">1 Month</case>
+									<default />
+									{$vo.period} Days
+								</switch>
+								
+								</td>
+								<td><a href="#" onclick="$('#inv_box{$vo.id}').val('{$vo.minvest}').trigger('change'); return false;">{$vo.minvest}</a></td>
+								<td><a href="#" onclick="$('#inv_box{$vo.id}').val('{$vo.maxvest}').trigger('change'); return false;">{$vo.maxvest}</a></td>
+								<td>{$vo['action'] |actionconvert }</td>
+								<td>
+								<switch name="vo.status">
+									<case value="0"><span class="label label-warning">Pending</span></case>
+									<case value="1"><span class="label label-success">Active</span></case>
+									<case value="2"><span class="label label-danger">Rejected</span></case>
+									<case value="3"><span class="label label-info">Completed</span></case>
+									<case value="4"><span class="label label-primary">Upcoming</span></case>
+									<default />NA
+								</switch>
+								</span></td>
+								<td><input class="input-sm" id="inv_box{$vo.id}"/></td>
+								<td class="text-center">
+									<switch name="vo.status">
+									<case value="1"><li><button class="btn btn-sm btn-success btn-block" onclick="investnow({$vo.id},'{$vo.coinname}');"><i class="icon-graph"></i> Invest</button></li>
+								</td></case>
+									<case value="4">Upcoming</case>
+									<default />--
+								</switch>
+								</td>
+							</tr>
+					</volist>	
+					<else/>
+						<p class="text-center font_gray font_16">No Data</p>
+					</notempty>		
+							
+						</tbody>
+					</table>
+			<div class="pages"> {$page}</div>
+		</div>
+	</div>
+
+<script>
+function investnow(id,coinname) {
+	var amount=$("input[id='inv_box"+id+"']").val();
+	if(amount==null || amount <=0){
+	layer.tips('Enter Amount', "input[id='inv_box"+id+"']", {tips: 1});
+	return false;
+	}
+	var msg = 'You want to invest '+amount+coinname;
+	
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.post("/Invest/makeinvest/",{id:id,amount:amount} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+						window.location.href = "{:U('Invest/listinvest')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+
+        }, 'json');
+		});
+    }
+</script>	
+<include file="Invest:include" />
+</div>
+</div>
+<include file="Public:footer_minimal"/>

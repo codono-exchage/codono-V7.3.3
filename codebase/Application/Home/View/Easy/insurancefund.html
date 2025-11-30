@@ -1,0 +1,69 @@
+<include file="Public:header" />
+	<!-- Vote Content Start -->
+	<section class="voting">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card profile_chart transparent">
+						<div class="card-header">
+							<div class="chart_current_data">
+								<h3>{:l("Insurance Fund Balance")}: </h3>
+								<p class="text-success">161,274,956.467 USDT</p>
+							</div>
+							<div class="duration-option">
+								<a id="all" href="#" class="active btn-1">{:l("All")}</a> <a id="one_month" href="#" class="btn-1">{:l("Last 30 Days")}</a>
+								<a id="six_month" href="#" class="btn-1">{:l("Last 6 Months")}</a> <a id="one_year" href="#" class="btn-1">{:l("Last 1 Year")}</a>
+							</div>
+						</div>
+						<div class="card-body">
+							<div id="timeline-chart"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="card-title">
+								{:l("Last Login Records")} </h4>
+						</div>
+						<div class="card-body">
+							<table class="table last-login-table table-striped table-hover">
+								<thead>
+								<tr>
+									<th scope="col">{:l("Time")}</th>
+									<th scope="col" class="text-right">{:l("Insurance Fund Balance")}</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>2021.07.11 15:15:11</td>
+									<td class="text-right">161,274,956.467 USDT</td>
+								</tr>
+								<tr>
+									<td>2021.07.11 15:15:11</td>
+									<td class="text-right">161,274,956.467 USDT</td>
+								</tr>
+								<tr>
+									<td>2021.07.11 15:15:11</td>
+									<td class="text-right">161,274,956.467 USDT</td>
+								</tr>
+								<tr>
+									<td>2021.07.11 15:15:11</td>
+									<td class="text-right">161,274,956.467 USDT</td>
+								</tr>
+								<tr>
+									<td>2021.07.11 15:15:11</td>
+									<td class="text-right">161,274,956.467 USDT</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Vote Content End -->
+
+	<include file="Public:footer_minimal"/>
+		<script src="__EPSILON__/js/apexchart-init.js"></script>

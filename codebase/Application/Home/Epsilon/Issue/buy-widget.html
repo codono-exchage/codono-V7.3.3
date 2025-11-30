@@ -1,0 +1,31 @@
+<div class="crowd_myx mt-20" id="issuebuybox">
+                  <div class="alert alert-warning" style="display:none" id="pleaselogin">{:l('PLEASE_LOGIN')}</div>
+             
+				  	<div class="form-group has-feedback has-feedback-left">
+										<div class="d-flex align-items-center justify-content-between f-s-14">
+											<div class="balance">
+											<i class="ion ion-ios-cash"></i> {:l('YOU_ARE_CURRENTLY_AVAILABLE')}: {$user_coin[$issue['convertcurrency']]*1} {$issue['convertcurrency']|strtoupper}
+											</div>
+											<span class="badge badge-danger p-5 p-r-10 p-l-10 f-s-14">{:l('PRICE')}:{$issue.price|format_num} {$issue['buycoin']|strtoupper}&cong; {$convert_price|format_num} {$issue['convertcurrency']|strtoupper}</span>
+										</div>
+									</div>
+                  <div class="form-group has-feedback has-feedback-left">
+                     <input type="text" class="form-control" placeholder="{:l('NUMBER_OF_ICO')}" title="{:l('NUMBER_OF_ICO')}" id="num" >
+                     <div class="form-control-feedback">
+                        <i class="icon-cart-add text-muted"></i>
+                     </div>
+                  </div>
+                  <div class="form-group has-feedback has-feedback-left">
+                     <input type="password" class="form-control" placeholder="{:l('TRANSACTION_PASSWORD')}" title="{:l('TRANSACTION_PASSWORD')}" id="paypassword">
+                     <div class="form-control-feedback">
+                        <i class="icon-key text-muted"></i>
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <eq name="issue['status']" value='1'>
+                        <button type="submit" class="btn btn-info btn-block form-control" onclick="codono_buy_up_tishi()">{:l('SUBSCRIBE_NOW')} <i class="icon-circle-right2 position-right"></i></button>
+                        <else/>
+                        <button type="button" class="btn-1 btn-block form-control" data-dismiss="modal" disabled='disabled'>{:l('ICO_IS_NOT_CURRENTLY_')}</button>
+                     </eq>
+                  </div>
+               </div>

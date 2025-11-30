@@ -1,0 +1,114 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">Warnings</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">RAO TimeLine</span>
+		</div>
+		<div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+			<div class="fl">
+				<a class="btn  btn-success" href="{:U('RAO/TimeLineedit',array('rao_id'=>$rao_id))}">Add</a>
+				<button class="btn ajax-post  btn-info" url="{:U('RAO/TimeLinestatus',array('method'=>'resume'))}" target-form="ids">Enable</button>
+				<button class="btn ajax-post  btn-warning" url="{:U('RAO/TimeLinestatus',array('method'=>'forbid'))}" target-form="ids">Disable</button>
+				<button class="btn ajax-post confirm btn-danger" url="{:U('RAO/TimeLinestatus',array('method'=>'delete'))}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i></button>
+			</div>
+			<div class="search-form fr cf">
+				<div class="sleft">
+					<form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+						<select  name="status" class="form-select">
+							<option value=""
+							<empty name="Think.get.status">selected</empty>
+							>All </option>
+							<option value="1"
+							<eq name="Think.get.status" value="1">selected</eq>
+							>Disabled</option>
+							<option value="2"
+							<eq name="Think.get.status" value="2">selected</eq>
+							>Enabled</option>
+						</select>
+						<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-select">
+							<option value="name"
+							<eq name="Think.get.field" value="name">selected</eq>
+							>RAO name</option>
+						</select>
+						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//Search function
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//Enter search
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="card card-body mt-2 table-responsive">
+			<table class="table table-sm emptyx">
+				<thead class="table-light">
+				<tr>
+					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+					<th class="">ID</th>
+					<th class="">RAO ID</th>
+					<th class="">Phase Time</th>
+					<th class="">Phase Name</th>
+					<th class="">Phase Description</th>
+					<th class="">Sort</th>
+					<th class="">Status</th>
+					<th class="">Option</th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+						
+							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td>{$vo.id}</td>
+							<td>{$vo.rao_id}</td>
+							<td>{$vo.phase_time}</td>
+							<td>{$vo.phase_name}</td>
+							<td>{$vo.phase_desc}</td>
+							<td>{$vo.sort}</td>
+							<td>
+								<eq name="vo.status" value="1">Enabled
+									<else/>
+								                               Disabled
+								</eq>
+							</td>
+
+
+							<td><a href="{:U('RAO/TimeLineedit?id='.$vo['id'])}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a></td>
+									
+						</tr>
+					</volist>
+					<else/>
+					<td colspan="12" class="text-center">No contents!</td>
+				</notempty>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('RAO/index')}");
+	</script>
+</block>

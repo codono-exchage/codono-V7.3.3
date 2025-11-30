@@ -1,0 +1,669 @@
+<link rel="stylesheet" href="__EPSILON__/multiverse/icon-park.css?v=3" />
+<style>
+body#light .logo-dark
+{
+  display: none;
+}
+body#light .logo-light
+{
+  display: block;
+}
+
+body#dark .logo-light{
+  display: none;
+}
+body#dark .logo-dark{
+  display: block;
+}
+.bg-featured{
+  background: #F94C45;
+  color:#fff;
+  padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    line-height: normal;
+    position: relative;
+    font-weight: 600;
+    display: inline-block;
+    margin-left: 3px !important;
+}
+.nav-space{
+  -webkit-text-size-adjust: 100%;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    tab-size: 4;
+    -webkit-tap-highlight-color: transparent;
+    --swiper-theme-color: #007aff;
+    --animate-duration: 1s;
+    --animate-delay: 1s;
+    --animate-repeat: 1;
+    --swiper-navigation-size: 44px;
+    --theme-multiverse-color: #0164C2;
+    --theme-multiverse-bg: #0164C2;
+    --theme-color: #0164C2;
+    --theme-element-bg: rgb(7 210 251/1);
+    --theme-element-color: #0164C2;
+    --ticker-text: #06304A;
+    --ticker-bg-1: #F2F9FF;
+    --ticker-bg-2: #D7EBFF;
+    --bg-element-bg: #D7EBFF;
+    --theme-text-color: #000;
+    --theme-header-bg: #fff;
+    --theme-nav-bg: #f8fafc;
+    line-height: inherit;
+    font-family: ProductSans-regular;
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255/var(--tw-text-opacity));
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x: ;
+    --tw-pan-y: ;
+    --tw-pinch-zoom: ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-gradient-from-position: ;
+    --tw-gradient-via-position: ;
+    --tw-gradient-to-position: ;
+    --tw-ordinal: ;
+    --tw-slashed-zero: ;
+    --tw-numeric-figure: ;
+    --tw-numeric-spacing: ;
+    --tw-numeric-fraction: ;
+    --tw-ring-inset: ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgba(59, 130, 246, .5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur: ;
+    --tw-brightness: ;
+    --tw-contrast: ;
+    --tw-grayscale: ;
+    --tw-hue-rotate: ;
+    --tw-invert: ;
+    --tw-saturate: ;
+    --tw-sepia: ;
+    --tw-drop-shadow: ;
+    --tw-backdrop-blur: ;
+    --tw-backdrop-brightness: ;
+    --tw-backdrop-contrast: ;
+    --tw-backdrop-grayscale: ;
+    --tw-backdrop-hue-rotate: ;
+    --tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;
+    --tw-backdrop-saturate: ;
+    --tw-backdrop-sepia: ;
+    margin-bottom: 1.25rem;
+    margin-top: 1.25rem;
+    height: .1px;
+    width: 100%;
+    background-color: hsla(0, 0%, 100%, .2);
+}  
+  .nav__item {
+    font-weight: 400;
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    display: none;
+    align-items: center;
+    font-family: ProductSans-regular;
+  }
+  .nav__item a {
+    text-decoration: none;
+    cursor: pointer;
+    color: rgb(109 109 112/1);
+    font-family: ProductSans-medium !important;
+    padding-top: .5rem;
+    padding-left:1.25rem;
+  }
+  .mobile-menu-drop {
+   padding:1rem 1.25rem;
+  }
+
+  .m-logo {
+    display: none;
+  }
+
+  .font-medium {
+    font-family: ProductSans-medium;
+  }
+
+  .nav-mobile {
+    display: none !important;
+    z-index: 10;
+    position: absolute;
+    top: 48px;
+    overflow-y: auto;
+    width: 85%;
+    height: calc(100% - 48px);
+    background-color: #000;
+    transition-timing-function: linear;
+    transition-duration: 500;
+    transition-duration: .15s;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    font-family: ProductSans-medium !important;
+  }
+
+  .nav__overview {
+    border-bottom: 1px solid #ccc;
+    background-color: #fafafa;
+    font-size: 14px;
+    color: #0288d1;
+    height: 54px;
+    padding: 20px 25px;
+    margin-bottom: 12px;
+  }
+
+  .nav__overview i {
+    display: flex;
+    justify-content: center;
+    width: 15px;
+    margin-right: 20px;
+  }
+
+  .nav__label {
+    font-weight: 300;
+    display: block;
+    line-height:24px;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    color: #fff;
+    padding: .5rem;
+    font-family: ProductSans-regular;
+  }
+
+
+  .nav__item.overview {
+    color: #fff;
+    height: 54px;
+    margin-bottom: 12px;
+  }
+
+  .nav__item:hover {
+
+    cursor: pointer;
+  }
+
+  .nav__item i {
+    display: flex;
+    justify-content: center;
+    width: 15px;
+    margin-right: 20px;
+  }
+
+  .main {
+    position: absolute;
+    left: 248px;
+    width: calc(100% - 248px);
+    height: calc(100% - 48px);
+  }
+
+  .main .title-bar {
+    background-color: #039be5;
+    height: 54px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .main .title-bar h2 {
+    font-size: 20px;
+    font-weight: 300;
+    margin-left: 24px;
+  }
+
+  .main .content-area {
+    position: relative;
+    height: calc(100% - 54px);
+    color: #999;
+    display: flex;
+    justify-content: center;
+  }
+
+  .main .content-area p {
+    align-self: center;
+  }
+
+  .nav__toggle {
+    display: none !important;
+    background: transparent !important;
+    border:0px !important;
+  }
+
+  @media only screen and (max-width: 991px) {
+    .nav__toggle {
+      display: block !important;
+    }
+
+    .m-logo {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0px 10px;
+    }
+
+    .m-logo .logo__icon {
+      display: inline-block;
+      height: 28px;
+      margin: 10px;
+    }
+
+    .m-logo .logo__text {
+      display: inline-block;
+      height: 18px;
+      opacity: 0.6;
+    }
+
+    .mobile-mask.show {
+      display: block;
+      z-index: 25;
+      background: #000;
+      opacity: 0.5;
+      top: 0;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .nav-mobile {
+      display: none;
+    }
+
+    .nav-mobile.show {
+      display: block !important;
+      z-index: 30;
+      position: fixed;
+      top: 0px;
+      overflow-y: auto;
+      width: 85%;
+      height: 100%;
+      background-color: #000;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+      right: 0;
+    }
+
+    .nav-mobile.show__overview {
+      border-bottom: 1px solid #e4e4e4;
+      background-color: #fafafa;
+      font-size: 14px;
+      color: #0288d1;
+      height: 52px;
+      padding: 20px 25px;
+      margin-bottom: 12px;
+    }
+
+    .nav-mobile.show__overview i {
+      display: flex;
+      justify-content: center;
+      width: 15px;
+      margin-right: 20px;
+    }
+
+    .nav-mobile.show__label {
+      font-weight: 300;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 12px;
+      color: #b5b5b5;
+      padding: 15px 24px;
+    }
+
+    .nav-mobile.show__item {
+      font-weight: 400;
+      display: block;
+      font-size: 14px;
+      color: #757575;
+      padding: 11px 25px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-mobile.show__item.overview {
+      color: #0288d1;
+      border-bottom: 1px solid #ccc;
+      background-color: #fafafa;
+      height: 54px;
+      margin-bottom: 12px;
+    }
+
+    .nav-mobile.show__item:hover {
+      background-color: red;
+      cursor: pointer;
+    }
+
+    .nav-mobile.show__item i {
+      display: flex;
+      justify-content: center;
+      width: 15px;
+      margin-right: 20px;
+    }
+
+    .main {
+      position: absolute;
+      left: 0px;
+      width: 100%;
+    }
+
+    .main .title-bar {
+      background-color: #039be5;
+      height: 54px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .main .title-bar h2 {
+      font-size: 20px;
+      font-weight: 300;
+      margin-left: 24px;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="/">
+    <img class="logo-dark" alt="{:SHORT_NAME}" src="__UPLOAD__/public/{$C['web_logo']}" />
+    <img class="logo-light" alt="{:SHORT_NAME}" src="__UPLOAD__/public/{$C['footer_logo']}"/>
+  </a>
+  <gt name="Think.session.userId" value="0">
+    <ul class="navbar-brand ml-auto align-items-center d-block d-lg-none">
+      <li class="nav-item dropdown userMenu header-custom-icon ml-3">
+        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle cret-after-nav-item theme-color"
+          data-toggle="dropdown" href="#" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" style="width:1.5rem ;height:1.5rem">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z">
+            </path>
+          </svg>
+          {$Think.session.userName|substr_replace='**',1,-1}
+        </a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header d-flex align-items-center justify-content-between theme-nav-bg ">
+            <p class="font-weight-medium theme-color">{$emailaddress}</p>
+          </div>
+          <div class="dropdown-body">
+            <a class="dropdown-item" href="{:U('User/index')}">
+              <span>{:l("Dashboard")}</span></a>
+              <a class="dropdown-item" href="{:U('Finance/index')}">
+                <span>{:l("Balance")}</span></a>
+              <a class="dropdown-item" href="{:U('Wallet/cryptodeposit')}"><span>{:l("Deposit")}</span></a>
+              <a class="dropdown-item" href="{:U('Wallet/cryptowithdrawal')}"><span>{:l("Withdrawal")}</span></a>
+              <a class="dropdown-item" href="{:U('Login/loginout')}"><span>{:l("Logout")}</span></a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </gt>
+  <button class="nav__toggle fa fa-bars fa-1x p-5 border theme-color f-s-24 rounded">
+    <!-- <i class="icon ion-md-menu"></i> -->
+  </button>
+  <div class="collapse navbar-collapse" id="headerNavMenu">
+    <ul class="navbar-nav mr-auto">
+      <volist name="navigation" id="vo">
+        <if condition="$vo.dropdown eq 1">
+          <li class="nav-item dropdown icon-flex-wrapper" id="{$vo['name']}_box">
+            <if condition="$vo['ico']">
+              <div class="nav-icon">
+                <i class="icon-size {$vo['ico']}"></i>
+              </div>
+              <else />
+              <if condition="$vo['title'] eq ' '">
+                <figure class="group leading-[3.5] flex items-center">
+                  <img src="/Public/template/epsilon/multiverse/imgs/menu-square.svg?v=2" />
+                </figure>
+
+                <else />
+                <div class="nav-noicon"></div>
+              </if>
+
+
+            </if>
+            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+              href="#" role="button">{:l($vo['title'])}
+              <if condition="$vo['featured']"><sup class="bg-featured">{:l($vo['featured'])}</sup></if>
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-body">
+                <volist name="vo.submenu" id="submenu">
+
+                  <a class="dropdown-item" href="/{$submenu.url}">
+                    <if condition="$submenu['ico']">
+                      <div class="nav-icon">
+                        <i class="icon-size {$submenu['ico']}"></i>
+                      </div>
+                      <else />
+                      <div class="nav-noicon"></div>
+
+
+                    </if>
+
+                    <div class="content ">{:l($submenu['title'])}
+
+                      <if condition="$submenu['subtext']"><span class="subtext">{:l($submenu['subtext'])}</span>
+                      </if>
+                    </div>
+                  </a>
+                </volist>
+              </div>
+            </div>
+          </li>
+          <else />
+          <li id="{$vo['name']}_box" class="nav-item">
+            <if condition="$vo['is_external']">
+              <a href="{$vo['url']}" class="nav-link icon-flex-wrapper ">
+                <else />
+                <a href="/{$vo['url']}" class="nav-link icon-flex-wrapper">
+            </if>
+            <if condition="$vo['ico']">
+              <div class="nav-icon">
+                <i class="icon-size {$vo['ico']}"></i>
+              </div>
+              <else />
+              <div class="nav-noicon"></div>
+            </if>
+            {:l($vo['title'])}
+            <if condition="$vo['featured']"><sup class="featured">{:l($vo['featured'])}</sup></if></a>
+          </li>
+        </if>
+      </volist>
+    </ul>
+    <ul class="navbar-nav ml-auto align-items-center navbar-brand">
+      <eq name="Think.session.userId" value="0">
+        <li class="nav-item header-custom-icon login-menu ml-3">
+          <a class="btn theme-bg" href="{:U('Login/login')}">{:l('Login/Register')}</a>
+        </li>
+      </eq>
+
+      <gt name="Think.session.userId" value="0">
+        <li class="nav-item dropdown userMenu header-custom-icon ml-3">
+          <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle cret-after-nav-item theme-color"
+            data-toggle="dropdown" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" style="width:1.5rem ;height:1.5rem">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z">
+              </path>
+            </svg>
+            {$Think.session.userName|substr_replace='****',3,-3}
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-header d-flex align-items-center justify-content-between theme-nav-bg">
+              <p class="font-weight-medium theme-color">{$emailaddress}</p>
+            </div>
+            <div class="dropdown-body">
+              <a class="dropdown-item" href="{:U('User/index')}">
+                <span>{:l("Dashboard")}</span></a>
+              <a class="dropdown-item" href="{:U('Finance/index')}">
+                <span>{:l("Balance")}</span></a>
+              <a class="dropdown-item" href="{:U('Wallet/cryptodeposit')}"><span>{:l("Deposit")}</span></a>
+              <a class="dropdown-item" href="{:U('Wallet/cryptowithdrawal')}"><span>{:l("Withdrawal")}</span></a>
+              <a class="dropdown-item" href="{:U('Login/loginout')}"><span>{:l("Logout")}</span>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <else />
+      </gt>
+      <li class="nav-item header-custom-icon ml-3">
+        <a class="nav-icon changeThemeLight bg-transparent" href="#!">
+          <i class="icon-size moon"></i>
+        </a>
+      </li>
+      <li class="nav-item dropdown header-custom-icon ml-3">
+        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle theme-color"
+          data-toggle="dropdown" href="#" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="none" viewBox="0 0 24 24"
+            id="navbar_download">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M16.44 8.9c3.6.31 5.07 2.16 5.07 6.21v.13c0 4.47-1.79 6.26-6.26 6.26H8.74c-4.47 0-6.26-1.79-6.26-6.26v-.13c0-4.02 1.45-5.87 4.99-6.2M12 2v12.88">
+            </path>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M15.35 12.65 12 16l-3.35-3.35"></path>
+          </svg></a>
+        <div class="dropdown-menu">
+          <div class="dropdown-body">
+            <img src="__UPLOAD__/public/{$C['contact_app_img']}" class="img-fluid" />
+          </div>
+          <div class="dropdown-footer d-flex align-items-center justify-content-center f-s-12 text-center">
+            {:l('Scan to Download iOS and Android App')}
+          </div>
+        </div>
+      </li>
+      
+      <include file="Public:lang_bar"/>
+    </ul>
+  </div>
+</nav>
+<div class="mobile-show ">
+</div>
+<div class="mobile-mask"></div>
+<div class="nav-mobile pt-2">
+  <div class="m-logo">
+    <img src="__UPLOAD__/public/{$C['web_logo']}" class="logo__icon" />
+
+  </div>
+  <eq name="Think.session.userId" value="0">
+    <div class="p-20">
+      <a role="button" href="{:U('Login/login')}" class="text-white strong text-link font-medium">{:l('Login/Register')}</a>
+    </div>
+  </eq>
+  <div class="mobile-menu-drop">
+  <volist name="navigation" id="vo">
+    <if condition="$vo.dropdown eq 1">
+      <label class="nav__label">
+      <if condition="$vo.title eq ' '">
+        
+          <if condition="$vo['mobile_ico']">
+            <div class="nav-icon">
+              <i class="icon-size {$vo['mobile_ico']}"></i>
+            </div>
+            <else />
+            <div class="nav-noicon"></div>
+          </if>More
+          <figure class="float-right theme-color">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" class="caret_scroll w-3 h-3">
+              <path fill="currentColor" d="M17.92 8.18H6.08c-.96 0-1.44 1.16-.76 1.84l5.18 5.18c.83.83 2.18.83 3.01 0l1.97-1.97 3.21-3.21c.67-.68.19-1.84-.77-1.84Z">
+              </path>
+            </svg>
+          </figure>
+        
+        <else />
+          <if condition="$vo['mobile_ico']">
+            <div class="nav-icon">
+              <i class="icon-size {$vo['mobile_ico']}"></i>
+            </div>
+            <else />
+            <div class="nav-noicon"></div>
+          </if>{:l($vo['title'])}
+          <figure class="float-right theme-color">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 24 24" class="caret_scroll w-3 h-3">
+              <path fill="currentColor" d="M17.92 8.18H6.08c-.96 0-1.44 1.16-.76 1.84l5.18 5.18c.83.83 2.18.83 3.01 0l1.97-1.97 3.21-3.21c.67-.68.19-1.84-.77-1.84Z">
+              </path>
+            </svg>
+          </figure>
+      </if>
+    </label>
+      <volist name="vo.submenu" id="submen">
+        <div class="nav__item">
+          <if condition="$submen['ico']">
+            <i class="icon-size {$submen['mobile_ico']}" aria-hidden="true"></i>
+            <else />
+            <i class="icon-size " aria-hidden="true"></i>
+          </if>
+          <if condition="$submen['is_external']">
+            <a href="{$submen.url}">
+              <else />
+              <a href="/{$submen.url}">
+          </if>
+          {:l($submen['title'])}</a>
+        </div>
+      </volist>
+      <else />
+      <label class="nav__label">
+        <if condition="$vo['mobile_ico']">
+          <div class="nav-icon">
+            <i class="icon-size {$vo['mobile_ico']}"></i>
+          </div>
+          <else />
+          <div class="nav-noicon"></div>
+        </if>
+        <if condition="$vo['is_external']">
+          <a href="{$vo['url']}">
+            <else />
+            <a href="/{$vo['url']}">
+        </if>{:l($vo['title'])}</a>
+      </label>
+    </if>
+  </volist>
+  <div class="nav-space"></div>
+  <label class="nav__label">
+    <div class="nav-icon">
+            <span class="icon-size app-switch"></span>
+          </div>
+          Theme
+       <span class="float-right theme-color">
+        <a class="nav-icon changeThemeLight bg-transparent" href="#!">
+          <i class="icon ion-md-moon"></i>
+        </a>
+      </span>
+      
+          </label>
+          
+  </div>
+  
+</div>
+<script>
+  $(document).ready(function () {
+    // Toggle submenu on click
+    $(".nav__label").click(function () {
+      // This toggles all `.nav__item` elements until the next `.nav__label`
+      $(this).nextUntil('.nav__label').filter('.nav__item').toggle();
+    });
+
+  });
+  //display flyout mobile-menu
+  $(".nav__toggle").on("click", function () {
+    $(".nav-mobile, .mobile-mask").toggleClass("show");
+  });
+
+  $(".mobile-mask").on("click", function () {
+    $(".nav-mobile, .mobile-mask").removeClass("show");
+  });
+</script>

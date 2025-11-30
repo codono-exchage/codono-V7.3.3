@@ -1,0 +1,23 @@
+<style>
+  .glide__slide{
+    text-align: center;
+  }
+  .glide__slide a img{
+    display: inline;
+  }
+</style>
+<div class="glide">
+                <div class="glide__track" data-glide-el="track">
+                  <div class="glide__slides">
+				  <volist name="indexLink" id="vo">
+                    <div class="glide__slide">
+					<a href="{$vo['url']?:'#'}">
+                      <img src="__UPLOAD__/link/{$vo['img']}"
+                        class="border rounded-md border-navColor/20 1300px:min-w-[310px] object-contain object-cver"
+                         alt="{$vo['title']}"/></a>
+                    </div>
+					</volist>
+
+                  </div>
+                </div>
+              </div>

@@ -1,0 +1,155 @@
+<include file="Publicnew:header"/>
+<!-- Wallet Content Start -->
+	<div class="container wallet-page">
+		<div class="row">
+			<div class="col-xl-12 m-t-30">
+				<div class="card">
+					<div class="card-body">
+						<div class="row justify-content-between align-items-center">
+							<div class="col-xl-6 col-lg-6 m-b-15">
+								<h5 class="text-muted">P2P {:l("Account")}</h5>
+								<p>
+									{:l("P2P payment methods: When you sell cryptocurrencies, please make sure that the account holders name is the same as your verified name on Binance, as the added payment method will be shown to the buyer among the payment acceptance options. You can add up to 20 payment methods.")}; </p>
+							</div>
+							<div class="col-xl-6 col-lg-6 text-right">
+								<a href="#!" data-toggle="modal" data-target="#addPaymentMethodModal" role="button" class="btn-2"><i class="fa fa-plus"></i> {:l("Add a payment method")}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-12">
+				<volist name="UserBank" id="vo">	
+				<div class="card bank-account-item">
+					<div class="card-header">
+						<h4 class="card-title">{:l("Bank Transfers")}</h4>
+						<ul class="list-inline">
+							<li class="list-inline-item"><a href="#!" data-toggle="modal" data-target="#viewPaymentMethodModal_{$vo.id}" role="button">{:l("View")}</a></li>
+							<li class="list-inline-item"><a href="#!" data-toggle="modal" data-target="#removePaymentMethodModal_{$vo.id}" role="button" class="red">{:l("Delete")}</a></li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							
+							<div class="col-sm-4"><span>{:l("Name")}</span> {$truename}</div>
+							<div class="col-sm-4"><span>{:l("Bank account/card number")}</span> {$vo.bankcard}
+							</div>
+							<div class="col-sm-4"><span>{:l("Bank Name")}</span> {$vo.bank}</div>
+						</div>
+					</div>
+				</div>
+				</volist>			
+				
+			</div>
+		</div>
+	</div>
+	<!-- Wallet Content End -->
+	<!-- add payment method modal start -->
+<div class="modal fade" id="addPaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="{:l('Add new payment method')}" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header  d-flex align-items-center">
+				<h5 class="modal-title">
+					<div class="coin-title d-flex align-items-center">
+						<div class="title">{:l("New payment method")}</span>
+						</div>
+					</div>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12">
+						<div class="card">
+							<div class="card-body">
+								<form action="#">
+									<div class="form-group">
+										<label>{:l("Name")}</label> <input type="text" class="form-control" id="bank_username" readonly value="{$truename}">
+									</div>
+									<div class="form-group">
+										<label>{:l('Bank account/card number')} </label> <input id="bank_bankcard" type="text" class="form-control" placeholder="{:l('Bank account/card number')}">
+									</div>
+									<div class="form-group">
+										<label>{:l('Bank Name')} </label> <input type="text" class="form-control" id="bank_bank" placeholder="{:l('Bank Name')}">
+									</div>
+									<div class="form-group">
+										<label>{:l('Branch where account was opened [Optional]')} </label> <input id="bank_bankaddr" type="text" class="form-control" placeholder="{:l('Branch where account was opened [Optional]')} ">
+									</div>
+								</form>
+								<div class="alert alert-info">
+									<h5>{:l("Tips")}</h5>
+									<p> {:l("Tip: When you sell your crypto, the added payment method will be shown to the buyer during the transaction to accept the fiat transfer. Please make sure the information is correct.")}.</p>
+								</div>
+							</div>
+						</div>
+					</div><!--/col-md-6-->
+				</div><!--/row-->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn-1" data-dismiss="modal">{:l("Cancel")}</button>
+				<button onclick="bank_up();"class="btn-2">{:l("Appove")}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--add payment method modal end -->
+<volist name="UserBank" id="vo">	
+<include file="P2p:inc_viewPaymentMethod"/>
+</volist>
+
+<script>
+	function bank_up() {
+		var bank        = $('#bank_bank').val();
+		var bankaddr    = $('#bank_bankaddr').val();
+		var bankcard    = $('#bank_bankcard').val();
+	
+		if (bankaddr == "" || bankaddr == null) {
+			layer.tips("{:l('ENTER_ACCOUNT_BRANCH')}", '#bank_bankaddr', {tips: 2});
+			return false;
+		}
+		if (bankcard == "" || bankcard == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_BANK_ACCOUNT_')}", '#bank_bankcard', {tips: 2});
+			return false;
+		}
+		
+		if(bankcard.length < 5 || bankcard.length > 30){
+			layer.tips("{:l('PLEASE_ENTER_THE_CORRECT_BANK_')}", '#bank_bankcard', {tips: 2});
+			return false;
+		}
+		
+		$.post("{:U('P2p/doAddBank')}", {
+			bank: bank,
+			bankaddr: bankaddr,
+			bankcard: bankcard,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function bank_del(_this) {
+		var id = $(_this).attr('data');
+			$.post("{:U('P2p/delbank')}", {id: id}, function (data) {
+						if (data.status == 1) {
+							layer.msg(data.info, {icon: 1});
+							location.reload();
+						} else {
+							layer.msg(data.info, {icon: 2});
+							if (data.url) {
+								window.location = data.url;
+							}
+						}
+					}, "json");
+	}
+</script>
+
+<!--remove payment method modal end -->
+<include file="Publicnew:footer_minimal" />

@@ -1,0 +1,68 @@
+<include file="Public:header" />
+
+<!-- Page container -->
+
+<div class="container wallet-page">
+	<div class="full-box row">
+		<include file="User:sidebar" />
+
+
+		<!-- Main content -->
+		<div class="col-10">
+		
+  <div class="row mt-3 mb-3">
+    <include file="User:top_bar" />
+    <div class="col-9 col-md-6 order-1 order-md-2 float-right">
+      <ul class="text-right breadcrumbs list-unstyle">
+        <li>
+          <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+        </li>
+        <li>
+          <a class="btn btn-warning btn-sm" href="{:U('Vote/index')}">{:l('Vote')}</a>
+        </li>
+        <li class="btn btn-warning btn-sm active">{:l('Logs')}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h1 class="card-title">{:l('MY VOTES')}</h1>
+    </div>
+    <div class="card-body">
+      <div class="f_body mt5">
+        <div class="f_body_main">
+          <div class="f_tab_body">
+            <div>
+              <table class="table wallet-table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>{:l('COIN')}</th>
+                    <th>{:l('TITLE')}</th>
+                    <th>{:l('ADD_TIME')}</th>
+                    <th>{:l('Voted')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <volist name="list" id="vo">
+                    <tr>
+                      <td>{$vo['coinname']}</td>
+                      <td>{$vo['title']}</td>
+                      <td>{$vo.addtime|addtime}</td>
+                      <td>
+                        <eq name="vo.type" value="1">{:l('Upvote')}</eq>
+                        <eq name="vo.type" value="2">{:l('Downvote')}</eq>
+                      </td>
+                    </tr>
+                  </volist>
+                </tbody>
+              </table>
+              <div class="pages">{$page}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div></div>
+<include file="Public:footer_minimal" />

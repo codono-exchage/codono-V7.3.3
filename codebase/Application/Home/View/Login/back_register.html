@@ -1,0 +1,259 @@
+<include file="Public:header" />
+
+<div class="autobox">
+
+		<!-- breadcrumb component -->
+<div class="breadcrumb-line breadcrumb-line-component content-group-lg">
+						<ul class="breadcrumb">
+							<li><a href="/"><i class="icon-home2 position-left"></i> {:l('HOME')}</a></li>
+							<li class="active">{:l('REGISTER_ACCOUNT')}</li>
+							
+						</ul>
+					</div>
+<!-- /breadcrumb component -->
+<div class="login_step">
+		<ul class="order clear">
+			<li><i class="fa fa-circle  fz_40 move"><span>1</span></i> {:l('USER_REGISTRATION')}<div class="order_line"></div>
+			</li>
+			<li><i class="fa fa-circle  fz_40"><span>2</span></i>{:l('SECURITY')}<div class="order_line"></div>
+			</li>
+			<li><i class="fa fa-circle  fz_40"><span>3</span></i>{:l('KYC')}<div class="order_line"></div>
+			</li>
+			<li><i class="fa fa-circle  fz_40"><span>4</span></i>{:l('SUCCESS')}</li>
+		</ul>
+	</div>
+	<div class="reg_box ">
+		<div class="mt50">
+			<div id="reg_index" class="reg_wrap">
+				<div class="reg_input_box reg-fb" id="email_reg">
+					<div class="reg_title">{:l('PHONE_NUMBER')}:</div>
+					<input type="text" id="cellphones" class="texts" style="display: none;"> 
+					<input type="text" id="cellphone" class="texts wh300 hg40" placeholder="{:l('PLEASE_ENTER_THE_PHONE_NUMBER')}" onblur="check_cellphone()" style="padding-left: 40px;    width: 295px;"/>
+					<link rel="stylesheet" href="__PUBLIC__/static/css/intltelinput.css">
+					<script src="__PUBLIC__/static/js/intlTelInput.js"></script>
+					<script>
+						$("#cellphones").intlTelInput({
+							autoHideDialCode: false,
+							defaultCountry: "us",
+							nationalMode: false,
+							preferredCountries: [ 'us', 'uk','in','cn','hk', 'tw', 'mo','it'],
+						});
+					</script>
+					<span id="reg_cellphone" class="" style="position: absolute;left: none;top: 2px;"></span>
+				</div>
+				<div class="reg_input_box reg-fb">Or Email</div>
+				<div class="reg_input_box reg-fb"><input type="text" id="email" class="texts wh300 hg40" placeholder="{:l('PLEASE_ENTER_EMAIL')}" onblur="check_email()" style="padding-left: 40px;    width: 295px;"/>
+				</div>	
+				<div class="reg_input_box reg-fb">
+					<div class="reg_title">{:l('SECURITY_CODE')}:</div>
+					<input id="cellphone_verify" type="text" class="texts w300 hg40" placeholder="{:l('PLEASE_ENTER_VERIFICATION_CODE')}"> 
+				</div>
+				<div class="reg_input_box reg-fb">
+					<div class="reg_title">{:l('PASSWORD')}:</div>
+					<input type="password" id="password" class="texts w300 hg40" placeholder="{:l('PLEASE_ENTER_A_LOGIN_PASSWORD')}" style="line-height: 34px;"/>
+				</div>
+				<div class="reg_input_box reg-fb">
+					<div class="reg_title">{:l('INVITE_CODE')}:</div>
+					<input id="invit" type="text" class="texts w300 hg40" placeholder="{:l('NO_TIME_TO_FILL')}" value=""/>
+				</div>
+				<div class="reg_radio_box">
+					<label> <input type="checkbox" id="regweb" checked="checked" style="vertical-align: -2px;"> {:l('REGISTRATION_IS_DEEMED_TO_AGRE')} <a href="javascript:void(0)" class="move" onclick="regWeb();">{:l('USER_REGISTRATION_AGREEMENT')}</a></label>
+				</div>
+				<div class="formbody">
+					<input type="button" class="btn btn-primary stepy-finish" onclick="reg_up();" value="{:l('SIGN_UP_NOW')}">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="all_mask_loginbox" id="step1" style="display: none;width:420px;">
+	<div class="login_title pl20">{:l('VERIFY_PHONE')}</div>
+	<form id="form-register" class="mask_wrap login-fb">
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('CAPTCHA')}</div>
+			<input type="text" id="verify" value="" class="texts" style="width: 98px; box-shadow: none;"/>
+			<span style="line-height: 20px;">
+				<img id="verify_up" class="codeImg reloadverify" src="{:U('Verify/code')}" title="{:l('REFRESH')}" onclick="this.src=this.src+'?t='+Math.random()" width="100" height="34" style="border-radius: 3px;border: 1px solid lightgray;">
+			</span>
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('GET_VERIFICATION_CODE')}</div>
+						<input type="button" value="{:l('SEND_SMS_VERIFICATION_CODE')}" class="btns" onclick="cellphone_reg('sms')" style="width: 100px;font-size: 12px;"/>
+								</div>
+	</form>
+	<div class="mask_wrap_close" onclick="showB()"><i class="fa fa-times fz_20 move" aria-hidden="true"></i></div>
+</div>
+<div id="step2" class="all_mask" style="height: 0px;display: none;"></div>
+<script>
+	$(function () {
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+		$("#cellphone").focus();
+	});
+	function regWeb() {
+		layer.open({
+			type: 2,
+			skin: 'layui-layer-rim', //frame
+			area: ['800px', '600px'], // width height
+			title: 'User Agreement', // title
+			content: "{:U('Login/webreg')}"
+		});
+	}
+	function showB() {
+		$("#step1").hide();
+		$("#step2").hide();
+		$("#verify").focus();
+	}
+	function check_email(){
+		$( "#cellphone" ).prop( "disabled", true );
+	}
+	function check_cellphone() {
+		$( "#email" ).prop( "disabled", true );
+		var cellphone  = $('#cellphone').val();
+		var cellphones = $('#cellphones').val();
+		if (cellphone == "" || cellphone == null) {
+			layer.tips("{:l('PLEASE_ENTER_PHONE_NUMBER')}", '#cellphone', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_cellphone", {
+			cellphone: cellphone,
+			cellphones: cellphones,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				$("#step1").show();
+				$("#step2").show();
+				$("#verify").focus();
+				$('#reg_cellphone').html('<a class="move" onclick="new_send()">{:l("CLICK_TO_SEND_A_VERIFICATION_C")}</a>');
+			} else {
+				layer.tips(data.info, '#cellphone', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	function verify_ups() {
+		$('#verify_up').attr('src', "/Ajax/verify?t=" + Math.random());
+	}
+	function new_send() {
+		$("#step1").show();
+		$("#step2").show();
+		$("#verify").focus();
+	}
+	function new_sends() {
+		var cellphone  = $('#cellphone').val();
+		var cellphones = $('#cellphones').val();
+		if (cellphone == "" || cellphone == null) {
+			layer.tips("{:l('PLEASE_ENTER_PHONE_NUMBER')}", '#cellphone', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_cellphone", {
+			cellphone: cellphone,
+			cellphones: cellphones,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				$("#step1").show();
+				$("#step2").show();
+				$("#verify").focus();
+			} else {
+				layer.tips(data.info, '#cellphone', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	function cellphone_reg(type) {
+		var cellphone  = $("#cellphone").val();
+		var cellphones = $("#cellphones").val();
+		var verify = $("#verify").val();
+		if (cellphone == "" || cellphone == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_PHONE_NUMBER')}", '#cellphone', {tips: 2});
+			return false;
+		}
+		if (verify == "" || verify == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_CAPTCHA_CODE')}", '#verify', {tips: 2});
+			return false;
+		}
+		$.post("/Login/real", {
+			cellphone: cellphone,
+			cellphones: cellphones,
+			type: type,
+			verify: verify,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$("#step1").hide();
+				$("#step2").hide();
+				$("#cellphone_verify").focus();
+				$('#cellphone').attr("disabled", "disabled");
+				$('#cellphones').attr("disabled", "disabled");
+				var obj      = $('#reg_cellphone');
+				var wait     = 60;
+				var interval = setInterval(function () {
+					obj.html("<a>" + wait + "{:l('SEC_CAN_BE_SENT_AGAIN')}" + "</a>");
+					wait--;
+					if (wait < 0) {
+						clearInterval(interval);
+						$(".reloadverify").click();
+						$("#verify").val('');
+						obj.html('<a class="move" onclick="new_send()">{:l("CLICK_RESEND")}</a>');
+					}
+					;
+				}, 1000);
+			} else {
+				$(".reloadverify").click();
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function reg_up() {
+		var cellphone        = $("#cellphone").val();
+		var cellphones       = $("#cellphones").val();
+		var cellphone_verify = $("#cellphone_verify").val();
+		var password     = $("#password").val();
+		var invit        = $("#invit").val();
+		if (cellphone == "" || cellphone == null) {
+			layer.tips("{:l('PLEASE_ENTER_PHONE_NUMBER')}", '#cellphone', {tips: 2});
+			return false;
+		}
+		if (cellphone_verify == "" || cellphone_verify == null) {
+			layer.tips("{:l('PLEASE_ENTER_VERIFICATION_CODE')}", '#cellphone_verify', {tips: 2});
+			return false;
+		}
+		if (password == "" || password == null) {
+			layer.tips("{:l('PLEASE_ENTER_YOUR_PASSWORD')}", '#password', {tips: 2});
+			return false;
+		}
+		if (!$("#regweb").is(':checked')) {
+			layer.tips("{:l('CHECK_USER_REGISTRATION_AGREEM')}", '#regweb', {tips: 3});
+			return false;
+		}
+		$.post("/Login/upregister", {
+			cellphone: cellphone,
+			cellphones: cellphones,
+			cellphone_verify: cellphone_verify,
+			password: password,
+			invit: invit,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$.cookies.set('exchange_cellphone', cellphone);
+				$.cookies.set('exchange_cellphones', cellphones);
+					window.location = '/Login/paypassword';
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+<include file="Public:footer_minimal" />

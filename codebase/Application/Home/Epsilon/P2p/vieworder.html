@@ -1,0 +1,524 @@
+<include file="Public:header" />
+<include file="P2p:inc_common_banner" />
+<!-- P2P Content Start -->
+<div class="">
+	<div class="p2p-table p2p-page">
+		<!-- P2P Content Start -->
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="p-t-5 p-b-5 p2p-buy-coin-form">
+						<div class="row">
+							<div class="col-md-8 col-sm-6">
+								<div class="card">
+									<div class="card-header d-flex justify-content-between">
+										<div class="title">{$order.coin|strtoupper} <if
+												condition="$order['ad_type'] eq 1"><span
+													class="text-success">{:l("Buy")}</span>
+												<else /><span class="text-danger">{:l("Sell")}</span>
+											</if>
+										</div>
+										<div class="order-info">
+											<ul>
+												<li>
+													<span>{:l("Time")}:</span> {$order.addtime|addtime}
+												</li>
+												<li>
+													<span>{:l("Ad id")}:</span> {$order.orderid}
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="card-body">
+										<ul class="heading-info">
+											<li>
+												<span class="label">{:l("Quantity")}:</span> <span
+													class="f-w-700 f-s-24 green amount-label">{$order.coin|strtoupper}
+													{$order.coin_qty|NumToStr}</span>
+											</li>
+											<li>
+												<span class="label">{:l("Price")}:</span> <span
+													class="">{$order.fixed_price|NumToStr}
+													{$order.fiat|strtoupper}</span>
+											</li>
+											<li>
+												<span class="label">{:l("Total")}:</span> <span
+													class="">{$order.fiat_qty|NumToStr} {$order.fiat|strtoupper}</span>
+											</li>
+										</ul>
+
+										<div class="p2p-buy-coin-summary">
+											<h5>
+												<if condition="$ad_info.mytype eq 'seller'">Please wait while another
+													party sends you funds
+													<else />Please confirm that you have successfully transferred the
+													money to the seller with the following payment method.
+												</if>.
+											</h5>
+											<div class="alert alert-warning">
+												<p class="m-b-0 f-s-12">
+													{:l('Sellers payment information is below. Please make sure money is
+													sent from an account that matches verified name of buyer. Money is
+													NOT automatically transferred by the platform.')};
+											</div>
+									
+											<div class="row">
+												<div class="col-3">
+													<div class="nav flex-column nav-pills" id="v-pills-tab"
+														role="tablist" aria-orientation="vertical">
+														<php> $ind=0;</php>
+														
+														<volist name="payinfo" id="payin">
+															
+															<a class="nav-link <if condition='$ind eq 0'>active</if>"
+																id="v-pills-{$payin.id}-tab" data-toggle="pill"
+																href="#v-pills-{$payin.id}" role="tab"
+																aria-controls="v-pills-{$payin.id}"
+																aria-selected="true">
+																
+																<if condition="$payin['method']">
+																	{$payin.method}
+																	<else/>
+																	{:l('Bank Transfer')}
+																</if>
+																
+															</a>
+															<php> $ind++;</php>
+														</volist>
+													</div>
+												</div>
+
+												<div class="col-9">
+													<div class="tab-content" id="v-pills">
+														<php> $ind=0;</php>
+														<volist name="payinfo" id="payin">
+
+															<div class=" tab-pane fade  <if condition='$ind eq 0'>show active</if>"
+																id="v-pills-{$payin.id}" role="tabpanel"
+																aria-labelledby="v-pills-{$payin.id}">
+																<if condition="$payin['method']">
+																	<table class="table table-bordered">
+																		<tbody>
+																		<tr><td><span style="font-weight: 400;font-size: 14px;" >Payment Method:</span></td><td> <span style="font-weight: 400;font-size: 14px;" >{$payin.method|formatString}</span></td></tr>
+																		<tr><td><span style="font-weight: 400;font-size: 14px;">Account:</span></td><td> <span style="font-weight: 400;font-size: 14px;"  >{$payin.information}</span></td></tr>
+																	</tbody>
+																	</table>
+																	
+																	
+																	<else/>
+																	<div class="bankInfo">
+																		<ul>
+																			<li>
+																				<span>{:l("Name")}</span> {$truename}
+																			</li>
+																			<li>
+																				<span>{:l('Bank account/cardnumber')}</span> {$payin.bankcard}
+																			</li>
+																			<li>
+																				<span>{:l('Bank Name')}</span> {$payin.bank}
+																			</li>
+																			<li>
+																				<span>{:l('Total')}</span>
+																				{$order.fiat|strtoupper}
+																				{$order.fiat_qty|NumToStr}
+																			</li>
+																		</ul>
+																	</div>
+																</if>
+
+
+															</div>
+															<php> $ind++;</php>
+														</volist>
+													</div>
+												</div>
+											</div>
+
+										</div>
+										<if condition="$order['status'] eq 0">
+											<div class="payment-timer">
+												<div class="timer">{:l("Payment to be made in")} <span
+														class="countdown green"></span>
+												</div>
+												{:l('Please pay within time, otherwise the order will be cancelled.')}
+											</div>
+											<if condition="$order['ad_type'] eq 1">
+												<div class="alert alert-warning">
+													<p class="m-b-0">
+														{:l('CAUTION! After making the fiat transfer, please click the
+														button below to notify the recipient of the payment. Failure to
+														do so will result in the order being automatically canceled and
+														potentially losing all your assets!')} </p>
+												</div>
+											</if>
+
+										</if>
+									</div>
+									<div class="card-footer">
+										
+										
+											<div id="orderstatus-0" class="order-status-container" style="display: none;">
+												<if condition="$times_up eq 0">
+													<if condition="$ad_info.mytype eq 'buyer'">
+														<div class="row text-center">
+															<span class="col-12">
+																<a href="#!" data-toggle="modal"
+																	data-target="#paymentConfirmModal" role="button"
+																	class="btn-2">{:l('Transfer, Next step')}</a>
+																<a href="#!" data-toggle="modal"
+																	data-target="#orderCancelModal" role="button"
+																	class="btn-1">{:l("Cancel Order")}</a>
+															</span>
+														</div>
+													</if>
+													<if condition="$ad_info.mytype eq 'seller'">
+														<div class="row text-center">
+															<span class="col-12">
+																<a href="#!" role="button" class="btn-2"
+																	disabled>{:l('Please wait')}</a>
+															</span>
+														</div>
+													</if>
+												<else />
+													<div class="row text-center">
+														<h2 class="text-center">{:l('Time ended')}</h2>
+													</div>
+												</if>
+											</div>
+											<div id="orderstatus-1" class="order-status-container" style="display: none;">
+												<if condition="$ad_info.mytype eq 'seller'">
+													<div class="row text-center ">
+														<span class="alert alert-warning col-12">User has paid, Please
+															confirm the payment receipt</span>
+
+														<span class="col-12">
+															<a href="#!" data-toggle="modal"
+																data-target="#receiptConfirmModal" role="button"
+																class="btn btn-success">{:l('Confirm Receipt and
+																Release')}</a>
+															<a href="#!" data-toggle="modal" data-target="#disputeModal"
+																role="button" class="btn btn-danger">{:l("Dispute")}</a>
+														</span>
+													</div>
+													<else />
+
+													<div class="row text-center">
+														<span class="col-12 alert alert-info">You have marked order as
+															paid, Let seller confirm the payment!</span>
+
+														<span class="col-12">
+														
+															<a href="#!" data-toggle="modal" data-target="#disputeModal"
+																role="button" class="btn btn-danger">{:l("Dispute")}</a>
+													</div>
+												</if>
+											</div>
+											<div id="orderstatus-2" class="order-status-container" style="display: none;">
+
+												<div class="row text-center">
+													<span class="col-12 alert alert-info">This order was canceled
+													</span>
+												</div>
+
+											</div>
+											<div id="orderstatus-3" class="order-status-container" style="display: none;">
+												<div class="row text-center">
+													<span class="col-12 alert alert-danger">Disputed:Our team is
+														verifying the order payment </span>
+												</div>
+
+											</div>
+											<div id="orderstatus-4" class="order-status-container" style="display: none;">
+												<div class="row text-center">
+													<span class="col-12 text-bold alert alert-success">{:l('Order was
+														successfully completed')}</span>
+												</div>
+											</div>
+
+										
+										<div class="row text-center">
+											
+											<span class="col-12"><hr/><button onclick="help();" class="btn-1">{:l("Need Help?")}?</button></span>
+										</div>
+									</div>
+								</div>
+								<if condition="$ad_info['mytype'] eq 'buyer' && $order['status'] eq 0">
+									<div class="alert alert-info">
+										<p>Tips</p>
+										<p class="text-muted">1. Please do not enter information regarding BTC, ETH,
+											USDT, BNB and other digital asset names in the transfer notes so that
+											payments are not stopped or bank funds are blocked.</p>
+										<p class="text-muted">2. Your payment will go directly to the seller's account.
+											</font>Digital assets sold by the seller during the transaction will be
+											handled by the platform.</p>
+										<p class="text-muted">3. Please complete the payment within the specified time
+											limit and make sure you click "I paid". </font>After the seller confirms the
+											payment, the digital assets will be transferred to your account by the
+											system.</p>
+										<p class="text-muted">4. If the buyer cancels orders 3 times a day, he cannot
+											trade for the rest of the day.</p>
+
+									</div>
+								</if>
+
+							</div>
+							<include file="P2p:inc_chatbox" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- P2P Content End -->
+	</div>
+	<include file="P2p:inc_vieworder_modals" />
+	<script>
+
+	 function updateOrderStatus() {
+			var myId = "{$user}";
+			var orderId="{$order.orderid}";
+			var viewer_type='{$viewer_type}';
+			var peerId=$('#peerId').val();
+        $.ajax({
+            url: "{:U('P2p/getOrderStatusAjax')}", // Adjust the URL to your endpoint
+            type: 'POST',
+            data: { id: orderId,viewer_type:viewer_type,peerId:peerId },
+            dataType: 'json',
+            success: function(response) {
+				console.log(response);
+                if (!response.error && response.status !== undefined) {
+                    // Hide all status containers
+                    $('.order-status-container').hide();
+                    // Show the container relevant to the current status
+                    $('#orderstatus-' + response.status).show();
+					$('#onlineText').html(response.peerStatus.onlineStatus);
+					if(response.peerStatus.onlineStatus=="Offline"){
+						$('#onlineBulb').removeClass('online');
+						$('#onlineBulb').addClass("offline");
+						$('#lastActive').html("["+response.peerStatus.last_online_time+"]")
+					}else{
+						$('#onlineBulb').removeClass('offline');
+						$('#onlineBulb').addClass("online");
+						$('#lastActive').html('')
+					}
+					
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching order status:', error);
+            }
+        });
+    }
+	updateOrderStatus();
+	setInterval(updateOrderStatus, 3000);
+		getChat();
+		var timer2 = '{$remain_time}';
+		var interval = setInterval(function () {
+			var timer = timer2.split(':');
+			//by parsing integer, I avoid all extra string processing
+			var hours = parseInt(timer[0], 10);
+			var minutes = parseInt(timer[1], 10);
+			var seconds = parseInt(timer[2], 10);
+
+			if (seconds != 0 || seconds !=0) {
+				--seconds;
+			}
+			if (hours < 10) { hours = "0" + hours; }
+			if (minutes < 10) { minutes = "0" + minutes; }
+			if (seconds < 10) { seconds = "0" + seconds; }
+
+			//minutes = (minutes < 10) ?  minutes : minutes;
+			$('.countdown').html(hours + ':' + minutes + ':' + seconds);
+
+			timer2 = hours + ':' + minutes + ':' + seconds;
+		}, 1000);
+
+
+		$('#confirm_payment').on('ifChanged', function (event) {
+			var checked = this.checked;
+			$('#paymentConfirmModal button').each(function () {
+				$(this).prop('disabled', !checked);
+			});
+		});
+		$('#confirm_receipt').on('ifChanged', function (event) {
+			var checked = this.checked;
+			$('#receiptConfirmModal button').each(function () {
+				$(this).prop('disabled', !checked);
+			});
+		});
+		$('#confirm_dispute').on('ifChanged', function (event) {
+			var checked = this.checked;
+			$('#disputeModal button').each(function () {
+				$(this).prop('disabled', !checked);
+			});
+		});
+
+		function markaspaid(id) {
+			layer.load(0, { shade: [0.5, '#8F8F8F'] });
+			$.post("{:U('P2p/markAsPaid')}", { id: id }, function (data) {
+				layer.closeAll('loading');
+				if (data.status == 1) {
+					layer.msg(data.info, { icon: 1 });
+					window.location.reload();
+				} else {
+					layer.alert(data.info, { title: "Info", btn: ['Ok'] });
+				}
+			}, "json");
+		}
+		function dispute(id) {
+			layer.load(0, { shade: [0.5, '#8F8F8F'] });
+			$.post("{:U('P2p/dispute')}", { id: id }, function (data) {
+				layer.closeAll('loading');
+				if (data.status == 1) {
+					layer.msg(data.info, { icon: 1 });
+					window.location.reload();
+				} else {
+					layer.alert(data.info, { title: "Info", btn: ['Ok'] });
+				}
+			}, "json");
+		}
+		function confirmCancel(id) {
+			layer.load(0, { shade: [0.5, '#8F8F8F'] });
+			$.post("{:U('P2p/confirmCancel')}", { id: id }, function (data) {
+				layer.closeAll('loading');
+				if (data.status == 1) {
+					layer.msg(data.info, { icon: 1 });
+					window.location.reload();
+				} else {
+					layer.alert(data.info, { title: "Info", btn: ['Ok'] });
+				}
+			}, "json");
+		}
+
+		// function timeoutCancelOrder(id) {
+		// 	$.post("{:U('P2p/timeoutCancelOrder')}", { id: id }, function (data) {
+		// 		if (data.status == 1) {
+		// 			layer.msg(data.info, { icon: 1 });
+		// 		} else {
+		// 			layer.alert(data.info, { title: "Info", btn: ['Ok'] });
+		// 		}
+		// 	}, "json");
+		// }
+
+
+		function confirmCancel(id) {
+			layer.load(0, { shade: [0.5, '#8F8F8F'] });
+			$.post("{:U('P2p/confirmCancel')}", { id: id }, function (data) {
+				layer.closeAll('loading');
+				if (data.status == 1) {
+					layer.msg(data.info, { icon: 1 });
+					window.location.reload();
+				} else {
+					layer.alert(data.info, { title: "Info", btn: ['Ok'] });
+				}
+			}, "json");
+		}
+
+
+		function releasePayment(id) {
+			layer.load(0, { shade: [0.5, '#8F8F8F'] });
+			$.post("{:U('P2p/releasePayment')}", { id: id }, function (data) {
+				layer.closeAll('loading');
+				if (data.status == 1) {
+					layer.msg(data.info, { icon: 1 });
+					window.location.reload();
+				} else {
+					layer.alert(data.info, { title: "Info", btn: ['Ok'] });
+				}
+			}, "json");
+		}
+
+
+		var chattext = document.getElementById("btn-input");
+
+		chattext.addEventListener("keyup", function (event) {
+			// Number 13 is the "Enter" key on the keyboard
+			if (event.keyCode === 13) {
+				// Cancel the default action, if needed
+				event.preventDefault();
+				// Trigger the button element with a click
+				document.getElementById("btn-chat").click();
+			}
+		});
+		function sendchat() {
+			var orderid = "{$order.id}";
+			var content = $("input#btn-input").val();
+			if (content == '' || content == null) {
+				layer.tips("{:l('Enter your message')}", '#btn-input', { tips: 3 });
+			}
+			$.post("{:U('P2p/sendchat')}", { orderid: orderid, content: content }, function (data) {
+
+				if (data.status == 1) {
+					$("input#btn-input").val('');
+					getChat();
+				} else {
+					//layer.alert(data.info, {title: "Info",btn: ['Ok']});
+				}
+			}, "json");
+
+		}
+
+
+		function getChat() {
+			var id = "{$order.id}";
+			list = [];
+			$.getJSON("/P2p/getchat?id=" + id + "&t=" + Math.random(), function (data) {
+				if (data) {
+					if (data['data']) {
+						for (var i in data['data']) {
+							if (data['data'][i]['userid'] == 0) {
+
+								list += '<li class="agent clearfix"><span class="chat-img left clearfix mx-2"><img src="__EPSILON__/img/avatar.svg" alt="avatar" class="img-circle"></span><div class="chat-body clearfix"><div class="header clearfix"><strong class="text-danger">{:SHORT_NAME}</strong>&nbsp; <small class="right text-muted"><span class="glyphicon glyphicon-time"></span>' + data['data'][i]['timestamp'] + '</small></div><p>' + data['data'][i]['content'] + '</p></div></li>';
+							}
+
+							else if (data['data'][i]['userid'] == '{$ad_info["myid"]}') {
+
+								list += '<li class="admin clearfix"><span class="chat-img right clearfix  mx-2"><img src="__EPSILON__/img/avatar.svg" alt="avatar" class="img-circle"></span><div class="chat-body clearfix"><div class="header clearfix"><strong class="text-warning">{:l("You")}</strong>&nbsp;<small class="right text-muted"><span class="glyphicon glyphicon-time"></span>' + data['data'][i]['timestamp'] + '</small><strong</div><p>' + data['data'][i]['content'] + '</p></div></li>';
+							}
+							else {
+								list += '<li class="agent clearfix"><span class="chat-img left clearfix mx-2"><img src="__EPSILON__/img/avatar.svg" alt="avatar" class="img-circle"></span><div class="chat-body clearfix"><div class="header clearfix"><strong class="text-info">{$ad_info.peername}</strong>&nbsp; <small class="right text-muted"><span class="glyphicon glyphicon-time"></span>' + data['data'][i]['timestamp'] + '</small></div><p>' + data['data'][i]['content'] + '</p></div></li>';
+							}
+						}
+						$("#chathistory").html(list);
+						var objDiv = document.getElementById("chathistory");
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+				}
+			});
+			setTimeout('getChat()', 3000);
+		}
+		function refreshChat() {
+			var id = "{$order.id}";
+			list = [];
+			$.getJSON("/P2p/getchat?id=" + id + "&t=" + Math.random(), function (data) {
+				if (data) {
+					if (data['data']) {
+						for (var i in data['data']) {
+							console.log(data['data'][i]['userid'] + {$ad_info['myid']});
+							if (data['data'][i]['userid'] == '{$ad_info["myid"]}') {
+								list += '<li class="admin clearfix"><span class="chat-img right clearfix  mx-2"><img src="__EPSILON__/img/avatar.svg" alt="avatar" class="img-circle"></span><div class="chat-body clearfix"><div class="header clearfix"><strong class="text-suceess">{:l("You")}</strong>&nbsp;<small class="right text-muted"><span class="glyphicon glyphicon-time"></span>' + data['data'][i]['timestamp'] + '</small><strong</div><p>' + data['data'][i]['content'] + '</p></div></li>';
+							}
+							else {
+								list += '<li class="agent clearfix"><span class="chat-img left clearfix mx-2"><img src="__EPSILON__/img/avatar.svg" alt="avatar" class="img-circle"></span><div class="chat-body clearfix"><div class="header clearfix"><strong class="primary-font">{$ad_info.peername}</strong>&nbsp; <small class="right text-muted"><span class="glyphicon glyphicon-time"></span>' + data['data'][i]['timestamp'] + '</small></div><p>' + data['data'][i]['content'] + '</p></div></li>';
+							}
+						}
+						$("#chathistory").html(list);
+						var objDiv = document.getElementById("chathistory");
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+				}
+			});
+		}
+		$('#paymentConfirmModal').on('shown.bs.modal', function () {
+			$("#bankinfo").html($('div.active .bankInfo').html());
+		});
+
+		
+	</script>
+	<style>
+		#chathistory {
+			overflow-y: scroll;
+			max-height: 400px;
+		}
+	</style>
+	<include file="P2p:tawkto_widget" />
+	<include file="Public:footer_minimal" />

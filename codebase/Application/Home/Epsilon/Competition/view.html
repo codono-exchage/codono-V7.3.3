@@ -1,0 +1,197 @@
+<include file="Public:header" />
+<main class="wrapper voting-page voting-detail">
+
+	<!-- Vote Content Start -->
+		<!-- Vote Content Start -->
+	<section class="voting">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-12 text-center">
+					<div class="row justify-content-center">
+						<div class="col-sm-8 col-md-6 col-lg-5 col-xl-4 active-voting">
+							<div class="title">{$list['title']|strtoupper}</div>
+							<div class="row">
+								<div class="col-5">
+									<div class="avatar">
+										<img src="{$list['img_1']}" alt="" class="img-fluid">							
+									</div>
+									<if condition="$list.fire eq 1">
+									<img src="__EPSILON__/img/redesign/fire.gif" alt="" class="fire">
+									</if>
+									<div class="bottom">
+										<span class="current-vote">{$list['coin_1']|strtoupper} </span>
+										<span class="current-vote count">{$list['votes_1']}</span>
+										<if condition="$list.end_date gt time()">
+										<button class="btn btn-2 btn-block" onclick="Update(1,'{$list['coin_1']}','{$list['fees']}','{$list['votecoin']}','{$list['id']}');"> Vote Now</button></if>
+										<button class="btn btn-2 btn-block"> {:l('Share')}</button>
+									</div>
+									
+								</div>
+								<div class="col-2">
+									<div>
+										<img src="__EPSILON__/img/redesign/vs.png" alt="" class="img-fluid">
+									</div>									
+								</div>
+								<div class="col-5">
+									<div class="avatar">
+										<img src="{$list['img_2']}" alt="" class="img-fluid">
+									</div>
+									<if condition="$list.fire eq 2">
+									<img src="__EPSILON__/img/redesign/fire.gif" alt="" class="fire">
+									</if>
+									<div class="bottom">
+										<span class="current-vote">{$list['coin_2']|strtoupper} </span>
+										<span class="current-vote count">{$list['votes_2']}</span>
+							<if condition="$list.end_date gt time()"><button class="btn btn-2 btn-block"  onclick="Update(2,'{$list['coin_1']}','{$list['fees']}','{$list['votecoin']}','{$list['id']}');"> Vote Now</button>
+							</if>
+										<button class="btn btn-2 btn-block"> {:l('Share')}</button>
+									</div>
+								</div>
+							</div>
+							<if condition="$list.end_date gt time()">
+							<div class="times m-t-30">
+								<strong class="times-title">{:l('End Time')}</strong>
+								<div class="time-wrapper">
+									<div>
+										<span id="counterDay"></span>
+										<p>{:l('Day')}</p>
+									</div>
+									<div>:</div>
+									<div>
+										<span id="counterHour"></span>
+										<p>{:l('Hour')}</p>
+									</div>
+									<div>:</div>
+									<div>
+										<span id="counterMinute"></span>
+										<p>{:l('Minute')}</p>
+									</div>
+									<div>:</div>
+									<div>
+										<span id="counterSecond"></span>
+										<p>{:l('Second')}</p>
+									</div>
+								</div>
+							</div>
+							</if>
+						</div>
+					</div>
+				</div>
+
+					<div class="col-xl-4">
+						<div class="card">
+							<div class="card-header">
+								<span>{:l('Participation conditions')}</span>
+							</div>
+							<div class="card-body">
+								<div class=" m-b-10"><span><i class="fa fa-check-circle m-r-5 green"></i></span>{:l('VIP level 0 or above')}</div>
+								<php>if (!userid()){</php>
+								<div class=" m-b-10"><a href="{:U('Login/login')}"><span><i class="fa fa-times-circle red m-r-5"></i></span>{:l('YOU_NEED_TO_LOGIN')}</a></div>
+								<php>}else{</php>
+									<div class=" m-b-10"><span><i class="fa fa-check-circle green m-r-5"></i></span>{:l('Logged In!')}</a></div>
+								<php>}</php>
+								<neq name="kyced" value="0">
+								<div class="red"><a href="{:U('User/nameauth')}"><span><i class="fa fa-times-circle m-r-5"></i></span>{:l('Complete KYC')}</a></div>
+								<else/>
+								<div class="green"><span><i class="fa fa-check-circle m-r-5"></i></span>{:l('KYC Complete')}</div>
+							</neq>
+							</div>
+						</div>
+					</div>
+
+				<div class="col-xl-10">
+					<div class="card rules">
+						<div class="card-header">
+							<h5 class="m-b-0">{:l('Rules')}</h5>
+						</div>
+						<div class="card-body">
+							<h6>{:l('What is Lorem Ipsum?')}</h6>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+							<p>	Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+
+							<h6>{:l('What is Lorem Ipsum?')}</h6>
+							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+							<p>	Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+							
+						
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<!-- Vote Content End -->
+
+</main>
+<script>
+ function Update(type, coinname, fees, votecoin, id) {
+    layer.confirm(
+      "Voting will cost " + votecoin + " " + fees + ", do you confirm it?",
+      {
+        btn: ["Confirm", "Cancel"], //PUSH_BUTTON
+        shade: false, //it does not show shadow
+        title: "Voting Price ",
+      },
+      function (index) {
+        $.post(
+          "/Competition/up",
+          {
+            type: type,
+            id: id,
+          },
+          function (data) {
+            if (data.status == 1) {
+              layer.msg(data.info, { icon: 1 });
+              window.setTimeout("window.location='/Competition/log'", 1000);
+            } else {
+              layer.msg(data.info, { icon: 2 });
+              if (data.url) {
+                window.setTimeout("window.location=" + data.url, 1000);
+              }
+            }
+          },
+          "json"
+        );
+
+        layer.close(index);
+      },
+      function (index) {
+        layer.close(index);
+      }
+    );
+  }
+  </script>
+  <script>
+  function secondsToDhms(seconds) {
+    seconds = Number(seconds);
+    var d = Math.floor(seconds / (3600 * 24));
+    var h = Math.floor((seconds % (3600 * 24)) / 3600);
+    var m = Math.floor((seconds % 3600) / 60);
+    var s = Math.floor(seconds % 60);
+
+    document.getElementById("counterDay").innerHTML = d;
+    document.getElementById("counterHour").innerHTML = h;
+    document.getElementById("counterMinute").innerHTML = m;
+    document.getElementById("counterSecond").innerHTML = s;
+  }
+<notempty name="list">
+<if condition='$list.end_date gt time()'>
+  let end_time = {$list['end_date']};
+  let ok_time=Math.floor(Date.now() / 1000);
+  if(ok_time>end_time){
+    $("#countdown-box").hide();
+  }  
+  let time=end_time-ok_time;
+  
+
+  setInterval(() => {
+    time = time - 1;
+    secondsToDhms(time);
+  }, 1000);
+  </if>
+  </notempty>
+  </script>
+<include file="Public:footer_minimal" />

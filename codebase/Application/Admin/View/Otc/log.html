@@ -1,0 +1,148 @@
+<include file="Public:header" />
+<div id="main-content">
+ <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+  <button class="close fixed" style="margin-top: 4px;">&times;</button>
+  <div class="alert-content">{:l('Warnings')}</div>
+ </div>
+ <div id="main" class="main">
+  <div class="main-title-h">
+   <span class="d-sm-flex align-items-center justify-content-between h4">{:l('OTC record')}</span>
+  </div>
+
+     <script>
+						//Search function
+						$(function(){
+							$('#search').click(function(){
+								$('#formSearch').submit();
+							});
+						});
+						//Enter search
+						$(".search-input").keyup(function(e){
+							if(e.keyCode===13){
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+    
+  <div class="card card-body mt-2 table-responsive">
+    <div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+  				<div class="fl">
+				<a class="btn btn-sm btn-info " href="{:U('Otc/download_log')}" target="_blank"><i class="bx bx-spreadsheet"></i> {:l('Excel this Page')}</a>
+				<a class="btn btn-sm btn-warning " href="{:U('Otc/index')}" >{:l('Otc Plans')}</a>
+
+			</div>
+
+   <div class="search-form fr cf">
+    <div class="sleft">
+     <form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+      						<select  name="fill" class="form-select">
+							<option value=""
+							<empty name="Think.get.fill">{:l('selected')}</empty>
+							>-{:l('Select Fill Status')}-</option>
+							<option value="1" <eq name="Think.get.fill" value="1">{:l('selected')}</eq>>{:l('Filled')}</option>
+							<option value="0" <eq name="Think.get.fill" value="0">{:l('selected')}</eq>>{:l('Unfilled')}</option>
+						</select>
+						<select  name="type" class="form-select">
+							<option value=""
+							<empty name="Think.get.type">{:l('selected')}</empty>
+							>{:l('Transaction Type')}</option>
+							<option value="buy" <eq name="Think.get.type" value="buy">{:l('selected')}</eq>>{:l('Buy')}</option>
+							<option value="sell" <eq name="Think.get.type" value="sell">{:l('selected')}</eq>>{:l('Sell')}</option>
+						</select>
+	  <select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-select">
+       <option value="username"
+       <eq name="Think.get.field" value="username">{:l('selected')}</eq>
+       >{:l('Username')}</option>
+	   <option value="id"
+       <eq name="Think.get.field" value="id">{:l('selected')}</eq>
+       >{:l('OTC Trade ID')}</option>
+      </select>
+      <input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" style="">
+      <a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+     </form>
+	 </div>
+   </div>
+  </div>
+   <table class="table table-sm emptyx">
+    <thead class="table-light">
+     <tr>
+      <th class="row-selected row-selected"><input class="check-all" type="checkbox" /></th>
+      <th class="">{:l('ID')}</th>
+      <th class="">{:l('Username[UID]')}</th>
+	  <th class="">{:l('Type')}</th>
+      <th class="" >{:l('Qty')}</th>
+	  <th class="">{:l('Traded')}</th>
+      <th class="">{:l('Base')}</th>
+      <th class="">{:l('@Price')}</th>
+      <th class="">{:l('Commission')}</th>
+      
+      <th class="">{:l('Total')}</th>
+      <th class="">{:l('Time')}</th>
+	  <th class="">{:l('Fill Status')}</th>
+	  <th class="">{:l('Option')}</th>
+     </tr>
+    </thead>
+    <tbody>
+     <notempty name="list"> <volist name="list" id="vo">
+     <tr>
+      <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+      <td>{$vo.id}</td>
+      <td>{$vo['username']}[{$vo['userid']}]</td>
+	  <td>{$vo['type']}</td>
+      <td>{$vo['qty']*1}</td>
+	  <td>{$vo.trade_coin}</td>
+      <td>{$vo.base_coin}</td>
+      <td>{$vo['final_price']*1}</td>
+      <td>{$vo['profit']*1}</td>
+      
+	  <td>{$vo['final_total']*1}</td>
+      <td>{$vo['addtime']|addtime}</td>
+	  <td>
+	  								<eq name="vo.fill" value="0">{:l('To be filled')}</eq>
+								<eq name="vo.fill" value="1">{:l('Filled')}</eq>
+	  </td>
+	  								<td>
+								<eq name="vo.fill" value="0">
+									<a href="{:U('Trade/fill?id='.$vo['id'])}" class="ajax-get btn btn-primary btn-sm">{:l('Mark as filled')}</a>
+								</eq>
+								<eq name="vo.fill" value="1">
+									<span onclick="showtable({$vo.fill_id})" class="ajax-get btn btn-info btn-sm">{:l('View')}</a>
+								</eq>
+							</td>
+     </tr>
+     </volist> <else />
+     <td colspan="12" class="text-center">{:l('No contents!')}</td>
+     </notempty>
+    </tbody>
+   </table>
+   <div class="page">
+    <div>{$page}</div>
+   </div>
+  </div>
+ </div>
+</div>
+<include file="Public:footer" />
+<script>
+function showtable(fill_id){
+		$.get("/Admin/Trade/getFillId?fill_id="+fill_id,function(data){
+//   				layer.alert(data.data, {title: "Change info",btn: ['Ok']});
+  layer.open({
+                            type: 1,
+                            skin: 'default', //styleclassname
+                            closeBtn: 1, //Close button does not show
+                            shift: 2,
+							area: ['743px', '584px'],
+                            shadeClose: true, //Open mask Close
+                            content: data.data
+                        });
+				console.log('ok');
+				console.log(data.data);
+   			},'json');
+}</script>
+<block name="script">
+ <script type="text/javascript" charset="utf-8">
+  //Highlight navigation
+  highlight_subnav("{:U('Issue/log')}");
+ </script>
+</block>

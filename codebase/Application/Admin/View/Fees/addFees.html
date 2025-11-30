@@ -1,0 +1,101 @@
+<include file="Public:header" />
+
+<block name="body">
+<div id="main-content">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <if condition='$config.id gt 0'>
+                    <h4 class="mb-sm-0 font-size-18">{:l('Edit Fee for Coin')}</h4>
+                    <else/>
+                <h4 class="mb-sm-0 font-size-18">{:l('Add Fee for Coin')}</h4>
+                </if>
+            </div>
+        </div>
+    </div>
+<div id="main" class="main">
+    <div class="card card-body mt-2 mb-2 table-responsive">
+	 <form action="#" method="post" id="form">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+					<th>Name</th>
+                    <th>Coin</th>
+                    <th>Fee Coin</th>
+                    <th>Out Fee %</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                    <tr>
+						<td>	<select name="wallet">
+						  <foreach name="wallet_list" item="wall" key="key">
+							<option value="{$key}" <if condition="$key eq $config['name']">selected</if>>{$key|strtoupper}</option>
+							</foreach>
+					</select>
+</td>
+                        <td>	<select name="coin">
+						  <foreach name="coin_list" item="co" key="key">
+							<option value="{$co}" <if condition="$co eq $config['coin']">selected</if>>{$co|strtoupper}</option>
+							</foreach>
+					</select>
+</td>
+                
+						<td>
+						<select name="fee_coin">
+						  <foreach name="coin_list" item="co" key="key">
+							<option value="{$co}" <if condition="$co eq $config['fee_coin']">selected</if>>{$co|strtoupper}</option>
+							</foreach>
+					</select>
+
+						</td>
+                        <td>
+                            <input type="text" name="out_fee" value="{$config.out_fee}" />
+                        </td>
+                    </tr>
+					
+            </tbody>
+        </table>
+		
+            <button class="btn submit-btn  btn-info" id="submit" type="button" onclick="updateConfig()">{:l('Update')}</button>
+            <button class="btn btn-return btn-warning" onclick="javascript:history.back(-1);return false;">{:l('Back')}</button>
+    </form>
+    </div>
+	</div>
+	</div>
+</block>
+		<script type="text/javascript">
+					//submit Form
+				function updateConfig() {
+    let msg = 'Add Coin Fees for wallet?';
+    var form = document.getElementById('form');
+    var formData = new FormData(form);
+	console.log(formData);
+    layer.confirm(msg, {
+        btn: ['Confirm', 'Cancel'] // buttons
+    }, function() {
+        $.ajax({
+            url: "{:U('Fees/editFeesCoin')}", // Your submission endpoint
+            type: "POST",
+            data: formData,
+            processData: false, // Important: tell jQuery not to process the data
+            contentType: false, // Important: tell jQuery not to set contentType
+            success: function(data) {
+                layer.closeAll('loading');
+                if (data.status == 1) {
+                    layer.msg(data.info, {icon: 1});
+                //    window.location.reload();
+                } else {
+                    layer.msg(data.info, {icon: 2});
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle errors
+                layer.msg('An error occurred: ' + error, {icon: 2});
+            }
+        });
+    });
+}
+
+				</script>
+<include file="Public:footer" />

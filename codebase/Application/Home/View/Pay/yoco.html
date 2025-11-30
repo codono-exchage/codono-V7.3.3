@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="renderer" content="webkit">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>{:C('web_title')}</title>
+	<meta name="Keywords" content="{:C('web_keywords')}">
+	<meta name="Description" content="{:C('web_description')}">
+	
+	<link rel="shortcut icon" href=" /favicon.ico"/>
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/basic.css"/>
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/style.css"/>
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/pay.css"/>
+		<link href="__PUBLIC__/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/font-awesome.min.css"/>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.flot.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.cookies.2.2.0.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+
+</head>
+<body>
+
+	<div class="wrapper" style="width: 100%; margin-top: 0px; margin: inherit;">
+	<div id="dialog_ali" class="mana-app styled-pane">
+	<div class="mana-app-title" style="line-height: 34px;">Yoco</div>
+<neq name="mycz.status" value="0">
+		
+<div class="row">	
+<div class="col-xs-9">			
+			<table class="table table-condensed table-bordered" >
+				<tbody>
+				<tr>
+					<td>Payment Method:</td>
+					<td>{$myczType.kaihu}</td>
+				</tr>
+				<tr>
+					<td>{:l('PAYMENT_AMOUNT')}</td>
+					<td>
+						<b id="right_usd">{$mycz['coin'] |strtoupper} {$mycz.num}</b>
+					</td>
+				</tr>
+				<gt name="myczType.extra"  value="0">
+				<tr>
+					<td>Fees applicable</td>
+					<td>
+						<b id="right_usd">{$myczType.extra}%</b>
+					</td>
+				</tr>
+				</gt>
+				<tr>
+					<td>{:l('ORDER_NUMBER')}</td>
+					<td><em class="usdin_msg"
+							style="color:red;font-style:normal;font-weight: bold;">{$mycz.tradeno}</em></td>
+				</tr>
+				<tr>
+					<td>TransactionID</td>
+					<td>
+						<b id="right_usd">{$mycz.remark}</b>
+					</td>
+				</tr>
+
+									<tr>
+					<td>{:l('STATUS')}</td><td> <eq name="mycz.status" value="0">
+			<h3 class="label label-danger">{:l('UNPAID')}</h3>
+		</eq>
+									<eq name="mycz.status" value="1">
+										<h3 class="label label-success">{:l('SUCCESSFUL_RECHARGE')}</h3>
+									</eq>
+									<eq name="mycz.status" value="2">
+									<h3 class="label label-success">{:l('Payment confirmed')}</h3>
+									</eq>
+									<eq name="mycz.status" value="3">
+									<h3 class="label label-danger">{:l('PROCESSING')}</h3>
+									</eq>
+									<eq name="mycz.status" value="4">
+									<h3 class="label label-warning">Processed and Being Verfied!</h3>
+									</eq>
+									</td>
+						</tr>			
+					<tr>
+					<td></td>
+					<td>
+					
+					<eq name="mycz.status" value="0">
+			<button onclick="myczRemittance({$mycz['id']})" href="javascript:void(0)" class="btn btn-warning">{:l('MARK_AS_PAID')}</button> 
+		</eq>
+		
+		<button class="btn btn-info" onclick="window.print();return false;" >Print</button>
+					</td>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+<div class="col-xs-3">			
+		<notempty name="myczType['img']">
+			<div class="pay_code">
+				<img src="__UPLOAD__/bank/{$myczType['img']}" class="img-responsive">
+			</div>
+		</notempty>
+</div>
+</div>	
+		<div class="col-xs-12">
+			<div class="alert alert-warning">
+
+				<p>Our system will shortly verify your payment status! </p>
+				<p>It takes some time to confirm fiat deposits</p>
+				<p>For any questions contact our support with your transactionid and orderid</p>
+			</div>
+
+		</div>
+	<else/>
+
+	<script src="https://js.yoco.com/sdk/v1/yoco-sdk-web.js"></script>
+	<div class="row">
+	<div class="col-xs-8 col-xs-offset-2 text-center">
+	<img src="{:SITE_URL}__UPLOAD__/bank/{$myczType['img']}" alt="Yoco"  width="150"/>
+		<div id="msg">		<p>  You will be now be redirected to Yoco Gateway to pay {$mycz['coin'] |strtoupper} {$mycz.num} <gt name="myczType.extra" value="0"> [Fees:{$myczType['extra']}%]</eq></p></div>
+				<p>Do not refresh or hit back key</p>
+	<button id="checkout-button" class="btn btn-info btn-block">Pay Now</button>
+	
+	</div>
+	</div>
+<script>
+  var yoco = new window.YocoSDK({
+    publicKey: "{:YOCO_GATEWAY['pub_key']}",
+  });
+  var checkoutButton = document.querySelector('#checkout-button');
+  checkoutButton.addEventListener('click', function () {
+    yoco.showPopup({
+      amountInCents: "<?php echo $mycz['num'] * 100;?>",
+      currency: "{$mycz['coin']|strtoupper}",
+      name: '{:SHORT_NAME}'+' Recharge',
+      description: "{$mycz['coin']|strtoupper}"+"{$mycz.num}"+" Recharge",
+      callback: function (result) {
+        // This function returns a token that your server can use to capture a payment
+        if (result.error) {
+          const errorMessage = result.error.message;
+          alert("error occured: " + errorMessage);
+        } else {
+		$("#checkout-button").remove();
+		$("#msg").html('Please wait a moment.. You are being redirected');
+          console.log("card successfully tokenised: " + result.id);
+		  window.location.replace("{:SITE_URL}Pay/yoco/?id={$mycz.tradeno}&token="+result.id+"&amount={$mycz.num}" );
+        }
+        // In a real integration - you would now pass this chargeToken back to your
+        // server along with the order/basket that the customer has purchased.
+      }
+    })
+  });
+</script>
+	</neq>
+	</div>
+</div>
+<script>
+	function myczRemittance(id) {
+		$.post("{:U('Finance/myczRemittance')}", {id: id}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+	
+</script>
+<style>
+#dialog_ali{
+z-index:0;
+}
+</style>
+</body></html>

@@ -1,0 +1,283 @@
+<include file="Public:header" />
+
+<!-- Page content -->
+<div class="page-container">
+
+	<include file="User:left" />
+	<div class="col-sm-9">
+		<!-- Main content -->
+		<div class="">
+
+			<div class="panel panel-flat">
+				<div class="panel-heading">
+					<h1>
+						<span>
+							{:l('BOUND_PHONE')} </span>
+						<span>
+							<a class="right" onclick="$('#hints').slideToggle();"><i
+									class="fa fa-hand-o-right fz_14 mr5 move"></i><span
+									class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+						</span>
+						<div id="hints" class="mytips" style="display:none;">
+
+							<p>
+
+								<notempty name="prompt_text">
+									{$prompt_text}
+								</notempty>
+
+							</p>
+						</div>
+
+					</h1>
+				</div>
+
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="step3 table table-condensed">
+							<tr>
+								<td>Status:</td>
+								<td>
+									<div class="move">
+										<i class="fa fa-check mr5"></i>{:l('YOUR_ACCOUNT_HAS_BEEN_ENABLED_')}
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>{:l('CURRENT_PHONE_NUMBER')}:</td>
+								<td id="dd-mobilebindc" title="{:l('CONTACT_THE_ADMINISTRATOR_TO_M')}">
+									<if condition="$user['cellphones']">{$user.cellphones}-
+										<else />--
+									</if>
+									<if condition="$user['cellphone']">{$user.cellphone}
+										<else />--
+									</if>
+								</td>
+							</tr>
+							<tr>
+								<td>{:l('TIME')}</td>
+								<td id="dd-mobilebindd"> {$user.cellphonetime|date="Y-m-d H:i:s",###}</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><input type="button" class="btn btn-sm btn-info"
+										value="{:l('REPLACEMENT_BINDINGS')}" onclick="new_cellphone()"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="step4" style="display:none;">
+						<form class="pwtrade mart30 table-responsive">
+
+							<table class="table">
+								<tr>
+									<td>{:l('NEW_MOBILE_PHONE_NUMBER')}</td>
+									<td>
+										<input type="text" id="cellphones_new" class="texts" style="display: none;">
+										<input type="text" id="cellphone_new" class="texts" style="padding-left: 40px;">
+									</td>
+									<link rel="stylesheet" href="__PUBLIC__/static/css/intltelinput.css">
+
+
+								</tr>
+								<tr class="step5">
+									<td>{:l('CURRENT_PHONE_NUMBER')}</td>
+									<td class="yuyin">
+										<div class="clear">
+											<if condition="$user['cellphones']">{$user.cellphones}
+												<else />--
+											</if>
+											<if condition="$user['cellphone']">{$user.cellphone}
+												<else />--
+											</if>
+										</div>
+									</td>
+								</tr>
+								<tr class="step5">
+									<td>{:l('GET_VERIFICATION_CODE')}</td>
+									<td class="yuyin">
+										<div class="clear">
+											<input type="button" value="{:l('SEND_SMS_VERIFICATION_CODE')}" class="btns"
+												onclick="send_cellphone_new('sms')"
+												style="width: 100px;font-size: 12px;" />
+										</div>
+									</td>
+								</tr>
+								<tr class="step6" style="display:none;">
+									<td>{:l('SMS_VERIFICATION_CODE')}</td>
+									<td>
+										<input type="text" id="cellphone_verify_new" value="" class="texts"
+											placeholder="{:l('PLEASE_ENTER_THE_VERIFICATION_')}" /> <span
+											id="reg_cellphone_new"></span>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>
+										<input type="button" value="{:l('REPLACEMENT_BINDINGS')}" id="genghuan" disabled
+											class="btns2" onclick="cellphone_news()" />
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<script>
+	var hints = "0";
+	if (hints == 1) {
+		$('#hints').show();
+	}
+</script>
+
+<script src="__PUBLIC__/static/js/intlTelInput.js"></script>
+<script>
+	$("#cellphones").intlTelInput({
+		autoHideDialCode: false,
+		defaultCountry: "us",
+		nationalMode: false,
+		preferredCountries: ['us', 'uk', 'hk', 'in', 'ru', 'vi', 'de'],
+	});
+</script>
+<script>
+	function new_send() {
+		$(".step2").hide();
+		$(".step1").show();
+	}
+
+	function cellphone_set() {
+		var cellphone = $("#cellphone").val();
+		var cellphones = $("#cellphones").val();
+		var cellphone_verify = $("#cellphone_verify").val();
+		if (cellphone == "" || cellphone == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_PHONE_NUMBER')}", '#cellphone', { tips: 3 });
+			return false;
+		}
+		if (cellphone_verify == "" || cellphone_verify == null) {
+			layer.msg("{:l('PLEASE_ENTER_THE_VERIFICATION_')}", { icon: 2 });
+			//layer.tips("{:l('PLEASE_ENTER_THE_VERIFICATION_')}", '#cellphone_verify', {tips: 3});
+			return false;
+		}
+		$.post("/User/cellphone_set", {
+			cellphone: cellphone,
+			cellphones: cellphones,
+			cellphone_verify: cellphone_verify
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, { icon: 1 });
+				location.reload();
+			} else {
+				layer.msg(data.info, { icon: 2 });
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+<script src="__PUBLIC__/static/js/intlTelInput.js"></script>
+<script>
+	$("#cellphones_new").intlTelInput({
+		autoHideDialCode: false,
+		defaultCountry: "us",
+		nationalMode: false,
+		preferredCountries: ['us', 'uk', 'hk', 'in', 'mo'],
+	});
+</script>
+<script>
+	function new_cellphone() {
+		$(".step3").hide();
+		$(".step4").show();
+	}
+
+	function send_new() {
+		$(".step6").hide();
+		$(".step5").show();
+	}
+
+	function send_cellphone_new(type) {
+		var cellphone = <empty name="user['cellphone']">$("#cellphone_new").val();<else />"{$user.cellphone}";</empty>
+		var cellphone_new = $("#cellphone_new").val();
+		var cellphones_new = $("#cellphones_new").val();
+
+		if (cellphone_new == "" || cellphone_new == null) {
+			layer.tips("{:l('PLEASE_ENTER_A_NEW_PHONE_NUMBE')}", '#cellphone_new', { tips: 3 });
+			return false;
+		}
+
+		if (cellphone == "" || cellphone == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_PHONE_NUMBER')}", '#cellphone', { tips: 3 });
+			return false;
+		}
+		$.post("/Verify/send_code_to_mobile", {
+			cellphone: cellphone,
+			cellphone_new: cellphone_new,
+			cellphones_new: cellphones_new,
+			type: type,
+		}, function (data) {
+			if (data.status == 1) {
+
+				$("#genghuan").removeAttr("disabled");
+
+				layer.msg(data.info, { icon: 1 });
+				$(".step5").hide();
+				$(".step6").show();
+				$('#cellphone_new').attr("disabled", "disabled");
+				var obj = $('#reg_cellphone_new');
+				var wait = 60;
+				var interval = setInterval(function () {
+					obj.html(wait + "{:l('SEC_CAN_BE_SENT_AGAIN')}");
+					wait--;
+					if (wait < 0) {
+						clearInterval(interval);
+						$(".reloadverify_new").click();
+						$("#verify_new").val('');
+						obj.html('<a class="move" onclick="send_new()">{:l("DID_NOT_RECEIVE_RESEND")}</a>');
+					}
+					;
+				}, 1000);
+			} else {
+				layer.msg(data.info, { icon: 2 });
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function cellphone_news() {
+		var cellphone_new = $("#cellphone_new").val();
+		var cellphones_new = $("#cellphones_new").val();
+		var cellphone_verify_new = $("#cellphone_verify_new").val();
+		if (cellphone_new == "" || cellphone_new == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_PHONE_NUMBER')}", '#cellphone_new', { tips: 3 });
+			return false;
+		}
+		if (cellphone_verify_new == "" || cellphone_verify_new == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_VERIFICATION_')}", '#cellphone_verify_new', { tips: 3 });
+			return false;
+		}
+		$.post("/Verify/verifyCode", {
+			cellphone_new: cellphone_new,
+			cellphones_new: cellphones_new,
+			cellphone_verify_new: cellphone_verify_new
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, { icon: 1 });
+				location.reload();
+			} else {
+				layer.msg(data.info, { icon: 2 });
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+<script>
+	$('.user_cellphone').addClass('active');
+</script>
+<include file="Public:footer_minimal" />

@@ -1,0 +1,66 @@
+<section class="section bg-theme tc-light ov-h has-ovm">
+<div class="container">
+
+  <div class="row">
+							<div class="table-responsive">
+								<table class="table text-nowrap  table-striped table-condensed  datatable-show-all">
+									<thead>
+										<tr>
+											<th>{:l('DIGITAL_ASSETS')}</th>
+											<th >{:l('AVAILABLE')}</th>
+											<th >{:l('FREEZE')}</th>
+											<th >{:l('TOTAL')}</th>
+											<th ><span title="{$conversion_coin} {:l('CONVERT')}">{$conversion_coin}</span></th>
+											<th>{:l('DEPOSIT')}</th>
+											<th>{:l('WITHDRAW')}</th>
+										</tr>
+									</thead>
+									<tbody>
+<volist name="coinList" id="vo">
+
+										<tr>
+											<td>
+												<div class="media-left media-left">
+													<img src="__UPLOAD__/coin/{$vo['img']}" alt=""  class="img-circle img-xs" alt="" onerror="this.onerror=null; this.src='__UPLOAD__/coin/default.png'">
+												</div>
+												<div class="media-left">
+													<div class=""><span  class="text-default text-semibold">{$vo['title']} <eq name="vo['type']" value="rmb">[Fiat]</eq></span></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-blue position-left"></span>
+														{$conversion_coin} {$vo['jia']|NumToStr}
+													</div>
+												</div>
+											</td>
+											<td><span class="text-green">{$vo['xnb']|NumToStr}</span></td>
+											<td><span class="text-warning-600">{$vo['xnbd']|NumToStr}</td>
+											<td><span >{$vo['xnbz']|NumToStr}</h6></td>
+											<td><span >{$vo['zhehe']|NumToStr}</span></td>
+											<td>
+											<switch name="vo.type">
+																<case value="rmb"><a href="{:U('Finance/mycz')}" class="btn btn-success btn-sm"><i class="icon-credit-card"></i> {:l('DEPOSIT')}</a></case>
+																<default /><a href="{:U('Finance/myzr','coin='.$vo['name'])}" class="btn btn-success btn-sm"><i class="icon-wallet"></i> {:l('DEPOSIT')}</a>
+															</switch>
+											</td>
+											<td>
+											
+											<switch name="vo.type">
+																<case value="rmb"><a href="{:U('Finance/mytx')}" class="btn btn-info btn-sm"><i class="icon-cash"></i> {:l('WITHDRAW')}</a></case>
+																<default /><a href="{:U('Finance/myzc','coin='.$vo['name'])}"class="btn btn-info btn-sm"><i class="icon-paperplane"></i> {:l('WITHDRAW')}</a>
+															</switch>
+											</td>
+											
+										</tr>
+										</volist>     	
+										
+									</tbody>
+								</table>
+							</div>
+</div>
+</div>
+</div>
+<style>
+.media-left {
+float:left;
+padding-right:3% !important;
+}
+</style>

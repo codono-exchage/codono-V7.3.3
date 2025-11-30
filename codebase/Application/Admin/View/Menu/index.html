@@ -1,0 +1,89 @@
+<include file="Public:header" />
+
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+        <div class="main-title-h">
+            <span class="d-sm-flex align-items-center justify-content-between h4">{:l('Admin')}</present>{:l('Menu Manager')}</span>
+        </div>
+
+       
+        <div class="card card-body mt-2 table-responsive">
+            <div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+                <a class="btn btn-success navbar-btn btn-sm" href="{:U('add',array('pid'=>I('get.pid',0)))}"><i class="far fa-edit"></i></a>
+                <button class="btn ajax-post confirm btn-danger navbar-btn btn-sm" url="{:U('del')}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i></button>
+                <a class="btn btn-info navbar-btn btn-sm" href="{:U('import',array('pid'=>I('get.pid',0)))}">{:l('Import')}</a>
+                <button class="btn list_sort btn-warning  navbar-btn btn-sm" url="{:U('sort',array('pid'=>I('get.pid',0)),'')}">{:l('Sort')}</button>
+                <!-- Advanced Search -->
+                <div class="search-form fr cf">
+                    <div class="sleft">
+                        <input type="text" name="title" class="form-control" value="{:I('title')}" placeholder="Please enter menu name">
+                        <a class="sch-btn" href="javascript:;" id="search" url="__SELF__"><i class="btn-search"></i></a>
+                    </div>
+                </div>
+            </div>
+            <form class="ids">
+                <table class="table">
+                    <thead class="table-light">
+                    <tr>
+                        <th class="row-selected">
+                            <input class="checkbox check-all" type="checkbox">
+                        </th>
+                        <th>{:l('ID')}</th>
+                        <th>{:l('name')}</th>
+                        <th>{:l('Previous menu')}</th>
+                        <th>{:l('Group')}</th>
+                        <th>{:l('URL')}</th>
+                        <th>{:l('Sequence')}</th>
+                        <th>{:l('Developer only')}</th>
+                        <th>{:l('Hide')}</th>
+                        <th>{:l('Option')}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <notempty name="list">
+                        <volist name="list" id="menu">
+                            <tr>
+                                <td><input class="ids row-selected" type="checkbox" name="id[]" value="{$menu.id}"></td>
+                                <td>{$menu.id}</td>
+                                <td>
+                                    <a href="{:U('index?pid='.$menu['id'])}">{$menu.title}</a>
+                                </td>
+                                <td>{$menu.up_title|default='No'}</td>
+                                <td>{$menu.group}</td>
+                                <td>{$menu.url}</td>
+                                <td>{$menu.sort}</td>
+                                <td>
+                                    <a href="{:U('toogleDev',array('id'=>$menu['id'],'value'=>abs($menu['is_dev']-1)))}" class="ajax-get">
+                                        {$menu.is_dev_text}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{:U('toogleHide',array('id'=>$menu['id'],'value'=>abs($menu['hide']-1)))}" class="ajax-get">
+                                        {$menu.hide_text}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a title="edit" href="{:U('edit?id='.$menu['id'])}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                                    <a class="confirm ajax-get btn-danger btn-sm" title="delete" href="{:U('del?id='.$menu['id'])}"><i class="far fa-trash-alt" title="Delete"></i></a>
+                                </td>
+                            </tr>
+                        </volist>
+                        <else/>
+                        <td colspan="10" class="text-center"> {:l('No contents!')}</td>
+                    </notempty>
+                    </tbody>
+                </table>
+            </form>
+            <!-- Paging -->
+            <div class="page">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="Public:footer" />

@@ -1,0 +1,34 @@
+<!-- Sidebar -->
+<div class="sidebar col-sm-2">
+	<!-- Sub navigation -->
+	<block name="sidebar">
+		<div id="subnav" class="subnav">
+			<notempty name="_extra_menu">
+				 {:extra_menu($_extra_menu,$__MENU__)}
+			</notempty>
+			
+			<volist name="__MENU__.child" id="sub_menu">
+			
+				<!-- Sub navigation -->
+				<notempty name="sub_menu">
+					<notempty name="key"><h3><i class="icon icon-unfold"></i>{$key}</h3></notempty>
+					<ul class="side-sub-menu">
+						<volist name="sub_menu" id="menu">
+							<li>
+								<a class="item" href="{$menu.url|U}">
+									<empty name="menu.ico_name">
+										<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+										<else/>
+										<span class="glyphicon glyphicon-{$menu.ico_name}" aria-hidden="true"></span>
+									</empty>
+									{$menu.title} </a>
+							</li>
+						</volist>
+					</ul>
+				</notempty>
+				<!-- /Sub navigation -->
+			</volist>
+		</div>
+	</block>
+	<!-- /Sub navigation -->
+</div>

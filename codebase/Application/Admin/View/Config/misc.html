@@ -1,0 +1,175 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		
+		       <!-- start page title -->
+			   <div class="row">
+				<div class="col-12">
+					<div class="page-title-box d-sm-flex align-items-center justify-content-between">
+						<h4 class="mb-sm-0 font-size-18">{:l('Misc Config')}</h4>
+
+						<div class="page-title-right">
+							<ol class="breadcrumb m-0">
+								<li class="breadcrumb-item"><a href="javascript: void(0);">{:l('Basic Config')}</a></li>
+								<li class="breadcrumb-item active">{:l('Misc Config')}</li>
+							</ol>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+		<div class="card">
+
+			<div class="card-body">
+				<form id="form" action="{:U('Config/miscEdit')}" method="post" class="form-horizontal col-lg-6 col-md-8 col-sm-12">
+					<div class="tab-pane in tab" id="tab">
+				
+						<!-- Default Coin -->
+						<div class="form-group">
+							<label for="xnb_mr">{:l('Default Coin')}:</label>
+							<select class="form-select" name="xnb_mr" id="xnb_mr">
+								<volist name="C['xnb_list']" id="vo">
+									<option value="{$vo['name']}" <eq name="vo['name']" value="$C['xnb_mr']">{:l('selected')}</eq>> {$vo['title']}</option>
+								</volist>
+							</select>
+						</div>
+				
+						<!-- Default Spot Market -->
+						<div class="form-group">
+							<label for="market_mr">{:l('Default Spot Market')}:</label>
+							<select class="form-select" name="market_mr" id="market_mr">
+								<volist name="C['market']" id="vo">
+									<option value="{$vo['name']}"<eq name="vo['name']" value="$C['market_mr']">{:l('selected')}</eq>>{$vo['title']}</option>
+								</volist>
+							</select>
+						</div>
+				
+						<!-- Spot OPEN_TRADING_CHAT -->
+						<div class="form-group">
+							<label for="trade_moshi">Spot {:L('OPEN_TRADING_CHAT')} :</label>
+							<select name="trade_moshi" class="form-select" id="trade_moshi">
+								<option value="1"<eq name="C['trade_moshi']" value="1">{:l('selected')}</eq>>{:l('Enable')}</option>
+								<option value="0"<eq name="C['trade_moshi']" value="0">{:l('selected')}</eq>>{:l('Disable')}</option>
+							</select>
+						</div>
+				
+						<!-- Signup Reward -->
+						<div class="form-group">
+							<label for="reg_award">{:l('Signup Reward')}:</label>
+							<select name="reg_award" class="form-select" id="reg_award">
+								<option value="0"<eq name="C['reg_award']" value="0">{:l('selected')}</eq>>{:l('No')}</option>
+								<option value="1"<eq name="C['reg_award']" value="1">{:l('selected')}</eq>>{:l('Yes')}
+								</option>
+							</select>
+						</div>
+				
+						<!-- Reward Currency -->
+						<div class="form-group">
+							<label for="reg_award_coin">{:l('Reward Currency')}:</label>
+							<select name="reg_award_coin" class="form-select" id="reg_award_coin">
+								<volist name="C['coin']" id="v">
+									<option value="{$v['name']}" <eq name="C['reg_award_coin']" value="$v['name']">{:l('selected')}</eq>>{$v['title']}</option>
+								</volist>
+							</select>
+						</div>
+				
+						<!-- Bonus -->
+						<div class="form-group">
+							<label for="reg_award_num">{:l('Bonus')}:</label>
+							<input type="text" class="form-control" name="reg_award_num" value="{$C['reg_award_num']}" id="reg_award_num">
+						</div>
+				
+						<!-- Signup Referrer Reward -->
+						<div class="form-group">
+							<label for="ref_award">{:l('Signup Referrer Reward')}:</label>
+							<select name="ref_award" class="form-select" id="ref_award">
+								<option value="0"<eq name="C['ref_award']" value="0">{:l('selected')}</eq>>{:l('Disable')}</option>
+								<option value="1"<eq name="C['ref_award']" value="1">{:l('selected')}</eq>>{:l('Enable')}</option>
+							</select>
+							<small class="form-text text-muted">{:l('Enable Referrer rewards')}</small>
+						</div>
+				
+						<!-- Referrer Reward -->
+						<div class="form-group">
+							<label for="ref_award_coin">{:l('Referrer Reward')}:</label>
+							<select name="ref_award_coin" class="form-select" id="ref_award_coin">
+								<volist name="C['coin']" id="v">
+									<option value="{$v['name']}" <eq name="C['ref_award_coin']" value="$v['name']">{:l('selected')}</eq>>{$v['title']}</option>
+								</volist>
+							</select>
+							<small class="form-text text-muted">{:l('Referrer gets bonus of selected coin')}</small>
+						</div>
+				
+						<!-- Referrer Reward Amount -->
+						<div class="form-group">
+							<label for="ref_award_num">{:l('Referrer Reward amount')}:</label>
+							<input type="text" class="form-control" name="ref_award_num" value="{$C['ref_award_num']}" id="ref_award_num">
+							<small class="form-text text-muted">{:l('Referrer gets num of selected coin')}</small>
+						</div>
+				
+						<!-- Login Captcha -->
+						<div class="form-group">
+							<label for="login_verify">{:l('Login Captcha')}:</label>
+							<select name="login_verify" class="form-select" id="login_verify">
+								<option value="1"<eq name="C['login_verify']" value="1">{:l('selected')}</eq>>{:l('Enable')}</option>
+								<option value="0"<eq name="C['login_verify']" value="0">{:l('selected')}</eq>>{:l('Disable')}</option>
+							</select>
+						</div>
+				
+						<!-- ICO Warning -->
+						<div class="form-group">
+							<label for="issue_warning">{:l('ICO Warning')}:</label>
+							<textarea name="issue_warning" id="issue_warning" class="form-control" style="height: 80px;">{$C['issue_warning']}</textarea>
+						</div>
+				
+						<!-- Submission Buttons -->
+						<div class="form-group">
+							<button class="btn submit-btn ajax-post btn-info" type="submit" id="submit" target-form="form-horizontal">{:l('Submit')}</button>
+							<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+						</div>
+					</div>
+				</form>
+				
+				<script type="text/javascript" src="__THEME__/kindeditor/kindeditor-min.js"></script>
+				<script type="text/javascript">
+					KindEditor.ready(function(K){
+						K.create('textarea[name="issue_warning"]', {
+							width:'465px',
+							height:'60px',
+							items: ['source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'link', 'fullscreen'],
+							afterBlur: function () { this.sync(); }
+						});
+					});
+				</script>
+				
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function(){
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+	var editor;
+	KindEditor.ready(function(K){
+		editor=K.create('textarea',{width:'100%',height:'200px',items:['source','fontname','fontsize','|','forecolor','hilitecolor','bold','italic','underline','removeformat','|','justifyleft','justifycenter','justifyright','insertorderedlist','insertunorderedlist','|','emoticons','link','fullscreen'],afterBlur: function () { this.sync(); }});
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		//Highlight the main navigation
+		$('.config-box').addClass('current');
+		//Highlight side navigation
+		$('.config-contact').addClass('current');
+	});
+</script>
+<include file="Public:footer" />

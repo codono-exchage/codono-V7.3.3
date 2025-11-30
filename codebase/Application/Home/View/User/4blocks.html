@@ -1,0 +1,65 @@
+<div class="row">
+					<div class="col-sm-4 col-md-4">
+						<div class="panel panel-body bg-info">
+							<div class="media no-margin">
+								<div class="media-left media-middle">
+									<eq name="user.accounttype" value="1"><i class="icon-man icon-3x text-success-400"></i></eq>
+                                    <eq name="user.accounttype" value="2"><i class="icon-office icon-3x text-success-400"></i></eq>
+								</div>
+
+								<div class="media-body text-right">
+									<h6 class="no-margin text-semibold"><if condition="$user['truename']">{$user['truename']}<else/>--</if></h6>
+									<span class="text-uppercase text-size-mini text-muted">
+									<eq name="user.accounttype" value="1">{:l("Individual")}</eq>
+                                    <eq name="user.accounttype" value="2">{:l("Institutional")}</eq>
+                                        
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4 col-md-4">
+						<div class="panel panel-body panel-body-accent">
+							<div class="media no-margin">
+								<div class="media-left media-middle">
+									<i class="icon-mailbox icon-3x text-indigo-400"></i>
+								</div>
+
+								<div class="media-body text-right">
+									<h6 class="no-margin text-semibold">{$user['email']}</h6>
+									<span class="text-uppercase text-size-mini text-muted">{:l('EMAIL')}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4 col-md-4">
+						<div class="panel panel-body bg-info">
+							<div class="media no-margin">
+								<div class="media-body">
+									<h6 class="no-margin text-semibold">
+									<switch name="user['idcardauth']" >
+													<case value="0">{:l('CERTIFIED_IMMEDIATELY')}</case>
+													<case value="1">{:l('APPROVED')}</case>
+													<case value="2">{:l('Under Review')}</case>
+													<case value="3">{:l('KYC Rejected!')}</case>
+													<default />Check
+												</switch>
+									</h6>
+									<span class="text-uppercase text-size-mini text-muted">{:l('KYC')}</span>
+								</div>
+
+								<div class="media-right media-middle">
+									<i class='icon-<switch name="user['idcardauth']"><case value="0">cloud-upload</case>
+													<case value="1">checkmark</case>
+													<case value="2">loop</case>
+													<case value="3">warning</case>
+													<default />Check
+												</switch> icon-3x text-blue-400'></i>
+													
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>

@@ -1,0 +1,168 @@
+﻿<include file="Public:header" />
+
+<!-- Page content -->
+<section class="generic">
+  <div class="container">
+    <div class="full-box row">
+			<include file="User:sidebar" />
+      <div class="col-10">
+    <div class="row mb-3 mt-3">
+      <include file="User:top_bar" />
+      <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+        <ul class="text-right breadcrumbs list-unstyle">
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+          </li>
+          <li>
+            <a href="{:U('/user/index')}" class="btn btn-warning btn-sm"
+              >{:l('User')}</a
+            >
+          </li>
+          <li>
+            <a href="{:U('/user/security')}" class="btn btn-warning btn-sm"
+              >{:l('Security')}</a
+            >
+          </li>
+          <li class="btn btn-warning btn-sm active">{:l('Freeze')}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12 col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">{:l('Freeze Account')}</h4>
+          </div>
+          <div class="card-body">
+            <div class="settings-profile">
+              <div class="row p-b-40">
+                <div class="col-md-12 m-b-30 m-t-10">
+                  <h5>You are freezing your account {$emailaddress}</h5>
+                  <div class="alert alert-warning m-t-30" role="alert">
+                    <h4 class="alert-heading">
+                      <i class="ion ion-md-information-circle-outline"></i>
+                    </h4>
+                    <p class="f-w-600">
+                      Disabling your account will cause the following:
+                    </p>
+                    <p>
+                      ① Account will not be able to log in <br />② All trading
+                      and login functions will be disabled <br />③ All API keys
+                      of your account will be unavailable <br />④ You need to
+                      contact customer service to unfreeze the account.
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <h6>{:l('Please select the reason for freezing:')}</h6>
+                  <div class="form-check form-check-inline">
+                    <input
+                      name="reason"
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox1"
+                      value="login"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox1"
+                      >{:l('Abnormal login')}</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      name="reason"
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox2"
+                      value="activities"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox2"
+                      >{:l('Abnormal Activities')}</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      name="reason"
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox3"
+                      value="withdrawal"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox3"
+                      >{:l('Abnormal withdrawal')}</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      name="reason"
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox4"
+                      value="transfer"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox4"
+                      >{:l('Abnormal transfer')}</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      name="reason"
+                      class="form-check-input"
+                      type="checkbox"
+                      id="inlineCheckbox5"
+                      value="others"
+                    />
+                    <label class="form-check-label" for="inlineCheckbox5"
+                      >{:l('Other')}</label
+                    >
+                  </div>
+                  <div class="clearfix m-t-15"></div>
+                  <button type="submit" class="btn-2" onclick="freeze();">
+                    Disable my account!
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+<script>
+  function freeze() {
+    var checkboxValues = [];
+    $('input[name="reason"]:checked').each(function (index, elem) {
+      checkboxValues.push($(elem).val());
+    });
+    //$('#debugOutput').html(checkboxValues.join(','));
+    var reason = checkboxValues.join(",");
+
+    layer.prompt(
+      {
+        title: "Type freeze",
+        formType: 1,
+        btn: ["Freeze", "Cancle"], //Push button
+      },
+      function (pass) {
+        if (!pass || pass != "freeze") {
+          layer.msg("Type freeze!");
+        } else {
+          $.post(
+            "{:U('User/doFreeze')}",
+            { pass: pass, reason: reason },
+            function (data) {
+              layer.msg(data.info);
+              layer.close();
+              if (data.status) {
+                window.location.href = "{:U('User/index')}";
+              }
+            },
+            "json"
+          );
+        }
+      }
+    );
+  }
+</script>
+<include file="Public:footer_minimal" />

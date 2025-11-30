@@ -1,0 +1,63 @@
+<script>
+ws = new WebSocket("{:SOCKET_WS_URL}");
+ws.onopen = function(e){
+        //console.info(e);
+        ws.send('Initialize WS');//Is equivalent to sending an initialization message
+        console.info("Send a heartbeat packet string to the server");
+     
+}
+ ws.onmessage = function(e){
+
+        // json data into js object
+        var data = JSON.parse(e.data);
+//        console.log(data);
+
+        var type = data.type || '';
+
+        switch(type){
+		   case 'newprice':
+                ws_newprice(data)
+                break		
+            case 'break':
+           //     console.log(data.info);
+                break
+            default :
+             //   console.log(data);
+
+        }
+    };	
+	function toNum(num, round) {
+        return Math.round(num * Math.pow(10, round) - 1) / Math.pow(10, round);
+    }
+
+	function ws_newprice(data) {
+		  if(decimals == null){
+			var decimals=6;
+			}
+				<notempty name="MARKETS_WS_SOCKET">	
+		<volist name="MARKETS_WS_SOCKET" id="marketname">	
+			if(data.market=="{$marketname}"){
+				if (data.type=='newprice') {
+					var elementname= "#m_<php>echo array_search($marketname,MARKETS_WS_SOCKET);</php>";
+					if(data.change>0){var changeclass="buy"}
+					if(data.change<0){var changeclass="sell"}
+					$(elementname+" dd:eq(5)").removeClass('buy');
+					$(elementname+" dd:eq(5)").removeClass('sell');
+					$(elementname+" dd:eq(5)").addClass(changeclass);
+					elementupdate(elementname+" dd:eq(5)",toNum(data.change,2)+'%');
+					elementupdate(elementname+" dd:eq(4)",toNum(data.amount,2));
+					elementupdate(elementname+" dd:eq(3)",toNum(data.volume,2));
+					elementupdate(elementname+" dd:eq(2)",toNum(data.sell_price,6));
+					elementupdate(elementname+" dd:eq(1)",toNum(data.buy_price,6));
+					if(data.new_price){
+					elementupdate(elementname+" dd:eq(0)",toNum(data.new_price,6));
+					}
+                }
+			}				
+		</volist>	
+	</notempty>
+    }
+function elementupdate(idselector,content){
+	$(idselector).html(content);
+}
+</script>

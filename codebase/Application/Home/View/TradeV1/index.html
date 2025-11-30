@@ -1,0 +1,41 @@
+<include file="Trade:html_header"/>
+<body id="dark" class="mainbody">
+<include file="Trade:header"/>
+  <div class="container-fluid mtb15 no-fluid">
+  <div class="row sm-gutters">
+  <div class="col-12 mb15">
+		<include file="Trade:statsbox"/>
+      </div>
+	</div>
+    <div class="row sm-gutters">
+      <include file="Trade:advanceinstrument"/>
+      <div class="col-md-6">
+		  <iframe style="border-style: none;" border="0" width="100%" height="550px" id="market_chartx" src="/Trade/ordinary/market/{$market}"></iframe>
+       </div> 
+        
+      
+      <div class="col-md-3">
+        <include file="Trade:orderbook"/>
+        
+      </div>
+	</div>    
+	<div class="row sm-gutters">
+	<div class="col-md-6"><include file="Trade:buysellbox"/></div>
+	<div class="col-md-6"><include file="Trade:market-history"/></div>
+	</div>
+	<include file="Trade:historybox"/>
+  </div>
+
+  <script src="__PUBLIC__/stocks/js/jquery-3.4.1.min.js"></script>
+  <script src="__PUBLIC__/stocks/js/popper.min.js"></script>
+  <script src="__PUBLIC__/stocks/js/bootstrap.min.js"></script>
+  <script src="__PUBLIC__/stocks/js/amcharts-core.min.js"></script>
+  <script src="__PUBLIC__/stocks/js/amcharts.min.js"></script>
+  
+  <script src="__PUBLIC__/stocks/js/custom.js"></script>
+
+  <include file="Trade:footer_scripts"/>
+<include file="Trade:stop-buy-script"/>
+</body>
+
+</html>

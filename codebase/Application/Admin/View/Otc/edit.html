@@ -1,0 +1,178 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4"><a href="{:U('Otc/index')}">{:l('OTC Management')}</a> >></span> <span class="d-sm-flex align-items-center justify-content-between h4"><empty name="data">{:l('Add OTC')}<else/>{:l('Edit OTC')}</empty></span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('Otc/save')}" method="post" class="form-horizontal">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<tr class="controls">
+									<td class="item-label">{:l('OTC name')} :</td>
+									<td>
+										<input type="text" class=" form-control input-10x " name="name" value="{$data.name}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('OTC Coin')}:</td>
+									<td><select name="coinname" class="form-select input-10x">
+										<volist name="C['coin_list']" id="v">
+											<option value="{$v['name']}"
+											<eq name="data['coinname']" value="$v['name']">{:l('selected')}</eq>
+											>{$v['title']}</option>
+										</volist>
+									</select></td>
+									<td class="item-note">{:l('Coin that User wants to buy/sell')}</td>
+								</tr>
+								
+								
+								<tr class="controls">
+									<td class="item-label">{:l('Sort')}:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="paixu" value="{$data['paixu']*1}">
+									
+									</td>
+									<td class="item-note">{:l('Higher the value , more the forward')}</td>
+								</tr>
+								<tr class="controls" >
+									<td class="item-label">{:l('Commission UserID')}:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="ownerid" value="{$data['ownerid']}">
+									
+									</td>
+									<td class="item-note">{:l('Userid to receive commmission, example 3124545,Leave 0 for no owner')}</td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label">{:l('Buy Commission')}:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="buy_commission" value="{$data['buy_commission']}">
+									
+									</td>
+									<td class="item-note">{:l('Client Price=Huobi Price+ Commission[Your profit%]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Sell Commission')}:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="sell_commission" value="{$data['sell_commission']}">
+									
+									</td>
+									<td class="item-note">{:l('Client Price=Huobi Price- Commission[Your profit%]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Tier 1 Commission')}:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="tier_1" value="{$data['tier_1']}">
+									
+									</td>
+									<td class="item-note">{:l('Commission split for tier 1 referrer [ie 0.00, 1.00 or 5.00]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Tier 2 Commission')}:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="tier_2" value="{$data['tier_2']}">
+									
+									</td>
+									<td class="item-note">{:l('Commission split for tier 2 referrer [ie 1.00 or 5.00]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Tier 3 Commission')}:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="tier_3" value="{$data['tier_3']}">
+									
+									</td>
+									<td class="item-note">{:l('Commission split for tier 3 referrer [ie 1.00 or 5.00]')}</td>
+								</tr>
+
+
+								<tr class="controls">
+									<td class="item-label">{:l('Fees')}:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="fees" value="{$data['fees']}">
+									
+									</td>
+									<td class="item-note">{:l('Keep it zero only')}</td>
+								</tr>								
+								<tr class="controls">
+									<td class="item-label">{:l('Total Bought yet')}:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="deal" value="{$data['deal_buy']*1}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+																<tr class="controls">
+									<td class="item-label">{:l('Total Sold yet')}:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="deal" value="{$data['deal_sell']*1}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+
+								<tr class="controls">
+									<td class="item-label">{:l('Min Buy')}:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="min" value="{$data['min']}">
+									</td>
+									<td class="item-note">{:l('Minimum Buy in each trade')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Max Buy')}:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="max" value="{$data['max']}">
+									</td>
+									<td class="item-note">{:l('Max buy in each trade')}</td>
+								</tr>
+
+								<tr class="controls">
+									<td class="item-label">{:l('Status')}:</td>
+									<td><select name="status" class="form-select  input-10x">
+										<option value="1"
+										<eq name="data.status" value="1">{:l('selected')}</eq>
+										>{:l('Enable')}</option>
+										<option value="0"
+										<eq name="data.status" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Otc/index')}");
+	</script>
+</block>

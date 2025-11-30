@@ -1,0 +1,49 @@
+:root {
+  --main-one: #28BAA7;
+  --main-two: #0a9482;
+  --header-bg:#07212a;
+  
+  --green:#28BAA7;
+  --green2:#28BAA7;
+  
+  --red:#e54c67;
+  
+  --blue:#007bff;
+  --orange:#ec5840;
+
+}
+.featured {
+    background-color: var(--theme-color) !important;
+    color: var(--white);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    line-height: normal;
+    position: relative;
+    font-weight: 600;
+    display: inline-block;
+    margin-left: 3px !important;
+}
+.featured::after {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    left: -3px;
+    top: 2px;
+    border-style: solid;
+    border-width: 6px 6px 6px 0px;
+    border-color: transparent var(--theme-color) transparent transparent !important;
+}
+.layui-layer-btn .layui-layer-btn0{
+  border-color:var(--theme-color) !important;
+  background-color:var(--theme-color) !important;
+  color:var(--white) !important;
+}
+.btn.theme-bg {
+  color: var(--white) !important;
+  background-color: var(--theme-color);
+}
+.btn-2, .btn-4 {
+  color: var(--white) !important;
+}

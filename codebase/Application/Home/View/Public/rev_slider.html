@@ -1,0 +1,201 @@
+<section>
+<div id="slide-window">
+  
+    <ol id="xslides" start="1">
+    		<volist name="indexAdver" id="vo">
+			      <li class="xslide color-0 alive" onclick="window.location.href='{$vo['url']}'"  style="background-image:url(__UPLOAD__/ad/{$vo.img});"></li>
+		</volist>	
+   </ol>
+ 
+    <span class="sliderxnav fa fa-chevron-left fa-3x" id="slidexleft"></span>
+    <span class="sliderxnav fa fa-chevron-right fa-3x" id="slidexright"></span>
+    
+    <div id="credit">
+	
+	<div class="banner-tag-box">
+	
+		<gt name="Think.session.userId" value="0">
+	
+			<div class="banner-tag login-banner-tag">
+				<div class="user-base">
+						<span class="user-base-sp">
+							Hi,<a href="#" target="_blank">{$Think.session.userName}</a>
+						</span>
+					<div class="user-info-block">
+						<table>
+							<tr>
+								<td>{:l('AVAILABLE')} USD</td>
+								<td>{:l('FREEZE')}</td>
+								<td>{:l('TOTAL_ASSETS')}</td>
+							</tr>
+							<tr>
+								<td>{$userCoin_top['usd']}</td>
+								<td>{$userCoin_top['usdd']}</td>
+								<td>{$userCoin_top['allusd']}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<ul class="clearfix">
+					<div class="user-info-fina">
+						<a href="{:U('Finance/mycz')}">{:l('RECHARGE')}</a> <a href="{:U('Finance/mytx')}">{:l('WITHDRAW')}</a>
+						<a href="{:U('User/index')}" class="w82">{:l('ACCOUNT')}</a>
+					</div>
+				</ul>
+				<a href="{:U('Finance/index')}" target="_blank" class="green-link-btn">{:l('TO_THE_FINANCIAL_CENTER')}</a>
+				<a href="{:U('Finance/mytj')}" target="_blank" class="transparent-link-btn">
+					<i class="icon-hot-tag"></i> {:l('REFER_A_FRIEND_TO_GET_REWARD')} </a>
+			</div>
+
+	
+		<else/>
+            <div class="banner-tag visitor-banner-tag">
+                <div class="topest-profit" style="margin:5px 0 0 0;">
+                    <div class="modal-header" style="border:none;text-align:center;padding:0px;">
+                    </div>
+                    <div class="modal-body" style="font-size:18px;width: 350px;">
+                        <div style="font-size:13px;text-align:left;margin: 0px 0 0 0">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <p>{:l('ACTUAL_TRADING_RISK')}</p>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-sm-10 col-sm-offset-1">
+                <a href="javascript:loginpop();" class="btn btn-info btn-block">{:l('LOG_IN_IMMEDIATELY')} </a><br/>
+                <a href="{:U('Login/register')}" class="btn btn-success btn-block"> {:l('SIGN_UP_NOW')} </a>
+				</div>
+            </div>
+		</gt>
+	</div>
+	</div>
+    
+</div>
+  <style>
+
+#slide-window
+  {
+  width:100%;
+  overflow:hidden;
+  top:0px;
+  left:0px;
+  }
+
+#xslides
+  {
+  height:100%;  
+  position:absolute;
+  margin:0px;
+  padding:0px;
+  
+  -webkit-transform: translate3d(0px,0px,0px);
+  transform: translate3d(0px,0px,0px);
+    
+  transition: all 0.66s ease; -webkit-transition: all 0.66s ease; 
+  
+  }
+
+.xslide 
+  {
+  list-style:none;
+  position: relative;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  height: 100%;
+  background: #ccc;
+  text-align: center;
+  line-height: 300px; 
+  background-size: cover; 
+  background-position:50% 50%;
+  color:#fff;
+  -webkit-transform: translate3d(0px,0px,0px);
+  visibility:hidden;
+  -webkit-transform-style: preserve-3d;
+  }
+
+.alive { visibility:visible; }
+
+.sliderxnav 
+  { 
+  position:fixed; 
+  z-index:9; 
+  top:50%; 
+  cursor:pointer; 
+  color:#fff; 
+  opacity:0.7; 
+  transition: all 0.66s ease; -webkit-transition: all 0.66s ease; 
+  }
+
+.sliderxnav:hover { opacity:1.0; }
+#slidexleft { left:3%; }
+#slidexright { right:3%; }
+
+
+#credit 
+  { 
+
+  }
+  </style>
+  <script>
+  $.global = new Object();
+
+$.global.item = 1;
+$.global.total = 0;
+
+$(document).ready(function() 
+	{
+	var navheight= document.getElementById('allinonenavs').offsetHeight;
+	
+	var WindowWidth = $(window).width();
+	var WindowHeight = $(window).height() - navheight;
+	var SlideCount = $('#xslides li').length;
+	var SlidesWidth = SlideCount * WindowWidth;
+	
+   $.global.item = 0;
+    $.global.total = SlideCount; 
+    $('#slide-window').css('height',WindowHeight+'px');
+	$('.xslide').css('width',WindowWidth+'px');
+	$('#xslides').css('width',SlidesWidth+'px');
+	$('#xslides').css('height',WindowHeight+'px');
+
+   $("#xslides li:nth-child(1)").addClass('alive');
+    
+  $('#slidexleft').click(function() { Slide('back'); }); 
+  $('#slidexright').click(function() { Slide('forward'); }); 
+        
+  });
+
+function Slide(direction)
+	{
+   
+    if (direction == 'back') { var $target = $.global.item - 1; }
+    if (direction == 'forward') { var $target = $.global.item + 1; }  
+    
+    if ($target == -1) { DoIt($.global.total-1); } 
+    else if ($target == $.global.total) { DoIt(0); }  
+    else { DoIt($target); }
+    
+    
+	}
+
+function DoIt(target)
+  {
+   
+    var $windowwidth = $(window).width();
+	var $margin = $windowwidth * target; 
+    var $actualtarget = target+1;
+    
+    $("#xslides li:nth-child("+$actualtarget+")").addClass('alive');
+    
+    $('#xslides').css('transform','translate3d(-'+$margin+'px,0px,0px)');	
+    
+    $.global.item = target; 
+    
+  $('#count').html($.global.item+1);
+    
+  }
+  </script>
+</div>
+<script src="__PUBLIC__/Home/js/canvas.index.js?version=<php>echo time()</php>"></script>
+  </section>

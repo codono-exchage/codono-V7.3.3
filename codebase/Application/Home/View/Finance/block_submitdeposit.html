@@ -1,0 +1,62 @@
+<div class="pwtrade  pw  mt50">
+								<dl>
+									<dt>{:l('INTO_THE_ADDRESS')}</dt>
+									<dd>
+										<span>
+											{$wallet}
+										</span>
+									</dd>
+								</dl>
+								
+								
+								<dl>
+									<dt>{:l('INTO_THE_ADDRESS')}</dt>
+									<dd style="position: relative;">
+										<input type="text" class="texts" id="codono_dzbz" maxlength="100" value="">
+										(*{:l('SIGN_INTO_THE_ADDRESS_FROM_WHI')})						
+									</dd>
+								</dl>
+								
+								
+								
+								<dl>
+									<dt>{:l('PAYMENT_AMOUNT')}</dt>
+									<dd style="position: relative;">
+										<input type="text" class="texts" id="usd_num" maxlength="12" value="">
+																
+																</dd>
+								</dl>
+								<eq name="M_ONLY" value="1">
+								<dl class="step5">
+									<dt>{:l('SMS_VERIFICATION_CODE')}</dt>
+									<dd class="yuyin">
+										<div class="clear">
+																			<input type="button" value="{:l('SEND_SMS_VERIFICATION_CODE')}" class="btns" onclick="send_cellphone_coinout('sms')" style="width: 100px;font-size: 12px;"/>
+																											{$cellphone}({:l('RECEIVING_CODES')})
+										</div>
+									</dd>
+								</dl>
+								<dl class="step6" style="display:none;">
+									<dt>{:l('SMS_VERIFICATION_CODE')}</dt>
+									<dd>
+										<input type="text" id="usd_cellphone_verify" value="" class="texts" placeholder="{:l('PLEASE_ENTER_THE_VERIFICATION_')}"/> <span id="reg_cellphone_new"></span>
+									</dd>
+								</dl>
+								</eq>
+								<dl>
+									<dt>{:l('TRANSACTION_PASSWORD')}</dt>
+									<dd>
+										<input type="password" class="texts" id="usd_paypassword"  value=""><a href="/findpwd/findpwd" class="move ml5">{:l('FORGET')}?</a>
+									</dd>
+								</dl>
+								<dl>
+									<dt></dt>
+									<dd>
+										<empty name="zc_jz">
+											<input type="button" class="btns2" value="{:l('IMMEDIATELY_TRANSFERRED')}" onclick="coinin_up()">
+										<else/>
+											<input type="button" class="btns2" value="{$zr_jz}" disabled>
+										</empty>
+									</dd>
+								</dl>
+						</div>

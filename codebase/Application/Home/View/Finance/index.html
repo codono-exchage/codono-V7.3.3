@@ -1,0 +1,172 @@
+<include file="Public:header" />
+
+	<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/forms/selects/select2.min.js"></script>
+
+	<script type="text/javascript" src="__PUBLIC__/assets/js/pages/datatables_advanced.js"></script>
+		<!-- Page content -->
+		<div class="page-container">
+
+			<!-- Main sidebar -->
+			<include file="Finance:left" />
+
+			<!-- Main content -->
+			<div class="panel panel-flat">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-4 mobile_hide">
+						<div class="panel panel-body bg-blue-400 has-bg-image">
+							<div class="media no-margin">
+								<div class="media-body">
+									<h3 class="no-margin"> {$usd['ky']|nice_number}</h3>
+									<span class="text-uppercase text-size-mini">{:l('AVAILABLE')} {$conversion_coin}</span>
+								</div>
+
+								<div class="media-right media-middle">
+									<i class="icon-cash3 icon-3x opacity-75"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4 mobile_hide">
+						<div class="panel panel-body bg-danger-400 has-bg-image">
+							<div class="media no-margin">
+								<div class="media-body">
+								
+									<h3 class="no-margin">{$usd['dj']|nice_number}</h3>
+									<span class="text-uppercase text-size-mini">{:l('IN_FREEZE')} {$conversion_coin}</span>
+								</div>
+
+								<div class="media-right media-middle">
+									<i class="icon-stairs-up icon-3x opacity-75"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="panel panel-body bg-success-400 has-bg-image">
+							<div class="media no-margin">
+								<div class="media-left media-middle">
+									<i class="icon-safe icon-3x opacity-75"></i>
+								</div>
+
+								<div class="media-body text-right">
+									<h3 class="no-margin"> {$usd['zj']|nice_number}</h3>
+									<span class="text-uppercase text-size-mini">{:l('ESTIMATED_TOTAL_ASSETS')} {$conversion_coin}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /simple statistics -->
+
+			
+							<!-- Coins List -->
+						<div class="row">
+							
+						<div class="table-responsive">
+								<table class="table text-nowrap table-hover table-striped table-condensed  datatable-show-all" id="balanceTable">
+									<thead>
+										<tr>
+											<th><div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input" id="hideZero" name="hideZero">
+  <label class="custom-control-label" for="hideZero">Hide 0 Balance</label>
+</div></th>
+											<th >{:l('AVAILABLE')}</th>
+											<th >{:l('FREEZE')}</th>
+											<th >{:l('TOTAL')}</th>
+											<th ><span title="{$conversion_coin} {:l('CONVERT')}">{$conversion_coin}</span></th>
+											<th>{:l('Options')}</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+<volist name="coinList" id="vo">
+
+										<tr class="<eq name="vo['xnbz']" value='0'>tr-hide</eq>">
+											<td>
+												<div class="media-left media-left">
+													<img src="__UPLOAD__/coin/{$vo['img']}" alt=""  class="img-circle img-xs" alt="" onerror="this.onerror=null; this.src='__UPLOAD__/coin/default.png'">
+												</div>
+												<div class="media-left">
+													<div class=""><span  class="text-default text-semibold"><small>{$vo['title']}</small> <eq name="vo['type']" value="rmb">[Fiat]</eq></span></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-blue position-left"></span>
+														{$conversion_coin} {$vo['jia']|NumToStr}
+													</div>
+												</div>
+											</td>
+											<td data-column><span class="text-green">{$vo['xnb']|NumToStr}</span></td>
+											<td><span class="text-warning-600">{$vo['xnbd']|NumToStr}</td>
+											<td><span >{$vo['xnbz']|NumToStr}</h6></td>
+											<td><span >{$vo['zhehe']|nice_number}</span></td>
+											<td>
+											<switch name="vo.type">
+																<case value="rmb"><a href="{:U('Finance/mycz')}" class="btn btn-success btn-xs"><i class="icon-credit-card"></i> {:l('DEPOSIT')}</a></case>
+																<default /><a href="{:U('Finance/myzr','coin='.$vo['name'])}" class="btn btn-success btn-xs"><i class="icon-wallet"></i> {:l('DEPOSIT')}</a>
+															</switch>
+											
+											
+											<switch name="vo.type">
+																<case value="rmb"><a href="{:U('Finance/mytx')}" class="btn btn-info btn-xs"><i class="icon-cash"></i> {:l('WITHDRAW')}</a></case>
+																<default /><a href="{:U('Finance/myzc','coin='.$vo['name'])}"class="btn btn-info btn-xs"><i class="icon-paperplane"></i> {:l('WITHDRAW')}</a>
+															</switch>
+											</td>
+											
+										</tr>
+										</volist>     	
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- /Coins List-->
+			</div>
+		</div>
+
+
+		</div>
+		<!-- /page content -->
+
+
+	<script>
+$('input:checkbox[name="hideZero"]').on('change', function () {
+var balanceTable=$("#balanceTable"); 
+if ($(this).is(':checked')) {
+
+            $("#balanceTable").addClass('NoZero'); 
+		
+   }
+   else {
+               $("#balanceTable").removeClass('NoZero')
+   }
+   });
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_index').addClass('active');
+</script>
+<style>
+table.NoZero tr.tr-hide{display:none};
+.media-left, .media>.pull-left{    padding-right: 6px;}
+ @media only screen and (max-width: 540px) {
+		.mobile_hide{display:none;}
+  #DataTables_Table_0 td{
+    display:none;
+  }
+ #DataTables_Table_0 td:first-child,#DataTables_Table_0 td:last-child, #DataTables_Table_0 th:first-child,#DataTables_Table_0 th:last-child {
+    display:table-cell;
+  }
+  #DataTables_Table_0 td,#DataTables_Table_0 th{
+    display:none;
+  }
+ 
+}
+
+</style>
+<include file="Public:footer_minimal"/>

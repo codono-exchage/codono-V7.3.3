@@ -1,0 +1,36 @@
+<include file="Public:header" />
+		<!-- Page content -->
+		<div class="page-container">	
+	
+			<include file="User:left" />
+<div class="col-sm-9">
+
+		<!-- Main content -->
+			<div class="">
+
+		<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h1>
+					<span>
+						KYC </span>
+			
+				</h1>
+			</div>
+			
+			<div class="panel-body">
+			<if condition="iframe">
+			<div class="full-width" style="min-height:550px;">
+			<iframe class="embed-responsive-item" src="{$url}" frameborder="0" style="width: 100%;min-height: 550px;"></iframe>
+			</div>
+			<else/>
+			<div class="alert alert-warning">{$url}</div>
+			</if>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+			<!-- Main content -->
+</div>
+<include file="Public:footer_minimal"/>

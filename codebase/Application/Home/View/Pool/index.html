@@ -1,0 +1,478 @@
+<include file="Public:header" />
+<script>
+
+function sparkline(element, chartType, qty, height, interpolation, duration, interval, color) {
+
+
+        // Basic setup
+        // ------------------------------
+
+        // Define main variables
+        var d3Container = d3.select(element),
+            margin = {top: 0, right: 0, bottom: 0, left: 0},
+            width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right,
+            height = height - margin.top - margin.bottom;
+
+
+        // Generate random data (for demo only)
+        var data = [];
+        for (var i=0; i < qty; i++) {
+            data.push(Math.floor(Math.random() * qty) + 5)
+        }
+
+
+
+        // Construct scales
+        // ------------------------------
+
+        // Horizontal
+        var x = d3.scale.linear().range([0, width]);
+
+        // Vertical
+        var y = d3.scale.linear().range([height - 5, 5]);
+
+
+
+        // Set input domains
+        // ------------------------------
+
+        // Horizontal
+        x.domain([1, qty - 3])
+
+        // Vertical
+        y.domain([0, qty])
+            
+
+
+        // Construct chart layout
+        // ------------------------------
+
+        // Line
+        var line = d3.svg.line()
+            .interpolate(interpolation)
+            .x(function(d, i) { return x(i); })
+            .y(function(d, i) { return y(d); });
+
+        // Area
+        var area = d3.svg.area()
+            .interpolate(interpolation)
+            .x(function(d,i) { 
+                return x(i); 
+            })
+            .y0(height)
+            .y1(function(d) { 
+                return y(d); 
+            });
+
+
+
+        // Create SVG
+        // ------------------------------
+
+        // Container
+        var container = d3Container.append('svg');
+
+        // SVG element
+        var svg = container
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+        // Add mask for animation
+        // ------------------------------
+
+        // Add clip path
+        var clip = svg.append("defs")
+            .append("clipPath")
+            .attr('id', function(d, i) { return "load-clip-" + element.substring(1) })
+
+        // Add clip shape
+        var clips = clip.append("rect")
+            .attr('class', 'load-clip')
+            .attr("width", 0)
+            .attr("height", height);
+
+        // Animate mask
+        clips
+            .transition()
+                .duration(1000)
+                .ease('linear')
+                .attr("width", width);
+
+
+
+        //
+        // Append chart elements
+        //
+
+        // Main path
+        var path = svg.append("g")
+            .attr("clip-path", function(d, i) { return "url(#load-clip-" + element.substring(1) + ")"})
+            .append("path")
+                .datum(data)
+                .attr("transform", "translate(" + x(0) + ",0)");
+
+        // Add path based on chart type
+        if(chartType == "area") {
+            path.attr("d", area).attr('class', 'd3-area').style("fill", color); // area
+        }
+        else {
+            path.attr("d", line).attr("class", "d3-line d3-line-medium").style('stroke', color); // line
+        }
+
+        // Animate path
+        path
+            .style('opacity', 0)
+            .transition()
+                .duration(750)
+                .style('opacity', 1);
+
+
+
+        // Set update interval. For demo only
+        // ------------------------------
+
+        setInterval(function() {
+
+            // push a new data point onto the back
+            data.push(Math.floor(Math.random() * qty) + 5);
+
+            // pop the old data point off the front
+            data.shift();
+
+            update();
+
+        }, interval);
+
+
+
+        // Update random data. For demo only
+        // ------------------------------
+
+        function update() {
+
+            // Redraw the path and slide it to the left
+            path
+                .attr("transform", null)
+                .transition()
+                    .duration(duration)
+                    .ease("linear")
+                    .attr("transform", "translate(" + x(0) + ",0)");
+
+            // Update path type
+            if(chartType == "area") {
+                path.attr("d", area).attr('class', 'd3-area').style("fill", color)
+            }
+            else {
+                path.attr("d", line).attr("class", "d3-line d3-line-medium").style('stroke', color);
+            }
+        }
+
+
+
+        // Resize chart
+        // ------------------------------
+
+        // Call function on window resize
+        $(window).on('resize', resizeSparklines);
+
+        // Call function on sidebar width change
+        $(document).on('click', '.sidebar-control', resizeSparklines);
+
+        // Resize function
+        // 
+        // Since D3 doesn't support SVG resize by default,
+        // we need to manually specify parts of the graph that need to 
+        // be updated on window resize
+        function resizeSparklines() {
+
+            // Layout variables
+            width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right;
+
+
+            // Layout
+            // -------------------------
+
+            // Main svg width
+            container.attr("width", width + margin.left + margin.right);
+
+            // Width of appended group
+            svg.attr("width", width + margin.left + margin.right);
+
+            // Horizontal range
+            x.range([0, width]);
+
+
+            // Chart elements
+            // -------------------------
+
+            // Clip mask
+            clips.attr("width", width);
+
+            // Line
+            svg.select(".d3-line").attr("d", line);
+
+            // Area
+            svg.select(".d3-area").attr("d", area);
+        }
+    }
+
+function progressCounter(element, radius, border, color, end, iconClass, textTitle, textAverage) {
+
+
+        // Basic setup
+        // ------------------------------
+
+        // Main variables
+        var d3Container = d3.select(element),
+            startPercent = 0,
+            iconSize = 32,
+            endPercent = end,
+            twoPi = Math.PI * 2,
+            formatPercent = d3.format('.0%'),
+            boxSize = radius * 2;
+
+        // Values count
+        var count = Math.abs((endPercent - startPercent) / 0.01);
+
+        // Values step
+        var step = endPercent < startPercent ? -0.01 : 0.01;
+
+
+
+        // Create chart
+        // ------------------------------
+
+        // Add SVG element
+        var container = d3Container.append('svg');
+
+        // Add SVG group
+        var svg = container
+            .attr('width', boxSize)
+            .attr('height', boxSize)
+            .append('g')
+                .attr('transform', 'translate(' + (boxSize / 2) + ',' + (boxSize / 2) + ')');
+
+
+
+        // Construct chart layout
+        // ------------------------------
+
+        // Arc
+        var arc = d3.svg.arc()
+            .startAngle(0)
+            .innerRadius(radius)
+            .outerRadius(radius - border);
+
+
+
+        //
+        // Append chart elements
+        //
+
+        // Paths
+        // ------------------------------
+
+        // Background path
+        svg.append('path')
+            .attr('class', 'd3-progress-background')
+            .attr('d', arc.endAngle(twoPi))
+            .style('fill', '#eee');
+
+        // Foreground path
+        var foreground = svg.append('path')
+            .attr('class', 'd3-progress-foreground')
+            .attr('filter', 'url(#blur)')
+            .style('fill', color)
+            .style('stroke', color);
+
+        // Front path
+        var front = svg.append('path')
+            .attr('class', 'd3-progress-front')
+            .style('fill', color)
+            .style('fill-opacity', 1);
+
+
+
+        // Text
+        // ------------------------------
+
+        // daily_profit text value
+        var numberText = d3.select(element)
+            .append('h2')
+                .attr('class', 'mt-15 mb-5')
+
+        // Icon
+        d3.select(element)
+            .append("i")
+                .attr("class", iconClass + " counter-icon")
+                .attr('style', 'top: ' + ((boxSize - iconSize) / 2) + 'px');
+
+        // Title
+        d3.select(element)
+            .append('div')
+                .text(textTitle);
+
+        // Subtitle
+        d3.select(element)
+            .append('div')
+                .attr('class', 'text-size-small text-muted')
+                .text(textAverage);
+
+
+
+        // Animation
+        // ------------------------------
+
+        // Animate path
+        function updateProgress(progress) {
+            foreground.attr('d', arc.endAngle(twoPi * progress));
+            front.attr('d', arc.endAngle(twoPi * progress));
+            numberText.text(formatPercent(progress));
+        }
+
+        // Animate text
+        var progress = startPercent;
+        (function loops() {
+            updateProgress(progress);
+            if (count > 0) {
+                count--;
+                progress += step;
+                setTimeout(loops, 10);
+            }
+        })();
+    }
+
+
+</script>
+	<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/visualization/d3/d3.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/assets/js/pages/dashboard.js"></script>
+	
+<div class="page-container">
+<div class="row">
+<div class="col-md-12">
+	<div class="navbar navbar-default navbar-xs navbar-component">
+	<ul class="nav navbar-nav no-border visible-xs-block">
+									<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-filter"><i class="icon-circle-down2"></i></a></li>
+								</ul>
+					<div class="navbar-collapse collapse" id="navbar-filter">
+							<p class="navbar-text">{:L('Filter:')}</p>
+						<ul class="nav navbar-nav">
+							<li class="dropdown active">
+								<a  class="" href="{:U('Pool/index')}" >{:L('Mining')}</a>
+							</li>
+							<li class="dropdown">
+								<a class="text-info" href="{:U('Pool/myMachines')}" >{:L('My Machines')}</a>
+							</li>
+							<li class="dropdown">
+								<a class="text-info" href="{:U('Pool/myRewards')}" >{:L('My Rewards')}</a>
+							</li>
+						</ul>
+
+						
+					</div>
+				</div>
+</div>
+</div>
+			<include file="Pool:mines" />
+				<div class="row">
+				<div class="col-md-12">
+					<div class="panel">
+						<div class="panel-body">
+						<table class="table table-striped table-info" id="mining_machines">
+						<thead>
+							<tr>
+								<th id="sublist-grid_c0">{:L('Name')}</th>
+								<th id="sublist-grid_c2">{:L('Price')}</th>
+								<th id="sublist-grid_c3">{:L('Available')}</th>
+								<th id="sublist-grid_c2">{:L('Mining Reward')}</th>
+								<th id="sublist-grid_c1">{:L('Contract Duration')}</th>
+								<th id="sublist-grid_c4">{:L('Total Reward')}</th>
+								<th id="sublist-grid_c3">{:L('User Limit')}</th>
+								<th id="sublist-grid_c3">{:L('Power')}</th>
+								
+								<th id="sublist-grid_c4">{:L('Action')}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<volist name="list" id="vo">
+							<tr>
+								<td>{$vo['name']}</td>
+								<td>{$vo['price']*1} {$vo['coinname']}</td>
+								<td>{$vo['stocks']}/{$vo['quantity']}</td>
+								<td>{$vo['daily_profit']*1} {$vo['getcoin']}/ {:L('Daily')}</td>
+								<td>{$vo['days']} {:L('Days')}</td>
+								<td>{$vo['days']*$vo['daily_profit']*1} {$vo['getcoin']}</td>
+								<td>{$vo['user_limit']}</td>
+								<td>{$vo['power']}</td>
+								<td><button class="btn btn-sm btn-success" data-toggle="modal" data-target="#Buyingform_{$vo['id']}">Rent now <i class="fa fa-flash"></i></button>
+																	<include file="Pool:buyform" />
+								</td>
+							</tr>
+							</volist>
+						</tbody>
+					</table>
+					</div>
+					<div class="panel-footer"><div class="pages">{$page}</div></div>
+					</div>
+					</div>
+				</div>
+</div>
+
+<script>
+function plusone(id,days=1) {
+var currentval=$('#pool_box'+id).val();
+var newval=parseInt(currentval)+1;
+$('#pool_box'+id).val(newval);
+}
+function buypool(id,days) {
+
+	var amount=$("input[id='pool_box"+id+"']").val();
+	if(amount==null || amount <=0){
+	layer.tips('Enter Amount', "input[id='pool_box"+id+"']", {tips: 1});
+	return false;
+	}
+	var string_day=days>1?'days':'day';
+	
+	var msg = 'Rent above Mining Machine Qty:'+amount+'!';
+	
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.post("/Pool/rentMachine/",{id:id,num:amount} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+						window.location.href = "{:U('Pool/myMachines')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+
+        }, 'json');
+		});
+    }
+    
+	</script>
+	<style>
+ @media only screen and (max-width: 540px) {
+		.mobile_hide{display:none;}
+  #mining_machines td{
+    display:none;
+  }
+ #mining_machines td:first-child,#mining_machines td:last-child, #mining_machines th:first-child,#mining_machines th:last-child {
+    display:table-cell;
+  }
+  #mining_machines td,#mining_machines th{
+    display:none;
+  }
+ 
+}
+
+</style>
+<include file="Public:footer" />

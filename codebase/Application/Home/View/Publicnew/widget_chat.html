@@ -1,0 +1,97 @@
+<style>
+#chat_text{
+    font-size: 11px;}
+</style>
+<eq name="C['trade_moshi']" value="1">
+				<div class="card" id="chatwidgetMainBox">
+					<div class="card-header">
+						<h6 class="card-title">{:l('CHATROOM')}</h6>
+						<div class="heading-elements">
+							<ul class="icons-list">
+		                		<li><a data-action="collapse" data-toggle="collapse" data-target="#CompleteChatTextBox"></a></li>
+		                		<li><a data-action="close" onclick="javacript:$('#chatwidgetMainBox').hide();"></a></li>
+		                	</ul>
+	                	</div>
+					</div>
+
+					<div class="card-body" id="CompleteChatTextBox">
+					<div id="marqueebox1">
+						<ul class="media-list chat-stacked content-group" id="chat_content">
+							<!--Chat Content will be loaded here -->
+						</ul>
+					</div>
+                    	<textarea name="enter-message" id="chat_text" class="form-control content-group" rows="1" cols="1" placeholder="Enter your message..."></textarea>
+
+                    	<div class="row">
+                    		<div class="col-xs-6">
+                    		</div>
+
+                    		<div class="col-xs-6 text-right">
+	                            <button type="button" onclick="upChat()" class="btn btn-info btn-labeled btn-labeled-right"><b><i class="icon-circle-right2"></i></b> Send</button>
+                    		</div>
+                    	</div>
+					</div>
+				</div>
+				<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qqFace.js"></script>
+</eq>
+<script type="text/javascript">
+    //@He
+    function atChat(_this) {
+        $("#chat_text").val('@' + $(_this).html() + ' :');
+    }
+    //ENTER_SUBMIT_CHAT
+    $("#chat_text").keyup(function (e) {
+        if (e.keyCode === 13) {
+            upChat();
+            return false;
+        }
+    });
+    // SUBMIT_CHAT
+    function upChat() {
+        var content = $("#chat_text").val();
+        if (content == "" || content == null) {
+            layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#chat_text', {tips: 3});
+            return false;
+        }
+        $.post("/Ajax/upChat", {content: content}, function (data) {
+            if (data.status == 1) {
+                $("#chat_text").val('');
+                getChat();
+            } else {
+                layer.tips(data.info, '#chat_text', {tips: 3});
+                return false;
+            }
+        }, 'json');
+    }
+    //EXPRESSION_BOX ID ASSIGNED_TO_THE_CONTROL EXPRESSION_STORED_PATH
+    $('#face1').qqFace({id: 'facebox1', assign: 'chat_text', path: '__UPLOAD__/face/'});
+
+
+    function getChat() {
+        //if (trade_moshi == 2) {
+            $.getJSON("/Ajax/getChat?t=" + Math.random(), function (data) {
+                if (data) {
+
+
+                    var list = '';
+                    for (i = 0; i < data.length; i++) {
+                        list += '<li><a href="javascript:void(0);" onclick="atChat(this)">' + data[i][1] + '</a>:' + data[i][2] + '</li>';
+					}
+                    list = list.replace(/\[\/#([0-9]*)\]/g, '<img src="__UPLOAD__/face/$1.gif"  width="18">');
+
+                    if ($("#chat_content").html() != list) {
+                        $("#chat_content").html(list);
+                        $("#marqueebox1").scrollTop(40000);
+                    }
+
+
+                }
+            });
+            setTimeout('getChat()', 5000);
+        //}
+    }
+
+	
+	getChat();
+
+</script>	

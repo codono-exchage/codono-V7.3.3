@@ -1,0 +1,175 @@
+<style>
+#marketWidTabs{
+padding-bottom:1px !important;
+padding-top:1px;}
+.crypt-buy-sell-form > p{
+padding:0px 20px !important;
+}
+.crypt-boxed-area input{
+max-height:30px !important;}
+.crypt-button-green-full{
+padding:0px !important;
+}
+.crypt-button-green-full{
+padding:0px !important;
+}
+.crypt-button-red-full{
+padding:0px !important;
+}
+</style>
+<div class="crypt-boxed-area">
+                    <h6 class="crypt-bg-head">&nbsp;</h6>
+                    <div class="row no-gutters">
+					<div class="col-md-12">
+					<ul class="nav nav-tabs" id="marketWidTabs">
+  
+  <li class="nav-item" id="ltbutton">
+    <button class="nav-link active" onclick="OrderType('limit')">Limit</button>
+  </li>
+  <li class="nav-item" id="mtbutton">
+    <button class="nav-link" onclick="OrderType('market')">Market</button>
+  </li>
+  <li class="nav-item" id="stbutton">
+    <button class="nav-link" ><span onclick="OrderType('stop')">Stop-Limit</span> <i onclick="TipStopLimit()" class="pe-7s-info"></i></button> 
+  </li>
+</ul>
+					</div>
+                        <div class="col-md-6">
+                            <div class="crypt-buy-sell-form">
+                                <p>{:l('BUY')} <span class="crypt-up">{$xnb|strtoupper}</span> <span class="fright">{:l('BALANCE')}: <b class="crypt-up"><i id="base_coin">{$base_coin*1}</i> {$rmb|shortFirstLetter=0,1}</b></span></p>
+                                <div class="crypt-buy">
+						 <div class="input-group mb-2" id="buystop" style="display:none">
+							<label for="sellprice" class="col-sm-3 col-form-label">{:l('Stop')}</label>
+							<div class="col-sm-9">
+							<input type="text" class="form-control" id="buy_stop" name="stop" >
+							<span class="inputHintBox">{$rmb|strtoupper}</span>
+							</div>
+						  </div>
+                          <div class="input-group mb-2" id="buypricebox">
+							<label for="sellprice" class="col-sm-3 col-form-label">{:l('Price')}</label>
+							<div class="col-sm-9">
+							<input type="text" class="form-control" id="buy_price" name="price" >
+							<span class="inputHintBox">{$rmb|strtoupper}</span>
+							</div>
+						  </div>
+						  <div class="input-group mb-2">
+							<label for="sellqty" class="col-sm-3 col-form-label">{:l('Qty')}</label>
+							<div class="col-sm-9">
+							<input type="text" class="form-control" id="buy_num" name="num" >
+							<span class="inputHintBox">{$xnb|strtoupper}</span>
+							</div>
+						  </div>
+						   <eq name="IF_TRADING_PASS" value="1">
+						  <div class="input-group mb-2">
+							<label for="sellqty" class="col-sm-3 col-form-label">{:l('Tx Pwd')}</label>
+							<div class="col-sm-9">
+							<input type="password" class="form-control" id="buy_paypassword" name="pwtrade" placeholder=<eq name="showPW" value="0">				"{:l('YOU_DO_NOT_NEED_TO_ENTER_THE_T')}"</eq><eq name="showPW" value="2">"{:l('DEPENDING_ON_THE_SETTING_OF_TH')}"</eq>>
+							<span class="inputHintBox input-group-addon" data-toggle="modal" data-target="#modal_paypass"><i class="pe-7s-settings"></i></span>
+							</div>
+						  </div>
+						  </eq>
+						  <div class="PercentButtons">
+						  <button onclick="Percentage('25','buy')" class="btn btn-sm btn-secondary">25%</button>
+						  <button onclick="Percentage('50','buy')" class="btn btn-sm btn-secondary">50%</button>
+						  <button onclick="Percentage('75','buy')" class="btn btn-sm btn-secondary">75%</button>
+						  <button onclick="Percentage('100','buy')" class="btn btn-sm btn-secondary">100%</button>
+						  </div>
+                                    <div  class="mt-1">
+                                        <p class="mb-0">{:l('TOTAL')}: <span class="fright" id="buy_mum">--</span></p>
+                                    </div>
+									 <eq name="SHOW_TRADING_FEES" value="1">
+                                    <div>
+                                        <p>{:l('FEE')} <span class="fright">{:C('market')[$market]['fee_buy']}%</span></p>
+                                    </div>
+									</eq>
+                                 
+									<div id="stopbuybutton" style="display:none"><button value="{:l('STOP BUY')}" onclick="stopadd_buy();"  class="crypt-button-green-full" >{:l('STOP BUY')}</button></div>
+                                    <div id="limitbuybutton"><button value="{:l('BUY')}" onclick="tradeadd_buy('limit');"  class="crypt-button-green-full">{:l('BUY')}</button></div>
+									 <div id="marketbuybutton" style="display:none"><button value="{:l('BUY')}" onclick="tradeadd_buy('market');"  class="crypt-button-green-full">{:l('BUY')}</button></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="crypt-buy-sell-form">
+						
+                                <p>{:l('SELL')} <span class="crypt-down">{$xnb|strtoupper}</span> <span class="fright">{:l('BALANCE')}: <b class="crypt-down"><i id="user_coin">{$user_coin*1}</i> {$xnb|shortFirstLetter=0,1}</b></span></p>
+                                <div class="crypt-sell">
+								<div class="input-group mb-2" id="sellstop" style="display:none">
+							<label for="sellprice" class="col-sm-3 col-form-label">{:l('Stop')}</label>
+							<div class="col-sm-9">
+							<input type="text" class="form-control" id="sell_stop" name="sellstop" >
+							<span class="inputHintBox">{$rmb|strtoupper}</span>
+							</div>
+						  </div>
+                          <div class="input-group mb-2" id="sellpricebox">
+							<label for="sellprice" class="col-sm-3 col-form-label">{:l('Price')}</label>
+							<div class="col-sm-9">
+							<input type="text" class="form-control" id="sell_price" name="price" >
+							<span class="inputHintBox">{$rmb|strtoupper}</span>
+							</div>
+						  </div>
+						  <div class="input-group mb-2">
+							<label for="sellqty" class="col-sm-3 col-form-label">{:l('Qty')}</label>
+							<div class="col-sm-9">
+							<input type="text" class="form-control"  id="sell_num" name="num"/>
+							<span class="inputHintBox">{$xnb|strtoupper}</span>
+							</div>
+						  </div>
+						  
+						  <eq name="IF_TRADING_PASS" value="1">
+						  <div class="input-group mb-2">
+							<label for="sellqty" class="col-sm-3 col-form-label">{:l('Tx Pwd')}</label>
+							<div class="col-sm-9">
+							<input type="password" class="form-control" id="sell_paypassword" name="pwtrade" >
+							<span class="inputHintBox" data-toggle="modal" data-target="#modal_paypass"><i class="pe-7s-settings"></i></span>
+							</div>
+						  </div>
+						  </eq>
+						  <div class="PercentButtons">
+						  <button onclick="Percentage('25','sell')" class="btn btn-sm btn-secondary">25%</button>
+						  <button onclick="Percentage('50','sell')" class="btn btn-sm btn-secondary">50%</button>
+						  <button onclick="Percentage('75','sell')" class="btn btn-sm btn-secondary">75%</button>
+						  <button onclick="Percentage('100','sell')" class="btn btn-sm btn-secondary">100%</button>
+						  </div>
+									<div class="mt-1">
+                                         <p class="mb-0">{:l('TOTAL')}:<span class="fright" id="sell_mum">--</span></p>
+                                    </div>
+									 <eq name="SHOW_TRADING_FEES" value="1">
+                                    <div>
+                                        <p>{:l('FEE')} <span class="fright">{:C('market')[$market]['fee_sell']}%</span></p>
+                                    </div>
+									</eq>
+								<div id="stopsellbutton" style="display:none"><button value="{:l('STOP SELL')}" onclick="stopadd_sell();"  class="crypt-button-red-full" >{:l('STOP SELL')}</button></div>
+                                    <div id="limitsellbutton"><button onclick="tradeadd_sell('limit');" class="crypt-button-red-full" >{:l('SELL')}</button></div>
+									 <div id="marketsellbutton" style="display:none"><button onclick="tradeadd_sell('market');" class="crypt-button-red-full" >{:l('SELL')}</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			<div id="modal_paypass" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h5 class="modal-title">{:l("TRANSACTION_PASSWORD_INPUT_SET")}</h5>
+							</div>
+							<form id="tpwdsetting" class="set_verify">
+							<div class="modal-body" id="tpwd">
+							<ul class="tpwd">
+							<li><label for="only"><input <eq name="showPW" value="1">checked</eq> type="radio" id="only" value="1" name="aaatpwdsetting"> {:l("ENTER_ONLY_ONCE_EACH_TIME_YOU_")} </label></li>
+							<li> <label for="every"><input type="radio" <eq name="showPW" value="2">checked</eq> id="every" value="2" name="aaatpwdsetting"> {:l("EACH_TRANSACTION_TRANSACTION_P")}</label></li>
+							<li><label for="none"><input type="radio" <eq name="showPW" value="3">checked</eq> id="none" name="aaatpwdsetting" value="3"> {:l("YOU_DO_NOT_NEED_TO_ENTER_EACH_")}</label></li>
+							<li><input type="password" id="aaapaypassword" name="paypassword" placeholder="{:l("PLEASE_ENTER_TRANSACTION_PASSW")}" class="text"/> 
+							</li></ul>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+								<button type="button" onclick="tpwdsettingaa()" class="btn btn-primary save_verify">{:l("SAVE")}</button>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- /basic modal -->

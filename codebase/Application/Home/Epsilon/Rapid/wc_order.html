@@ -1,0 +1,119 @@
+<include file="Public:header"/>
+<script>
+
+</script>
+<link rel="stylesheet" href="__PUBLIC__/otc/otc.css"/>
+<div class="page-container">
+<div class="row">
+
+<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+<!-- rightbox starts -->
+<div class="rightbox">
+	<div class="QuoteLayout-Wrap">
+		<div class="QuoteLayout-Title" id="quotebox">Order Confirmation {$method}</div>
+		<div class="QuoteLayout-Body">
+			
+			<div class="quoteContent-wrap" id="with_orderx">
+				<div class="quoteContent-TopWrap">
+					<div class="quoteContent-CryptoTitle" id="tradetype_final"><i class="fa fa-check-circle fa-3x text-success"></i></div>
+					<div class="quoteContent-CryptoWrap">
+						<div class="quoteContent-StyledTargetAmount" id="tradecoin_qty">{$record['qty']*1}</div>
+						<div class="quoteContent-CryptoCoin" id="tradecoin_name">{$record.buy_coin}</div>
+					</div>
+				</div>
+				<div class="quoteContent-MiddleWrap">
+				
+				<div class="quoteContent-LabelRow"><div>{:L('Buy')}</div><div class="text-bold">{$record['qty']*1} {$record.buy_coin|strtoupper}</div></div>
+					<div class="quoteContent-LabelRow"><div>Price</div><div class="text-bold">{$record['price']} {$record.spend_coin|strtoupper}</div></div>
+					<!--<div class="quoteContent-LabelRow"><div>Fees</div><div class="text-bold">{$record.fees_paid} {$record.base_coin|strtoupper}</div></div>-->
+					<div class="quoteContent-LabelRow"><div>Pay Total</div><div class="text-bold">{$record['total']*1} {$record.spend_coin|strtoupper}</div></div>
+					
+					
+				</div>
+
+				<div class="quoteContent-button" id="quotefinal">
+					
+					<span class="row" id="desktopbutton"> <button data-bn-type="button"  id="approve-button" class="quote-button" onclick="walletconnect()">Wallet Connect</button>
+					</span>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+  <!-- Disabled animation -->
+				<div id="modal_animation" class="modal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							
+							<div class="modal-body">
+								<div class="text-center btn-box" id="metamask">
+								<div ><img src="__UPLOAD__/coin/metamask.svg" alt="MetaMask" style="height: 45px;"></div>
+								<div class="h3">MetaMask</div>
+								<div class="h6">Connect to your MetaMask Wallet</div></div>
+								<hr>
+
+								<div class="text-center btn-box" id="trustwallet">
+								<div ><img src="__UPLOAD__/coin/trustwallet.svg" alt="Trustwallet" style="height: 45px;"></div>
+								<div class="h3">Trustwallet</div>
+								<div class="h6">Connect to your Trust Wallet</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!-- /disabled animation -->
+
+<!-- Rightbox ends -->
+</div>
+</div>
+</div>
+<style>
+.btn-box{
+    display: block;
+    cursor: pointer;
+	padding:10px 0 10px 0;
+}
+.btn-box:hover{
+background:#f0f0f0}
+</style>
+<script type = "text/javascript">
+	
+//metamask button clicked
+$("#metamask").click(function(){
+let current_location="{:SITE_URL}Dex/walletconnect/qid/{$record['qid']}";
+	current_location = current_location.replace(/(^\w+:|^)\/\//, '');
+
+	let finalurl='https://metamask.app.link/dapp/'+current_location;
+	
+	if (!window.ethereum) {
+		console.log(finalurl);
+		window.location.replace(finalurl);
+	}else{
+		console.info('else part');
+			console.log(finalurl);
+	}
+});
+
+
+//Trustwallet button clicked
+$("#trustwallet").click(function(){
+	let current_location="{:SITE_URL}Dex/coreconnect/qid/{$record['qid']}";
+	let finalurl='https://link.trustwallet.com/open_url?coin_id=60&url='+encodeURIComponent(current_location);
+	if (!window.ethereum) {
+		console.log(finalurl);
+		window.location.replace(finalurl);
+	}else{
+		console.info('else part');
+	//		console.log(finalurl);
+	}
+
+});
+function walletconnect(){
+	window.location="{:U('Dex/walletconnect', array('qid' => $record['qid']))}";
+	
+}
+
+</script >
+<include file="Public:footer_minimal"/>

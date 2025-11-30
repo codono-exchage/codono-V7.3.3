@@ -1,0 +1,148 @@
+<include file="Public:header" />
+
+<main class="wrapper white-grey">
+	<!-- Swap Start -->
+	<section class="">
+		<div class="container">
+			<div class="row mt-3 mb-3">
+                <include file="User:top_bar" />
+                <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+                  <ul class="text-right breadcrumbs list-unstyle">
+                    <li>
+                      <a
+                        class="btn btn-warning btn-sm"
+                        href="{:U('/')}"
+                        >{:l('Home')}</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="btn btn-warning btn-sm"
+                        href="{:U('/invest')}"
+                        >{:l('Invest')}</a
+                      >
+                    </li>
+                    <li class="btn btn-warning btn-sm active">
+                      Dice Rolls
+                    </li>
+                  </ul>
+                </div>
+              </div>
+			<div class="row card pt-3 pb-3">
+				<div class="col-12 col-sm-8 col-md-7 col-lg-6">
+					<h1 class="f-s-30 f-w-700 m-b-15" onclick="TipDice();">{:l('Dice Game')}</h1>
+					<label class="bold control-label border">Bet {$basecoin| strtoupper} [<small><i>{:L('Balance')}: {$user_bal*1} {$basecoin| strtolower}</i></small>] </label>
+					<div class="uncredited-deposit-form">
+						<div class="form-group">
+							<div class="clearfix"></div>
+							<select id="diceamount" class="bootstrap-select" data-live-search="true" data-live-search-placeholder="Search" data-width="100%">
+								<volist name="allowed_bids" id="vo">
+									<option value="{$vo}">{$vo}</option>
+									</volist>
+							</select>
+						</div>
+						<button class="btn-2" onclick="diceroll('low');">R < 48</button>
+									<button class="btn-2" onclick="diceroll('high');">R > 52</button>
+						<!-- <a href="#" class="btn-2">{:l('Send')}</a> -->
+					</div>
+				</div>
+				</div>
+				<div class="row card p-20">
+					<div class="table-responsive">
+						<h1 class="f-s-30 f-w-700 m-b-15">{:l('Dice Roll History')}</h1>
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th class="">
+									Coin
+								</th>
+								<th class="">
+									Amount
+								</th>
+			
+								<th class="">
+									Call
+								</th>
+								<th class="">
+									Roll
+								</th>
+								<th class="">
+									{:l('Time')}
+								</th>
+								<th class="">
+									{:l('Won')}
+								</th>
+								<th class="">
+									{:l('Result')}
+								</th>
+							</tr>
+							</thead>
+							<tbody>
+								<notempty name="list">	
+								<volist name="list" id="vo">					
+									<tr>
+											
+											<td>{$vo.coinname}</td>
+											<td>{$vo['amount']*1}</td>
+											<td>{$vo.call}</td>
+											<td>{$vo.number}</td>
+											<td>{$vo.addtime|date="Y-m-d",###}</td>
+											<td>{$vo['winamount']*1}</td>
+											<td>
+											<switch name="vo.result">
+												<case value="1"><span class="label text-success">{:l('Won')}</span></case>
+												<case value="2"><span class="label text-danger">{:l('Lost')}</span></case>
+												<default />NA
+											</switch>
+											</span></td>
+										</tr>
+								</volist>	
+								<else/>
+						<p class="text-center font_gray font_16">
+						  <php>if (!userid()){</php>
+							<button onclick="javascript:loginpop()" class="btn btn-warning">{:l('Login to view your Rolls History')}</button>
+						<php>}else{</php>
+							No Rolls so far, Go Ahead and try now !
+						<php>}</php>
+						</p>
+					</notempty>		
+							</tbody>
+						</table>
+					</div>
+				</div>
+		</div>
+	</section>
+	<!-- Swap End -->
+</main>
+
+<script>
+	function TipDice(){
+				layer.tips('Choose necessary bet and press Roll < 48 or Roll > 52.Watch result in Dice Histroy..', '#stbutton', {tips: 1});
+	}
+	
+	function diceroll(call) {
+		var time=<php>echo time()</php>;
+		var amount=$("#diceamount").val();
+		var msg = 'You want to roll '+call+' and bet '+amount+' {$basecoin| strtoupper}';
+		
+		 layer.confirm(msg, {
+			 btn: ['Confirm','Cancel'] //PUSH_BUTTON
+		   }, function(){
+			$.post("/Invest/highlow/",{call:call,amount:amount,time:time} , function (data) {
+				layer.closeAll('loading');
+				trans_lock = 0;
+				if (data.status == 1) {
+	
+					layer.msg(data.info, {icon: 1});
+							
+				} else {
+					layer.msg(data.info, {icon: 2});
+				}
+				window.location.href = "{:U('Invest/dicerolls')}";
+			}, 'json');
+			});
+		}
+	
+	</script>
+
+<include file="Public:footer_minimal"/>

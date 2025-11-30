@@ -1,0 +1,137 @@
+<include file="Public:header"/>
+<!-- Wallet Content Start -->
+	<div class="container wallet-page">
+		<div class="row">
+			<div class="col-xl-12 m-t-30">
+				<div class="card">
+					<div class="card-body">
+						<volist name="payment_methods" id="pm">
+							<div class="row justify-content-between align-items-center">
+								<div class="col-xl-6 col-lg-6 m-b-15">
+									<p>{$pm.name} Payment:{$pm.instructions} </p>
+								</div>
+								<div class="col-xl-6 col-lg-6 text-right">
+									<a href="#!" data-toggle="modal" data-target="#add-{$pm.unique_identifier}" role="button" class="btn-2"><i class="fa fa-plus"></i> {:l("Add")} {$pm.name}</a>
+								</div>
+							</div>
+							<hr/>
+						</volist>
+					</div>
+				</div>
+			</div>
+			<include file="P2p:inc_user_bank_list"/>
+			<include file="P2p:inc_user_method_list"/>
+		</div>
+	</div>
+	<!-- Wallet Content End -->
+
+<volist name="UserBank" id="vo">	
+<include file="P2p:inc_viewPaymentMethod"/>
+</volist>
+
+
+<include file="P2p:modal_bank"/>
+<volist name="payment_methods" id="pm">
+	<if condition="$pm.is_default eq 0">
+<include file="P2p:modal_common"/>
+</if>
+</volist>
+<script>
+	function bank_up() {
+		var bank        = $('#bank_bank').val();
+		var bankaddr    = $('#bank_bankaddr').val();
+		var bankcard    = $('#bank_bankcard').val();
+	
+		if (bankaddr == "" || bankaddr == null) {
+			layer.tips("{:l('ENTER_ACCOUNT_BRANCH')}", '#bank_bankaddr', {tips: 2});
+			return false;
+		}
+		if (bankcard == "" || bankcard == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_BANK_ACCOUNT_')}", '#bank_bankcard', {tips: 2});
+			return false;
+		}
+		
+		if(bankcard.length < 5 || bankcard.length > 30){
+			layer.tips("{:l('PLEASE_ENTER_THE_CORRECT_BANK_')}", '#bank_bankcard', {tips: 2});
+			return false;
+		}
+		
+		$.post("{:U('P2p/doAddBank')}", {
+			bank: bank,
+			bankaddr: bankaddr,
+			bankcard: bankcard,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function bank_del(_this) {
+		var id = $(_this).attr('data');
+			$.post("{:U('P2p/delbank')}", {id: id}, function (data) {
+						if (data.status == 1) {
+							layer.msg(data.info, {icon: 1});
+							location.reload();
+						} else {
+							layer.msg(data.info, {icon: 2});
+							if (data.url) {
+								window.location = data.url;
+							}
+						}
+					}, "json");
+	}
+	function removeMethod(id,information) {
+
+
+	if(id==null || id <=0 || information==null){
+		layer.tips('Please select correct method', "#um"+id, {tips: 1});
+		return false;
+	}
+
+
+var msg = 'Are you sure want to delete:'+information+'!';
+
+ layer.confirm(msg, {
+	 btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   }, function(){
+	$.post("{:U('P2p/del_user_method')}",{id:id} , function (data) {
+		layer.closeAll('loading');
+		trans_lock = 0;
+		if (data.status == 1) {
+			layer.msg(data.info, {icon: 1});
+			window.setTimeout("window.location='" + data.url + "'", 3000);
+		} else {
+			layer.msg(data.info, {icon: 2});
+		}
+
+	}, 'json');
+	});
+}
+
+
+	function add_method(method){
+		var information        = $('#information_'+method).val();
+		$.post("{:U('P2p/user_add_method')}", {method: method,information:information}, function (data) {
+						if (data.status == 1) {
+							layer.msg(data.info, {icon: 1});
+							location.reload();
+						} else {
+							layer.msg(data.info, {icon: 2});
+							if (data.url) {
+								window.location = data.url;
+							}else{
+								location.reload();
+							}
+						}
+					}, "json");
+	}
+</script>
+
+<!--remove payment method modal end -->
+<include file="Public:footer_minimal" />

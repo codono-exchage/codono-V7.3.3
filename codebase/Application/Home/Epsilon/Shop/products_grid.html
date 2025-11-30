@@ -1,0 +1,24 @@
+<volist name="list" id="vo" mod="2">
+		<div class="col-md-6">
+					<div class="product product-list row">
+						<figure class="product-media col-12 col-sm-5">
+							<a href="{:U('Shop/go','view='.slugify($vo['name']).'-'.$vo['id'])}"> <img src="{$vo.img}" alt="{$vo.name}"></a>
+						</figure>
+						<div class="product-details col-12 col-sm-7">
+							<div class="product-cat">
+								<a href="{:U('Shop/index' ,array('type'=>$vo['type']))}">{$vo.type}</a>
+							</div>
+							<h4 class="product-name">
+								<a href="{:U('Shop/go','view='.slugify($vo['name']).'-'.$vo['id'])}">{$vo.name}</a>
+							</h4>
+							<div class="product-price">{$vo.buycoin}{$vo.market_price|Num} ${$vo.price|Num}</div>
+							<div class="product-desc">
+								{$vo['content']|strip_tags|msubstr=0,100}
+							</div>
+							<div class="product-action">
+								<a href="{:U('Shop/go','view='.slugify($vo['name']).'-'.$vo['id'])}" class="btn-2" title="Add to Cart"><i class="ion ion-md-basket"></i> {:l('BUY_NOW')}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+	</volist>

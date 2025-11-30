@@ -1,0 +1,147 @@
+</div></div></div>
+        <!-- JAVASCRIPT -->
+        
+        <script src="__THEME__/assets/libs/bootstrap/js/bootstrap.pack.min.js"></script>
+        <script src="__THEME__/assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="__THEME__/assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="__THEME__/assets/libs/node-waves/waves.min.js"></script>
+		<script type="text/javascript" src="__THEME__/layer/layer.js"></script>
+        <!-- apexcharts -->
+        <script src="__THEME__/assets/libs/apexcharts/apexcharts.min.js"></script>
+
+        <!-- dashboard init -->
+        <script src="__THEME__/assets/js/pages/dashboard.init.js"></script>
+
+        <!-- App js -->
+        <script src="__THEME__/assets/js/app.js"></script><script type="text/javascript" src="__THEME__/js/common.js"></script>
+<script type="text/javascript">
+	+function(){
+		//$("select").select2({dropdownCssClass: 'dropdown-inverse'});//Pull-down bar style
+		layer.config({
+			extend: 'extend/layer.ext.js'
+		});
+
+		var $window = $(window), $subnav = $("#subnav"), url;
+		$window.resize(function(){
+			//$("#main").css("min-height", $window.height() - 90);
+		}).resize();
+
+		/* Highlight the menu on the left */
+		url = window.location.pathname + window.location.search;
+
+		url = url.replace(/(\/(p)\/\d+)|(&p=\d+)|(\/(id)\/\d+)|(&id=\d+)|(\/(group)\/\d+)|(&group=\d+)/, "");
+		$subnav.find("a[href='" + url + "']").parent().addClass("current");
+
+		/*Menu on the left show hide*/
+		$("#subnav").on("click", "h3", function(){
+			var $this = $(this);
+			$this.find(".icon").toggleClass("icon-fold");
+			$this.next().slideToggle("fast").siblings(".side-sub-menu:visible").
+			prev("h3").find("i").addClass("icon-fold").end().end().hide();
+		});
+
+		$("#subnav h3 a").click(function(e){e.stopPropagation()});
+
+		/* headmanagementMembers menu */
+		$(".user-bar").mouseenter(function(){
+			var userMenu = $(this).children(".user-menu ");
+			userMenu.removeClass("hidden");
+			clearTimeout(userMenu.data("timeout"));
+		}).mouseleave(function(){
+			var userMenu = $(this).children(".user-menu");
+			userMenu.data("timeout") && clearTimeout(userMenu.data("timeout"));
+			userMenu.data("timeout", setTimeout(function(){userMenu.addClass("hidden")}, 100));
+		});
+
+		/* FormsColor gets focus */
+		$("form").on("focus", "input", function(){
+			$(this).addClass('focus');
+		}).on("blur","input",function(){
+			$(this).removeClass('focus');
+		});
+		$("form").on("focus", "textarea", function(){
+			$(this).closest('label').addClass('focus');
+		}).on("blur","textarea",function(){
+			$(this).closest('label').removeClass('focus');
+		});
+
+		// The navigation bar outside the windowheightRearAnalog scroll bar
+		var sHeight = $(".sidebar").height();
+		var subHeight  = $(".subnav").height();
+		var diff = subHeight - sHeight; //250
+		var sub = $(".subnav");
+		if(diff > 0){
+//			$(window).mousewheel(function(event, delta){
+//				if(delta>0){
+//					if(parseInt(sub.css('marginTop'))>-10){
+//						sub.css('marginTop','0px');
+//					}else{
+//						sub.css('marginTop','+='+10);
+//					}
+//				}else{
+//					if(parseInt(sub.css('marginTop'))<'-'+(diff-10)){
+//						sub.css('marginTop','-'+(diff-10));
+//					}else{
+//						sub.css('marginTop','-='+10);
+//					}
+//				}
+//			});
+		}
+	}();
+
+	//Highlight navigation
+	function highlight_subnav(url){
+		$('.side-sub-menu').find('a[href="'+url+'"]').closest('li').addClass('current');
+	}
+
+	function lockscreen(){
+		layer.prompt({
+			title: 'Screen Lock PWD',
+			formType: 1,
+			btn: ['Lock screen','cancel'] //Push button
+		}, function(pass){
+			if(!pass){
+				layer.msg('Screen Lock PWD!');
+			}else{
+				$.post("{:U('Login/lockScreen')}",{pass:pass},function(data){
+					layer.msg(data.info);
+					layer.close();
+					if(data.status){
+						window.location.href = "{:U('Login/lockScreen')}";
+					}
+				},'json');
+			}
+		});
+	}
+	function clearCache(){
+								$.get('/Admin/Tools/delcache').done(function(data){
+									if (data.status==1) {
+										if (data.url) {
+											updateAlert(data.info + ' page will automatically refresh~','alert-success');
+										}else{
+											updateAlert(data.info+ ' page will automatically refresh~','alert-success');
+										}
+										setTimeout(function(){
+											if (data.url) {
+												location.href=data.url;
+											}else if( $(this).hasClass('no-refresh')){
+												$('#top-alert').find('button').click();
+											}else{
+												location.reload();
+											}
+										},1500);
+									}else{
+										updateAlert(data.info);
+										setTimeout(function(){
+											if (data.url) {
+												location.href=data.url;
+											}else{
+												$('#top-alert').find('button').click();
+											}
+										},1500);
+									}
+								});
+							}
+</script>
+</body>
+</html>

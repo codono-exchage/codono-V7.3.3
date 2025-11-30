@@ -1,0 +1,184 @@
+body {
+    background-color: white !important;
+    background-image: url(/Public/Home/landing/img/bg.png) !important;
+    background-color: #171055;
+    background-position: center center;
+    background-size: cover;
+}
+
+.g-recaptcha > div {
+    margin:auto;
+    width:234px;
+    height:78px;
+}
+
+#login-btn {
+    background-color: transparent;
+    color: #4d8ea9;
+}
+
+#login-btn:hover {
+    background-color: #eaeaea;
+}
+
+.all_mask_loginbox {
+    background-color: #fff;
+    padding: 0;
+    width: 400px;
+    left: 50%;
+    transform: translate(10%, 0%);
+    box-shadow: 0 0;
+    border: 0;
+}
+
+.login_title.pl20 span {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    position: relative;
+    display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: normal;
+}
+
+.login_title.pl20 {
+    padding: 30px 0;
+    margin: 0 0 20px 0;
+    height: auto;
+    background-color: #4d8ea9;
+}
+
+.mask_wrap_close i {
+    color: #fff !important;
+    font-size: 15px !important;
+}
+
+.mask_wrap_close i:hover {
+    color: #969696 !important;
+}
+
+.all_mask_loginbox button.btn.bg-success.btn-block {
+    background-color: #4d8ea9;
+    border: 0;
+    border-radius: 2px !important;
+    padding: 12px 0px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    margin: 0;
+}
+
+.all_mask_loginbox .form-group.login-options a {
+    color: #969696 !important;
+}
+
+.all_mask_loginbox form#form-login .form-group.row {
+    margin: 10px 0 !important;
+    float: left;
+    width: 100%;
+}
+
+.all_mask_loginbox form#form-login .form-group.row .col-sm-6 {
+    padding: 0 10px 0px 0;
+}
+
+.mask_wrap_login {
+    padding: 0 5%;
+}
+
+.mask_wrap_close {
+    top: -22px;
+    right: -5px;
+}
+.login-container .page-container {
+    background-color: transparent !important;
+    padding: 40px !important;
+    background-image: none !important;
+}
+
+.login-container .page-container .login-form {
+    background-color:#fff !important;
+    border: 0 !important;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.login-container .page-container .nav-tabs.nav-justified>li>a {
+    text-transform: uppercase;
+    color: #fff;
+    border: 0;
+    padding: 0;
+}
+
+
+
+div#navbar-second-toggle ul li a {
+    color: #898E94 !important;
+}
+
+.all_mask_loginbox form#form-login {
+    padding: 5% !important;
+}
+
+.all_mask_loginbox {
+    background-color: #fff;
+    padding: 0;
+    width: 400px;
+    left: 50%;
+    transform: translate(10%, 0%);
+    box-shadow: 0 0;
+    border: 0;
+    position: relative;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.has-feedback-left .form-control {
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    outline: 0;
+    border-radius: 0px;
+}
+
+
+.login-container .page-container .nav-tabs.nav-justified>li>a h6 {
+    color: inherit !important;
+    margin: 0 !important;
+    line-height: normal;
+    font-size: 23px;
+    letter-spacing: .5px;
+    padding: 35px;
+}
+
+ul.nav.nav-tabs.nav-justified {
+    height: 90px;
+    border: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 23px;
+    color: #fff;
+    background-color: rgba(17, 97, 134, 0.72);
+}
+
+.login-container .page-container .nav-tabs.nav-justified li {
+    width: 100%;
+}
+
+.content-divider.text-muted.form-group {
+    display: none;
+}
+
+button.btn.bg-indigo-300.btn-block {
+    background-color: #4d8ea9;
+    border: 0;
+    border-radius: 2px !important;
+    padding: 12px 0px;
+}
+
+.form-btnz {
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: .3px;
+}

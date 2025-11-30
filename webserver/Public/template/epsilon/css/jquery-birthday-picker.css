@@ -1,0 +1,14 @@
+.birthdatepicker_container{
+    display: flex;
+    width: 100%;
+}
+.birthdatepicker_container .birthday{
+    flex-basis: 100%;
+    margin: 0 10px;
+}
+.birthdatepicker_container .birthday.birthdatepicker_day{
+    margin-left:0;
+}
+.birthdatepicker_container .birthday.birthdatepicker_year{
+    margin-right:0;
+}

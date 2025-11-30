@@ -1,0 +1,149 @@
+<include file="Public:header"/>
+
+	<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/forms/wizards/stepy.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/assets/js/pages/wizard_stepy.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/forms/selects/select2.min.js"></script>
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+<!-- Basic setup -->
+	            <div class="panel panel-default">
+					<div class="card-header">
+						<h1 class="card-title text-center">P2P Ad Posting</h1>
+					</div>
+
+                	<form class="stepy-basic" action="#">
+						<fieldset title="1">
+							<legend class="text-semibold">Set Type & Price</legend>
+
+							<div class="row">
+								
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Ad type:</label>
+												<select onchange="correctTerms()" name="trade-type" id="tradetype" data-placeholder="Type" class="select form-control">
+													<option value="buy">I want to Buy</option>
+													<option value="sell">I want to Sell</option>
+												</select>
+											
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label id="textforcoin">Buy Coin:</label>
+												<select name="coinname" data-placeholder="coin" class="select form-control">
+													<volist name="allowed_cryptos" id="coinname">
+													<option value="{$coinname.symbol}">{$coinname['symbol'] | strtoupper}</option>
+													</volist>
+												</select>
+											
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+									<div class="col-md-6">
+									<div class="form-group">
+										<label id="textforfiat">Pay Fiat:</label>
+												<select name="fiatname" data-placeholder="fiat" class="select form-control">
+													<volist name="allowed_fiat" id="fiat">
+													<option value="{$fiat.name}">{$fiat['name'] | strtoupper}</option>
+													</volist>
+												</select>
+											
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Current Market Rate:</label>
+										<input type="email" name="email" class="form-control" placeholder="75.25 USD" disabled>
+									</div>
+								</div>
+							</div>
+
+							
+						</fieldset>
+
+						<fieldset title="2">
+							<legend class="text-semibold">Set Total Amount & Payment Method</legend>
+
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Price:</label>
+		                                <input type="text" name="price" id="price" placeholder="Enter Price" class="form-control">
+	                                </div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Total Quantity:</label>
+		                                <input type="text" name="quantity" id="quantity" placeholder="Enter Quantity" class="form-control">
+	                                </div>
+								</div>
+
+							</div>
+
+							<div class="row">
+						
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Payment Method:</label>
+												<select name="paymentmethod" id="paymentmethod" data-placeholder="Method" class="select form-control">
+													<volist name="payment_methods" id="method">
+													<option value="{$method.id}">{$method.truename}@{$method.bank}</option>
+													</volist>
+												</select>
+									</div>
+								</div>
+								
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Remarks (Optional):</label>
+		                                <input type="text" name="remarks" placeholder="customer remarks" class="form-control">
+	                                </div>
+								</div>
+							</div>
+						</fieldset>
+
+						<button type="submit" class="btn btn-primary stepy-finish">Submit <i class="icon-check position-right"></i></button>
+					</form>
+	            </div>
+</div>
+</div>
+</div>
+<style>
+.form-control{
+background:#000;}
+.select2-selection--single:not([class*=bg-]) {
+    background-color: #000;
+    color: #fff;
+}
+.stepy-header li.stepy-active span {
+    color: #fff;
+}</style>
+<script>
+function correctTerms(){
+const tradetype=$('select#tradetype').find(":selected").val();
+console.log(tradetype);
+if(tradetype ==='sell'){
+$('#textforfiat').html("Receive Fiat");
+$('#textforcoin').html("Sell Coin");
+}else{
+$('#textforfiat').html("Pay Fiat");
+$('#textforcoin').html("Buy Coin");
+}
+}
+</script>
+
+	            <!-- /basic setup -->
+<include file="Public:footer_minimal" />

@@ -1,0 +1,311 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="__EPSILON__/otc/otc.css"/>
+
+<div class="container">
+	<div class="row mt-3">
+        <include file="User:top_bar" />
+        <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+          <ul class="text-right breadcrumbs list-unstyle">
+            <li>
+              <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+            </li>
+            <li class="btn btn-warning btn-sm active">{:l('OTC')}</li>
+			<li>
+				<a href="{:U('Otc/log')}" class="btn btn-warning btn-sm"
+				  >{:l('OTC Log')}</a
+				>
+			  </li>
+          </ul>
+        </div>
+      </div>
+</div>
+
+<section class="swap-page">
+		<div class="container">
+			<div class="row justify-content-center ">
+				<div class="col-12">
+					<div class="swap-form-wrapper">
+						<div class="swap-form-inner">
+							<h1 class="text-center m-b-30">{:l("SWAP")}</h1>
+							
+								<div class="swap-from" id="showselloptions">
+									<label for="swapFrom">{:l("Use")}</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+										<select id="swapFrom" class="bootstrap-select xselloption" data-live-search="true" data-live-search-placeholder="{:l('Search')}" data-width="200px">
+												<option>{:l("Select")}</option>
+												<volist name="base_coins" id="so">    
+												<option data-content="<img src='{$so.image}'> {$so.symbol|strtoupper}" data-value="{$so.symbol|strtoupper}" selected></option>
+												</volist>
+										</select>
+										</div>
+										<input type="text" class="form-control" placeholder=" " id="change2ndInput" value="">
+									</div>
+								<div class="coinInput-error" id="input2error"></div>
+								</div>
+								<div class="swap-from" id="showbuyoptions">
+									<label for="swapTo">{:l("Get")}</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<select id="swapTo" class="bootstrap-select xbuyoption" data-live-search="true" data-live-search-placeholder="{:l('Search')}" data-width="200px">
+												<option>{:l("Select")}</option>
+												<volist name="trade_coins" id="vo">    
+												<option data-content="<img src='{$vo.image}'> {$vo.symbol|strtoupper}" data-value="{$vo.symbol|strtoupper}" selected></option>
+												</volist>   
+											</select> 
+										</div>
+										<input type="text" class="form-control" placeholder="0.00" id="change1stInput">
+									</div>
+								</div>
+								<div class="connect-wallet">
+									<button type="submit" class="btn btn-warning btn-block"  id="quote-button" onclick="requestQuote()">{:l("SWAP NOW")}</button>
+								</div>
+								<div class="coinInput-error" id="input1error"></div>
+	<input name="tradetype" id="tradetype" value="buy" type="hidden"/>
+	<input name="trade_coin" id="trade_coin" value="{$default_coin_trade.symbol}" type="hidden"/>
+	<input name="base_coin" id="base_coin" value="{$default_coin_base.symbol}" type="hidden"/>
+	<input name="min_req" id="min_req" value="" type="hidden"/>
+	<input name="max_req" id="max_req" value="" type="hidden"/>
+	<input name="qid" id="qid" value="" type="hidden"/>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+<include file="Otc:widget_quote"/>
+	<script type = "text/javascript" >
+var trade_coins = {$trade_coins|json_encode} ;
+var base_coins = {$base_coins|json_encode} ;
+var select_coin_b=$("#base_coin").val().toLowerCase();
+var select_coin=select_coin_b.toLowerCase();
+var min_req_b=parseFloat(base_coins[select_coin]['min']);
+var max_req_b=parseFloat(base_coins[select_coin]['max']);
+$("#change2ndInput").attr("placeholder", min_req_b+" - "+max_req_b);
+
+changetype('buy');
+$("#change2ndInput").change(function(){
+$('.quote-button').prop('disabled', true);
+$("#input1error").html('');
+$("#input2error").html('');
+$('.quote-button').prop('disabled', false);
+var value=parseFloat($('#change2ndInput').val());
+$('#change1stInput').val("");
+var select_coin_b=$("#base_coin").val().toLowerCase();
+var select_coin=select_coin_b.toLowerCase();
+
+
+
+if(value<min_req_b){
+$('.quote-button').prop('disabled', true);
+$("#input2error").html('Amount should be greater than '+min_req_b+' '+select_coin_b);
+return false;
+}
+else if(value>max_req_b)
+{
+$('.quote-button').prop('disabled', true);
+$("#input2error").html('Amount should be less than  '+max_req_b+' '+select_coin_b);
+return false;
+}else{
+//Means its true enable button for quote
+$('.quote-button').prop('disabled', false);
+$("#input2error").html('');
+}
+
+
+});
+
+
+$("#change1stInput").change(function(){
+$("#input1error").html('');
+$("#input2error").html('');
+$('.quote-button').prop('disabled', true);
+var value=parseFloat($('#change1stInput').val());
+var select_coin_t=$("#trade_coin").val().toLowerCase();
+var select_coin=select_coin_t.toLowerCase();
+$('#change2ndInput').val("");
+var min_req_t=parseFloat(trade_coins[select_coin]['min']);
+var max_req_t=parseFloat(trade_coins[select_coin]['max']);
+
+if(value<min_req_t){
+$('.quote-button').prop('disabled', true);
+$("#input1error").html('Amount should be greater than  '+min_req_t+' '+select_coin_t);
+return false;
+}
+else if(value>max_req_t)
+{
+$('.quote-button').prop('disabled', true);
+$("#input1error").html('Amount should be less than  '+max_req_t+' '+select_coin_t);
+return false;
+}else{
+//Means its true enable button for quote
+$('.quote-button').prop('disabled', false);
+$("#input1error").html('');
+}
+
+});
+
+
+function changetype(type){
+if(type !='buy' && type !='sell'){ return false;}
+  $("#tradetype").val(type);
+if(type=='buy'){
+$("#input1text").html('Buy');
+$("#input2text").html('Spend');
+$("#wanttobuy").css("color","#fff");
+$("#wanttobuy").css("border-bottom","2px solid #5d78ff");
+$("#wanttosell").css("color","rgb(146, 154, 165)");
+$("#wanttosell").css("border-bottom","0px");
+}else{
+$("#input1text").html('Sell');
+$("#input2text").html('Receive');
+$("#wanttosell").css("color","#fff");
+$("#wanttosell").css("border-bottom","2px solid #5d78ff");
+$("#wanttobuy").css("color","rgb(146, 154, 165)");
+$("#wanttobuy").css("border-bottom","0px");
+}
+
+}
+
+
+$("#showbuyoptions li a").click(function () {
+	alert("Clicked");
+    var selText = $(this).text();
+    var imgSource = $(this).find('img').attr('src');
+    var img = '<img class="coin-input-coinimage" src="' + imgSource + '"/>';        
+	var source =img+'<span class="coinInput-CoinText">'+selText+'</span> <span class="caret"></span>';
+    $('.xbuyoption').html(source);
+	$("#trade_coin").val(selText);
+});
+
+$("#showselloptions li a").click(function () {
+    var selText = $(this).text();
+	
+    var imgSource = $(this).find('img').attr('src');
+    var img = '<img class="coin-input-coinimage" src="' + imgSource + '"/>';        
+	var source =img+'<span class="coinInput-CoinText">'+selText+'</span> <span class="caret"></span>';
+    $('.xselloption').html(source);
+	$("#base_coin").val(selText);
+	
+});
+
+function rejectQuote(){
+$('#quote-button').prop('disabled', false);
+				$('#received_price').html("");
+				$('#received_total').html("");
+				$('#tradecoin_name').html("");
+				$('#tradecoin_qty').html("");
+				$('#tradetype_final').html("");
+				$("#with_order").css("display","none");
+				$("#blank_order").css("display","block");
+}
+function requestQuote(){
+
+var base_coin=$('select#swapFrom').find("option:selected").attr('data-value');
+var trade_coin=$('select#swapTo').find("option:selected").attr('data-value');
+var input1=$("#change1stInput").val();
+var input2=$("#change2ndInput").val();
+var tradetype=$("#tradetype").val();
+
+if(trade_coin=='' || trade_coin==null)
+{
+layer.tips('Please select From!', '#swapFrom', {tips: 3});
+return false;
+}
+
+if(base_coin=='' || base_coin==null)
+{
+layer.tips('Please select To!', '#swapTo', {tips: 3});
+return false;
+}
+
+
+if(input1==null && input2==null)
+{
+layer.tips('Please enter amount!', '#change1stInput', {tips: 3});
+return false;
+}
+
+		$.post("{:U('Otc/getquote')}", {
+			trade_coin: trade_coin,
+			base_coin: base_coin,
+			input1: input1,
+			input2: input2,
+			tradetype:tradetype,
+		}, function (data) {
+	
+	
+			if (data.status == 1) {
+				if(data.data.qid==0){
+				$("#quotefinal").css("display","none");
+				$("#quoteerror").css("display","flex");
+				}
+				$("#quotebox").modal('show');
+
+				layer.msg(data.msg, {icon: 1});
+				layer.tips('Press this button to continue!', '#approve-button', {tips: 3});
+				
+				$('#received_price').html(data.data.price+' '+data.data.base);
+				$('#received_total').html(data.data.total+' '+data.data.base);
+						
+				$('#tradecoin_name').html(data.data.trade);
+				$('#tradecoin_qty').html(data.data.qty);
+				$('#tradetype_final').html("I want to "+data.data.trade_type);
+				$('#expiretime').html(data.data.expire+'s')
+				$("#with_order").css("display","block");
+				$("#blank_order").css("display","none");
+				$('#qid').val(data.data.qid);
+				var expire=data.data.expire
+				var counter = expire;
+				var interval = setInterval(function() {
+				counter--;
+				var percentage=counter*(100/expire);
+				$('#quote-button').prop('disabled', true);
+				$("#progressbar").css("width",percentage+"%");
+				$('#expiretime').html(counter+'s')
+				
+				// Display 'counter' wherever you want to display it.
+				if (counter == 0) {
+				// Times up 
+				$("#quotefinal").css("display","none");
+				$("#quoteerror").css("display","flex");
+				$("#quoteerror2").html("Your Quote is expired, try a new quote now");
+				$('#expiretime').html('0s')
+				clearInterval(interval);
+				$('#quote-button').prop('disabled', false);
+						}
+				}, 1000);
+				
+				
+				
+			} else {
+				layer.msg(data.msg, {icon: 3});
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+
+function approveQuote(){
+
+var qid=$("#qid").val();
+if(qid=='' || qid==0)
+{
+layer.alert('You currently do not have a valid quote, Please refresh!', {title: "Info",btn: ['Ok']});
+}
+$.post("{:U('Otc/approveQuote')}", {
+			qid: qid,
+		}, function (data) {
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+				
+				window.location=data.url;
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+</script>
+
+<include file="Public:footer_minimal"/>

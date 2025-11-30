@@ -1,0 +1,46 @@
+<div id="all_mask" class="all_mask" style="height: 0px; display: none;"></div>
+<div id="all_mask_loginbox" class="all_mask_loginbox" style="display: none;">
+    <div class="login_title pl20">
+        <span style="text-align: center;margin-left: 15px;color: #1a81d6;cursor:pointer;">{:l('MEMBER_LOGIN')}</span>
+		<eq name="Think.session.codono_already" value="1"><font color="#ff0000" size="1px;">{:l('YOUR_ACCOUNT_LOGIN_IN_OTHER_PL')}</font></eq>
+	</div>
+    <form id="form-login" class="mask_wrap login-fb">
+        <div class="login_text zin90">
+            <div class="mask_wrap_title">{:l('ACCOUNTS')}:</div>
+            <input type="text" id="login_cellphones" class="texts" style="display:none ;">
+            <input type="text" id="login_cellphone" class="texts hg40 w250" placeholder="{:l('PLEASE_ENTER_THE_PHONE_NUMBER')}"
+                   style="padding-left: 42px;" value=""/>
+            <link rel="stylesheet" href="__PUBLIC__/static/css/intltelinput.css">
+            <script src="__PUBLIC__/static/js/intltelinput.js"></script>
+            <script>
+                $("#login_cellphones").intlTelInput({
+                    autoHideDialCode: false,
+                    defaultCountry: "us",
+                    nationalMode: false,
+                    preferredCountries: ['us', 'uk', 'in', 'hk', 'au'],
+                });
+            </script>
+        </div>
+        <div class="login_text zin80">
+            <div class="mask_wrap_title">{:l('PASSWORD')}:</div>
+            <input id="login_password" class="texts hg40 w250" type="password" placeholder="{:l('PLEASE_ENTER_YOUR_PASSWORD')}" autocomplete="off">
+        </div>
+        <div class="login_text zin80">
+            <div class="mask_wrap_title">{:l('SECURITY_CODE')}</div>
+            <input type="text" id="login_verify" value="" class="texts w145 hg40" placeholder="{:l('PLEASE_ENTER_VERIFICATION_CODE')}"/>
+			<span style="line-height: 20px;">
+				<img id="login_verify_up" class="codeImg reloadverify hg40" src="{:U('Verify/code')}"
+                     title="{:l('REFRESH')}" onclick="this.src=this.src+'?t='+Math.random()" width="100" height="34">
+			</span>
+        </div>
+        <div class="login_button">
+            <input type="button" value="{:l('LOG_IN')}" onclick="footer_login();" class="btn btn-primary btn-block">
+        </div>
+        <div class="login-footer wwxwwx" style="border-bottom-left-radius: 3px; border-bottom-right-radius: 3px;">
+			<span style="color: #CCC; float: right; margin-right: 25px;">
+			<a style="font-size: 14px;" href="{:U('Login/register')}">{:l('FREE_REGISTRATION')}</a> | <a href="{:U('Login/findpwd')}" style="font-size: 14px;">{:l('FORGET_PASSWORD')}</a>
+			</span>
+        </div>
+    </form>
+    <div class="mask_wrap_close" onclick="wrapClose()"><i class="fa fa-times fz_20 move" aria-hidden="true"></i></div>
+</div>

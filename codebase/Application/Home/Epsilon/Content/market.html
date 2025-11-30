@@ -1,0 +1,24 @@
+<include file="Public:header" />
+
+<div class="container">
+  <div class="row">
+    <include file="User:top_bar" />
+    <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+      <ul class="text-right breadcrumbs list-unstyle">
+        <li>
+          <a class="btn theme-bg text-white btn-sm" href="{:U('/')}">{:l('Home')}</a>
+        </li>
+        <li>
+          <a href="{:U('/')}" class="btn theme-bg text-white btn-sm">{:l('Content')}</a>
+        </li>
+        <li class="btn theme-bg text-white btn-sm active">{:l('Market')}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<eq name="SOCKET_WS_ENABLE" value='1'>
+	<include file="Index:socket_script"/>
+	</eq>
+<include file="Content:widget_markets" />
+<include file="Content:widget_info_modal" />
+<include file="Public:footer_minimal" />

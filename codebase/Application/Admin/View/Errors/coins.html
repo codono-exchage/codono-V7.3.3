@@ -1,0 +1,24 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Todo')}</span>
+		</div>
+		<div class="d-flex flex-wrap gap-2 tomato-1 mb-1"><ul>
+			<li>{$data.coin_message}</li>
+			</ul></div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function () {
+		//Highlight the main navigation
+		$('.issue-box').addClass('current');
+		//Highlight side navigation
+		$('.issue-index').addClass('current');
+	});
+</script>
+<include file="Public:footer"/>

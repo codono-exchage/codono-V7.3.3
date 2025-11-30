@@ -1,0 +1,68 @@
+<script>
+ws = new WebSocket("{:SOCKET_WS_URL}");
+ws.onopen = function(e){
+        //console.info(e);
+        ws.send('Initialize WS');//Is equivalent to sending an initialization message
+        console.info("Send a heartbeat packet string to the server");
+     
+}
+ ws.onmessage = function(e){
+
+        // json data into js object
+        var data = JSON.parse(e.data);
+//        console.log(data);
+
+        var type = data.type || '';
+
+        switch(type){
+		   case 'newprice':
+                ws_newprice(data)
+                break		
+            case 'break':
+           //     console.log(data.info);
+                break
+            default :
+             //   console.log(data);
+
+        }
+    };	
+	function toNum(num, round) {
+        return Math.round(num * Math.pow(10, round) - 1) / Math.pow(10, round);
+    }
+
+	function ws_newprice(data) {
+		//console.log(34,socket_array);
+		  if(decimals == null){
+			var decimals=6;
+			}
+			
+			if (socket_array.includes(data.market)) {
+			//	console.log(40);
+				if (data.type=='newprice') {
+				var elementname= "#m_"+data.market;
+			//	console.log(43,elementname);
+					
+					if(data.change>0){var changeclass="buy"}
+					if(data.change<0){var changeclass="sell"}
+					$(elementname+" td:eq(6)").removeClass('buy');
+					$(elementname+" td:eq(6)").removeClass('sell');
+					$(elementname+" td:eq(6)").addClass(changeclass);
+					elementupdate(elementname+" td:eq(6)",toNum(data.change,2)+'%');
+					elementupdate(elementname+" td:eq(5)",formatCount(data.amount));
+					elementupdate(elementname+" td:eq(3)",formatCount(data.volume));
+					elementupdate(elementname+" td:eq(4)",formatCount(data.sell_price));
+					elementupdate(elementname+" td:eq(2)",formatCount(data.buy_price));
+
+					if(data.new_price){
+					elementupdate(elementname+" td:eq(1)",formatCount(data.new_price));
+					}
+                }
+			}		else{
+			//	console.log(57,socket_array,data.market);
+			}		
+
+    }
+function elementupdate(idselector,content){
+	$(idselector).html(content);
+}
+</script>

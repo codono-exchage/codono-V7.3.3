@@ -1,0 +1,116 @@
+<!-- Footer Start -->
+
+
+
+	<footer class="footer-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="footer-blocks">
+						<div class="block col-3">
+
+							<img class="logo-dark" alt="{:SHORT_NAME}" src="__UPLOAD__/public/{$C['web_logo']}" width="152px"/>
+							<img class="logo-light" alt="{:SHORT_NAME}" src="__UPLOAD__/public/{$C['footer_logo']}" width="152px"/>
+							<div class="small-text">{$C['web_waring']}</div>
+						</div>
+						<volist name="footer" id="vo">
+							<if condition="$vo.dropdown eq 1">
+								<div class="block">
+								 <h3>{:l($vo['title'])}</h3>
+								
+								  <ul>
+									<volist name="vo.submenu" id="submenu">
+									  <li>
+										<if condition="$submenu['is_external']">
+											<a href="{$submenu.url}">
+											<else/>
+											<a href="/{$submenu.url}">
+											</if>
+									   {:l($submenu['title'])}
+									  </a>
+									  </li>
+									</volist>
+								  </ul>
+								</div>
+							</if>
+						  </volist>
+					
+						<div class="block">
+							<h3>{:l("Community")}</h3>
+							<ul class="social-icons list-inline">
+								<li class="list-inline-item"><a href="{$C['contact_facebook']}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+								<li class="list-inline-item"><a href="{$C['contact_twitter']}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+								<li class="list-inline-item"><a href="{$C['contact_instagram']}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+								<li class="list-inline-item"><a href="{$C['contact_linkedin']}" target="_blank" ><i class="fa fa-linkedin"></i></a></li>
+								<li class="list-inline-item"><a href="{$C['contact_pinterest']}" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+								<li class="list-inline-item"><a href="{$C['contact_youtube']}" target="_blank"><i class="fa fa-youtube"></i></a></li>
+								<li class="list-inline-item"><a href="{$C['contact_telegram']}" target="_blank"><i class="fa fa-telegram"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer End -->
+
+	<section class="footer-section">
+		<div class="panel-group pt-3 pb-3" id="accordion" role="tablist" aria-multiselectable="true">
+			<volist name="footer" id="vo">
+				<if condition="$vo.dropdown eq 1">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="heading{$vo['id']}">
+						  <p class="panel-title" style="margin: 0;">
+						  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{$vo['id']}" aria-expanded="true" aria-controls="collapseOne">
+							{:l($vo['title'])}
+						  </a>
+						</p>
+						</div>
+						<div id="collapse-{$vo['id']}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{$vo['id']}">
+							<ul class="link-wrapper">
+								<volist name="vo.submenu" id="submenu">
+									<li>
+										<a href="/{$submenu.url}">
+											{:l($submenu['title'])}
+										</a>
+										</li>
+							</volist>
+								
+							</ul>
+						  </div>
+					  <ul>
+					</div>
+				</if>
+			  </volist>
+			  <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingFive">
+				  <p class="panel-title" style="margin: 0;">
+				  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+					{:l("Community")}
+				  </a>
+				</p>
+				</div>
+				<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+				  <ul class="link-wrapper d-flex justify-content-around w-100 align-items-center">
+					<li class="list-inline-item"><a href="{$C['contact_facebook']}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+					<li class="list-inline-item"><a href="{$C['contact_twitter']}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+					<li class="list-inline-item"><a href="{$C['contact_instagram']}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+					<li class="list-inline-item"><a href="{$C['contact_linkedin']}" target="_blank" ><i class="fa fa-linkedin"></i></a></li>
+					<li class="list-inline-item"><a href="{$C['contact_pinterest']}" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+					<li class="list-inline-item"><a href="{$C['contact_youtube']}" target="_blank"><i class="fa fa-youtube"></i></a></li>
+					<li class="list-inline-item"><a href="{$C['contact_telegram']}" target="_blank"><i class="fa fa-telegram"></i></a></li>
+
+				  </ul>
+				</div>
+			  </div>
+		  </div>
+
+		  <div class="panel-group">
+			<ul class="link-wrapper d-flex justify-content-center w-100 align-items-center">
+				<li class="text-white">{:C('web_icp')}</li>
+				<li class="ml-2 text-white">{:l('All rights reserved')}.</li>
+			</ul>
+			
+		  </div>
+	</section>
+</main>

@@ -1,0 +1,25 @@
+<div class="col-md-4 col-lg-6 col-pd">
+<div id="middleColumn" class="graph-div">
+<div id="allchartsinone" class="crypt-market-status">
+
+
+<div class="ShowGraph2 h-40 " id="marketchartbox">
+<iframe style="border-style: none;" border="0" width="100%" height="296px" id="market_chart" src="/Trade/ordinary?market={$market}"></iframe>
+</div>
+<div class="ShowGraph3 hideme h-40 " id="tradingviewbox">
+<iframe style="border-style: none;" border="0" width="100%" height="296px" id="market_chartx" src="/Trade/tradingview/market/{$market}"></iframe>
+</div>
+<div class="ShowGraph3 hideme h-40 depthchart" id="depthchart">
+</div>
+<div id="depthurl" style="display:none">{:SITE_URL}Ajax/getDepthNew?market={$market}</div>
+<div id="depthmarket" style="display:none">{$market}</div>
+
+<div id="depthbuttons">
+<button class="btn btn-secondary btn-xs" id="togglebutton2" onclick="ShowMe('marketchartbox')" >{:l('Candle')}</button> 
+<button class="btn btn-secondary btn-xs" id="togglebutton2" onclick="ShowMe('tradingviewbox')" >{:l('TradingView')}</button> 
+<button class="btn btn-secondary btn-xs" id="togglebutton2" onclick="ShowMe('depthchart')" >{:l('Depth')}</button> 
+</div>
+</div>
+
+</div>
+</div>

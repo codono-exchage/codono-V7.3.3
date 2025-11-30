@@ -1,0 +1,220 @@
+﻿<include file="Public:header" />
+
+<style>
+    .container {
+        background-color: var(--theme-bg);
+    }
+    .lottery-con {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 2rem 0;
+        background: url("/Public/Home/award/images/lottery_con1.png") no-repeat center;
+        background-size: cover;
+        color: var(--theme-color);
+    }
+    .lottery-result {
+        padding: 1.5rem;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    #lottery {
+        padding: 2rem;
+        background-size: cover;
+    }
+    .begin-btn {
+        background: url(/Public/Home/award/images/begin_btn.png) no-repeat center;
+        width: 160px;
+        height: 160px;
+        background-size: contain;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .lottery-explain {
+        background: url("/Public/Home/award/images/lottery_con2.png") no-repeat center;
+        background-size: cover;
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+</style>
+
+<!-- Modal for messages -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalMessageBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="lottery-con text-center">
+        <h2 class="my-4">
+            <img src="/Public/Home/award/images/lottery_t1.png" alt="Lottery Title" class="img-fluid">
+        </h2>
+        
+        <div class="lottery-result">
+            <gt name="Think.session.userId" value="0">
+                <span class="font-weight-bold">{:l('DRAWS')} <span id="cjcs" class="text-success">{$uinfo['awardNumToday']}</span>, {:l('WINS')} <span class="text-danger">{$uinfo['awardTotalToday']}</span></span>
+            <else/>
+                <a href="#" onclick="loginpop();return false;" class="btn btn-primary btn-sm">{:l('LOG_IN')}</a> {:l('AND_THEN_TO_PARTICIPATE_IN_SWE')}
+            </gt>
+        </div>
+
+        <div id="lottery" class="d-flex justify-content-center position-relative">
+            <div class="award" id="drawPointer">
+                <img src="/Public/Home/award/images/prize.png" class="img-fluid">
+            </div>
+            <div class="begin-btn" onclick="signInWheel();"></div>
+            <input type="hidden" id="isWheeling" value="0">
+        </div>
+    </div>
+
+    <div class="lottery-explain text-white rounded">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="text-center">{:l('LUCKY_LIST')}</h3>
+                <div class="lottery-explain-con mt-4">
+                    <ul id="FontScroll" class="list-unstyled"></ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>{:l('EXPLANATION')}</h3>
+                <ul class="list-unstyled">
+                    <li><em>1.</em> {:l('AS_TIME')} {:date('Y-m-d')}</li>
+                    <li><em>2.</em> {:l('DURING_THE_EVENT_A_SINGLE_DAY_')} 300 {:l('YUAN_WILL_BE_ABLE_TO_GET_A_LUC')}</li>
+                    <li><em>3.</em> {:l('DAILY_LIMIT_PER_ACCOUNT')} 6 {:l('LUCKY_DRAW_OPPORTUNITIES')}</li>
+                    <li><em>4.</em> {:l('THE_HIGHER_THE_AMOUNT_OF_THE_T')}</li>
+                    <li><em>5.</em> {:l('THE_OPPORTUNITY_TO_DRAW_VALID_')}</li>
+                    <li><em>6.</em> {:l('THE_ABOVE_PICTURES_ARE_FOR_REF')}</li>
+                    <li><em>7.</em> {:l('TYRANT_ERA_COINS_FINAL_INTERPR')}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!-- Other template content -->
+
+    <div class="recent-wins">
+        <h3>Recent Wins</h3>
+        <ul class="list-unstyled">
+            <volist name="recentWins" id="win">
+                <li>
+                    <strong>{$win.username}</strong> won <span class="text-warning">{$win.awardname}</span> on {$win.addtime|date="Y-m-d H:i:s"}
+                </li>
+            </volist>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="/Public/Home/award/js/awardRotate.js"></script>
+
+<script>
+// Function to display message in Bootstrap modal
+function showMessage(title, message) {
+    $('#messageModalLabel').text(title);
+    $('#modalMessageBody').html(message);
+    $('#messageModal').modal('show');
+}
+
+function getAwardInfo() {
+    $.getJSON("/Ajax/getAwardInfo?t=" + Math.random(), function (data) {
+        if (data && data['awardInfo']) {
+            var list = '';
+            data['awardInfo'].forEach(function(item) {
+                list += `<li><strong>{:l('CONGRATULATION')}</strong> ${item.username} {:l('OBTAIN')} [${item.awardname}] <span class="text-warning">{:l('BONUS')}</span></li>`;
+            });
+            $("#FontScroll").html(list);
+
+            if ($('#FontScroll li').length > 10) {
+                onescroll($('#FontScroll'));
+            }
+        }
+    });
+    setTimeout(getAwardInfo, 300000);
+}
+getAwardInfo();
+
+function onescroll(id) {
+    function scroll() {
+        id.animate({ marginTop: '-34px' }, 800, function () {
+            $(this).css({ marginTop: '0px' }).find('li:first').appendTo(this);
+        });
+    }
+    var interval = setInterval(scroll, 2000);
+    id.hover(() => clearInterval(interval), () => interval = setInterval(scroll, 2000));
+}
+
+function signInWheel() {
+    if ($("#isWheeling").val() === "1") return;
+
+    $("#isWheeling").val("1");
+    $.post("/award/award?random=" + Math.random(), function (data) {
+
+        switch (data.loginState) {
+            case 0:
+                showMessage(data.prize_name, data.message);
+                $("#isWheeling").val("0");
+                return;
+
+            case 4:
+                showMessage("Event Ended", "{:l('SWEEPSTAKES_HAS_ENDED')}");
+                $("#isWheeling").val("0");
+                return;
+
+            case 3:
+                if (data.awardStatus === 1) {
+                    showMessage("No Opportunity", "{:l('YOU_DO_NOT_HAVE_THE_OPPORTUNITY')}");
+                    $("#isWheeling").val("0");
+                    return;
+                }
+
+                if (data.awardStatus === 2) {
+                    showMessage("Opportunity Exceeded", "{:l('YOU_HAVE_RUN_OUT_OF_OPPORTUNITY')}");
+                    $("#isWheeling").val("0");
+                    return;
+                }
+
+                var animateTo = 360 * 10 + (11 - data.prize_id) * 36;
+                $("#drawPointer").rotate({
+                    angle: 0,
+                    duration: 8000,
+                    animateTo: animateTo,
+                    callback: function () {
+                        var prizeImage = data.image || '/images/awards/default.png';
+                        var message = data.prize_id !== 8 && data.prize_id !== 10 
+                            ? data.prize_name 
+                            : "{:l('THANK_YOU_FOR_PARTICIPATION')}, {:l('MAKE_PERSISTENT_EFFORTS')}";
+                        
+                        showMessage("Congratulations!", message);
+                        $("#isWheeling").val("0");
+                        $('#cjcs').text(parseInt($('#cjcs').text()) + 1);
+                    }
+                });
+                break;
+
+            default:
+                showMessage("Unexpected Error", "{:l('UNEXPECTED_ERROR')}");
+                $("#isWheeling").val("0");
+                return;
+        }
+    }, "json").fail(function() {
+        showMessage("Connection Error", "{:l('CONNECTION_ERROR')}");
+        $("#isWheeling").val("0");
+    });
+}
+</script>
+
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,70 @@
+<!-- Members of the authorizededitpage -->
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Members of the authorized')}</span>
+			<select name="group" class="navbar-btn  form-select select select-default select-sm" style="       height: 30px; width: 150px;min-width:150px;">
+				<volist name="auth_group" id="vo">
+					<option value="{:U('User/authUser',array('group_id'=>$vo['id'],'group_name'=>$vo['title']))}"
+					<eq name="vo['id']" value="$this_group['id']">{:l('selected')}</eq>
+					>{$vo.title}</option>
+				</volist>
+			</select>
+		</div>
+		<div class="card card-body mt-2 table-responsive">
+			<table class="table table-sm emptyx">
+				<thead class="table-light">
+				<tr>
+					<th class="">{:l('ID')}</th>
+					<th class="">{:l('Username')}</th>
+					<th class="">{:l('Nickname')}</th>
+					<th class="">{:l('Last login time')}</th>
+					<th class="">{:l('Last Login IP')}</th>
+					<th class="">{:l('Status')}</th>
+					<th class="">{:l('Option')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<volist name="_list" id="vo">
+					<tr>
+						<td>{$vo.id}</td>
+						<td>{$vo.username}</td>
+						<td>{$vo.nickname}</td>
+						<td><span>{$vo.last_login_time|time_format}</span></td>
+						<td><span>{$vo.last_login_ip|long2ip}</span></td>
+						<td>{$vo.status_text}</td>
+						<td>
+							<a href="{:U('User/authUserRemove?uid='.$vo['id'].'&group_id='.I('group_id'))}" class="ajax-get">{:l('DeAuth')}</a>
+						</td>
+					</tr>
+				</volist>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+			<table class="table table-sm emptyx">
+				<form class="add-user" action="{:U('User/authUserAdd')}" method="post" enctype="application/x-www-form-urlencoded">
+					<input class="form-control input-4x" type="text" name="uid" placeholder="userid separated by comma " style="    display: initial;    padding-top: 0px;margin-right: 4px;">
+					<input type="hidden" name="group_id" value="{:I('group_id')}">
+					<button type="submit" class="btn btn-return btn-warning ajax-post" target-form="add-user"><i class="far fa-edit"></i></button>
+				</form>
+			</table>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		$('select[name=group]').change(function () {
+			location.href = this.value;
+		});
+		//Highlight navigation
+		highlight_subnav("{:U('User/auth')}");
+	</script>
+</block>

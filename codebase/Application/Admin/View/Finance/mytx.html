@@ -1,0 +1,159 @@
+
+<include file="Public:header"/>
+
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Withdrawals record')}</span>
+			<notempty name="name">
+				<span class="h2-title">>><a href="{:U('Finance/mytx')}">{:l('Withdraw List')}</a></span>
+			</notempty>
+		</div>
+		<div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+			<div class="fl">
+				<button class="btn ajax-post confirm btn-danger " url="{:U('Finance/mytxStatus',array('type'=>'del'))}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i></button>
+				<button class="btn btn-success" url="{:U('Finance/mytxExcel')}" target-form="ids" id="submit" type="submit">{:l('Export selected')}</button>
+			</div>
+			<div class="search-form fr cf">
+				<div class="sleft">
+					<form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+						<select  name="status" class="form-select">
+							<option value="0"
+							<empty name="Think.get.status">{:l('selected')}</empty>
+							>{:l('All')}</option><option value="1"
+							<eq name="Think.get.status" value="1">{:l('selected')}</eq>
+							>{:l('Untreated')}</option>
+							<option value="2"
+							<eq name="Think.get.status" value="2">{:l('selected')}</eq>
+							>{:l('Already transfer money')}</option>
+							<option value="3"
+							<eq name="Think.get.status" value="3">{:l('selected')}</eq>
+							>{:l('Revoked')}</option>
+							<option value="4"
+							<eq name="Think.get.status" value="4">{:l('selected')}</eq>
+							>{:l('Processing')}</option>
+						</select>
+						<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-select">
+							<option value="username"
+							<eq name="Think.get.field" value="username">{:l('selected')}</eq>
+							>{:l('Username')}</option>
+							<option value="tradeno"
+							<eq name="Think.get.field" value="tradeno">{:l('selected')}</eq>
+							>{:l('order number')}</option>
+						</select>
+						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//Search function
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//Enter search
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="card card-body mt-2 table-responsive">
+			<form id="form" action="{:U('Finance/mytxExcel')}" method="post" class="form-horizontal">
+				<table class="table table-sm emptyx">
+					<thead class="table-light">
+					<tr>
+						<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+						<th class="">{:l('ID')}</th>
+						<th class="">{:l('Username')}</th>
+						<th class="">{:l('Requested')}</th>
+						<th class="">{:l('Fee')}</th>
+						<th class="">{:l('To be paid')}</th>
+						<th class="">{:l('Info')}</th>
+						<th class="">{:l('Person name')}</th>
+						<th class="">{:l('Method')}</th>
+						<!--<th class="">State Bank withdrawals</th>
+						<th class="">Withdraw Bank city</th>-->
+						<th class="">{:l('Info')}</th>
+						<th class="">{:l('Withdrawal Address')}</th>
+						<th class="">{:l('Status')}</th>
+						<th class="">{:l('Option')}</th>
+					</tr>
+					</thead>
+					<tbody>
+					<notempty name="list">
+						<volist name="list" id="vo">
+							<tr>
+								<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+								<td>{$vo.id}</td>
+								<td>{$vo['username']}</td>
+								<td>{$vo.coin} {$vo.num}</td>
+								<td>{$vo.fee}</td>
+								<td>{$vo.mum}</td>
+								<td><span class="fas fa-clock" title="Requested {$vo.addtime|addtime}"></span></td>
+								<td>{$vo.truename}</td>
+								<td>{$vo.bank}</td>
+								<!--<td>{$vo.bankprov}</td>
+								<td>{$vo.bankcity}</td>-->
+								<td><if condition="$vo['bankaddr']"><span class="btn btn-info btn-sm" onclick='showtx("Name:{$vo.truename}<br/>Bank:{$vo.bank}<br/>Branch:{$vo.bankaddr}<br/>A/C #:{$vo.bankcard}")'>Info</span><else/>--</if></td>
+								<td>{$vo.bankcard}</td>
+								<td>
+									<eq name="vo.status" value="0">{:l('Unpaid')}</eq>
+									<eq name="vo.status" value="1">{:l('Paid')}</eq>
+									<eq name="vo.status" value="2">{:l('Revoked')}</eq>
+									<eq name="vo.status" value="3">{:l('Processing')}</eq>
+								</td>
+								<td>
+								
+									<eq name="vo.status" value="1">
+									<a  href="{:U('Finance/fiatwithdrawal?id='.$vo['id'])}" class="btn btn-info btn-sm">{:l('Edit Info')}</a>
+									</eq>
+
+									<eq name="vo.status" value="0">
+										<a href="{:U('Finance/mytxChuli?id='.$vo['id'])}" class="ajax-get btn btn-primary btn-sm">{:l('Lock for Processing')}</a>
+										<a href="{:U('Finance/mytxReject?id='.$vo['id'])}" class="ajax-get btn btn-danger btn-sm">{:l('Undo')}</a>
+									</eq>
+									<eq name="vo.status" value="3">
+										<a href="{:U('Finance/mytxConfirm?id='.$vo['id'])}" class="ajax-get btn btn-success btn-sm">{:l('Mark as paid')}</a>
+									</eq>
+									</td>
+							</tr>
+						</volist>
+						<else/>
+						<td colspan="17" class="text-center">{:l('No data temporarily!')}</td>
+					</notempty>
+					</tbody>
+				</table>
+			</form>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//submit Form
+	$('#submit').click(function () {
+		$('#form').submit();
+	});
+	
+function showtx(info){
+	layer.alert(info, {title: "Bank information",btn: ['Ok']});
+	}
+	
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Finance/mytx')}");
+	</script>
+</block>

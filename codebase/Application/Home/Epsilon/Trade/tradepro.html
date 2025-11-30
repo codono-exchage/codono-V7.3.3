@@ -1,0 +1,223 @@
+<include file="Public:header" />
+<script type="text/javascript">
+     let market = "{$market}";
+     let market_round = "{$C['market'][$market]['round']}";
+
+     let market_round_num="{$C['market'][$market]['round']}";
+     let market_type="{$C['market'][$market]['ext_orderbook']}";
+     let userid = "{$Think.session.userId}";
+     let trade_moshi = 1;
+     let getDepth_tlme = null;
+     let trans_lock = 0;
+  if("{$Think.cookie.colorshade}"){
+    const colorshade = "{$Think.cookie.colorshade}";
+  }
+  else{
+    const colorshade = "Dark";
+  }
+</script>
+<style>
+#CryptoPriceTable .table tr td{
+padding: 2px 7px !important;
+}</style>
+<div class="trade trade-pro common-bg">
+	<div class="container-fluid no-fluid p-0">
+		<div class="row no-gutters">
+			<div class="col-lg-8 col-xl-9">
+				<div class="row no-gutters">
+					<div class="col-xl-9">
+						<include file="Trade:mid_stats_pro" />
+						<div class="tab-content show_chart" id="v-pills-tabContent">
+							<div class="tab-pane fade show active" id="v-pills-tradingview" role="tabpanel" aria-labelledby="v-pills-tradingview-tab">
+								<div class="main-chart">
+									<!-- TradingView Widget Start -->
+									<div class="tradingview-widget-container">
+										<include file="Trade:mid_chartsPro" />
+									</div>
+									<!-- TradingView Widget End -->
+								</div>
+							</div>
+							<div class="tab-pane fade" id="v-pills-deepchart" role="tabpanel" aria-labelledby="v-pills-deepchart-tab">
+								<div id="depthchart" class="depthchart ">
+									<img src="__EPSILON__/img/deepchart.jpg" class="img-fluid m-auto">
+								</div>
+							</div>
+						</div>
+						<div class="p-0 order-history market-order show_mytrades">
+							<include file="Trade:bottom_history_pro" />	
+						</div>
+					</div>
+					<div class="col-xl-3 show_ob">
+						<!-- Order Book Start -->
+						<include file="Trade:left_orderbook" />
+						
+						<!-- Order Book End -->
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-xl-3">
+				<include file="Trade:right_bar_tradepro"/>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<div class="mobile_logout" style="display:none;">
+	<nav class="nav-bottom">
+        <!-- Existing links -->
+        <a href="#" class="nav__link_bottom" onclick="toggleDiv('show_chart')"><i class="fa fa-bar-chart nav__icon_bottom"></i>
+			<span class="nav__text">{:l('Chart')}</span></a>
+        <a href="#" class="nav__link_bottom" onclick="toggleDiv('show_mytrades')">
+			<i class="fa fa-list-alt nav__icon_bottom"></i>
+			<span class="nav__text">{:l('My Trades')}</span></a>
+        <a href="#" class="nav__link_bottom" onclick="toggleDiv('show_ob')">
+			<i class="fa fa-book nav__icon_bottom"></i>
+			<span class="nav__text">{:l('Orderbook')}</span></a>
+        <a href="#" class="nav__link_bottom" onclick="toggleDiv('show_toolbox')">
+			<i class="fa fa-exchange nav__icon_bottom"></i>
+			<span class="nav__text">{:l('Exchange')}</span></a>
+        <a href="#" class="nav__link_bottom" onclick="toggleDiv('show_recenttrades')">
+			<i class="fa fa-history nav__icon_bottom"></i>
+			<span class="nav__text">{:l('History')}</span></a>
+    </nav>
+
+	</div>
+<!--currency modal end -->
+<style>
+	div#DealRecordTable {
+    max-height: 262px !important;
+    overflow-y: scroll;
+}
+@media (max-width: 767px){
+	.heading{
+		display:none;
+	}
+	.action-tools{
+		display: none !important;
+	}
+	#accordion{
+		display: none;
+	}
+	.show_chart, .show_mytrades, .show_ob, .show_recenttrades {
+        display: none;
+    }
+    .show_toolbox {
+        display: block;
+    }
+	td.mobile-hide {
+    display: none !important;
+}
+.mobile_logout {
+    display: block !important;
+}
+.footer-section{
+	display: none;
+}
+.nav-bottom {
+    position: fixed !important;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+    background-color: var(--common-bg);
+    display: flex;
+    overflow-x: auto;
+    z-index: 999999;
+}
+.nav__link_bottom:hover {
+    color: #7b7b7b;
+}
+.nav__icon_bottom {
+    font-size: 18px;
+}
+.nav__link_bottom {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: sans-serif;
+    font-size: 0.75rem;
+    color: var(--common-text);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.1s ease-in-out;
+}
+
+}
+@media (max-width: 576px) {
+
+.total-amt {
+  display: none !important;
+}
+.buysellorders td, .buysellorders th {
+  display: inline-block !important;
+  /* Adjust width as necessary */
+  width: 48% !important;
+}
+
+}
+</style>
+<script>
+		var loc = window.location.pathname.split('/');
+		var overlay = document.getElementById("overlay");
+
+    $(document).ready(function () {
+		$('#mobile-menu-footer').html('');
+		
+		$("#bot_home").removeClass("nav__link_bottom--active");
+		$("#bot_markets").removeClass("nav__link_bottom--active");
+		$("#bot_trade").removeClass("nav__link_bottom--active");
+		$("#bot_dash").removeClass("nav__link_bottom--active");
+		$("#bot_login").removeClass("nav__link_bottom--active");
+
+		if (loc[1].toUpperCase() == 'TRADEMARKET') {
+			$("#bot_markets").toggleClass("nav__link_bottom--active");
+		} else if (loc[1].toUpperCase() == 'TRADE') {
+			$("#bot_trade").toggleClass("nav__link_bottom--active");
+		} else if (loc[1].toUpperCase() == 'USER') {
+			$("#bot_dash").toggleClass("nav__link_bottom--active");
+		} else if (loc[1].toUpperCase() == 'LOGIN') {
+			$("#bot_login").toggleClass("nav__link_bottom--active");
+		} else {
+			$("#bot_home").toggleClass("nav__link_bottom--active");
+		}		
+
+		
+        $('#sidebarCollapse').on('click', function () {
+			if (loc[1].toUpperCase() != 'USER') {
+				window.location.href = "/User/index";
+			}
+        });
+        $('#pnlICN').on('click', function () {
+			if (loc[1].toUpperCase() != 'USER' && loc[1].toUpperCase() != 'FINANCE' && loc[1].toUpperCase() != 'WALLET' && loc[1].toUpperCase() != 'PAY' && loc[1].toUpperCase() != 'REPORT' && loc[1].toUpperCase() != 'NOTIFICATIONS') {
+				window.location.href = "/User/index";
+			}
+			
+            $('.sidebar').toggleClass('active');
+            $('body').toggleClass('pagewrapperbox');
+            $(".headbg .collapse").removeClass("show");
+        });
+		
+    });
+	function toggleDiv(divId) {
+        // Hide all divs
+        document.querySelectorAll('.show_chart, .show_mytrades, .show_ob, .show_toolbox, .show_recenttrades')
+               .forEach(div => div.style.display = 'none');
+
+        // Show the clicked div
+        document.querySelector('.' + divId).style.display = 'block';
+    }
+	
+	</script>
+<include file="Trade:footer_scripts_pro" />
+<eq name="switch" value="0">
+	<script>
+	  OrderType('market');
+	  console.log('switched to market');
+	</script>
+	</eq>
+<include file="Public:footer_minimal" />

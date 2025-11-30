@@ -1,0 +1,533 @@
+<div class="market-trade">
+  <div class="d-flex justify-content-between align-items-center">
+    <ul class="nav nav-pills" role="tablist">
+      <li class="nav-item">
+        <span class="nav-link active" onclick="OrderType('limit')" role="tab"
+          >{:l("Limit")}</span
+        >
+      </li>
+      <li class="nav-item">
+        <span class="nav-link active" onclick="OrderType('market')" role="tab"
+          >{:l("Market")}</span
+        >
+      </li>
+      <li class="nav-item">
+        <span class="nav-link active" onclick="OrderType('stop')" role="tab"
+          >{:l("Stop-Limit")}</span
+        >
+      </li>
+    </ul>
+    <div class="hide-mobile">
+      <button class="btn btn-sm btn-outline-warning">
+        <a href="#!" data-toggle="modal" data-target="#transfer">① Transfer</a>
+      </button>
+      <button class="btn btn-sm btn-outline-warning">
+        <a href="#!" data-toggle="modal" data-target="#borrow">Borrow</a>
+      </button>
+      <button
+        class="btn btn-sm btn-outline-warning"
+        data-toggle="modal"
+        data-target="#repay"
+      >
+        Repay
+      </button>
+    </div>
+  </div>
+
+  <div class="tab-content">
+    <div class="margin-arrow-wrapper row pt-3 pb-3 p-20 white-bg">
+      <div class="main-item p-l-20">
+        <div class="main-diamond"></div>
+        <div class="flex-center-all">
+          <a href="#!" data-toggle="modal" data-target="#transfer">① Transfer</a>
+          
+        </div>
+        <div class="main-diamond"></div>
+      </div>
+      <div class="main-item p-l-20">
+        <div class="main-diamond"></div>
+        <div class="flex-center-all">
+          <a href="#!" data-toggle="modal" data-target="#borrow">② Borrow</a>
+        </div>
+        <div class="main-diamond"></div>
+      </div>
+      <div class="main-item p-l-20">
+        <div class="main-diamond"></div>
+        <div class="flex-center-all">
+          <a href="#!">③ Trade</a>
+        </div>
+        <div class="main-diamond"></div>
+      </div>
+      <div class="main-item p-l-20">
+        <div class="main-diamond"></div>
+        <div class="flex-center-all">
+          <a href="#!" data-toggle="modal" data-target="#repay">④ Repay</a>
+        </div>
+        <div class="main-diamond"></div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade show active"
+      id="pills-trade-limit"
+      role="tabpanel"
+    >
+      <div class="d-flex justify-content-between">
+        <div class="market-trade-buy">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="w-full">
+              {:l('BALANCE')}:
+              <span
+                ><span id="base_coin">{$base_coin*1}</span>
+                {$rmb|strtoupper}</span
+              >
+              <span class="pull-right hide-mobile"
+                ><a
+                  id="deposit-href"
+                  href="Wallet/cryptodeposit/coin/{$rmb}"
+                  class="green"
+                  ><i class="fa fa-download"></i> {:l('Deposit')}</a
+                ></span
+              >
+            </p>
+          </div>
+          <div class="input-group" id="buystop" style="display: none">
+            <input
+              class="form-control"
+              placeholder="{:l('Stop')}"
+              type="number"
+              id="buy_stop"
+              name="stop"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment hide-mobile"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$rmb|strtoupper}</span>
+            </div>
+          </div>
+          <div class="input-group" id="buypricebox">
+            <input
+              class="form-control"
+              placeholder="{:l('Price')}"
+              type="number"
+              id="buy_price"
+              name="price"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment hide-mobile"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$rmb|strtoupper}</span>
+            </div>
+          </div>
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="{:l('Qty')}"
+              type="number"
+              id="buy_num"
+              name="num"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment hide-mobile"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$xnb|strtoupper}</span>
+            </div>
+          </div>
+          <input type="text" name="buy_range" id="buy_range" />
+          <ul class="market-trade-list">
+            <li>
+              <a href="#!" onclick="Percentage('25','buy')">25%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('50','buy')">50%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('75','buy')">75%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('25','buy')">100%</a>
+            </li>
+          </ul>
+          <div id="stopbuybutton" style="display: none">
+            <button
+              value="{:l('STOP BUY')}"
+              onclick="stopadd_buy();"
+              class="btn buy-trade"
+            >
+              {:l('STOP BUY')}
+            </button>
+          </div>
+          <div id="limitbuybutton">
+            <button
+              value="{:l('BUY')}"
+              onclick="tradeadd_buy('limit');"
+              class="btn buy-trade"
+            >
+              {:l('BUY')}
+            </button>
+          </div>
+          <div id="marketbuybutton" style="display: none">
+            <button
+              value="{:l('BUY')}"
+              onclick="tradeadd_buy('market');"
+              class="btn buy-trade"
+            >
+              {:l('BUY')}
+            </button>
+          </div>
+        </div>
+        <div class="market-trade-sell">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="w-full">
+              {:l('BALANCE')}:
+              <span
+                ><span id="user_coin">{$user_coin*1}</span>
+                {$xnb|strtoupper}</span
+              >
+
+              <span class="pull-right hide-mobile">
+                <a href="Wallet/cryptodeposit/coin/{$xnb}" class="red"
+                  ><i class="fa fa-download"></i> {:l('Deposit')}</a
+                >
+              </span>
+            </p>
+          </div>
+          <div class="input-group" id="sellstop" style="display: none">
+            <input
+              class="form-control"
+              placeholder="{:l('Stop')}"
+              type="number"
+              id="sell_stop"
+              name="sellstop"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment hide-mobile"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$rmb|strtoupper}</span>
+            </div>
+          </div>
+          <div class="input-group" id="sellpricebox">
+            <input
+              class="form-control"
+              placeholder="{:l('Price')}"
+              type="number"
+              id="sell_price"
+              name="price"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment hide-mobile"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$rmb|strtoupper}</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="{:l('Qty')}"
+              type="number"
+              id="sell_num"
+              name="num"
+            />
+            <div class="input-group-append">
+              <button
+                style="min-width: 2.5rem"
+                class="btn btn-increment hide-mobile"
+                type="button"
+              >
+                <strong>+</strong>
+              </button>
+              <span class="input-group-text">{$xnb|strtoupper}</span>
+            </div>
+          </div>
+          <input type="text" name="sell_range" id="sell_range" />
+          <ul class="market-trade-list">
+            <li>
+              <a href="#!" onclick="Percentage('25','sell')">25%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('50','sell')">50%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('75','sell')">75%</a>
+            </li>
+            <li>
+              <a href="#!" onclick="Percentage('100','sell')">100%</a>
+            </li>
+          </ul>
+
+          <div id="stopsellbutton" style="display: none">
+            <button
+              value="{:l('STOP SELL')}"
+              onclick="stopadd_sell();"
+              class="btn sell"
+            >
+              {:l('STOP SELL')}
+            </button>
+          </div>
+          <div id="limitsellbutton">
+            <button onclick="tradeadd_sell('limit');" class="btn sell">
+              {:l('SELL')}
+            </button>
+          </div>
+          <div id="marketsellbutton" style="display: none">
+            <button onclick="tradeadd_sell('market');" class="btn sell">
+              {:l('SELL')}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="buy_fees" value="{$buy_fees|NumToStr}" />
+<input type="hidden" id="sell_fees" value="{$sell_fees|NumToStr}" />
+
+<div
+  class="modal fade new-ads-modal"
+  id="transfer"
+  tabindex="-1"
+  role="dialog"
+
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Transfer</h5>
+        <a
+          href="javascript:closeAddress();"
+          class="dialog_closed"
+          title="{:l('SHUT_DOWN')}"
+        ></a>
+      </div>
+      <div class="modal-body">
+        <form  class="mask_wrap login-fb">
+          <div class="form-group">
+            <label for="goods_prov">Margin Market</label>
+
+            <select name="" id="" class="form-control">
+              <option value="BTC">BTC</option>
+              <option value="ETH">BTC</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="goods_prov">Token</label>
+
+            <select name="" id="" class="form-control">
+              <option value="BTC">BTC</option>
+              <option value="ETH">BTC</option>
+            </select>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Daily Interest Rate</div>
+            <div class="col-4"><b>0%</b></div>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Borrowed</div>
+            <div class="col-4"><b>0 BTC </b></div>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Maximum Borrowing Limit</div>
+            <div class="col-4"><b>0 BTC </b></div>
+          </div>
+          <div class="form-group mt-3">
+            <label form="goods_name"><b>Amount</b></label>
+            <input
+              id="goods_name"
+              class="form-control"
+              type="text"
+              placeholder="Please enter borrowing amount"
+            />
+            <label for=""
+              ><span class="text-warning mt-2"
+                >Maximum Available to Borrow 0 BTC</span
+              >
+              <a href="#" class="text-success"><u>All</u></a></label
+            >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-2" onclick="goods_up();">
+          Borrow
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div
+  class="modal fade new-ads-modal"
+  id="borrow"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="{:l('ADD_A_CONTACT_ADDRESS')}"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Borrow</h5>
+        <a
+          href="javascript:closeAddress();"
+          class="dialog_closed"
+          title="{:l('SHUT_DOWN')}"
+        ></a>
+      </div>
+      <div class="modal-body">
+        <form  class="mask_wrap login-fb">
+          <div class="form-group">
+            <label for="goods_prov">Margin Market</label>
+
+            <select name="" id="" class="form-control">
+              <option value="BTC">BTC</option>
+              <option value="ETH">BTC</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="goods_prov">Token</label>
+
+            <select name="" id="" class="form-control">
+              <option value="BTC">BTC</option>
+              <option value="ETH">BTC</option>
+            </select>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Daily Interest Rate</div>
+            <div class="col-4"><b>0%</b></div>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Borrowed</div>
+            <div class="col-4"><b>0 BTC </b></div>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Maximum Borrowing Limit</div>
+            <div class="col-4"><b>0 BTC </b></div>
+          </div>
+          <div class="form-group mt-3">
+            <label form="goods_name"><b>Amount</b></label>
+            <input
+              id="goods_name"
+              class="form-control"
+              type="text"
+              placeholder="Please enter borrowing amount"
+            />
+            <label for=""
+              ><span class="text-warning mt-2"
+                >Maximum Available to Borrow 0 BTC</span
+              >
+              <a href="#" class="text-success"><u>All</u></a></label
+            >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-2" onclick="goods_up();">
+          Borrow
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade new-ads-modal"
+  id="repay"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="{:l('ADD_A_CONTACT_ADDRESS')}"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Repay</h5>
+        <a
+          href="javascript:closeAddress();"
+          class="dialog_closed"
+          title="{:l('SHUT_DOWN')}"
+        ></a>
+      </div>
+      <div class="modal-body">
+        <form  class="mask_wrap login-fb">
+          <div class="form-group">
+            <label for="goods_prov">Margin Market</label>
+
+            <select name="" id="" class="form-control">
+              <option value="BTC">BTC</option>
+              <option value="ETH">BTC</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="goods_prov">Token</label>
+
+            <select name="" id="" class="form-control">
+              <option value="BTC">BTC</option>
+              <option value="ETH">BTC</option>
+            </select>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Available</div>
+            <div class="col-4"><b>0 BTC</b></div>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Interest</div>
+            <div class="col-4"><b>0 BTC </b></div>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Borrowed</div>
+            <div class="col-4"><b>0 BTC </b></div>
+          </div>
+          <div class="row mt-1 mb-1">
+            <div class="col-8">Total Borrowed Amount</div>
+            <div class="col-4"><b>0 BTC </b></div>
+          </div>
+          <div class="form-group mt-3">
+            <label form="goods_name"><b>Repaying amount</b></label>
+            <input
+              id="goods_name"
+              class="form-control"
+              type="text"
+              placeholder="Please enter repayment amount"
+            />
+            <label for=""
+              ><span class="text-warning mt-2"
+                >Maximum Available to repay 0 BTC</span
+              >
+              <a href="#" class="text-success"><u>All</u></a></label
+            >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-2" onclick="goods_up();">Repay</button>
+      </div>
+    </div>
+  </div>
+</div>

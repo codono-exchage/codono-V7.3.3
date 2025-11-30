@@ -1,0 +1,226 @@
+<include file="Public:header" />
+
+
+<div class="page-container">
+
+	<div class="row">
+	<div class="col-sm-7 col-sm-offset-2">
+	<div class="panel panel-flat">
+	<div class="panel-heading">
+		<h1 class="panel-title">{:l('FORGET_PASSWORD')}</h1>
+	</div>	
+	<div class="panel-body">
+			<div id="reg_index" class="form-horizontal">
+				<div class="form-group" id="email_reg">
+
+					<label  class="control-label col-xs-3">{:l('MAILBOX')}</label>
+					<div class="col-xs-9"><input type="text" id="email" class="form-control" placeholder="Email" onblur="check_email()"/></div>
+					
+					
+				</div>
+				<div class="form-group" >
+					<label  class="control-label col-xs-3">{:l('SECURITY_CODE')}</label>
+					<div class="col-xs-9"><input id="email_verify" type="text" class="form-control" placeholder="{:l('PLEASE_ENTER_VERIFICATION_CODE')}"/> 
+					
+					<div class="label-block text-right">
+													<span class="label label-default text-right" id="reg_email" ><a class="move" onclick="new_send()">Click resend</a></span>
+					</div>
+					</div>
+					
+				</div>
+				<div class="form-group" >
+					<label  class="control-label col-xs-3">{:l('PASSWORD')}</label>
+					<div class="col-xs-9"><input id="password" type="text" class="form-control" placeholder="{:l('PLEASE_ENTER_A_LOGIN_PASSWORD')}"/> </div>
+				</div>
+				<div class="form-group" >
+					<label  class="control-label col-xs-3">{:l('CONFIRM_PASSWORD')}</label>
+					<div class="col-xs-9"><input id="repassword" type="text" class="form-control" placeholder="{:l('CONFIRM_PASSWORD')}"/> </div>
+				</div>
+				<div class="form-group" >
+				<div class="col-xs-3"></div>
+					<div class="col-xs-9"><input type="button" class="btn btn-info btn-sm form-control" onclick="findpwd_up();" value="{:l('RESET_PASSWORD')}"/></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+</div>
+<div class="modal" id="step1" >
+<div class="modal-dialog modal-sm">
+						<div class="panel panel-flat">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h5 class="modal-title">{:l('VERIFY_EMAIL')}</h5>
+							</div>
+
+	
+	<form id="find-pwd-login" class="form-horizontal">
+	<div class="modal-body">
+			<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<label>{:l('CAPTCHA')}</label>
+												<input type="text" id="verify" value="" class="form-control">
+											</div>
+
+											<div class="col-sm-6">
+												<label> </label>
+												<img id="verify_up" class="img-responsive codeImg reloadverify" src="{:U('Verify/code')}" title="{:l('REFRESH')}" onclick="this.src=this.src+'?t='+Math.random()" />
+											</div>
+										</div>
+									</div>
+	
+		<div class="form-group">
+										<div class="row">
+											<div class="col-sm-12">
+												<label>{:l('GET_VERIFICATION_CODE')}</label>
+												<input type="button" value="{:l('SEND')}" class="btn btn-block btn-info" onclick="email_findpwd('sms')"  class="form-control">
+											</div>
+
+										</div>
+									</div>
+		
+		</div>
+	</form>
+	<div class="mask_wrap_close" onclick="showB()"><i class="fa fa-times fz_20 move" aria-hidden="true"></i></div>
+</div>
+</div></div>
+<div id="step2" class="all_mask" style="height: 0px;display: none;"></div>
+
+
+<script>
+	$(function () {
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+	});
+
+
+	function showB() {
+		$("#step1").hide();
+		$("#step2").hide();
+	}
+
+	function check_email() {
+		var email  = $('#email').val();
+	
+		if (email == "" || email == null) {
+			layer.tips("{:l('MAILBOX')}", '#email', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_pwdemail", {
+			email: email,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				$("#step1").show();
+				$("#step2").show();
+				$('#reg_email').html('<a class="move" onclick="new_send()">{:l('CLICK_TO_SEND_A_VERIFICATION_C')}</a>');
+			} else {
+				layer.tips(data.info, '#email', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+
+
+	function new_send() {
+		$("#step1").show();
+		$("#step2").show();
+	}
+
+
+	function email_findpwd(type) {
+		var email  = $("#email").val();
+		var verify = $("#verify").val();
+		if (email == "" || email == null) {
+			layer.tips("{:l('PLEASE_ENTER_EMAIL')}", '#email', {tips: 2});
+			return false;
+		}
+		if (verify == "" || verify == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_CAPTCHA_CODE')}", '#verify', {tips: 2});
+			return false;
+		}
+		$.post("/Verify/email_findpwd", {
+			email: email,
+			type: type,
+			verify: verify,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$("#step1").hide();
+				$("#step2").hide();
+				$("#email_verify").focus();
+				$('#email').attr("disabled", "disabled");
+				var obj      = $('#reg_email');
+				var wait     = 60;
+				var interval = setInterval(function () {
+					obj.html("<a>" + wait + " {:l('SEC_CAN_BE_SENT_AGAIN')}" + "</a>");
+					wait--;
+					if (wait < 0) {
+						clearInterval(interval);
+						$(".reloadverify").click();
+						$("#verify").val('');
+						obj.html('<a class="move" onclick="new_send()">{:l('CLICK_RESEND')}</a>');
+					}
+					;
+				}, 1000);
+			} else {
+				$(".reloadverify").click();
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+
+
+	function findpwd_up() {
+		var email        = $("#email").val();
+		var password        = $("#password").val();
+		var repassword        = $("#repassword").val();
+		var email_verify = $("#email_verify").val();
+
+
+		if (email == "" || email == null) {
+			layer.tips("{:l('PLEASE_ENTER_EMAIL')}", '#email', {tips: 2});
+			return false;
+		}
+		if (email_verify == "" || email_verify == null) {
+			layer.tips("{:l('PLEASE_ENTER_VERIFICATION_CODE')}", '#email_verify', {tips: 2});
+			return false;
+		}
+		if (password == "" || password == null) {
+			layer.tips("Please choose a password", '#email', {tips: 2});
+			return false;
+		}
+		if (repassword != password ) {
+			layer.tips("Password and confirm password should be same", '#email', {tips: 2});
+			return false;
+		}
+		$.post("/Login/findpwdemail", {
+			email: email,
+			password: password,
+			repassword: repassword,
+			email_verify: email_verify,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location = '/Login/findpwdemailconfirm';
+				
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+<include file="Public:footer_minimal"/>

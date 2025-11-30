@@ -1,0 +1,122 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('DEFAULT_MAILER')}</span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('Config/ExtrasSave')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<tr class="controls">
+									<td class="item-label">{:l('Default Mailer')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="DEFAULT_MAILER" value="{$DEFAULT_MAILER}">
+									</td>
+									<td class="item-note">{:l('Support number')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" target-form="form-horizontal" id="submit" type="submit">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+					
+					
+					$(document).ready(function () {
+						//The response fileAdd tosuccessevent
+						$("#inputfile").change(function () {
+							//createFormDataObjects
+							var data = new FormData();
+							//forFormDataAdding Data Object
+							$.each($('#inputfile')[0].files, function (i, file) {
+								data.append('upload_file' + i, file);
+							});
+
+
+							//send data
+							$.ajax({
+								url: '/Admin/Config/image',
+								type: 'POST',
+								data: data,
+								cache: false,
+								contentType: false,		//Essential parameters
+								processData: false,		//Essential parameters
+								success: function (data) {
+									if (data) {
+										$('#up_img').attr("src", '/Upload/public/' + data);
+										$('#img').val(data);
+										$('#up_img').show();
+									}
+								},
+								error: function () {
+									alert('Upload error');
+									$(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+								}
+							});
+
+						});
+					});
+									
+					
+					
+					
+				$(document).ready(function () {
+					//The response fileAdd tosuccessevent
+					$("#inputfilea").change(function () {
+						//createFormDataObjects
+						var data = new FormData();
+						//forFormDataAdding Data Object
+						$.each($('#inputfilea')[0].files, function (i, file) {
+							data.append('upload_file' + i, file);
+						});
+
+
+						//send data
+						$.ajax({
+							url: '/Admin/Config/image',
+							type: 'POST',
+							data: data,
+							cache: false,
+							contentType: false,		//Essential parameters
+							processData: false,		//Essential parameters
+							success: function (data) {
+								if (data) {
+									$('#up_imga').attr("src", '/Upload/public/' + data);
+									$('#imga').val(data);
+									$('#up_imga').show();
+								}
+							},
+							error: function () {
+								alert('Upload error');
+								$(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+							}
+						});
+
+					});
+				});
+					
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>

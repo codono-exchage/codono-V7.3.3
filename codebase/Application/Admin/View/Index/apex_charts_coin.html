@@ -1,0 +1,123 @@
+				<div class="col-xl-6" id="revenue_chart">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title mb-4">{:l('Balance / Wallet')}</h4>
+
+							<div id="column-charts"  data-colors='["--bs-success","--bs-primary", "--bs-danger"]' dir="ltr"></div>
+
+						</div>
+					</div>
+				</div> <!-- end col -->
+			
+	<script>
+		var columnChart, columnChartColors = ['#4a8bc2', '#ff6c60', '#a94442', '#afgh4e']; // Example colors
+
+$(function() {
+	function transformData(response) {
+    var categories = new Set();
+    var seriesData = {
+        "Balance": {},
+        "Wallet": {}
+    };
+
+    // Process each item in the response
+    response.forEach(function(item) {
+        // Format the date and add it to the categories set
+        var date = new Date(item.date);
+        var formattedDate = date.toLocaleString('default', { month: 'short', year: 'numeric' });
+        categories.add(formattedDate);
+
+        // Initialize data for each category date if not already present
+        if (!seriesData["Balance"][formattedDate]) {
+            seriesData["Balance"][formattedDate] = 0;
+            seriesData["Wallet"][formattedDate] = 0;
+        }
+
+        // Aggregate data for each category
+        seriesData["Balance"][formattedDate] += item.num;
+        seriesData["Wallet"][formattedDate] += item.mum;
+    });
+
+    // Convert the processed data into the structure needed for ApexCharts
+    var finalData = {
+        categories: Array.from(categories),
+        series: []
+    };
+
+    for (var key in seriesData) {
+        finalData.series.push({
+            name: key,
+            data: finalData.categories.map(function(category) {
+                return seriesData[key][category];
+            })
+        });
+    }
+
+    return finalData;
+}
+
+// Example usage
+var response = {$cztx};
+var data = transformData(response);
+
+console.log(data);
+
+    var options = {
+        chart: {
+            type: 'bar',
+            height: 380
+        },
+        series: data.series,
+        xaxis: {
+            categories: data.categories
+        },
+        yaxis: {
+            title: {
+                text: 'Amount'
+            }
+        },
+        colors: columnChartColors,
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '45%',
+                endingShape: 'rounded'
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        grid: {
+            borderColor: '#f1f1f1'
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function(value) {
+                    return '$ ' + value;
+                }
+            }
+        }
+    };
+
+    columnChart = new ApexCharts(document.querySelector("#column-charts"), options);
+    columnChart.render();
+
+    // Handle window resize
+    $(window).resize(function() {
+        columnChartWidth = $("#column-charts").width();
+        columnChart.resize({
+            width: columnChartWidth,
+            height: 380
+        });
+    });
+});
+
+	</script>

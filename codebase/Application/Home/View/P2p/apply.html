@@ -1,0 +1,122 @@
+<include file="Publicnew:header"/>
+<include file="P2p:inc_common_banner"/>
+
+<!-- P2P Content Start -->
+	<div class="container p2p-page">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="card invite-code-wrapper">
+					<include file="P2p:inc_mid_nav"/>
+					<div class="card-body p-l-0 p-r-0">
+						<div class="row justify-center">
+							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 m-b-30">
+								<div class="merchantappItem">
+									<div class="icon"><img src="__PUBLIC__/template/v6/img/merApplicationRewardIcon.svg"></div>
+									<div class="title">Advanced Ad Management</div>
+									<span class="description">Sellers can access more trading tools through the seller portal to better manage their listings and trading activities.
+									</span>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 m-b-30">
+								<div class="merchantappItem">
+									<div class="icon"><img src="__PUBLIC__/template/v6/img/merApplicationFeeIcon.svg"></div>
+									<div class="title">Verified Badges</div>
+									<span class="description">To give your brand credibility, a verified badge will be displayed next to your P2P nickname.</span>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 m-b-30">
+								<div class="merchantappItem">
+									<div class="icon"><img src="__PUBLIC__/template/v6/img/merApplicationCsIcon.svg"></div>
+									<div class="title">Dedicated Customer Support
+									</div>
+									<span class="description">{:SHORT_NAME} provides one-on-one service with quick response to your requests or issues.</span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-12">
+								<div class="requiredItem">
+									<div class="row">
+										<div class="col-12">
+											<div class="title"></div>
+										</div>
+										<div class="col-md-6 col-12">
+											<div class="country">
+												<label>{:l("Country")}:</label> {$userinfo['country']}
+											</div>
+										</div>
+										<div class="col-md-6 col-12">
+											<div class="currency">
+												<label>{:l("Fiat")}</label>
+												<volist name="allowed_fiat" id="fiat">
+												{$fiat}&nbsp;
+												</volist>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-12">
+								<div class="requiredItem">
+									<div class="row">
+										<div class="col-12">
+											<div class="title">What's needed</div>
+										</div>
+									</div>
+									<div class="row align-items-center">
+										<div class="col-md-8 col-12">
+											<ul class="requiredList">
+												<li>
+													<if condition="$status['sms'] eq 1"> <img src="__PUBLIC__/template/v6/img/iconSuccess.svg"> <else/><img src="__PUBLIC__/template/v6/img/iconFailed.svg"> </if>Complete SMS verification
+												</li>
+												<li>
+													<if condition="$status['email'] eq 1"> <img src="__PUBLIC__/template/v6/img/iconSuccess.svg"> <else/><img src="__PUBLIC__/template/v6/img/iconFailed.svg"> </if> Complete Email verification
+												</li>
+												<li>
+													<if condition="$status['kyc'] eq 1"> <img src="__PUBLIC__/template/v6/img/iconSuccess.svg"> <else/><img src="__PUBLIC__/template/v6/img/iconFailed.svg"> </if> Complete the Advanced verification
+												</li>
+												<li>
+													<if condition="$status['balance'] eq 1"> <img src="__PUBLIC__/template/v6/img/iconSuccess.svg"> <else/><img src="__PUBLIC__/template/v6/img/iconFailed.svg"> </if> Your P2p account must have at least {$require_balance} {$require_coin|strtoupper}
+												</li>
+											</ul>
+										</div>
+										<div class="col-md-4">
+											<if condition="$status['merchant'] eq 0"><button onclick="apply()" class="btn main p-t-5 p-b-5">{:l("Apply")}</button><else/>
+											You are already a merchant
+											</if>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 text-center">
+
+								<if condition="$status['merchant'] eq 0"><button onclick="apply()" class="btn-2 m-t-40">{:l("Apply")}</button><else/>
+								<a  class="btn-2 m-t-40" href="{:U('P2p/newad')}" >{:l("Post a New Ad")}</a>
+											</if>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- P2P Content End -->
+</div>
+<include file="Publicnew:inc_newAdsModal" />
+<script>
+
+function apply(){
+layer.load(0, {shade: [0.5,'#8F8F8F']});
+$.post("{:U('P2p/doApply')}", {}, function (data) {
+		layer.closeAll('loading');
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+</script>
+<include file="Publicnew:footer_minimal" />

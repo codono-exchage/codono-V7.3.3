@@ -1,0 +1,295 @@
+<main class="wrapper">
+  <div class="page-top-banner">
+    <div
+      class="filter"
+      style="
+        background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');
+      "
+    >
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-12 mt-3">
+            <h1>{$page_title}</h1>
+            <h2>{$prompt_text}</h2>
+            <h2></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Shop Listing Start -->
+  <section class="shop-page product-details pt-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-md-12">
+          <div class="card m-b-30">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a class="nav-link active" href="/shop">{:l('Shopping centre')}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/shop/log">{:l('Order History')}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/user/goods">{:l('My Delivery Addresses')}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="row">
+            <div class="col-12 col-md-5 col-lg-5">
+              <figure class="product-media">
+                <img src="{$data.img}" class="" alt="" itemprop="image" />
+              </figure>
+            </div>
+            <div class="col-12 col-md-5 col-lg-7">
+              <h1 class="product-name f-s-30 m-b-30">{$data.name}</h1>
+              <div class="form-horizontal">
+                <div class="form-group row align-items-center">
+                  <label class="col-lg-3 control-label">{:l('SOLD')}</label>
+                  <div class="col-lg-9">
+                    <strong id="ECS_SHOPSOLD">{$data.deal}/{$data.num}</strong>
+                  </div>
+                </div>
+                <div
+                  class="form-group row align-items-center"
+                  itemprop="offers"
+                  itemscope=""
+                  itemtype="http://schema.org/Offer"
+                >
+                  <label class="col-lg-3 control-label"
+                    >{:l('MARKET_PRICE')}:</label
+                  >
+                  <div class="col-lg-9">
+                    <small style="text-decoration: line-through"
+                      ><span
+                        itemprop="priceCurrency"
+                        content="{$data.buycoinname}"
+                        >{$data.buycoinname}</span
+                      ><span>{$data.market_price|Num}</span></small
+                    >
+                    <strong id="ECS_SHOPPRICE" itemprop="price"
+                      >{$data.price|Num}</strong
+                    >
+                  </div>
+                </div>
+                <gt name="data.codono_awardcoinnum" value="0">
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">{:l('GIFT')}:</label>
+                    <div class="col-lg-9">
+                      <span id="ECS_SHOPPRICE1"
+                        >{$data.codono_awardcoinnum}</span
+                      >
+                      <p>{:l('MORE')} {$data.codono_awardcoin}</p>
+                    </div>
+                  </div>
+                </gt>
+                <div class="form-group row align-items-center">
+                  <label class="col-lg-3 control-label"
+                    >{:l('PURCHASE_QUANTITY')}:</label
+                  >
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="num"
+                      value="1"
+                      placeholder="{:l('PURCHASE_QUANTITY')}"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row align-items-center">
+                  <label class="col-lg-3 control-label"
+                    >{:l('SHIPPING_ADDRESS')}:</label
+                  >
+                  <div class="col-lg-9">
+                    <select class="form-control" name="type" id="shop_goods">
+                      <option selected>{:l('CHOOSE')}</option>
+                      <volist name="goods_list" id="vo">
+                        <option value="{$key}">{$vo}</option>
+                      </volist>
+                      <option value="addnew">
+                        + {:l('ADD_A_NEW_ADDRESS')}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row align-items-center">
+                  <label class="col-lg-3 control-label"
+                    >{:l('TRANSACTION_PASSWORD')}:</label
+                  >
+                  <div class="col-lg-9">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="paypassword"
+                      value=""
+                    />
+                    <a
+                      href="/Login/findpaypwd"
+                      class="yellow m-t-5 d-inline-block"
+                      >{:l('FORGET_PASSWORD')}?</a
+                    >
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end align-content-end">
+                  <button
+                    class="btn btn-4 d-flex align-items-center"
+                    id="online_bank"
+                    onclick="Update()"
+                    value="{:l('BUY_NOW')}"
+                    title="{:l('BUY_NOW')}"
+                  >
+                    {:l('BUY_NOW')}
+                    <i class="ion ion-ios-cart f-s-24 m-r-10"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <p>{$data.content}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="filter-group">
+            <h5 class="filter-title">{:l('Search')}</h5>
+            <form action="#">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="Search by typing product name"
+                  type="text"
+                />
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="icon ion-ios-search"></i
+                  ></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="filter-group">
+            <h5 class="filter-title">{:l('Categories')}</h5>
+            <div class="caregorie-list">
+              <ul>
+                <li><a href="#">{:l('ELECTRONIC')}</a></li>
+                <li><a href="#">{:l('COMPUTER')}</a></li>
+                <li><a href="#">{:l('ACCESSORY')}</a></li>
+                <li><a href="#">{:l('MONITOR')}</a></li>
+                <li><a href="#">{:l('WIRELESS')}</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h5 class="filter-title">{:l('Bestsellers')}</h5>
+            <div class="best-seller">
+              <a
+                href="shop-product-details.html"
+                class="best-seller-item row align-items-center"
+              >
+                <figure class="col-3">
+                  <img src="__EPSILON__/img/shop/1.jpg" alt="Product" />
+                </figure>
+                <div class="col-auto">
+                  <h4 class="product-name">{:l('Apple Laptop M1 Intel')}</h4>
+                  <div class="product-price">
+                    $1085.00 <span class="old-price">$1293.00</span>
+                  </div>
+                </div>
+              </a>
+              <a
+                href="shop-product-details.html"
+                class="best-seller-item row align-items-center"
+              >
+                <figure class="col-3">
+                  <img src="__EPSILON__/img/shop/1.jpg" alt="Product" />
+                </figure>
+                <div class="col-auto">
+                  <h4 class="product-name">{:l('Apple Laptop M1 Intel')}</h4>
+                  <div class="product-price">
+                    $1085.00 <span class="old-price">$1293.00</span>
+                  </div>
+                </div>
+              </a>
+              <a
+                href="shop-product-details.html"
+                class="best-seller-item row align-items-center"
+              >
+                <figure class="col-3">
+                  <img src="__EPSILON__/img/shop/1.jpg" alt="Product" />
+                </figure>
+                <div class="col-auto">
+                  <h4 class="product-name">{:l('Apple Laptop M1 Intel')}</h4>
+                  <div class="product-price">
+                    $1085.00 <span class="old-price">$1293.00</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Shop Listing End -->
+</main>
+<script>
+  $("#shop_goods").change(function () {
+    var type = $("#shop_goods option:selected").val();
+    if (type == "addnew") {
+      window.location = "/User/goods";
+    }
+  });
+  $(function () {
+    $(".coin_price_1").show();
+  });
+
+  $("#coin_type").change(function () {
+    var coin_type = $("#coin_type option:selected").val();
+
+    $(".coin_price").hide();
+
+    $("#coin_price_" + coin_type).show();
+  });
+</script>
+<script>
+  function Update() {
+    var type = $("#coin_type option:selected").val();
+    var goods = $("#shop_goods option:selected").val();
+
+    var paypassword = $("#paypassword").val();
+    if (goods == "" || goods == "addnew" || goods == "CHOOSE") {
+      layer.tips("Please add an address", "#shop_goods", { tips: 3 });
+      return false;
+    }
+    if (paypassword == "" || paypassword == null) {
+      layer.tips("Fund Password Required", "#paypassword", { tips: 3 });
+      return false;
+    }
+
+    $.post(
+      "{:U('Shop/buyShop')}",
+      {
+        id: "{$data['id']}",
+        type: type,
+        goods: goods,
+        num: $("#num").val(),
+        paypassword: $("#paypassword").val(),
+      },
+      function (data) {
+        if (data.status === 1) {
+          layer.msg(data.info, { icon: 1 });
+          window.location = "{:U('Shop/log')}";
+        } else {
+          layer.msg(data.info, { icon: 2 });
+          if (data.url) {
+            window.setTimeout("window.location='" + data.url + "'", 3000);
+          }
+        }
+      },
+      "json"
+    );
+  }
+</script>

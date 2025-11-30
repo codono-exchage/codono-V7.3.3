@@ -1,0 +1,71 @@
+<include file="Public:header"/>
+<div class="container"	>
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<div class="panel panel-flat timeline-content">	
+					<div class="panel-heading">
+									<h6 class="panel-title text-semibold">Trading Fees</h6>
+									<div class="heading-elements">
+										
+				                	</div>
+								</div>
+								<div class="panel-body">
+				<!-- Info blocks -->
+				<div class="row">
+					<table class="table text-nowrap">
+									<thead>
+										<tr>
+
+											<th class="col-md-2">Market</th>
+											<th class="col-md-2">Trading Status</th>
+											<th class="col-md-2">Buy Fees</th>
+											<th class="col-md-2">Sell Fees</th>
+											<th class="col-md-2">Coin</th>
+										</tr>
+									</thead>
+									<tbody>
+									<volist name="feesMarket" id="vo">
+										<tr>
+											<td onclick="top.location='/trade/index/market/{$vo.name}'">
+												<div class="media-left media-middle">
+													<a href="#"><img src="{$vo.img}" class="img-circle img-xs" alt=""></a>
+												</div>
+												<div class="media-left">
+													<div class=""><a href="#" class="text-default text-semibold">{$vo.title}</a></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-blue position-left"></span>
+														{$vo.name}
+													</div>
+												</div>
+											</td>
+											<td><eq name="vo['status']" value='0'>
+											<span class="label bg-danger">Closed</span>
+											<else/>
+											<span class="label bg-blue">Active</span>
+											</eq>
+											</td>
+											<td><h6 class="{$textclass}"> {$vo.fee_buy}%</h6></td>
+											<td><h6 class="{$textclass}"> {$vo.fee_sell}%</h6></td>
+											<td><h6 class="{$textclass}"> {$vo.xnb_name}</h6></td>
+											
+										</tr>
+									</volist>
+									</tbody>
+								</table>
+				</div>
+				
+				<!-- /info blocks -->
+				</div>
+				</div>
+</div>
+</div>
+</div>
+</div>
+<include file="Public:footer_minimal"/>

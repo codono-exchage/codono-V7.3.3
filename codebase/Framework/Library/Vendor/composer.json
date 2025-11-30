@@ -1,0 +1,16 @@
+{
+    "require": {
+        "omnimail/omnimail": "^0.3.1",
+        "sendgrid/sendgrid": "^6.0",
+        "mailin-api/mailin-api-php": "^1.0",
+        "mailjet/mailjet-apiv3-php": "^1.2",
+        "daniel-zahariev/php-aws-ses": "^0.9.1",
+        "mailgun/mailgun-php": "^2.4",
+        "php-http/guzzle6-adapter": "^1.1",
+        "mandrill/mandrill": "^1.0",
+        "wildbit/postmark-php": "^2.5",
+        "league/omnipay": "^3.0",
+        "omnipay/paypal": "^3.0",
+        "omnipay/authorizenet": "3.x@dev"
+    }
+}

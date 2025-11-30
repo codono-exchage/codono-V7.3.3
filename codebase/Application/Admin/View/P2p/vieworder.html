@@ -1,0 +1,312 @@
+<include file="Public:header" />
+<div id="main-content">
+ <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+  <button class="close fixed" style="margin-top: 4px;">&times;</button>
+  <div class="alert-content">{:l('Warnings')}</div>
+ </div>
+ <div id="main" class="main">
+  <div class="main-title-h">
+            <span class="d-sm-flex align-items-center justify-content-between h4"><a href="{:U('P2p/Orders')}">{:l('Goto Orders')}</a></span>
+        </div>
+  <div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+   <div class="fl">
+				
+	</div>
+   
+   </div>
+   
+  
+  <div class="row" >
+  <div class="col-md-6 col-sm-12">
+	<div class="panel">
+	<div class="panel-body">
+			<table class="table table-bordered">
+				<tbody>
+				<if condition="$orderinfo['status'] eq 3">
+				<tr>
+					<td>{:l('Action')}</td>
+					<td><button class="btn btn-danger" onclick="resolve({$orderinfo.id},'refund');">{:l('Refund')}</button><button class="btn btn-warning" onclick="resolve({$orderinfo.id},'release');">{:l('Release')}</button></td>
+				</tr>
+				</if>
+				<tr>
+				<td>Status [{$orderinfo.status}]</td>
+				<td>
+				<switch name="orderinfo.status">
+    <case value="0">{:l('Pending')}</case>
+	<case value="1">{:l('Paid')}</case>
+	<case value="2">{:l('Cancelled')}</case>
+	<case value="3">{:l('Disputed')}</case>
+    <case value="4">{:l('Paid')}</case>
+	<default />--</switch>
+	</td>
+	</tr>
+				<tr>
+				<td>id</td>
+				<td>{$orderinfo.id}</td>
+				</tr><tr>
+				<td>orderid</td>
+				<td>{$orderinfo.orderid}</td>
+				</tr><tr>
+				<td>ad_id</td>
+				<td>{$orderinfo.ad_id}</td>
+				</tr><tr>
+				<td>name</td>
+				<td>{$orderinfo.name}</td>
+				</tr><tr>
+				<td>{:l('Buy')}</td>
+				<td>{$orderinfo['coin'] |strtoupper} {$orderinfo.coin_qty|NumToStr}</td>
+				</tr><tr>
+				<td>fixed_price</td>
+				<td>{$orderinfo['fiat']|strtoupper} {$orderinfo.fixed_price|NumToStr}</td>
+				</tr><tr>
+				<td>{:l('Payable')}</td>
+				<td>{$orderinfo['fiat']|strtoupper} {$orderinfo.fiat_qty|NumToStr}</td>
+				</tr>
+				<tr>
+				<td>ad_type</td>
+				<td><if condition="$orderinfo['ad_type'] eq 1">Buy<else/>Sell</if></td>
+				</tr>
+				<tr>
+				<td>time_limit</td>
+				<td>{$orderinfo.time_limit} {:l('Mins')}</td>
+				</tr><tr>
+				<td>addtime</td>
+				<td>{$orderinfo['addtime']|addtime}</td>
+				</tr><tr>
+				<td>endtime</td>
+				<td>{$orderinfo.endtime|addtime}</td>
+				</tr><tr>
+				<td>{:l('Marked as paid')}</td>
+				<td><if condition="$orderinfo['has_paid'] eq 1">{:l('Yes')}<else/>{:l('No')}</if> [{$orderinfo.paidtime|addtime}]</td>
+				</tr>
+				<tr>
+				<td> <if condition="$orderinfo['merchant_id'] eq $orderinfo['buyer']"><strong>{:l('Buyer [Merchant]')}</strong><else/>{:l('Buyer')}</if></td>
+				<td>[{$orderinfo.buyer}] {$orderinfo.buyer|username}  [{$orderinfo.buyer_name}]</td>
+				</tr><tr>
+				<td> <if condition="$orderinfo['merchant_id'] eq $orderinfo['seller']"><strong>{:l('Seller [Merchant]')}</strong><else/>{:l('Seller')}</if></td>
+				<td>[{$orderinfo.seller}] {$orderinfo.seller|username} [{$orderinfo.seller_name}]</td>
+				</tr>
+				<tr>
+				<td>payinfo</td>
+				<td>
+				<strong>
+				<span>{$orderinfo.seller_name}</span><br/>
+				<foreach name="orderinfo['payinfo']" item="payin" >
+					<if condition="$payin['method']">
+						{$payin.method|formatString}:{$payin.information}
+						<else/>
+				<span>{$payin.bankcard}@{$payin.bank}</span><br/>
+					</if>		
+					</foreach>
+				</strong>					
+				</td>
+				</tr>
+
+				</tbody>
+				
+				</table>
+		</div>
+	</div>	
+  </div>
+        <div class="col-md-6 " id="chatboxhistory">
+            <div class="panel panel-primary">
+                <div class="panel-body" id="">
+                    <ul class="chat" id="chathistory">
+                        <volist name="data" id="chat">
+						<if condition="$chat['userid'] eq $merchant">
+						<li class="left clearfix"><span class="pull-left">
+                            <strong class="primary-font"><if condition="$chat['userid'] eq 0">{:l('System')}<else/>{$chat['userid']|username}</if></strong>
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="chat-header">
+                                    <small class="pull-right text-muted">
+                                        <span class="fas fa-clock"></span>{$chat.timestamp}</small>
+                                </div>
+								<span class="clearfix"></span>
+                                <p>
+                                    {$chat.content}
+                                </p>
+                            </div>
+                        </li>
+						<else/>
+                        <li class="right clearfix"><span class=" pull-right">
+                            <strong class="primary-font"><if condition="$chat['userid'] eq 0">{:l('System')}<else/>{$chat['userid']|username}</if></strong>
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="chat-header">
+                                    <small class=" text-muted"><span class="fas fa-clock"></span>{$chat.timestamp}</small>
+                                    </strong>
+                                </div>
+                                <p>
+								{$chat.content}
+                                </p>
+                            </div>
+                        </li>
+						</if>
+						</volist>
+                        
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat" onclick="sendchat();">{:l('Send')}</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+ </div>
+</div>
+</div>
+<script type="text/javascript">
+$("#chathistory").scrollTop($("#chathistory")[0].scrollHeight);
+		getChat();			
+	function resolve(id,solution)
+	{
+	if(solution=='release'){
+	var msg = 'Buyer will get funds when released, and you assume seller already got funds in bank';
+	}else{
+	var msg = 'Seller will get frozen funds back, and you assume buyer didnt pay';
+	}
+	
+	
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.post("/Admin/P2p/resolution/",{orderid:id,solution:solution} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+				location.reload();
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+			   setTimeout(function(){return true;},30000);
+			
+        }, 'json');
+		});
+    }
+
+					
+					
+function sendchat(){
+	var orderid="{$orderid}";
+	var content=$("input#btn-input").val();
+	if(content=='' || content==null)
+	{
+	layer.tips("{:l('Enter your message')}", '#btn-input', {tips: 3});
+	}
+		$.post("{:U('Admin/P2p/sendchat')}", {orderid:orderid,content:content}, function (data) {
+
+			if (data.status == 1) {
+				$("input#btn-input").val('');
+				getChat();
+			} else {
+				//layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+
+	}
+	
+function getChat() {
+	var id="{$orderid}";
+	list=[];
+        $.getJSON("/Admin/P2p/getchat?id=" + id + "&t=" + Math.random(), function (data) {
+            if (data) {
+                if (data['data']) {
+                    for (var i in data['data']) {
+					
+						if (data['data'][i]['userid']==0) {
+						console.log('if '+data['data'][i]['userid']);
+							list+=' <li class="right clearfix"><span class=" pull-right"><strong class="text-danger">System</strong></span><div class="chat-body clearfix"><div class="chat-header"><small class="right text-muted"><span class="fas fa-clock"></span>'+data['data'][i]['timestamp'] +'</small></strong></div><p class="text-danger">'+data['data'][i]['content'] +'</p></div></li>';
+                        } 
+						else if (data['data'][i]['userid']=={$merchant}) {
+						console.log('elseif'+data['data'][i]['userid']);
+                            list += '<li class="admin clearfix"><span class="chat-img left clearfix  mx-2"></span><div class="chat-body clearfix"><div class="chat-header clearfix"><strong class="text-success">{$merchant|username}</strong>&nbsp;<small class="left text-muted"><span class="fas fa-clock"></span>'+data['data'][i]['timestamp'] +'</small><strong</div><p class="text-success">'+data['data'][i]['content'] +'</p></div></li>';
+                        } 
+                        else {
+						console.log('else '+data['data'][i]['userid']);
+                            list += '<li class="agent clearfix"><span class="chat-img left clearfix mx-2"></span><div class="chat-body clearfix"><div class="chat-header clearfix"><strong class="text-info">{$peerid|username}</strong>&nbsp; <small class="left text-muted"><span class="fas fa-clock"></span>'+data['data'][i]['timestamp'] +'</small></div><p class="text-info">'+data['data'][i]['content'] +'</p></div></li>';
+                        } 
+                    }
+                    $("#chathistory").html(list);
+					$("#chathistory").scrollTop($("#chathistory")[0].scrollHeight);
+                }
+            }
+        });
+		setTimeout('getChat()', 3000);
+    }	
+	$(function(){
+	
+		var chattext = document.getElementById("btn-input");
+
+	chattext.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("btn-chat").click();
+  }
+  });
+		//Highlight the main navigation
+		$('.invit-box').addClass('current');
+		//Highlight side navigation
+		$('.invit-index').addClass('current');
+	});
+</script>
+<style>
+#chatboxhistory .chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#chatboxhistory .chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+#chatboxhistory .chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+#chatboxhistory .chat li.right .chat-body
+{
+    margin-right: 60px;
+}
+
+
+#chatboxhistory .chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+#chatboxhistory .panel .slidedown .glyphicon,#chatboxhistory .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+#chathistory
+{
+    overflow-y: scroll;
+    height: 400px;
+}
+
+
+#btn-chat{height:35px;}
+</style>
+
+
+<include file="Public:footer" />

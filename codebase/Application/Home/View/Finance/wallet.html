@@ -1,0 +1,434 @@
+<include file="Public:header" />
+
+<style>
+	.yb-add{
+		width:231px;
+		margin-left:12px;
+		height:147px;
+		background-position:-10px -355px;
+		float:left;
+		padding-top:50px;
+		cursor:pointer;
+		padding-right:7px;
+	}
+	.ydt-bank .yb-list-window{
+		position:relative;
+		z-index:2;
+		width:990px;
+		margin:0 auto;
+		overflow:hidden;
+	}
+	.yb-ico-add{
+		width:16px;
+		height:16px;
+		margin:0 auto;
+		background-position:-100px -10px;
+	}
+	.ydt-title .yt-ico-arrow,
+	.ydt-bank .yb-arrows .yb-ico-left,
+	.ydt-bank .yb-arrows .yb-ico-right,
+	.ydt-bank .yb-list .yb-item .yb-info,
+	.ydt-bank .yb-list .yb-item .yb-ico-up,
+	.ydt-bank .yb-add,
+	.ydt-bank .yb-add .yb-ico-add,
+	.ico-up{
+		background-image:url('__PUBLIC__/static/images/index_sprites_24.png');
+		_background-image:url('__PUBLIC__/static/images/index_sprites_24.png');
+		background-repeat:no-repeat;
+	}
+	.ydt-bank .yb-add .yb-txt{
+		text-align:center;
+		margin-top:10px;
+	}
+	.ydt-bank .yb-list .yb-item.current .yb-info{
+		background-position:-10px -200px;
+	}
+	.ydt-bank .yb-list .yb-item .yb-info{
+		width:225px;
+		height:151px;
+		padding-top:10px;
+		margin-left:9px;
+		background-position:-10px -40px;
+		cursor:pointer;
+	}
+	.ydt-bank .yb-list .yb-item .yb-num{
+		display:block;
+		white-space:nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		margin-left:15px;
+		color:#1A81D6;
+		font-size:20px;
+		width:192px;
+		padding:25px 0 14px;
+		white-space:nowrap;
+	}
+	.ydt-bank .yb-list .yb-item .yb-links .yb-link{
+		line-height:0px;
+	}
+	a:hover{
+		color:#6CD9FF;
+	}
+	.ydt-bank .yb-list .yb-item .yb-links .yb-split{
+		width:3px;
+		padding-right:-1px;
+		height:13px;
+		float:left;
+		margin:-6px 27px 10px;
+	}
+	.ydt-bank .yb-arrows{
+		position:absolute;
+		width:100%;
+		height:18px;
+		top:82px;
+	}
+	.ydt-bank .yb-arrows .yb-ico-left{
+		left:0;
+	}
+	.ydt-bank .yb-arrows .yb-ico-right{
+		right:0;
+	}
+	.ydt-bank .yb-arrows div{
+		position:absolute;
+		display:inline-block;
+		_display:inline;
+		*display:inline;
+		zoom:1;
+		width:10px;
+		height:18px;
+		cursor:pointer;
+	}
+	.yb-item.current .yb-links{
+		display:block;
+	}
+	.yb-item .yb-links{
+		width:191px;
+		margin:0 auto;
+		padding-top:11px;
+		display:none;
+	}
+	.yb-name div{
+		float:left;
+	}
+	.banke{
+		margin-top:19px;
+		margin-left:15px;
+		width:60px;
+		overflow:hidden;
+	}
+	.chuxu{
+		margin-top:-16px;
+		margin-left:98px;
+	}
+	.yb-info{
+		float:left;
+	}
+	.yb-item{
+		float:left;
+		word-wrap:break-word;
+		word-break:break-all;
+	}
+	.current{
+		width:243px;
+	}
+	.zhuanru{
+		color:#00B1EE;
+	}
+	.zhuanchu{
+		color:#00B1EE
+	}
+	.jiebang{
+		color:#00B1EE;
+		float:right;
+	}
+	.img_name{
+		margin-left:11px;
+		margin-top:10px;
+	}
+	.name{
+		display:block;
+		white-space:nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		width:73px;
+		margin-left:20px;
+		margin-top:16px;
+	}
+</style>
+	
+
+		<!-- Page content -->
+		<div class="page-container">	
+	
+		<include file="Finance:left" />
+
+		<!-- Main content -->
+			<div class="panel panel-flat">
+	
+			<div class="panel-heading">
+				<h1>
+					<span>
+						{:l('OUT_ADDRESS')}					</span>
+	 <span>
+                        <a href="{:U('Finance/myzc')}" class="step fz_12 ml50 pd6 ">{:l('ROLLOUT_OF_DIGITAL_ASSETS')}</a>
+		 <a href="{:U('Finance/coinoutlog')}" class="step fz_12 ml20 pd6 ">{:l('OUT_RECORD')}</a>
+                        <a href="{:U('Finance/addnew')}" class="step fz_12 ml20 pd6 active">{:l('ROLLOUT_ADDRESS_MANAGEMENT')}</a>
+                    </span>
+					<span>
+												<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+				</h1>
+			</div>
+			<div id="hints" class="mytips" style="display:none;">
+
+				<p>
+				
+				<notempty name="prompt_text">
+					{$prompt_text}
+				</notempty>
+				
+				</p>			
+			</div>
+		<div class="panel-body">
+			<div class="mytable-body pb20">
+				<div class="f_body  step2">
+					<table class="table table-responsive" id="investLog_content">
+						<thead>
+						<tr>
+							<th style="width: 150px;text-align: left;padding-left: 10px;">
+								<select name="type" id="coinnam-select">
+									<option value="">--{:l('ALL_CURRENCIES')}--</option>
+										<volist name="coin_list" id="vo">
+											<eq name="xnb" value="$key">
+												<option value="{$vo['name']}" selected="selected">{$vo.title} ({$vo['name']|strtoupper})</option>
+												<else/>
+												<option value="{$vo['name']}">{$vo.title} ({$vo['name']|strtoupper})</option>
+											</eq>
+										</volist>
+									 </select>
+							</th>
+						</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="ydt-bank">
+				<div class="yb-list-window">
+					<div class="yb-list-wapper">
+						<div id="bank_wrap" data-marginleft="979" data-on-cls="current" data-page-num="4" class="yb-list">
+							<div class="yb-add js-add-bank-card js-bank-index-0" onclick="showA()">
+								<a href="javascript:void(0)">
+									<div class="yb-ico-add"></div>
+								</a>
+								<div class="yb-txt">{:l('ADDING_WALLET')}</div>
+							</div>
+									
+			<volist name="userWalletList" id="vo">
+
+									
+					<div class="yb-item  js-bank-item js-bank-index-1 current" id="item_bank" data-serial="">
+								<div class="yb-info">
+									<div class="yb-name">
+										<div class="img_name">
+										<notempty name="coin_list[$vo['coinname']]['img']">
+											<img src="/Upload/coin/{$coin_list[$vo['coinname']]['img']}" class="mr5" style="margin-bottom: -5px; width: 22px;"/>
+										</notempty>
+											{$coin_list[$vo['coinname']]['title']}({$vo.coinname})
+										</div>
+										<div class="name">{$vo.name}</div>
+									</div>
+									<div class="yb-num " onclick="show_addr('{$vo.addr}','{$vo.dest_tag}')">
+										{$vo.addr}									</div>
+									<div class="yb-links clearfix">
+										<div class="js-bank-opt">
+                <span id="cur_bank_opt">
+                <div class="yb-link">
+	                <a href="{:U('Finance/myzr','coin='.$vo['coinname'])}" class="js-opt @BANKCARD.FUN_C@" data-fun="C"><span class="zhuanru">{:l('DEPOSIT')}</span></a>
+                </div>
+                <span class="yb-split"></span>
+                <div class="yb-link"><a href="{:U('Finance/myzc','coin='.$vo['coinname'])}" class="js-opt @BANKCARD.FUN_Pay@" data-fun="Pay"><span class="zhuanchu">{:l('WITHDRAW')}</span></a>
+                </div>
+				 <span class="yb-split"></span>
+            
+											<div class="yb-link">
+												<a href="javascript:void(0)" data-align="{$vo.id}" onclick="del(this)" class="selected @BANKCARD.CHANGESTATUS@ js-cur-status-switch" data-open="<span>{:l('SHUT_DOWN')}</span>" data-close="<span>{:l('OPEN')}</span>" data-active="<span>{:l('ACTIVATION')}</span>"><span class="jiebang"><i class="fa fa-trash"></i></span></a>
+											</div>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+													
+													
+</volist>												
+									
+
+
+									
+													
+													</div>
+						<div class="pages">{$page}</div>
+					</div>
+				</div>
+				<div class="yb-arrows">
+					<div id="bank_pre_btn" class="yb-ico-left i-hide"></div>
+					<div id="bank_next_btn" class="yb-ico-right i-hide"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="all_mask_loginbox" id="step1" style="display: none;">
+	<div class="login_title pl20">{:l('ADD_A_WALLET_ADDRESS')}</div>
+	<form id="form-wallet" class="mask_wrap login-fb">
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('CURRENCY_NAME')}</div>
+			<select name="bank" id="wallet_coinname" class="texts">
+				<option value="" selected="selected">--{:l('CHOOSE_A_CURRENCY')}--</option>
+					<volist name="coin_list" id="vo">
+
+							<option value="{$vo['name']}">{$vo.title} ({$vo['name']|strtoupper})</option>
+
+					</volist>
+				 </select>
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('WALLET_ID')}</div>
+			<input id="wallet_name" class="texts" type="text">
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('WALLET_ADDRESS')}</div>
+			<input id="wallet_addr" class="texts" type="text" placeholder="Enter address" autocomplete="off" />
+		</div>
+				<div class="login_text zin80">
+			<div class="mask_wrap_title">DestTag/Payid</div>
+			<input id="wallet_dest_tag" class="texts" type="text"> <span>[If Any]</span>
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('TRANSACTION_PASSWORD')}</div>
+			<input id="wallet_paypassword" class="texts" type="password"><a href="/findpwd/findpwd" class="move ml5">{:l('FORGET')}?</a>
+		</div>
+		<div class="login_button">
+			<input type="button" class="btns2" value="{:l('ADD_IT_NOW')}" onclick="wallet_up();">
+		</div>
+	</form>
+	<div class="mask_wrap_close " onclick="showB()"><i class="fa fa-close fa-2x move"></i></div>
+</div>
+<div id="step2" class="all_mask" style="height: 0px;display: none;"></div>
+<script>
+	$("#coinnam-select").val("{$xnb}");
+	$("#coinnam-select").change(function () {
+		var coinname = $("#coinnam-select option:selected").val();
+		var url      = '{:U('Finance/addnew')}';
+		if (coinname) {
+			url += '/coin/' + coinname;
+		}
+		window.location = url;
+	});
+	function show_addr(addr,dest_tag) {
+	if (dest_tag > 0 || dest_tag !=0 || dest_tag!= null) {
+	addr=addr+ ' <br/><span style="color:blue">dest_tag: ' + dest_tag+'</span>';
+	}
+		layer.alert(addr, {title: "{:l('YOUR_WALLET_ADDRESS_IS')}"});
+	}
+	function del(o) {
+		var id = $(o).attr('data-align');
+		layer.config({
+			extend: 'extend/layer.ext.js'
+		});
+		layer.ready(function () {
+			layer.prompt({
+				title: 'Enter Fund Pwd',
+				formType: 1
+			}, function (val) {
+				if (val) {
+					$.post("{:U('User/delwallet')}", {
+						id: id,
+						paypassword: val
+					}, function (data) {
+						if (data.status == 1) {
+							layer.msg(data.info, {icon: 1});
+							location.reload();
+						} else {
+							layer.msg(data.info, {icon: 2});
+							if (data.url) {
+								window.location = data.url;
+							}
+						}
+					}, "json");
+				}
+				;
+			});
+		});
+	}
+	$(function () {
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+	});
+	function showA() {
+		$("#step1").show();
+		$("#step2").show();
+	}
+	function showB() {
+		$("#step1").hide();
+		$("#step2").hide();
+	}
+	function wallet_up() {
+		var coinname    = $("#wallet_coinname option:selected").val();
+		var name        = $('#wallet_name').val();
+		var addr        = $('#wallet_addr').val();
+		var dest_tag        = $('#wallet_dest_tag').val();
+		var paypassword = $('#wallet_paypassword').val();
+		if (coinname == "" || coinname == null) {
+			layer.tips('Select Currency', '#wallet_coinname', {tips: 2});
+			return false;
+		}
+		if (name == "" || name == null) {
+			layer.tips('Enter Wallet Logo', '#wallet_name', {tips: 2});
+			return false;
+		}
+		if (addr == "" || addr == null) {
+			layer.tips('Enter wallet address', '#wallet_addr', {tips: 2});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Provide Trans Password', '#wallet_paypassword', {tips: 2});
+			return false;
+		}
+		$.post("{:U('User/upwallet')}", {
+			coin: coinname,
+			name: name,
+			addr: addr,
+			dest_tag:dest_tag,
+			paypassword: paypassword
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+
+
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_out').addClass('active');
+</script>	
+<include file="Public:footer_minimal"/>

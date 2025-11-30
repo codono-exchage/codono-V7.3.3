@@ -1,0 +1,77 @@
+<include file="Public:header" />
+
+
+<div class="page-container">
+	<div class="now">
+		<i class="fa fa-home fa-lg move mr5"></i><a href="/" class="">{:l('HOME')} </a>&gt; {:l('RETRIEVE_TRANSACTION_PASSWORD')}	</div>
+	<div class="login_step">
+		<div class="login_step">
+			<ul class="order clear" style="margin-left: 312px;">
+				<li><i class="fa fa-circle  fz_40 "><span>1</span></i>{:l('CONFIRM_THE_ACCOUNT')}					<div class="order_line"></div>
+				</li>
+				<li><i class="fa fa-circle  fz_40 move"><span>2</span></i>{:l('RESET_TRANSACTION_PASSWORD')}					<div class="order_line"></div>
+				</li>
+				<li><i class="fa fa-circle  fz_40"><span>3</span></i>{:l('CARRY_OUT')}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="reg_box">
+		<div class="reg_wrap pt47">
+			<div class="reg_input_box reg-fb">
+				<div class="reg_title">{:l('NEW_TRADING_PASSWORD')}</div>
+				<input type="password" id="password" class="texts w300"/>
+			</div>
+			<div class="reg_input_box reg-fb">
+				<div class="reg_title">{:l('CONFIRM_THE_TRANSACTION_PASSWO')}</div>
+				<input type="password" id="repassword" class="texts w300"/>
+			</div>
+			<br/>
+			<div class="reg_button_box">
+				<input type="button" class="btns2 w300" value="{:l('THE_NEXT_STEP')}" onclick="password_up();"/>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	function password_up() {
+
+		var password   = $("#password").val();
+		var repassword = $("#repassword").val();
+
+
+
+		if (password == "" || password == null) {
+			layer.tips("{:l('PLEASE_ENTER_A_NEW_PASSWORD')}", '#password', {tips: 3});
+			return false;
+		}
+		if (repassword == "" || repassword == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_CONFIRMATION_')}", '#repassword', {tips: 3});
+			return false;
+		}
+		if (password != repassword) {
+			layer.tips("{:l('CONFIRM_PASSWORD_ERROR')}", '#repassword', {tips: 3});
+			return false;
+		}
+
+		$.post("/Findpwd/password_up", {
+			password: password,
+			repassword:repassword,
+			token: ""
+		}, function (data) {
+			console.log(data);
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location = '/Findpwd/findpwdinfo';
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+<include file="Public:footer_minimal"/>

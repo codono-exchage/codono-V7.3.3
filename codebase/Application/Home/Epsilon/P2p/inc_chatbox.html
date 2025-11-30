@@ -1,0 +1,50 @@
+<style>
+	.status-bulb {
+	width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 10px;
+	margin-right: 3px;
+}
+
+.online {
+  background-color: green;
+}
+
+.offline {
+  background-color: red;
+}
+#onlineText{
+	margin-right: 10px;
+}
+
+</style>
+<div class="col-md-4 col-sm-6 mx-auto">
+							<div class="card chat-box">
+								<div class="card-header">
+									<div class="pair-name">
+										<div class="icon" style="background-image: url('__EPSILON__/img/icons/btc.png')"></div>
+										<input type="hidden" value="{$peerId}" id="peerId">
+										<div class="name">{$ad_info.peername}</div>
+										<span id="onlineBulb" class="status-bulb"></span>
+										<span id="onlineText">Offline</span>
+										<div><span id="lastActive"></span></div>
+									</div>
+								</div>
+								<div class="card-body chat-care">
+									<ul class="chat" id="chathistory">
+									
+									</ul>
+								</div>
+								<div class="card-footer">
+									<div class="input-group">
+										<input id="btn-input" type="text" class="form-control input-sm" placeholder="{:l('Enter your message')}"/> <span class="input-group-btn">
+				                            <button type="submit" class="form-control btn btn-3 btn-block" id="btn-chat" onclick="sendchat()">{:l('Send')}</button>
+					                        </span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+	

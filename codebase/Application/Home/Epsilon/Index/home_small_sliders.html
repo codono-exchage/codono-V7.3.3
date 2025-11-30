@@ -1,0 +1,17 @@
+	<!-- Home Banners Slider Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="home-small-banners">
+				
+						<volist name="indexLink" id="vo">
+                            
+								<div>
+						<a href="{$vo['url']?:'#'}"><img src="__UPLOAD__/link/{$vo['img']}" alt="{$vo['title']}" class="img-fluid m-auto"></a>
+					</div>
+						</volist>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Home Banners Slider End -->

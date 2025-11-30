@@ -1,0 +1,12 @@
+	<div class="panel steps-starting-step wizard clearfix">
+	
+<div class="steps clearfix">
+<ul role="tablist">
+<li role="tab" aria-disabled="false" class="done first">
+<a id="steps-uid-3-t-0" href="#steps-uid-3-h-0" aria-controls="steps-uid-3-p-0"><span class="number">1</span> {:l('SIGNUP')}</a></li>
+<li role="tab" aria-disabled="false" class="done"><a id="steps-uid-3-t-1" href="#steps-uid-3-h-1" aria-controls="steps-uid-3-p-1"><span class="number">2</span> {:l('TRANSACTION_PASSWORD')}</a></li>
+<eq name="KYC_OPTIONAL" value="0">
+<li role="tab" class="done" aria-disabled="false" aria-selected="true"><a id="steps-uid-3-t-2" href="#steps-uid-3-h-2" aria-controls="steps-uid-3-p-2"><span class="number">3</span>Email {:l('VERIFIED')}</a></li>
+</eq>
+<li role="tab" class="current" aria-disabled="true"><a id="steps-uid-3-t-3" href="#steps-uid-3-h-3" aria-controls="steps-uid-3-p-3"><span class="current-info audible">current step: </span><span class="number"><eq name="KYC_OPTIONAL" value="0">4<else/>3</eq></span> <span class="text-white">{:l('Security')}</span></a></li></ul></div>
+</div>

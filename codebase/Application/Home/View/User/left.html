@@ -1,0 +1,56 @@
+	<!-- Main sidebar -->
+<div class="col-sm-3">
+			<div class="sidebar sidebar-main">
+				<div class="sidebar-content">
+
+					<!-- Main navigation -->
+					<div class="sidebar-category sidebar-category-visible">
+						<div class="category-title h6">
+							<span>{:l('SECURITY_CENTER')}</span>
+							<ul class="icons-list">
+								<li><a href="#" data-action="collapse"></a></li>
+							</ul>
+						</div>
+
+		
+
+						<div class="category-content no-padding">
+							<ul class="navigation navigation-main navigation-accordion">
+			<li class="user_index">
+				<a href="{:U('User/index')}"> <i class="fa fa-diamond fa-lg fa-fw mr5"></i> <span>{:l('ACCOUNT_PREVIEW')}</span> <i class="fa fa-angle-right  fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<li class="user_truename">
+				<a href="{:U('User/nameauth')}"> <i class="fa fa-list-alt fa-lg fa-fw mr5"></i> <span>{:l('KYC')}</span> <i class="fa fa-angle-right   fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<li class="user_password">
+				<a href="{:U('User/password')}"> <i class="fa fa-unlock-alt fa-lg fa-fw mr5"></i> <span>{:l('LOGIN_PASSWORD')}</span> <i class="fa fa-angle-right   fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<li class="user_paypassword">
+				<a href="{:U('User/paypassword')}"> <i class="fa fa-key fa-lg fa-fw mr5"></i> <span>{:l('TRANSACTION_PASSWORD')}</span> <i class="fa fa-angle-right   fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<eq name="ENABLE_MOBILE_VERIFY" value="1">
+			<li class="user_cellphone">
+				<a href="{:U('User/cellphone')}"> <i class="fa fa-tablet fa-lg fa-fw mr5"></i> <span>{:l('BOUND_PHONE')}</span> <i class="fa fa-angle-right   fa-lg right mr10 mt17"></i> </a>
+			</li>
+			</eq>
+			<li class="user_log">
+				<a href="{:U('User/log')}"> <i class="fa fa-search fa-lg fa-fw mr5"></i> <span>{:l('MY_LOG')}</span> <i class="fa fa-angle-right   fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<li class="user_goods">
+				<a href="{:U('User/goods')}"> <i class="fa fa-globe fa-lg fa-fw mr5"></i> <span>{:l('SHIPPING_ADDRESS')}</span> <i class="fa fa-angle-right   fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<li class="user_ga">
+				<a href="{:U('User/ga')}"> <i class="fa fa-google fa-lg fa-fw mr5"></i> <span>{:l('GOOGLE_AUTHENTICATOR')}</span> <i class="fa fa-angle-right   fa-lg right mr10 mt17"></i> </a>
+			</li>
+					</ul>
+						</div>
+					</div>
+					<!-- /main navigation -->
+
+				</div>
+			</div>
+			<!-- /main sidebar -->
+</div>
+			<script>
+			$('#showside').css('display','block');
+			</script>

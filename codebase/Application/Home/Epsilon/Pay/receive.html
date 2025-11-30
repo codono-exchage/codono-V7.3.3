@@ -1,0 +1,163 @@
+<include file="Public:header" />
+		<!-- Page content -->
+
+		<main class="wrapper grey-bg affiliate-page">
+			<!-- Account Heading Start -->
+	
+			<!-- Account Heading End -->
+			<!-- Account Content Start -->
+			<div class="container">
+				<div class="full-box row">
+					<include file="User:sidebar" />
+					<div class="col-10">
+					<include file="User:top_bar" />
+					<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+					  <ul class="text-right breadcrumbs list-unstyle">
+						<li>
+						  <a class="btn btn-warning btn-sm" href="{:U('Finance/index')}">{:l('Finance')}</a>
+						</li>
+						<li>
+						  <a href="{:U('Pay/index')}" class="btn btn-warning btn-sm"
+							>{:l('Payment')}</a
+						  >
+						</li>
+						<li class="btn btn-warning btn-sm active">{:l('Receive')}</li>
+					  </ul>
+					</div>
+				  
+				  <div class="row align-items-stretch m-t-30">
+					<div class="col-12">
+						<ul id="withdraw-money-tabs" class="nav nav-pills" role="tablist">
+							<li class="nav-item white-bg">
+								<a  class="nav-link "  href="{:U('Pay/index')}"
+									role="tab">Send </a>
+							</li>
+							<li class="nav-item white-bg">
+								<a aria-selected="true" class="nav-link active" data-toggle="pill" href="#pay"
+									data-target=".money" role="tab">Receive </a>
+							</li>
+						</ul>
+					</div>
+	
+					<div class="col-xl-4">
+						<div class="card invite-earning-wrapper">
+							
+							
+							<div class="card-body">
+								<span  class="img-fluid m-auto" id="codeaa"></span>
+
+							</div>
+				
+						</div>
+					</div>			
+					<div class="col-xl-8">
+						<div class="card invite-code-wrapper">
+							<div class="card-header">
+								<h4 class="card-title">{:l('My PaymentID')}</h4>
+							</div>
+							<div class="card-body">
+								<div class="row justify-content-between">
+									<div class="form-group col-12">
+										<label>{:l('PaymentID')}</label>
+										<div class="input-group">
+											<input type="text" class="form-control copy-code-input" value="{$invit}" readonly>
+											<div class="input-group-append">
+												<span class="input-group-text border-0 copy-code-btn"><i class="fa fa-copy"></i></span>
+											</div>
+										</div>
+									</div>
+		
+									<div class="form-group col-12">
+										<label>{:l('Payment link')}</label>
+										<div class="input-group">
+											<input type="text" class="form-control copy-input" value="{:SITE_URL}Pay/Link/id/{$invit}" readonly>
+											<div class="input-group-append">
+												<span class="input-group-text border-0 copy-btn"><i class="fa fa-copy"></i></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+						<div class="col-xl-12 m-t-30">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title"><i class="fa fa-database m-r-5"></i>{:l('Receive records')} </h4>
+								</div>
+								<div class="card-body p-b-0 p-t-0">	
+								
+									<notempty name="list">
+								
+									<div class="table-responsive">
+										<table class="table  table-condensed table-hover">
+											<thead>
+												<tr>
+													<th>{:l('Sender')}</th>
+													<th>{:l('Recipient')}</th>
+													<th>{:l('Txid')}</th>
+													<th>{:l('Coinname')}</th>
+													<th>{:l('Amount')}</th>
+													<th>{:l('Received')}</th>
+													<th>{:l('Time')}</th>
+													<th>{:l('STATUS')}</th>
+												</tr>
+												
+											</thead>
+											<tbody>
+												<volist name="list" id="vo">
+													<tr>
+														<td>{$vo['sender']}</td>
+														<td>{$vo['email']}</td>
+														<td>{$vo['txid']}</td>
+														<td>{$vo.coinname}</td>
+														<td>{$vo['num']|NumToStr}</td>
+														<td>{$vo['mum']|NumToStr}</td>
+														<td>{$vo.addtime|addtime}</td>
+														<td>
+															<eq name="vo.status" value="1">
+																<i class="fa fa-check-circle text-success" title="{:l('INTO_SUCCESS')}"></i>
+																<else/>
+																<i class="fa fa-info-circle text-warning" title="{:l('PENDING')}"></i>
+															</eq>
+														</td>
+													</tr>
+												</volist>
+											</tbody>
+											<tfoot class="text-center">
+												<tr>
+													<td colspan="4">{$page}</td>
+												</tr>
+												</tfoot>
+										</table>
+									</div>
+									<else/>
+									<div class="col-12">	
+										<div class="kno-data m-b-30">
+											<i class="ion ion-md-document"></i>
+											<p>{:l('No Records Found..')}</p>
+										</div>
+		
+									</div>
+								</notempty>	
+								
+								</div>
+							</div>
+						</div>
+		
+				</div>
+			</div>
+			<!-- Account Content End -->
+		</main>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+       <script type="text/javascript" >
+       $('#codeaa').qrcode({
+         render: "table", //table
+         size:250,
+         text: "{:SITE_URL}Pay/link/id/{$invit}" ////Any content
+       }); //ANY_STRING
+       </script>
+	
+<include file="Public:footer_minimal"/>

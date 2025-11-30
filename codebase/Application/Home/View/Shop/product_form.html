@@ -1,0 +1,117 @@
+<div class="form-horizontal">
+									<div class="form-group">
+										<label class="col-lg-3 control-label">{:l('SOLD')}</label>
+										<div class="col-lg-9">
+											<strong id="ECS_SHOPSOLD">{$data.deal}/{$data.num}</strong> 
+										</div>
+									</div>
+									<div class="form-group">
+									
+									<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+										<label class="col-lg-3 control-label">{:l('MARKET_PRICE')}:</label>
+										<div class="col-lg-9">
+											<small style="text-decoration:line-through"><span itemprop="priceCurrency" content="{$data.buycoinname}">{$data.buycoinname}</span><span>{$data.market_price|Num}</span></small> <strong id="ECS_SHOPPRICE"  itemprop="price">{$data.price|Num}</strong> 
+										</div>
+										</span>
+									</div>
+									<gt name="data.codono_awardcoinnum" value="0">
+									<div class="form-group">
+										<label class="col-lg-3 control-label">{:l('GIFT')}:</label>
+										<div class="col-lg-9">
+											<span id="ECS_SHOPPRICE1">{$data.codono_awardcoinnum}</span> <p>{:l('MORE')} {$data.codono_awardcoin}
+										</div>
+									</div>
+									</gt>	
+									<div class="form-group">
+										<label class="col-lg-3 control-label">{:l('TRANSACTION_PASSWORD')}:</label>
+										<div class="col-lg-9">
+											<input type="password" class="form-control" id="paypassword" value="" >
+											<a href="/Findpwd/findpwd" class="reg_floatr">{:l('FORGET_PASSWORD')}?</a>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-lg-3 control-label">{:l('PURCHASE_QUANTITY')}:</label>
+										<div class="col-lg-9">
+											<input type="text" class="form-control"  id="num" value="1" placeholder="{:l('PURCHASE_QUANTITY')}">
+										</div>
+									</div>
+								<gt name="data.shipping" value="0">
+									<div class="form-group">
+										<label class="col-lg-3 control-label">{:l('SHIPPING_ADDRESS')}:</label>
+										<div class="col-lg-9">
+										
+										<select class="select form-control" name="type" id="shop_goods">
+										<option selected>{:l('CHOOSE')}</option>
+                                            <volist name="goods_list" id="vo">
+                                                <option value="{$key}">{$vo}</option>
+                                            </volist>
+											<option value="addnew">+ {:l('ADD_A_NEW_ADDRESS')}</option>
+											
+                                        </select>
+										</div>
+									</div>
+								</gt>
+									<div class="text-right">
+										<button class="btn btn-primary" id="online_bank" onclick="Update()" value="{:l('BUY_NOW')}" title="{:l('BUY_NOW')}">{:l('BUY_NOW')} <i class="icon-cart position-right"></i></button>
+									</div>
+						</div>
+<script>
+    $("#shop_goods").change(function () {
+        var type = $("#shop_goods option:selected").val();
+        if (type == 'addnew') {
+            window.location = '/User/goods';
+        }
+    });
+    $(function () {
+        $(".coin_price_1").show();
+    });
+
+    $("#coin_type").change(function () {
+        var coin_type = $("#coin_type option:selected").val();
+
+        $(".coin_price").hide();
+
+
+        $("#coin_price_" + coin_type).show();
+
+
+    });
+</script>
+<script>
+    function Update() {
+		
+		var type = $("#coin_type option:selected").val();
+		var goods = $("#shop_goods option:selected").val();
+		
+		var paypassword = $('#paypassword').val();
+		if (goods == "" || goods == 'addnew' || goods=='CHOOSE') {
+			layer.tips('Please add an address', '#shop_goods', {tips: 3});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Fund Password Required', '#paypassword', {tips: 3});
+			return false;
+		}
+
+
+        $.post("{:U('Shop/buyShop')}", {
+            id: "{$data['id']}",
+			type: type,
+            goods: goods,
+            num: $('#num').val(),
+            paypassword: $('#paypassword').val(),
+
+
+        }, function (data) {
+            if (data.status === 1) {
+                layer.msg(data.info, {icon: 1});
+                window.location = "{:U('Shop/log')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+                if (data.url) {
+                    window.setTimeout("window.location='" + data.url + "'", 3000);
+                }
+            }
+        }, 'json');
+    }
+</script>

@@ -1,0 +1,142 @@
+<include file="Publicnew:header"/>
+<section class="transfer-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h1 class="text-center m-b-30"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{:l("Transfer")}</font></font></h1>
+					<div class="transfer-form-wrapper">
+						<div class="transfer-form-inner">
+							<div class="row">
+								<div class="col-6">
+									<h4 class="f-s-16">{:l("Transfer")}</h4>
+								</div>
+								<div class="col-6 text-right"><a href="{:U('Transfer/history')}" class="green"><i class="fa fa-history"></i> {:l("Transfer History")}</a></div>
+								<div class="col-12 m-t-15">
+									<div class="alert alert-info">
+										<p class="text-muted m-b-0"><i class="fa fa-info-circle"></i> {:l('Make instant deposits and withdrawals with bank transfer')}.</p>
+									</div>
+								</div>
+							</div>
+							<form action="#" method="post">
+								<div class="transfer-from-to">
+									<div class="from-to-inputs">
+										<div>
+											<label>{:l("From")}:</label>
+											<div class="fromInput">
+												<span class="form-control"><img src="__PUBLIC__/template/v6/img/wallet.svg"> {$from}</span>
+											</div>
+										</div>
+										<img src="__PUBLIC__/template/v6/img/swap.png"  onclick="swap()">
+										<div>
+											<label>{:l("To")}:</label>
+											<div class="toInput">
+												<span class="form-control"><img src="__PUBLIC__/template/v6/img/wallet.svg"> {$to}</span>
+											</div>
+										</div>
+									</div>
+										<div class="form-group">
+										<label for="coin">Coin</label>
+										<select id="coin" class="bootstrap-select" data-live-search="true" data-live-search-placeholder="{:l("Search")}" data-width="100%">
+												<option>{:l("PLEASE_CHOOSE")}</option>
+
+													<volist name="coins" id="coin">
+														<option data-subtitle="{$coin['title']}" data-value="{$coin['balance'] |NumToStr}" data-coin="{$coin['name'] | strtoupper}" data-content="<img src='__UPLOAD__/coin/{$coin['img']}'> {$coin['title']} <span>{$coin['name'] | strtoupper}</span> <span class='value'>{$coin['balance']|NumToStr}</span>"></option>
+													</volist>
+											</select>
+									</div>
+									<div class="form-group">
+										<label for="amount">{:l("Amount")}</label> 
+										<div class="amount form-control">
+											<input id="amount" class="form-control" placeholder="{:l("Please enter amount")}" type="text" required>
+											<div class="balance">{:l("Available balance")}: <span class="current_balance" id="coinbalance">0 --</span></div>
+											
+											<input type="hidden" id="selected_coin" name="selected_coin" value="" />
+											<input type="hidden" id="selected_coin_bal" name="selected_coin_bal" value="" />
+										</div>
+									</div>
+								
+									<div class="form-group">
+									<input type="text" id="my_range" name="my_range" value="" />
+									</div>
+
+									<div class="form-grpup">
+										<button type="submit" class="btn-2 w-100" onclick="dotransfer();">{:l("Send")}</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<script>
+$( document ).ready(function() {
+    console.log( "ready!" );
+	 $("#my_range").ionRangeSlider({
+        
+		step: 1,
+		min:0,
+		max:100,
+        from: 100,
+		grid:true,
+		skin:"round",
+        onChange: function (data) {
+            var percent=data.from;
+			var avail=$("#selected_coin_bal").val();
+			var calc_buy=(avail*percent)/100;
+			
+			$("#amount").val(calc_buy.toFixed(8));
+		
+        }
+    });
+});
+document.querySelector('select#coin').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+   var coin=this.selectedOptions[0].getAttribute('data-coin'); 
+   
+   $("#selected_coin_bal").val(value);
+   $("#selected_coin").val(coin);
+   $("#coinbalance").html(value);
+   $("#fee_coin").html('0 '+coin);
+	$("#amount").val(value.toString());
+	};
+	
+	function swap(){
+window.location="{:U('Transfer/index')}/from/{$to}/to/{$from}";
+}
+	
+function dotransfer(){
+	var from="{$from}";
+	var to="{$to}";
+   var amount=$("#amount").val();
+   var coin=$("#selected_coin").val();
+if(coin=='' || coin==null)
+{
+layer.tips('Please select coin!', '#coin', {tips: 3});
+return false;
+}
+if(amount=='' || amount==0)
+{
+
+layer.tips('Please enter amount!', '#amount', {tips: 3});
+return false;
+}
+
+$.post("{:U('Transfer/doTransfer')}", {
+			coin: coin,
+			amount: amount,
+			from:from,
+			to:to,
+		}, function (data) {
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+				window.location="{:U('Transfer/index')}";
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+</script>
+<include file="Publicnew:footer_minimal"/>
+	

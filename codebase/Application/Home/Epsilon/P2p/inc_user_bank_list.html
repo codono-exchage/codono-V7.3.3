@@ -1,0 +1,28 @@
+<div class="col-xl-12">				
+    <div class="card bank-account-item">
+        <div class="card-header">
+            <h4 class="card-title">{:l("Bank Transfers")}</h4>
+            
+        </div>
+        <div class="card-body">
+            <volist name="UserBank" id="vo">	
+                <hr/>
+            <div class="row">
+                <div class="col-sm-2"><span>{:l("Memo")}</span> {$title}</div>
+                <div class="col-sm-2"><span>{:l("Name")}</span> {$truename}</div>
+                <div class="col-sm-3"><span>{:l("Bank account/card number")}</span> {$vo.bankcard}
+                </div>
+                <div class="col-sm-3"><span>{:l("Bank Name")}</span> {$vo.bank}</div>
+                <div class="col-sm-2">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="#!" data-toggle="modal" data-target="#viewPaymentMethodModal_{$vo.id}" role="button">{:l("View")}</a></li>
+                        <li class="list-inline-item"><a href="#!" data-toggle="modal" data-target="#removePaymentMethodModal_{$vo.id}" role="button" class="red">{:l("Delete")}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </volist>			
+        </div>
+    </div>
+    
+    
+</div>

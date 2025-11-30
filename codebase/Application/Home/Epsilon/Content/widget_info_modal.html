@@ -1,0 +1,67 @@
+<!-- info modal start -->
+	<div class="modal fade infoModal left" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="Info Modal" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="infoPair"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<p><span>{:l("Symbol")} <b id="infoSymbol"></b></span></p>
+							<p><span>{:l("Name")} <b id="infoName"></b></span></p>
+							<p><span>{:l("Release Date")} <b id="infoRelease"></b></span></p>
+							<p><span>{:l("Block Reward")} <b id="infoReward"></b></span></b></p>
+							<p><span>{:l("Supply")} <b id="infoSupply"></b></span></p>
+							<p><span>{:l("Withdrawal")} <b id="infoWithdrawal"></b></span></p>
+							<p><span>{:l("Deposit")} <b id="infoDeposit"></b></span></p>
+							<p><span>{:l("Official Link")} <b id="infoLink"></b></span></p>
+							<h2 class="" class="infoDescription">{:l("Description")}</h2>
+							<div id="infoDescription"></div>
+						</div><!--/col-sm-6-->
+					</div><!--/row-->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-1" data-dismiss="modal">{:l("Close")}</button>
+					<a href="#" class="btn-2" id="tradelink" >{:l("Trade")}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- info modal end -->
+	<script>
+	$(document).on("click", ".infobutton", function () {
+     var market = $(this).data('id');
+	 
+	 $.post("{:U('Content/info')}", {
+						
+						market: market
+					}, function (data) {
+						
+						if (data.status == 1) {
+							$('#infoPair').html(data.info.market);
+							$('#infoName').html(data.info.name);
+							$('#infoSymbol').html(data.info.xnb);
+							$('#infoRelease').html(data.info.releasedate);
+							$('#infoSupply').html(data.info.supply);
+							$('#infoReward').html(data.info.reward);
+							$('#infoWithdrawal').html(data.info.withdrawal);
+							$('#infoDeposit').html(data.info.deposit);
+							$('#infoLink').html('<a href="'+data.info.link+'" target="_blank" rel="noreferrer">{:l("Official Site")}</a>');
+							$('#infoDescription').html(data.info.description);
+							if(data.info.description==''){
+								$('.infoDescription').hide();	
+							}else{
+							}
+							$('#tradelink').attr("href", data.info.tradelink); // Set herf value
+							$('#infoModal').modal('show');
+						} else {
+
+						}
+					}, "json");
+     
+      
+});</script>

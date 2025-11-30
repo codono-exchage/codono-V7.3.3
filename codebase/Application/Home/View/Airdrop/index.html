@@ -1,0 +1,133 @@
+<include file="Public:header"/>
+
+
+<div class="page-container">
+		<!-- content -->
+		
+		<!-- HEADLINE_PROJECT-->
+		<div class="page-header">
+		<div class="page-header-content">
+			<div class="page-title text-center">
+				<h1> <span class="text-semibold text-white text-center">Featured</span>  </h1>
+
+		</div>
+		</div>
+		</div>
+		<notempty name="featured">
+		<div class="row " >
+			<volist name="featured" id="is_featured">
+						<div class="col-sm-4">
+						<!-- Invitation stats colored -->
+						<div class="panel text-center bg-blue-400 has-bg-image">
+							<div class="panel-body">
+								<h2 class="text-semibold no-margin-bottom mt-5">{$is_featured.name|ucfirst}</h6>
+								
+											<div class="svg-center position-relative mb-5" id="">
+												<div class="col-xs-6 text-center">					
+																<img src="{$is_featured.image}" class="img-circle img-responsive" alt="" style="width: 120px; height: 120px;">
+												</div>
+												<div class="col-xs-6 text-center">					
+																	<div class="col-xs-12">
+										<div class="text-uppercase text-size-mini opacity-75 text-white">{:l('STARTING_TIME')}</div>
+										<small class="text-semibold no-margin text-white">{$is_featured.beginTime}</small>
+									</div>
+																		<div class="col-xs-12">
+										<div class="text-uppercase text-size-mini opacity-75 text-white">{:l('END_TIME')}</div>
+										<small class="text-semibold no-margin text-white">{$is_featured.endTime}</small>
+									</div>
+												</div>
+																
+											</div>
+							</div>
+
+							<div class="panel-body panel-body-accent pb-15">
+								<div class="row">
+									<div class="col-xs-6">
+										<div class="text-uppercase text-size-mini opacity-75 text-white">{:l('HOLD')}</div>
+										<h5 class="text-semibold no-margin text-white">{$is_featured.coinname|strtoupper}</h5>
+									</div>
+
+									<div class="col-xs-6">
+										<div class="text-uppercase text-size-mini opacity-75 text-white">{:l('AIRDROP')}</div>
+										<h5 class="text-semibold no-margin text-white">{$is_featured['num']*1} {$is_featured.coinjian|strtoupper}</h5>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<!-- /invitation stats colored -->
+						</div>
+			</volist>
+			</div>
+		
+		</notempty>
+		
+		<div class="row margin-top40">
+		
+			<div class="col-xs-12 col-xs-12">
+				<div class="tabbable">
+				<ul id="crowdfundingul" class="nav nav-tabs bg-slate nav-tabs-component nav-justified" role="tablist">
+					<li role="jxz" class="static active"><a href="#" onclick="return false;" role="tab">{:l('PROCESSING')}</a></li>
+					<li role="jjks" class="static middle"><a href="#" onclick="return false;" role="tab">{:l('PREHEATING')}</a></li>
+					<li role="yjs" class="static "><a href="#" onclick="return false;" role="tab">{:l('OVER')}</a></li>
+				</ul>
+				</div>
+				<div id="crowdfundingcontent" class="tab-content">
+
+					<div role="tabpanel" class="tab-pane fade in active" id="jxz">
+					<notempty name="list_running">	
+						<volist name="list_running" id="vo">					
+						<include file="Airdrop:list_widget"/>
+					</volist>	
+					<else/>
+						<p class="text-center font_gray font_16">{:l('THE_CLASSIFICATION_NO_DATA')}</p>
+					</notempty>						
+					</div>
+					<div role="tabpanel" class="tab-pane fade in" id="jjks">
+
+
+					
+					<notempty name="list_upcoming">	
+						<volist name="list_upcoming" id="vo">
+							<include file="Airdrop:list_widget"/>
+						</volist>	
+					<else/>
+						<p class="text-center font_gray font_16">{:l('THE_CLASSIFICATION_NO_DATA')}</p>
+					</notempty>
+				
+					</div>
+					<div role="tabpanel" class="tab-pane fade " id="yjs">
+					<notempty name="list_ended">	
+						<volist name="list_ended" id="vo">
+							<include file="Airdrop:list_widget"/>
+						</volist>	
+					<else/>
+						<p class="text-center font_gray font_16">{:l('THE_CLASSIFICATION_NO_DATA')}</p>
+					</notempty>
+					
+					</div>
+				</div>
+			</div>
+			<script>
+				var hints = "0";
+				if(hints == 1){
+					$('#hints').show();
+				}
+				$('#Issue_box').addClass('active');
+				
+				$(".static").click(function() {
+					$(".tab-pane").removeClass("in");
+					$(".tab-pane").removeClass("active");
+					$(".static").removeClass("active");
+					$(this).addClass("active");
+					$("#" + $(this).attr("role")).addClass("active in");
+				});
+				
+				
+				
+				
+			</script>
+		</div>
+
+	</div>
+<include file="Public:footer_minimal"/>

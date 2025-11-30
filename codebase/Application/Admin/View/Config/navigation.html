@@ -1,0 +1,82 @@
+    <include file="Public:header" />
+
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+        <div class="main-title-h">
+            <span class="d-sm-flex align-items-center justify-content-between h4">{:l('Frontend Menu')}</span>
+        </div>
+
+
+        <div class="card card-body mt-2 table-responsive">
+            <div class="m-2">
+                <a class="btn btn-success " href="{:U('Config/navigationEdit')}">{:l('Add')}</a>
+                <button class="btn ajax-post btn-info "
+                        url="{:U('Config/navigationStatus',array('type'=>'resume'))}" target-form="ids">{:l('Enable')}</button>
+                <button class="btn ajax-post btn-warning "
+                        url="{:U('Config/navigationStatus',array('type'=>'forbid'))}" target-form="ids">{:l('Disable')}</button>
+                <button class="btn ajax-post confirm btn-danger "
+                        url="{:U('Config/navigationStatus',array('type'=>'delete'))}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i>
+                </button>
+            </div>
+            <form class="ids">
+                <table class="table">
+                    <thead class="table-light">
+                    <tr>
+                        <th class="row-selected">
+                            <input class="checkbox check-all" type="checkbox">
+                        </th>
+                        <th>{:l('ID')}</th>
+                        <th>{:l('name')}</th>
+                        <th>{:l('Parent menu')}</th>
+                        <th>{:l('URL')}</th>
+                        <th>{:l('Sort')}</th>
+                        <th>{:l('Status')}</th>
+                        <th>{:l('Option')}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <notempty name="list">
+                        <volist name="list" id="menu">
+                            <tr>
+                                <td><input class="ids row-selected" type="checkbox" name="id[]" value="{$menu.id}"></td>
+                                <td>{$menu.id}</td>
+                                <td>
+                                    <a href="{:U('Config/navigationEdit?id='.$menu['id'])}">{$menu.title}</a>
+                                </td>
+                                <td>{$menu.up_title|default='--'}</td>
+                                
+                                <td>{$menu.url}</td>
+                                <td>{$menu.sort}</td>
+                          
+                                   <td>
+                                <eq name="menu.status" value="1">
+                                    <span class="badge badge-pill badge-soft-success font-size-11">{:l('Enabled')}</span>
+                                    <else/>
+                                    <span class="badge badge-pill badge-soft-danger font-size-11">{:l('Disabled')}</span>
+                                    
+                                </eq>
+                            </td>
+                               <td> <a href="{:U('Config/navigationEdit?id='.$menu['id'])}" class="btn btn-primary btn-sm waves-effect waves-light"><i class="far fa-edit"></i></a>
+                                    
+                                </td>
+                            </tr>
+                        </volist>
+                        <else/>
+                        <td colspan="10" class="text-center"> {:l('No contents!')}</td>
+                    </notempty>
+                    </tbody>
+                </table>
+            </form>
+            <!-- Paging -->
+            <div class="page">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="Public:footer" />

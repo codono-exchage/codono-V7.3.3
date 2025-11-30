@@ -1,0 +1,747 @@
+﻿<include file="Public:header" />
+<style type="text/css">
+@media only screen and (max-width: 768px) {
+    .ani-class{display: none;}
+    .page_title .h3, .page_title h3 {
+    font-size: 24px !important;
+    line-height: 30px !important;
+}
+.top_rank .d-flex .flex-grow-1 .circle{
+    display: none !important;
+}
+.top_rank .d-flex .flex-grow-1{
+padding-left:2px !important;
+}
+.user_circle .circle{
+    display: none !important;
+}
+
+.leaderboard_content{
+    padding:3px 8px 5px !important;
+}
+.leaderboard_content .table tbody td, .leaderboard_content .table tbody th{
+    padding:9px !important;
+}
+}
+.page_title p {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #7272a8;
+}
+.page_title .h3, .page_title h3 {
+    font-size: 48px;
+    line-height: 60px;
+    font-weight: 500;
+}
+    .user_circle {
+        display: flex;
+        align-items: center
+    }
+
+    .user_circle .circle {
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+        display: inline-block;
+        margin-right: 15px;
+        -webkit-box-shadow: 0 14px 24px rgba(0, 0, 0, .04);
+        box-shadow: 0 14px 24px rgba(0, 0, 0, .04)
+    }
+
+    .user_circle .circle.user1 {
+        background: #fe9431
+    }
+
+    .user_circle .circle.user2 {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#f5e06b), to(#f7ae09));
+        background-image: linear-gradient(180deg, #f5e06b, #f7ae09)
+    }
+
+    .user_circle .circle.user3 {
+        background: #fcd5b2
+    }
+
+    .user_circle .circle.user4 {
+        background: #fff0d0
+    }
+
+    .user_circle .circle.user5 {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#43bef2), to(#1e6cf7));
+        background-image: linear-gradient(180deg, #43bef2, #1e6cf7)
+    }
+
+    .user_circle .circle.user6 {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f48e), to(#fde636));
+        background-image: linear-gradient(180deg, #f8f48e, #fde636)
+    }
+
+    .user_circle .circle.user7 {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#46dea2), to(#7bf8c5));
+        background-image: linear-gradient(180deg, #46dea2, #7bf8c5)
+    }
+
+    .ani-1 {
+        right: -3% !important;
+        top: 0 !important
+    }
+
+    .ani-2 {
+        right: 4% !important;
+        bottom: 34% !important
+    }
+
+    .ani-3 {
+        left: 40% !important;
+        top: 20% !important
+    }
+
+    .ani-4 {
+        left: 42% !important;
+        top: 7% !important
+    }
+
+    .ani-5 {
+        left: -3% !important;
+        top: 7% !important
+    }
+
+    .ani-6 {
+        right: 25% !important;
+        top: 10% !important
+    }
+
+    .ani-7 {
+        right: 30% !important;
+        top: 23% !important
+    }
+
+    .ani-8 {
+        right: 28% !important;
+        top: 30% !important
+    }
+
+    .ani-9 {
+        left: 5% !important;
+        bottom: 32% !important
+    }
+
+    .ani-10 {
+        left: 5% !important;
+        bottom: 30% !important
+    }
+
+    .ani-11 {
+        left: 9% !important;
+        bottom: 30% !important
+    }
+
+    .ani-12 {
+        top: 60% !important
+    }
+
+    .ani-12 .a1 {
+        position: absolute;
+        left: 45px !important;
+        top: -80px !important
+    }
+
+    .ani-12 .a2 {
+        position: absolute;
+        left: 30px !important;
+        top: 10px !important
+    }
+
+    .ani-12 .a3 {
+        position: absolute;
+        left: -25px !important
+    }
+
+    .ani-13 {
+        top: 50% !important
+    }
+
+    .ani-13 img {
+        position: absolute
+    }
+
+    .ani-13 .a1 {
+        left: -50px !important
+    }
+
+    .ani-13 .a2 {
+        top: 160px !important;
+        left: -50px !important
+    }
+
+    .ani-13 .a3 {
+        left: 53px !important;
+        top: 182px !important
+    }
+
+    .ani-13 .a4 {
+        top: 90px !important;
+        left: 20px !important
+    }
+
+    .ani-14 {
+        right: 6% !important;
+        top: 20% !important
+    }
+
+    .ani-15 {
+        left: 18% !important;
+        bottom: -5% !important
+    }
+
+    .ani-16 {
+        right: 0 !important;
+        top: 60% !important
+    }
+
+    .ani-17 {
+        right: 0 !important;
+        top: 0 !important;
+        position: absolute;
+        z-index: -10;
+
+    }
+
+    .ani-18 {
+        bottom: 0 !important;
+        left: 0 !important;
+        position: absolute;
+        z-index: -10;
+
+    }
+
+    .ani-19 {
+        bottom: 12% !important;
+        left: 0 !important
+    }
+
+    .ani-20 {
+        right: 5% !important;
+        top: 10% !important
+    }
+
+    .ani-21 {
+        right: 20% !important;
+        bottom: 25% !important
+    }
+
+    .ani-24 {
+        right: 45% !important;
+        bottom: 34% !important
+    }
+
+    .ani-22 {
+        left: -20px !important;
+        top: 50% !important
+    }
+
+    .ani-class {
+        position: absolute !important;
+
+    }
+
+    .leaderboard {
+        margin-bottom: 180px
+    }
+
+    .leaderboard_top_rank {
+        padding: 100px 0;
+        position: relative
+    }
+
+    .top_rank .d-flex {
+        align-items: center;
+        background-image: linear-gradient(90deg, #2f2cd8, #8481f5);
+        border-radius: 24px;
+        box-shadow: 0 36px 48px rgba(108, 105, 237, .24);
+        margin-bottom: 30px;
+        max-width: 90%;
+        padding: 25px;
+        transition: all .3s ease-in-out
+    }
+
+    .top_rank .d-flex .rank_icon {
+        border-radius: 12px;
+        height: 70px;
+        margin-right: 35px;
+        padding: 13px;
+        text-align: center;
+        width: 70px
+    }
+
+    .top_rank .d-flex .flex-grow-1 {
+        border-left: 1px solid #7977f7;
+        padding-left: 100px;
+        position: relative
+    }
+
+    .top_rank .d-flex .flex-grow-1 .circle {
+        border: 2px solid #fff;
+        border-radius: 50px;
+        display: inline-block;
+        height: 50px;
+        left: 30px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px
+    }
+
+    .top_rank .d-flex .flex-grow-1 .h6,
+    .top_rank .d-flex .flex-grow-1 h6 {
+        font-size: 16px
+    }
+
+    .top_rank .d-flex .flex-grow-1 .h5,
+    .top_rank .d-flex .flex-grow-1 h5 {
+        color: #fff;
+        font-size: 18px
+    }
+
+    .top_rank .d-flex .flex-grow-1 p {
+        color: #d0d0e6;
+        font-size: 14px;
+        margin-bottom: 0
+    }
+
+    .top_rank .d-flex .prize {
+        align-items: flex-end;
+        display: flex
+    }
+
+    .top_rank .d-flex .prize .h4,
+    .top_rank .d-flex .prize h4 {
+        color: #fff;
+        font-size: 24px;
+        margin-bottom: 0
+    }
+
+    .top_rank .d-flex .prize .prize_gem {
+        margin-left: 15px;
+        text-align: center
+    }
+
+    .top_rank .d-flex .prize .prize_gem span {
+        color: #d0d0e6;
+        display: block;
+        font-size: 14px;
+        margin-bottom: 5px
+    }
+
+    .top_rank .d-flex.crown .rank_icon {
+        background-image: linear-gradient(0deg, hsla(58, 88%, 76%, .3), rgba(253, 230, 54, .3))
+    }
+
+    .top_rank .d-flex.crown .circle {
+        background-image: linear-gradient(0deg, #fde636, #f8f48e)
+    }
+
+    .top_rank .d-flex.crown .h6,
+    .top_rank .d-flex.crown h6 {
+        color: #fcd73a
+    }
+
+    .top_rank .d-flex.crown:hover {
+        transform: scale(1.03)
+    }
+
+    .top_rank .d-flex.cup {
+        margin-left: 10%
+    }
+
+    .top_rank .d-flex.cup .rank_icon {
+        background-image: linear-gradient(0deg, rgba(123, 248, 197, .3), rgba(70, 222, 162, .3))
+    }
+
+    .top_rank .d-flex.cup .circle {
+        background-image: linear-gradient(0deg, #46dea2, #7bf8c5)
+    }
+
+    .top_rank .d-flex.cup .h6,
+    .top_rank .d-flex.cup h6 {
+        color: #60ebb3
+    }
+
+    .top_rank .d-flex.cup:hover {
+        transform: scale(1.03)
+    }
+
+    .top_rank .d-flex.medal .rank_icon {
+        background-image: linear-gradient(0deg, hsla(39, 87%, 69%, .38), rgba(255, 143, 43, .38))
+    }
+
+    .top_rank .d-flex.medal .circle {
+        background-image: linear-gradient(0deg, #ff8f2b, #f5c56b)
+    }
+
+    .top_rank .d-flex.medal .h6,
+    .top_rank .d-flex.medal h6 {
+        color: #fe9431
+    }
+
+    .top_rank .d-flex.medal:hover {
+        transform: scale(1.03)
+    }
+
+    .leaderboard_tab_link {
+        align-items: flex-end;
+        display: flex;
+        height: 100%;
+        justify-content: flex-end
+    }
+
+    .leaderboard_tab_link .nav-tabs {
+        align-items: flex-end;
+        border-bottom: 0;
+        box-shadow: 0 36px 48px rgba(0, 0, 0, .04);
+        flex-wrap: nowrap;
+        justify-content: flex-end
+    }
+
+    .leaderboard_tab_link .nav-tabs .nav-item .nav-link {
+        border: 0;
+        font-size: 16px;
+        font-weight: 500;
+        min-width: 125px;
+        padding: 15px;
+        text-align: center
+    }
+
+    .leaderboard_tab_link .nav-tabs .nav-item .nav-link.active {
+        background-image: linear-gradient(270deg, #2f2cd8, #8481f5);
+        color: #fff
+    }
+
+    .leaderboard_tab_link .nav-tabs .nav-item:first-child .nav-link {
+        border-bottom-left-radius: 30px;
+        border-top-left-radius: 30px
+    }
+
+    .leaderboard_tab_link .nav-tabs .nav-item:last-child .nav-link {
+        border-bottom-right-radius: 30px;
+        border-top-right-radius: 30px
+    }
+
+    .leaderboard_content {
+        background: var(--common-bg);
+        border-radius: 24px;
+        box-shadow: 0 36px 48px rgba(31, 66, 135, .04);
+        margin-top: 10px;
+        padding: 10px 35px 30px
+    }
+
+    .leaderboard_content .table {
+        margin-bottom: 0
+    }
+
+    .leaderboard_content .table thead th {
+        border-bottom: 1px solid #f1f1f8;
+        border-top: 0;
+        color: #515184;
+        font-size: 24px;
+        font-weight: 500;
+        padding: 25px 15px
+    }
+
+    .leaderboard_content .table thead th:last-child {
+        text-align: right
+    }
+
+    .leaderboard_content .table thead th:last-child img {
+        margin-left: 15px
+    }
+
+    .leaderboard_content .table tbody td,
+    .leaderboard_content .table tbody th {
+        border: 0;
+        color: #7272a8;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 15px;
+        vertical-align: middle
+    }
+
+    .leaderboard_content .table tbody td:last-child,
+    .leaderboard_content .table tbody th:last-child {
+        color: #2f2cd8;
+        text-align: right
+    }
+
+    .leaderboard_content .table tbody td:last-child img,
+    .leaderboard_content .table tbody th:last-child img {
+        margin-left: 15px
+    }
+
+    .leaderboard_content .load_more {
+        margin: 20px 0;
+        text-align: center
+    }
+
+    .leaderboard_content .load_more a {
+        color: #aeaed5;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 500
+    }
+
+    .user_circle {
+        align-items: center;
+        display: flex
+    }
+
+    .user_circle .circle {
+        border-radius: 50px;
+        box-shadow: 0 14px 24px rgba(0, 0, 0, .04);
+        display: inline-block;
+        height: 50px;
+        margin-right: 15px;
+        width: 50px
+    }
+
+    .user_circle .circle.user1 {
+        background: #fe9431
+    }
+
+    .user_circle .circle.user2 {
+        background-image: linear-gradient(180deg, #f5e06b, #f7ae09)
+    }
+
+    .user_circle .circle.user3 {
+        background: #fcd5b2
+    }
+
+    .user_circle .circle.user4 {
+        background: #fff0d0
+    }
+
+    .user_circle .circle.user5 {
+        background-image: linear-gradient(180deg, #43bef2, #1e6cf7)
+    }
+
+    .user_circle .circle.user6 {
+        background-image: linear-gradient(180deg, #f8f48e, #fde636)
+    }
+
+    .user_circle .circle.user7 {
+        background-image: linear-gradient(180deg, #46dea2, #7bf8c5)
+    }
+</style>
+<!-- main start -->
+<div class="prompt-container">
+    <!-- wap banner start -->
+    <div class="page_title section-padding p-t-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="page_title-content">
+                        <p>{:l('Leaderboard')}</p>
+                        <h3>{:SHORT_NAME} {:l('Top Ranking')}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ani-3 ani-class"><img src="__EPSILON__/img/brown_circle.svg" alt=""></div>
+        <div class="ani-4 ani-class"><img src="__EPSILON__/img/line.svg" alt=""></div>
+        <div class="ani-6 ani-class"><img src="__EPSILON__/img/circle2.svg" alt=""></div>
+        <div class="ani-7 ani-class"><img src="__EPSILON__/img/circleline.svg" alt=""></div>
+        <div class="ani-8 ani-class"><img src="__EPSILON__/img/polygon.svg" alt=""></div>
+    </div>
+    <div class="leaderboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="leaderboard_top_rank">
+                        <div class="ani-17 ani-class"><img src="__EPSILON__/img/ani-17.png" alt=""></div>
+                        <div class="ani-18 ani-class"><img src="__EPSILON__/img/ani-18.png" alt=""></div>
+                        <div class="top_rank">
+                            <div class="d-flex crown rank_ani1">
+                                <div class="rank_icon"><img src="__EPSILON__/img/crown.svg" alt=""></div>
+                                <div class="flex-grow-1"><span class="circle"></span>
+                                    <h6>1<sup>st</sup> {:l('Position')}</h6>
+                                    <h5>{$list[0]['username'] |substr_replace='****',2,4}</h5>
+                                    
+                                </div>
+                                <div class="prize">
+                                    <h4> {$list[0]['pnum']}</h4>
+                                    <div class="prize_gem"><span>{:l('Users')}</span><img src="__EPSILON__/img/team.svg" alt=""></div>
+                                </div>
+                            </div>
+                            <div class="d-flex cup rank_ani2">
+                                <div class="rank_icon"><img src="__EPSILON__/img/cup.svg" alt=""></div>
+                                <div class="flex-grow-1"><span class="circle"></span>
+                                    <h6>2<sup>nd</sup> {:l('Position')}</h6>
+                                    <h5>{$list[1]['username'] |substr_replace='****',2,4}</h5>
+                                </div>
+                                <div class="prize">
+                                    <h4> {$list[1]['pnum']}</h4>
+                                    <div class="prize_gem"><span>{:l('Users')}</span><img src="__EPSILON__/img/team.svg" alt=""></div>
+                                </div>
+                            </div>
+                            <div class="d-flex medal rank_ani1">
+                                <div class="rank_icon"><img src="__EPSILON__/img/medal.svg" alt=""></div>
+                                <div class="flex-grow-1"><span class="circle"></span>
+                                    <h6>3<sup>rd</sup> {:l('Position')}</h6>
+                                    <h5>{$list[2]['username'] |substr_replace='****',2,4}</h5>
+                                </div>
+                                <div class="prize">
+                                    <h4> {$list[2]['pnum']}</h4>
+                                    <div class="prize_gem"><span>{:l('Users')}</span><img src="__EPSILON__/img/team.svg" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="leaderboard_content">
+                        <div class="leaderboard_tab">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="alltime">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="bg-transparent">{:l('Place')}</th>
+                                                    <th scope="col" class="bg-transparent">{:l('User')}</th>
+                                                    <th scope="col" class="bg-transparent">{:l('Credit')} <img src="__EPSILON__/img/gem.svg" alt=""></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <volist name="list_fees" id="vo_fees">
+                                                <tr>
+                                                    <th scope="row">0{$i}</th>
+                                                    <td class="user_circle"><span class="circle user{$i}"></span><span>{$vo_fees['username']}</span></td>
+                                                    <td>{$vo_fees.sum_fees} <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                            </volist>
+                                             
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="week">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">{:l('Place')}</th>
+                                                    <th scope="col">{:l('User')} </th>
+                                                    <th scope="col">{:l('Credit')} <img src="__EPSILON__/img/gem.svg" alt=""></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">04</th>
+                                                    <td class="user_circle"><span class="circle user1"></span> Yeremias NJ
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">05</th>
+                                                    <td class="user_circle"><span class="circle user2"></span> John Pentol
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">06</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Magda Hera
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">07</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Danielad Dan
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">08</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Henry </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">09</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Thomas C
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">10</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Paijoo </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="month">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">{:l('Place')}</th>
+                                                    <th scope="col">User </th>
+                                                    <th scope="col">Credit <img src="__EPSILON__/img/gem.svg" alt=""></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">04</th>
+                                                    <td class="user_circle"><span class="circle user1"></span> Yeremias NJ
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">05</th>
+                                                    <td class="user_circle"><span class="circle user2"></span> John Pentol
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">06</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Magda Hera
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">07</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Danielad Dan
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">08</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Henry </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">09</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Thomas C
+                                                    </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">10</th>
+                                                    <td class="user_circle"><span class="circle user3"></span> Paijoo </td>
+                                                    <td>13.200 <img src="__EPSILON__/img/gem.svg" alt=""></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+</div>
+<!-- main end -->
+<include file="Public:footer_minimal" />

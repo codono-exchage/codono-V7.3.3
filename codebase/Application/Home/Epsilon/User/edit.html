@@ -1,0 +1,104 @@
+<include file="Public:header" />
+
+<section class="generic">
+<!-- Page container -->
+	<div class="container">
+		<div class="full-box row">
+		<include file="User:sidebar" />
+		<div class="col-10">
+		<div class="row mb-3 mt-3">
+			<include file="User:top_bar" />
+			<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+			  <ul class="text-right breadcrumbs list-unstyle">
+				<li>
+				  <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+				</li>
+				<li>
+				  <a href="{:U('/user/index')}" class="btn btn-warning btn-sm"
+					>{:l('User')}</a
+				  >
+				</li>
+				<li class="btn btn-warning btn-sm active">{:l('Edit Username')}</li>
+			  </ul>
+			</div>
+		  </div>
+		  
+		  
+		<!-- Main content -->
+			<div class="card">
+			<div class="card-header">
+				<h1 class="card-title">{:l('Change Username')}</h1>
+				
+			</div>
+
+			<div class="card-body ">
+			
+			<div class="form-horizontal">
+				<fieldset class="content-group">
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2">{:l('Choose New Username')} </label>
+					<div class="col-lg-5">
+					<input type="text" id="username" class="form-control" tabindex="1">
+					<span class="help-block">5-20 chars , alpha/numeric/underscore</span>
+				</div>
+					
+				</div>
+								
+
+				<div class="form-group col-lg-5">
+								<button tabindex="4" type="submit" class="btn btn-warning form-control"  onclick="change()">Change Username </button>
+							</div>
+				
+			</div>
+		
+	</div>
+</div>
+</div></div>
+</div>
+
+</section>
+<script>
+var hints = "0";
+					if(hints == 1){
+						$('#hints').show();
+	}
+	function change() {
+		var username = $('#username').val();
+
+
+		if (username == '' || username == null) {
+			layer.tips("Enter New Username", '#username', {tips: 2});
+			return false;
+		}
+		$.post("/User/doEdit", {
+			username:username
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				if (data.url) {
+					window.location = data.url;
+				} else {
+					window.location.reload();
+				}
+
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, 'json');
+	}
+
+	$('.user_password').addClass('active');
+
+	if ($("#user_box").length > 0) {
+		$('#user_box').addClass('active');
+	} else {
+		$('#index_box').addClass('active');
+	}
+	$("#whichpage").html("{:l('Password')}");
+	$('.finan_index').addClass('active');
+</script>
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,56 @@
+<div class="vertical-menu">
+	<block name="sidebar">
+	<div data-simplebar class="h-100">
+<notempty name="_extra_menu">
+				 {:extra_menu($_extra_menu,$__ALLNAV__)}
+			</notempty>
+		<!--- Sidemenu -->
+		
+		<div id="sidebar-menu">
+			<!-- Left Menu Start -->
+			<ul class="metismenu list-unstyled" id="side-menu">
+				<volist name="__ALLNAV__.main" id="side_menu">		
+			
+					<li>
+						<a href="javascript: void(0);" class="has-arrow waves-effect">
+						<i class="{$side_menu['ico_name']}"></i>
+						<span key="t-layouts">{:l($side_menu['title'])}</span>
+					</a>
+					<notempty name="side_menu.child_menu">
+						<ul class="sub-menu" aria-expanded="false">
+							<volist name="side_menu.child_menu" id="group_menus">
+								
+								
+								<if condition="$key">
+								<li>
+									
+									<a href="javascript: void(0);" class="has-arrow" key="t-vertical">{:l($key)}</a>
+									
+									<ul class="sub-menu" aria-expanded="true">
+									<volist name="group_menus" id="child_menu">
+									<li>
+										<a href="{$child_menu.url|U}" key="t-{$child_menu.title}">{:l($child_menu['title'])}</a>
+									</li>
+									</volist>
+								</ul>
+							</li>
+							<else/>
+							<volist name="group_menus" id="child_menu">
+								<li>
+									<a href="{$child_menu.url|U}" key="t-{$child_menu.title}">{:l($child_menu['title'])}</a>
+								</li>
+								</volist>
+						</if>
+							
+							</volist>
+						</ul>
+					</notempty>
+				</li>
+				</volist>
+			</ul>
+		</div>
+		<!-- Sidebar -->
+	</div>
+</block>
+</div>
+<!-- Left Sidebar End -->

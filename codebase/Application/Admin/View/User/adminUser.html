@@ -1,0 +1,120 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+        <div class="main-title-h">
+            <span class="d-sm-flex align-items-center justify-content-between h4">{:l('User management background')}</span>
+            <notempty name="name">
+                <span class="h2-title">>><a href="{:U('User/adminUser')}">{:l('List Management')}</a></span>
+            </notempty>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+            <div class="fl">
+                <a class="btn btn-success navbar-btn btn-sm" href="{:U('User/adminUserEdit')}">{:l('Add')}</a>
+                <button class="btn ajax-post btn-info navbar-btn btn-sm"
+                        url="{:U('User/status',array('type'=>'resume','model'=>'Admin'))}" target-form="ids">{:l('Enable')}</button>
+                <button class="btn ajax-post btn-warning navbar-btn btn-sm"
+                        url="{:U('User/status',array('type'=>'forbid','model'=>'Admin'))}" target-form="ids">{:l('Disable')}</button>
+                <button class="btn ajax-post confirm btn-danger navbar-btn btn-sm" confirm-msg="Batch delete Can not restore, confirm delete?"
+                        url="{:U('User/status',array('type'=>'del','model'=>'Admin'))}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i>
+                </button>
+            </div>
+
+
+            <div class="search-form fr cf">
+                <div class="sleft">
+                    <form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+                        <select style="height: 32px; font-size: 14px; width: 100px; float: left; margin-right: 5px;"
+                                name="field">
+                            <option value="uid"
+                            <option value="username">{:l('Username')}</option>
+                        </select> <input type="text" name="name" class="form-control" value="{$name}"
+                                         placeholder="Find Administrator" style="width: 150px">
+                        <a class="sch-btn" href="javascript:;" id="search">
+                            <i class="btn-search"></i>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card card-body mt-2 table-responsive">
+            <table class="table table-sm emptyx">
+                <thead class="table-light">
+                <tr>
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">{:l('ID')}</th>
+                    <th class="">{:l('Username')}</th>
+                    <th class="">{:l('Truename')}</th>
+                    <th class="">{:l('Mobile')}</th>
+                    <th class="">{:l('Email')}</th>
+                    <th class="">{:l('Status')}</th>
+                    <th class="">{:l('Option')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <notempty name="list">
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.username}</td>
+                            <td>{$vo.nickname}</td>
+                            <td>{$vo.cellphone}</td>
+                            <td>{$vo.email}</td>
+                            <td>
+                                <eq name="vo.status" value="1">
+									<span class="badge badge-pill badge-soft-success font-size-11">{:l('Enabled')}</span>
+									<else/>
+									<span class="badge badge-pill badge-soft-danger font-size-11">{:l('Disabled')}</span>
+								</eq>
+                            </td>
+                            <td>
+                                <a href="{:U('User/adminUserEdit?id='.$vo['id'])}" class="btn btn-info btn-sm"><i class="far fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="12" class="text-center">{:l('No contents!')}</td>
+                </notempty>
+                </tbody>
+            </table>
+            <div class="page">
+                <div>{$page}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function del_adminuser() {
+        var aaa = confirm("determineTo clear the data?");
+        alert(aaa);
+        return false;
+
+    }
+    //Search function
+    $(function () {
+        $('#search').click(function () {
+            $('#formSearch').submit();
+        });
+    });
+    //Enter search
+    $(".search-input").keyup(function (e) {
+        if (e.keyCode === 13) {
+            $("#search").click();
+            return false;
+        }
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        //Highlight the main navigation
+        $('.user-box').addClass('current');
+        //Highlight side navigation
+        $('.user-index').addClass('current');
+    });
+</script>
+<include file="Public:footer"/>

@@ -1,0 +1,38 @@
+<div class="step2 table-responsive">
+					<table class="table table-condensed table-striped table-hover" id="investLog_content">
+						<thead>
+						<tr>
+							<th>{:l('Payee')}</th>
+							<th>{:l('Txid')}</th>
+							<th>{:l('Coinname')}</th>
+							<th>{:l('Amount')}</th>
+							<th>{:l('Received')}</th>
+							<th>{:l('Time')}</th>
+							<th>{:l('STATUS')}</th>
+						</tr>
+						</thead>
+						<tbody>
+						
+                        <volist name="list" id="vo">
+                            <tr>
+                                <td>{$vo['email']}</td>
+								<td>{$vo['txid']}</td>
+                                <td>{$vo.coinname}</td>
+                                <td>{$vo['num']|NumToStr}</td>
+                                <td>{$vo['mum']|NumToStr}</td>
+								<td>{$vo.addtime|addtime}</td>
+                                <td>
+                                    <eq name="vo.status" value="1">
+                                        <font color="#23a800">{:l('INTO_SUCCESS')} </font>
+                                        <else/>
+                                        <font color="red">{:l('PENDING')}</font>
+                                    </eq>
+                                </td>
+                            </tr>
+                        </volist>
+						
+						
+						</tbody>
+					</table>
+					<div class="pages"></div>
+				</div>

@@ -1,0 +1,29 @@
+	<!-- Progress counters -->
+						<div class="row">
+<volist name="list" id="vo">
+							<div class="{$class}">
+
+								<!-- Available hours -->
+								<div class="panel text-center">
+									<div class="card-body">
+						            	<!-- Progress counter -->
+										<div class="content-group-sm svg-center position-relative" id="progress-box-{$vo.id}"></div>
+										<!-- /progress counter -->
+
+
+										<!-- Bars -->
+										<div id="hours-available-bars"></div>
+										<!-- /bars -->
+																					<div class="content-group" id="new-sessions-{$vo.id}"></div>
+
+									</div>
+								</div>
+								<!-- /available hours -->
+
+							</div>
+<script>progressCounter('#progress-box-{$vo.id}', 38, 2, "#F06292", {$vo["stocks"]/$vo["quantity"]*1}, "fa fa-server text-pink-400", '{$vo["power"]}', '64% average')
+    sparkline("#new-sessions-{$vo['id']}", "line", 30, 35, "basis", 750, 2000, "#FF7043");
+</script>
+</volist>
+						</div>
+						<!-- /progress counters -->

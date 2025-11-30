@@ -1,0 +1,13 @@
+	<div class="panel">
+		<ul class="order clear">
+			<li><i class="fa fa-circle  fz_40 {$reg_class}"><span>1</span></i>{:l('USER_REGISTRATION')}<div class="order_line"></div>
+			</li>
+			<li><i class="fa fa-circle  fz_40 {$fund_class}"><span>2</span></i>{:l('TRANSACTION_PASSWORD')}<div class="order_line"></div>
+			</li>
+			<eq name="KYC_OPTIONAL" value="0">
+			<li><i class="fa fa-circle  fz_40 {$kyc_class}"><span>3</span></i>{:l('VERIFIED')}<div class="order_line"></div>
+			</li>
+			</eq>
+			<li><i class="fa fa-circle  fz_40 {$success_class}"><span><eq name="KYC_OPTIONAL" value="0">4<else/>3</eq></span></i>{:l('SUCCESS')}</li>
+		</ul>
+	</div>

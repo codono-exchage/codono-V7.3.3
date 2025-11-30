@@ -1,0 +1,60 @@
+﻿<include file="Public:header" />
+
+		<!-- Page content -->
+		<div class="page-container">	
+
+	<include file="Finance:left" />
+	<!-- Main content -->
+	<div class="panel panel-flat">
+            <div class="panel-heading">
+    <h1>{:l('I_PRIZE')}</h1>
+   
+	</div>
+	
+   
+     <div class="usdin_record panel-body" style="">
+   <div class="f_body">
+    <div class="f_body_main" style="display: block;">
+     <div class="f_tab_body">
+      <div>
+       <table class="table table-responsive" id="investLog_content">
+        <thead>
+         <tr>
+          <th id="">{:l('PRIZES_NAME')}</th>
+          <th id="">{:l('TIME')}</th>
+          <th id="">{:l('PROCESSING_STATUS')}</th>
+         </tr>
+        </thead>
+        <tbody>
+         <volist name="list" id="vo">
+         <tr>
+          <td>{$vo.awardname}</td>
+          <td>{$vo.addtime|addtime}</td>
+          <td>
+				<eq name="vo.status" value="0"> <font class="sell">{:l('UNTREATED')}</font></eq>
+				<eq name="vo.status" value="1"> <font class="sell">{:l('PROCESSING')}</font></eq> 				
+				<eq name="vo.status" value="2"> <font class="buy">{:l('PROCESSED')}</font></eq>
+		  </td>
+         </tr>
+         </volist>
+        </tbody>
+       </table>
+       <div class="pages">{$page}</div>
+      </div>
+     </div>
+    </div>
+   </div>
+   </div>
+   
+   
+  </div>
+ </div>
+
+
+<script>
+	//MENU_HIGHLIGHTS
+	$('#finance_box').addClass('active');
+	$('#finance_myaward').addClass('active');
+	$('#finance_myaward i').attr('class','coin_menu_op_20');
+</script>
+<include file="Public:footer_minimal"/>

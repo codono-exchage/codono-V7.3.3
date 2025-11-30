@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="Keywords" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_keywords')}">
+<meta name="Description" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_description')}">
+<link rel="stylesheet" href="__PUBLIC__/vuetrade/assets/css/vendor.bundle.css?ver=192">
+<link rel="stylesheet" href="__PUBLIC__/vuetrade/assets/css/style-libertas.css?ver=192" id="changeTheme">
+<script type="text/javascript" src="__PUBLIC__/assets/js/core/libraries/jquery.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/vuetrade/assets/css/theme.css?ver=192">
+<script src="__PUBLIC__/vuetrade/assets/js/jquery.bundle.js?ver=192"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/jquery.cookies.2.2.0.js"></script>
+
+</head>
+   
+
+
+    <body class="nk-body body-wider bg-light-alt">
+
+	<div class="nk-wrap">
+    
+        <main class="nk-pages nk-pages-centered bg-theme">
+            <div class="ath-container">
+                <div class="ath-header text-center">
+                    <a href="/" class="logo-link">
+								<img  srcset="__UPLOAD__/public/{$C['web_logo']} 2x" alt="logo">
+							</a>
+                </div>
+                <div class="ath-body  bg-dark tc-light">
+                    <h5 class="ath-heading title">{:l('MEMBER_LOGIN')}</h5>
+					<eq name="Think.session.codono_already" value="1"><h6 class="alert alert-danger"><small>{:l('YOUR_ACCOUNT_LOGIN_IN_OTHER_PL')}</small></h6></eq>
+                        <div class="field-item">
+                            <div class="field-wrap">
+                                <input type="text" class="input-bordered"  placeholder="{:l('USERNAME_OR_EMAIL')}" value=""  id="username" >
+                            </div>
+                        </div>
+                        <div class="field-item">
+                            <div class="field-wrap">
+                                <input type="password" class="input-bordered" id="login_password" placeholder="{:l('PLEASE_ENTER_YOUR_PASSWORD')}" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="d-flex field-item">
+<eq name="RECAPTCHA" value="1">
+<include file="Public:recaptcha"/>
+<else/>
+<include file="Public:image_captcha"/>
+</eq>
+							</div>
+						<div class="d-flex justify-content-between align-items-center">
+                        <button class="btn btn-grad btn-full btn-md col-12"  onclick="footer_user_login();">{:l('LOG_IN')}</button>
+						</div>
+               
+                    <div class="sap-text"><span class="bg-dark">Or </span></div>
+
+                    <ul class="row gutter-20px gutter-vr-20px">
+                        <li class="col-5"><a href="{:U('Login/register')}" class="btn btn-sm btn-info">{:l('FREE_REGISTRATION')}</a></li>
+                        <li class="col-7"><a href="{:U('Login/findpwd')}" class="btn btn-sm btn-warning"><span>{:l('FORGET_PASSWORD')}</span></a></li>
+                    </ul>
+                </div>
+                <div class="text-center tc-info">
+                    <p>{:C('web_icp')}</p>
+                </div>
+            </div>
+        </main>
+    
+	</div>
+	
+<script>
+    function footer_user_login() {
+        var username = $("#username").val();
+        var password = $("#login_password").val();
+<eq name="RECAPTCHA" value="1">
+        var verify = $("#g-recaptcha-response").val();
+<else/>
+        var verify = $("#login_verify").val();
+
+</eq>
+        if (username == "" || username == null) {
+            layer.tips("Username", '#username', {tips: 2});
+            return false;
+        }
+        if (password == "" || password == null) {
+            layer.tips("Enter password", '#login_password', {tips: 2});
+            return false;
+        }
+        
+        if (verify == "" || verify == null) {
+            layer.tips("Captcha", '.recaptcha', {tips: 2});
+            return false;
+            
+        }
+        $.post("{:U('Login/submit')}", {
+            username: username,
+            password: password,
+            verify: verify,
+            //login_token: "",
+        }, function (data) {
+            if (data.status == 1) {
+                $.cookies.set('username', username);
+                layer.msg(data.info, {icon: 1});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    window.location = "{:SITE_URL}";
+                }
+            } else {
+                layer.msg(data.info, {icon: 2});
+				$("#login_verify_up").click();
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+
+    function choose_lang(lang) {
+        $.cookies.set("lang", lang);
+        window.location.reload();
+    }
+</script>
+<Style>
+#rc-imageselect {transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;}
+</style>
+</body>
+</html>

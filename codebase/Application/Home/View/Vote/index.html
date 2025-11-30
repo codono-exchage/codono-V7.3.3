@@ -1,0 +1,107 @@
+<include file="Public:header"/>
+
+<div class="page-container">
+
+<div class="container-fluid">
+<!-- breadcrumb component -->
+
+<!-- /breadcrumb component -->
+	<div class="row">
+	<div class="panel">
+				<div class="panel-heading">
+					<h1>{:l('THE_NEW_CURRENCY_VOTE')}  <a class="right ml20" onclick="$('#hints').slideToggle();">
+						<i class="fa fa-hand-o-right fz_14 move"></i> <span class="fz_14 move">{:l('VIEW_DESCRIPTION')}</span>
+					</a> 					</h1>
+	<div id="hints" class="mytips" style="display:none;">
+					<script>
+						var hints = "0";
+						if(hints == 1){
+							$('#hints').show();
+						}
+					</script>
+					<p>
+						<notempty name="prompt_text">
+							{$prompt_text}
+						</notempty>
+					
+					</p>				
+					
+					</div>			
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+				<table class="table table-striped" id="investLog_content">
+					<thead>
+					<tr>
+						<th></th>
+						<th>{:l('SYMBOL_AB')}</th>
+						<th>{:l('Name')}</th>
+						<th>{:l('Upvote')}</th>
+						<eq name="is_down_vote_allowed" value='1'><th>{:l('Downvote')}</th></eq>
+						<th>{:l('TOTAL')}</th>
+						<th>{:l('OPERATING')}</th>
+					</tr>
+					</thead>
+					<tbody>
+					<volist name="list" id="vo">
+					<tr>
+						<td>
+						<img src="{$vo['img']}" alt="" style="width: 20px; "/>	
+						</td>
+						<td>{$vo['name']}</td>
+						<td>{$vo['title']}</td>
+						<td><font class="green">{$vo['zhichi']}</font></td>
+					<eq name="is_down_vote_allowed" value='1'><td><font class="red">{$vo['fandui']}</font></td></eq>	
+						<td>{$vo['zongji']}</td>
+						<td>
+					
+					<a onclick="Update(1,'{$vo['name']}','{$vo['assumnum']}','{$vo['votecoin']}','{$vo['id']}');" href="javascript:void(0)" class="btn  btn-success"><i class="icon-thumbs-up2 position-left"></i> {:l('Upvote')}</a>
+					<eq name="is_down_vote_allowed" value='1'>
+					<a onclick="Update(2,'{$vo['name']}','{$vo['assumnum']}','{$vo['votecoin']}','{$vo['id']}');" href="javascript:void(0)" class="btn btn-danger"><i class="icon-thumbs-down2 position-left"></i> {:l('Downvote')}</a>
+					</eq>
+						</td>
+					</tr>
+					</volist>
+				</tbody>
+				</table>
+			</div>
+	</div>
+	<div class="pages">{$page} </div>
+		</div>
+		</div>
+	</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function Update(type,coinname,assumnum,votecoin,id) {
+		layer.confirm('Voting will cost '+votecoin+' '+assumnum+', do you confirm it?', 
+		{
+			btn: ['Confirm','Cancel'], //PUSH_BUTTON
+			shade: false, //it does not show shadow
+			title:'Voting Price '
+		}, function(index){
+			$.post("/Vote/up", {
+				type : type,
+				id : id
+			}, function (data) {
+				if (data.status == 1) {
+					layer.msg(data.info, {icon: 1});
+					window.setTimeout("window.location='/Vote/index'", 1000);
+				} else {
+					layer.msg(data.info, {icon: 2});
+					if (data.url) {
+						window.setTimeout("window.location=" + data.url, 1000);
+					}
+				}
+			}, "json");
+		
+			layer.close(index);
+		},function(index){
+			layer.close(index);
+		}
+		
+		);
+
+	}
+</script>
+<include file="Public:footer_minimal"/>

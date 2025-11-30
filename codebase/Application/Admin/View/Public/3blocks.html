@@ -1,0 +1,53 @@
+<div class="table-responsive">
+								<table class="table table-xlg text-nowrap">
+									<tbody>
+										<tr>
+											<td class="col-md-2">
+												{:l('LOGIN_PASSWORD')}
+											</td>
+
+											<td class="col-md-7">
+												{:l('YOU_NEED_TO_ENTER_LOGIN_ACCOUN')}
+											</td>
+
+											<td class="text-right col-md-3">
+												<a href="/user/password" class="btn bg-teal-400"><i class="icon-key position-left"></i>{:l('CHANGE_PASSWORD')}</a>
+											</td>
+										</tr>
+												<tr>
+											<td class="col-md-2">
+												{:l('TRANSACTION_PASSWORD')}
+											</td>
+
+											<td class="col-md-7">
+												{:l('YOU_NEED_TO_ENTER_A_PASSWORD_W')}
+											</td>
+
+											<td class="text-right col-md-3">
+												<a href="/user/paypassword" class="btn bg-teal-400"><i class="icon-piggy-bank position-left"></i>{:l('CHANGE_PASSWORD')}</a>
+											</td>
+										</tr>
+												<tr>
+											<td class="col-md-2">
+											{:l('KYC')}
+											</td>
+
+											<td class="col-md-7">
+											{:l('AND_SUBJECT_TO_NATIONAL_REQUIR')}
+											</td>
+
+											<td class="text-right col-md-3">
+<eq name="user['idcardauth']" value='0'>								
+								<a href="/user/nameauth" class="btn btn-danger">
+								<i class="icon-person position-left"></i>
+									{:l('CERTIFIED_IMMEDIATELY')}
+								<else/>
+								<a href="/user/nameauth" class="btn btn-warning">
+								<i class="icon-person position-left"></i>
+									{:l('VERIFIED')}:{:l('REQUESTS_FOR_CHANGES')}
+								</eq>
+							</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>

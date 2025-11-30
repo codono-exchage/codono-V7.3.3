@@ -1,0 +1,14 @@
+.idea/
+.vscode/
+.github/
+.git/
+webserver/Runtime
+codebase/Runtime
+codebase/Database/Log
+webserver/runme.bat
+*.bat
+*.zip
+.*
+*.tar
+*.tar.gz
+!/.gitignore

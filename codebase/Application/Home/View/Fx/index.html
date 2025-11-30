@@ -1,0 +1,354 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="__PUBLIC__/otc/otc.css"/>
+<div class="page-container">
+<div class="otc-body">
+<div class="row">
+<div class="alert alert-danger"><i class="fa fa-check-circle mr5"></i>	Please add your Bank address for withdrawal <a href="{:U('Fx/Bank')}">click here!!</a></div> 
+ <!-- leftbox Starts -->
+<div class="col-md-6 col-sm-12">
+<div class="leftbox">
+<div class="left-title-1">
+<div class="left-title-2">Request for Quote</div>
+</div>
+<div class="head-tabs-1">
+	<div class="head-tabs-1-1">
+		<div class="head-tabs-title" style="color: #fff;" id="wanttobuy" onclick="changetype('buy')">I want to buy</div>
+		<div class="head-tabs-title" style="color: rgb(146, 154, 165);" id="wanttosell" onclick="changetype('sell')">I want to sell</div>
+	</div>
+	<div class="head-tabs-1-2">
+		<div class="BaseLine"></div>
+	</div>
+</div>
+<!--buytab starts-->
+<div class="coinwrap buytab">
+<div class="coin-input-div">
+	<div class="coin-input-label" id="input1text">Buy</div>
+		<input placeholder="Enter Amount" class="input-box-css" value=""  id="change1stInput">
+	<div class="coin-input-split"></div>
+	<div class="coin-input-coinwrap" id="showbuyoptions">
+   
+		<a class="dropdown-toggle xbuyoption" data-toggle="dropdown" href="#">
+		<img class="coin-input-coinimage" src="{$default_coin_trade.image}"><span class="coinInput-CoinText">{$default_coin_trade.symbol|strtoupper}</span> <span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			<volist name="trade_coins" id="vo">    
+			<li role="option">
+			<div class="CoinInput-Option"><a href="javascript:void(0);"><img class="CoinInput-Logo"  src="{$vo.image}" />{$vo.symbol|strtoupper}</a></div>
+			</li>
+			</volist>    
+		</ul>	
+
+	</div>
+</div> 
+
+<div class="coinInput-error" id="input1error"></div>
+</div>
+	<!--buytab ends-->
+<div class="coinwrap selltab">
+<div class="coin-input-div">
+	<div class="coin-input-label" id="input2text">Spend</div>
+		<input placeholder="Enter Amount" class="input-box-css" value="" id="change2ndInput">
+	<div class="coin-input-split"></div>
+	<div class="coin-input-coinwrap" id="showselloptions">
+   
+		<a class="dropdown-toggle xselloption" data-toggle="dropdown" href="#">
+		<img class="coin-input-coinimage" src="{$default_coin_base.image}"><span class="coinInput-CoinText">{$default_coin_base.symbol|strtoupper}</span> <span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			<volist name="base_coins" id="so">    
+			<li>
+			<div class="CoinInput-Option"><a href="javascript:void(0);"><img class="CoinInput-Logo"  src="{$so.image}" />{$so.symbol|strtoupper}</a></div>
+			</li>
+			</volist>    
+		</ul>	
+
+	</div>
+</div> 
+
+	<div class="coinInput-error" id="input2error"></div>
+</div>
+
+
+	<input name="tradetype" id="tradetype" value="buy" type="hidden"/>
+	<input name="trade_coin" id="trade_coin" value="{$default_coin_trade.symbol}" type="hidden"/>
+	<input name="base_coin" id="base_coin" value="{$default_coin_base.symbol}" type="hidden"/>
+	<input name="min_req" id="min_req" value="" type="hidden"/>
+	<input name="max_req" id="max_req" value="" type="hidden"/>
+	<input name="qid" id="qid" value="" type="hidden"/>
+	<div class="coin-input-div ">
+	<div class="coin-input-label" id="input2text">Bank</div>
+	<select class="select form-control" name="bankid" id="bankid" data-placeholder="Type" class="">
+	<volist name="UserBank" id="ub">		
+	<option value="{$ub.id}">{$ub.bankcard}@{$ub.bank} </option>
+	</volist>
+	</select>
+	</div>
+	<button data-bn-type="button" disabled="" id="quote-button" class="quote-button" onclick="requestQuote()">Get Quote </button>
+</div>
+</div>
+<!-- Leftbox ends -->
+<!-- rightbox starts -->
+<div class="col-md-6 col-sm-12">
+<div class="rightbox">
+	<div class="QuoteLayout-Wrap">
+		<div class="QuoteLayout-Title" id="quotebox">
+		<img class="quoteLayout-arrowBack" src="__PUBLIC__/static/images/arrow-back.svg">Current Quote</div>
+		<div class="QuoteLayout-Body">
+			
+			<div class="QuoteEmpty-Wrap" id="blank_order">
+				<div class="QuoteEmpty-Body">
+					<p><i class="fa fa-undo fa-4x"></i></p>
+					
+					<div class="QuoteEmpty-Title">Please fill in an amount on the left to receive a quote.</div>
+				</div>
+				
+			</div>
+			
+			<div class="quoteContent-wrap" id="with_order">
+				<div class="quoteContent-TopWrap">
+					<div class="quoteContent-CryptoTitle" id="tradetype_final">I want to buy</div>
+					<div class="quoteContent-CryptoWrap">
+						<div class="quoteContent-StyledTargetAmount" id="tradecoin_qty">--</div>
+						<div class="quoteContent-CryptoCoin" id="tradecoin_name">--</div>
+					</div>
+				</div>
+				<div class="quoteContent-MiddleWrap">
+					<div class="quoteContent-LabelRow"><div>Price per Coin</div><div>Total Proceeds</div></div>
+					<div class="quoteContent-CoinRow">
+						<div class="quoteContent-FiatPerCoin" id="received_price">-- --</div>
+						<div class="quoteContent-FiatTotal" id="received_total">-- --</div>
+					</div>
+					<div class="quoteContent-CountdownWrap">
+						<div class="quoteContent-CountdownInfo">
+							Quote expires in<div class="quoteContent-CountdownNumber" id="expiretime">--s</div>
+						</div>
+						<div class="progress-Wrap">
+							<div class="progress-BaseLine"></div>
+							<div class="progress-ActiveLine" style="width: 100%;" id="progressbar"></div>
+						</div>
+					</div>
+				</div>
+				<div class="quoteContent-StyledError" id="quoteerror">
+					<img class="quoteContent-ErrorIcon" src="__PUBLIC__/static/images/home-errorIcon.svg"><span id="quoteerror2">Insufficient funds! This quote is indicative only</span>
+				</div>
+				<div class="quoteContent-button row" id="quotefinal">
+					<div class="col-xs-12">
+					<div class="col-xs-6"> <button data-bn-type="button"  id="reject-button" class="btn btn-md btn-default btn-block" onclick="rejectQuote()">Reject </button></div>
+					<div class="col-xs-6"> <button data-bn-type="button"  id="approve-button" class="btn btn-md btn-info btn-block" onclick="approveQuote()">Approve </button></div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+</div>
+<!-- Rightbox ends -->
+</div>
+</div>
+</div>
+<script type = "text/javascript" >
+var trade_coins = {$trade_coins|json_encode} ;
+var base_coins = {$base_coins|json_encode} ;
+changetype('buy');
+
+$("#change2ndInput").change(function(){
+$('.quote-button').prop('disabled', true);
+$("#input1error").html('');
+$("#input2error").html('');
+$('.quote-button').prop('disabled', false);
+var value=parseFloat($('#change2ndInput').val());
+$('#change1stInput').val("");
+var select_coin_b=$("#base_coin").val().toLowerCase();
+var select_coin=select_coin_b.toLowerCase();
+
+var min_req_b=parseFloat(base_coins[select_coin]['min']);
+var max_req_b=parseFloat(base_coins[select_coin]['max']);
+
+if(value<min_req_b){
+$('.quote-button').prop('disabled', true);
+$("#input2error").html('Amount should be greater than '+min_req_b+' '+select_coin_b);
+
+}
+else if(value>max_req_b)
+{
+$('.quote-button').prop('disabled', true);
+$("#input2error").html('Amount should be less than  '+max_req_b+' '+select_coin_b);
+
+}else{
+//Means its true enable button for quote
+$('.quote-button').prop('disabled', false);
+$("#input2error").html('');
+}
+
+
+});
+
+
+$("#change1stInput").change(function(){
+$("#input1error").html('');
+$("#input2error").html('');
+$('.quote-button').prop('disabled', true);
+var value=parseFloat($('#change1stInput').val());
+var select_coin_t=$("#trade_coin").val().toLowerCase();
+var select_coin=select_coin_t.toLowerCase();
+$('#change2ndInput').val("");
+var min_req_t=parseFloat(trade_coins[select_coin]['min']);
+var max_req_t=parseFloat(trade_coins[select_coin]['max']);
+
+if(value<min_req_t){
+$('.quote-button').prop('disabled', true);
+$("#input1error").html('Amount should be greater than  '+min_req_t+' '+select_coin_t);
+
+}
+else if(value>max_req_t)
+{
+$('.quote-button').prop('disabled', true);
+$("#input1error").html('Amount should be less than  '+max_req_t+' '+select_coin_t);
+
+}else{
+//Means its true enable button for quote
+$('.quote-button').prop('disabled', false);
+$("#input1error").html('');
+}
+
+});
+
+
+function changetype(type){
+if(type !='buy' && type !='sell'){ return false;}
+  $("#tradetype").val(type);
+if(type=='buy'){
+$("#input1text").html('Buy');
+$("#input2text").html('Spend');
+$("#wanttobuy").css("color","#fff");
+$("#wanttobuy").css("border-bottom","2px solid #5d78ff");
+$("#wanttosell").css("color","rgb(146, 154, 165)");
+$("#wanttosell").css("border-bottom","0px");
+}else{
+$("#input1text").html('Sell');
+$("#input2text").html('Receive');
+$("#wanttosell").css("color","#fff");
+$("#wanttosell").css("border-bottom","2px solid #5d78ff");
+$("#wanttobuy").css("color","rgb(146, 154, 165)");
+$("#wanttobuy").css("border-bottom","0px");
+}
+
+}
+$("#showbuyoptions li a").click(function () {
+    var selText = $(this).text();
+    var imgSource = $(this).find('img').attr('src');
+    var img = '<img class="coin-input-coinimage" src="' + imgSource + '"/>';        
+	var source =img+'<span class="coinInput-CoinText">'+selText+'</span> <span class="caret"></span>';
+    $('.xbuyoption').html(source);
+	$("#trade_coin").val(selText);
+});
+
+$("#showselloptions li a").click(function () {
+    var selText = $(this).text();
+	
+    var imgSource = $(this).find('img').attr('src');
+    var img = '<img class="coin-input-coinimage" src="' + imgSource + '"/>';        
+	var source =img+'<span class="coinInput-CoinText">'+selText+'</span> <span class="caret"></span>';
+    $('.xselloption').html(source);
+	$("#base_coin").val(selText);
+	
+});
+
+function rejectQuote(){
+$('#quote-button').prop('disabled', false);
+				$('#received_price').html("");
+				$('#received_total').html("");
+				$('#tradecoin_name').html("");
+				$('#tradecoin_qty').html("");
+				$('#tradetype_final').html("");
+				$("#with_order").css("display","none");
+				$("#blank_order").css("display","flex");
+}
+function requestQuote(){
+$("#quotefinal").css("display","flex");
+$("#quoteerror").css("display","none");
+	
+var trade_coin=$("#trade_coin").val();
+var base_coin=$("#base_coin").val();
+var input1=$("#change1stInput").val();
+var input2=$("#change2ndInput").val();
+var tradetype=$("#tradetype").val();
+var bankid=$("#bankid").val();
+		$.post("{:U('Fx/getquote')}", {
+			trade_coin: trade_coin,
+			base_coin: base_coin,
+			input1: input1,
+			input2: input2,
+			tradetype:tradetype,
+			bankid:bankid,
+		}, function (data) {
+			if (data.status == 1) {
+				if(data.data.qid==0){
+				$("#quotefinal").css("display","none");
+				$("#quoteerror").css("display","flex");
+				}
+				layer.msg(data.msg, {icon: 1});
+				layer.tips('Press this button to continue!', '#approve-button', {tips: 3});
+				
+				$('#received_price').html(data.data.price+' '+data.data.base);
+				$('#received_total').html(data.data.total+' '+data.data.base);
+						
+				$('#tradecoin_name').html(data.data.trade);
+				$('#tradecoin_qty').html(data.data.qty);
+				$('#tradetype_final').html("I want to "+data.data.trade_type);
+				$('#expiretime').html(data.data.expire+'s')
+				$("#with_order").css("display","block");
+				$("#blank_order").css("display","none");
+				$('#qid').val(data.data.qid);
+				var expire=data.data.expire
+				var counter = expire;
+				var interval = setInterval(function() {
+				counter--;
+				var percentage=counter*(100/expire);
+				$('#quote-button').prop('disabled', true);
+				$("#progressbar").css("width",percentage+"%");
+				$('#expiretime').html(counter+'s')
+				
+				// Display 'counter' wherever you want to display it.
+				if (counter == 0) {
+				// Times up 
+				$("#quotefinal").css("display","none");
+				$("#quoteerror").css("display","flex");
+				$("#quoteerror2").html("Your Quote is expired, try a new quote now");
+				$('#expiretime').html('0s')
+				clearInterval(interval);
+				$('#quote-button').prop('disabled', false);
+						}
+				}, 1000);
+				
+				
+				
+			} else {
+				layer.msg(data.msg, {icon: 3});
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+
+function approveQuote(){
+
+var qid=$("#qid").val();
+if(qid=='' || qid==0)
+{
+layer.alert('You currently do not have a valid quote, Please refresh!', {title: "Info",btn: ['Ok']});
+}
+$.post("{:U('Fx/approveQuote')}", {
+			qid: qid,
+		}, function (data) {
+			if (data.status == 1) {			
+				layer.msg(data.msg, {icon: 1});
+				
+				window.location=data.url;
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+</script >
+<include file="Public:footer_minimal"/>

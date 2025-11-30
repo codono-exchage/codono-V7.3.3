@@ -1,0 +1,35 @@
+<!-- Cookie Banner -->
+<div class="cookie-banner fixed-bottom bg-dark text-light p-3 d-none">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="cookie-message">
+        We use cookies to ensure you get the best experience on our website. 
+        <a href="{:U('Content/policy')}" class="text-warning">Learn more</a>
+      </div>
+      <button class="btn btn-primary btn-sm" id="acceptCookies">Accept</button>
+    </div>
+  </div>
+  <style>
+    .cookie-banner {
+  display: none !important;
+}
+
+.cookie-banner.show {
+  display: block !important;
+}
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var cookieBanner = document.querySelector('.cookie-banner');
+      var acceptButton = document.getElementById('acceptCookies');
+  
+      if (!localStorage.getItem('cookiesAccepted')) {
+        cookieBanner.classList.add('show');
+      }
+  
+      acceptButton.addEventListener('click', function() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieBanner.classList.remove('show');
+      });
+    });
+  </script>
+  

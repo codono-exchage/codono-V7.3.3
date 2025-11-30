@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="Keywords" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_keywords')}">
+<meta name="Description" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_description')}">
+<link rel="stylesheet" href="__PUBLIC__/vuetrade/assets/css/vendor.bundle.css?ver=192">
+
+<script type="text/javascript" src="__PUBLIC__/assets/js/core/libraries/jquery.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/vuetrade/assets/css/theme.css?ver=192">
+<script src="__PUBLIC__/vuetrade/assets/js/jquery.bundle.js?ver=192"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/jquery.cookies.2.2.0.js"></script>
+
+</head>
+   
+<include file="Public:header"/>
+
+    <body class="nk-body body-wider bg-light-alt">
+
+	<div class="nk-wrap">
+    
+		<main class="wrapper h-100-vh login">
+			<div class="container">
+			  <div class="row justify-content-center inner-wrapper">
+				<div class="col-md-12 col-lg-12 col-xl-12">
+				  <div class="form-wrapper">
+					<div class="row align-items-center me-5">
+						<eq name="MOBILE_LAUNCHED" value="0">
+							<div class="col-sm-3 col-md-3 col-lg-3"></div>
+							</eq>
+						<div class="col-sm-5 col-md-5 col-lg-5">
+							
+						<div
+						  class="needs-validation"
+						  id="login-form"
+						>
+						  <h1 class="title">
+							<span class="h2 m-r-5 font-bold text-center">{:l('Create an account')}</span>
+						  </h1>
+						  <eq name="GOOGLE_LOGIN_ALLOWED" value="1">
+                            
+                            <a href="{:U('Login/googleLogin')}" class="btn google-button m-b-10 btn-block btn-sm " data-onsuccess="onSignIn">
+                              
+                            <span><img src='__EPSILON__/img/redesign/google-icon.svg'/> {:l('Signup with Google')}</span></a>
+                            
+                          </eq>
+						  <div class="tab-content">
+							<div
+							  class="tab-pane fade show active"
+							  role="tabpanel"
+							  id="email-login"
+							>
+							<div class="form-group">
+								<label >{:l('Username')}</label>
+								<input
+								  class="form-control"
+								  placeholder="{:l('Username')}"
+								  type="text"
+								  id="username"
+								  required
+								/>
+							  </div>
+							  <div class="form-group">
+								<label for="email">{:l('Email')}</label>
+								<input
+								  class="form-control"
+								  placeholder="{:l('Email Address')}"
+								  type="email"
+								  id="email"
+								  required value="{$_GET['email']}"
+								/>
+							  </div>
+							  <div class="form-group">
+								<label for="enterPW1">{:l('Password')}</label>
+								<input
+								  class="form-control"
+								  placeholder="{:l('Password')}"
+								  type="password"
+								  id="email_password"
+								  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+								  autocomplete="no"
+								  required
+								/>
+								<span class="input-inner-right"
+								  ><i class="fa fa-eye" id="eye1" onclick="hideShowPass('email_password','eye1')"></i
+								></span>
+								<div class="invalid-feedback">
+								  {:l('Your password must contain at least 6 characters, 1 uppercase letter, 1 lowercase letter and numbers.')}
+								</div>
+							  </div>
+							  <div class="form-group">
+                                <label for="enterPW1">{:l('Captcha')}</label>
+
+                                <div class="invalid-feedback">
+                                  {:l('Code must not be empty')}
+                                </div>
+                                <div class="d-flex field-item small">
+                                    <eq name="RECAPTCHA" value="1">
+                                    <include file="Public:recaptcha"/>
+                                    <else/>
+                                    <include file="Public:image_captcha"/>
+                                    </eq>
+                                        </div>
+                              </div>
+							  <div class="form-group" >
+								<label for="email" id="inviteCodeLabelArrowDown" class="" style="cursor: pointer;" onclick="inviteCode();" >{:l('Invite Code')} ({:l('Optional')}) &#x2193;</label>
+								<label for="email" id="inviteCodeLabelArrowUp" class="hideInviteCode" style="cursor: pointer;" onclick="inviteCode();" >{:l('Invite Code')} (Optional) &#x2191;</label>
+							  </div>
+							  <div class="form-group hideInviteCode" id="email_invit_toggle">
+								<input
+								  class="form-control"
+								  placeholder="{:l('Invite Code')}"
+								  type="email"
+								  id="email_invit"
+								  required
+								/>
+							  </div>
+							</div>
+						  </div>
+						  <a href="#" onclick="reg_email();" class="btn btn-4 d-block w-100 m-t-4">{:l('Sign Up')}</a>
+						  <div class="other-link">
+							<p class="">{:l('Already registered?')} <a href="{:U('Login/login')}" class="">{:l('Sign In')}</a></p>
+						  </div>
+						</div>
+					  </div>
+					  <div class="col-1"></div>
+					  
+					  <eq name="MOBILE_LAUNCHED" value="1">
+						<div class="col-sm-6 col-md-4 col-lg-5">
+						  <div class="qr-login">
+							<div class="h3  heading-padding mb-4">{:l('Scan code to log in')}</div>
+						   <div class="row">
+							<div class="col-md-6 col-12  ">
+							  <div class="qr-box" id="qrcode1">
+							<img src="" class="img-fluid"/>
+						  </div>
+							</div>
+							<div class="col-md-6 text-center d-none d-md-block">
+							<img class="qr-tip" src="__EPSILON__/img/scan.png" alt="">
+						  </div>
+						  </div>
+							<p class="">{:l('Open App')}</p>
+							<p class="">
+								{:l('For instant login with the mobile app scan this code.')}
+							</p>
+						  </div>
+						</div>
+					  </eq>
+					</div>
+				  </div>
+				<!-- </div> -->
+			  </div>
+			  <!--/row-->
+			</div>
+		  </main>
+    
+	</div>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+
+<script>
+	$(function () {
+	var inviteurl = new URL(window.location.href);
+	var invitecode = inviteurl.searchParams.get("invite");
+	document.getElementById("email_invit").value =invitecode;
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+		$('#email_step2').height(height);
+		$("#cellphone").focus();
+	});
+
+	function inviteCode () {
+		$("#email_invit_toggle").toggleClass("hideInviteCode");
+		$("#inviteCodeLabelArrowUp").toggleClass("hideInviteCode");
+		$("#inviteCodeLabelArrowDown").toggleClass("hideInviteCode");
+	}
+	function regWeb() {
+		layer.open({
+			type: 2,
+			skin: 'layui-layer-rim', //frame
+			area: ['800px', '600px'], // width height
+			title: 'User Agreement', // title
+			content: "{:U('Login/webreg')}"
+		});
+	}
+	
+	function showB() {
+		$("#step1").hide();
+		$("#step2").hide();
+		$("#verify").focus();
+	}
+	function showE() {
+		$("#email_step1").hide();
+		$("#email_step2").hide();
+		$("#everify").focus();
+	}
+		function check_username() {
+		var username  = $('#username').val();
+		if (username == "" || username == null) {
+			layer.tips("Please choose username", '#username', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_username", {
+			username: username,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.tips("Good!!", '#username', {tips: 2});
+				return true;
+			} else {
+				layer.tips(data.info, '#username', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	function check_email() {
+		var email  = $('#email').val();
+		if (email == "" || email == null) {
+			layer.tips("{:l('PLEASE_ENTER_email')}", '#email', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_email", {
+			email: email,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				$("#email_step1").show();
+				$("#email_step2").show();
+				$("#everify").focus();
+				layer.tips("{:l('Good!')}", '#email', {tips: 2});
+			} else {
+				layer.tips(data.info, '#email', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	
+	function verify_ups() {
+		$('#verify_up').attr('src', "/Ajax/verify?t=" + Math.random());
+	}
+	function new_send() {
+		$("#step1").show();
+		$("#step2").show();
+		$("#verify").focus();
+	}
+	function new_send_email() {
+		$("#email_step1").show();
+		$("#email__step2").show();
+		$("#everify").focus();
+	}
+	
+	
+	function validateEmail(sEmail){
+       var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
+
+  if(!sEmail.match(reEmail)) {
+    alert("Invalid email address");
+    return false;
+  }
+
+  return true;
+
+}
+function reg_email() {
+		var username        = $("#username").val();
+		var email        = $("#email").val();
+		<eq name="RECAPTCHA" value="1">
+		var verify =$("#g-recaptcha-response").val();
+				<else/>
+		var verify = $("#login_verify").val();
+		</eq>
+		var password     = $("#email_password").val();
+		var invit        = $("#email_invit").val();
+		// $("input[name='accounttype']:checked").val()
+		var accounttype = "1";
+		if (email == "" || email == null || validateEmail(email)== false) {
+			layer.tips("{:l('PLEASE_ENTER_VALID_EMAIL')}", '#email', {tips: 2});
+			return false;
+		}
+		if (username == "" ||username == null) {
+			layer.tips("Please enter username", '#username', {tips: 2});
+			return false;
+		}
+		
+		if (password == "" || password == null) {
+			layer.tips("{:l('PLEASE_ENTER_YOUR_PASSWORD')}", '#email_password', {tips: 2});
+			return false;
+		}
+		if (verify == "" || verify == null) {
+			layer.tips("{:l('Please enter Captcha')}", '#login_verify', {tips: 2});
+			return false;
+		}
+		if (accounttype == "" || accounttype == null) {
+			layer.tips("{:l('Please Choose acount type')}", '#account_type', {tips: 2});
+			return false;
+		}
+		// if (!$("#emailregweb").is(':checked')) {
+		// 	layer.tips("{:l('CHECK_USER_REGISTRATION_AGREEM')}", '#emailregweb', {tips: 3});
+		// //	return false;
+		// }
+		$.post("/Login/emailsignup", {
+			email: email,
+			username: username,
+			verify: verify,
+			password: password,
+			invit: invit,
+			accounttype:accounttype,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$.cookies.set('exchange_email', email);
+					window.location = '/Login/thankyou';
+			} else {
+				<eq name="RECAPTCHA" value="1">
+    				grecaptcha.reset();
+				</eq>
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	$('#qrcode1').qrcode({
+                        render: "table", //table
+                        size: 150,
+                        text: '{$qrhash}', //Any content
+						            background: "#ffffff",
+                        class:"img-fluid"
+                    }); 
+                    let imgcontent	=$('#qrcode1').html();
+</script>
+<style>
+#rc-imageselect {transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;}
+</style>
+<include file="Public:footer_minimal"/>

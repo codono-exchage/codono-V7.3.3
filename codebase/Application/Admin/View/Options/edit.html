@@ -1,0 +1,66 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">Option {$name} Config</span>
+		</div>
+		<div class="alert alert-info">{:l('Page does not show full value for security , save only if you have changed the value')}</div>
+		<div class="card">
+
+			<div class="card-body">
+				<form id="form" action="{:U('Options/save')}" method="post" class="form-horizontal" >
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<tr class="controls">
+									<td class="item-label">{$config.title}:</td>
+									<td><input type="text" class="form-control input-10x" name="{$name}" value="" <if condition="$name eq 'blockgum_jwt'">placeholder="Hidden "<else/>placeholder="{$value|msubstr=0,8}"</if>
+									></td>
+									<td class="item-note"></td>
+								</tr>					
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class= "btn submit-btn ajax-post btn-info"  target-form="form-horizontal" id="submit" type="submit">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{:U('Options/index')}">{:l('Back')}</a>
+											<notempty name="id"><input type="hidden" name="id" value="{$id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function(){
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+	let editor;
+	KindEditor.ready(function(K){
+		editor=K.create('textarea',{width:'500px',height:'200px',items:['source','fontname','fontsize','|','forecolor','hilitecolor','bold','italic','underline','removeformat','|','justifyleft','justifycenter','justifyright','insertorderedlist','insertunorderedlist','|','emoticons','link','fullscreen'],afterBlur: function () { this.sync(); }});
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		//Highlight the main navigation
+		$('.config-box').addClass('current');
+		//Highlight side navigation
+		$('.config-contact').addClass('current');
+	});
+</script>
+<include file="Public:footer" />

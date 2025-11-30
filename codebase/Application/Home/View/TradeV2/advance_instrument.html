@@ -1,0 +1,38 @@
+<div class="col-md-4 col-lg-3 col-pd">
+
+                    <div class="graph-desc">
+                        <ul class="nav nav-tabs graph-nav">
+							<volist name="activated_base_markets" id="v">		
+							<li ><a href="#" id="id{$v |strtolower}" data-toggle="tab" data-target="#{$v | strtolower}">{$v}</a></li>
+							</volist>
+                        </ul>
+
+                        <div class="tab-content crypt-tab-content" id="CryptoPriceTable">
+						<div class="search-bar">
+                                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchFilter">
+                                    <i class="fa fa-search"></i>
+                                </div>
+						<volist name="activated_base_markets" id="v">		                          
+						  <div role="tabpanel" class="tab-pane" id="{$v |strtolower}">
+						  
+                                
+								<div class="table-responsive mytable-2 table-height-two all-tables">
+                                <table class="table table-hover table-dark">
+                                    <thead>
+                                        <tr>
+										<th><i class="fa fa-star"></i></th>
+                                            <th scope="col">Coin</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Change</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="" id="coinleftmenu-{$v |strtolower}">
+                                    </tbody>
+                                </table>
+								</div>
+                            </div>
+							</volist>	
+                           
+                        </div>
+                    </div>
+ </div>

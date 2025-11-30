@@ -1,0 +1,119 @@
+<!-- deposit/withdraw TL modal start -->
+<div class="modal fade deposit-withdraw-modal" id="depositTLModal" tabindex="-1" role="dialog" aria-labelledby="Türk Litası Yatır" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header  d-flex align-items-center">
+				<h5 class="modal-title" id="exampleModalLabel">
+					<div class="coin-title d-flex align-items-center">
+						<div class="icon"><img src="__PUBLIC__/template/v6/img/icons/TRY.png" class="img-fluid " alt="TL"></div>
+						<div class="title">
+							Türk Lirası <span>TL</span>
+						</div>
+					</div>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-6">
+						<div class="card">
+							<div class="card-body p-0">
+								<ul id="deposit-withdraw-tabs" class="nav nav-pills nav-fill" role="tablist">
+									<li class="nav-item">
+										<a aria-selected="true" class="nav-link active deposit" data-toggle="pill" href="#tl-deposit" data-target=".crypto-deposit, .tl-deposit-info" role="tab">
+											<span class="coin-name">TL </span>{:l("Deposit")}</a>
+									</li>
+									<li class="nav-item">
+										<a aria-selected="false" class="nav-link withdraw" data-toggle="pill" href="#tl-withdraw" data-target=".crypto-withdraw, .tl-withdraw-info" role="tab">
+											<span class="coin-name">TL </span>{:l("Withdraw")}</a>
+									</li>
+								</ul>
+								<div class="tab-content p-15">
+									<div class="tab-pane fade show active crypto-deposit  text-center" role="tabpanel" id="tl-deposit">
+										<select name="bank-accounts" id="bank-accounts" class="form-control">
+											<volist name="default_bank" id="bank">
+											<option value="bank_{$bank.id}">{$bank.title}</option>
+											</volist>
+										</select>
+										<volist name="default_bank" id="bank">
+										<div id="bank_{$bank.id}" class="bank-info" <if condition="($key eq 0)"> style="display: block"</if>>
+											<img src="__PUBLIC__/template/v6/img/logos/ziraat-bankasi.png" class="img-fluid m-auto m-b-15 m-t-15">
+											<hr/>
+											<div class="d-flex">
+												<div class="qr-code m-r-15">
+													<img src="__PUBLIC__/template/v6/img/google-auth-qr.png" class="img-fluid">
+												</div>
+												<div class="content">
+													<p><span class="green clearfix">{:l("Name")} :</span> {$bank.truename}</p>
+													<p><span class="green clearfix">IBAN :</span> {$bank.kaihu}</p>
+													<p><span class="green clearfix">{:l("Reference #")} :</span> {$userinfo.invit}</p>
+												</div>
+											</div>
+										</div>
+										</volist>
+									</div>
+									
+									<div class="tab-pane fade p-t-15 crypto-withdraw" role="tabpanel" id="tl-withdraw">
+										<div class="form-group">
+											<label for="recipient">{:("Receiver")}</label>
+											<input class="form-control" placeholder="" type="text" id="recipient" disabled readonly value="{$userinfo.firstname} {$userinfo.lastname}">
+										</div><!--
+										<div class="form-group">
+											<label for="iban">IBAN</label>
+											<input class="form-control iban-mask" placeholder="TR" type="text" id="iban" pattern="^TR\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|TR\d{20}$">
+										</div>
+										<div class="form-group">
+											<label for="tl_amount">{:l("Amount")} (TL)</label> <input class="form-control" placeholder="" type="text" id="tl_amount">
+										</div>-->
+										<a href="{:U('P2p/paymentsettings')}" class="btn sell d-block w-100" >
+											<span class="coin-name">TL </span>{:l("View")}
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!--/col-md-6-->
+					<div class="col-sm-12 col-md-6">
+						<div class="tab-content">
+							<div class="tab-pane fade show active tl-deposit-info" role="tabpanel" id="tl-deposit-info">
+								<div class="alert alert-warning" role="alert">
+									<h4 class="alert-heading">Önemli</h4>
+									<ul class="description-box-rules">
+										<li>EFT transferlerinde Lehdar/Alıcı kısmına  yazılması gerekmektedir.</li>
+										<li>Adınıza açılmış olan tüm bireysel, vadesiz, Türk Lirası hesaplarınızdan, listelenen hesaplara Havale/EFT işlemi gerçekleştirebilirsiniz.
+											Farklı kişiye ait hesaplardan yapılan gönderimler kabul edilmeyecektir.
+										</li>
+										<li>ATM kullanılarak yapılan transferler (kartlı/kartsız), gönderici bilgilerini teyit etmek mümkün olmadığı için kabul edilmeyecektir.
+										</li>
+										<li>Gönderdiğiniz miktar kontrollerin ardından sistem tarafından otomatik olarak hesabınıza yansıtılacaktır, ayrıca bir bildirimde
+											bulunmanıza gerek yoktur.
+										</li>
+										<li>Kimlik doğrulama işleminizi tamamladığınız için açıklama kısmına sabit yatırma kodu girmeniz gerekmemektedir.</li><!----></ul>
+								</div>
+							</div>
+							<div class="tab-pane fade tl-withdraw-info" role="tabpanel" id="tl-withdraw-info">
+								<div class="alert alert-warning" role="alert">
+									<h4 class="alert-heading">Önemli</h4>
+									<ul class="description-box-rules"><!----><!---->
+										<li>Adınıza açılmış (bireysel, vadesiz, TL) tüm banka hesaplarınıza çekim yapabilirsiniz. Farklı bir kişiye transfer işleminiz
+											gerçekleşmeyecektir.
+										</li>
+										<li>Minimum çekim miktarı 10 TL'dir.</li>
+										<li>Çekim işlemi sırasında 3 TL işlem ücreti tahsil edilir.</li>
+										<li>Bir çekim talimatı verdiğinizde bu tutar kullanılabilir bakiyenizden düşecektir.</li>
+										<li>Henüz gerçekleşmemiş talimatlarınızı iptal edebilirsiniz. Bu durumda, talimat tutarı tekrar kullanılabilir bakiyenize aktarılır.
+										</li><!---->
+										<li>Bankaların mesai saatleri dışında verilen çekim talimatları, bankaların mesaiye başlaması ile birlikte işleme alınır.</li><!---->
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div><!--/col-md-6-->
+				</div><!--/row-->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- deposit/withdraw TL modal end -->

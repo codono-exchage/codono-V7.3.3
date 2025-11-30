@@ -1,0 +1,86 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Withdraw Configuration')}</span>
+		</div>
+		<div class="card">
+
+			<div class="card-body">
+				<form id="form" action="{:U('Config/save')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<table class="table">
+									<tr class="controls">
+										<td class="item-label">{:l('Min Withdrawal')}:</td>
+										<td><input type="text" class="form-control" name="mytx_min" value="{$C['mytx_min']}"></td>
+										<td class="item-note">{:l('Minimum withdrawal amount')}</td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">{:l('Max Withdrawal')}:</td>
+										<td><input type="text" class="form-control" name="mytx_max" value="{$C['mytx_max']}"></td>
+										<td class="item-note">{:l('Maximum amount of withdrawals')}</td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">{:l('Integer multiple')}:</td>
+										<td><input type="text" class="form-control" name="mytx_bei" value="{$C['mytx_bei']}"></td>
+										<td class="item-note">{:l('Integer multiple withdrawals')}</td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">{:l('Withdrawal fee')}:</td>
+										<td><input type="text" class="form-control" name="mytx_fee" value="{$C['mytx_fee']}"></td>
+										<td class="item-note">{:l('Withdrawal fee in %')}</td>
+									</tr>
+
+
+									<tr class="controls">
+										<td class="item-label">{:l('Withdraw tips')}:</td>
+										<td><textarea name="mytx_text_index" class="textarea input-8x" style="height: 80px; margin-top: 24px;">{$C['mytx_text_index']}</textarea></td>
+										<td class="item-note"></td>
+									</tr>
+
+									<tr class="controls">
+										<td class="item-label"></td>
+										<td>
+											<div class="form-item cf">
+												<button class= "btn submit-btn ajax-post btn-info"  target-form="form-horizontal"  id="submit" type="submit">{:l('Submit')}</button>
+												<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function(){
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__THEME__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+	var editor;
+	KindEditor.ready(function(K){
+		editor=K.create('textarea',{width:'465px',height:'60px',items:['source','fontname','fontsize','|','forecolor','hilitecolor','bold','italic','underline','removeformat','|','justifyleft','justifycenter','justifyright','insertorderedlist','insertunorderedlist','|','emoticons','link','fullscreen'],afterBlur: function () { this.sync(); }});
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		//Highlight the main navigation
+		$('.mytx-box').addClass('current');
+		//Highlight side navigation
+		$('.mytx-config').addClass('current');
+	});
+</script>
+<include file="Public:footer" />

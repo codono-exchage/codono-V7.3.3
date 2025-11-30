@@ -1,0 +1,333 @@
+<include file="Public:header" />
+<main class="wrapper">
+	<section class="container">
+		<div class="full-box row">
+			<include file="User:sidebar" />
+			<div class="col-10">
+		<div class="container ">
+			<div class="row mt-3 mb-3">
+				<include file="User:top_bar" />
+				<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+					<ul class="text-right breadcrumbs list-unstyle">
+						<li>
+							<a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+						</li>
+						<li>
+							<a href="{:U('/finance/index')}" class="btn btn-warning btn-sm">{:l('Finance')}</a>
+						</li>
+						<li class="btn btn-warning btn-sm active">{:l('Pay')}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<ul id="withdraw-money-tabs" class="nav nav-pills" role="tablist">
+						<li class="nav-item white-bg">
+							<a aria-selected="true" class="nav-link " data-toggle="pill" href="/Finance/mytx"
+								data-target=".money" role="tab">{:l("Fiat")} </a>
+						</li>
+						<li class="nav-item white-bg">
+							<a aria-selected="false" class="nav-link " href="/wallet/cryptowithdrawal">{:l('Crypto')}
+							</a>
+						</li>
+						<li class="nav-item white-bg">
+							<a aria-selected="true" class="nav-link active" data-toggle="pill" href="#pay"
+								data-target=".money" role="tab">{:l("Pay")} </a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class=" card lend-form">
+
+				<div class="tab-content withdraw-tab p-t-20">
+
+
+					<div class="row">
+						<div class="col-md-6 col-lg-6 col-sm-12">
+							<div class="form-group">
+								<ul class="nav nav-pills" id="radioTab" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link active" id="email-tab" data-toggle="pill" href="#email" role="tab" aria-controls="email" aria-selected="true">{:l('Pay by Email')}</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="payid-tab"  data-toggle="pill" href="#payid" role="tab" aria-controls="payid" aria-selected="false">{:l('Pay by PayID')}</a>
+									</li>
+								</ul>
+								<input id="paymethod" value="" type="hidden" />
+
+								<div class="tab-content mt-3" id="radioTabContent">
+									<div class="tab-pane fade show active" id="email" role="tabpanel" aria-labelledby="email-tab">
+										<div class="form-group">
+											<label id="method-name">{:l('Receiver Email:')}</label>
+											<div class="input-group">
+											<input class="form-control" placeholder="" type="email" id="email-input" required="">
+											<div class="input-group-append">
+												<span class="input-group-text" id="max"><i class="fa fa-envelope"></i></span>
+											  </div>	
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="payid" role="tabpanel" aria-labelledby="payid-tab">
+										<div class="form-group">
+											<label id="method-name">{:l('Receiver PayID:')}</label>
+											<div class="input-group">
+											<input class="form-control" placeholder="" type="text" id="payid-input" required="">
+											<div class="input-group-append">
+												<span class="input-group-text" id="max"><i class="fa fa-leaf"></i></span>
+											  </div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								
+								<label>{:l('Coin')}</label>
+
+								<select id="coin-select" class="bootstrap-select" data-live-search="true"
+									data-live-search-placeholder='{:l("Search")}' data-width="100%">
+									<volist name="coin_list" id="vo">
+										<eq name="xnb" value="$key">
+											<option value="{$vo['name']}" selected="selected">{$vo.title}
+												({$vo['name']|strtoupper})</option>
+											<else />
+											<option value="{$vo['name']}">{$vo.title} ({$vo['name']|strtoupper})
+											</option>
+										</eq>
+									</volist>
+								</select>
+							</div>
+					
+							
+							<div class="form-group">
+								<label for="quantity">{:l('Amount')}</label>
+								<div class="input-group">
+								<input class="form-control" placeholder="" maxlength="12" type="number" id="quantity"
+									required="">
+									<div class="input-group-append">
+										<span class="input-group-text" id="max">{:l('Available')} <span class="m-l-5 green">{$user_coin[$xnb]|Num}</span></span>
+									  </div>	
+									</div>
+
+							</div>
+
+							<eq name="is_ga" value="1">
+								<div class="form-group">
+									<label>{:l('Google 2FA Code')}:</label>
+									<div>
+										<input type="text" class="form-control" id="gacode" value="" name="gacode">
+									</div>
+								</div>
+							</eq>
+							<div class="form-group">
+								<labe for="usdout_paypassword">{:l('TRANSACTION_PASSWORD')} </label>
+									<div class="input-group">
+									<input type="password" id="usdout_paypassword" name="fundpassword"
+										class="form-control" required>
+										<div class="input-group-append">
+											<span class="input-group-text" id="max"><i class="fa fa-lock"></i></span>
+										  </div>	
+										</div>
+									<a href="{:U('Findpwd/findpwd')}" class="green m-t-5 d-inline-block pull-right">I forgot my
+										password?</a>
+							</div>
+							<label for="otp">{:l('OTP Code')}:</label>
+
+							<div class="form-group input-group">
+
+								<input type="text" class="form-control" id="otp" value="">
+								<div class="input-group-append">
+									<button onclick="requestOTP()" class="btn btn-outline-secondary">{:l('Request
+										OPT')}</button>
+								</div>
+							</div>
+
+							<ul class="limit-info mb-3">
+
+								<li>{:l('Transaction Fees')}
+									{$coin_list[$xnb]['zc_fee']}%</li>
+							</ul>
+							<empty name="zc_jz">
+								<button class="btn btn-4 btn-block  text-center"
+									onclick="payment_send()">{:l('Withdraw')}</button>
+								<else />
+								<button class="btn btn-warning text-center">Withdrawals are disabled </button>
+							</empty>
+						</div>
+						<div class="col-md-6 col-lg-6 col-sm-12">
+							<div class="alert alert-warning hide-mobile">
+								<ul class="description-box-rules small">
+									<li>{:l('Please cross check email exists on exchange accounts.')}</li>
+									<li>{:l('Transfers between exchange accounts are internal transfers, there is transaction fee for internal transfers and the entire amount you enter in the amount section is sent to the recipient.')}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+
+	</section>
+</main>
+<script>
+
+        $(document).ready(function () {
+            function updateMethodInput() {
+                var selectedTabId = $('#radioTab .nav-link.active').attr('id');
+                var methodValue = selectedTabId === 'email-tab' ? 'email' : 'payid';
+                $('#paymethod').val(methodValue);
+            }
+
+            // Initialize the hidden input with the default selected tab value
+            updateMethodInput();
+
+            // Update the hidden input value when a tab is shown
+            $('#radioTab a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+                updateMethodInput();
+            });
+        });
+    
+
+	$("#coin-select").change(function () {
+		var coin = $("#coin-select option:selected").val();
+		var url = '/Pay/index';
+		if (coin) {
+			url += '/coin/' + coin + '';
+		}
+		window.location = url;
+	});
+	function requestOTP() {
+		layer.load(0, { shade: [0.5, '#8F8F8F'] });
+		var amount = $('#quantity').val();
+		var coinname = $('#coin-select option:selected').val();
+		var paymethod= $('#paymethod').val();
+		if(paymethod=='email'){
+			var address = $('#email-input').val();
+		}else{
+			var address = $('#payid-input').val();
+		}
+		
+		
+		if (amount == "" || amount == null) {
+			layer.tips("Please enter amount  to withdraw first !", '#quantity', { tips: 2 });
+			return false;
+		}
+		if (coinname == "" || coinname == null) {
+			layer.tips("Please choose currency to withdraw first !", '#coinname', { tips: 2 });
+			return false;
+		}
+
+		if (address == "" || address == null) {
+			layer.tips("Please enter receivers details !", '#radioTabContent', { tips: 2 });
+			return false;
+		}
+
+		$.post("{:U('Pay/pbe_requestOTP')}", {
+			amount: amount,
+			coinname: coinname,
+			address: address,
+			paymethod: paymethod,
+		}, function (data) {
+			layer.closeAll('loading');
+			setTimeout(function () {
+				layer.closeAll('loading');
+				trans_lock = 0;
+			}, 10000);
+			if (data.status == 1) {
+				layer.msg(data.info, { icon: 1 });
+
+			} else {
+				layer.msg(data.info, { icon: 2 });
+			}
+		}, "json");
+	}
+	function payment_send() {
+		var otp = $("#otp").val();
+		var num = $("#quantity").val();
+		var paypassword = $("#usdout_paypassword").val();
+		var paymethod= $('#paymethod').val();
+		if(paymethod=='email'){
+			var address = $('#email-input').val();
+		}else{
+			var address = $('#payid-input').val();
+		}
+		if (address == "" || address == null) {
+			layer.tips("Please enter receivers details !", '#radioTabContent', { tips: 2 });
+			return false;
+		}
+		var coin = $('#coin-select option:selected').val();
+		if (num == "" || num == null) {
+			layer.tips('Enter the amount for transfer', '#quantity', {
+				tips: 2
+			});
+			return false;
+		}
+		if (otp == "" || otp == null) {
+			layer.tips('Enter the OTP you received on email', '#otp', {
+				tips: 2
+			});
+			return false;
+		}
+	
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Provide Trans Password', '#usdout_paypassword', {
+				tips: 2
+			});
+			return false;
+		}
+		if (coin == "" || coin == null) {
+			layer.tips('Select Currency', '#coin-select', {
+				tips: 2
+			});
+			return false;
+		}
+		
+			layer.load(0, { shade: [0.5, '#8F8F8F'] });
+			setTimeout(function () {
+				layer.closeAll('loading');
+				trans_lock = 0;
+			}, 10000);
+
+			var msg = 'You want to send ' + num + ' ' + coin + ' to '+paymethod+' ' + address;
+			layer.confirm(msg, {
+				btn: ['Confirm', 'Cancel'] //PUSH_BUTTON
+			}, function () {
+				layer.closeAll('loading');
+				$.post("{:U('Pay/doPaymentSend')}", {
+					coin: coin,
+					otp: otp,
+					num: num,
+					paypassword: paypassword,
+					address:address,
+					paymethod:paymethod
+				}, function (data) {
+					layer.closeAll('loading');
+					trans_lock = 0;
+					if (data.status == 1) {
+						layer.msg(data.info, {
+							icon: 1
+						});
+						window.location = "{:U('Finance/coinoutlog')}";
+					} else {
+						layer.msg(data.info, {
+							icon: 2
+						});
+						if (data.url) {
+							//	window.location = data.url;
+						}
+					}
+				}, "json");
+
+			});
+		
+	}
+</script>
+<include file="Public:footer_minimal" />

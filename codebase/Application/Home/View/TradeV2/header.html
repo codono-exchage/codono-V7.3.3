@@ -1,0 +1,74 @@
+    <header class="top-header">
+        <nav class="navbar navbar-inverse custom-nav">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="__UPLOAD__/public/{$C['web_logo']}" style="width:150px" alt="" /></a>
+					
+					
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+					<volist name="navigation" id="vo">
+						<li id="{$vo['name']}_box">
+							<a   href="/{$vo['url']}"><if condition="$vo['ico']"><i class="fa fa-{$vo['ico']}"></i></if>  {:l($vo['title'])}</a>
+						</li>
+					</volist>
+              
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">DeFi<i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="fa fa-windows"></i> Windows</a></li>
+                                <li><a href="#"><i class="fa fa-apple"></i> MacOS</a></li>
+                                <li><a href="#"><i class="fa fa-linux"></i> Linux</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+					<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="__PUBLIC__/assets/images/flags/<notempty name="Think.cookie.lang"> {$Think.cookie.lang}<else/>en</notempty>.png" class="position-left" alt=""><i class="fa fa-angle-down"></i></a></a>
+                <ul class="dropdown-menu ml-auto" aria-labelledby="dropdown2" id="lang-menu">
+                    	<li onclick="choose_lang('en')" class="dropdown-item"><a class="english"><img src="__PUBLIC__/assets/images/flags/gb.png" alt=""> English</a></li>
+						<li onclick="choose_lang('es')" class="dropdown-item"><a class="espana"><img src="__PUBLIC__/assets/images/flags/es.png" alt=""> España</a></li>
+						<li onclick="choose_lang('nl')" class="dropdown-item"><a class="deutsch"><img src="__PUBLIC__/assets/images/flags/nl.png" alt=""> Dutch</a></li>
+						<li onclick="choose_lang('iw')" class="dropdown-item"><a class="Hebrew"><img src="__PUBLIC__/assets/images/flags/iw.png" alt=""> Hebrew</a></li>
+						<li onclick="choose_lang('de')" class="dropdown-item"><a class="german"><img src="__PUBLIC__/assets/images/flags/de.png" alt=""> German</a></li>
+						<li onclick="choose_lang('pt')" class="dropdown-item"><a class="portuguese"><img src="__PUBLIC__/assets/images/flags/pt.png" alt=""> Portuguese</a></li>
+						<li onclick="choose_lang('ru')" class="dropdown-item"><a class="russian"><img src="__PUBLIC__/assets/images/flags/ru.png" alt=""> Русский</a></li>
+						<li onclick="choose_lang('vi')" class="dropdown-item"><a class="vietnamese"><img src="__PUBLIC__/assets/images/flags/vi.png" alt=""> Vietnamese</a></li>
+						<li onclick="choose_lang('ja')" class="dropdown-item"><a class="Japanese"><img src="__PUBLIC__/assets/images/flags/ja.png" alt=""> Japanese</a></li>
+						<li onclick="choose_lang('ko')" class="dropdown-item"><a class="Korean"><img src="__PUBLIC__/assets/images/flags/ko.png" alt=""> Korean</a></li>
+						<li onclick="choose_lang('zhtw')" class="dropdown-item"><a class="Traditional Chinese"><img src="__PUBLIC__/assets/images/flags/zhtw.png" alt=""> Traditional</a></li>
+						<li onclick="choose_lang('zhcn')" class="dropdown-item"><a class="Simplified Chinese"><img src="__PUBLIC__/assets/images/flags/zhcn.png" alt=""> Simplified</a></li>
+                </ul>
+            </li>
+			<gt name="Think.session.userId" value="0">
+				<li class="nav-item active dropdown">
+					<a class="nav-link nav-link dropdown-toggle">
+						 <i<i class="fa fa-user"></i>  {$Think.session.userName}<i class="fa fa-angle-down"></i></a> 
+					</a>			
+					<ul class="dropdown-menu cleanmenu" aria-labelledby="dropdown2" id="login-menu">
+						   <li class="dropdown-item"><a href="{:U('Finance/index')}" ><i class="fa fa-bank"></i> {:l('FINANCE')}</a></li>
+                            <li class="dropdown-item"><a href="{:U('User/index')}" ><i class="fa fa-vcard"></i> {:l('ACCOUNT')}</a></li>
+						
+						<li class="divider"></li>
+						<li class="dropdown-item"><a href="{:U('Login/loginout')}"><i class="fa fa-sign-out"></i> {:l('LOG_OUT')}</a></li>
+					</ul>
+					</li>	
+
+				<else/>
+				   <li><a class="btn  btn-warning" href="{:U('Login/login')}">{:l('SIGNIN')}</a><li>
+			    	<li><a class="btn  btn-info btn-sm" href="{:U('Login/register')}" ><i class="icon-user-plus"></i> {:l('SIGNUP')}</a></li>
+					
+				</gt>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>

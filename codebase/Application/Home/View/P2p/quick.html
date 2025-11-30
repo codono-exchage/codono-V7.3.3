@@ -1,0 +1,186 @@
+<include file="Publicnew:header"/>
+<include file="P2p:inc_common_banner"/>
+
+<!-- P2P Content Start -->
+
+	<div class="p2p-page">
+		<!-- P2P Content Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="card invite-code-wrapper">
+					<include file="P2p:inc_mid_nav"/>
+					<div class="card-body p-t-5 p-b-5 p2p-quick-form">
+						<div class="swap-form-wrapper">
+							<div class="swap-form-inner">
+								<ul id="p2p-quick-tabs" class="nav nav-pills nav-fill" role="tablist">
+									<li class="nav-item">
+										<a aria-selected="true" class="nav-link active buy" data-toggle="pill" href="#quick-buy" id="quick-buy-tab" aria-controls="quick-buy" role="tab">
+										{:l('Buy')}</a>
+									</li>
+									<li class="nav-item">
+										<a aria-selected="false" class="nav-link sell" data-toggle="pill" href="#quick-sell" id="quick-sell-tab" aria-controls="quick-sell" role="tab">
+											{:l('Sell')}</a>
+									</li>
+								</ul>
+								<div class="tab-content p-15">
+							<div class="tab-pane fade show active p-t-15" role="tabpanel" id="quick-buy">
+									
+										<div class="swap-from">
+											<label for="buyfiat">{:l("I want to pay with")}:</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<select id="buyfiat" name="buyfiat" class="bootstrap-select" data-live-search="true" data-live-search-placeholder="{:l('Search')}" data-width="200px">
+																											<volist name="FiatList" id="fiatcoin">
+															<option  data-value="{$fiatcoin['name']| strtoupper}" data-content="<img src='__UPLOAD__/coin/{$fiatcoin['img']}'/> {$fiatcoin['name']| strtoupper}" ></option>
+														</volist></select>
+													</select>
+												</div>
+												<input type="number" class="form-control" placeholder="100.00 - 60000.00" id="buyfiatqty" name="paywith">
+											</div>
+										</div>
+										<div class="swap-from">
+											<label for="buycoin">{:l('I want to sell')}</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<select id="buycoin" name="buycoin" class="bootstrap-select" data-live-search="true" data-live-search-placeholder="{:l('Search')}" data-width="200px">
+														<volist name="allow_cryptos" id="coin">
+													
+														<option data-content="<img src='{$coin['image']}'> {$coin['symbol']|strtoupper}" data-value="{$coin['symbol']}"></option>
+													</volist>
+													</select>
+												</div>
+												<input type="number" class="form-control" placeholder="0.00" id="buycoinqty" name="takeamount">
+											</div>
+										</div>
+									
+										<div class="connect-wallet">
+											<button type="submit" class="btn buy" onclick="trade('buy')">{:("Buy with  0 Fees")}</button>
+										</div>
+									
+							</div>
+							<div class="tab-pane fade p-t-15" role="tabpanel" id="quick-sell">
+								
+									<div class="swap-from">
+										<label for="sellfiat">{:l("I want to receive")}:</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+													<select id="sellfiat" name="sellfiat" class="bootstrap-select" data-live-search="true" data-live-search-placeholder="{:l('Search')}" data-width="200px">
+																											<volist name="FiatList" id="fiatcoin">
+															<option  data-value="{$fiatcoin['name']| strtoupper}" data-content="<img src='__UPLOAD__/coin/{$fiatcoin['img']}'/> {$fiatcoin['name']| strtoupper}" ></option>
+														</volist></select>
+													</select>
+											</div>
+											<input type="number" class="form-control" placeholder="100.00 - 60000.00" id="sellfiatqty" name="paywith">
+										</div>
+									</div>
+									<div class="swap-from">
+										<label for="sellcoin">{:l("Trade")}</label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<select id="sellcoin" name="sellcoin" class="bootstrap-select" data-live-search="true" data-live-search-placeholder="{:l('Search')}" data-width="200px">
+														<volist name="allow_cryptos" id="coin">
+													
+														<option data-content="<img src='{$coin['image']}'> {$coin['symbol']|strtoupper}" data-value="{$coin['symbol']}"></option>
+													</volist>
+													</select>
+											</div>
+											<input type="number" class="form-control" placeholder="0.00" id="sellcoinqty" name="takeamount">
+										</div>
+									</div>
+									
+									<div class="connect-wallet">
+										<button type="submit" class="btn sell" onclick="trade('sell')">{:("Sell with  0 Fees")}</button>
+									</div>
+								
+							</div>
+						</div>
+				</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- P2P Content End -->
+</div>
+<include file="Publicnew:inc_newAdsModal" />
+<script>
+	jQuery(document).ready(function ($) {
+		$('input[type=number][name=paywith]').change(function(){
+	$('input[type=number][name=takeamount]').val("");
+	});
+		$('input[type=number][name=takeamount]').change(function(){
+	$('input[type=number][name=paywith]').val("");
+	});
+		$("#p2p-list-table").on('shown.bs.collapse', '.collapse', function (e) {
+			$('.table-overlay').addClass('active');
+		});
+		$('.table-overlay').on('click', function () {
+			$(this).removeClass("active");
+			$("#p2p-list-table").find('.collapse.show').collapse('hide');
+		});
+		$('#p2p-list-table').on('hidden.bs.collapse', '.collapse', function () {
+			$('.table-overlay').removeClass('active');
+		})
+	});
+function refreshpage(prefix,value){
+
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+}
+
+function trade(type){
+	
+	if(type=='buy'){
+	var fiat=$("select#buyfiat").find("option:selected").attr('data-value').toUpperCase();
+	var coin=$("select#buycoin").find("option:selected").attr('data-value').toUpperCase();
+	var fiat_qty=$("input#buyfiatqty").val();
+	var coin_qty=$("input#buycoinqty").val();
+	}else{
+	var fiat=$("select#sellfiat").find("option:selected").attr('data-value').toUpperCase();
+	var coin=$("select#sellcoin").find("option:selected").attr('data-value').toUpperCase();
+	var fiat_qty=$("input#sellfiatqty").val();
+	var coin_qty=$("input#sellcoinqty").val();
+	}
+	console.log(fiat+coin+fiat_qty+coin_qty);
+	var addon='{:U("P2p/index")}'+'/type/'+type;
+	if(fiat){
+	addon=addon+'/fiat/'+fiat;
+	}
+	if(coin){
+	addon=addon+'/coin/'+coin;
+	}
+	if(fiat_qty){
+	addon=addon+'/fiat_qty/'+fiat_qty;
+	}
+	if(coin_qty){
+		addon=addon+'/coin_qty/'+coin_qty;
+	}
+	console.log(addon);
+	//var url='{:U("P2p/index")}'+'/type/'+type+'/coin/'+coin+'/fiat/'+fiat+'/fiat_qty/'+fiat_qty+'/coin_qty/'+coin_qty;
+	window.location=addon+'#page-area';
+	
+}
+
+<if condition="$Think.get.coin eq ''">
+$("#allowed_USDT").parent().addClass("active");
+</if>
+
+<if condition="$Think.get.type eq 'sell'">
+$("#sellcat").addClass("active");
+<else/>
+$("#buycat").addClass("active");
+</if>
+
+<if condition="$Think.get.coin">
+$("#allowed_{$Think.get.coin}").parent().addClass("active");
+</if>
+<if condition="$Think.get.fiat">
+$("#fiat_{$Think.get.coin}").parent().addClass("active");
+</if>
+</script>
+<include file="Publicnew:footer_minimal" />

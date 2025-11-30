@@ -1,0 +1,128 @@
+<div
+  class="modal fade"
+  id="Buyingform_{$vo.id}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="Buyingform_Label_{$vo.id}"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Buyingform_Label_{$vo.id}">
+          {$vo['name']}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+		<div class="row">
+			<div class="col-6">
+				<div class="form-group">
+					<div class="row">
+					  <div class="col-6">
+						<span class="small"><b>{:l('Available')} </b> </span>
+  
+					  </div>
+	  
+					  <div class="col-6">
+						<span class="small text-right"
+						  >{$vo['stocks']}/ {$vo['quantity']} Machines</span
+						>
+					  </div>
+					</div>
+				  </div>
+	
+				<div class="form-group">
+				  <div class="row">
+					<div class="col-6">
+					  <span class="small"><b>{:l('Price')} </b> </span>
+
+					</div>
+	
+					<div class="col-6">
+					  <span class="small text-right"
+						>{$vo['price']*1} {$vo['coinname'] |strtoupper}</span
+					  >
+					</div>
+				  </div>
+				</div>
+				<input
+						  
+						  class="form-control"
+						  placeholder="Please enter the amount"
+						  id="pool_box{$vo.id}"
+						  value="1" type="hidden"
+						/>
+	
+	
+				<div class="form-group">
+				  <div class="row">
+					<div class="col-6">
+					  <span class="small"
+						><b>{:l('Balance')} </b></span
+					  >
+					</div>
+	
+					<div class="col-6">
+					  <span class="small text-right"
+						>{$user_balances[$vo['coinname']] |NumToStr} {$vo['coinname'] |strtoupper}</span
+					  >
+					</div>
+				  </div>
+				</div>
+			  </div>
+	
+			  <div class="col-6">
+				<div class="form-group">
+				  <div class="row">
+					<div class="col-6">
+					  <span class="small"><b>{:l('Duration')}</b></span>
+					</div>
+					<div class="col-6">
+					  <span class="small text-right">{$vo['days']} {:l('days')}</span>
+					</div>
+				  </div>
+				</div>
+				<div class="form-group">
+				  <div class="row">
+					<div class="col-6">
+					  <span class="small"><b>{:l('Daily Reward')}</b></span>
+					</div>
+					<div class="col-6">
+					  <span class="small text-right"
+						>{$vo['daily_profit']|NumToStr}  {$vo['getcoin']|strtoupper}
+					  </span>
+					</div>
+				  </div>
+				</div>
+	
+				<div class="form-group">
+				  <div class="row">
+					<div class="col-6">
+					  <span class="small"> <b>{:l('Power')}</b> </span>
+					</div>
+					<div class="col-6">
+					  <span class="small text-right">{$vo['power']}</span>
+					</div>
+				  </div>
+				</div>
+			  </div>
+		</div>
+
+	  </div>
+      <div class="modal-footer">
+		<button type="submit" class="btn btn-primary" onclick="buypool('{$vo.id}','{$vo.days}');">
+			{:l('Confirm Purchase')}
+	  	</button>
+      </div>
+    </div>
+  </div>
+</div>

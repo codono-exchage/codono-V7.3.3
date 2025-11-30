@@ -1,0 +1,22 @@
+
+               <div class="panel panel-body">
+                  <div class="row text-center">
+                     <div class="col-xs-4">
+                        <p><i class="icon-calendar icon-2x display-inline-block text-info"></i></p>
+                        <h5 class="text-semibold no-margin">{$issue['time']}</h5>
+                        <span class="text-muted text-size-small">{:l('STARTING_TIME')}</span>
+                     </div>
+                     <div class="col-xs-4">
+                        <p><i class="icon-racing icon-2x display-inline-block text-warning"></i></p>
+                        <h5 class="text-semibold no-margin">{$issue['endtime']}</h5>
+                        <span class="text-muted text-size-small">{:l('END_TIME')}</span>
+                     </div>
+                     <div class="col-xs-4">
+                        <p><i class="icon-coins icon-2x display-inline-block text-success"></i></p>
+						
+                        <h5 class="text-semibold no-margin">{$convert_price}</h5>
+                        <span class="text-muted text-size-small">{$issue['convertcurrency']|strtoupper}</span>
+                     </div>
+                  </div>
+               </div>
+               

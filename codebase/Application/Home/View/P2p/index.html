@@ -1,0 +1,242 @@
+<include file="Publicnew:header"/>
+<include file="P2p:inc_common_banner"/>
+
+<!-- P2P Content Start -->
+<div class ="p2p-page" id="page-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="card invite-code-wrapper">
+					<include file="P2p:inc_mid_nav"/>
+					<div class="card-body p-t-5 p-b-5">
+						<div class="row justify-content-between align-items-center">
+							<div class="col-12 d-flex align-items-center p2p-buy-sell-menu">
+								<div class="buy-sell-buttons">
+									<a href="{:U('P2p/index',array('type'=>'buy'))}" class="btn-buy" id="buycat">{:l("Buy")}</a> 
+									<a href="{:U('P2p/index',array('type'=>'sell'))}" class="btn-sell" id="sellcat">{:l("Sell")}</a>
+								</div>
+								<ul class="list-inline coin-list-items">
+								<volist name="allow_cryptos" id="ac">
+									<li class="list-inline-item"><a href="#" onclick="refreshpage('coin','{$ac |strtoupper}')" id="allowed_{$ac |strtoupper}">{$ac |strtoupper}</a></li>
+								</volist>
+								
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="p2p-table">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="card">
+						<div class="card-body">
+							<form action="#" class="m-b-30">
+								<div class="row ">
+									<div class="col-12">
+										<div class="d-flex justify-content-between align-items-center filter-wrapper">
+											<div class="form-filters d-flex align-items-center">
+												<div class="filterItem">
+													<label for="quantity">{:l("Amount")}</label>
+													<div class="filter-quantity">
+														<input type="text" class="form-control" placeholder="{:l("Enter amount")}" id="quantity" name="quantity" aria-label="">
+														<button class="btn search" type="button" onclick="search()">{:l("Search")}</button>
+													</div>
+												</div>
+												<div class="filterItem">
+													<label for="fiat">{:l("Fiat")}</label>
+													<div class="filter-quantity">
+														<select id="fiat" class="bootstrap-select selectpicker" data-live-search="true" data-live-search-placeholder="{:l("Search")}" data-width="144px" >
+														
+														<volist name="FiatList" id="fiatcoin">
+															<option value="{$fiatcoin['name']|strtoupper}" data-value="{$fiatcoin['name']| strtoupper}" data-content="<img src='__UPLOAD__/coin/{$fiatcoin['img']}'/> {$fiatcoin['name']| strtoupper}" ></option>
+														</volist></select>
+													</div>
+												</div>
+												<div class="filterItem">
+													<label for="paymentmethods">{:l("Payment Method")}</label>
+													<div class="filter-quantity">
+														<select id="paymentmethods" class="bootstrap-select" data-live-search="true" data-live-search-placeholder="{:l("Search")}" data-width="200px">
+															<volist name="FiatMethods" id="method">
+																<option data-value="{$method.id}" data-content="{$method.name}" ></option>
+															</volist>
+														</select>
+													</div>
+												</div>
+												<div class="filterItem">
+													<label for="onlySellers">&nbsp;</label>
+													<div class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input" id="onlySellers" value="1">
+														<label class="custom-control-label" for="onlySellers">{:l('Show Merchant Listing Only')}</label>
+													</div>
+												</div>
+											</div>
+											<div class="refresh-settings">
+												<a href="#" class="btn transparent"> <i class="ion ion-ios-refresh"></i> {:l("Refresh")}</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div class="table-responsive p2p-table">
+								<table class="table p2p-list-table table-striped table-hover text-left" id="p2p-list-table">
+									<thead class="">
+									<tr class="text-left">
+										<th class="text-left">
+											<div class="row">
+												<div class="col">{:l("Advertiser")}</div>
+												<div class="col">{:l("Price")}</div>
+												<div class="col">{:l("Limit/Available")}</div>
+												<div class="col">{:l("Payment Method")}</div>
+												<div class="col text-right">
+													{:l("Trade")} <span class="d-inline badge badge-success">0 {:l("Fee")}</span></div>
+											</div>
+										</th>
+									</tr>
+									</thead>
+									<tbody>
+									<include file="P2p:inc_index_adsList"/>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="table-overlay"></div>
+	</div>
+	<!-- P2P Content End -->
+</div>
+<include file="Publicnew:inc_newAdsModal" />
+<script>
+	jQuery(document).ready(function ($) {
+	$('input[type=number][name=paywith]').change(function(){
+	$('input[type=number][name=takeamount]').val("");
+	});
+		$('input[type=number][name=takeamount]').change(function(){
+	$('input[type=number][name=paywith]').val("");
+	});
+
+	
+	
+		$("#p2p-list-table").on('shown.bs.collapse', '.collapse', function (e) {
+			$('.table-overlay').addClass('active');
+		});
+		$('.table-overlay').on('click', function () {
+			$(this).removeClass("active");
+			$("#p2p-list-table").find('.collapse.show').collapse('hide');
+		});
+		$('#p2p-list-table').on('hidden.bs.collapse', '.collapse', function () {
+			$('.table-overlay').removeClass('active');
+		})
+	});
+	
+function trade(id,type){
+//var amount=$('input[type=number][name=takeamount]').val();
+//var paywith=$('input[type=number][name=paywith]').val();
+var amount=$('input#ta_'+id).val();
+var paywith=$('input#pw_'+id).val();
+var paymethod=0;
+if(type==2){
+var paymethod=$('select#pm_'+id).find("option:selected").attr('data-value');
+}
+
+
+if(!amount){
+amount=0;
+}
+if(!paywith){
+paywith=0;
+}
+if(amount==0 && paywith==0){
+layer.tips('Enter Amount', '#pw_'+id, {tips: 3});
+return false;
+}
+
+//console.log(amount+paywith+id+type+paymethod);
+layer.load(0, {shade: [0.5,'#8F8F8F']});
+$.post("{:U('P2p/doTrade')}", {
+id:id,
+type:type,
+amount:amount,
+paywith:paywith,
+paymethod:paymethod
+}, function (data) {
+		layer.closeAll('loading');
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+				window.location = "{:U('P2p/orders')}";
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+
+	
+	
+function refreshpage(prefix,value){
+
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+}
+function search(){
+	var quantity=$("#quantity").val();
+	
+	if(!quantity){
+	layer.tips('Enter Amount', '#quantity', {tips: 3});
+	return false;
+	}
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append('fiat_qty', quantity);
+	url.searchParams.set('fiat_qty', quantity);
+    window.location.href =url;
+}
+
+document.querySelector('select#fiat').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+	var prefix="fiat";
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+
+};
+document.querySelector('select#paymentmethods').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+	var prefix="pm";
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+
+};
+<if condition="$Think.get.coin eq ''">
+$("#allowed_USDT").parent().addClass("active");
+</if>
+
+<if condition="$Think.get.type eq 'sell'">
+$("#sellcat").addClass("active");
+<else/>
+$("#buycat").addClass("active");
+</if>
+
+<if condition="$Think.get.coin">
+$("#allowed_{$Think.get.coin}").parent().addClass("active");
+</if>
+</script>
+<include file="Publicnew:footer_minimal" />
+<script>
+<if condition="$Think.get.fiat neq ''">
+$('.selectpicker').selectpicker('val', '{$Think.get.fiat}');
+</if>
+</script>

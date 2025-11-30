@@ -1,0 +1,34 @@
+<notempty name="roadmap">
+ <section class="section" id="roadmap">
+
+                <div class="container">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-lg-6">
+                            <div class="section-head section-head-s2">
+                                <h2 class="title title-xl animated" data-animate="fadeInUp" data-delay="0.1" title="Timeline">ROADMAP</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container container-xxl">
+                    <div class="nk-block">
+                        <div class="roadmap-wrap roadmap-wrap-ovl-right text-center animated" data-animate="fadeInUp" data-delay="0.3">
+                            <div class="roadmap-line-s2"></div>
+                            <div class="roadmap-slider has-carousel carousel-nav-center" data-blank="true" data-items="5" data-items-tab-l="4" data-items-tab-p="3" data-items-mobile="2" data-margin="-1" data-navs="true">
+                                <volist name="roadmap" id="vo">
+								<div class="roadmap roadmap-s2 roadmap-i{$vo.id} <eq name="vo['status']" value='1'>roadmap-finished</eq><eq name="vo['status']" value='2'>roadmap-running</eq>">
+                                    <h6 class="roadmap-year-s2">{$vo.year}</h6>
+                                    <h5 class="title title-sm roadmap-date">{$vo.date}</h5>
+                                    <div class="roadmap-text">
+                                        <p>{$vo.text}</p>
+                                    </div>
+                                </div>
+								</volist>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+</notempty>

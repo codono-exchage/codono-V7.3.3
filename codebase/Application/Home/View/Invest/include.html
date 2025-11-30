@@ -1,0 +1,155 @@
+
+ <!-- Vertical form modal -->
+				<div id="modal_form_investcreate" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h5 class="modal-title">Create Investment Plan</h5>
+							</div>
+
+							<form action="#">
+								<div class="modal-body">
+									<div class="form-group">
+										<div class="row">
+											<div class="alert alert-warning no-border">
+									<span class="text-semibold">Attention!</span> Do not create new plan if you want to earn a percentage. This form is for <span class="text-semibold">developers and coin owners only</span>.
+
+							    </div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<label>Coin name</label>
+												<select data-placeholder="Select your coin" id ="coinname" name="coinname" class="select form-control">
+													<volist name="coin_list" id="v" key="k">
+													<option value="{$key}">{$v}</option>
+													</volist>
+			                                    </select>
+											</div>
+
+											<div class="col-sm-6">
+												<label>Payment Method</label>
+												<select data-placeholder="Select Method" id="period" name="period" class="select form-control">
+												<volist name="allowed_plans" id="vo">
+												<option value="{$vo['value']}">{$vo['name']}</option>
+												</volist>
+												</select>
+												
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-4">
+												<label>Minvest</label>
+												<input type="text" placeholder="0.01" name="minvest" id="minvest" class="form-control">
+											</div>
+
+											<div class="col-sm-4">
+												<label>Maxvest</label>
+												<input type="text" placeholder="100" name="maxvest" id="maxvest" class="form-control">
+											</div>
+											<div class="col-sm-4">
+												<label>Percentage %</label>
+												<input type="text" placeholder="Enter Percentage" name="percentage" id="percentage" class="form-control">
+											</div>
+
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<label>Balance Coin <i id="balancebutton" onclick="balancebutton()" class="icon-exclamation"></i></label>
+												<select data-placeholder="Select your coin" id ="coin" name="coin" class="select form-control">
+												<option value="">Choose a coin</option>
+													<volist name="coin_list" id="v" key="k">
+													<option value="{$key}">{$v}</option>
+													</volist>
+			                                    </select>
+											</div>
+
+											<div class="col-sm-6">
+												<label>Balance Value Required</label>
+												<input type="text" placeholder="100 or leave blank" name="balance" id="balance" class="form-control">
+											</div>
+
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-4">
+												<label>Market <i id="marketbutton" onclick="marketbutton()" class="icon-exclamation"></i></label>
+												<select data-placeholder="Select your coin" id ="market" name="market" class="select form-control">
+												<option value="">Choose a market</option>
+													<volist name="market_list" id="vo"> <eq name="market" value="$key">
+             <option value="{$vo['name']}" selected="selected">{$vo['xnb']|strtoupper}_{$vo['rmb']|strtoupper}</option>
+             <else />
+             <option value="{$vo['name']}">{$vo['xnb']|strtoupper}_{$vo['rmb']|strtoupper}</option>
+             </eq> </volist>
+			                                    </select>
+											</div>
+
+											<div class="col-sm-4">
+												<label>Buy Trades Required</label>
+												<input type="text" placeholder="10 or leave blank" name="buytrades" id="buytrades" class="form-control">
+											</div>
+											<div class="col-sm-4">
+												<label>Sell Trades Required</label>
+												<input type="text" placeholder="15 or leave blank" name="selltrades" id="selltrades" class="form-control">
+											</div>
+										</div>
+									</div>
+
+									
+								<div class="modal-footer">
+									<span class="btn btn-info btn-block" onclick="submitplan();">Submit Investment Plan</span>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- /vertical form modal -->
+
+<script>
+function balancebutton(){
+            layer.tips('Enter if user is required to have coin balance or leave blank..', '#balancebutton', {tips: 1});
+}
+function marketbutton(){
+            layer.tips('Choose if user is required to have minimum trades or leave blank..', '#marketbutton', {tips: 1});
+}
+function submitplan(call) {
+		var period=$("#period").val();
+		var coinname=$("#coinname").val();
+		var minvest=$("#minvest").val();
+		var maxvest=$("#maxvest").val();
+		var percentage=$("#percentage").val();
+		var coin=$("#coin").val();
+		var balance=$("#balance").val();
+		var market=$("#market").val();
+		var buytrades=$("#buytrades").val();
+		var selltrades=$("#selltrades").val();
+	
+		var msg = 'You want to create investment plan for your coin '+coinname;
+	
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.post("/Invest/createinvest/",{coinname:coinname,minvest:minvest,maxvest:maxvest,percentage:percentage,coin:coin,market:market,buytrades:buytrades,selltrades:selltrades,period:period,balance:balance} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+			window.location.href = "{:U('Invest/index')}";				
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+		
+        }, 'json');
+		});
+    }
+
+
+</script>

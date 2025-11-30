@@ -1,0 +1,159 @@
+<include file="Publicnew:header" />
+
+	<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/forms/selects/select2.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/assets/js/pages/datatables_advanced.js"></script>
+<!-- Wallet Content Start -->
+	<div class="container wallet-page">
+		<div class="row">
+			<div class="col-xl-12 m-t-30">
+				<div class="card">
+					<div class="card-body">
+						<div class="row justify-content-between align-items-center">
+							<div class="col-xl-6 col-lg-6 m-b-15">
+																<h5 class="text-muted">{:l("Total balance")}</h5>
+								<h2>{$usd['zj']|NumToStr} <span> {$conversion_coin} </span></h2>
+							</div>
+							<div class="col-xl-6 col-lg-6 text-right">
+								<a href="{:U("Finance/index")}" class="btn-1"><i class="fa fa-exchange"></i> SPOT {:l("Wallet")}</a>
+								<a href="{:U("Transfer/index")}" class="btn-2"><i class="fa fa-download"></i> {:l("Transfer")}</a>
+								<a href="{:U("P2p/index")}" class="btn-1"><i class="fa fa-exchange"></i> {:l("Trade")}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-12">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">{:l('MY_ASSETS')}</h4>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table  wallet-table table-striped table-hover">
+								<thead>
+								<tr>
+											<th scope="col">{:l('DIGITAL_ASSETS')}</th>
+											<th >{:l('Balance')}</th>
+											<th scope="col">{:l('Conversion')}</th>
+											<th scope="col" >{:l('FREEZE')}</th>
+											<th scope="col" >{:l('TOTAL')}</th>
+											<th ><span title="{$conversion_coin} {:l('CONVERT')}">{$conversion_coin}</span></th>
+											<th scope="col" >{:l('Options')}</th>
+
+
+								</tr>
+								</thead>
+								<tbody>
+							<volist name="fiatList" id="vo">
+								<eq name="vo['type']" value="rmb">
+								<tr>
+									<td class="col-2">
+										<div class="pair-name">
+											<div class="icon" style="background-image: url('__UPLOAD__/coin/{$vo['img']}')" onerror="this.onerror=null; this.src='__UPLOAD__/coin/default.png'"></div>
+											{$vo['title']}
+										</div>
+									</td>
+									<td>{$vo['xnb']|NumToStr}</td>
+									<td >{$conversion_coin} {$vo['jia']|NumToStr}</td>
+									<td>{$vo['xnbd']|NumToStr}</td>
+									<td>{$vo['xnbz']|NumToStr}</td>
+									<td>{$vo['zhehe']|NumToStr}</td>
+									<td class="col-2 text-right">
+																		<a href="{:U("Transfer/index")}" class="green"><i class="fa fa-download"></i> {:l("Transfer")}</a>
+								<a href="{:U("P2p/index")}" class="red"><i class="fa fa-exchange"></i> {:l("Trade")}</a>
+									</td>
+								</tr>
+								</eq>
+								</volist>     	
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-12">
+				<div class="card">
+					<div class="card-header p-l-5 p-r-5">
+						<div class="col-3">
+							<h4 class="card-title">{:l('DIGITAL_ASSETS')}</h4>
+						</div>
+						<div class="col-3">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="hideLowValues" value="1"> <label class="custom-control-label" for="hideLowValues">{:l("Hide Low Balances")}</label>
+							</div>
+						</div>
+						<div class="col-3">
+							
+						</div>
+						<div class="col-3">
+							<input class="form-control"  placeholder="{:l('Search')}" id="searchFilter">
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table wallet-table table-striped table-hover" id="cryptoTable">
+								<thead>
+								<tr>
+											<th scope="col">{:l('DIGITAL_ASSETS')}</th>
+											<th >{:l('Balance')}</th>
+											<th scope="col">{:l('Conversion')}</th>
+											<th scope="col" >{:l('FREEZE')}</th>
+											<th scope="col" >{:l('TOTAL')}</th>
+											<th ><span title="{$conversion_coin} {:l('CONVERT')}">{$conversion_coin}</span></th>
+											<th scope="col" >{:l('Options')}</th>
+
+								</tr>
+								</thead>
+								<tbody>
+								<volist name="cryptoList" id="vo">
+								<neq name="vo['type']" value="rmb">
+								<tr>
+									<td class="col-2">
+										<div class="pair-name">
+											<div class="icon" style="background-image: url('__UPLOAD__/coin/{$vo['img']}')" onerror="this.onerror=null; this.src='__UPLOAD__/coin/default.png'"></div>
+											{$vo['title']}
+										</div>
+									</td>
+									<td>{$vo['xnb']|NumToStr}</td>
+									<td >{$conversion_coin} {$vo['jia']|NumToStr}</td>
+									<td>{$vo['xnbd']|NumToStr}</td>
+									<td>{$vo['xnbz']|NumToStr}</td>
+									<td>{$vo['zhehe']|NumToStr}</td>
+									<td class="col-2 text-right">
+
+																		<a href="{:U("Transfer/index")}" class="green"><i class="fa fa-download"></i> {:l("Transfer")}</a>
+								<a href="{:U("P2p/index")}" class="red"><i class="fa fa-exchange"></i> {:l("Trade")}</a>
+									</td>
+								</tr>
+								</neq>
+								</volist>     	
+								
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	  $("#searchFilter").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#cryptoTable tbody tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+  $("#hideLowValues").change(function() {
+    $("#cryptoTable tbody tr td:nth-child(2)").each(function(){
+	  var condition=$('#hideLowValues').is(":checked");
+        if ($(this).text() == 0 && condition){
+            $(this).closest("tr").hide();
+        } else {
+            $(this).closest("tr").show();
+        }
+    });
+});
+	</script>
+	<!-- Wallet Content End -->
+<include file="Publicnew:footer_minimal"/>

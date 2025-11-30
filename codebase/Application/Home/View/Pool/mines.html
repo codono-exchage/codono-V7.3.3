@@ -1,0 +1,65 @@
+	<!-- Progress counters -->
+						<div class="row">
+<volist name="populars" id="vo">
+							<div class="{$class}">
+
+								<!-- Current server load -->
+								<div class="panel">
+									<div class="panel-body">
+										<div class="mine_img"><img class="" src="__UPLOAD__/pool/{$vo['ico']}" width="40px" height="40px"/></div>
+										<div class="row">
+									<div class="col-xs-4">
+										<div class=" text-size-mini text-muted">{:L('Rent Price')}</div>
+										<h5 class="text-semibold no-margin">{$vo['price']*1} {$vo['coinname'] | strtoupper}</h5>
+									</div>
+
+									<div class="col-xs-4">
+										<div class=" text-size-mini text-muted">{:L('Available Machines')}</div>
+										<h5 class="text-semibold no-margin">{$vo['stocks']}/{$vo['quantity']}</h5>
+									</div>
+
+									<div class="col-xs-4">
+										<div class=" text-size-mini text-muted">{:L('Daily Reward')}</div>
+										<h5 class="text-semibold no-margin">{$vo['daily_profit']*1} {$vo['getcoin'] | strtoupper} </h5>
+									</div>
+								</div>
+						<div class="botright">
+						<button class="btn btn-sm btn-info" data-toggle="modal" data-target="#Buyingform_{$vo['id']}">Rent now</button>
+																	
+						</div>
+						<include file="Pool:buyform" />
+						   <div class="ribbon-container">
+									<div class="ribbon bg-info"><i class="fa fa-server"></i> Popular</div>
+								</div>
+									</div>
+
+									<div id="mine-load-{$vo['id']}"></div>
+									<div class="svg-center" id="prog-round-{$vo['id']}"></div>
+
+								</div>
+								<!-- /current server load -->
+
+							</div>
+<script>
+	    sparkline("#mine-load-{$vo['id']}", "area", 30, 50, "basis", 750, 2000, "rgba(255,255,255,0.5)");
+</script>
+</volist>
+						</div>
+						<!-- /progress counters -->
+<style>
+
+.mine_img img {
+    position: absolute;
+    overflow: hidden !important;
+    left: 19px;
+    opacity: 52%;
+    bottom: -40px;
+}
+.botright button{
+position: absolute;
+    overflow: hidden !important;
+    right: 19px;
+    
+    bottom: -40px;
+}
+</style>

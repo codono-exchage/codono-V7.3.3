@@ -1,0 +1,219 @@
+<section class="section bg-theme tc-light ov-h has-ovm">
+<div class="container">
+
+  <div class="row justify-content-center text-center">
+                        <div class="col-lg-12">
+                            <div class="section-head-s2" id="market-tab-box">
+            
+<ul class="nav tab-nav tab-nav-line tab-nav-center trade_qu_list">
+<volist name="codono_jiaoyiqu" id="v">		
+	<li  class="trade_moshi trade_qu_pai <eq name="key" value="0">
+	current active</eq>" data="{$key}" onclick="trade_qu(this)">
+	<a href="#highlighted-justified-tab1" class="<eq name="key" value="0">active</eq>" data-toggle="tab">{$v}</a>
+	</li>
+	</volist>	
+</ul>
+                            </div>
+                        </div>
+                    </div>
+
+</div>
+<div class="price_today container container-xxl">
+	
+                        <table class="table table-stiped" id="markettable">
+                            <thead class="price_today_ull thead-dark">
+                                <tr>
+                                    <th scope="col" data-sort="0" style="cursor: default;">{:l('PAIR')}</th>
+                                    <th scope="col"class="click-sort" data-sort="1" data-flaglist="0" data-toggle="0">{:l('THE_LATEST_TRANSACTION_PRICE')} </th>
+                                    <th scope="col" class="click-sort" data-sort="2" data-flaglist="0" data-toggle="0">{:l('Buy')}</th>
+                                    <th scope="col" class="click-sort" data-sort="3" data-flaglist="0" data-toggle="0">{:l('SELL_A_PRICE')}</th>
+                                    <th scope="col" class="click-sort" data-sort="6" data-flaglist="0" data-toggle="0">24H {:l('Vol')}</th>
+                                    <th scope="col"  class="click-sort" data-sort="4" data-flaglist="0" data-toggle="0">24H {:l('Total')}</th>
+                                    <th scope="col" class="click-sort" data-sort="7" data-flaglist="0" data-toggle="0">24H {:l('CHANGE')}</th>
+									
+									<th scope="col" data-sort="0">{:l('OPERATING')}</th>
+									
+                                </tr>
+                            </thead>	
+							
+<tbody id="price_today_ul">
+
+</tbody>
+</table>
+</div>
+
+
+<script>
+	$('.price_today_ull > .click-sort').each(function () {
+		$(this).click(function () {
+			click_sortList(this);
+		})
+	});
+	function allcoin_callback(priceTmp) {
+		for (var i in priceTmp) {
+			var c = priceTmp[i][8];
+			if (typeof (trends[c]['data']) && typeof (trends[c]['data']) != 'null') {
+				if (typeof (trends[c]) != 'undefined' && typeof (trends[c]['data']) != 'undefined') {
+				
+				}
+			}
+		}
+	}
+	function click_sortList(sortdata) {
+		var a = $(sortdata).attr('data-toggle');
+		var b = $(sortdata).attr('data-sort');
+		$(".price_today_ull > th").find('.fa-angle-up').css('border-bottom-color', '#848484');
+		$(".price_today_ull > th").find('.fa-angle-down').css('border-top-color', '#848484');
+		$(".price_today_ull > th").attr('data-flaglist', 0).attr('data-toggle', 0);
+		$(".price_today_ull > th").css('color', '');
+		$(sortdata).css('color', '#1a81d6');
+		if (a == 0) {
+			priceTmp = priceTmp.sort(sortcoinList('dec', b));
+			$(sortdata).find('.fa-angle-down').css('border-top-color', '#1a81d6');
+			$(sortdata).find('.fa-angle-up').css('border-bottom-color', '#848484');
+			$(sortdata).attr('data-flaglist', 1).attr('data-toggle', 1)
+		}
+		else if (a == 1) {
+			$(sortdata).attr('data-toggle', 0).attr('data-flaglist', 2);
+			$(sortdata).find('.fa-angle-up').css('border-bottom-color', '#1a81d6');
+			$(sortdata).find('.fa-angle-down').css('border-top-color', '#848484');
+			priceTmp = priceTmp.sort(sortcoinList('asc', b));
+		}
+		renderPage(priceTmp);
+		change_line_bg('price_today_ul', 'li');
+	//	allcoin_callback(priceTmp);
+	}
+	function trends() {
+		$.getJSON('{:U('Ajax/top_coin_menu')}?t=' + rd(), function (d) {
+			trends = d;
+			allcoin();
+		});
+	}
+	function allcoin(cb) {
+		var trade_qu_id = $('.trade_qu_list .current').attr('data');
+		$.get('{:U('Ajax/allcoin_a')}/id/' + trade_qu_id + '?t=' + rd(), cb ? cb : function (data) {
+			var d;
+			if (data.status == 1) {
+				d = data.url;
+			}
+			ALLCOIN  = d;
+			var t    = 0;
+			var img  = '';
+			priceTmp = [];
+			for (var x in d) {
+				if (typeof(trends[x]) != 'undefined' && parseFloat(trends[x]['yprice']) > 0) {
+					rise1 = (((parseFloat(d[x][4]) + parseFloat(d[x][5])) / 2 - parseFloat(trends[x]['yprice'])) * 100) / parseFloat(trends[x]['yprice']);
+					rise1 = rise1.toFixed(2);
+				} else {
+					rise1 = 0;
+				}
+				img = d[x].pop();
+				d[x].push(rise1);
+				d[x].push(x);
+				d[x].push(img);
+				priceTmp.push(d[x]);
+			}
+			$('.price_today_ull > .click-sort').each(function () {
+				var listId = $(this).attr('data-sort');
+				if ($(this).attr('data-flaglist') == 1 && $(this).attr('data-sort') !== 0) {
+					priceTmp = priceTmp.sort(sortcoinList('dec', listId))
+				} else if ($(this).attr('data-flaglist') == 2 && $(this).attr('data-sort') !== 0) {
+					priceTmp = priceTmp.sort(sortcoinList('asc', listId))
+				}
+			});
+			renderPage(priceTmp);
+		//	allcoin_callback(priceTmp);
+			change_line_bg('price_today_ul', 'li');
+			//t = setTimeout('allcoin()', 5000);
+		}, 'json');
+	}
+	function rd() {
+		return Math.random()
+	}
+	function renderPage(ary) {
+		var html = '';
+		for (var i in ary) {
+			var coinfinance = 0;
+			if (typeof FINANCE == 'object') coinfinance = parseFloat(FINANCE.data[ary[i][8] + '_balance']);
+			html += '<tr id="m_' + ary[i][15] + '"><td><a href="/trade/index/market/' + ary[i][8] + '/"><span class="pr10">' +
+					'<img src="/Upload/coin/' + ary[i][9] + '" width="20px"></span><span class="pairname">' + ary[i][12] + '</span></a></td><td class="tc-warning">' + ary[i][1] + '</td><td >' + ary[i][2] + '</td><td >' + ary[i][3] + '</td><td >' + formatCount(ary[i][6]) + '</td><td >' + formatCount(ary[i][4]) + '</td><td class="' + (ary[i][7] >= 0 ? 'tc-success' : 'tc-danger') + '" >' + (parseFloat(ary[i][7]) < 0 ? '' : '') + ((parseFloat(ary[i][7]) < 0.01 && parseFloat(ary[i][7]) > -0.01) ? "0.00" : (parseFloat(ary[i][7])).toFixed(2)) + '%</td><td><button type="button" class="btn btn-info btn-sm" onclick="top.location=\'/trade/index/market/' + ary[i][8] + '/\'" > <i class="fa fa-balance-scale"></i> {:l('TO_TRADE')}</button></td></tr>'
+		}
+		$('#price_today_ul').html(html);
+	}
+	function formatCount(count) {
+		var countokuu = (count / 1000000000).toFixed(3);
+		var countwan  = (count / 1000000).toFixed(3);
+		if (count > 1000000000)
+			return countokuu.substring(0, countokuu.lastIndexOf('.') + 3) + ' bl';
+		if (count > 1000000)
+			return countwan.substring(0, countwan.lastIndexOf('.') + 3) + ' ml';
+		else
+			return count;
+			
+	}
+	function change_line_bg(id, tag, nobg) {
+		var oCoin_list = $('#' + id);
+		var oC_li      = oCoin_list.find(tag);
+		var oInp       = oCoin_list.find('input');
+		var oldCol     = null;
+		var newCol     = null;
+		if (!nobg) {
+			for (var i = 0; i < oC_li.length; i++) {
+				oC_li.eq(i).css('background-color', i % 2 ? '#f8f8f8' : '#fff');
+			}
+		}
+		oCoin_list.find(tag).hover(function () {
+			oldCol = $(this).css('backgroundColor');
+			$(this).css('background-color', '#eaedf4');
+		}, function () {
+			$(this).css('background-color', oldCol);
+		})
+	}
+	function sortcoinList(order, sortBy) {
+		var ordAlpah = (order == 'asc') ? '>' : '<';
+		var sortFun  = new Function('a', 'b', 'return parseFloat(a[' + sortBy + '])' + ordAlpah + 'parseFloat(b[' + sortBy + '])? 1:-1');
+		return sortFun;
+	}
+	function trade_qu(o){
+		$('.trade_qu_pai').removeClass('current');
+		$(o).addClass('current');
+		allcoin();
+	}
+	trends();
+</script>
+<style>
+#market-tab-box {
+    background: #fff;
+    border-radius: 21px;
+    color: #5d78ff;
+}
+
+#market-tab-box li a{
+color: #5d78ff;
+font-weight:bold;
+}
+#market-tab-box li a.active{
+
+background: #5d78ff;
+color:#fff!important;
+
+}
+
+#market-tab-box li:first-child a.active{
+border-top-left-radius:21px !important;
+border-bottom-left-radius:21px !important;
+border-bottom-right-radius:30px !important;
+}
+
+#market-tab-box li:last-child a.active{
+border-top-right-radius:21px !important;
+border-bottom-right-radius:21px !important;
+border-bottom-left-radius:30px !important;
+}
+
+.price_today_ull th:first-child{padding-left:10px !important;}
+.price_today_ull th{padding-left:0px;}
+.pr10{ padding-right:10px;}
+.pairname{ text-transform:uppercase;}
+</style>
+</section>

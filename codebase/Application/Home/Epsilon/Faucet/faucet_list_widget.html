@@ -1,0 +1,38 @@
+<notempty name="list_jinxing">
+  <div class="row">
+    <volist name="list_jinxing" id="vo">
+      <div class="col-4">
+        <div class="card border">
+          <div class="text-center">
+            <a href="#" class="display-inline-block">
+              <img
+                src="__UPLOAD__/coin/{$vo.img}"
+                class="img-circle img-responsive"
+                alt=""
+                style="width: 100px; height: 100px"
+              />
+            </a>
+
+            <h5 class="content-group">
+              {$vo.name} <small class="display-block">{:l('Claim')} {$vo['price']*1} {$vo.coinname} {:l('Every')} {$vo.tian} {:l('Hours')}</small>
+            </h5>
+          </div>
+          <div class="form-group text-center m-10">
+            <a
+              class="btn btn-block btn-warning"
+              onclick="buy_up({$vo.id})"
+              href="#faucettable"
+              >{:l('Claim')}</a
+            >
+          </div>
+        </div>
+      </div>
+    </volist>
+  </div>
+  <else />
+
+  <div class="no-data">
+    <i class="ion ion-md-document"></i>
+    <p>{:l('THE_CLASSIFICATION_NO_DATA')}</p>
+  </div>
+</notempty>

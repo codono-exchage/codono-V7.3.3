@@ -1,0 +1,102 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4"><a href="{:U('User/wallet')}">{:l('Users wallet')}</a> >></span>
+			 <span class="d-sm-flex align-items-center justify-content-between h4"><empty name="data">{:l('Adding wallet')}<else/>{:l('Edit wallet')}</empty></span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('User/walletEdit')}" method="post" class="form-horizontal">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<tr class="controls">
+									<td class="item-label">{:l('UserId')}	:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="userid" value="{$data.userid}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Currencies')}	:</td>
+									<td><select name="coinname" class="form-select input-10x">
+										<volist name="C['coin_list']" id="v">
+											<option value="{$v['name']}"
+											<eq name="data['coinname']" value="$v['name']">{:l('selected')}</eq>
+											>{$v['title']}											</option>
+										</volist>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Wallet tag')}	:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="name" value="{$data.name}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Wallet address')}	:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="addr" value="{$data.addr}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Operating time')}	:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="addtime" value="{$data['addtime']|addtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Status')}	:</td>
+									<td><select name="status" class="form-select input-10x">
+										<option value="1"
+										<eq name="data.status" value="1">{:l('selected')}</eq>
+										>{:l('Enabled')}</option>
+										<option value="0"
+										<eq name="data.status" value="0">{:l('selected')}</eq>
+										>{:l('Disabled')}</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//submit Form
+	$('#submit').click(function () {
+		$('#form').submit();
+	});
+</script>
+
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('User/wallet')}");
+	</script>
+</block>

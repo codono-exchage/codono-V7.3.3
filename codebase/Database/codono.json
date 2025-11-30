@@ -1,0 +1,9 @@
+{
+	"sys_lic" : "YOURLICENSE",
+	"codono_indexcat" : ["USDT","BTC","ETH","TRY","EUR"], /*Trading Categories*/
+	"codono_userTradeNum" : 20, /*General user Group trading market can browse display buy and sell data Information Bar number*/
+	"codono_specialUserTradeNum": 50,/*Special User group Trading market can browse display buy and sell data Information Bar number*/
+	"codono_userTradeDetailNum" : 100,/*General user Group Market page can browse display buy and sell data Information Bar number*/
+	"codono_specialUserTradeDetailNum": 500,/*General user Group Market page can browse display buy and sell data Information Bar number*/
+	"codono_opencoin": 1 /*Open Wallet Docking Server mode*/
+}

@@ -1,0 +1,41 @@
+<include file="Public:header" />
+
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Batch Import')}[{$data.title|default='Top Menu'}]</span>
+		</div>
+		<!-- Tab navigation -->
+		<div class="card">
+			<div class="card-body">
+				<!-- Forms -->
+				<form id="form" action="{:U('import')}" method="post" class="form-horizontal">
+					<!-- Foundation document  -->
+					<div id="tab1" class="tab-pane in tab1">
+						<div class="form-item cf">
+							<label class="item-label">{:l('Imported content')}<span class="check-tips">({:l('Follow the guideEnterOutput formatEnter')})</span></label>
+							<div class="controls">
+								<label class="textarea input-large">
+									<textarea name="tree"></textarea>
+								</label>
+							</div>
+							<span class="check-tips">{:l('Import format')} :<br>title|url(Enter key)<br>title|url</span>
+						</div>
+					</div>
+					<div class="form-item cf">
+						<button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Submit')}</button>
+						<a class="btn btn-return btn-warning" href="{:U('index?pid='.$pid)}">{:l('Back')}</a>
+						<input type="hidden" name="pid" value="{$pid}"/>
+						<input type="hidden" name="cate_id" value="{$cate_id|default=0}">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<include file="Public:footer" />

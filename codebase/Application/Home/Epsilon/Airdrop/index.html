@@ -1,0 +1,218 @@
+<include file="Public:header" />
+
+<main class="wrapper grey-bg airdrop-page">
+  <div class="page-top-banner">
+    <div
+      class="filter"
+      style="
+        background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');
+      "
+    >
+      <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-md-8 col-lg-7 col-xl-7">
+            <h1>{$page_title}</h1>
+            <h2>
+              <notempty name="prompt_text">
+                {$prompt_text}
+              </notempty>
+            </h2>
+          </div>
+          <div class="col-8 col-sm-6 col-md-4 col-lg-4 col-xl-5">
+            <img
+              src="__EPSILON__/img/redesign/airdrop-banner.png"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Airdrop Start -->
+  <section class="page-inner">
+    <div class="container">
+      <div class="row m-t-30 m-b-40 justify-content-center">
+        <div class="col-xl-11">
+          <div class="card">
+            <div class="card-body">
+              <div class="airdrop-single-item airdrop-item arrow-black">
+                <div>
+                  <volist name="featured" id="is_featured">
+                    <div class="row align-items-center">
+                      <div class="col-lg-6">
+                        <img
+                        src="{$is_featured.image}"
+                          alt=""
+                          srcset=""
+                        />
+                      </div>
+
+                      <div class="col-lg-6">
+                        <h3 class="title">{$is_featured.name}</h3>
+                        <ul>
+                          <li>
+                            <b>{:l('Hold')} - </b> {$is_featured.coinname|strtoupper}
+                          </li>
+                          <li>
+                            <b>{:l('Airdrop')} - </b> {$is_featured['num']*1}
+                              {$is_featured.coinjian|strtoupper}
+                          </li>
+                            <b>{:l('Start Time')} </b> {$is_featured.beginTime}
+                          </li>
+                          <li>
+                            <b>{:l('End Time')} </b> {$is_featured.endTime}
+                          </li>
+                        </ul>
+                  
+                      </div>
+                    </div>
+                  </volist>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-11 m-t-30 airdrop-list">
+          <div class="card">
+            <div class="card-header">
+              <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                  <a
+                    aria-selected="true"
+                    class="nav-link active"
+                    data-toggle="pill"
+                    href="#processing"
+                    role="tab"
+                    >{:l('Processing')}</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    aria-selected="true"
+                    class="nav-link"
+                    data-toggle="pill"
+                    href="#upcoming"
+                    role="tab"
+                    >{:l('Upcoming')}</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    aria-selected="true"
+                    class="nav-link"
+                    data-toggle="pill"
+                    href="#ended"
+                    role="tab"
+                    >{:l('Ended')}</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div
+                  class="tab-pane fade show active"
+                  id="processing"
+                  role="tabpanel"
+                >
+                  <div class="row">
+                    <volist name="list_running" id="vo">					
+                      <div class="col-sm-6 col-md-4 col-lg-4">
+                          <div class="thumb" style="min-height: 200px">
+                            <img
+                              src="{$vo.image}"
+                              class="img-fluid"
+                              style="width: 120px; height: 120px;"
+                            />
+                          </div>
+                          <div class="caption">
+                            <h6 class="title">{$vo.name}</h6>
+                            <ul>
+                              <li>{:L("Holding")}:<span>{$vo.coinname}</span></li>
+                              <li>{:L("Aidrop")}:<span>{$vo['num']*1} {$vo.coinjian} </span></li>
+                              <li>{:L("Start Date")}:<span>{$vo.beginTime}</span></li>
+                              <li>{:L("End Date")}:<span>{$vo.endTime}</span></li>
+                            </ul>
+                          </div>
+                        
+                      </div>
+                    </volist>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade show"
+                  id="upcoming"
+                  role="tabpanel"
+                >
+                <div class="row">
+                  <volist name="list_upcoming" id="vo">
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                      
+                        <div class="thumb" style="min-height: 200px">
+                          <img
+                            src="{$vo.image}"
+                            class="img-fluid"
+                            style="width: 120px; height: 120px;"
+                          />
+                        </div>
+                        <div class="caption">
+                          <h6 class="title">{$vo.name}</h6>
+                          <ul>
+                            <li>{:L("Holding")}:<span>{$vo.coinname}</span></li>
+                            <li>{:L("Airdrop")}:<span>{$vo['num']*1} {$vo.coinjian} </span></li>
+                            <li>{:L("Start Date")}:<span>{$vo.beginTime}</span></li>
+                            <li>{:L("End Date")}:<span>{$vo.endTime}</span></li>
+                          </ul>
+                        </div>
+                      
+                    </div>
+                  </volist>
+                </div>
+              </div>
+                <div class="tab-pane fade show" id="ended" role="tabpanel">
+                  <div class="row">
+                    <volist name="list_ended" id="vo">
+                      <div class="col-sm-6 col-md-4 col-lg-4">
+                       
+                          <div class="thumb" style="min-height: 200px">
+                            <img
+                              src="{$vo.image}"
+                              class="img-fluid"
+                              style="width: 120px; height: 120px;"
+                            />
+                          </div>
+                          <div class="caption">
+                            <h6 class="title">{$vo.name}</h6>
+                            <ul>
+                              <li>{:L("Holding")}:<span>{$vo.coinname}</span></li>
+                              <li>{:L("Airdrop")}:<span>{$vo['num']*1} {$vo.coinjian} </span></li>
+                              <li>{:L("Start Date")}:<span>{$vo.beginTime}</span></li>
+                              <li>{:L("End Date")}:<span>{$vo.endTime}</span></li>
+                            </ul>
+                          </div>
+                        
+                      </div>
+                    </volist>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Aidrop End -->
+</main>
+
+<include file="Public:footer_minimal" />
+<script>
+  $('.airdrop-single-item').slick({
+  infinite: true,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  arrows: true,
+  dots: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+});</script>

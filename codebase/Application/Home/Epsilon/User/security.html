@@ -1,0 +1,121 @@
+﻿<include file="Public:header" />
+
+<!-- Page content -->
+<section class="generic">
+  <div class="container">
+    <div class="full-box row">
+      <include file="User:sidebar" />
+      <div class="col-10">
+  
+    <div class="row mt-3 mb-3">
+      <include file="User:top_bar" />
+      <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+        <ul class="text-right breadcrumbs list-unstyle">
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+          </li>
+          <li>
+            <a href="{:U('/user/index')}" class="btn btn-warning btn-sm"
+              >{:l('User')}</a
+            >
+          </li>
+          <li class="btn btn-warning btn-sm active">{:l('Security')}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="alert alert-warning p-t-30 p-b-30" role="alert">
+          <h3>{:l('Current account risk level: Medium')}</h3>
+          <p class="m-b-0">
+            {:l('It is recommended that you enable Google Authenticator to protect the security of your assets.')}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">{:l('Account Security')}</h5>
+          </div>
+          <div class="card-body">
+            <div class="settings-security">
+              <ul>
+                <li>
+                  <div class="security-info">
+                    <p>{:l('Login Password')}</p>
+                    <span>{:l('Increasing the strength of your password helps to increase the security of your money')}</span
+                    >
+                  </div>
+                  <a href="{:U('User/password')}" class="btn-2">{:l('Change')}</a>
+                </li>
+                <li>
+                  <div class="security-info">
+                    <p>{:l('Fund Password')}</p>
+                    <if condition="$pp_exists neq null">
+                    <span>{:l('You can change fund password for withdrawal confirmation')}</span>
+                    <else/>
+                    <span>{:l('Create fund password for withdrawals')}</span>
+                  </if>
+                  </div>
+                  <a href="{:U('User/paypassword')}" class="btn-2"><if condition="$pp_exists neq null">{:l('Change')}<else/>{:l('Create')}</if></a>
+                </li>
+                <eq name="ENABLE_MOBILE_VERIFY" value="1">
+                <li>
+                  <div class="security-info">
+                    <p>{:l('Cell phone verification')}</p>
+                    <span>{:l('You can use it to verify the SMS code when withdrawing cash, changing passwords and setting security.')}</span
+                    >
+                  </div>
+                  <eq name="cellphone_verified" value="1">
+                  <a href="{:U('User/cellphone')}" class="btn-2">{:l('Verified')}</a>
+                  <else/>
+                  <a href="{:U('User/cellphone')}" class="btn-2">{:l('Verify')}</a>
+                  </eq>
+                </li>
+              </eq>
+                <li>
+                  <div class="security-info">
+                    <p>{:l('Google Authenticator')}</p>
+                    <span>{:l('Google Authentication code required when withdrawing cash and changing security settings')}</span
+                    >
+                  </div>
+                  <a href="{:U('User/ga')}" class="btn-2">{:l('Settings')}</a>
+                </li>
+                <li>
+                  <div class="security-info">
+                    <p>{:l('Anti-phishing code')}</p>
+                    <span>{:l('The email sent will contain the anti-phishing code you set to prevent fraudulent emails.')}</span
+                    >
+                  </div>
+                  <a href="{:U('User/antiphishing')}" class="btn-2">{:l('Settings')}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">{:l('Other Settings')}</h5>
+          </div>
+          <div class="card-body">
+            <div class="settings-security">
+              <ul>
+                <li>
+                  <div class="security-info">
+                    <p>{:l('Frozen Account')}</p>
+                    <span>{:l('Increasing the strength of your password helps to increase the security of your money')}</span
+                    >
+                  </div>
+                  <a href="{:U('User/freeze')}" class="btn account-freeze-btn">{:l('Freeze Account')}!</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div></div></div>
+  </div>
+</section>
+<include file="Public:footer_minimal" />

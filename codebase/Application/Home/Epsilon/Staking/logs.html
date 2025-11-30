@@ -1,0 +1,248 @@
+<include file="Public:header" />
+
+<main class="wrapper stake-page ">
+	<!-- Account Heading Start -->
+	<div class="page-top-banner">
+		<div class="filter" style="background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-md-8">
+						<h1>{$page_title}</h1>
+						<notempty name="prompt_text">
+							<h2>{$prompt_text}</h2>
+						</notempty>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Account Heading End -->
+	<div class="container">
+		<div class="row mt-3 mb-3">
+			<include file="User:top_bar" />
+			<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+			  <ul class="text-right breadcrumbs list-unstyle">
+				<li>
+				  <a
+					class="btn btn-warning btn-sm"
+					href="{:U('/')}"
+					>{:l('Home')}</a
+				  >
+				</li>
+				<li>
+				  <a
+					class="btn btn-warning btn-sm"
+					href="{:U('Staking/index')}"
+					>{:l('Staking')}</a
+				  >
+				</li>
+				<li class="btn btn-warning btn-sm active">
+				  Staking Logs
+				</li>
+			  </ul>
+			</div>
+		  </div>
+		<div class=" table-responsive card p-20">
+			<h1 class="f-s-30 f-w-700 m-b-15">{:l('My Stakings')}</h1>
+		
+			<table class="table text-center">
+				<thead>
+					<tr>
+					<th>{:l('Staking ID')}</th>
+						<th>{:l('Locked')}</th>
+						<th>{:l('Estimated Annual Yield')}</th>
+						<th>{:l('Duration')}</th>
+						<th>{:l('Limit')}</th>
+						<th>{:l('Duration')}</th>
+						<th>{:l('Paid')}</th>
+						<th>{:l('Status')}</th>
+						<th>{:l('Option')}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">	
+				<volist name="list" id="vo">
+				<tr>
+				<td>{$vo.docid}</td>
+				<td>{$vo['amount']|NumToStr} {$vo['coinname']|strtoupper}</td>
+					<td>{$vo['percentage']|NumToStr}%/yr</td>
+						<td><switch name="vo.period"><case value="1">1 Day</case><case value="7">1 Week</case><case value="30">1 Month</case><default />{$vo.period} days</switch> </td>
+					<td><i class="fa fa-info" title="Min {$vo.minvest|NumToStr} / Max {$vo.maxvest|NumToStr}"></i></td>
+						
+						
+						<td>{$vo.begintime|date="Y-m-d",###} to {$vo.endtime|date="Y-m-d",###}</td>
+						<td>{$vo['credited']*1}</td>
+						<td>
+						<switch name="vo.status">
+							<case value="0"><span class="label label-danger">{:l('Withdrawn')}</span></case>
+							<case value="1"><span class="label label-success">{:l('Active')}</span></case>
+							<case value="2"><span class="label label-warning">{:l('Rejected')}<span></case>
+							<case value="3"><span class="label label-info">{:l('Completed')}<span></case>
+							<default />NA
+						</switch>
+						</td>
+						<td class="text-center">
+						<eq name="vo['allow_withdrawal']" value='1'>	
+							<switch name="vo.status">
+							<case value="0">on {$vo.withdrawn|date="Y-m-d",###}</case>
+							<case value="1"><li><button class="btn btn-sm btn-danger btn-block" onclick="withdraw('{$vo.docid}','{$vo.penalty_amount|NumToStr}','{$vo.penalty_coin}');"><i class="icon-exit"></i> Withdraw</button></li></case>
+							<case value="2">on {$vo.withdrawn|date="Y-m-d",###}</case>
+							<case value="3">{$vo.endtime|date="Y-m-d",###}</case>
+							<default />NA
+							</switch>
+							<else/>
+							<switch name="vo.status">
+							<case value="0">on {$vo.withdrawn|date="Y-m-d",###}</case>
+							<case value="1"><button class="btn btn-sm btn-warning btn-block" onclick="info('{$vo.docid}');" id="out-{$vo.docid}">{:l('Info')}</button></case>
+							<case value="2">on {$vo.withdrawn|date="Y-m-d",###}</case>
+							<case value="3">{$vo.endtime|date="Y-m-d",###}</case>
+							<default />NA
+							</switch>
+						</eq>
+						</td>
+					</tr>
+			</volist>	
+			<else/>
+				<p class="text-center font_gray font_16">{:l('No Data')}</p>
+			</notempty>	
+					
+				</tbody>
+			</table>
+			<div class="pages"> {$page}</div>
+		</div>
+	</div>
+
+
+
+	<!-- P2P Content End -->
+	
+</main>
+
+<!-- sstake modal start -->
+<div class="modal fade" id="stakeModal" tabindex="-1" role="dialog" aria-labelledby="LOCK" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header  d-flex align-items-center">
+				<h5 class="modal-title">
+					<div class="coin-title d-flex align-items-center">
+						<div class="title">{:l('Lock')}</div>
+					</div>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-12 col-md-12">
+
+								<form action="#">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label>Type </label> <input type="text" class="form-control" name="" placeholder="Locked" value="Locked">
+											</div>
+												<div class="form-group btn-select">
+													<label for="">{:l('Duration')}</label>
+													<div class="btn-group-toggle" data-toggle="buttons">
+														<label class="btn btn-radio">1<input type="radio" name="options" autocomplete="off"></label>
+														<label class="btn btn-radio  active">7<input type="radio" name="options2" autocomplete="off" checked></label>
+														<label class="btn btn-radio">30<input type="radio" name="options3" autocomplete="off"></label>
+														<label class="btn btn-radio">60<input type="radio" name="options4" autocomplete="off"></label>
+														<label class="btn btn-radio">90<input type="radio" name="options5" autocomplete="off"></label>
+													</div>
+												</div>
+
+										</div>
+										<div class="col-sm-6">
+											<ul>
+												<li>Minimum Locked Amount <span class="pull-right">0.1</span></li>
+												<li>Maximum Locked Amount <span class="pull-right">10000</span></li>
+												<li>Annual Yield Percentage <span class="pull-right">4%</span></li>
+											</ul>
+											<div class="form-group m-t-15">
+												<label>{:l('Lock Amount')}</label> <span class="pull-right">Avaible <span>0</span><span>{:l('LINK')}</span></span>
+												<div class="input-group">
+													<input type="text" class="form-control" name="" placeholder="{:l('Please enter amount')}">
+													<div class="input-group-append input-inner-btn">
+														<span><button class="btn p-0 green f-s-13 bold">{:l('Max')}</button></span>
+													</div>
+												</div>
+											</div>
+										</div>	
+
+									</div>
+								</form>
+					</div><!--/col-md-6-->
+				</div><!--/row-->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn-1" data-dismiss="modal">{:l('Cancel')}</button>
+				<a href="#!" class="btn-2">{:l('Confirm Purchase')}</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!--stake modal end -->
+<!-- Whitdraw Modal START-->	
+<div class="modal fade warning-modal" id="withdrawModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{:l('Info!')}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      	<div class="icon">
+      		<i class="fa fa-exclamation-circle"></i>
+      	</div>
+        <div class="title">
+        	Attention!
+        </div>
+        <div class="desc">{:l('If you premature withdraw this Staking you will loose any interest earned on it last price')}</div>
+      </div>
+      <div class="modal-footer text-right">
+        <button type="button" class="btn btn-3" data-dismiss="modal">{:l('Close')}</button>
+        <button type="button" class="btn btn-4">{:l('Confirm')}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+	
+
+<script>
+function info(docid){
+		layer.tips('It will be automatically withdrawn to your account upon completion', '#out-'+docid, {tips: 1});
+	
+
+}
+function withdraw(docid,penalty_amount,penalty_coin) {
+	if(penalty_amount>0 && penalty_coin){
+	var msg = "It will cost <strong>"+penalty_coin+' '+penalty_amount+"</strong> also you will loose any interest";
+	}else{
+		var msg = 'If you premature withdraw this Staking you will loose any interest earned on it last price ';	
+	}
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.get("/Staking/withdraw/docid/"+docid,  function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+						window.location.href = "{:U('Staking/logs')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+
+        }, 'json');
+		});
+    }
+</script>	
+
+</div>
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,161 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('SET_UP_TWOFACTOR_AUTHENTICATIO')}</span>
+		</div>
+		
+		<!-- Datasheets -->
+		<div class="card  mt-2 table-responsive">
+
+			
+						<div class="card-body no-padding">
+			
+						<eq name="is_ga" value="0">
+							<form id="form-gaa" >
+								<div class="row" >
+									<div class="col-sm-6">
+									<div class="dv_contentx">
+										<table class="table table-responsive" >
+											<tr><td colspan="2"><h5> {:l('1st step: Setup Google Authentication')}</h5></td></tr>			
+											<tr>
+													<td colspan="2">{:l('In the Google Authenticator, Click + to add new account. You may scan the QR code or enter provided key to add your account on Google Authenticator')}</td>
+												</tr>
+												<tr>
+													<td colspan="2"><div class="row"><div class="dv_ewm img-responsive  col-sm-6" id="qrcode"></div></div></td>
+												</tr>
+												<tr>
+												<td colspan="2">
+													  {:l('IF_YOU_CAN_NOT_SUCCESSFULLY_SC')}<b>{$Asecret}</b>
+												</td>
+												</tr>
+				
+											</table>
+									</div>
+									</div>
+									<div class="col-sm-6">
+									
+									<div class="dv_contentx">
+										<table class="table table-responsive" >
+									
+											<tr><td colspan="2"><h5> {:l('2nd step: Enter 6-digits code from Google authenticator')}	:</h5></td></tr>			
+									<tr>
+									<td>{:l('TWOFACTOR_AUTHENTICATION_PASSW')}</td>
+											<td><input type="hidden" name="secret" value="{$Asecret}"><input  class="form-control" id="ga" type="text" placeholder="{:l('PLEASE_ENTER_THE_TWOFACTOR_AUT')}" name="ga"/></td>
+										</tr>
+										
+		
+										<tr>
+											<td colspan="2"><input type="button" class="btn btn-warning btn-block" onclick="google_verify()" value="{:l('VERIFY_AND_ENABLE')}"></td>
+										</tr>
+		
+									</table>
+
+									</div>
+									</div>
+									
+								
+								</div>
+							</form>
+							<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+							<script>
+								$('#qrcode').qrcode({
+									render: "table", //table
+									size: 200,
+									text: "{$qrCodeUrl}", //Any content
+									background: "#ffffff"
+								}); //ANY_STRING
+			
+								function google_verify() {
+									var ga = $('#ga').val();
+									var ga_login = $('#ga-login').is(':checked') ? 1 : 0;
+									var ga_transfer = $('#ga-transfer').is(':checked') ? 1 : 0;
+									var ga = $('#ga').val();
+									if (!ga) {
+										layer.tips('Enter verification code', '#ga', {
+											tips: [
+												1,
+												'#0FA6D8'
+											]
+										});
+										return;
+									}
+									$.post("{:U('user/google_2fa')}", {
+										ga: ga,
+										ga_login: ga_login,
+										ga_transfer: ga_transfer,
+										type: 'add'
+									}, function (ret) {
+										if (ret.status) {
+											layer.msg("{:l('JUMP_IN_THE_OPERATION_WAS_SUCC')}...", {icon: 16});
+											setTimeout('flash()', 3000);
+										} else {
+											layer.msg(ret.info);
+										}
+									}, 'json');
+								}
+							</script>
+							<else/>
+							<form id="form-ga" class="">
+								<div class="mb-3 row">
+									<label  class="col-md-2 col-form-label">{:l('2FA Status')}</label>
+									<div class="col-md-10 ">
+										<span class="square-switch"><input type="checkbox" id="square-switch1" switch="none" checked />
+									<label for="square-switch1" data-on-label="On"
+										data-off-label="Off"></label>
+									</span>
+									</div>
+								</div>
+							
+								<div class="mb-3 row">
+										
+										<label  class="col-md-2 col-form-label">{:l('Turn 2FA Off')}</label>
+										<div class="col-md-10 ">
+											<input id="ga_delete" name="ga_delete" placeholder="{:l('PLEASE_ENTER_THE_TWOFACTOR_AUT')}" type="text" class="form-control" >
+											
+										  </div>									
+								</div>
+								<div class="mb-3 row">
+									<button onclick="ga_cancel()" class="btn btn-xs btn-danger btn-block" type="button" >{:l('CANCEL_TWOFACTOR_AUTHENTICATIO')} <i class="fa fa-trash" aria-hidden="true"></i></button>
+								</div>
+							</form>
+							<script>
+
+			
+								function ga_cancel() {
+									var ga = $('#ga_delete').val();
+									var ga = $('#ga_delete').val();
+									if (!ga) {
+										layer.tips('Enter verification code', '#ga_delete', {
+											tips: [
+												1,
+												'#0FA6D8'
+											]
+										});
+										return;
+									}
+									$.post("{:U('User/google_2fa')}", {
+										ga: ga,
+										type: 'delete'
+									}, function (ret) {
+										if (ret.status) {
+											layer.msg("{:l('JUMP_IN_THE_OPERATION_WAS_SUCC')}...", {icon: 16});
+											setTimeout('flash()', 3000);
+										} else {
+											layer.msg(ret.info);
+										}
+									}, 'json');
+								}
+							</script>
+						</eq>
+						<script>function flash() {
+
+							window.location = "{:U('user/ga')}"
+						}</script>
+		
+</div>
+<include file="Public:footer"/>

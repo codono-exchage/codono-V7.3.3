@@ -1,0 +1,271 @@
+<include file="Public:header" />
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+        <div class="main-title-h" style="font-size: 24px;">
+            <span class="d-sm-flex align-items-center justify-content-between h4">{:l('Mining Machine Edit/Add')}</span>
+            <i class="ca"></i>[<a href="/Admin/Pool/index"> {:l('List')}</a> ]
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form id="form" action="/Admin/Pool/edit" method="post" class="form-horizontal">
+                    <div id="tab" class="tab-pane in tab">
+                        <div class="form-item cf">
+                            <table class="table">
+                                <tbody>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('ID')}:</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="id" value="{$id}"
+                                                disabled="disabled"
+                                                style="background-color: #ECECEC;min-width: 400px;color: red;">
+
+                                        </td>
+                                        <td class="item-note"></td>
+                                    </tr><input type="hidden" name="id" value="{$id}" class="text input-large">
+
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Mine Title')}:</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="name" value="{$name}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Name of Mining Machines')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Image')}:</td>
+                                        <td>
+                                            <div id="addpicContainer">
+
+                                                <notempty name="data.ico">
+                                                    <!--Noimagedisplaydefaultimage-->
+                                                    <img id="up_img" onclick="getElementById('inputfile').click()"
+                                                        style="cursor:pointer;max-width:500px;"
+                                                        title="Click Add Picture" alt="Click Add Picture"
+                                                        src="/Upload/pool/{$data.ico}">
+                                                    <else />
+                                                    <!--Noimagedisplaydefaultimage-->
+                                                    <img id="up_img" onclick="getElementById('inputfile').click()"
+                                                        style="cursor:pointer;max-width:500px;"
+                                                        title="Click Add Picture" alt="Click Add Picture"
+                                                        src="__THEME__/images/addimg.png">
+                                                </notempty>
+                                                <input type="hidden" id="ico" name="ico" value="{$data.ico}">
+                                                <input type="file" id="inputfile"
+                                                    style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;"
+                                                    value="" />
+                                            </div>
+                                        </td>
+                                        <td class="item-note">80px*80px</td>
+                                    </tr>
+
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Purchase Coin')}:</td>
+
+                                        <td><select name="coinname" class="form-select input-10x">
+
+                                                <volist name="coin_list" id="v" k="key">
+                                                    <option value="{$key}" <eq name="data['coinname']" value="$key">{:l('selected')}</eq>>{$v}</option>
+                                                </volist>
+                                            </select></td>
+
+                                        <td class="item-note">{:l('Purchase Coin')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Price')}:</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="price" value="{$price}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Price in Purchase Coin')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Release Charge Coin')}</td>
+                                         
+                                        <td><select name="charge_coin" class="form-select input-10x">
+
+                                                <volist name="coin_list" id="v2" k="key">
+                                                        <option value="{$key}" <eq name="data['charge_coin']" value="$key">{:l('selected')}</eq>>{$v2}</option>
+                                                </volist>
+                                            </select></td>
+
+                                        <td class="item-note">{:l('Charge Coin on Release')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Charge Amount on release')}:</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="charge_price" value="{$charge_price}"
+                                                style="min-width: 400px;" placeholder="0.00">
+                                        </td>
+                                        <td class="item-note">{:l('Price in Release per reward coin')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Reward Coin')}:</td>
+                                        <td><select name="getcoin" class="form-select input-10x">
+                                                <volist name="coin_list" id="v" k="key">
+
+                                                    <option value="{$key}" <eq name="data['getcoin']" value="$key">{:l('selected')}</eq>>{$v}</option>
+                                                </volist>
+                                            </select></td>
+
+                                        <td class="item-note">{:l('Reward Coin')}</td>
+                                    </tr>
+
+
+
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Profit')}:</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="daily_profit"
+                                                value="{$daily_profit}" style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Daily profit in Reward Coin quantity')}</td>
+                                    </tr>
+
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Days')} :</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="days" value="{$days}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Renting Period in days')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Total machines')} :</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="quantity" value="{$quantity}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Total Machines')} </td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Inventory')} :</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="stocks" value="{$stocks}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Available Machines')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('User Buy Limit')} :</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="user_limit"
+                                                value="{$user_limit}" style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Per User Buy Limit')} </td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Power Hash')} :</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="power" value="{$power}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Hash in ghz ex. 1.2ghz [For marketing only]')}</td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Sort')} :</td>
+                                        <td>
+                                            <input type="text" class="form-control" name="sort" value="{$sort}"
+                                                style="min-width: 400px;">
+                                        </td>
+                                        <td class="item-note">{:l('Higher the top listed')} </td>
+                                    </tr>
+                                    <tr class="controls">
+                                        <td class="item-label">{:l('Popular')} :</td>
+                                        <td>
+                                            <select name="is_popular" class="form-select" style="min-width: 400px;">
+                                                <option value="0" <eq name="data.is_popular" value="0">{:l('selected')}</eq>>{:l('No')}</option>
+                                                <option value="1" <eq name="data.is_popular" value="1">{:l('selected')}</eq>>{:l('Yes')}</option>
+                                            </select>
+                                        </td>
+                                        <td class="item-note">{:l('Popular')}</td>
+                                    </tr <tr class="controls">
+                                    <td class="item-label">{:l('Status')} :</td>
+                                    <td>
+                                        <select name="status" class="form-select" style="min-width: 400px;">
+                                            <option value="0" <eq name="data.status" value="0">{:l('selected')}</eq>>{:l('Inactive')}</option>
+                                            <option value="1" <eq name="data.status" value="1">{:l('selected')}</eq>>{:l('Active')}</option>
+                                        </select>
+                                    </td>
+                                    <td class="item-note">{:l('Status')}</td>
+                                    </tr>
+
+                                    <tr class="controls" style="margin: 10px 0px;height: 80px;">
+                                        <td class="item-label"></td>
+                                        <td>
+                                            <button class="btn submit-btn ajax-post btn-info" id="submit" type="submit"
+                                                target-form="form-horizontal" autocomplete="off">{:l('Submit')}</button>
+                                            <a class="btn btn-return btn-warning" href="{:U('Admin/Pool/')}">{:l('Back')}</a>
+                                        </td>
+                                        <td class="item-note"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    //submit Form
+                    $('#submit').click(function () {
+                        $('#form').submit();
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__THEME__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //The response fileAdd tosuccessevent
+        $("#inputfile").change(function () {
+            //createFormDataObjects
+            var data = new FormData();
+            //forFormDataAdding Data Object
+            $.each($('#inputfile')[0].files, function (i, file) {
+                data.append('upload_file' + i, file);
+            });
+
+
+            //send data
+            $.ajax({
+                url: '/Admin/Pool/mineImage',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,		//Essential parameters
+                processData: false,		//Essential parameters
+                success: function (jsonresp) {
+                    resp = JSON.parse(jsonresp);
+                    if(resp.error){
+                        alert('Upload error');
+                        $(".loading").hide();
+                    }
+                    if (resp) {
+                        $('#up_img').attr("src", '/Upload/pool/' + resp.url);
+                        $('#ico').val(resp.url);
+                        $('#up_img').show();
+                    }
+                },
+                error: function () {
+                    alert('Upload error');
+                    $(".loading").hide();	//plus Upload failedshiftexceptplusLoadimage
+                }
+            });
+
+        });
+    });
+
+
+</script>
+<include file="Public:footer" />
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //Highlight navigation
+        highlight_subnav("{:U('Invest/index')}");
+    </script>
+</block>

@@ -1,0 +1,118 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Administrator Management')}</span>
+			<notempty name="name">
+				<span class="h2-title">>><a href="{:U('User/adminUser')}">{:l('List Management')}</a></span>
+			</notempty>
+		</div>
+
+		<script>
+						//Search function
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//Enter search
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				
+		
+		<div class="card card-body mt-2 table-responsive">
+			<div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+				<span class="justify-content-right">
+				<a class="btn btn-success " href="{:U('User/adminEdit')}">{:l('Add')}</a>
+				<button class="btn ajax-post btn-info " url="{:U('User/adminStatus',array('type'=>'resume','model'=>'Admin'))}" target-form="ids">{:l('Enable')}</button>
+				<button class="btn ajax-post btn-warning " url="{:U('User/adminStatus',array('type'=>'forbid','model'=>'Admin'))}" target-form="ids">{:l('Disable')}</button>
+				<button class="btn ajax-post confirm btn-danger " confirm-msg="Batch delete Can not restore, confirm delete?" url="{:U('User/adminStatus',array('type'=>'del','model'=>'Admin'))}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i>
+				</button>
+				</span>
+					<form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+						<select class="form-select me-2">
+							<option value=""
+							<empty name="Think.get.status">{:l('selected')}</empty>
+							>{:l('All states')}</option>
+							<option value="1"
+							<eq name="Think.get.status" value="1">{:l('selected')}</eq>
+							>{:l('Disabled')}</option>
+							<option value="2"
+							<eq name="Think.get.status" value="2">{:l('selected')}</eq>
+							>{:l('Enabled')}</option>
+						</select>
+						<select class="form-select me-2" name="field" >
+							<option value="username"
+							<empty name="Think.get.field">{:l('selected')}</empty>
+							>{:l('Username')}</option>
+							<option value="cellphone"
+							<eq name="Think.get.field" value="cellphone">{:l('selected')}</eq>
+							>{:l('PHONE_NUMBER')}</option>
+						</select>
+						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+		</div>
+			<table class="table table-sm emptyx">
+				<thead class="table-light">
+				<tr>
+					<th class="row-selected row-selected d-none d-md-table-cell"><input class="check-all" type="checkbox"/></th>
+					<th class="d-none d-md-table-cell">{:l('ID')}</th>
+					<th class="">{:l('Username')}</th>
+					<th class="d-none d-md-table-cell">{:l('Truename')}</th>
+					<th class="d-none d-md-table-cell">{:l('Mobile')}</th>
+					<th class="">{:l('Email')}</th>
+					<th class="">{:l('Status')}</th>
+					<th class="">{:l('Option')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td class="d-none d-md-table-cell"><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td class="d-none d-md-table-cell">{$vo.id}</td>
+							<td>{$vo.username}</td>
+							<td class="d-none d-md-table-cell">{$vo.nickname}</td>
+							<td class="d-none d-md-table-cell">{$vo.cellphone}</td>
+							<td>{$vo.email}</td>
+							<td>
+
+								<eq name="vo.status" value="1">
+									<span class="badge badge-pill badge-soft-success font-size-11">{:l('Enabled')}</span>
+									<else/>
+									<span class="badge badge-pill badge-soft-danger font-size-11">{:l('Disabled')}</span>
+								</eq>
+							</td>
+							<td>
+								<a href="{:U('User/adminEdit?id='.$vo['id'])}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+							</td>
+						</tr>
+					</volist>
+					<else/>
+					<td colspan="12" class="text-center">{:l('No contents!')}</td>
+				</notempty>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('User/admin')}");
+	</script>
+</block>

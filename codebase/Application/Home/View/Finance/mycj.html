@@ -1,0 +1,87 @@
+<include file="Public:header" />
+<script src="__PUBLIC__/Home/js/datepicker.min.js"></script>
+ 
+
+	
+<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">	
+
+<include file="Finance:left" />
+
+
+		<!-- Main content -->
+			<div class="panel panel-flat">
+<div class="panel-heading">
+<div class="panel-title"> <h1>{:l('TRANSACTION_QUERY')}</h1></div>
+</div>
+
+			<div class="panel-body">
+
+       <div class="table-responsive">
+        <table class="table " id="investLog_content">
+         <thead>
+          <tr>
+           <th><img src="__UPLOAD__/coin/{$coin_list[$market_list[$market]['xnb']]['img']}" alt="" style="margin-bottom: -5px; width: 22px;" /> <select name="market-selectTest" id="market-selectTest">
+             <volist name="market_list" id="vo"> <eq name="market" value="$key">
+             <option value="{$vo['name']}" selected="selected">{$coin_list[$vo['xnb']]['title']}({$vo['xnb']|strtoupper}/{$vo['rmb']|strtoupper})</option>
+             <else />
+             <option value="{$vo['name']}">{$coin_list[$vo['xnb']]['title']}({$vo['xnb']|strtoupper}/{$vo['rmb']|strtoupper})</option>
+             </eq> </volist>
+           </select></th>
+           <th>{:l('TRANSACTION_TIME')}</th>
+           <th><select name="type-selectTest" id="type-selectTest">
+             <option value="0"<eq name="type" value="0">selected</eq>>-{:l('ALL')}-
+             </option>
+             <option value="1"<eq name="type" value="1">selected</eq>>{:l('BUY')}
+             </option>
+             <option value="2"<eq name="type" value="2">selected</eq>>{:l('SELL')}
+             </option>
+           </select></th>
+           <th>{:l('PRICE')}</th>
+           <th>{:l('QUANTITY')}</th>
+           <th>{:l('TOTAL')}</th>
+           <th>{:l('FEES')}</th>
+          </tr>
+         </thead>
+         <tbody>
+          <volist name="list" id="vo">
+          <tr>
+           <td>{$coin_list[$market_list[$vo['market']]['xnb']]['title']} ({$market_list[$vo['market']]['xnb']|strtoupper}/{$market_list[$vo['market']]['rmb']|strtoupper})</td>
+           <td>{$vo.addtime|date='m-d H:i:s',###}</td>
+           <td> <if condition="$vo['type'] eq 1"> <font class="buy">{:l('BUY')}</font> </if> <if condition="$vo['type'] eq 2"> <font class="sell">{:l('SELL')}</font> </if>  </td>
+           <td>{$vo['price']|NumToStr}</td>
+           <td>{$vo['num']|NumToStr}</td>
+           <td>{$vo['mum']|NumToStr}</td>
+           <td><if condition="($vo['userid'] eq $userid)"> {$vo['fee_buy']} <else /> {$vo['fee_sell']} </if></td>
+          </tr>
+          </volist>
+         </tbody>
+        </table>
+      
+       
+   </div>
+  </div>
+  
+  <div class="panel-footer">
+    <div class="pages">{$page}</div>
+  </div>
+ </div>
+</div>
+</div>
+<script>
+	$("#type-selectTest,#market-selectTest").change(function(){
+		var type=$("#type-selectTest option:selected").val();
+		var market=$("#market-selectTest option:selected").val();
+		window.location='/Finance/mycj/type/'+type+'/market/'+market+'';
+	});
+</script>
+<script>
+	//MENU_HIGHLIGHTS
+	$('#finance_box').addClass('active');
+	$('#finance_mycj').addClass('active');
+	$('#finance_mycj i').attr('class','coin_menu_op_7');
+</script>
+<include file="Public:footer_minimal"/>

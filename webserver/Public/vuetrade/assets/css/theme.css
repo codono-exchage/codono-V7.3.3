@@ -1,0 +1,16 @@
+/*!
+
+*/
+/*! WRITE YOUR CUSTOM STYLE **/
+.table .thead-dark th {
+    color: #fff;
+    background-color: #070709;
+    border-color: #454d55;
+}
+#price_today_ul {
+    background: #131722;
+    padding: 21px;
+}
+#price_today_ul tr td:first-child {
+    padding: 23px !important;
+}

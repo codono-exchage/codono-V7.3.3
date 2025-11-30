@@ -1,0 +1,325 @@
+<!--- Login / Register Modals Start -->
+<div class="cd-user-modal">
+	<!-- this is the entire modal form, including the background -->
+	<div class="cd-user-modal-container">
+		<div id="cd-login">
+			<!-- log in form -->
+			<form class="cd-form">
+				<img src="__UPLOAD__/public/{$C['web_logo']}" class="img-fluid m-auto m-b-30 d-block">
+				<div class="row">
+					<div class="col-12 col-sm-7">
+						<p class="fieldset">
+							<label class="image-replace cd-email" for="signin-email">{:l('USERNAME_OR_EMAIL')}</label>
+							<input class="full-width form-control has-border" id="username"> <span class="cd-error-message">Error message here!</span>
+						</p>
+						<p class="fieldset">
+							<label class="image-replace cd-password" for="signin-password">{:l('Password')}</label>
+							<input class="full-width form-control has-border" id="login_password" placeholder="{:l('PLEASE_ENTER_YOUR_PASSWORD')}" autocomplete="off"> <a class="hide-password" href="#0">{:l('Hide')}</a>
+							<span class="cd-error-message">Error message here!</span>
+						</p>
+						<p class="fieldset">
+						<eq name="RECAPTCHA" value="1">
+<include file="Publicnew:recaptcha"/>
+<else/>
+<include file="Publicnew:image_captcha"/>
+</eq>
+				
+						</p>
+
+						<p class="fieldset">
+							<input class="full-width btn main" type="submit" value="{:l('LOG_IN')}"  onclick="footer_user_login();">
+						</p>
+						<div class="row">
+							<div class="col-6">
+								<p class="cd-form-bottom-message">
+									<a href="#0">{:l('FORGET_PASSWORD')}</a>
+								</p>
+							</div>
+							<div class="col-6">
+								<p class="register">
+									<a href="#0">{:l('FREE_REGISTRATION')}</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-sm-5 text-center">
+						<img src="__PUBLIC__/template/v6/img/google-auth-qr.png" class="img-fluid m-auto m-b-15">
+						<p>{:l('Sign in with QR code')}</p>
+						<p>{:l('For instant login')} <span class="green">{:SHORT_NAME} </span> {:l('Scan this code with the mobile app')}</p>
+					</div>
+				</div>
+			</form>
+			<!-- <a href="#0" class="cd-close-form">Close</a> -->
+		</div>
+		<!-- cd-login -->
+		<div id="cd-signup">
+			<!-- sign up form -->
+			<div class="cd-form">
+				<img src="__UPLOAD__/public/{$C['web_logo']}" class="img-fluid logoImg m-auto m-b-10 d-block">
+				<p class="fieldset">
+					<label class="image-replace cd-username" for="siunup-username">{:l("Username")}</label>
+					<input class="full-width form-control has-border" id="signup_username" onblur="check_username()" type="text"> <span class="cd-error-message">Error message here!</span>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-email" for="email">{:l("MAILBOX")}</label> <input class="full-width form-control has-border" id="email" onblur="check_email()" type="email">
+					<span class="cd-error-message">Error message here!</span>
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-password" for="email_password">{:l("Password")}</label> <input class="full-width form-control has-border" id="email_password" type="text">
+					<a class="hide-password" href="#0">{:l("Hide")}</a> <span class="cd-error-message">Error message here!</span>
+				</p>
+				<p class="fieldset">
+												<eq name="RECAPTCHA" value="1">
+									<include file="Publicnew:recaptcha"/>
+												<else/>
+									<include file="Publicnew:signup_captcha"/>
+									</eq>
+									 
+				</p>
+				<p class="fieldset m-b-0 text-small">
+					<input id="emailregweb" type="checkbox"> <label for="emailregweb"><a href="#0">{:l('User Agreement')}</a> {:l("Short_terms")}
+					</label>
+					<input id="email_invit" placeholder="{:l('INVITE_CODE')}" type="hidden" class="input-bordered" autocomplete="off">
+				</p>
+				<p class="fieldset">
+					<input class="full-width  btn main" type="button"  value="{:l('SIGN_UP_NOW')}"  onclick="reg_email();">
+				</p>
+				<p class="fieldset login">
+					<a href="#0">{:l('Already have an account')}</a>
+				</p>
+			</div>
+			<!-- <a href="#0" class="cd-close-form">Close</a> -->
+		</div>
+		<!-- cd-signup -->
+		<div id="cd-reset-password">
+			<!-- reset password form -->
+			<p class="cd-form-message">
+				Forgot your password? Please enter your e-mail address. You will receive a link to create a new password.</p>
+			<form class="cd-form">
+				<p class="fieldset">
+					<label class="image-replace cd-email" for="reset-email">{:l('Email')}</label>
+					<input class="full-width form-control has-border" id="reset-email" placeholder="{:l('Email')}" type="email"> <span class="cd-error-message">Error message here!</span>
+				</p>
+				<p class="fieldset">
+					<input class="full-width  btn main" type="submit" value="Şifre Sıfırla">
+				</p>
+				<p class="cd-form-bottom-message">
+					<a href="#0">Kullanıcı Girişine Dön!</a>
+				</p>
+			</form>
+		</div>
+		<!-- cd-reset-password -->
+		<a class="cd-close-form" href="#0">Close</a>
+	</div>
+	<!-- cd-user-modal-container -->
+</div>
+<!-- cd-user-modal -->
+<!--- Login / Register Modals End -->
+
+<script>
+    function footer_user_login() {
+        var username = $("#username").val();
+        var password = $("#login_password").val();
+<eq name="RECAPTCHA" value="1">
+        var verify = $("#g-recaptcha-response").val();
+<else/>
+        var verify = $("#login_verify").val();
+
+</eq>
+        if (username == "" || username == null) {
+            layer.tips("Username", '#username', {tips: 2});
+            return false;
+        }
+        if (password == "" || password == null) {
+            layer.tips("Enter password", '#login_password', {tips: 2});
+            return false;
+        }
+        
+        if (verify == "" || verify == null) {
+            layer.tips("Captcha", '.recaptcha', {tips: 2});
+            return false;
+            
+        }
+        $.post("{:U('Login/submit')}", {
+            username: username,
+            password: password,
+            verify: verify,
+            //login_token: "",
+        }, function (data) {
+            if (data.status == 1) {
+                $.cookies.set('username', username);
+                layer.msg(data.info, {icon: 1});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    window.location = "{:SITE_URL}";
+                }
+            } else {
+                layer.msg(data.info, {icon: 2});
+				$("#login_verify").click();
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+
+</script>
+<script>
+	$(function () {
+	var inviteurl = new URL(window.location.href);
+	var invitecode = inviteurl.searchParams.get("invite");
+	document.getElementById("email_invit").value =invitecode;
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+		$('#email_step2').height(height);
+		$("#cellphone").focus();
+	});
+	function regWeb() {
+		layer.open({
+			type: 2,
+			skin: 'layui-layer-rim', //frame
+			area: ['800px', '600px'], // width height
+			title: 'User Agreement', // title
+			content: "{:U('Login/webreg')}"
+		});
+	}
+	
+	function showB() {
+		$("#step1").hide();
+		$("#step2").hide();
+		$("#verify").focus();
+	}
+	function showE() {
+		$("#email_step1").hide();
+		$("#email_step2").hide();
+		$("#everify").focus();
+	}
+		function check_username() {
+		var username  = $('#signup_username').val();
+		if (username == "" || username == null) {
+			layer.tips("Please choose username", '#signup_username', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_username", {
+			username: username,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.tips("Good!!", '#signup_username', {tips: 2});
+				return true;
+			} else {
+				layer.tips(data.info, '#signup_username', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	function check_email() {
+		var email  = $('#email').val();
+		if (email == "" || email == null) {
+			layer.tips("{:l('PLEASE_ENTER_email')}", '#email', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_email", {
+			email: email,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				$("#email_step1").show();
+				$("#email_step2").show();
+				$("#everify").focus();
+				layer.tips("{:l('Good!')}", '#email', {tips: 2});
+			} else {
+				layer.tips(data.info, '#email', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	
+	function verify_ups() {
+		$('#verify_up').attr('src', "/Ajax/verify?t=" + Math.random());
+	}
+	function new_send() {
+		$("#step1").show();
+		$("#step2").show();
+		$("#verify").focus();
+	}
+	function new_send_email() {
+		$("#email_step1").show();
+		$("#email__step2").show();
+		$("#everify").focus();
+	}
+	
+	
+	function validateEmail(sEmail){
+       var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
+
+  if(!sEmail.match(reEmail)) {
+    alert("Invalid email address");
+    return false;
+  }
+
+  return true;
+
+}
+function reg_email() {
+		var username        = $("#signup_username").val();
+		var email        = $("#email").val();
+		<eq name="RECAPTCHA" value="1">
+		var verify =$("#g-recaptcha-response").val();
+				<else/>
+		var verify = $("#signup_verify").val();
+		</eq>
+		var password     = $("#email_password").val();
+		var invit        = $("#email_invit").val();
+		var accounttype =1;
+		if (email == "" || email == null || validateEmail(email)== false) {
+			layer.tips("{:l('PLEASE_ENTER_VALID_EMAIL')}", '#email', {tips: 2});
+			return false;
+		}
+		if (username == "" ||username == null) {
+			layer.tips("Please enter username", '#signup_username', {tips: 2});
+			return false;
+		}
+		
+		if (password == "" || password == null) {
+			layer.tips("{:l('PLEASE_ENTER_YOUR_PASSWORD')}", '#email_password', {tips: 2});
+			return false;
+		}
+		if (verify == "" || verify == null) {
+			layer.tips("{:l('Please enter Captcha')}", '#signup_verify', {tips: 2});
+			return false;
+		}
+		if (accounttype == "" || accounttype == null) {
+			layer.tips("{:l('Please Choose acount type')}", '#account_type', {tips: 2});
+			return false;
+		}
+		if (!$("#emailregweb").is(':checked')) {
+			layer.tips("{:l('CHECK_USER_REGISTRATION_AGREEM')}", '#emailregweb', {tips: 3});
+			return false;
+		}
+		$.post("/Login/emailsignup", {
+			email: email,
+			username: username,
+			verify: verify,
+			password: password,
+			invit: invit,
+			accounttype:accounttype,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$.cookies.set('exchange_email', email);
+					window.location = '/Login/thankyou';
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>

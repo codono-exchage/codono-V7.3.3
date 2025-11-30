@@ -1,0 +1,40 @@
+<div class="crypt-gross-market-cap" id="marketStatsBox">
+                    <div class="row ">
+                        <div class="col-sm-4 col-md-4 col-lg-4 pr-0">
+                            <div class="row">
+                                <div class="">
+                                    <p class="d-sm-none d-md-block">{:l('LAST PRICE')}</p>
+                                    <div class="stat-major"><span class="sellpricex crypt-down">{$rmb|strtoupper} <span id="market_sell_price" class="crypt-down">--</span></span> <span class="buypricex">/ <span id="market_buy_price" class="crypt-up">--</span></span></div>
+                                </div>
+
+                            </div>
+                        </div>
+						<div class="col-sm-8 col-md-8 col-lg-8 pl-0 pr-0">
+						<div class="row">
+						 <div class="col-sm-2 col-md-2 col-lg-2  pl-0 pr-0">
+                                    <p>{:l('DAY_CHANGE')}</p>
+                                    <p  id="market_change">--</p>
+                                </div>
+                        <div class=" col-sm-2 col-md-2 col-lg-2 pl-0 pr-0">
+                            <p>24H {:l('HIGH')}</p>
+                            <p class="crypt-up" id="market_max_price">--</p>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2 pl-0 pr-0">
+                            <p>24H {:l('LOW')}</p>
+                            <p class="crypt-down" id="market_min_price">--</p>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2 pl-0 pr-0">
+                            <p>24H {:l('VOLUME')}</p>
+                            <p class="crypt-down" id="market_volume">--</p>
+                        </div>
+						<div class="col-sm-4 col-md-4 col-lg-4 pl-0 pr-0">
+						    <p>{:l('CHARTS')}</p>
+                            <p class="crypt-down"> <i class="pe-7s-graph2"  onclick="ShowMe('tradingviewbox')"  style="font-size:24px" id="togglebutton1"></i>
+							<i id="togglebutton2" onclick="ShowMe('marketchartbox')" class="pe-7s-graph1" style="font-size:24px" ></i>
+							</p>
+						</div>
+					</div>
+					</div>
+					
+                    </div>
+                </div>

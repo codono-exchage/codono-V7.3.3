@@ -1,0 +1,76 @@
+<section class="section section-m  tc-light tc-light-alt bg-dark">
+                <div class="container">
+                    <!-- Block @s -->
+                    <div class="nk-block nk-block-footer">
+                        <div class="row justify-content-between text-center text-sm-left">
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="wgs wgs-menu">
+                                    <h6 class="wgs-title text-white animated" data-animate="fadeInUp" data-delay=".1">Address</h6>
+                                    <div class="wgs-body">
+                                        <ul class="wgs-list mt-3 animated" data-animate="fadeInUp" data-delay=".2">
+                                            <li>381 Rivonia Boulevard Rivonia</li>
+                                            <li>Johannesburg Gauteng<br/> South Africa</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="col-2">
+        <h6 class="wgs-title text-white animated" data-animate="fadeInUp" data-delay=".3">{:L('Service')}</h6>
+		<div class="wgs-body">
+        <ul class="wgs-links wgs-links-s3 animated" data-animate="fadeInUp" data-delay=".4">
+          <li><a href="{:SITE_URL}Content/fees" class="tt-c" ><small>{:L('Trading Fees')}</small></a></li>
+		  <li><a href="{:SITE_URL}Content/referral" class="tt-c"><small>{:L('Referral')}</small></a></li>
+		  <li><a href="{:SITE_URL}Content/health" class="tt-c"><small>{:L('Coins Health')}</small></a></li>
+        </ul>
+		</div>
+      </div>
+							
+	<volist name="footerArticleType" id="vo">		
+      <div class="col-2">
+                                <div class="wgs wgs-menu">
+                                    <h6 class="wgs-title text-white animated" data-animate="fadeInUp" data-delay=".3">{$vo['title']}</h6>
+        <div class="wgs-body">
+         <ul class="wgs-links wgs-links-s3 animated" data-animate="fadeInUp" data-delay=".4">
+          <volist name="footerArticle[$vo['name']]" id="vvo">
+					
+							<li><a href="{:U('Article/type',array('id'=>$vvo['id']))}" ><small>{$vvo['title']}</small></a></li>
+						</volist>
+        </ul>
+        </div>
+                                </div>
+                            </div>
+	  </volist>
+							
+							
+                            <div class="col-lg-3 col-md-3">
+                                <div class="wgs wgs-text">
+                                    <div class="wgs-logo animated" data-animate="fadeInUp" data-delay=".7">
+                                        <a href="./">
+                                            <img src="__UPLOAD__/public/{$C['web_logo']}" srcset="__UPLOAD__/public/{$C['web_logo']}" alt="{:SHORT_NAME}" width="150px">
+											
+                                        </a>
+                                    </div>
+                                    <div class="wgs-body">
+                                        <div class="wgs-subscribe wgs-subscribe-s2">
+                                            <small class="animated" data-animate="fadeInUp" data-delay=".8">{:C('web_title')}</small>
+                                            <ul class="social pt-2">
+                                                <li class="animated" data-animate="fadeInUp" data-delay=".9"><a href="#"><em class="social-icon fab fa-facebook-f"></em></a></li>
+                                                <li class="animated" data-animate="fadeInUp" data-delay=".95"><a href="#"><em class="social-icon fab fa-twitter"></em></a></li>
+                                                <li class="animated" data-animate="fadeInUp" data-delay="1"><a href="#"><em class="social-icon fab fa-medium-m"></em></a></li>
+                                                <li class="animated" data-animate="fadeInUp" data-delay="1.05"><a href="#"><em class="social-icon fab fa-github"></em></a></li>
+                                                <li class="animated" data-animate="fadeInUp" data-delay="1.1"><a href="#"><em class="social-icon fab fa-bitcoin"></em></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                        <div class="footer-bottom pdt-r">
+                            <div class="copyright-text copyright-text-s1 text-center text-sm-left text-lg-center">
+                                <p>{:C('web_icp')}</p>
+                            </div>
+                        </div>
+                    </div><!-- .block @e -->
+                </div>
+            </section>
+        </footer>

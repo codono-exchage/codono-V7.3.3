@@ -1,0 +1,143 @@
+<include file="Public:header" />
+<php> 
+$reg_class="";
+$fund_class="";
+$kyc_class="move";
+$success_class="";
+</php>
+<div class="autobox">
+		<!-- breadcrumb component -->
+<div class="breadcrumb-line breadcrumb-line-component content-group-lg">
+						<ul class="breadcrumb">
+							<li><a href="/"><i class="icon-home2 position-left"></i> {:l('HOME')}</a></li>
+
+							<li class="active">{:l('REGISTER_ACCOUNT')}	</li>
+							
+						</ul>
+					</div>
+<!-- /breadcrumb component -->
+<include file="Login:progress" />
+	<div class="reg_box">
+		<div class="reg_wrap pt47">
+			<div class="reg_warning"><i class="fa fa-exclamation-sign mr5"></i>
+			<span>
+				{:l('STATE_REGULATIONS_PLEASE_FILL_')}
+			</span></div>
+			<div class="reg_input_box reg-fb">
+				<div class="reg_title">{:l('ACTUAL_NAME')}</div>
+				<input type="text" id="truename" class="texts w300"/>
+			</div>
+			<div class="reg_input_box reg-fb" >
+				<div class="reg_title">{:l('TYPE_OF_CERTIFICATE')}</div>
+				<select id="idcardtype" class="select texts w300">
+					<option value="">{:l('PLEASE_CHOOSE')}</option>
+					<option value="1" selected>{:l('ID_CARD')}</option>
+					<option value="2">{:l('DRIVERS_LICENSE')}</option>
+					<option value="3">{:l('PASSPORT')}</option>
+					<option value="4">{:l('UTILITY_BILL')}</option>
+					<option value="5">{:l('SOCIAL_SECURITY')}</option>
+					<option value="9">{:l('OTHERS')}</option>
+				</select>
+			</div>
+
+			<div class="reg_input_box reg-fb">
+				<div class="reg_title">{:l('ID_NUMBER')}</div>
+				<input type="text" id="idcard" class="texts w300"/>
+			</div>
+
+			<div class="reg_input_box reg-fb">
+			<img src="__PUBLIC__/Home/images/plus.png" alt="Pending Upload" id="up_img" />
+			<input type="hidden" id="image" name="image" value="">
+			<input type="file" id="inputfile" value=""/>
+			</div>
+			
+
+			<div class="reg_button_box">
+				<input type="button" class="btns2 w300" value="{:l('THE_NEXT_STEP')}" onclick="truename_up();"/>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+$(document).ready(function () {
+		//The response fileAdd tosuccessevent
+		$("#inputfile").change(function () {
+			//createFormDataObjects
+			var data = new FormData();
+			//forFormDataAdding Data Object
+			$.each($('#inputfile')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+
+
+			//send data
+			$.ajax({
+				url: '/Login/idimage',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//Essential parameters
+				processData: false,		//Essential parameters
+				success: function (data) {
+					if (data) {
+						$('#up_img').attr("src", '/Upload/idcard/' + data);
+						$('#image').val(data);
+						$('#up_img').show();
+					}
+				},
+				error: function () {
+					alert('Upload error');
+					$(".loading").hide();	//plus Upload failed shift except plus Load image
+				}
+			});
+
+		});
+	});
+	
+	
+	function truename_up() {
+		var idcardtype = $('#idcardtype option:selected').html();
+		var truename   = $("#truename").val();
+		var idcard     = $("#idcard").val();
+		var image     = $("#image").val();
+
+		if (idcardtype == "" || idcardtype == null) {
+			layer.tips("{:l('PLEASE_SELECT_THE_TYPE_OF_DOCU')}", '#idcardtype', {tips: 2});
+			return false;
+		}
+		if (truename == "" || truename == null) {
+			layer.tips("{:l('Enter Actual Name')}", '#truename', {tips: 2});
+			return false;
+		}
+		if (image == "" || image == null) {
+			layer.tips("{:l('Upload File')}", '#image', {tips: 2});
+			return false;
+		}
+		if (idcard == "" || idcard == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_CERTIFICATE_N')}", '#idcard', {tips: 2});
+			return false;
+		}
+		$.post("/Login/upregister3", {
+			idcardtype: idcardtype,
+			truename: truename,
+			idcard: idcard,
+			image: image,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+
+					window.location ='/Login/info';
+
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+<include file="Public:footer_minimal"/>

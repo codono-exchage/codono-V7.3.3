@@ -1,0 +1,45 @@
+<include file="Public:header"/>
+		<div class="page-container">	
+
+<include file="Finance:left" />
+<div class="panel panel-flat">
+
+<div class="panel-heading">
+<h1 class="panel-title">{:l('MY VOTES')}</h1>
+</div>
+            <div class="panel-body">
+                <div class="f_body mt5">
+                    <div class="f_body_main">
+                        <div class="f_tab_body">
+                            <div>
+                                <table class="table table-responsive" id="investLog_content">
+                                    <thead>
+                                    <tr>
+                                        <th>{:l('COIN')}</th>
+                                        <th>{:l('TITLE')}</th>
+                                        <th>{:l('ADD_TIME')}</th>
+                                        <th>{:l('Voted')}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <tr>
+                                            <td>{$vo['coinname']}</td>
+                                            <td>{$vo['title']}</td>
+                                            <td>{$vo.addtime|addtime}</td>
+											<td>
+                                                <eq name="vo.type" value="1">{:l('Upvote')}</eq>
+                                                <eq name="vo.type" value="2">{:l('Downvote')}</eq>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                                <div class="pages">{$page}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+<include file="Public:footer_minimal"/>

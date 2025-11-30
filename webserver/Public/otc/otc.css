@@ -1,0 +1,793 @@
+#quoteerror,#with_order{
+	display:none;
+}
+#showselloptions .dropdown-menu,#showbuyoptions .dropdown-menu{
+	overflow: hidden;
+    width: 100%;
+    background-color: #131722;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    border: none;
+    z-index: 99;
+}
+
+input, textarea {
+    outline: none;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}
+img {
+    vertical-align: middle;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}
+.otc-area{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+	background:#000;
+	padding-top:15px;
+}
+.otc-body{
+box-sizing:border-box;
+display:flex;
+
+height:auto;
+justify-content:center;
+margin-bottom:0px;
+margin-left:0px;
+margin-right:0px;
+margin-top:0px;
+min-width:0px;
+padding-bottom:10px;
+padding-left:0px;
+padding-right:0px;
+padding-top:0px;
+width:100%;
+-webkit-box-pack:center;
+}
+.leftbox{
+	border-bottom-left-radius:4px;
+border-bottom-right-radius:4px;
+border-top-left-radius:4px;
+border-top-right-radius:4px;
+box-shadow:none;
+box-sizing:border-box;
+display:block;
+
+height:488px;
+margin-bottom:0px;
+margin-left:0px;
+margin-right:0px;
+margin-top:0px;
+min-width:0px;
+padding-bottom:0px;
+padding-left:0px;
+padding-right:0px;
+padding-top:30px;
+
+width:auto;
+}
+.left-title-1{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    margin-bottom: 44px;
+}
+.left-title-2{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    font-size: 32px;
+    line-height: 30px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+}
+.head-tabs-1{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    margin-bottom: 24px;
+}
+.head-tabs-1-1 {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.head-tabs-title {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    color: #929AA5;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 32px;
+    padding-bottom: 14px;
+}
+.head-tabs-1-2 {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    position: relative;
+    width: 100%;
+    height: 2px;
+    margin-bottom: 32px;
+}
+.ActiveLine {
+    box-sizing: border-box;
+    min-width: 0px;
+    height: 2px;
+    background-color: #026bfb;
+    position: absolute;
+    top: -1px;
+    width: 86px;
+    margin: 0px;
+}
+.BaseLine {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #E6E8EA;
+}
+.coinwrap {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    width: 100%;
+    position: relative;
+}
+.coin-input-div{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid #eaecef;
+    border-radius: 3px;
+    width: 100%;
+    height: 56px;
+    padding: 16px;
+    position: relative;
+}
+.coin-input-div:hover{border: 1px solid #026bfb;}
+.coin-input-label{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    font-size: 16px;
+    color: #929AA5;
+    width: 68px;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+.input-box-css{
+	font-size: 18px;
+    color: #fff;
+    width: 100%;
+	background:#000;
+}
+.input-box-css:focus{
+	font-size: 18px;
+    color: #fff;
+    width: 100%;
+	background:#000;
+}
+.coin-input-split{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #fff;
+    margin-left: 4px;
+    margin-right: 6px;
+	
+}
+.coin-input-coinwrap{
+	margin: 0;
+    min-width: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.coin-input-coinimage{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    border-radius: 100%;
+}
+.coinInput-CoinText {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin-right: 2px;
+    width: 44px;
+}
+.home-down {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    width: 8px;
+}
+.coinInput-error{
+   box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    font-size: 12px;
+    line-height: 32px;
+    height: 32px;
+    color: #F23051;
+    text-align: left;
+}
+.CoinInput-selectWrap{
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    overflow: hidden;
+    height: 0;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    border: none;
+    z-index: 99;
+}
+.CoinInput-InputWrap{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 54px;
+    padding-left: 16px;
+    padding-right: 16px;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-bottom: 1px solid #eaecef;
+	
+}
+.input-select-coin{
+	font-size: 14px;
+    width: 100%;
+}
+.home-down-2{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    width: 8px;
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.CoinInput-ListWrap{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    text-align: left;
+    overflow-y: auto;
+    -webkit-transition: max-height .15s;
+    transition: max-height .15s;
+    max-height: 306px;
+    overflow: auto;
+}
+.CoinInput-Option a{
+	width:100%;
+}
+.CoinInput-Option{
+	box-sizing: border-box;
+    min-width: 0px;
+    display: flex;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin: 0px;
+	width:100%
+}	
+.CoinInput-Logo{
+box-sizing: border-box;
+    min-width: 0px;
+    max-width: 100%;
+    width: 18px;
+    height: 18px;
+    margin: 0px 16px 0px 0px;	
+}
+.CoinInput-Option-2{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    text-align: left;
+    overflow-y: auto;
+    -webkit-transition: max-height .15s;
+    transition: max-height .15s;
+    max-height: 306px;
+    overflow: auto;
+}
+	
+}
+.CoinInput-selectedImg{
+box-sizing: border-box;
+    min-width: 0px;
+    max-width: 100%;
+    height: 14px;
+    width: 18px;
+    margin: 0px;
+}
+.quote-button{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-size: inherit;
+    font-family: inherit;
+    text-align: center;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    outline: none;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 20px;
+    color: #fff;
+    background-color: #026bfb;
+    border-radius: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-height: 32px;
+    border: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 100%;
+    height: 48px;
+    margin-top: 16px;
+}	
+.quote-button:disabled {
+    cursor: not-allowed;
+    background-color: #F5F5F5;
+    background-image: none;
+    color: #AEB4BC;
+}
+.reject-button{
+	background-color: #fff !important;
+	color:#026bfb;
+	border:1px solid #000;
+}
+.rightbox {
+    display: block;
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+}
+
+.QuoteLayout-Wrap{
+    box-shadow: 0px 6px 20px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    border-radius: 4px;
+	background:#131722;
+	color:#fff !important;
+}
+.QuoteLayout-Title {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    font-weight: 600;
+    
+    color: #FFFFFF;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: 2px solid #EAECEF;
+        font-size: 20px;
+    height: 80px;
+}
+
+.quoteLayout-arrowBack{
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    position: absolute;
+    left: 8px;
+}
+.QuoteLayout-Body{
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+}
+.QuoteEmpty-Wrap{
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    min-height: 408px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.QuoteEmpty-Body{
+	margin: 0;
+    min-width: 0;
+    width: auto;
+    text-align: center;
+}
+.QuoteEmpty-Image{
+	box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    margin-bottom: 20px;
+}
+.QuoteEmpty-Title{
+	    box-sizing: border-box;
+		padding:10px;
+    margin: 0;
+    min-width: 0;
+    color: #828282;
+    font-size: 14px;
+    font-weight: 500;
+}
+.quoteContent-wrap{
+	padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+    min-width: 0px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin: 0px;	
+}
+
+.quoteContent-TopWrap {
+    box-sizing: border-box;
+    min-width: 0px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-bottom: 48px;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 0px;
+    border-bottom: 1px solid rgb(234, 236, 239);
+}
+
+.quoteContent-CryptoTitle{
+    box-sizing: border-box;
+    min-width: 0px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+    opacity: 0.5;
+    text-align: center;
+    margin: 0px 0px 8px;
+}
+.quoteContent-CryptoWrap{
+    box-sizing: border-box;
+    min-width: 0px;
+    display: flex;
+    -webkit-box-align: baseline;
+    align-items: baseline;
+    margin: 0px;
+}
+
+.quoteContent-StyledTargetAmount{
+    box-sizing: border-box;
+    min-width: 0px;
+    font-size: 40px;
+    color: #fff;
+    margin: 0px 8px 0px 0px;
+}
+.quoteContent-CryptoCoin{
+    box-sizing: border-box;
+    min-width: 0px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+    opacity: 0.5;
+    color: #fff;
+    margin: 0px;
+}
+.quoteContent-MiddleWrap{
+    box-sizing: border-box;
+    min-width: 0px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    margin: 0px 0px 24px;
+    border-bottom: 1px solid rgb(234, 236, 239);
+}
+.quoteContent-LabelRow{
+	box-sizing: border-box;
+    min-width: 0px;
+    display: flex;
+    color: #fff;
+    font-size: 14px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin: 0px 0px 8px;
+	
+}
+.quoteContent-CoinRow{
+    box-sizing: border-box;
+    min-width: 0px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    font-size: 20px;
+    margin: 0px 0px 24px;
+}
+.quoteContent-FiatPerCoin{
+    box-sizing: border-box;
+    min-width: 0px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    font-size: 24px;
+    margin: 0px 50px 0px 0px;
+}
+.quoteContent-FiatTotal{
+	
+	box-sizing: border-box;
+    min-width: 0px;
+    color: #026bfb;
+    text-align: right;
+    margin: 0px;
+	font-size:24px;
+}
+.quoteContent-CountdownWrap{
+	box-sizing: border-box;
+    min-width: 0px;
+    display: flex;
+    font-size: 12px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin: 0px;
+}
+.quoteContent-CountdownInfo{
+box-sizing: border-box;
+    min-width: 0px;
+    color: rgb(163, 168, 174);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin: 0px 16px 0px 0px;
+}
+.quoteContent-CountdownNumber{
+	box-sizing: border-box;
+    min-width: 0px;
+    color: #fff;
+    display: inline-block;
+    width: 20px;
+    margin: 0px 0px 0px 4px;
+}
+.progress-Wrap{
+	box-sizing: border-box;
+    min-width: 0px;
+    position: relative;
+    width: 100%;
+    margin: 0px;
+}
+.progress-BaseLine{
+	box-sizing: border-box;
+    min-width: 0px;
+    height: 6px;
+    background-color: rgb(234, 236, 239);
+    margin: 0px;
+    border-radius: 18px;
+}
+.progress-ActiveLine {
+    box-sizing: border-box;
+    min-width: 0px;
+    position: absolute;
+    background-color: #026bfb;
+    height: 6px;
+    top: 0px;
+    width: 100%;
+    margin: 0px;
+    border-radius: 18px;
+}
+.quoteContent-StyledError{
+    box-sizing: border-box;
+    min-width: 0px;
+    display: flex;
+    background-color: rgb(253, 224, 229);
+    color: rgb(242, 48, 81);
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 48px;
+    margin: 0px;
+}
+.quoteContent-ErrorIcon{
+	box-sizing: border-box;
+    min-width: 0px;
+    max-width: 100%;
+    width: 20px;
+    height: 20px;
+    margin: 0px 16px 0px 0px;
+}
+
+@media only screen and (max-device-width: 480px) {
+	#paidPage .quoteContent-LabelRow div:first-child {
+    display: none;
+}
+	.quoteContent-wrap{
+	padding-left: 10px;
+    padding-right: 10px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.QuoteEmpty-Wrap{
+	min-height:230px;
+}
+.leftbox{
+	height:354px;
+}
+.login-container .page-container{
+	padding-top:5px;
+}
+.otc-body{
+	height:auto !important;
+	padding-bottom:0px !important;
+}
+.head-tabs-1-2{
+	margin-bottom:12px;
+}
+.coinInput-error{
+    line-height: 16px;
+    height: 16px;	
+}
+.quote-button{
+	margin-top:0px;
+	font-weight: 700;
+    font-size: 21px;
+    line-height: 20px;
+    color: #fff;
+    background-color: #026bfb;
+    border-radius: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-height: 32px;
+    border: none;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 100%;
+    height: 48px;
+    
+}
+
+.left-title-1{
+	margin-bottom:24px;
+}
+.quoteContent-TopWrap{
+	padding-bottom:0px;
+}
+.quoteContent-MiddleWrap{
+	margin:0px;
+	padding:12px 5px;
+}
+.quoteContent-FiatPerCoin,.quoteContent-FiatTotal{
+	font-size:14px;
+	margin:0px;
+}
+.QuoteLayout-Title{
+	height:60px;
+}
+.quoteContent-StyledTargetAmount{
+	font-size:30px;
+}
+div#quotefinal {
+    padding: 20px 0px;
+}
+}

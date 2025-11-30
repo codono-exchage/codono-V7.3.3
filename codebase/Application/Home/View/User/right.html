@@ -1,0 +1,218 @@
+<div class="col-sm-9">
+		<div class="row">
+		
+		<div class="col-sm-4">
+		<div class="panel panel-flat">
+			<div class="panel-body">
+								<div class="col-sm-12  text-center">	
+								<span class="text-info">
+								<eq name="user.accounttype" value="1"><i class="fa fa-user-circle fa-4x" title="{:l("Individual")}"></i></eq>
+                                    <eq name="user.accounttype" value="2"><i class="fa fa-institution fa-4x" title="{:l("Institutional")}"></i></eq></span>
+									
+                                    <h6 class="no-margin text-default text-semibold"> <if condition="$user['truename']">{$user['truename']}<else/>{$user['username']}</if></h6>
+									<span class="text-size-mini text-muted">{$user['email']}</span>
+								</div>
+
+			</div>
+		</div>
+		</div>
+		<div class="col-sm-4">
+		<div class="panel panel-flat">
+			
+			<div class="panel-body">
+								<div class="col-sm-12  text-center">	
+								
+								<switch name="user['idcardauth']" >
+													<case value="0"><span class="text-default"><i class="fa fa-upload fa-4x"></i></span></case>
+													<case value="1"><span class="text-success"><i class="fa fa-check-circle fa-4x"></i></span></case>
+													<case value="2"><span class="text-info"><i class="fa fa-files-o fa-4x"></i></span></case>
+													<case value="3"><span class="text-warning"><i class="fa  fa-exclamation-circle fa-4x"></i></span></case>
+													<default />Check
+												</switch>
+								<h6 class="no-margin text-default text-semibold">
+									<switch name="user['idcardauth']" >
+													<case value="0">KYC {:l('CERTIFIED_IMMEDIATELY')}</case>
+													<case value="1">KYC {:l('APPROVED')}</case>
+													<case value="2">KYC {:l('Under Review')}</case>
+													<case value="3">KYC {:l('KYC Rejected!')}</case>
+													<default />Check
+												</switch>
+								</h6>
+								<span class="text-size-mini text-muted">
+									<switch name="user['idcardauth']" >
+													<case value="0"><a href="/user/nameauth">How to verify</a></case>
+													<case value="1"><a href="/user/nameauth" >{:l('VERIFIED')}:{:l('REQUESTS_FOR_CHANGES')}</a></case>
+													<case value="2"><a href="/user/nameauth" >{:l('Under Review')}</a></case>
+													<case value="3"><a href="/user/nameauth" >{:l('KYC Rejected!')}</a></case>
+													<default />Check
+												</switch>
+									</span>
+								</div>
+			</div>
+		</div>		
+		</div>
+		
+		
+		
+		<div class="col-sm-4">
+			<div class="panel panel-flat">
+				<div class="panel-body">
+								<div class="col-sm-12  text-center">	
+									<span class="text-info"><i class="fa fa-cog fa-4x"></i></span>
+								<h6 class="no-margin text-default text-semibold">
+									{:l('API KEY')}
+								</h6>
+								<span class="text-size-mini text-muted">
+									<a href="javascript:checkapi();">Preview Api Key</a>
+									</span>
+								</div>
+				</div>
+			</div>		
+		</div>
+		<div class="col-sm-4">
+	<div class="panel panel-flat">
+			
+			<div class="panel-body">
+								<div class="col-sm-12  text-center">	
+									<span class="text-info"><i class="fa fa-key fa-4x"></i></span>
+								<h6 class="no-margin text-default text-semibold">
+									{:l('Login Password')}
+								</h6>
+								<span class="text-size-mini text-muted">
+									<a href="{:U('User/password')}">Change Login Settings</a>
+									</span>
+								</div>
+			</div>
+		</div>		
+		</div>
+	
+		<div class="col-sm-4">
+		
+			<div class="panel panel-flat">
+				<div class="panel-body">
+								<div class="col-sm-12  text-center">	
+									<span class="text-info"><i class="fa fa-cog fa-4x"></i></span>
+								<h6 class="no-margin text-default text-semibold">
+									{:l('Fund Password')}
+								</h6>
+								<span class="text-size-mini text-muted">
+									<a href="{:U('User/paypassword')}" >{:l('CHANGE_PASSWORD')}</a>
+									</span>
+								</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="panel panel-flat">
+				<div class="panel-body">
+								<div class="col-sm-12  text-center">	
+									<span class="text-info"><i class="fa fa-lock fa-4x"></i></span>
+								<h6 class="no-margin text-default text-semibold">
+									Google 2FA
+								</h6>
+								<span class="text-size-mini text-muted">
+									<a href="{:U('User/ga')}"><eq name="is_ga" value="0">Setup 2fa<else/>Check 2fa</eq></a>
+									</span>
+								</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+			<eq name="ENABLE_SUBS" value="1">
+			<div class="col-sm-4">
+			<div class="panel panel-flat">
+				<div class="panel-body">
+								<div class="col-sm-12  text-center">	
+									<span class="text-info"><i class="fa fa-user-plus fa-4x"></i></span>
+								<h6 class="no-margin text-default text-semibold">
+													{:l('Subscription')}
+								</h6>
+								<span class="text-size-mini text-muted">
+				<eq name="user['usertype']" value='0'><a href="/subscription/index">{:l('SUBSCRIBE NOW')}</a><else/>	
+				<eq name="user['usertype']" value='1'><a href="/subscription/index">{:l('PREMIUM')} {:l('Subscription')}</a>
+				<else/><a href="/subscription/index">{:l('PREMIUM PLUS')} {:l('Subscription')}</a></eq>
+								</eq></span>
+								</div>
+				</div>
+			</div>
+		</div>
+										</eq>
+			<div class="col-sm-4">
+			<div class="panel panel-flat">
+				<div class="panel-body">
+								<div class="col-sm-12  text-center">	
+									<span class="text-info"><i class="fa fa-money fa-4x"></i></span>
+								<h6 class="no-margin text-default text-semibold">
+												{:l('Currency')}:{$selected_coin}
+								</h6>
+								<span class="text-size-mini text-muted">
+								<a href="#"  data-toggle="modal" data-target="#modal_default">Update </a>
+						</span>
+								</div>
+				</div>
+			</div>
+		</div>
+
+		
+		
+		</div>
+		
+		
+</div>
+<!-- Basic modal -->
+				<div id="modal_default" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content page-header-inverse">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h5 class="modal-title">Currency Selection</h5>
+							</div>
+
+							<div class="modal-body">
+								<h6 class="text-semibold">Choose your Currency</h6>
+								<select name="type" id="coinname" class="form-control input-sm">
+									<option value="">--{:l('ALL_CURRENCIES')}--</option>
+										<volist name="fiatcoins" id="vo">
+											<eq name="vo.name" value="$selected_coin">
+												<option value="{$vo['name']}" selected="selected">{$vo['name']|strtoupper}</option>
+												<else/>
+												<option value="{$vo['name']}">{$vo['name']|strtoupper}</option>
+											</eq>
+										</volist>
+									 </select>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" onclick="gocoin()">Save changes</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /basic modal -->
+
+<script>
+function gocoin(){
+var updated_coin=$('#coinname').val();
+
+					$.post("{:U('User/updateFiat')}", {fiat: updated_coin}, function (data) {
+						if (data.status == 1) {
+							layer.msg(data.info, {icon: 1});
+							location.reload();
+						} else {
+							layer.msg(data.info, {icon: 2});
+							if (data.url) {
+								window.location = data.url;
+							}
+						}
+					}, "json");
+
+}
+function checkapi(){
+	apikey=' <table class="table table-bordered"><tr><td>Note</td><td>Do not share this information </td></tr><tr><td>ID</td><td>{$user["id"]} </td></tr><tr><td>Token</td><td>{$user["apikey"]} </td></tr></table>';
+		layer.alert(apikey, {title: "Api Key" ,area: ['auto', 'auto'],btn: ['I Understand']});	
+}
+	$('.finan_index').addClass('active');
+</script>

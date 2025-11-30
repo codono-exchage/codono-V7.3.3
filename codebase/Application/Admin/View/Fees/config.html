@@ -1,0 +1,100 @@
+<include file="Public:header" />
+
+<block name="body">
+<div id="main-content">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">{:l('Wallet Fee Config')}</h4>
+            </div>
+        </div>
+    </div>
+
+    <div id="main" class="main">
+        <div class="card card-body mt-2 mb-2 table-responsive">
+            <div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+				<a class="btn btn-success  " href="{:U('Fees/index')}">{:l('List Coin Fees')}</a>
+                
+					</div>
+
+	
+	 <form action="#" method="post" id="form">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+					<th>Name</th>
+                    <th>Identifier</th>
+                    <th>Transfer In</th>
+                    <th>Transfer Out</th>
+                    <th>Wallet Enable</th>
+                    <th>Transfer Out Fee </th>
+                </tr>
+            </thead>
+            <tbody>
+                <foreach name="configs" item="config">
+                    <tr>
+						<td>{$config.name}</td>
+                        <td>{$config.type}</td>
+                        <td>
+                            <input type="checkbox" name="{$config.name}[in_let]" value="1" <if condition="$config.in_let eq 1">checked</if> />
+                        </td>
+                        <td>
+                            <input type="checkbox" name="{$config.name}[out_let]" value="1" <if condition="$config.out_let eq 1">checked</if> />
+                        </td>
+                        <td>
+                            <input type="checkbox" name="{$config.name}[wallet_enable]" value="1" <if condition="$config.wallet_enable eq 1">checked</if> />
+                        </td>
+				
+                        <td>
+						<input type="checkbox" name="{$config.name}[out_fee]" value="1" <if condition="$config.out_fee eq 1">checked</if> />
+                            
+                        </td>
+                    </tr>
+					
+                </foreach>
+            </tbody>
+        </table>
+		
+            <input type="hidden" name="csrf" value="{$token|default=''}">
+            <button class="btn submit-btn  btn-info" id="submit" type="button" onclick="updateConfig()">{:l('Update')}</button>
+            <button class="btn btn-return btn-warning" onclick="javascript:history.back(-1);return false;">{:l('Back')}</button>
+    </form>
+	</div>
+</div>	
+</div>
+</block>
+		<script type="text/javascript">
+					//submit Form
+				function updateConfig() {
+    let msg = 'Update wallet config?';
+    var form = document.getElementById('form');
+    var formData = new FormData(form);
+
+    layer.confirm(msg, {
+        btn: ['Confirm', 'Cancel'] // buttons
+    }, function() {
+        $.ajax({
+            url: "{:U('Fees/editFees')}", // Your submission endpoint
+            type: "POST",
+            data: formData,
+            processData: false, // Important: tell jQuery not to process the data
+            contentType: false, // Important: tell jQuery not to set contentType
+            success: function(data) {
+                layer.closeAll('loading');
+                if (data.status == 1) {
+                    layer.msg(data.info, {icon: 1});
+                    window.location.reload();
+                } else {
+                    layer.msg(data.info, {icon: 2});
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle errors
+                layer.msg('An error occurred: ' + error, {icon: 2});
+            }
+        });
+    });
+}
+
+				</script>
+<include file="Public:footer" />

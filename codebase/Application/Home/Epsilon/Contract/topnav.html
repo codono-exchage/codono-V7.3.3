@@ -1,0 +1,104 @@
+<style>
+.cleanmenu	{	    left: auto !important;
+    right: auto !important;
+    width: auto !important;
+}
+			</style>
+<div id="CryptTopNav">
+<div class="navbar navbar-expand-md navbar-dark" role="navigation">
+	<a class="navbar-brand" href="/"><img src="__UPLOAD__/public/{$C['web_logo']}" alt="" style="width:150px"/></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav  ml-auto">
+					<volist name="navigation" id="vo">  
+						<if condition="$vo.dropdown eq 1">
+					<li class="nav-item crypt-mega-dropdown-menu" id="{$vo['name']}_box">
+					 <a class="nav-link dropdown-toggle" href="#" id="{$vo['name']}_drop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{:l($vo['title'])} <if condition="$vo['featured']"><span class="featured">{:l($vo['featured'])}</span></if></a>
+					<ul class="dropdown-menu" aria-labelledby=id="{$vo['name']}_drop">
+										
+
+						<volist name="vo.submenu" id="submenu">
+						<li>
+							<a class="dropdown-item" href="/{$submenu.url}">
+									{$submenu.title} <if condition="$submenu['featured']"><span class="featured">{:l($submenu['featured'])}</span></if>
+							</a>
+						</li>		
+						</volist>
+						
+					</ul>
+				</li>
+				<else/>
+				<li id="{$vo['name']}_box" class="nav-item">
+                        <a href="/{$vo['url']}" class="nav-link"><if condition="$vo['ico']">
+						<div class="icon">
+								<i class="icon {$vo['ico']}"></i>
+							</div>
+						</if>  {:l($vo['title'])} <if condition="$vo['featured']"><span class="featured">{:l($vo['featured'])}</span></if> </a>
+                    </li>
+					</if>
+                </volist>	
+				
+		<gt name="Think.session.userId" value="0">
+				<li class="nav-item active dropdown">
+					<a class="nav-link nav-link dropdown-toggle" id="dropdown1" data-toggle="dropdown">
+
+						 <i class="pe-7s-user"></i> {$Think.session.userName} 
+					</a>			
+					<ul class="dropdown-menu cleanmenu" aria-labelledby="dropdown1" id="login-menu">
+						   <li class="dropdown-item"><a href="{:U('Finance/index')}" ><i class="icon-coins"></i> {:l('FINANCE')}</a></li>
+                            <li class="dropdown-item"><a href="{:U('User/index')}" ><i class="fa fa-vcard"></i> {:l('ACCOUNT')}</a></li>
+						
+						<li class="divider"></li>
+						<li class="dropdown-item"><a href="{:U('Login/loginout')}"><i class="icon-switch2"></i> {:l('LOG_OUT')}</a></li>
+					</ul>
+					</li>	
+
+				<else/>
+				  <li class="nav-item"><a class="nav-link" href="{:U('Login/register')}" ><i class="icon-user-plus"></i> {:l('SIGNUP')}</a></li>
+					<li class="nav-item"><a  class="nav-link" href="{:U('Login/login')}" ><i class="icon-enter"></i> {:l('SIGNIN')}</a></li>	
+				</gt>
+
+				
+            <li class="nav-item crypt-mega-dropdown-menu">
+                <a class="nav-link dropdown-toggle" id="dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="__PUBLIC__/assets/images/flags/<notempty name="Think.cookie.lang"> {$Think.cookie.lang}<else/>en</notempty>.png" class="position-left" alt=""></a>
+                <ul class="dropdown-menu ml-auto" aria-labelledby="dropdown2" id="lang-menu">
+                    	<li onclick="choose_lang('en')" class="dropdown-item"><a class="english"><img src="__PUBLIC__/assets/images/flags/gb.png" alt=""> English</a></li>
+						<li onclick="choose_lang('es')" class="dropdown-item"><a class="espana"><img src="__PUBLIC__/assets/images/flags/es.png" alt=""> España</a></li>
+						<li onclick="choose_lang('nl')" class="dropdown-item"><a class="deutsch"><img src="__PUBLIC__/assets/images/flags/nl.png" alt=""> Dutch</a></li>
+						<li onclick="choose_lang('iw')" class="dropdown-item"><a class="Hebrew"><img src="__PUBLIC__/assets/images/flags/iw.png" alt=""> Hebrew</a></li>
+						<li onclick="choose_lang('de')" class="dropdown-item"><a class="german"><img src="__PUBLIC__/assets/images/flags/de.png" alt=""> German</a></li>
+						<li onclick="choose_lang('pt')" class="dropdown-item"><a class="portuguese"><img src="__PUBLIC__/assets/images/flags/pt.png" alt=""> Portuguese</a></li>
+						<li onclick="choose_lang('ru')" class="dropdown-item"><a class="russian"><img src="__PUBLIC__/assets/images/flags/ru.png" alt=""> Русский</a></li>
+						<li onclick="choose_lang('vi')" class="dropdown-item"><a class="vietnamese"><img src="__PUBLIC__/assets/images/flags/vi.png" alt=""> Vietnamese</a></li>
+						<li onclick="choose_lang('ja')" class="dropdown-item"><a class="Japanese"><img src="__PUBLIC__/assets/images/flags/ja.png" alt=""> Japanese</a></li>
+						<li onclick="choose_lang('ko')" class="dropdown-item"><a class="Korean"><img src="__PUBLIC__/assets/images/flags/ko.png" alt=""> Korean</a></li>
+						<li onclick="choose_lang('zhtw')" class="dropdown-item"><a class="Traditional Chinese"><img src="__PUBLIC__/assets/images/flags/zhtw.png" alt=""> Traditional</a></li>
+						<li onclick="choose_lang('zhcn')" class="dropdown-item"><a class="Simplified Chinese"><img src="__PUBLIC__/assets/images/flags/zhcn.png" alt=""> Simplified</a></li>
+                </ul>
+            </li>
+				<li class="nav-item" > <span class="nav-link" onclick="Dark()" id="darksun"><i class="pe-7s-moon" style="font-size:16px;font-weight:bold;"></i></span></li>
+                    </ul>
+                </div>
+            
+    
+</div>
+<notempty name="topnews">
+<div class="row">
+<div class="col-sm-12">
+				<!-- Info alert -->
+				<div class="info-bar-area">
+					<?php $iron=0;?>
+						<volist name="topnews" id="vo">
+							<?php if($iron>0){ echo '<em>/</em>';}$iron++;?>
+							<a href="{:U('Article/detail','id='.$vo['id'])}" class="title">{$vo.title}</a>
+						</volist>
+					
+			    </div>
+			    <!-- /info alert -->
+</div>
+</div>
+	</notempty>
+
+</div>

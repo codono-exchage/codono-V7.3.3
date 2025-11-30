@@ -1,0 +1,126 @@
+<include file="Public:header"/>
+
+
+<link rel="stylesheet" href="__PUBLIC__/static/css/issue.css"/>
+
+
+<div class="breadcrumb-line breadcrumb-line-component content-group-lg">
+					<ul class="breadcrumb">
+						<li><a href="/"><i class="icon-home2 position-left"></i> {:l('HOME')}</a></li>
+						<li><a href="/issue/index">{:l('ICO_CENTER')}</a></li>
+						<li class="active">{:l('ICO_RECORD')}</li>
+					</ul>
+</div>
+<div class="page-container">
+<include file="Finance:left" />
+			<div class="content-wrapper">
+	<div class="panel panel-flat">
+		
+				<div class="panel-heading">
+				<h1>
+					<span>
+						{:l('ICO_CENTER')}					</span>
+	                <span>
+                        <a href="/issue/index" id="step1" class="step fz_12 ml50 pd6 ">{:l('ICO_LIST')}</a>
+						<a href="/issue/log" id="step3" class="step fz_12 ml20 pd6 active">{:l('Boughts')}</a>
+                    </span>
+					<span>
+												<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+				</h1>
+			</div>
+			<div id="hints" class="mytips" style="display:none;">
+
+				<p>
+				
+				
+					<notempty name="prompt_text">
+						{$prompt_text}
+					</notempty>
+				
+				
+				</p>			</div>
+			<div class="panel-body">
+			<div class="usdin_record">
+				<div class="f_body">
+					<div class="f_body_main">
+						<div class="f_tab_body">
+							<div>
+								<table class="table table-striped" id="investLog_content">
+									<thead>
+									<tr>
+										<th>{:l('ICO_NAME')}</th>
+										<th>{:l('ICO_PRICE')}</th>
+										<th id="sublist-grid_c3">{:l('NUMBER_OF_ICO')}</th>
+										<th id="sublist-grid_c4">{:l('PAID PRICE')}</th>
+										<th id="sublist-grid_c0">{:l('ICO_TIME')}</th>
+										<th id="sublist-grid_c1" style="display:none;">{:l('LAST_THAW')}</th>
+										<th id="sublist-grid_c8" style="display:none;">{:l('THAWING_TIMES')}</th>
+										<th id="sublist-grid_c5" style="display:none;">{:l('THE_REMAINING_FREEZE')}</th>
+										<th id="sublist-grid_c9" style="display:none;">{:l('STATUS')}</th>
+										<th id="sublist-grid_c6" style="display:none;">{:l('OPERATING')}</th>
+									</tr>
+									</thead>
+									<tbody>
+									
+									
+                                    <volist name="list" id="vo">
+									<tr>
+                                            
+                                            
+                                            <td>{$vo['name']}</td>
+                                            <td>{$vo['price'] * 1} {$vo['buycoin']|strtoupper}</td>
+                                            <td>{$vo['num'] * 1}</td>
+                                            <td>{$vo['mum']*1} {$vo['convertcurrency']|strtoupper}</td>
+											<td>{$vo.addtime|date='m-d H:i:s',###}</td>
+											<td style="display:none;">{$vo.endtime|date='m-d H:i:s',###}</td>
+                                            <td style="display:none;">{$vo['unlock']}/{$vo['ci']}</td>
+                                            <td style="display:none;">{$vo['shen'] * 1}</td>
+                                            <td style="display:none;">
+                                                <eq name="vo.status" value="1"><font color="#0096dd">{:l('COMPLETED')}</font>
+                                                    <else/>
+                                                    <font color="#23a800">{:l('THAWING')}</font></eq>
+                                            </td>
+                                            <td style="display:none;">
+                                                <eq name="vo.status" value="0">
+                                                    <a class="unlock" id="{$vo.id}" href="javascript:void(0)">{:l('THAW')}</a>
+                                                </eq>
+                                            </td>
+                                        </tr>
+                                    </volist>
+									
+									
+									</tbody>
+								</table>
+								<div class="pages">{$page}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$('.unlock').click(function () {
+		$.post("{:U('Issue/unlock')}", {id: $(this).attr('id')}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	});
+
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#Issue_box').addClass('active');
+</script>	
+<include file="Public:footer_minimal"/>

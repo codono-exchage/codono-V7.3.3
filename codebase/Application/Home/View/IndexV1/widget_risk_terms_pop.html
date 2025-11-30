@@ -1,0 +1,39 @@
+<div id="myModal" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header bg-info">
+								<h6 class="modal-title">{:l('ADVISORY')}:</h6>
+							</div>
+
+							<div class="modal-body">
+								 {$C['web_waring']}
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-info btn-block text-center" data-dismiss="modal" id="yes_sure">{:l('I_UNDERSTAND_THESE_RISKS')}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /info modal -->
+<div class="modal-backdrop fade in" style="display:none;"></div>
+
+<script>
+
+	$("#yes_sure").click(function(){
+		$('#myModal').css('display','none');
+		$('.modal-backdrop').css('display','none');
+		$.cookies.set('codono_advisory', 1);
+	});
+
+	$(function () {
+        var waring = $.cookies.get('codono_advisory');
+        if (!waring) {
+			$('#myModal').css('display','block');
+			$('#myModal').removeClass("fade");
+			$('#myModal').addClass("fade in");
+			$('.modal-backdrop').css('display','block');
+			$.cookies.set('codono_advisory', 1,{ hoursToLive: 24 });
+        }
+    });
+</script>

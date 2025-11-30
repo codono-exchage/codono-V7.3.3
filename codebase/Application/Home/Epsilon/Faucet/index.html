@@ -1,0 +1,168 @@
+<include file="Public:header" />
+
+<div class="container">
+  <div class="row mt-3">
+    <include file="User:top_bar" />
+    <div class="col-9 col-md-6 order-1 order-md-2 float-right">
+      <ul class="text-right breadcrumbs list-unstyle">
+        <li class="btn btn-warning btn-sm active">{:l('Faucet Home')}</li>
+        <li>
+          <a class="btn btn-warning btn-sm" href="{:U('faucet/log')}"
+            >{:l('Faucet Logs')}</a
+          >
+        </li>
+        <li>
+          <a class="btn btn-warning btn-sm" href="{:U('Faucet/faucetlogs')}"
+            >{:l('Faucet All Logs')}</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row p-t-30">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">{:l('Faucets')}</h4>
+        </div>
+        <div class="card-body">
+          <div class="codono-distribution">
+            <div class="row p-t-40 p-b-40">
+              <div class="col-12">
+                <ul class="nav nav-pills nav-fill" role="tablist">
+                  <li class="nav-item">
+                    <a
+                      aria-selected="true"
+                      class="nav-link active"
+                      data-toggle="pill"
+                      href="#on-process"
+                      role="tab"
+                      >{:l('PROCESSING')}</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      aria-selected="false"
+                      class="nav-link"
+                      data-toggle="pill"
+                      href="#upcoming"
+                      role="tab"
+                      >{:l('PREHEATING')}</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      aria-selected="false"
+                      class="nav-link"
+                      data-toggle="pill"
+                      href="#ended"
+                      role="tab"
+                      >{:l('OVER')}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12">
+                <div id="crowdfundingcontent" class="tab-content">
+                  <div
+                    role="tabpanel"
+                    class="tab-pane fade p-t-15 show active"
+                    id="on-process"
+                  >
+                    <include file="Faucet:faucet_list_widget" />
+                  </div>
+                  <div
+                    role="tabpanel"
+                    class="tab-pane fade p-t-15"
+                    id="upcoming"
+                  >
+                    <include file="Faucet:faucet_list_widget_upcoming" />
+                  </div>
+                  <div role="tabpanel" class="tab-pane fade p-t-15" id="ended">
+                    <include file="Faucet:faucet_list_widget_expired" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <table
+            class="table last-login-table table-striped table-hover"
+            id="orderlist"
+          ></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  				var hints = "0";
+  				if(hints == 1){
+  					$('#hints').show();
+  				}
+  				$('#Faucet_box').addClass('active');
+
+  				$(".static").click(function() {
+  					$(".tab-pane").removeClass("in");
+  					$(".tab-pane").removeClass("active");
+  					$(".static").removeClass("active");
+  					$(this).addClass("active");
+  					$("#" + $(this).attr("role")).addClass("active in");
+  				});
+
+
+
+  	function buy_up(id) {
+  	<php>if (!userid()){</php>
+  	layer.msg("Please login first", {icon: 2});
+  	<php>}else{</php>
+  $.post("{:U('Faucet/upbuy')}", {
+  			id: id,
+  			token:""
+  		}, function (data) {
+  			if (data.status == 1) {
+  				layer.msg(data.info, {icon: 1});
+  				window.location = "/faucet/log";
+  			} else {
+  				layer.msg(data.info, {icon: 2});
+  				if (data.url) {
+  					window.location = data.url;
+  				}
+  			}
+  		}, "json");
+  	<php>}</php>
+  	}
+  function getUselog() {
+          $.getJSON("/Faucet/getUselog?t=" + Math.random(), function (data) {
+              if (data) {
+                  if (data['consumelog']) {
+                      var list = '<thead><tr><th>{:l("Time")}</th><th>{:l("Nickname")}</th><th>{:l("Coin")}</th><th>{:l("Amount")}</th></tr></thead><tbody>';
+                      var type = '';
+                      var typename = '';
+                      for (var i in data['consumelog']) {
+  					var xdate = new Date(data['consumelog'][i]['addtime'] * 1000);
+  					var iso = xdate.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/)
+  					var truedate=iso[1] + ' ' + iso[2];
+                              list += '<tr><td >' + truedate + '</td><td >' + data['consumelog'][i]['username'] + '</td><td >' + data['consumelog'][i]['coinname'] + '</td><td >' + data['consumelog'][i]['price'] + '</td></tr>';
+  							}
+  							list +='</tbody>'
+                      $("#orderlist").html(list);
+                  }
+              }
+          });
+          setTimeout('getUselog()', 5000);
+      }
+  	$(function () {
+          getUselog();
+      });
+</script>
+
+<include file="Public:footer_minimal" />

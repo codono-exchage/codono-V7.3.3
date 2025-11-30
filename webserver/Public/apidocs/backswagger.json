@@ -1,0 +1,5586 @@
+openapi: 3.0.0
+info:
+  title: NAMEHERE
+  description: API GUIDE
+  version: 1.0.0
+servers:
+  - url: http://{{siteurl}}
+tags:
+  - name: Login
+    description: Login APIs
+  - name: Articles
+  - name: Affiliates
+  - name: Exchange
+  - name: Chart
+  - name: Index
+  - name: Trade
+  - name: User
+  - name: Otc
+  - name: Crypto
+  - name: CoinGecko Submission Apis
+    description: |-
+      HTTP API should cover the following: 
+      1) Ticker (last done, bid, ask, 24h volume, 24h high, 24h low).
+      2) OrderBook (list of asks and list of bids at least 100 levels).
+      3) Trades (X number of trades executed)
+  - name: Fiat
+  - name: Internal
+  - name: CMC
+    description: ' Spot Exchanges API endpoints'
+paths:
+  /Api/Login/chkUser:
+    post:
+      tags:
+        - Login
+      summary: chkUser
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: amber
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Login/login:
+    post:
+      tags:
+        - Login
+      summary: login
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: email,username,cellphone
+                  example: amber
+                password:
+                  type: string
+                  description: password
+                  example: password
+                gacode:
+                  type: integer
+                  description: Send Ga code if any or leave blank
+                  example: '972802'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate
+            Connection:
+              schema:
+                type: string
+                example: close
+            Content-type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Mon, 27 Aug 2018 21:51:55 +0800
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Host:
+              schema:
+                type: string
+                example: localhost:2005
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.1.9
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  ID: '30'
+                  TOKEN: 0922d72c312539b0a522ac572c283550
+                  msg: login successful!
+  /Api/Login/submit:
+    post:
+      tags:
+        - Login
+      summary: submit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: amber
+                password: password1
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/x-www-form-urlencoded
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate
+            Connection:
+              schema:
+                type: string
+                example: close
+            Content-type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Mon, 27 Aug 2018 21:51:55 +0800
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Host:
+              schema:
+                type: string
+                example: localhost:2005
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.1.9
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  ID: '30'
+                  TOKEN: 0922d72c312539b0a522ac572c283550
+                  msg: login successful!
+  /Api/Login/check2fa:
+    post:
+      tags:
+        - Login
+      summary: check2fa
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                ga:
+                  type: integer
+                  description: Enter 2fa from Google Authenticator
+                  example: '018454'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate
+            Connection:
+              schema:
+                type: string
+                example: close
+            Content-type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Mon, 27 Aug 2018 21:51:55 +0800
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Host:
+              schema:
+                type: string
+                example: localhost:2005
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.1.9
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  ID: '30'
+                  TOKEN: 0922d72c312539b0a522ac572c283550
+                  msg: login successful!
+  /Api/Login/emailcode:
+    post:
+      tags:
+        - Login
+      summary: emailcode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: turndealer@gmail.com
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/x-www-form-urlencoded
+        - name: content
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:1005
+            Date:
+              schema:
+                type: string
+                example: Sun, 10 May 2020 15:01:31 +0000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: codono.com
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: token,Origin, X-Requested-With, Content-Type, Accept,ID,TOKEN
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: POST,GET
+            Content-type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 0
+                data: EMAIL ALREADY EXISTS, PLEASE LOGIN INSTEAD!
+  /Api/Login/emailregister:
+    post:
+      tags:
+        - Login
+      summary: emailregister
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: turndealer
+                email:
+                  type: string
+                  example: turndealer@gmail.com
+                verify:
+                  type: integer
+                  description: code received from emailcode api
+                  example: '898684'
+                password:
+                  type: string
+                  example: password
+                invit:
+                  type: string
+                  description: optional invite id
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:1005
+            Date:
+              schema:
+                type: string
+                example: Sun, 10 May 2020 14:58:30 +0000
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: codono.com
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: token,Origin, X-Requested-With, Content-Type, Accept,ID,TOKEN
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: POST,GET
+            Content-type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data: SUCCESSFULLY_REGISTERED
+  /Api/Login/forgotcode:
+    post:
+      tags:
+        - Login
+      summary: forgotcode
+      description: |-
+        When user is not logged in
+
+        Person can request a code on email for password reset
+
+        Which can later be confirmed using confirmcode api
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: wroupon@gmail.com
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate
+            Connection:
+              schema:
+                type: string
+                example: close
+            Content-type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Mon, 27 Aug 2018 21:51:55 +0800
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Host:
+              schema:
+                type: string
+                example: localhost:2005
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.1.9
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  ID: '30'
+                  TOKEN: 0922d72c312539b0a522ac572c283550
+                  msg: login successful!
+  /Api/Login/confirmcode:
+    post:
+      tags:
+        - Login
+      summary: confirmcode
+      description: >-
+        When user is not logged in
+
+
+        Code requested in forgotcode api can be send to this api with email and
+        new password to reset the password.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: wroupon@gmail.com
+                verify_code:
+                  type: integer
+                  example: '142063'
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate
+            Connection:
+              schema:
+                type: string
+                example: close
+            Content-type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Mon, 27 Aug 2018 21:51:55 +0800
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Host:
+              schema:
+                type: string
+                example: localhost:2005
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/7.1.9
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  ID: '30'
+                  TOKEN: 0922d72c312539b0a522ac572c283550
+                  msg: login successful!
+  /Api/Login/loginout:
+    get:
+      tags:
+        - Login
+      summary: loginout
+      parameters:
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          example: '38'
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: b31247c632693b7e4448566c625fac3b
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Login/findpwd:
+    post:
+      tags:
+        - Login
+      summary: findpwd
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: integer
+                  example: '123456789'
+                cellphone:
+                  type: string
+                cellphone_verify:
+                  type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Login/findpaypwd:
+    post:
+      tags:
+        - Login
+      summary: findpaypwd
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                cellphone:
+                  type: string
+                cellphone_verify:
+                  type: string
+                password:
+                  type: string
+                  description: New Fund password
+                repassword:
+                  type: string
+                  description: Repeat Fund password
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Login/check_reg:
+    post:
+      tags:
+        - Login
+      summary: check_reg
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: demouserx
+                mobile:
+                  type: integer
+                  example: '1234567891'
+                verify:
+                  type: string
+                password:
+                  type: string
+                  description: New Fund password
+                  example: demouser
+                invit:
+                  type: string
+                  description: Repeat Fund password
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Login/sendCellphone:
+    post:
+      tags:
+        - Login
+      summary: sendCellphone
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                cellphone:
+                  type: integer
+                  description: >-
+                    cellphone number along with country code example
+                    441245454545
+                  example: '123456789'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Login/sendForgetCode:
+    post:
+      tags:
+        - Login
+      summary: sendForgetCode
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                cellphone:
+                  type: integer
+                  description: >-
+                    cellphone number along with country code example
+                    441245454545
+                  example: '123456789'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Login/forgetSave:
+    post:
+      tags:
+        - Login
+      summary: forgetSave
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                cellphone:
+                  type: integer
+                  description: >-
+                    cellphone number along with country code example
+                    441245454545
+                  example: '123456789'
+                verify_code:
+                  type: integer
+                  example: '8892'
+                password:
+                  type: string
+                  example: password
+                paypassword:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Art/index:
+    get:
+      tags:
+        - Articles
+      summary: index
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Art/ArtList:
+    post:
+      tags:
+        - Articles
+      summary: ArtList
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pid:
+                  type: string
+                  description: Show articles where id >pid
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Art/ArtShow:
+    post:
+      tags:
+        - Articles
+      summary: ArtShow
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Enter article id to show
+                  example: '40'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Affiliates/info:
+    get:
+      tags:
+        - Affiliates
+      summary: info
+      parameters:
+        - name: id
+          in: header
+          schema:
+            type: string
+          example: '{{id}}'
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: '{{token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Exchange/lasttrades/market/eth_usd:
+    get:
+      tags:
+        - Exchange
+      summary: lasttrades
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Exchange/activeorders/market/btc_usd:
+    get:
+      tags:
+        - Exchange
+      summary: activeorders
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Exchange/MyOpenOrders/market/eth_usd:
+    post:
+      tags:
+        - Exchange
+      summary: MyOpenOrders
+      requestBody:
+        content: {}
+      parameters:
+        - name: id
+          in: header
+          schema:
+            type: string
+          example: '{{id}}'
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: '{{token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Exchange/upTrade:
+    post:
+      tags:
+        - Exchange
+      summary: upTrade
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                price:
+                  type: integer
+                  description: price
+                  example: '7100'
+                market:
+                  type: string
+                  description: market
+                  example: btc_usd
+                num:
+                  type: integer
+                  description: quantity
+                  example: '1'
+                type:
+                  type: integer
+                  description: 1=buy 2= sell
+                  example: '1'
+      parameters:
+        - name: id
+          in: header
+          schema:
+            type: string
+          example: '{{id}}'
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: '{{token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Exchange/reject/id/275:
+    post:
+      tags:
+        - Exchange
+      summary: reject
+      requestBody:
+        content: {}
+      parameters:
+        - name: id
+          in: header
+          schema:
+            type: string
+          example: '{{id}}'
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: '{{token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Chart/index:
+    get:
+      tags:
+        - Chart
+      summary: index
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Chart/getChart:
+    post:
+      tags:
+        - Chart
+      summary: getChart
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                marketid:
+                  type: integer
+                  description: 'Enter ID of market '
+                  example: '8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Chart/depth:
+    post:
+      tags:
+        - Chart
+      summary: depth
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                marketid:
+                  type: integer
+                  description: marketid for depth
+                  example: '8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Chart/showP:
+    post:
+      tags:
+        - Chart
+      summary: showP
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                market_id:
+                  type: integer
+                  description: Stats line by market id
+                  example: '8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Index/index:
+    get:
+      tags:
+        - Index
+      summary: index
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Index/initinfo:
+    get:
+      tags:
+        - Index
+      summary: initinfo
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Index/marketInfo:
+    get:
+      tags:
+        - Index
+      summary: marketInfo
+      description: All Market Stats in one
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx
+            Date:
+              schema:
+                type: string
+                example: Sat, 03 Nov 2018 07:45:39 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '503'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Set-Cookie:
+              schema:
+                type: string
+                example: PHPSESSID=aecpm9h1g628v61gltqqiilebb; path=/
+            Accept-Ranges:
+              schema:
+                type: string
+                example: none
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  market:
+                    - id: '7'
+                      name: Litecoin(LTC/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845c9fb46c2.png
+                      new_price: 525.618
+                      buy_price: 0
+                      sell_price: 292.01
+                      min_price: 408.81399999999996
+                      max_price: 350.412
+                      change: 0.01
+                      volume: 1.6
+                    - id: '8'
+                      name: BCH(BCC/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845cb49d7d8.png
+                      new_price: 1570.092
+                      buy_price: 500
+                      sell_price: 5233.64
+                      min_price: 4710.276000000001
+                      max_price: 3140.184
+                      change: -0.01
+                      volume: 1.6
+                    - id: '6'
+                      name: ETC(ETC/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845cab4ba05.png
+                      new_price: 144.38199999999998
+                      buy_price: 61.89
+                      sell_price: 41.524
+                      min_price: 61.85999999999999
+                      max_price: 41.252
+                      change: 0
+                      volume: 48
+                    - id: '5'
+                      name: ETH(ETH/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845aa8b444f.png
+                      new_price: 2145.9339999999997
+                      buy_price: 0
+                      sell_price: 3065.62
+                      min_price: 3065.62
+                      max_price: 2452.496
+                      change: 0.01
+                      volume: 0.11
+                    - id: '4'
+                      name: Bitcoin(BTC/USD)
+                      icon: http://advance.codono.com/Upload/coin/598458a23a26a.png
+                      new_price: 19288.81
+                      buy_price: 34718.4
+                      sell_price: 34719.858
+                      min_price: 15431.048000000003
+                      max_price: 30862.096000000005
+                      change: 0
+                      volume: 2
+                    - id: '13'
+                      name: Bitcoin(BTC/ETH)
+                      icon: http://advance.codono.com/Upload/coin/598458a23a26a.png
+                      new_price: 0
+                      buy_price: 0
+                      sell_price: 0
+                      min_price: 0
+                      max_price: 0
+                      change: 0
+                      volume: 0
+                    - id: '15'
+                      name: Litecoin(LTC/BTC)
+                      icon: http://advance.codono.com/Upload/coin/59845c9fb46c2.png
+                      new_price: 0
+                      buy_price: 0
+                      sell_price: 0
+                      min_price: 0
+                      max_price: 0
+                      change: 0
+                      volume: 0
+                    - id: '16'
+                      name: doge(DOGE/BTC)
+                      icon: http://advance.codono.com/Upload/coin/
+                      new_price: 0
+                      buy_price: 0
+                      sell_price: 0
+                      min_price: 0
+                      max_price: 0
+                      change: 0
+                      volume: 0
+  /Api/Index/ticker:
+    get:
+      tags:
+        - Index
+      summary: ticker
+      description: All Market Stats in one
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx
+            Date:
+              schema:
+                type: string
+                example: Sat, 03 Nov 2018 07:45:39 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '503'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Set-Cookie:
+              schema:
+                type: string
+                example: PHPSESSID=aecpm9h1g628v61gltqqiilebb; path=/
+            Accept-Ranges:
+              schema:
+                type: string
+                example: none
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  market:
+                    - id: '7'
+                      name: Litecoin(LTC/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845c9fb46c2.png
+                      new_price: 525.618
+                      buy_price: 0
+                      sell_price: 292.01
+                      min_price: 408.81399999999996
+                      max_price: 350.412
+                      change: 0.01
+                      volume: 1.6
+                    - id: '8'
+                      name: BCH(BCC/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845cb49d7d8.png
+                      new_price: 1570.092
+                      buy_price: 500
+                      sell_price: 5233.64
+                      min_price: 4710.276000000001
+                      max_price: 3140.184
+                      change: -0.01
+                      volume: 1.6
+                    - id: '6'
+                      name: ETC(ETC/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845cab4ba05.png
+                      new_price: 144.38199999999998
+                      buy_price: 61.89
+                      sell_price: 41.524
+                      min_price: 61.85999999999999
+                      max_price: 41.252
+                      change: 0
+                      volume: 48
+                    - id: '5'
+                      name: ETH(ETH/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845aa8b444f.png
+                      new_price: 2145.9339999999997
+                      buy_price: 0
+                      sell_price: 3065.62
+                      min_price: 3065.62
+                      max_price: 2452.496
+                      change: 0.01
+                      volume: 0.11
+                    - id: '4'
+                      name: Bitcoin(BTC/USD)
+                      icon: http://advance.codono.com/Upload/coin/598458a23a26a.png
+                      new_price: 19288.81
+                      buy_price: 34718.4
+                      sell_price: 34719.858
+                      min_price: 15431.048000000003
+                      max_price: 30862.096000000005
+                      change: 0
+                      volume: 2
+                    - id: '13'
+                      name: Bitcoin(BTC/ETH)
+                      icon: http://advance.codono.com/Upload/coin/598458a23a26a.png
+                      new_price: 0
+                      buy_price: 0
+                      sell_price: 0
+                      min_price: 0
+                      max_price: 0
+                      change: 0
+                      volume: 0
+                    - id: '15'
+                      name: Litecoin(LTC/BTC)
+                      icon: http://advance.codono.com/Upload/coin/59845c9fb46c2.png
+                      new_price: 0
+                      buy_price: 0
+                      sell_price: 0
+                      min_price: 0
+                      max_price: 0
+                      change: 0
+                      volume: 0
+                    - id: '16'
+                      name: doge(DOGE/BTC)
+                      icon: http://advance.codono.com/Upload/coin/
+                      new_price: 0
+                      buy_price: 0
+                      sell_price: 0
+                      min_price: 0
+                      max_price: 0
+                      change: 0
+                      volume: 0
+  /Api/Index/singlemarketInfo/market/btc_usd:
+    get:
+      tags:
+        - Index
+      summary: singlemarketInfo
+      description: All Market Stats in one
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx
+            Date:
+              schema:
+                type: string
+                example: Sat, 03 Nov 2018 07:45:39 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '503'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Set-Cookie:
+              schema:
+                type: string
+                example: PHPSESSID=aecpm9h1g628v61gltqqiilebb; path=/
+            Accept-Ranges:
+              schema:
+                type: string
+                example: none
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  market:
+                    - id: '7'
+                      name: Litecoin(LTC/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845c9fb46c2.png
+                      new_price: 525.618
+                      buy_price: 0
+                      sell_price: 292.01
+                      min_price: 408.81399999999996
+                      max_price: 350.412
+                      change: 0.01
+                      volume: 1.6
+                    - id: '8'
+                      name: BCH(BCC/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845cb49d7d8.png
+                      new_price: 1570.092
+                      buy_price: 500
+                      sell_price: 5233.64
+                      min_price: 4710.276000000001
+                      max_price: 3140.184
+                      change: -0.01
+                      volume: 1.6
+                    - id: '6'
+                      name: ETC(ETC/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845cab4ba05.png
+                      new_price: 144.38199999999998
+                      buy_price: 61.89
+                      sell_price: 41.524
+                      min_price: 61.85999999999999
+                      max_price: 41.252
+                      change: 0
+                      volume: 48
+                    - id: '5'
+                      name: ETH(ETH/USD)
+                      icon: http://advance.codono.com/Upload/coin/59845aa8b444f.png
+                      new_price: 2145.9339999999997
+                      buy_price: 0
+                      sell_price: 3065.62
+                      min_price: 3065.62
+                      max_price: 2452.496
+                      change: 0.01
+                      volume: 0.11
+                    - id: '4'
+                      name: Bitcoin(BTC/USD)
+                      icon: http://advance.codono.com/Upload/coin/598458a23a26a.png
+                      new_price: 19288.81
+                      buy_price: 34718.4
+                      sell_price: 34719.858
+                      min_price: 15431.048000000003
+                      max_price: 30862.096000000005
+                      change: 0
+                      volume: 2
+                    - id: '13'
+                      name: Bitcoin(BTC/ETH)
+                      icon: http://advance.codono.com/Upload/coin/598458a23a26a.png
+                      new_price: 0
+                      buy_price: 0
+                      sell_price: 0
+                      min_price: 0
+                      max_price: 0
+                      change: 0
+                      volume: 0
+                    - id: '15'
+                      name: Litecoin(LTC/BTC)
+                      icon: http://advance.codono.com/Upload/coin/59845c9fb46c2.png
+                      new_price: 0
+                      buy_price: 0
+                      sell_price: 0
+                      min_price: 0
+                      max_price: 0
+                      change: 0
+                      volume: 0
+                    - id: '16'
+                      name: doge(DOGE/BTC)
+                      icon: http://advance.codono.com/Upload/coin/
+                      new_price: 0
+                      buy_price: 0
+                      sell_price: 0
+                      min_price: 0
+                      max_price: 0
+                      change: 0
+                      volume: 0
+  /Api/Index/up:
+    get:
+      tags:
+        - Index
+      summary: up
+      parameters:
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          example: '30'
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: 0922d72c312539b0a522ac572c283550
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Trade/getTradedata:
+    post:
+      tags:
+        - User
+      summary: getTradedata
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                marketid:
+                  type: integer
+                  description: enter marketid example 7,8
+                  example: '8'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '217'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:28:57 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  entrust: null
+                  depth:
+                    buy: ''
+                    sell:
+                      - - 2616.85
+                        - 10
+                      - - 2616.84
+                        - 10
+                      - - 2616.83
+                        - 10
+                      - - 2616.82
+                        - 10
+                      - - 2616.81
+                        - 1
+                  info:
+                    new_price: 2616.12
+                    buy_price: 2616.13
+                    sell_price: 2616.81
+                  user:
+                    login: 0
+  /Api/Trade/matchingTrade:
+    post:
+      tags:
+        - Trade
+      summary: matchingTrade
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                market:
+                  type: string
+                  description: btc_ltc
+                  example: btc_usd
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Trade/mywt:
+    post:
+      tags:
+        - Trade
+      summary: mywt
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Enter trade id
+                  example: '183'
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: 9a0fce26945b38afd05b42cfb2f3803c
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '30'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /User/changeFundPassword:
+    post:
+      tags:
+        - User
+      summary: changeFundPassword
+      description: |-
+        When there is no fund exising password,
+        Send oldpaypassword as empty or NEW
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                oldpaypassword:
+                  type: string
+                  description: Your exiting Password
+                  example: funding
+                newpaypassword:
+                  type: string
+                  description: New fund password
+                  example: xyz123
+                repaypassword:
+                  type: string
+                  description: Repeat Fund password
+                  example: xyz123
+      parameters:
+        - name: ID
+          in: header
+          schema:
+            type: string
+          example: '{{id}}'
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: '{{token}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /User/GetSet2FA:
+    get:
+      tags:
+        - User
+      summary: GetSet2FA
+      description: GetSet2FA
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '217'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:28:57 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  entrust: null
+                  depth:
+                    buy: ''
+                    sell:
+                      - - 2616.85
+                        - 10
+                      - - 2616.84
+                        - 10
+                      - - 2616.83
+                        - 10
+                      - - 2616.82
+                        - 10
+                      - - 2616.81
+                        - 1
+                  info:
+                    new_price: 2616.12
+                    buy_price: 2616.13
+                    sell_price: 2616.81
+                  user:
+                    login: 0
+    post:
+      tags:
+        - User
+      summary: GetSet2FA Post
+      description: GetSet2FA
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                ga:
+                  type: integer
+                  description: 2FA code Generated using Secret
+                  example: '938371'
+                type:
+                  type: string
+                  description: add/update/delete
+                  example: update
+                ga_transfer:
+                  type: integer
+                  description: >-
+                    1=2fa required for withdrawal, 0=2fa not required for
+                    withdrawal
+                  example: '1'
+                ga_login:
+                  type: integer
+                  description: 1=2fa  Required at login, 0 =2fa Not required at login
+                  example: '1'
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '217'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:28:57 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  entrust: null
+                  depth:
+                    buy: ''
+                    sell:
+                      - - 2616.85
+                        - 10
+                      - - 2616.84
+                        - 10
+                      - - 2616.83
+                        - 10
+                      - - 2616.82
+                        - 10
+                      - - 2616.81
+                        - 1
+                  info:
+                    new_price: 2616.12
+                    buy_price: 2616.13
+                    sell_price: 2616.81
+                  user:
+                    login: 0
+  /Api/User/userinfo:
+    get:
+      tags:
+        - User
+      summary: userinfo
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '2488'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:33:28 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  baseinfo:
+                    id: '30'
+                    username: '123456789'
+                    cellphone: '123456789'
+                    cellphonetime: '1521711858'
+                    password: 5f4dcc3b5aa765d61d8327deb882cf99
+                    tpwdsetting: '1'
+                    paypassword: 5f4dcc3b5aa765d61d8327deb882cf99
+                    invit_1: '0'
+                    invit_2: '0'
+                    invit_3: '0'
+                    truename: quickuser
+                    idcard: quickuser
+                    idcardauth: '1'
+                    idcardimg1: null
+                    idcardimg2: null
+                    idcardinfo: null
+                    logins: null
+                    ga: null
+                    addip: 127.0.0.1
+                    addr: Unassigned or intranet IP
+                    sort: null
+                    addtime: '1521712689'
+                    endtime: null
+                    status: '1'
+                    email: null
+                    alipay: null
+                    invit: TAPFZL
+                    token: 9a0fce26945b38afd05b42cfb2f3803c
+                    awardid: '9'
+                    awardstatus: '0'
+                    awardname: 1Yuan in cash
+                    awardnumall: '0'
+                    awardnumtoday: '0'
+                    awardtotaltoday: '0'
+                    awardtime: '0'
+                    regaward: '0'
+                    usertype: '0'
+                  coin:
+                    usd:
+                      zj: 13264509.47
+                      ky: 6142.24
+                      dj: 0
+                    coinList:
+                      - id: '5'
+                        name: eth
+                        ico: http://127.0.0.1/Upload/coin/59845aa8b444f.png
+                        title: ETH(ETH)
+                        xnb: 400
+                        xnbd: 50
+                        xnbz: 450
+                        jia: 1532.62
+                        zhehe: 689679
+                      - id: '6'
+                        name: etc
+                        ico: http://127.0.0.1/Upload/coin/59845cab4ba05.png
+                        title: ETC(ETC)
+                        xnb: 200
+                        xnbd: 0
+                        xnbz: 200
+                        jia: 103.13
+                        zhehe: 20626
+                      - id: '13'
+                        name: btc
+                        ico: http://127.0.0.1/Upload/coin/598458a23a26a.png
+                        title: Bitcoin(BTC)
+                        xnb: 37633.2
+                        xnbd: 0
+                        xnbz: 37633.2
+                        jia: 0
+                        zhehe: 0
+                      - id: '7'
+                        name: ltc
+                        ico: http://127.0.0.1/Upload/coin/59845c9fb46c2.png
+                        title: Litecoin(LTC)
+                        xnb: 123
+                        xnbd: 0
+                        xnbz: 123
+                        jia: 292.05
+                        zhehe: 35922.15
+                      - id: '8'
+                        name: bcc
+                        ico: http://127.0.0.1/Upload/coin/59845cb49d7d8.png
+                        title: BCH(BCC)
+                        xnb: 3434
+                        xnbd: 0
+                        xnbz: 3434
+                        jia: 2616.12
+                        zhehe: 8983756.08
+                      - id: 0
+                        name: ast
+                        ico: http://127.0.0.1/Upload/coin/5984689c5832f.png
+                        title: Oersted(AST)
+                        xnb: 3476384
+                        xnbd: 0
+                        xnbz: 3476384
+                        jia: 1
+                        zhehe: 3476384
+                      - id: 0
+                        name: mtc
+                        ico: http://127.0.0.1/Upload/coin/5984695b52ce1.png
+                        title: Mitt currency(MTC)
+                        xnb: 21000
+                        xnbd: 0
+                        xnbz: 21000
+                        jia: 1
+                        zhehe: 21000
+                      - id: 0
+                        name: eos
+                        ico: http://127.0.0.1/Upload/coin/5984699448d41.png
+                        title: EOS(EOS)
+                        xnb: 1000
+                        xnbd: 0
+                        xnbz: 1000
+                        jia: 1
+                        zhehe: 1000
+                      - id: 0
+                        name: ico
+                        ico: http://127.0.0.1/Upload/coin/59846a22e55ae.png
+                        title: ICC(ICO)
+                        xnb: 20000
+                        xnbd: 0
+                        xnbz: 20000
+                        jia: 1
+                        zhehe: 20000
+                      - id: 0
+                        name: powr
+                        ico: http://127.0.0.1/Upload/coin/5ab0f6dc6ddd0.jpg
+                        title: Power Ledger(POWR)
+                        xnb: 10000
+                        xnbd: 0
+                        xnbz: 10000
+                        jia: 1
+                        zhehe: 10000
+  /Api/User/profile:
+    get:
+      tags:
+        - User
+      summary: profile
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: a8e8227fec29f7b9b1436a12d02c2903
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '38'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '2488'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:33:28 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  baseinfo:
+                    id: '30'
+                    username: '123456789'
+                    cellphone: '123456789'
+                    cellphonetime: '1521711858'
+                    password: 5f4dcc3b5aa765d61d8327deb882cf99
+                    tpwdsetting: '1'
+                    paypassword: 5f4dcc3b5aa765d61d8327deb882cf99
+                    invit_1: '0'
+                    invit_2: '0'
+                    invit_3: '0'
+                    truename: quickuser
+                    idcard: quickuser
+                    idcardauth: '1'
+                    idcardimg1: null
+                    idcardimg2: null
+                    idcardinfo: null
+                    logins: null
+                    ga: null
+                    addip: 127.0.0.1
+                    addr: Unassigned or intranet IP
+                    sort: null
+                    addtime: '1521712689'
+                    endtime: null
+                    status: '1'
+                    email: null
+                    alipay: null
+                    invit: TAPFZL
+                    token: 9a0fce26945b38afd05b42cfb2f3803c
+                    awardid: '9'
+                    awardstatus: '0'
+                    awardname: 1Yuan in cash
+                    awardnumall: '0'
+                    awardnumtoday: '0'
+                    awardtotaltoday: '0'
+                    awardtime: '0'
+                    regaward: '0'
+                    usertype: '0'
+                  coin:
+                    usd:
+                      zj: 13264509.47
+                      ky: 6142.24
+                      dj: 0
+                    coinList:
+                      - id: '5'
+                        name: eth
+                        ico: http://127.0.0.1/Upload/coin/59845aa8b444f.png
+                        title: ETH(ETH)
+                        xnb: 400
+                        xnbd: 50
+                        xnbz: 450
+                        jia: 1532.62
+                        zhehe: 689679
+                      - id: '6'
+                        name: etc
+                        ico: http://127.0.0.1/Upload/coin/59845cab4ba05.png
+                        title: ETC(ETC)
+                        xnb: 200
+                        xnbd: 0
+                        xnbz: 200
+                        jia: 103.13
+                        zhehe: 20626
+                      - id: '13'
+                        name: btc
+                        ico: http://127.0.0.1/Upload/coin/598458a23a26a.png
+                        title: Bitcoin(BTC)
+                        xnb: 37633.2
+                        xnbd: 0
+                        xnbz: 37633.2
+                        jia: 0
+                        zhehe: 0
+                      - id: '7'
+                        name: ltc
+                        ico: http://127.0.0.1/Upload/coin/59845c9fb46c2.png
+                        title: Litecoin(LTC)
+                        xnb: 123
+                        xnbd: 0
+                        xnbz: 123
+                        jia: 292.05
+                        zhehe: 35922.15
+                      - id: '8'
+                        name: bcc
+                        ico: http://127.0.0.1/Upload/coin/59845cb49d7d8.png
+                        title: BCH(BCC)
+                        xnb: 3434
+                        xnbd: 0
+                        xnbz: 3434
+                        jia: 2616.12
+                        zhehe: 8983756.08
+                      - id: 0
+                        name: ast
+                        ico: http://127.0.0.1/Upload/coin/5984689c5832f.png
+                        title: Oersted(AST)
+                        xnb: 3476384
+                        xnbd: 0
+                        xnbz: 3476384
+                        jia: 1
+                        zhehe: 3476384
+                      - id: 0
+                        name: mtc
+                        ico: http://127.0.0.1/Upload/coin/5984695b52ce1.png
+                        title: Mitt currency(MTC)
+                        xnb: 21000
+                        xnbd: 0
+                        xnbz: 21000
+                        jia: 1
+                        zhehe: 21000
+                      - id: 0
+                        name: eos
+                        ico: http://127.0.0.1/Upload/coin/5984699448d41.png
+                        title: EOS(EOS)
+                        xnb: 1000
+                        xnbd: 0
+                        xnbz: 1000
+                        jia: 1
+                        zhehe: 1000
+                      - id: 0
+                        name: ico
+                        ico: http://127.0.0.1/Upload/coin/59846a22e55ae.png
+                        title: ICC(ICO)
+                        xnb: 20000
+                        xnbd: 0
+                        xnbz: 20000
+                        jia: 1
+                        zhehe: 20000
+                      - id: 0
+                        name: powr
+                        ico: http://127.0.0.1/Upload/coin/5ab0f6dc6ddd0.jpg
+                        title: Power Ledger(POWR)
+                        xnb: 10000
+                        xnbd: 0
+                        xnbz: 10000
+                        jia: 1
+                        zhehe: 10000
+  /Api/User/updatepass:
+    post:
+      tags:
+        - User
+      summary: updatepass
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                curpass: password
+                newpass: password1
+                repass: password1
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: 0922d72c312539b0a522ac572c283550
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '30'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '2488'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:33:28 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  baseinfo:
+                    id: '30'
+                    username: '123456789'
+                    cellphone: '123456789'
+                    cellphonetime: '1521711858'
+                    password: 5f4dcc3b5aa765d61d8327deb882cf99
+                    tpwdsetting: '1'
+                    paypassword: 5f4dcc3b5aa765d61d8327deb882cf99
+                    invit_1: '0'
+                    invit_2: '0'
+                    invit_3: '0'
+                    truename: quickuser
+                    idcard: quickuser
+                    idcardauth: '1'
+                    idcardimg1: null
+                    idcardimg2: null
+                    idcardinfo: null
+                    logins: null
+                    ga: null
+                    addip: 127.0.0.1
+                    addr: Unassigned or intranet IP
+                    sort: null
+                    addtime: '1521712689'
+                    endtime: null
+                    status: '1'
+                    email: null
+                    alipay: null
+                    invit: TAPFZL
+                    token: 9a0fce26945b38afd05b42cfb2f3803c
+                    awardid: '9'
+                    awardstatus: '0'
+                    awardname: 1Yuan in cash
+                    awardnumall: '0'
+                    awardnumtoday: '0'
+                    awardtotaltoday: '0'
+                    awardtime: '0'
+                    regaward: '0'
+                    usertype: '0'
+                  coin:
+                    usd:
+                      zj: 13264509.47
+                      ky: 6142.24
+                      dj: 0
+                    coinList:
+                      - id: '5'
+                        name: eth
+                        ico: http://127.0.0.1/Upload/coin/59845aa8b444f.png
+                        title: ETH(ETH)
+                        xnb: 400
+                        xnbd: 50
+                        xnbz: 450
+                        jia: 1532.62
+                        zhehe: 689679
+                      - id: '6'
+                        name: etc
+                        ico: http://127.0.0.1/Upload/coin/59845cab4ba05.png
+                        title: ETC(ETC)
+                        xnb: 200
+                        xnbd: 0
+                        xnbz: 200
+                        jia: 103.13
+                        zhehe: 20626
+                      - id: '13'
+                        name: btc
+                        ico: http://127.0.0.1/Upload/coin/598458a23a26a.png
+                        title: Bitcoin(BTC)
+                        xnb: 37633.2
+                        xnbd: 0
+                        xnbz: 37633.2
+                        jia: 0
+                        zhehe: 0
+                      - id: '7'
+                        name: ltc
+                        ico: http://127.0.0.1/Upload/coin/59845c9fb46c2.png
+                        title: Litecoin(LTC)
+                        xnb: 123
+                        xnbd: 0
+                        xnbz: 123
+                        jia: 292.05
+                        zhehe: 35922.15
+                      - id: '8'
+                        name: bcc
+                        ico: http://127.0.0.1/Upload/coin/59845cb49d7d8.png
+                        title: BCH(BCC)
+                        xnb: 3434
+                        xnbd: 0
+                        xnbz: 3434
+                        jia: 2616.12
+                        zhehe: 8983756.08
+                      - id: 0
+                        name: ast
+                        ico: http://127.0.0.1/Upload/coin/5984689c5832f.png
+                        title: Oersted(AST)
+                        xnb: 3476384
+                        xnbd: 0
+                        xnbz: 3476384
+                        jia: 1
+                        zhehe: 3476384
+                      - id: 0
+                        name: mtc
+                        ico: http://127.0.0.1/Upload/coin/5984695b52ce1.png
+                        title: Mitt currency(MTC)
+                        xnb: 21000
+                        xnbd: 0
+                        xnbz: 21000
+                        jia: 1
+                        zhehe: 21000
+                      - id: 0
+                        name: eos
+                        ico: http://127.0.0.1/Upload/coin/5984699448d41.png
+                        title: EOS(EOS)
+                        xnb: 1000
+                        xnbd: 0
+                        xnbz: 1000
+                        jia: 1
+                        zhehe: 1000
+                      - id: 0
+                        name: ico
+                        ico: http://127.0.0.1/Upload/coin/59846a22e55ae.png
+                        title: ICC(ICO)
+                        xnb: 20000
+                        xnbd: 0
+                        xnbz: 20000
+                        jia: 1
+                        zhehe: 20000
+                      - id: 0
+                        name: powr
+                        ico: http://127.0.0.1/Upload/coin/5ab0f6dc6ddd0.jpg
+                        title: Power Ledger(POWR)
+                        xnb: 10000
+                        xnbd: 0
+                        xnbz: 10000
+                        jia: 1
+                        zhehe: 10000
+  /Api/User/wallet/:
+    get:
+      tags:
+        - User
+      summary: wallet
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '2488'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:33:28 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  baseinfo:
+                    id: '30'
+                    username: '123456789'
+                    cellphone: '123456789'
+                    cellphonetime: '1521711858'
+                    password: 5f4dcc3b5aa765d61d8327deb882cf99
+                    tpwdsetting: '1'
+                    paypassword: 5f4dcc3b5aa765d61d8327deb882cf99
+                    invit_1: '0'
+                    invit_2: '0'
+                    invit_3: '0'
+                    truename: quickuser
+                    idcard: quickuser
+                    idcardauth: '1'
+                    idcardimg1: null
+                    idcardimg2: null
+                    idcardinfo: null
+                    logins: null
+                    ga: null
+                    addip: 127.0.0.1
+                    addr: Unassigned or intranet IP
+                    sort: null
+                    addtime: '1521712689'
+                    endtime: null
+                    status: '1'
+                    email: null
+                    alipay: null
+                    invit: TAPFZL
+                    token: 9a0fce26945b38afd05b42cfb2f3803c
+                    awardid: '9'
+                    awardstatus: '0'
+                    awardname: 1Yuan in cash
+                    awardnumall: '0'
+                    awardnumtoday: '0'
+                    awardtotaltoday: '0'
+                    awardtime: '0'
+                    regaward: '0'
+                    usertype: '0'
+                  coin:
+                    usd:
+                      zj: 13264509.47
+                      ky: 6142.24
+                      dj: 0
+                    coinList:
+                      - id: '5'
+                        name: eth
+                        ico: http://127.0.0.1/Upload/coin/59845aa8b444f.png
+                        title: ETH(ETH)
+                        xnb: 400
+                        xnbd: 50
+                        xnbz: 450
+                        jia: 1532.62
+                        zhehe: 689679
+                      - id: '6'
+                        name: etc
+                        ico: http://127.0.0.1/Upload/coin/59845cab4ba05.png
+                        title: ETC(ETC)
+                        xnb: 200
+                        xnbd: 0
+                        xnbz: 200
+                        jia: 103.13
+                        zhehe: 20626
+                      - id: '13'
+                        name: btc
+                        ico: http://127.0.0.1/Upload/coin/598458a23a26a.png
+                        title: Bitcoin(BTC)
+                        xnb: 37633.2
+                        xnbd: 0
+                        xnbz: 37633.2
+                        jia: 0
+                        zhehe: 0
+                      - id: '7'
+                        name: ltc
+                        ico: http://127.0.0.1/Upload/coin/59845c9fb46c2.png
+                        title: Litecoin(LTC)
+                        xnb: 123
+                        xnbd: 0
+                        xnbz: 123
+                        jia: 292.05
+                        zhehe: 35922.15
+                      - id: '8'
+                        name: bcc
+                        ico: http://127.0.0.1/Upload/coin/59845cb49d7d8.png
+                        title: BCH(BCC)
+                        xnb: 3434
+                        xnbd: 0
+                        xnbz: 3434
+                        jia: 2616.12
+                        zhehe: 8983756.08
+                      - id: 0
+                        name: ast
+                        ico: http://127.0.0.1/Upload/coin/5984689c5832f.png
+                        title: Oersted(AST)
+                        xnb: 3476384
+                        xnbd: 0
+                        xnbz: 3476384
+                        jia: 1
+                        zhehe: 3476384
+                      - id: 0
+                        name: mtc
+                        ico: http://127.0.0.1/Upload/coin/5984695b52ce1.png
+                        title: Mitt currency(MTC)
+                        xnb: 21000
+                        xnbd: 0
+                        xnbz: 21000
+                        jia: 1
+                        zhehe: 21000
+                      - id: 0
+                        name: eos
+                        ico: http://127.0.0.1/Upload/coin/5984699448d41.png
+                        title: EOS(EOS)
+                        xnb: 1000
+                        xnbd: 0
+                        xnbz: 1000
+                        jia: 1
+                        zhehe: 1000
+                      - id: 0
+                        name: ico
+                        ico: http://127.0.0.1/Upload/coin/59846a22e55ae.png
+                        title: ICC(ICO)
+                        xnb: 20000
+                        xnbd: 0
+                        xnbz: 20000
+                        jia: 1
+                        zhehe: 20000
+                      - id: 0
+                        name: powr
+                        ico: http://127.0.0.1/Upload/coin/5ab0f6dc6ddd0.jpg
+                        title: Power Ledger(POWR)
+                        xnb: 10000
+                        xnbd: 0
+                        xnbz: 10000
+                        jia: 1
+                        zhehe: 10000
+  /Api/User/FiatBalance:
+    get:
+      tags:
+        - User
+      summary: FiatBalance
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: 1a1f3578724db2f6f3e068136dee46b6
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '38'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '2488'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:33:28 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  baseinfo:
+                    id: '30'
+                    username: '123456789'
+                    cellphone: '123456789'
+                    cellphonetime: '1521711858'
+                    password: 5f4dcc3b5aa765d61d8327deb882cf99
+                    tpwdsetting: '1'
+                    paypassword: 5f4dcc3b5aa765d61d8327deb882cf99
+                    invit_1: '0'
+                    invit_2: '0'
+                    invit_3: '0'
+                    truename: quickuser
+                    idcard: quickuser
+                    idcardauth: '1'
+                    idcardimg1: null
+                    idcardimg2: null
+                    idcardinfo: null
+                    logins: null
+                    ga: null
+                    addip: 127.0.0.1
+                    addr: Unassigned or intranet IP
+                    sort: null
+                    addtime: '1521712689'
+                    endtime: null
+                    status: '1'
+                    email: null
+                    alipay: null
+                    invit: TAPFZL
+                    token: 9a0fce26945b38afd05b42cfb2f3803c
+                    awardid: '9'
+                    awardstatus: '0'
+                    awardname: 1Yuan in cash
+                    awardnumall: '0'
+                    awardnumtoday: '0'
+                    awardtotaltoday: '0'
+                    awardtime: '0'
+                    regaward: '0'
+                    usertype: '0'
+                  coin:
+                    usd:
+                      zj: 13264509.47
+                      ky: 6142.24
+                      dj: 0
+                    coinList:
+                      - id: '5'
+                        name: eth
+                        ico: http://127.0.0.1/Upload/coin/59845aa8b444f.png
+                        title: ETH(ETH)
+                        xnb: 400
+                        xnbd: 50
+                        xnbz: 450
+                        jia: 1532.62
+                        zhehe: 689679
+                      - id: '6'
+                        name: etc
+                        ico: http://127.0.0.1/Upload/coin/59845cab4ba05.png
+                        title: ETC(ETC)
+                        xnb: 200
+                        xnbd: 0
+                        xnbz: 200
+                        jia: 103.13
+                        zhehe: 20626
+                      - id: '13'
+                        name: btc
+                        ico: http://127.0.0.1/Upload/coin/598458a23a26a.png
+                        title: Bitcoin(BTC)
+                        xnb: 37633.2
+                        xnbd: 0
+                        xnbz: 37633.2
+                        jia: 0
+                        zhehe: 0
+                      - id: '7'
+                        name: ltc
+                        ico: http://127.0.0.1/Upload/coin/59845c9fb46c2.png
+                        title: Litecoin(LTC)
+                        xnb: 123
+                        xnbd: 0
+                        xnbz: 123
+                        jia: 292.05
+                        zhehe: 35922.15
+                      - id: '8'
+                        name: bcc
+                        ico: http://127.0.0.1/Upload/coin/59845cb49d7d8.png
+                        title: BCH(BCC)
+                        xnb: 3434
+                        xnbd: 0
+                        xnbz: 3434
+                        jia: 2616.12
+                        zhehe: 8983756.08
+                      - id: 0
+                        name: ast
+                        ico: http://127.0.0.1/Upload/coin/5984689c5832f.png
+                        title: Oersted(AST)
+                        xnb: 3476384
+                        xnbd: 0
+                        xnbz: 3476384
+                        jia: 1
+                        zhehe: 3476384
+                      - id: 0
+                        name: mtc
+                        ico: http://127.0.0.1/Upload/coin/5984695b52ce1.png
+                        title: Mitt currency(MTC)
+                        xnb: 21000
+                        xnbd: 0
+                        xnbz: 21000
+                        jia: 1
+                        zhehe: 21000
+                      - id: 0
+                        name: eos
+                        ico: http://127.0.0.1/Upload/coin/5984699448d41.png
+                        title: EOS(EOS)
+                        xnb: 1000
+                        xnbd: 0
+                        xnbz: 1000
+                        jia: 1
+                        zhehe: 1000
+                      - id: 0
+                        name: ico
+                        ico: http://127.0.0.1/Upload/coin/59846a22e55ae.png
+                        title: ICC(ICO)
+                        xnb: 20000
+                        xnbd: 0
+                        xnbz: 20000
+                        jia: 1
+                        zhehe: 20000
+                      - id: 0
+                        name: powr
+                        ico: http://127.0.0.1/Upload/coin/5ab0f6dc6ddd0.jpg
+                        title: Power Ledger(POWR)
+                        xnb: 10000
+                        xnbd: 0
+                        xnbz: 10000
+                        jia: 1
+                        zhehe: 10000
+  /Api/User/bank:
+    get:
+      tags:
+        - User
+      summary: bank
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: db71481613b62b96b1e56cd3f6ead6ec
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '30'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/User/mybank:
+    get:
+      tags:
+        - User
+      summary: mybank
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: db71481613b62b96b1e56cd3f6ead6ec
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '30'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/User/sendCellphone:
+    get:
+      tags:
+        - User
+      summary: sendCellphone
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: 0922d72c312539b0a522ac572c283550
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '30'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/User/mytx_log:
+    get:
+      tags:
+        - User
+      summary: mytx_log
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: beb3a8d46d1919149912e48378978450
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '38'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/User/mycz_log:
+    post:
+      tags:
+        - User
+      summary: mycz_log
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pid:
+                  type: integer
+                  description: pageid or record id after which records need to be fetched
+                  example: '10'
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: 9a0fce26945b38afd05b42cfb2f3803c
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '30'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/User/auth_check:
+    get:
+      tags:
+        - User
+      summary: auth_check
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: 9a0fce26945b38afd05b42cfb2f3803c
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '30'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Otc/index:
+    get:
+      tags:
+        - Otc
+      summary: index
+      description: "Show OTP Plans\r\nReturns all infomation"
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '217'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:28:57 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  entrust: null
+                  depth:
+                    buy: ''
+                    sell:
+                      - - 2616.85
+                        - 10
+                      - - 2616.84
+                        - 10
+                      - - 2616.83
+                        - 10
+                      - - 2616.82
+                        - 10
+                      - - 2616.81
+                        - 1
+                  info:
+                    new_price: 2616.12
+                    buy_price: 2616.13
+                    sell_price: 2616.81
+                  user:
+                    login: 0
+  /Otc/getquote:
+    post:
+      tags:
+        - Otc
+      summary: getquote
+      description: GetSet2FA
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                trade_coin:
+                  type: string
+                  description: |
+                    coin you need to buy sell [1st option]
+                  example: eth
+                base_coin:
+                  type: string
+                  description: coin you need to use [2nd option]
+                  example: usdt
+                input1:
+                  type: integer
+                  description: trade coin you need to buy sell
+                  example: '1'
+                input2:
+                  type: string
+                  description: >-
+                    base coin you need to spend/get [choose either input 1 or
+                    input2
+                tradetype:
+                  type: string
+                  description: buy/sell
+                  example: buy
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '217'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:28:57 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  entrust: null
+                  depth:
+                    buy: ''
+                    sell:
+                      - - 2616.85
+                        - 10
+                      - - 2616.84
+                        - 10
+                      - - 2616.83
+                        - 10
+                      - - 2616.82
+                        - 10
+                      - - 2616.81
+                        - 1
+                  info:
+                    new_price: 2616.12
+                    buy_price: 2616.13
+                    sell_price: 2616.81
+                  user:
+                    login: 0
+  /Api/Otc/approvequote:
+    post:
+      tags:
+        - Otc
+      summary: approvequote
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                qid:
+                  type: integer
+                  description: quote id [int]
+                  example: '1'
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '2488'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:33:28 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  baseinfo:
+                    id: '30'
+                    username: '123456789'
+                    cellphone: '123456789'
+                    cellphonetime: '1521711858'
+                    password: 5f4dcc3b5aa765d61d8327deb882cf99
+                    tpwdsetting: '1'
+                    paypassword: 5f4dcc3b5aa765d61d8327deb882cf99
+                    invit_1: '0'
+                    invit_2: '0'
+                    invit_3: '0'
+                    truename: quickuser
+                    idcard: quickuser
+                    idcardauth: '1'
+                    idcardimg1: null
+                    idcardimg2: null
+                    idcardinfo: null
+                    logins: null
+                    ga: null
+                    addip: 127.0.0.1
+                    addr: Unassigned or intranet IP
+                    sort: null
+                    addtime: '1521712689'
+                    endtime: null
+                    status: '1'
+                    email: null
+                    alipay: null
+                    invit: TAPFZL
+                    token: 9a0fce26945b38afd05b42cfb2f3803c
+                    awardid: '9'
+                    awardstatus: '0'
+                    awardname: 1Yuan in cash
+                    awardnumall: '0'
+                    awardnumtoday: '0'
+                    awardtotaltoday: '0'
+                    awardtime: '0'
+                    regaward: '0'
+                    usertype: '0'
+                  coin:
+                    usd:
+                      zj: 13264509.47
+                      ky: 6142.24
+                      dj: 0
+                    coinList:
+                      - id: '5'
+                        name: eth
+                        ico: http://127.0.0.1/Upload/coin/59845aa8b444f.png
+                        title: ETH(ETH)
+                        xnb: 400
+                        xnbd: 50
+                        xnbz: 450
+                        jia: 1532.62
+                        zhehe: 689679
+                      - id: '6'
+                        name: etc
+                        ico: http://127.0.0.1/Upload/coin/59845cab4ba05.png
+                        title: ETC(ETC)
+                        xnb: 200
+                        xnbd: 0
+                        xnbz: 200
+                        jia: 103.13
+                        zhehe: 20626
+                      - id: '13'
+                        name: btc
+                        ico: http://127.0.0.1/Upload/coin/598458a23a26a.png
+                        title: Bitcoin(BTC)
+                        xnb: 37633.2
+                        xnbd: 0
+                        xnbz: 37633.2
+                        jia: 0
+                        zhehe: 0
+                      - id: '7'
+                        name: ltc
+                        ico: http://127.0.0.1/Upload/coin/59845c9fb46c2.png
+                        title: Litecoin(LTC)
+                        xnb: 123
+                        xnbd: 0
+                        xnbz: 123
+                        jia: 292.05
+                        zhehe: 35922.15
+                      - id: '8'
+                        name: bcc
+                        ico: http://127.0.0.1/Upload/coin/59845cb49d7d8.png
+                        title: BCH(BCC)
+                        xnb: 3434
+                        xnbd: 0
+                        xnbz: 3434
+                        jia: 2616.12
+                        zhehe: 8983756.08
+                      - id: 0
+                        name: ast
+                        ico: http://127.0.0.1/Upload/coin/5984689c5832f.png
+                        title: Oersted(AST)
+                        xnb: 3476384
+                        xnbd: 0
+                        xnbz: 3476384
+                        jia: 1
+                        zhehe: 3476384
+                      - id: 0
+                        name: mtc
+                        ico: http://127.0.0.1/Upload/coin/5984695b52ce1.png
+                        title: Mitt currency(MTC)
+                        xnb: 21000
+                        xnbd: 0
+                        xnbz: 21000
+                        jia: 1
+                        zhehe: 21000
+                      - id: 0
+                        name: eos
+                        ico: http://127.0.0.1/Upload/coin/5984699448d41.png
+                        title: EOS(EOS)
+                        xnb: 1000
+                        xnbd: 0
+                        xnbz: 1000
+                        jia: 1
+                        zhehe: 1000
+                      - id: 0
+                        name: ico
+                        ico: http://127.0.0.1/Upload/coin/59846a22e55ae.png
+                        title: ICC(ICO)
+                        xnb: 20000
+                        xnbd: 0
+                        xnbz: 20000
+                        jia: 1
+                        zhehe: 20000
+                      - id: 0
+                        name: powr
+                        ico: http://127.0.0.1/Upload/coin/5ab0f6dc6ddd0.jpg
+                        title: Power Ledger(POWR)
+                        xnb: 10000
+                        xnbd: 0
+                        xnbz: 10000
+                        jia: 1
+                        zhehe: 10000
+  /Api/Otc/log:
+    post:
+      tags:
+        - Otc
+      summary: log
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: id for log view [int]
+                  example: '1'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '217'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:28:57 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  entrust: null
+                  depth:
+                    buy: ''
+                    sell:
+                      - - 2616.85
+                        - 10
+                      - - 2616.84
+                        - 10
+                      - - 2616.83
+                        - 10
+                      - - 2616.82
+                        - 10
+                      - - 2616.81
+                        - 1
+                  info:
+                    new_price: 2616.12
+                    buy_price: 2616.13
+                    sell_price: 2616.81
+                  user:
+                    login: 0
+  /Api/Otc/records:
+    post:
+      tags:
+        - Otc
+      summary: records
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: a8e8227fec29f7b9b1436a12d02c2903
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '38'
+        - name: ls
+          in: query
+          schema:
+            type: integer
+          description: optional last record [int]
+          example: '15'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Length:
+              schema:
+                type: integer
+                example: '2488'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Date:
+              schema:
+                type: string
+                example: Sat, 24 Mar 2018 19:33:28 GMT
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=100
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Server:
+              schema:
+                type: number
+                example: Apache/2.4.27 (Win32) PHP/5.6.31
+            X-Powered-By:
+              schema:
+                type: number
+                example: PHP/5.6.31
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  baseinfo:
+                    id: '30'
+                    username: '123456789'
+                    cellphone: '123456789'
+                    cellphonetime: '1521711858'
+                    password: 5f4dcc3b5aa765d61d8327deb882cf99
+                    tpwdsetting: '1'
+                    paypassword: 5f4dcc3b5aa765d61d8327deb882cf99
+                    invit_1: '0'
+                    invit_2: '0'
+                    invit_3: '0'
+                    truename: quickuser
+                    idcard: quickuser
+                    idcardauth: '1'
+                    idcardimg1: null
+                    idcardimg2: null
+                    idcardinfo: null
+                    logins: null
+                    ga: null
+                    addip: 127.0.0.1
+                    addr: Unassigned or intranet IP
+                    sort: null
+                    addtime: '1521712689'
+                    endtime: null
+                    status: '1'
+                    email: null
+                    alipay: null
+                    invit: TAPFZL
+                    token: 9a0fce26945b38afd05b42cfb2f3803c
+                    awardid: '9'
+                    awardstatus: '0'
+                    awardname: 1Yuan in cash
+                    awardnumall: '0'
+                    awardnumtoday: '0'
+                    awardtotaltoday: '0'
+                    awardtime: '0'
+                    regaward: '0'
+                    usertype: '0'
+                  coin:
+                    usd:
+                      zj: 13264509.47
+                      ky: 6142.24
+                      dj: 0
+                    coinList:
+                      - id: '5'
+                        name: eth
+                        ico: http://127.0.0.1/Upload/coin/59845aa8b444f.png
+                        title: ETH(ETH)
+                        xnb: 400
+                        xnbd: 50
+                        xnbz: 450
+                        jia: 1532.62
+                        zhehe: 689679
+                      - id: '6'
+                        name: etc
+                        ico: http://127.0.0.1/Upload/coin/59845cab4ba05.png
+                        title: ETC(ETC)
+                        xnb: 200
+                        xnbd: 0
+                        xnbz: 200
+                        jia: 103.13
+                        zhehe: 20626
+                      - id: '13'
+                        name: btc
+                        ico: http://127.0.0.1/Upload/coin/598458a23a26a.png
+                        title: Bitcoin(BTC)
+                        xnb: 37633.2
+                        xnbd: 0
+                        xnbz: 37633.2
+                        jia: 0
+                        zhehe: 0
+                      - id: '7'
+                        name: ltc
+                        ico: http://127.0.0.1/Upload/coin/59845c9fb46c2.png
+                        title: Litecoin(LTC)
+                        xnb: 123
+                        xnbd: 0
+                        xnbz: 123
+                        jia: 292.05
+                        zhehe: 35922.15
+                      - id: '8'
+                        name: bcc
+                        ico: http://127.0.0.1/Upload/coin/59845cb49d7d8.png
+                        title: BCH(BCC)
+                        xnb: 3434
+                        xnbd: 0
+                        xnbz: 3434
+                        jia: 2616.12
+                        zhehe: 8983756.08
+                      - id: 0
+                        name: ast
+                        ico: http://127.0.0.1/Upload/coin/5984689c5832f.png
+                        title: Oersted(AST)
+                        xnb: 3476384
+                        xnbd: 0
+                        xnbz: 3476384
+                        jia: 1
+                        zhehe: 3476384
+                      - id: 0
+                        name: mtc
+                        ico: http://127.0.0.1/Upload/coin/5984695b52ce1.png
+                        title: Mitt currency(MTC)
+                        xnb: 21000
+                        xnbd: 0
+                        xnbz: 21000
+                        jia: 1
+                        zhehe: 21000
+                      - id: 0
+                        name: eos
+                        ico: http://127.0.0.1/Upload/coin/5984699448d41.png
+                        title: EOS(EOS)
+                        xnb: 1000
+                        xnbd: 0
+                        xnbz: 1000
+                        jia: 1
+                        zhehe: 1000
+                      - id: 0
+                        name: ico
+                        ico: http://127.0.0.1/Upload/coin/59846a22e55ae.png
+                        title: ICC(ICO)
+                        xnb: 20000
+                        xnbd: 0
+                        xnbz: 20000
+                        jia: 1
+                        zhehe: 20000
+                      - id: 0
+                        name: powr
+                        ico: http://127.0.0.1/Upload/coin/5ab0f6dc6ddd0.jpg
+                        title: Power Ledger(POWR)
+                        xnb: 10000
+                        xnbd: 0
+                        xnbz: 10000
+                        jia: 1
+                        zhehe: 10000
+  /Api/Crypto/MyWithdrawals:
+    get:
+      tags:
+        - Fiat
+      summary: '{{siteurl}}/Api/Crypto/MyWithdrawals'
+      description: MyFiat
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 May 2020 04:46:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  origin, x-requested-with,
+                  content-type,id,token,ID,TOKEN,XMLHttpRequest
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: PUT, GET, POST, DELETE, OPTIONS
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  - id: '636'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: d98fc845d28b1bff80b165c9009f1f49
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567078200'
+                    endtime: null
+                    status: '1'
+                  - id: '635'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 1acc85f0401a2c6d591a651715912cd4
+                    shifted_to_main: '0'
+                    num: '0.01010000'
+                    mum: '0.01009899'
+                    fee: '0.00000101'
+                    sort: null
+                    addtime: '1567078033'
+                    endtime: null
+                    status: '1'
+                  - id: '634'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 8efe997ee60aad7497ff15b35530caa6
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567077824'
+                    endtime: null
+                    status: '1'
+  /Api/Crypto/depositaddress/coin/tbtc:
+    get:
+      tags:
+        - Crypto
+      summary: '{{siteurl}}/Api/Crypto/depositaddress'
+      description: MyWithdrawals
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: 5649c7f17db8343a5159473f548f4594
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '39'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Crypto/coinbalance/coin/eth:
+    get:
+      tags:
+        - Crypto
+      summary: '{{siteurl}}/Api/Crypto/coinbalance'
+      description: MyWithdrawals
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: 5649c7f17db8343a5159473f548f4594
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '39'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Crypto/doWithdraw:
+    post:
+      tags:
+        - Crypto
+      summary: '{{siteurl}}/Api/Crypto/doWithdraw'
+      description: MyWithdrawals
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                coin: tbtc
+                num: '0.001'
+                addr: '1123423423423525353453456346534645645745746747475'
+                paypassword: funding
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: 5649c7f17db8343a5159473f548f4594
+        - name: ID
+          in: header
+          schema:
+            type: integer
+          description: Set id from login api
+          example: '39'
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/x-www-form-urlencoded
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Crypto/MyDeposits/coin/btc:
+    get:
+      tags:
+        - Crypto
+      summary: '{{siteurl}}/Api/Crypto/MyDeposits'
+      description: MyWithdrawals
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 May 2020 04:46:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  origin, x-requested-with,
+                  content-type,id,token,ID,TOKEN,XMLHttpRequest
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: PUT, GET, POST, DELETE, OPTIONS
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  - id: '636'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: d98fc845d28b1bff80b165c9009f1f49
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567078200'
+                    endtime: null
+                    status: '1'
+                  - id: '635'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 1acc85f0401a2c6d591a651715912cd4
+                    shifted_to_main: '0'
+                    num: '0.01010000'
+                    mum: '0.01009899'
+                    fee: '0.00000101'
+                    sort: null
+                    addtime: '1567078033'
+                    endtime: null
+                    status: '1'
+                  - id: '634'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 8efe997ee60aad7497ff15b35530caa6
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567077824'
+                    endtime: null
+                    status: '1'
+  /Api/External/pairs/:
+    get:
+      tags:
+        - CoinGecko Submission Apis
+      summary: pairs
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/External/tickers/:
+    get:
+      tags:
+        - CoinGecko Submission Apis
+      summary: tickers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/External/orderbook:
+    get:
+      tags:
+        - CoinGecko Submission Apis
+      summary: orderbook
+      parameters:
+        - name: ticker_id
+          in: query
+          schema:
+            type: string
+          description: market name
+          example: BTC_ETH
+        - name: depth
+          in: query
+          schema:
+            type: integer
+          description: max 100
+          example: '100'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/External/historical_trades:
+    get:
+      tags:
+        - CoinGecko Submission Apis
+      summary: historical_trades
+      parameters:
+        - name: ticker_id
+          in: query
+          schema:
+            type: string
+          description: required
+          example: BTC_USD
+        - name: depth
+          in: query
+          schema:
+            type: integer
+          description: optional
+          example: '100'
+        - name: type
+          in: query
+          schema:
+            type: string
+          description: 'required:buy or sell '
+          example: buy
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Crypto/fiatDeposit/coinname/usd:
+    get:
+      tags:
+        - Fiat
+      summary: '{{siteurl}}/Api/Crypto/fiatDeposit'
+      description: MyFiat
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 May 2020 04:46:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  origin, x-requested-with,
+                  content-type,id,token,ID,TOKEN,XMLHttpRequest
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: PUT, GET, POST, DELETE, OPTIONS
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  - id: '636'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: d98fc845d28b1bff80b165c9009f1f49
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567078200'
+                    endtime: null
+                    status: '1'
+                  - id: '635'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 1acc85f0401a2c6d591a651715912cd4
+                    shifted_to_main: '0'
+                    num: '0.01010000'
+                    mum: '0.01009899'
+                    fee: '0.00000101'
+                    sort: null
+                    addtime: '1567078033'
+                    endtime: null
+                    status: '1'
+                  - id: '634'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 8efe997ee60aad7497ff15b35530caa6
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567077824'
+                    endtime: null
+                    status: '1'
+  /Api/Crypto/fiatDepositHistory/coinname/usd:
+    get:
+      tags:
+        - Fiat
+      summary: '{{siteurl}}/Api/Crypto/fiatDepositHistory'
+      description: MyFiat
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{TOKEN}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{ID}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 May 2020 04:46:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  origin, x-requested-with,
+                  content-type,id,token,ID,TOKEN,XMLHttpRequest
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: PUT, GET, POST, DELETE, OPTIONS
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  - id: '636'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: d98fc845d28b1bff80b165c9009f1f49
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567078200'
+                    endtime: null
+                    status: '1'
+                  - id: '635'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 1acc85f0401a2c6d591a651715912cd4
+                    shifted_to_main: '0'
+                    num: '0.01010000'
+                    mum: '0.01009899'
+                    fee: '0.00000101'
+                    sort: null
+                    addtime: '1567078033'
+                    endtime: null
+                    status: '1'
+                  - id: '634'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 8efe997ee60aad7497ff15b35530caa6
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567077824'
+                    endtime: null
+                    status: '1'
+  /Api/Crypto/fiatoutlog/coinname/usd:
+    get:
+      tags:
+        - Fiat
+      summary: '{{siteurl}}/Api/Crypto/fiatoutlog'
+      description: MyFiat
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 May 2020 04:46:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  origin, x-requested-with,
+                  content-type,id,token,ID,TOKEN,XMLHttpRequest
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: PUT, GET, POST, DELETE, OPTIONS
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  - id: '636'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: d98fc845d28b1bff80b165c9009f1f49
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567078200'
+                    endtime: null
+                    status: '1'
+                  - id: '635'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 1acc85f0401a2c6d591a651715912cd4
+                    shifted_to_main: '0'
+                    num: '0.01010000'
+                    mum: '0.01009899'
+                    fee: '0.00000101'
+                    sort: null
+                    addtime: '1567078033'
+                    endtime: null
+                    status: '1'
+                  - id: '634'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 8efe997ee60aad7497ff15b35530caa6
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567077824'
+                    endtime: null
+                    status: '1'
+  /Api/Crypto/markAsPaid/id/28:
+    get:
+      tags:
+        - Fiat
+      summary: '{{siteurl}}/Api/Crypto/markAsPaid'
+      description: MyFiat
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 May 2020 04:46:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  origin, x-requested-with,
+                  content-type,id,token,ID,TOKEN,XMLHttpRequest
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: PUT, GET, POST, DELETE, OPTIONS
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  - id: '636'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: d98fc845d28b1bff80b165c9009f1f49
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567078200'
+                    endtime: null
+                    status: '1'
+                  - id: '635'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 1acc85f0401a2c6d591a651715912cd4
+                    shifted_to_main: '0'
+                    num: '0.01010000'
+                    mum: '0.01009899'
+                    fee: '0.00000101'
+                    sort: null
+                    addtime: '1567078033'
+                    endtime: null
+                    status: '1'
+                  - id: '634'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 8efe997ee60aad7497ff15b35530caa6
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567077824'
+                    endtime: null
+                    status: '1'
+  /Api/Crypto/cancelFiatOut/id/191:
+    get:
+      tags:
+        - Fiat
+      summary: '{{siteurl}}/Api/Crypto/cancelFiatOut'
+      description: MyFiat
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 May 2020 04:46:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  origin, x-requested-with,
+                  content-type,id,token,ID,TOKEN,XMLHttpRequest
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: PUT, GET, POST, DELETE, OPTIONS
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  - id: '636'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: d98fc845d28b1bff80b165c9009f1f49
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567078200'
+                    endtime: null
+                    status: '1'
+                  - id: '635'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 1acc85f0401a2c6d591a651715912cd4
+                    shifted_to_main: '0'
+                    num: '0.01010000'
+                    mum: '0.01009899'
+                    fee: '0.00000101'
+                    sort: null
+                    addtime: '1567078033'
+                    endtime: null
+                    status: '1'
+                  - id: '634'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 8efe997ee60aad7497ff15b35530caa6
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567077824'
+                    endtime: null
+                    status: '1'
+  /Api/Crypto/viewFiatOrder/id/28:
+    get:
+      tags:
+        - Fiat
+      summary: '{{siteurl}}/Api/Crypto/viewFiatOrder'
+      description: MyFiat
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 May 2020 04:46:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  origin, x-requested-with,
+                  content-type,id,token,ID,TOKEN,XMLHttpRequest
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: PUT, GET, POST, DELETE, OPTIONS
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  - id: '636'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: d98fc845d28b1bff80b165c9009f1f49
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567078200'
+                    endtime: null
+                    status: '1'
+                  - id: '635'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 1acc85f0401a2c6d591a651715912cd4
+                    shifted_to_main: '0'
+                    num: '0.01010000'
+                    mum: '0.01009899'
+                    fee: '0.00000101'
+                    sort: null
+                    addtime: '1567078033'
+                    endtime: null
+                    status: '1'
+                  - id: '634'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 8efe997ee60aad7497ff15b35530caa6
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567077824'
+                    endtime: null
+                    status: '1'
+  /Api/Crypto/doFiatWithdrawal:
+    get:
+      tags:
+        - Fiat
+      summary: '{{siteurl}}/Api/Crypto/doFiatWithdrawal'
+      description: MyFiat
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: Set token from login api
+          example: '{{token}}'
+        - name: ID
+          in: header
+          schema:
+            type: string
+          description: Set id from login api
+          example: '{{id}}'
+        - name: num
+          in: query
+          schema:
+            type: integer
+          example: '6400'
+        - name: paypassword
+          in: query
+          schema:
+            type: string
+          example: funding
+        - name: type
+          in: query
+          schema:
+            type: integer
+          example: '13'
+        - name: coinname
+          in: query
+          schema:
+            type: string
+          example: usd
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 May 2020 04:46:37 GMT
+            Server:
+              schema:
+                type: string
+                example: Apache
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: PleskLin
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: private, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: >-
+                  origin, x-requested-with,
+                  content-type,id,token,ID,TOKEN,XMLHttpRequest
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: PUT, GET, POST, DELETE, OPTIONS
+            Vary:
+              schema:
+                type: string
+                example: Accept-Encoding
+            Content-Encoding:
+              schema:
+                type: string
+                example: gzip
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5, max=99
+            Connection:
+              schema:
+                type: string
+                example: Keep-Alive
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: 1
+                data:
+                  - id: '636'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: d98fc845d28b1bff80b165c9009f1f49
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567078200'
+                    endtime: null
+                    status: '1'
+                  - id: '635'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 1acc85f0401a2c6d591a651715912cd4
+                    shifted_to_main: '0'
+                    num: '0.01010000'
+                    mum: '0.01009899'
+                    fee: '0.00000101'
+                    sort: null
+                    addtime: '1567078033'
+                    endtime: null
+                    status: '1'
+                  - id: '634'
+                    userid: '38'
+                    username: shree@codono.com
+                    coinname: btc
+                    type: '0'
+                    txid: 8efe997ee60aad7497ff15b35530caa6
+                    shifted_to_main: '0'
+                    num: '0.01000000'
+                    mum: '0.00999900'
+                    fee: '0.00000100'
+                    sort: null
+                    addtime: '1567077824'
+                    endtime: null
+                    status: '1'
+  /Api/Internal/makeUpdate:
+    post:
+      tags:
+        - Internal
+      summary: makeUpdate
+      description: Deposit or withdraw from User account
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                member_id:
+                  type: integer
+                  description: |
+                    mapping userid
+                  example: '77'
+                wallet_item_id:
+                  type: integer
+                  description: coin_id
+                  example: '38'
+                coin_amount:
+                  type: integer
+                  description: amount
+                  example: '22'
+                Transaction_type:
+                  type: string
+                  description: |
+                    deposit/withdrawal
+                  example: deposit
+                "TXID\n":
+                  type: integer
+                  description: Transaction id from other system
+                  example: '3287574858738478'
+                "TXID_datetime\n":
+                  type: integer
+                  description: timestamp else it will use unix timestamp
+                  example: '1617897112'
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: In simple auth pass secret , in advance pass generated token
+          example: 5f2b5cdbe5194f10b3241568fe4e2b24
+        - name: APIKEY
+          in: header
+          schema:
+            type: string
+          example: bf55fcff5d1cbeebf5f00e08e23357fb
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Internal/tradelog:
+    post:
+      tags:
+        - Internal
+      summary: tradelog
+      description: Receive Trade logs
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                MY_ID:
+                  type: integer
+                  description: For own record
+                  example: '22'
+                CODONO_TXID:
+                  type: integer
+                  description: id for trade_log
+                  example: '10'
+                Datetime:
+                  type: integer
+                  description: 'timestamp '
+                  example: '1617897112'
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: In simple auth pass secret , in advance pass generated token
+          example: 5f2b5cdbe5194f10b3241568fe4e2b24
+        - name: APIKEY
+          in: header
+          schema:
+            type: string
+          example: bf55fcff5d1cbeebf5f00e08e23357fb
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Internal/simulateTrade:
+    post:
+      tags:
+        - Internal
+      summary: simulateTrade
+      description: Create Trade orders [First buy then sell or viceversa]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                orderid:
+                  type: integer
+                  description: |
+                    External orderid
+                  example: '22'
+                market:
+                  type: string
+                  description: market name on exchange
+                  example: btc_usdt
+                num:
+                  type: number
+                  description: quantity
+                  example: '0.021'
+                price:
+                  type: integer
+                  description: price
+                  example: '53250'
+                type:
+                  type: integer
+                  description: buy=1, sell=2
+                  example: '2'
+                ordertime:
+                  type: integer
+                  description: external timestamp
+                  example: '1618481888'
+                delay:
+                  type: integer
+                  description: mili secs [10^6]
+                  example: '2000000'
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: In simple auth pass secret , in advance pass generated token
+          example: 5f2b5cdbe5194f10b3241568fe4e2b24
+        - name: APIKEY
+          in: header
+          schema:
+            type: string
+          example: bf55fcff5d1cbeebf5f00e08e23357fb
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Internal/multipleOrders:
+    post:
+      tags:
+        - Internal
+      summary: multipleOrders
+      description: >-
+        Method when called Creates Multiple orders, and if there are pending
+        orders and amount isnt sufficient then it cancels also
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                market:
+                  type: string
+                  description: system market pair
+                  example: btc_usdt
+                type:
+                  type: integer
+                  description: buy=1, sell=2
+                  example: '1'
+                Datetime:
+                  type: integer
+                  description: external timestamp
+                  example: '1618481888'
+                orders_json:
+                  type: number
+                  description: '[["price,"qty],["price,"qty],["price,"qty]]'
+                  example: >-
+                    [["50678.04849132","0.2"],["50700.04849132","0.21"],["51678.04849132","0.1"],["50678.04849132","0.9"]]
+                TXID:
+                  type: integer
+                  description: externalid
+                  example: '123456'
+                uid:
+                  type: integer
+                  example: '38'
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: In simple auth pass secret , in advance pass generated token
+          example: 5f2b5cdbe5194f10b3241568fe4e2b24
+        - name: APIKEY
+          in: header
+          schema:
+            type: string
+          example: bf55fcff5d1cbeebf5f00e08e23357fb
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/Internal/user:
+    post:
+      tags:
+        - Internal
+      summary: user
+      description: Deposit or withdraw from User account
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: userid to update or add
+                  example: '110'
+                username:
+                  type: string
+                  description: username
+                  example: blackhawk
+                email:
+                  type: string
+                  description: add only
+                  example: someone@black.hawk
+                idcardauth:
+                  type: integer
+                  description: update or add
+                  example: '0'
+                "last_update\n":
+                  type: integer
+                  description: add/update
+                  example: '1617897114'
+                password:
+                  type: string
+                  description: password [md5]
+                  example: 5f4dcc3b5aa765d61d8327deb882cf99
+                paypassword:
+                  type: string
+                  description: paypassword [md5]
+                  example: 5f4dcc3b5aa765d61d8327deb882cf99
+                truename:
+                  type: string
+                  description: full name
+                  example: steve jobs
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          description: In simple auth pass secret , in advance pass generated token
+          example: 5f2b5cdbe5194f10b3241568fe4e2b24
+        - name: APIKEY
+          in: header
+          schema:
+            type: string
+          example: bf55fcff5d1cbeebf5f00e08e23357fb
+      responses:
+        '200':
+          description: OK
+          headers:
+            Host:
+              schema:
+                type: string
+                example: localhost:1006
+            Date:
+              schema:
+                type: string
+                example: Mon, 12 Apr 2021 18:54:03 GMT
+            Connection:
+              schema:
+                type: string
+                example: close
+            X-Xdebug-Profile-Filename:
+              schema:
+                type: number
+                example: c:/dev/tmp\cachegrind.out.1618253643.21160
+            Content-Type:
+              schema:
+                type: string
+                example: text/html;charset=utf-8
+            X-Content-Type-Options:
+              schema:
+                type: string
+                example: nosniff
+            X-Powered-By:
+              schema:
+                type: string
+                example: codono.com
+            Expires:
+              schema:
+                type: string
+                example: Thu, 19 Nov 1981 08:52:00 GMT
+            Cache-Control:
+              schema:
+                type: string
+                example: no-store, no-cache, must-revalidate
+            Pragma:
+              schema:
+                type: string
+                example: no-cache
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: token,Origin, X-Requested-With, Content-Type, Accept,ID,TOKEN
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: POST,GET
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                example-0:
+                  summary: user add
+                  value: >-
+                    {"status":1,"action":"add","last_update":"1617897112","token":"c4dd6bc4362fdd9ae8de188e6fc7318f","data":{"user_id":"380","username":"blackhawk","email":"someone@black.hawk","idcardauth":"1","last_update":"1617897112","password":"5f4dcc3b5aa765d61d8327deb882cf99","truename":"steve
+                    jobs"}}
+                example-1:
+                  summary: user update
+                  value: >-
+                    {"status":1,"action":"update","last_update":"1617897114","token":"bce5ae8bd15be0857485ddb5f065f214","data":{"username":"blackhawk","email":"someone@black.hawk","idcardauth":"0","password":"5f4dcc3b5aa765d61d8327deb882cf99","paypassword":"5f4dcc3b5aa765d61d8327deb882cf99","truename":"steve
+                    jobs","endtime":"1617897114"},"msg":"Record updated"}
+  /Api/Internal/index:
+    post:
+      tags:
+        - Internal
+      summary: index
+      description: Connection Check
+      requestBody:
+        content: {}
+      parameters:
+        - name: TOKEN
+          in: header
+          schema:
+            type: string
+          example: zyx321
+        - name: ID
+          in: header
+          schema:
+            type: string
+          example: abc123
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/cmc/Summary:
+    get:
+      tags:
+        - CMC
+      summary: Summary
+      description: >-
+        The summary endpoint is to provide an overview of market data for all
+        tickers and all market pairs on the exchange.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/cmc/assets:
+    get:
+      tags:
+        - CMC
+      summary: assets
+      description: >-
+        The assets endpoint is to provide a detailed summary for each currency
+        available on the exchange.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/cmc/ticker:
+    get:
+      tags:
+        - CMC
+      summary: ticker
+      description: >-
+        The ticker endpoint is to provide a 24-hour pricing and volume summary
+        for each market pair available on the exchange.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/cmc/orderbook:
+    get:
+      tags:
+        - CMC
+      summary: orderbook
+      description: >-
+        The order book endpoint is to provide a complete level 2 order book
+        (arranged by best asks/bids) with full depth returned for a given market
+        pair.
+      parameters:
+        - name: market_pair
+          in: query
+          schema:
+            type: string
+          example: btc_usdt
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /Api/cmc/trades:
+    get:
+      tags:
+        - CMC
+      summary: trades
+      description: >-
+        The trades endpoint is to return data on all recently completed trades
+        for a given market pair.
+      parameters:
+        - name: market_pair
+          in: query
+          schema:
+            type: string
+          example: btc_usdt
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

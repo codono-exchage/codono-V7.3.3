@@ -1,0 +1,129 @@
+<div class="navbar navbar-inverse" id="navbar-second">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/"><img src="__UPLOAD__/public/{$C['web_logo']}" alt=""/></a>
+
+			<ul class="nav navbar-nav pull-right visible-xs-block">
+				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+			</ul>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-second-toggle">
+		
+			<ul class="nav navbar-nav navex">
+			
+				<li class="active"><a href="{:U('Home/index')}"><i class="fa fa-diamond"></i>  {:l('HOME')}</a></li>
+				<li>
+                     <a href="{:U('Trade/index')}" ><i class="fa fa-balance-scale "></i>  {:l('Exchange')} </a>
+                </li>
+                <volist name="navigation" id="vo">
+                    <li id="{$vo['name']}_box">
+                        <a href="/{$vo['url']}"><if condition="$vo['ico']"><i class="fa fa-{$vo['ico']}"></i></if>  {:l($vo['title'])}</a>
+                    </li>
+                </volist>	
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
+			<include file="Public:lang_bar"/>
+				<gt name="Think.session.userId" value="0">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-money"></i>
+                            <span class="caret"></span>
+                        </a>
+                        
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="icon-coin-dollar"></i> {:l('AVAILABLE_USD')}:{$userCoin_top['usd']*1}</a></li>
+                            <li class="divider"></li>
+                            
+                            <li><a href="#"><i class="fa fa-bar-chart"></i> {:l('FREEZE_USD')}:{$userCoin_top['usdd']*1}</a></li>
+                            <li class="divider"></li>
+                            
+                            <li><a href="#"><i class="fa fa-pie-chart"></i> {:l('THE_TOTAL_ASSETS_OF')}:{$userCoin_top['allusd']*1}</a></li>
+                        </ul>
+                    </li>
+				</gt>
+				<gt name="Think.session.userId" value="0">
+                    <li class="dropdown dropdown-user">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <span>{$Think.session.userName}</span>
+                            <i class="caret"></i>
+                        </a>
+                        
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="{:U('Finance/index')}" ><i class="fa fa-institution"></i> {:l('FINANCE')}</a></li>
+                                <li><a href="{:U('User/index')}" ><i class="icon-cube"></i> {:l('ACCOUNT')}</a></li>
+                            
+                            <li class="divider"></li>
+                            <li><a href="{:U('Login/loginout')}"><i class="fa fa-sign-out"></i> {:l('LOG_OUT')}</a></li>
+                        </ul>
+                    </li>
+				<else/>
+                    <li><a href="{:U('Login/register')}" ><i class="glyphicon glyphicon-user"></i> {:l('SIGNUP')}</a></li>
+                    <li><a href="{:U('Login/login')}" ><i class="icon-lock"></i> {:l('SIGNIN')}</a></li>	
+				</gt>
+				<include file="Public:site_news"/>
+			</ul>
+			
+		</div>
+	</div>
+	<script>
+    $('#trade_top').hover(function () {
+        $('#trade_list').show();
+    }, function () {
+        $('#trade_list').hide();
+    });
+    $('#trade_tops').hover(function () {
+        $('#trade_lists').show();
+    }, function () {
+        $('#trade_lists').hide();
+    });
+    $('#trade_list').hover(function () {
+        $('#trade_list').show();
+    }, function () {
+        $('#trade_list').hide();
+    });
+    $('#trade_lists').hover(function () {
+        $('#trade_lists').show();
+    }, function () {
+        $('#trade_lists').hide();
+    });
+
+    $.post("{:U('Ajax/top_coin_menu')}?t=" + Math.random(), function (data) {
+        if (data) {
+            var interText = doT.template($("#trade_list_tpl").text());
+            var interTexts = doT.template($("#trade_list_tpls").text());
+            $("#trade_list").html(interText(data));
+            $("#trade_lists").html(interTexts(data));
+
+            var $li = $('#trade-nav-tabs > li');
+            var $lis = $('#trade-nav-tabss > li');
+            var $ul = $('#trade-nav-body > dl');
+            var $uls = $('#trade-nav-bodys > dl');
+
+            $li.mouseover(function () {
+                var $this = $(this);
+                var $t = $this.index();
+                $li.removeClass();
+                $this.addClass('current');
+                $ul.css('display', 'none');
+                $ul.eq($t).css('display', 'block');
+            });
+            $lis.mouseover(function () {
+                var $this = $(this);
+                var $t = $this.index();
+                $lis.removeClass();
+                $this.addClass('current');
+                $uls.css('display', 'none');
+                $uls.eq($t).css('display', 'block');
+            });
+        }
+    }, "json");
+
+    function chose_lang(lang) {
+        $.cookies.set("lang", lang);
+		window.location.reload();
+    }
+    function expect() {
+        layer.msg('We are currently upgrading our system!', {icon: 6});
+    }
+</script>

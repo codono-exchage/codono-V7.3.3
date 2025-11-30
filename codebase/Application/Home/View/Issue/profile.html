@@ -1,0 +1,23 @@
+<div class="panel-body  border-radius-top text-center" style="background-size: contain;">
+<div class="col-sm-4">						
+						<div class="content-group-sm">
+								<h6 class="text-semibold no-margin-bottom">
+									{$issue['name']}
+								</h6>
+
+							</div>
+
+							<a href="#" class="display-inline-block content-group-sm">
+								<img src="__UPLOAD__/coin/{$issue['img']}" class="img-circle img-responsive" alt="" style="width: 110px; height: 110px;">
+							</a>
+
+							<ul class="list-inline list-inline-condensed no-margin-bottom">
+								<li><a href="{$issue['facebook']}" class="btn bg-indigo btn-rounded btn-icon"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="{$issue['twitter']}" class="btn bg-indigo btn-rounded btn-icon"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="{$issue['telegram']}" class="btn bg-indigo btn-rounded btn-icon"><i class="fa fa-telegram"></i></a></li>
+							</ul>
+</div>
+	<div class="col-sm-8">
+	<include file="Issue:widgets-2"/>	
+	</div>
+						</div>

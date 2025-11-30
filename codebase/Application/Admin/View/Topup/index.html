@@ -1,0 +1,110 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">Warnings</div>
+    </div>
+    <div id="main" class="main">
+        <div class="main-title-h" style="font-size: 24px;">
+            <span class="d-sm-flex align-items-center justify-content-between h4">Recharge record</span>
+            <present name="Think.get.name">
+                <i class="ca"></i>[<a href="{:U('Topup/index')}"> Record List</a> ]
+            </present>
+        </div>
+        <div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+            <div class="fl"></div>
+            <div class="search-form fr cf">
+                <div class="sleft">
+                    <form name="formSearch" id="formSearch" method="get" name="form1" action="{:U('Topup/index')}">
+                        <input type="text" name="name" class="form-control" value="{$Think.get.name}" placeholder="Please enter username">
+                        <a class="sch-btn" href="javascript:;" id="search"><i class="btn-search"></i></a>
+                    </form>
+                    <script>
+                        //Search function
+                        $(function () {
+                            $('#search').click(function () {
+                                $('#formSearch').submit();
+                            });
+                        });
+                        //Enter search
+                        $(".search-input").keyup(function (e) {
+                            if (e.keyCode === 13) {
+                                $("#search").click();
+                                return false;
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="card card-body mt-2 table-responsive">
+            <table class="table table-sm emptyx">
+                <thead class="table-light">
+                <tr>
+                    <th class="row-selected row-selected">
+                        <input class="check-all" type="checkbox"/>
+                    </th>
+                    <th class="">ID</th>
+                    <th class="">Username</th>
+                    <th class="">Prepaid cell phone</th>
+                    <th class="">Recharge amount</th>
+                    <th class="">payment method</th>
+                    <th class="">paymentMoney</th>
+                    <th class="">Recharge time</th>
+                    <th class="">Processing time</th>
+                    <th class="">Status</th>
+                    <th class="">Option</th>
+                </tr>
+                </thead>
+                <tbody>
+                <notempty name="list">
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>
+                                <input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/>
+                            </td>
+                            <td>{$vo.id}</td>
+                            <td>
+                                <a href="{:U('User/index?field=username&name='.$vo['username'])}">{$vo.username}</a>
+                            </td>
+                            <td>{$vo.cellphone}</td>
+                            <td>{$vo.num}</td>
+                            <td>{$vo.type}</td>
+                            <td>{$vo.mum}({$vo.type})</td>
+                            <td>{$vo.addtime}</td>
+                            <td>{$vo.endtime}</td>
+                            <td>
+                                <eq name="vo['status']" value="0">Processing</eq>
+                                <eq name="vo['status']" value="1">It has been credited into account</eq>
+                                <eq name="vo['status']" value="2">Revoked</eq>
+                            </td>
+                            <td>
+                                <eq name="vo['status']" value="0">
+                                    <a href="{:U('Topup/resume?id='.$vo['id'])}" class="btn btn-primary btn-sm ajax-get confirm">Arrival</a><a href="{:U('Topup/repeal?id='.$vo['id'])}" class="btn btn-warning btn-sm ajax-get confirm">Undo</a>
+                                </eq>
+                                <eq name="vo['status']" value="1">
+                                    <a href="{:U('Topup/delete?id='.$vo['id'])}" class="btn btn-danger btn-sm ajax-get confirm"><i class="far fa-trash-alt" title="Delete"></i></a>
+                                </eq>
+                                <eq name="vo['status']" value="2">
+                                    <a href="{:U('Topup/delete?id='.$vo['id'])}" class="btn btn-danger btn-sm ajax-get confirm"><i class="far fa-trash-alt" title="Delete"></i></a>
+                                </eq>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="12" class="text-center">No contents!</td>
+                </notempty>
+                </tbody>
+            </table>
+            <div class="page">
+                <div>{$page}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //Highlight the main navigation
+    $('.Adver-box').addClass('current');
+    //Highlight side navigation
+    $('.Adver-index').addClass('current');
+</script><!-- /Content Area -->
+<include file="Public:footer"/>

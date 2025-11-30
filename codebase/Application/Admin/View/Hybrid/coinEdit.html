@@ -1,0 +1,228 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Dex Coin Edit')}</span>
+		</div>
+
+		<div class="card">
+
+			<div class="card-body">
+				<form id="form" action="{:U('Hybrid/coinEdit')}" method="post" class="form-horizontal" >
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+
+								<tr class="controls">
+									<td class="item-label">{:l('Status')}:</td>
+									<td><select name="status" class="input-small">
+										<option value="1" <eq name="data.status" value="1">{:l('selected')}</eq> >{:l('Enabled')}</option>
+										<option value="0" <eq name="data.status" value="0">{:l('selected')}</eq> >{:l('Disabled')}</option>
+									</select></td>									</select> </td>
+									<td class="item-note">{:l('Coin status')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Is Default in Spend')}:</td>
+									<td><select name="is_default" class="input-small">
+										<option value="0" <eq name="data.is_default" value="0">{:l('selected')}</eq> >{:l('NA')}</option>
+										<option value="1" <eq name="data.is_default" value="1">{:l('selected')}</eq> >{:l('Default')}</option>
+
+									</select></td>									</select> </td>
+									<td class="item-note">{:l('Select only one coin as default status either ETH or BNB')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Is Token?')}:</td>
+									<td><select name="is_token" class="input-small">
+										<option value="0" <eq name="data.is_token" value="0">{:l('selected')}</eq> >{:l('Main Coin')}</option>
+										<option value="1" <eq name="data.is_token" value="1">{:l('selected')}</eq> >{:l('Token')}</option>
+
+									</select></td>									</select> </td>
+									<td class="item-note">{:l('Only One main coin')}</td>
+								</tr>								
+								<tr class="controls">
+									<td class="item-label">{:l('Name of coin')}:</td>
+									<td><input type="text" class="form-control input-10x" name="name" value="{$data['name']}"></td>
+									<td class="item-note">{:l('Name of coin')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Symbol of coin')}:</td>
+									<td><input type="text" class="form-control input-10x" name="symbol" value="{$data['symbol']}"></td>
+									<td class="item-note">symbol in small letters ie : usdt</td>
+								</tr>
+								                                <tr class="controls">
+                                    <td class="item-label">{:l('Image')}:</td>
+                                    <td>
+                                        <div id="addpicContainer">
+                                            <!-- Use multiple="multiple"Property implementation Add to More map features -->
+                                            <!-- position: absolute;left: 10px;top: 5px;Only for thisuseThe casesinputHidden toimageunder.-->
+                                            <!-- height:0;width:0;z-index: -1;In order to hideinput,becauseChromeYou can not use lowerdisplay:noneOtherwise, notAdd tofile -->
+                                            <!-- onclick="getElementById('inputfile').click()" Click onimageWhen click onAdd tofilePush button -->
+                                            <notempty name="data.img">
+                                                <!--Noimagedisplaydefaultimage-->
+                                                <img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:80px;" title="Click Add Picture" alt="Click Add Picture" src="/Upload/coin/{$data.img}">
+                                                <else/>
+                                                <!--Noimagedisplaydefaultimage-->
+                                                <img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:80px;" title="Click Add Picture" alt="Click Add Picture" src="__THEME__/images/addimg.png">
+                                            </notempty>
+                                            <input type="hidden" id="img" name="img" value="{$data.img}">
+                                            <input type="file" id="inputfile" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+                                        </div>
+                                    </td>
+                                    <td class="item-note">80px*80px</td>
+                                </tr>
+
+								<tr class="controls">
+									<td class="item-label">{:l('Contract address')}:</td>
+									<td><input type="text" class="form-control input-10x" name="contract_address" value="{$data['contract_address']}"></td>
+									<td class="item-note">{:l('Contract Address of token , Empty in case of main coin')}</td>
+								</tr>
+									<tr class="controls">
+									<td class="item-label">{:l('Decimals')}:</td>
+									<td><select name="decimals" class="input-small">
+										<option value="0" <eq name="data.decimals" value="0">{:l('selected')}</eq> >0
+										</option>
+										<option value="1" <eq name="data.decimals" value="1">{:l('selected')}</eq> >1
+										</option>
+										<option value="2" <eq name="data.decimals" value="2">{:l('selected')}</eq> >2
+										</option>
+										<option value="3" <eq name="data.decimals" value="3">{:l('selected')}</eq> >3
+										</option>
+										<option value="4" <eq name="data.decimals" value="4">{:l('selected')}</eq> >4
+										</option>
+										<option value="5" <eq name="data.decimals" value="5">{:l('selected')}</eq> >5
+										</option>
+										<option value="6" <eq name="data.decimals" value="6">{:l('selected')}</eq> >6
+										</option>
+										<option value="7" <eq name="data.decimals" value="7">{:l('selected')}</eq> >7
+										</option>
+										<option value="8" <eq name="data.decimals" value="8">{:l('selected')}</eq> >8
+										</option>
+										<option value="9" <eq name="data.decimals" value="9">{:l('selected')}</eq> >9
+										</option>
+										<option value="10" <eq name="data.decimals" value="10">{:l('selected')}</eq> >10
+										</option>
+										<option value="11" <eq name="data.decimals" value="11">{:l('selected')}</eq> >11
+										</option>
+										<option value="12" <eq name="data.decimals" value="12">{:l('selected')}</eq> >12
+										</option>
+										<option value="13" <eq name="data.decimals" value="13">{:l('selected')}</eq> >13
+										</option>
+										<option value="14" <eq name="data.decimals" value="14">{:l('selected')}</eq> >14
+										</option>
+										<option value="15" <eq name="data.decimals" value="15">{:l('selected')}</eq> >15
+										</option>
+										<option value="16" <eq name="data.decimals" value="16">{:l('selected')}</eq> >16
+										</option>
+										<option value="17" <eq name="data.decimals" value="17">{:l('selected')}</eq> >17
+										</option>
+										<option value="18" <eq name="data.decimals" value="18">{:l('selected')}</eq> >18
+										</option>
+
+									</select></td>									</select> </td>
+									<td class="item-note">{:l('Only One main coin')}</td>
+								</tr>
+
+								<tr class="controls">
+									<td class="item-label">{:l('Price')}:</td>
+									<td><input type="text" class="form-control input-10x" name="price" value="{$data['price']}"></td>
+									<td class="item-note">{:l('Price of your token')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Min Buy Quantity')}:</td>
+									<td><input type="text" class="form-control input-10x" name="buy_min" value="{$data['buy_min']}"></td>
+									<td class="item-note">{:l('Minimum Buy Quantity')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Max Buy Quantity')}:</td>
+									<td><input type="text" class="form-control input-10x" name="buy_max" value="{$data['buy_max']}"></td>
+									<td class="item-note">{:l('Maximum Buy Quantity')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class= "btn submit-btn ajax-post btn-info"  target-form="form-horizontal" id="submit" type="submit">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+											      <notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+                                            </notempty>
+										</div>
+									</td>
+								</tr>
+
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function(){
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+	
+	$('#selectcointype').on('change', function() {
+	CoinSelectHint(this.value);
+	});
+        //The response fileAdd tosuccessevent
+        $("#inputfile").change(function () {
+            //createFormDataObjects
+            var data = new FormData();
+            //forFormDataAdding Data Object
+            $.each($('#inputfile')[0].files, function (i, file) {
+                data.append('upload_file' + i, file);
+            });
+
+
+            //send data
+            $.ajax({
+                url: '/Admin/Hybrid/coinImage',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,		//Essential parameters
+                processData: false,		//Essential parameters
+                success: function (data) {
+                    if (data) {
+                        $('#up_img').attr("src", '/Upload/coin/' + data);
+                        $('#img').val(data);
+                        $('#up_img').show();
+                    }
+                },
+                error: function () {
+                    alert('Upload error');
+                    $(".loading").hide();	//plus Upload failed shift except plus Load image
+                }
+            });
+
+        });
+    });
+	var editor;
+	KindEditor.ready(function(K){
+		editor=K.create('textarea',{width:'500px',height:'200px',items:['source','fontname','fontsize','|','forecolor','hilitecolor','bold','italic','underline','removeformat','|','justifyleft','justifycenter','justifyright','insertorderedlist','insertunorderedlist','|','emoticons','link','fullscreen'],afterBlur: function () { this.sync(); }});
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		//Highlight the main navigation
+		$('.config-box').addClass('current');
+		//Highlight side navigation
+		$('.config-contact').addClass('current');
+	});
+</script>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //Highlight navigation
+        highlight_subnav("{:U('Hybrid/coin')}");
+    </script>
+</block>
+<include file="Public:footer" />

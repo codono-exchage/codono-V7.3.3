@@ -1,0 +1,685 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4"><a href="{:U('Trade/market')}">{:l('Crypto Markets')}</a> >></span>
+
+            <span class="d-sm-flex align-items-center justify-content-between h4"><empty name="data">{:l('Add markets')}<else/>{:l('Edit Market')}</empty></span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form_form" action="{:U('Trade/marketEdit')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<empty name="data['id']">
+								
+									<tr class="controls">
+										<td class="item-label">{:l('Seller currency')}:</td>
+										<td><select name="sellname" class="form-select input-5x">
+											
+											<volist name="coin_list" id="v">
+												
+												<option value="{$v['name']}">{$v['name'] |strtoupper}</option>
+											</volist>
+										</select>
+										</td>
+										<td class="item-note">{:l('First coin of pair')}</td>
+									</tr>
+									<tr class="controls">
+										<td class="item-label">{:l('Buyer currency')}:</td>
+										<td><select name="buyname" class="form-select input-5x">
+											<volist name="coin_list" id="v">
+												<option value="{$v['name']}">{$v['name'] |strtoupper}</option>
+											</volist>
+										</select>
+										</td>
+										<td class="item-note">{:l('Last coin of pair')}</td>
+									</tr>
+									<else/>
+									<tr class="controls">
+										<td class="item-label">{:l('Market Name')}:</td>
+										<td>{$data.name}</td>
+										<td class="item-note"></td>
+									</tr>
+									
+								</empty>
+								 
+								
+								<tr class="controls">
+									<td class="item-label">{:l('Owned trading')}</td>
+									<td>
+										<select name="jiaoyiqu" class="form-select">
+											<volist name="codono_getCoreConfig" id="v">
+											
+												<option value="{$key}"
+												
+												<eq name="data.jiaoyiqu" value="$key">{:l('selected')}</eq>
+												
+												>{$v}</option>
+												
+											</volist>
+										</select>
+									</td>
+									<td class="item-note">{:l('Pair in which market')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Fees User')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="ownerid" value="{$data.ownerid}">
+									</td>
+									<td class="item-note" title="Fees userid"><neq name="data['ownerid']" value="0">[{$data.ownerid|username}]</neq>{:l('Frontend user to collect fees Leave 0 for no collection')}</td>
+								</tr>
+										
+								
+								
+								
+								
+								<tr class="controls">
+									<td class="item-label">{:l('Decimal places')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="round" value="{$data.round}">
+									</td>
+									<td class="item-note" title="Decimal places after ."><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('BUY fee%')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="fee_buy" value="{$data.fee_buy}">
+									</td>
+									<td class="item-note" title="% Buy fees "><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Selling fees%')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="fee_sell" value="{$data.fee_sell}">
+									</td>
+									<td class="item-note" title="% Sell fees "><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Min Buy Price')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="buy_min" value="{$data.buy_min}">
+									</td>
+									<td class="item-note" title="Min Buy Price default 0.000001"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Max Buy Price')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="buy_max" value="{$data.buy_max}">
+									</td>
+									<td class="item-note" title="Max Buy Price default 1000000"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Min Sale Price')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="sell_min" value="{$data.sell_min}">
+									</td>
+									<td class="item-note" title="Min Sale Price default 0.000001"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Max Sale Price')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="sell_max" value="{$data.sell_max}">
+									</td>
+									<td class="item-note" title="Max Sale Price default 1000000"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Min Trx Amt')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="trade_min" value="{$data.trade_min}">
+									</td>
+									<td class="item-note" title="Min Trx Amt Buy"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Single Max Trx Amt')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="trade_max" value="{$data.trade_max}">
+									</td>
+									<td class="item-note" title="Largest single trx amt default1:000000"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls"><td></td><td><hr/><td></tr>
+								<tr class="controls">
+									<td class="item-label">{:l('1st Tier Refer Bonus%')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="invit_1" value="{$data.invit_1}">
+									</td>
+									<td class="item-note" title="% of the transaction fees"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('2nd Tier Refer Bonus%')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="invit_2" value="{$data.invit_2}">
+									</td>
+									<td class="item-note" title="% of the transaction fees"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('3rd Tier Refer Bonus%')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="invit_3" value="{$data.invit_3}">
+									</td>
+									<td class="item-note" title="% of the transaction fees"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Refer Bonus[Buyers]')}:</td>
+									<td><select name="invit_buy" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.invit_buy" value="1">{:l('selected')}</eq>
+										>{:l('Enable')}</option>
+										<option value="0"
+										<eq name="data.invit_buy" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note">{:l('It would enable commission bonus to invitee on buy')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Refer Bonus[Sellers]')}:</td>
+									<td><select name="invit_sell" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.invit_sell" value="1">{:l('selected')}</eq>
+										>{:l('Enable')}</option>
+										<option value="0"
+										<eq name="data.invit_sell" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note">{:l('It would enable commission bonus to invitee on sell')}</td>
+								</tr>
+								
+								<tr class="controls"><td></td><td><hr/><td></tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Issue price')}:</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="market_ico_price" value="{$data.market_ico_price}">
+									</td>
+									<td class="item-note" title="Issuing Price"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls"><td></td><td><hr/><small>{:l('Selection for Data update')}</small><td></tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Websocket/Ajax')}:</td>
+									<td>
+										<select name="socket_type" class="form-select input-5x">
+										<option value="0"
+										<eq name="data.socket_type" value="0">{:l('selected')}</eq>
+										>{:l('Ajax [No Websocket]')}</option>
+										<option value="1"
+										<eq name="data.socket_type" value="1">{:l('selected')}</eq>
+										>{:l('SelfEngine Websocket')}</option>
+										<option value="2"
+										<eq name="data.socket_type" value="2">{:l('selected')}</eq>
+										>{:l('Huobi Websocket')}</option>
+										<option value="3"
+										<eq name="data.socket_type" value="3">{:l('selected')}</eq>
+										>{:l('Other [Currently not available]')}</option>
+										</select>
+									</td>
+									<td class="item-note">{:l('Orderbook+Tradelog+Market data')}</td>
+								</tr>
+
+								
+								<tr class="controls">
+									<td class="item-label">{:l('External Pair:[Optional]')}</td>
+									<td>
+										<input type="text" class="form-control input-5x" name="socket_pair" value="{$data.socket_pair}"/>
+									</td>
+									<td class="item-note">{:l('Only if you pair from Houbi socket market [Example for eth_usd market type ethusdt]')}</td>
+								</tr>
+								
+								<tr class="controls"><td></td><td><hr/><td></tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Market External Price')}:</td>
+										<td><select name="ext_price_update" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.ext_price_update" value="1">{:l('selected')}</eq>
+										>{:l('Enable')}</option>
+										<option value="0"
+										<eq name="data.ext_price_update" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note">{:l('Allows to update Price from Binance')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Liquidity')}:</td>
+									<td>
+										<select name="ext_orderbook" class="form-select input-5x">
+										<option value="0"
+										<eq name="data.ext_orderbook" value="0">{:l('selected')}</eq>
+										>{:l('Internal')}</option>
+										<option value="1"
+										<eq name="data.ext_orderbook" value="1">{:l('selected')}</eq>
+										>{:l('BinanceEngine')}</option>
+										<option value="2"
+										<eq name="data.ext_orderbook" value="2">{:l('selected')}</eq>
+										>{:l('SelfEngine')}</option>
+										
+										</select>
+									</td>
+									<td class="item-note">{:l('Allows to Add external orderbook from Binance Or Create own using Buy/Sell price')}</td>
+								</tr>
+
+								<tr class="controls">
+									<td class="item-label">{:l('External Orderbook Markup')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="orderbook_markup" value="{$data.orderbook_markup}"></td>
+									
+									<td class="item-note">{:l('Adds a % commission on Binance price')}</td>
+								</tr>
+									<tr class="controls">
+									<td class="item-label">	{:l('Cross Ordering From Binance')}:</td>
+										<td><select name="xtrade" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.xtrade" value="1">{:l('selected')}</eq>
+										>Enable</option>
+										<option value="0"
+										<eq name="data.xtrade" value="0">{:l('selected')}</eq>
+										>Disable</option>
+									</select></td>
+									<td class="item-note">{:l('System cross orders on Binance the matched orders with LiqUsers[Liquidity]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Generate Fake orders')}:</td>
+										<td><select name="ext_fake_trades" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.ext_fake_trades" value="1">{:l('selected')}</eq>
+										>{:l('Enable')}</option>
+										<option value="0"
+										<eq name="data.ext_fake_trades" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note">{:l('For Binance or Selfengine only')}</td>
+								</tr>
+								
+								
+								<tr class="controls">
+									<td class="item-label">{:l('Charts from TradingView')}:</td>
+										<td><select name="ext_charts" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.ext_charts" value="1">{:l('selected')}</eq>
+										>{:l('Enable')}</option>
+										<option value="0"
+										<eq name="data.ext_charts" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note">{:l('Show External Charts from Tradingview')}</td>
+								</tr>
+									<tr class="controls">
+									<td class="item-label">{:l('Charts Symbol from TradingView')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="charts_symbol" value="{$data.charts_symbol}"></td>
+									
+									<td class="item-note">{:l('Get Symbol from')}<a href="https://tradingview.com/widget/advanced-chart/" target="_blank">{:l('here')}</a> {:l('EXAMPLE BINANCE:BTCUSDT')}</td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label">{:l('SelfEngine Orderbook Buy Price')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="api_min" value="{$data.api_min}"></td>
+									
+									<td class="item-note">{:l('A price using which buy orderbook will be created[Works with SelfEngine only]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('SelfEngine Orderbook Sell Price')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="api_max" value="{$data.api_max}"></td>
+									
+									<td class="item-note">{:l('Keep it <b>more than</b> <i>SelfEngine Orderbook Buy Price</i>')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('SelfEngine Orderbook Max Qty')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="api_max_qty" value="{$data.api_max_qty}"></td>
+									
+									<td class="item-note">{:l('A Maximum quantitiy which buy orderbook will be created[Works with SelfEngine only]')}</td>
+								</tr>
+								<tr class="controls"><td></td><td><strong>----{:l('Market Stats Autogenerated')}----</strong><td></tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Last Price')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="new_price" value="{$data.new_price}"></td>
+									
+									<td class="item-note">{:l('Last Price of market [Autogenerated]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Buy Price')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="buy_price" value="{$data.buy_price}"></td>
+									
+									<td class="item-note">{:l('Buy Price of market [Autogenerated]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Sell Price')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="sell_price" value="{$data.sell_price}"></td>
+									
+									<td class="item-note">{:l('Sell Price of market [Autogenerated]')}</td>
+								</tr>
+									
+								<tr class="controls">
+									<td class="item-label">{:l('Min Price')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="min_price" value="{$data.min_price}"></td>
+									
+									<td class="item-note">{:l('Min Price of market [Autogenerated]')}</td>
+								</tr>
+									<tr class="controls">
+									<td class="item-label">{:l('Max Price')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="max_price" value="{$data.max_price}"></td>
+									
+									<td class="item-note">{:l('Max Price of market [Autogenerated]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('24 Hr Vol')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="volume" value="<?php echo format_num($data['volume'])?>"></td>
+									
+									<td class="item-note">{:l('24 Hr Vol of market [Autogenerated]')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Change %')}:</td>
+								
+										<td><input type="text" class="form-control input-5x" name="change" value="{$data.change}"></td>
+									
+									<td class="item-note">{:l('Change % in price in 24 hours of market [Autogenerated]')}</td>
+								</tr>
+										
+								<tr class="controls"><td></td><td><strong>----------------</strong><td></tr>
+						
+								<tr class="controls">
+									<td class="item-label">{:l('Start Trading Time')}:</td>
+									<td>
+										<input type="hidden" name="begintrade" id="begintrade" />
+										<select id="beginshi">
+											<option value="00">00</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+										</select>:
+										
+										<select id="beginfen">
+											<option value="00">00</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+											<option value="24">24</option>
+											<option value="25">25</option>
+											<option value="26">26</option>
+											<option value="27">27</option>
+											<option value="28">28</option>
+											<option value="29">29</option>
+											<option value="30">30</option>
+											<option value="31">31</option>
+											<option value="32">32</option>
+											<option value="33">33</option>
+											<option value="34">34</option>
+											<option value="35">35</option>
+											<option value="36">36</option>
+											<option value="37">37</option>
+											<option value="38">38</option>
+											<option value="39">39</option>
+											<option value="40">40</option>
+											<option value="41">41</option>
+											<option value="42">42</option>
+											<option value="43">43</option>
+											<option value="44">44</option>
+											<option value="45">45</option>
+											<option value="46">46</option>
+											<option value="47">47</option>
+											<option value="48">48</option>
+											<option value="49">49</option>
+											<option value="50">50</option>
+											<option value="51">51</option>
+											<option value="52">52</option>
+											<option value="53">53</option>
+											<option value="54">54</option>
+											<option value="55">55</option>
+											<option value="56">56</option>
+											<option value="57">57</option>
+											<option value="58">58</option>
+											<option value="59">59</option>
+											
+										</select>
+
+										
+									</td>
+									<td class="item-note"></td>
+									<td class="item-note" title="Time format 9:50"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								
+								
+								<tr class="controls">
+									<td class="item-label">{:l('End Trading Time')}:</td>
+									<td>
+										<input type="hidden" name="endtrade" id="endtrade" />
+										<select id="endshi">
+											<option value="00">00</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+										</select>:
+										
+										<select id="endfen">
+											<option value="00">00</option>
+											<option value="01">01</option>
+											<option value="02">02</option>
+											<option value="03">03</option>
+											<option value="04">04</option>
+											<option value="05">05</option>
+											<option value="06">06</option>
+											<option value="07">07</option>
+											<option value="08">08</option>
+											<option value="09">09</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+											<option value="24">24</option>
+											<option value="25">25</option>
+											<option value="26">26</option>
+											<option value="27">27</option>
+											<option value="28">28</option>
+											<option value="29">29</option>
+											<option value="30">30</option>
+											<option value="31">31</option>
+											<option value="32">32</option>
+											<option value="33">33</option>
+											<option value="34">34</option>
+											<option value="35">35</option>
+											<option value="36">36</option>
+											<option value="37">37</option>
+											<option value="38">38</option>
+											<option value="39">39</option>
+											<option value="40">40</option>
+											<option value="41">41</option>
+											<option value="42">42</option>
+											<option value="43">43</option>
+											<option value="44">44</option>
+											<option value="45">45</option>
+											<option value="46">46</option>
+											<option value="47">47</option>
+											<option value="48">48</option>
+											<option value="49">49</option>
+											<option value="50">50</option>
+											<option value="51">51</option>
+											<option value="52">52</option>
+											<option value="53">53</option>
+											<option value="54">54</option>
+											<option value="55">55</option>
+											<option value="56">56</option>
+											<option value="57">57</option>
+											<option value="58">58</option>
+											<option value="59">59</option>
+											
+										</select>
+
+										
+									</td>
+									<td class="item-note" title="Time format 23:50"><span class="fa fa-info-circle" aria-hidden="true"></span></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Disable Limit/Stop Trading')}:</td>
+									<td><select name="switch" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.switch" value="1">{:l('selected')}</eq>
+										>{:l('Enable')}</option>
+										<option value="0"
+										<eq name="data.switch" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note">Keep enabled</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Auto Matching Orders')}:</td>
+									<td><select name="auto_match" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.auto_match" value="1">{:l('selected')}</eq>
+										>{:l('Keep Enabled')}</option>
+										<option value="0"
+										<eq name="data.auto_match" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note">Keep enabled</td>
+								</tr>
+								
+								
+								<tr class="controls">
+									<td class="item-label">{:l('Open trading')}:</td>
+									<td><select name="trade" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.trade" value="1">{:l('selected')}</eq>
+										>{:l('Open trading')}</option>
+										<option value="0"
+										<eq name="data.trade" value="0">{:l('selected')}</eq>
+										>{:l('Prohibited transaction')}</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Status')}:</td>
+									<td><select name="status" class="form-select input-5x">
+										<option value="1"
+										<eq name="data.status" value="1">{:l('selected')}</eq>
+										>{:l('Enabled')}</option>
+										<option value="0"
+										<eq name="data.status" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					
+					
+					$("#beginshi").find("option").eq('{$beginshi}').attr("selected", "selected");
+					$("#beginfen").find("option").eq('{$beginfen}').attr("selected", "selected");
+					$("#endshi").find("option").eq("{$endshi}").attr("selected", "selected");
+					$("#endfen").find("option").eq('{$endfen}').attr("selected", "selected");
+					
+					$('#submit').click(function () {
+						$("#begintrade").val($("#beginshi").val() + ":"+$("#beginfen").val()+":00");
+						$("#endtrade").val($("#endshi").val() + ":"+$("#endfen").val()+":00");
+						$('#form_form').submit();
+					});
+
+					
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Trade/market')}");
+	</script>
+</block>

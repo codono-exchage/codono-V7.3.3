@@ -1,0 +1,197 @@
+
+<include file="Public:header" />
+<script type="text/javascript" src="__PUBLIC__/static/js/cityselect.js"></script>
+		<!-- Page content -->
+		<div class="page-content">	
+	
+<include file="User:left" />
+<div class="col-sm-9">
+		<!-- Main content -->
+			<div class="content-wrapper">
+  <div class="assets_content">
+   <div class="safe_center clear" style="padding-left: 0px; border-bottom: 2px solid #ed4040;">
+    <h1 >{:l('BANK_CARD_MANAGEMENT')}</h1>
+   </div>
+      <notempty name="prompt_text">
+                    <div class="mytips">
+                        <h6 style="color: #ff8000;">{:l('TIPS')}</h6>
+                        {$prompt_text}
+                    </div>
+                </notempty>
+   <br>
+
+
+   <div class="usdin_record" style="width: 918px;">
+    <div class="f_body">
+     <div class="f_body_main">
+      <div class="f_tab_body">
+       <div>
+        <table class="table table-responsive" id="investLog_content">
+         <thead>
+          <tr>
+           <th>{:l('REMARKS_NAME')}</th>
+           <th>{:l('BANK')}</th>
+           <th>{:l('OPENING_PROVINCES')}</th>
+           <th>{:l('CITIES_ACCOUNT')}</th>
+           <th>{:l('ACCOUNT_BRANCH')}</th>
+           <th>{:l('ACCOUNT_NAME')}</th>
+           <th>{:l('BANK_CARD_NUMBER')}</th>
+           <th>{:l('ADD_TIME')}</th>
+           <th>{:l('OPERATING')}</th>
+          </tr>
+         </thead>
+         <tbody>
+          <volist name="UserBank" id="vo">
+          <tr>
+           <td>{$vo.name}</td>
+           <td>{$vo.bank}</td>
+           <td>{$vo.bankprov}</td>
+           <td>{$vo.bankcity}</td>
+           <td>{$vo.bankaddr}</td>
+           <td>{$truename}</td>
+           <td>{$vo.bankcard}</td>
+           <td>{$vo.addtime|addtime}</td>
+           <td><a class="cancel" href="javascript:void(0)" onclick="UpdateB({$vo['id']})">{:l('DELETE')}</a></td>
+          </tr>
+          </volist>
+         </tbody>
+        </table>
+        <div class="pages">
+         <a href="javascript:void(0)" onclick="showA()">{:l('ADD_AN_ADDRESS')}</a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ </div>
+</div>
+</div>
+<div class="okcoinPop" id="withdrawUsdAddress" style="display: none;">
+ <div class="dialog_content" id="dialog_content_UsdAddress" style="margin-left: -200px; margin-top: 200px; left: 50%; top: 21px;">
+  <div class="dialog_title" id="dialog_title_UsdAddress">
+   <span id="UsdAddressTitle">{:l('ADDING_A_BANK_ADDRESS')}</span> <a href="javascript:closeAddress();" class="dialog_closed" title="{:l('SHUT_DOWN')}"></a>
+  </div>
+  <div class="dialog_body center">
+   <div style="line-height: 35px; text-align: left; padding-left: 50px;">
+    <ul class="PopLayer">
+     <li><span class="c2" id="lotteryAmountSpan1">{:l('REMARKS_NAME')}:</span> <input name="name" id="bank_name" type="text" class="cztxinput" style="width: 200px; padding: 2px; padding-bottom: 5px;"></li>
+     <li><span class="c2" id="lotteryAmountSpan2">{:l('BANK')}:</span> <select name="bank" id="bank_bank" style="width: 110px;">
+       <option value="0">--{:l('CHOOSE_BANK')}--</option>
+       <volist name="UserBankType" id="vo">
+       <option value="{$vo['title']}">{$vo['title']}</option>
+       </volist>
+     </select></li>
+     <li><span class="c2" id="lotteryAmountSpan3">{:l('OPENING_PROVINCES')}:</span> <span class="controls" id="city_1"> <select class="prov" id="bank_bankprov" name="prov" style="width: 110px;"></select> <select class="city" id="bank_bankcity" name="city" style="width: 110px; display: none;"></select>
+     </span></li>
+     <li><span class="c2" id="lotteryAmountSpan4">{:l('ACCOUNT_BRANCH')}:</span> <input name="name" id="bank_bankaddr" type="text" class="cztxinput" style="width: 200px; padding: 2px; padding-bottom: 5px;"></li>
+     <li><span class="c2" id="lotteryAmountSpan5">{:l('ACCOUNT_NAME')}:</span> {$truename}</li>
+     <li><span class="c2" id="lotteryAmountSpan6">{:l('BANK_CARD_NUMBER')}:</span> <input name="name" id="bank_bankcard" type="text" class="cztxinput" style="width: 200px; padding: 2px; padding-bottom: 5px;"></li>
+     <li><span class="c2" id="lotteryAmountSpan7">{:l('TRANSACTION_PASSWORD')}:</span> <input name="name" id="bank_paypassword" type="password" class="cztxinput" style="width: 100px; padding: 2px; padding-bottom: 5px;"> <a href="/Login/findpaypwd" class="reg_floatr">{:l('FORGET')}?</a></li>
+     <li><a href="javascript:void(0)" onclick="Update()" class="btn" id="btn" style="">{:l('ADD IT')}</a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</div>
+<div id="dialogBoxShadow" style="position: absolute; top: 0px; left: 0px; z-index: 100; background-color: rgb(0, 0, 0); opacity: 0.4; width: 100%; background-position: initial initial; background-repeat: initial initial; display: none;"></div>
+<br>
+<br>
+<script>
+ 
+
+
+ $("#city_1").citySelect({nodata:"none",required:false});
+
+ $('#dialogBoxShadow').height($(document).height());
+ function closeAddress(){
+  $("#withdrawUsdAddress").hide();
+  $("#dialogBoxShadow").hide();
+ }
+ function showA(){
+  $("#withdrawUsdAddress").show();
+  $("#dialogBoxShadow").show();
+ }
+
+ function Update(){
+  var name=$('#bank_name').val();
+  var bank=$('#bank_bank option:selected').val();
+  var bankprov=$('#bank_bankprov option:selected').val();
+  var bankcity=$('#bank_bankcity option:selected').val();
+  var bankaddr=$('#bank_bankaddr').val();
+  var bankcard=$('#bank_bankcard').val();
+  var paypassword=$('#bank_paypassword').val();
+  if(name==""||name==null){
+   layer.tips('Enter name Remarks','#bank_name',{tips:3});
+   return false;
+  }
+  if(bankaddr==""||bankaddr==null){
+   layer.tips('Enter Account Branch','#bank_bankaddr',{tips:3});
+   return false;
+  }
+  if(bankcard==""||bankcard==null){
+   layer.tips('Enter Bank account','#bank_bankcard',{tips:3});
+   return false;
+  }
+  if(paypassword==""||paypassword==null){
+   layer.tips('Provide Trans Password','#bank_paypassword',{tips:3});
+   return false;
+  }
+
+
+  $.post("{:U('User/upbank')}",{type:1,name:name,bank:bank,bankprov:bankprov,bankcity:bankcity,bankaddr:bankaddr,bankcard:bankcard,paypassword:paypassword},function(data){
+   if(data.status==1){
+    layer.msg(data.info,{icon:1});
+    window.location="{:U('User/bank')}";
+   }else{
+    layer.msg(data.info,{icon:2});
+    if(data.url){
+     window.location=data.url;
+    }
+   }
+  },"json");
+ }
+
+ function UpdateB(id){
+  layer.config({
+   extend: 'extend/layer.ext.js'
+  });
+  layer.ready(function () {
+   //Default Prompt
+   layer.prompt({
+    title: 'Enter Fund Pwd',
+    formType: 1},function(val){
+    if (val) {
+     //THE_METHOD_TO_BE_EXECUTED
+     $.post("{:U('User/delbank')}",{type:2,id:id,paypassword:val},function(data){
+      if(data.status==1){
+       layer.msg(data.info,{icon:1});
+       window.location="{:U('User/bank')}";
+      }else{
+       layer.msg(data.info,{icon:2});
+       if(data.url){
+        window.location=data.url;
+       }
+      }
+     },"json");
+
+
+    };
+   });
+
+  });
+
+
+ }
+
+</script>
+<script>
+	//MENU_HIGHLIGHTS
+	
+	$('#user_box').addClass('active');
+	$('#user_bank').addClass('active');
+    $('#user_bank i').attr('class','coin_menu_op_13');
+</script>
+<include file="Public:footer_minimal"/>

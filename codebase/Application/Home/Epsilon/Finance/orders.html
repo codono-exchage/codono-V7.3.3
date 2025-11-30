@@ -1,0 +1,132 @@
+<include file="Public:header" />
+<script src="__PUBLIC__/Home/js/datepicker.min.js"></script>
+
+
+
+<div class="container wallet-page">
+  <div class="full-box row">
+    <include file="User:sidebar" />
+
+		<!-- Main content -->
+		<div class="col-10">
+      <div class="row mt-3 mb-3">
+        <include file="User:top_bar" />
+        <div class="col-9 col-md-6 order-1 order-md-2 float-right">
+          <ul class="text-right breadcrumbs list-unstyle">
+            <li>
+              <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+            </li>
+            <li>
+              <a class="btn btn-warning btn-sm" href="{:U('/finance/index')}"
+                >{:l('Finance')}</a
+              >
+            </li>
+            <li class="btn btn-warning btn-sm active">{:l('Orders')}</li>
+          </ul>
+        </div>
+      </div>
+		<div class="card">
+
+       <div class="card-header" >
+   
+    <h4 >{:l('DELEGATED_ADMINISTRATION')}</h4>
+    <select name="type-selectTest" id="type-selectTest" class=" input-group-btn bootstrap-select" data-mobile="false">
+      <option value="0"<eq name="type" value="0">selected</eq>>-{:l('BUY/SELL')}-
+      </option>
+      <option value="1"<eq name="type" value="1">selected</eq>>{:l('BUY')}
+      </option>
+      <option value="2"<eq name="type" value="2">selected</eq>>{:l('SELL')}
+      </option>
+    </select>
+    <select name="status-selectTest" class="bootstrap-select input-group-btn" id="status-selectTest">
+      <option value="0"<eq name="status" value="0">selected</eq>>---{:l('ALL')}---
+      </option>
+      <option value="1"<eq name="status" value="1">selected</eq>>{:l('IN_TRANSACTION')}
+      </option>
+      <option value="2"<eq name="status" value="2">selected</eq>>{:l('COMPLETED')}
+      </option>
+      <option value="3"<eq name="status" value="3">selected</eq>>{:l('REVOKED')}
+      </option>
+    </select>
+  <select name="market-selectTest" id="market-selectTest" data-live-search="true" data-live-search-placeholder='Search' class="input-group-btn bootstrap-select form-control col-3" data-mobile="false">
+    <option selected></option>         
+    <volist name="market_list" id="vo"> 
+              
+              <eq name="market" value="$key">
+             <option value="{$vo['name']}" selected >{$vo['xnb']|strtoupper}/{$vo['rmb']|strtoupper}</option>
+             <else />
+             <option value="{$vo['name']}">{$vo['xnb']|strtoupper}/{$vo['rmb']|strtoupper}</option>
+             </eq> </volist>
+           </select>
+   </div>
+   
+   <div class="card-body">
+       <div class="table-responsive">
+        <table class="table " id="investLog_content">
+         <thead>
+          <tr class="justify-content-between align-items-right">
+           <th>{:l('Market')}</th>
+           <th>{:l('Type')}</th>
+           <th>{:l('Price')}</th>
+           <th>{:l('Fee')}</th>
+		       <th>{:l('QUANTITY')}</th>
+           <th>{:l('Total')}</th>
+           <th>{:l('Status')}</th>
+           <th>{:l('Time')}</th>
+          </tr>
+         </thead>
+         <tbody>
+          <volist name="list" id="vo">
+          <tr>
+           <td>{$market_list[$vo['market']]['xnb']|strtoupper}/{$market_list[$vo['market']]['rmb']|strtoupper}</td>
+           
+           <td><eq name="vo.type" value="1"> <font class="buy">{:l('BUY')}</font> <else /> <font class="sell">{:l('SELL')}</font></eq></td>
+           <td>{$vo['price']|NumToStr}</td>
+		   <td>{$vo['fee']|NumToStr}</td>
+           <td>{$vo['num']|NumToStr}</td>
+           <td>{$vo['mum']|NumToStr}</td>
+           <td><eq name="vo.status" value="0">{:l('IN_TRANSACTION')} | <a class="cancel" id="{$vo.id}" href="javascript:void(0);">{:l('UNDO')}</a></eq> <eq name="vo.status" value="1">{:l('COMPLETED')}</eq> <eq name="vo.status" value="2">{:l('REVOKED')}</eq></td>
+           <td>{$vo.addtime|date='m-d H:i:s',###}</td>
+          </tr>
+          </volist>
+         </tbody>
+        </table>
+        <div class="pages">{$page}</div>
+       </div>
+ 
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+<script>
+	$("#type-selectTest,#status-selectTest,#market-selectTest").change(function(){
+		var type=$("#type-selectTest option:selected").val();
+		var status=$("#status-selectTest option:selected").val();
+		var market=$("#market-selectTest option:selected").val();
+		window.location='/Finance/orders/type/'+type+'/status/'+status+'/market/'+market+'';
+	});
+
+	$('.cancel').click(function(){
+		$.post("{:U('Trade/reject')}",{id : $(this).attr('id'), },function(data){
+			if(data.status==1){
+				layer.msg(data.info,{icon : 1 });
+				window.setTimeout("window.location='{:U('Finance/orders')}'",1000);
+			}else{
+				layer.msg(data.info,{icon : 2 });
+			}
+		});
+	});
+</script>
+<script>
+	//MENU_HIGHLIGHTS
+	$('#finance_box').addClass('active');
+	$('#finance_mywt').addClass('active');
+	$('#finance_mywt i').attr('class','coin_menu_op_6');
+</script>
+<style>
+	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+		padding:7px 2px !important;
+	}
+</style>
+<include file="Public:footer_minimal"/>

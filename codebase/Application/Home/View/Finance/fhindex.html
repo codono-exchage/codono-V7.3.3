@@ -1,0 +1,70 @@
+<include file="Public:header" />
+		<!-- Page content -->
+		<div class="page-container">	
+
+<include file="Finance:left" />
+		<!-- Main content -->
+			<div class="content-wrapper">
+
+
+
+
+		<div class="panel">
+			<div class="assets_content">
+				<div class="safe_center clear ">
+					<h1>{:l('DIVIDEND_CENTER')}  <a class="right" onclick="$('#hints').slideToggle();"> <i class="fa fa-hand-o-right move fz_14 mr5"></i> <span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span> </a> 					</h1>
+				</div>
+				<div id="hints" class="mytips" style="display:none;">
+					
+					<p>
+					<notempty name="prompt_text">
+					{$prompt_text}
+					</notempty>
+					
+					</p>				</div>
+				<div class="mytable-body ">
+					<div class="f_body  table-responsive">
+						<table class="table " id="investLog_content">
+							<thead>
+							<tr>
+								<th>{:l('CURRENCIES')}</th>
+								<th>{:l('THE_TOTAL_SITEWIDE')}</th>
+								<th>{:l('MY_ASSETS')}</th>
+								<th>{:l('HOLD_PERCENTAGE')}</th>
+							</tr>
+							</thead>
+							<tbody>
+														
+                                    <volist name="list" id="vo">
+                                        <tr>
+                                            <td>
+                                                <img src="__UPLOAD__/coin/{$vo['img']}" alt="" style="width: 20px; margin-bottom: -5px;"/>
+                                                {$vo['title']}
+                                            </td>
+                                            <td>{$vo['quanbu']}</td>
+                                            <td>{$vo['wodi']}</td>
+                                            <td>{$vo['bili']}</td>
+                                        </tr>
+                                    </volist>				
+								
+							</tbody>
+						</table>
+						<div class="pages">{$page}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_dividend').addClass('active');
+</script>	
+	
+<include file="Public:footer_minimal"/>

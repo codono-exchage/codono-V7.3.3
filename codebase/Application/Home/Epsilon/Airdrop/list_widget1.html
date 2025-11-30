@@ -1,0 +1,26 @@
+					<div class="col-sm-6 col-md-4 col-lg-4">
+						<div class="thumbnail" >
+							<div class="thumb" style="min-height:200px;">
+								<img src="{$vo.image}" class="img-responsive">
+							</div>
+							<div class="caption">
+								<div class="content-group-sm media">
+									<div class="media-body">
+										<h6 class="text-semibold no-margin"><a href="#" class="text-default">{$vo.name}</a></h6>
+										<small class="text-muted">Coin: {$vo.coinname}</small>
+									</div>
+									<h6 class="text-success media-right no-margin-bottom text-semibold">{$vo['num']*1} {$vo.coinjian}</h6>
+									<small class="text-muted">{$vo.coinjian}</small>
+								</div>
+							</div>
+
+							<div class="card-footer card-footer-transparent">
+								<div class="heading-elements text-center">
+										<div class="col-sm-4" title="{:l('TOTAL')}"><i class="icon-store position-left"></i> {$vo.num}</div>
+										<div class="col-sm-4" title="{:l('STARTING_TIME')}"><i class="icon-store position-left"></i> {$vo.beginTime}</div>
+										<div class="col-sm-4" title="{:l('END_TIME')}"><i class="icon-store position-left"></i> {$vo.endTime}</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+		

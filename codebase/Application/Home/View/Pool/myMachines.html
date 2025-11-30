@@ -1,0 +1,126 @@
+<include file="Public:header" />
+<div class="page-container">
+<div class="row">
+	<div class="navbar navbar-default navbar-xs navbar-component">
+	<ul class="nav navbar-nav no-border visible-xs-block">
+									<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-filter"><i class="icon-circle-down2"></i></a></li>
+								</ul>
+					<div class="navbar-collapse collapse" id="navbar-filter">
+						<p class="navbar-text">Filter:</p>
+						<ul class="nav navbar-nav">
+							<li class="dropdown ">
+								<a  class="text-info" href="{:U('Pool/index')}" >Mining </a>
+							</li>
+							<li class="dropdown active">
+								<a class="" href="{:U('Pool/myMachines')}" >My Machines </a>
+							</li>
+							<li class="dropdown">
+								<a class="text-info" href="{:U('Pool/myRewards')}" >My Rewards </a>
+							</li>
+						</ul>
+
+						
+					</div>
+				</div>
+
+
+</div>
+			
+				<div class="row">
+					<div class="panel">
+						<div class="panel-body">
+						<table class="table table-striped table-info" id="my_machines">
+						<thead>
+							<tr>
+								<th id="sublist-grid_c0">{:L('Name')}</th>
+								<th id="sublist-grid_c1">{:L('Time')}</th>
+								<th id="sublist-grid_c3">{:L('Price')}</th>
+								<th id="sublist-grid_c4">{:L('Mine')}</th>
+								<th id="sublist-grid_c5">{:L('Reward')}</th>
+								<th id="sublist-grid_c6">{:L('Used')}</th>
+								<th id="sublist-grid_c7">{:L('Power')}</th>
+								<th id="sublist-grid_c8">{:L('Time')}</th>
+								<th id="sublist-grid_c9">{:L('Status')}</th>
+								<th id="sublist-grid_c10">{:L('Action')}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<volist name="list" id="vo">
+							<tr>
+								<td>{$vo['name']}</td>
+								<td>{$vo['days']} {:L('Days')}</td>
+								<td>{$vo['price']*1} {$vo['coinname']}</td>
+								<td>{$vo['getcoin']}</td>
+								<td>{$vo['daily_profit']*1} {$vo['getcoin']}/ {:L('Day')}</td>
+								<td>{$vo['collected']}/{$vo['days']}</td>
+								<td>{$vo['power']}</td>
+								<td>{$vo['addtime']|addtime}</td>
+								<td>
+								<switch name="vo.status">
+    <case value="0">Ready state</case>
+    <case value="1">Mining Currently</case>
+	<case value="2">Mining Completed</case>
+	</switch>
+														<include file="Pool:buyform" />
+
+								</td>
+								<td>
+								<switch name="vo.status">
+    <case value="0"><span onclick="startpool('{$vo['id']}')" class="btn btn-sm btn-info"><i class="fa fa-play"></i> Start Mining</span></case>
+    <case value="1"><span onclick="claimreward('{$vo['id']}')" class="btn btn-sm btn-success"><i class="fa fa-arrow-circle-down"></i> Claim Reward</span></case>
+	<case value="2">--</case>
+	</switch>
+								</td>
+							</tr>
+							</volist>
+						</tbody>
+					</table>
+					</div>
+					<div class="panel-footer"><div class="pages">{$page}</div></div>
+					</div>
+				</div>
+			
+		
+</div>
+<br>
+<script>
+	function startpool(id){
+		$.post("{:U('Pool/startMachine')}",{id:id},function(data){
+			if(data.status==1){
+				layer.msg(data.info,{icon:1});
+				window.setTimeout("window.location='{:U('Pool/myMachines')}'",1000);
+			}else{
+				layer.msg(data.info,{icon:2});
+			}
+		});
+	}
+	function  claimreward(id){
+		$.post("{:U('Pool/claimReward')}",{id:id,},function(data){
+			if(data.status==1){
+				layer.msg(data.info,{icon:1});
+				window.setTimeout("window.location='{:U('Pool/myRewards')}'",1000);
+			}else{
+				layer.msg(data.info,{icon:2});
+			}
+		});
+	}
+</script>
+
+<style>
+ @media only screen and (max-width: 540px) {
+		.mobile_hide{display:none;}
+  #my_machines td{
+    display:none;
+  }
+ #my_machines td:first-child,#my_machines td:last-child, #my_machines th:first-child,#my_machines th:last-child {
+    display:table-cell;
+  }
+  #my_machines td,#my_machines th{
+    display:none;
+  }
+ 
+}
+
+</style>
+
+<include file="Public:footer" />

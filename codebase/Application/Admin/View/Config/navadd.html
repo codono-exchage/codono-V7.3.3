@@ -1,0 +1,85 @@
+<include file="Public:header" />
+
+<block name="body">
+<div id="main-content">
+<div id="main" class="main">
+    <div class="main-title-h">
+        <span class="d-sm-flex align-items-center justify-content-between h4">{:isset($info['id'])?'edit':'New'} {:l('Background Menu')}</span>
+    </div>
+
+    <form action="{:U()}" method="post" class="form-horizontal">
+	<table class="table">
+        <tr class="controls">
+            <td class="item-label">{:l('Title')}</td>
+            <td>
+                <input type="text" class="form-control" name="title" value="{$info.title|default=''}">
+			</td>
+				<td class="item-note">({:l('Configuration title for background display')})</td>
+            
+        </tr>
+		    <tr class="controls">
+            <td class="item-label">{:l('Name')}</td>
+            <td>
+                <input type="text" class="form-control" name="name" value="{$info.name|default=''}">
+			</td>
+				<td class="item-note">{:l('Nav Name')}</td>
+            
+        </tr>
+        <tr class="controls">
+            <td class="item-label">{:l('Sort')}</td>
+            <td>
+                <input type="text" class="form-control" name="sort" value="{$info.sort|default=0}">
+			</td>	
+				<td class="item-note">({:l('Order for group display')})</td>
+            
+        </tr>
+        <tr class="controls">
+            <td class="item-label">{:l('URL')}</td>
+            <td>
+                <input type="text" class="form-control" name="url" value="{$info.url|default=''}">
+			</td>		
+			<td class="item-note">({:l('U function parsed URL or external link')})</td>
+            
+        </tr>
+		    <tr class="controls">
+            <td class="item-label">{:l('Icon')}</td>
+            <td>
+                <input type="text" class="form-control" name="ico" value="{$info.ico|default=''}">
+			</td>		
+			<td class="item-note">{:l('Example')} ion-md-lock [<a href="https://iconpark.oceanengine.com/official" target="_blank">{:l('CheatSheet')}</a></td>        
+        </tr>
+        <tr class="controls">
+            <td class="item-label">{:l('Parent menu')}</td>
+            <td>
+                <select name="pid" class="form-select">
+                    <volist name="Menus" id="menu">
+                        <option value="{$menu.id}">{$menu.title_show}</option>
+                    </volist>
+                </select>
+			</td>
+				<td class="item-note">({:l('belong to Parent menu')})</td>
+            </tr>
+
+			<tr class="controls">
+									<td class="item-label">{:l('Status')}:</td>
+									<td><select name="status" class="form-select input-10x">
+										<option value="1">{:l('Enable')}</option>
+										<option value="0">{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+        <tr class="controls">
+		<td class="item-label"></td>
+		<td>
+            <input type="hidden" name="id" value="{$info.id|default=''}">
+            <button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Submit')}</button>
+            <button class="btn btn-return btn-warning" onclick="javascript:history.back(-1);return false;">{:l('Back')}</button>
+		</td>
+        </tr>
+	</table>
+    </form>
+	</div>
+	</div>
+</block>
+
+<include file="Public:footer" />

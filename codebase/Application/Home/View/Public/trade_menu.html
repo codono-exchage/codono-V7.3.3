@@ -1,0 +1,74 @@
+<div class="navbar navbar-default" id="navbar-second">
+		<ul class="nav navbar-nav no-border visible-xs-block">
+			<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
+		</ul>
+
+		<div class="navbar-collapse collapse" id="navbar-second-toggle">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="{:U('Home/index')}"><i class="icon-display4 position-left"></i> {:l('HOME')}</a></li>
+				<li><a href="{:U('Trade/chart')}"><i class="icon-graph position-left"></i> {:l('MARKET_TREND')}</a></li>
+				           <li id="trade_box" class="dropdown">
+                     <a href="{:U('Trade/index')}" id="trade_top" class="darker">{:l('TRADE')}  <span class="caret"></span> </a>
+                    
+
+                     <script id="trade_list_tpl" type="text/x-dot-template">
+                        <ul id="trade-nav-tabs">
+                            {{ for(var k in it) { }}
+                            <li class="trade-tab {{? k == 0}}current{{?}}">
+                                {{=it[k]['title']}}
+                            </li>
+                            {{ } }}
+                        </ul>
+                        <div id="trade-nav-body">
+                            {{ for(var k in it) { }} {{? k == 0}}
+                            <dl style="display: block">
+                                {{??}}
+                                <dl style="display: none">
+                                    {{?}} {{ for(var kk in it[k]['data']) { }}
+                                    <dd>
+                                        <a style="color:#000;" href="/trade/index/market/{{=kk}}"><img src="/Upload/coin/{{=it[k]['data'][kk]['img']}}" style="width: 18px;vertical-align: -4px;margin-right: 5px;">{{=it[k]['data'][kk]['title']}}</a>
+                                    </dd>
+                                    {{ } }}
+                                </dl>
+                                {{ } }}
+                            </dl>
+                        </div>
+                        <i class="fa fa-caret-up move" style="position: absolute;top: -21px;left: 18px;font-size: 28px;"></i>
+                        <div class="nocontent"></div>
+                    </script>
+
+                    <div id="trade_list" class="deal_list ">
+                    </div>
+                    </li>
+
+					<volist name="navigation" id="vo">
+						<li id="{$vo['name']}_box">
+							<a href="/{$vo['url']}">{$vo['title']}</a>
+						</li>
+					</volist>	
+				
+			</ul>
+			<gt name="Think.session.userId" value="0">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-cog3"></i>
+						<span class="visible-xs-inline-block position-right">Share</span>
+						<span class="caret"></span>
+					</a>
+					
+					<ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="#"><i class="icon-user-lock"></i> {:l('AVAILABLE_USD')}:{$userCoin_top['usd']*1}</a></li>
+						<li class="divider"></li>
+						
+						<li><a href="#"><i class="icon-statistics"></i> {:l('FREEZE_USD')}:{$userCoin_top['usdd']*1}</a></li>
+						<li class="divider"></li>
+						
+						<li><a href="#"><i class="icon-accessibility"></i> {:l('THE_TOTAL_ASSETS_OF')}:{$userCoin_top['allusd']*1}</a></li>
+						
+					</ul>
+				</li>
+			</ul>
+			</gt>
+		</div>
+	</div>

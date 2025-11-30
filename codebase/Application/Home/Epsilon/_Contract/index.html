@@ -1,0 +1,39 @@
+<include file="Public:header" />
+<script type="text/javascript">
+     var market = "{$market}";
+     var market_round = {$C['market'][$market]['round']};
+     var market_round_num = {$C['market'][$market]['round']};
+  var market_type={$C['market'][$market]['ext_orderbook']};
+     var userid = "{$Think.session.userId}";
+     var trade_moshi = 1;
+     var getDepth_tlme = null;
+     var trans_lock = 0;
+  if("{$Think.cookie.colorshade}"){
+  var colorshade="{$Think.cookie.colorshade}";
+  }
+  else{
+  var colorshade="Dark";
+  }
+</script>
+
+<div class="container-fluid mtb15 no-fluid">
+  <div class="row sm-gutters">
+    <div class="col-md-3">
+      <include file="Trade:left_orderbook" />
+    </div>
+    <div class="col-md-6">
+      <include file="Trade:mid_stats" />
+      <include file="Trade:mid_charts" />
+      <include file="Trade:mid_tradebox" />
+    </div>
+    <div class="col-md-3">
+      <include file="Trade:right_pairs" />
+      <include file="Trade:right_history" />
+    </div>
+    <div class="col-md-12">
+      <include file="Trade:bottom_history" />
+    </div>
+  </div>
+</div>
+<include file="Trade:footer_scripts" />
+<include file="Public:footer_minimal" />

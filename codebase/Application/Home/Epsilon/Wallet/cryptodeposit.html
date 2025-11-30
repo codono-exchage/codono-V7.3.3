@@ -1,0 +1,373 @@
+<include file="Public:header"/>
+<!-- Page container -->
+
+<main class="wrapper">
+	
+	<!-- Swap Start -->
+	<section class="container">
+		<div class="full-box row">
+			<include file="User:sidebar" />
+			<div class="col-10">
+		<div class="container mt-3 mb-3">
+			<div class="row">
+				<include file="User:top_bar" />
+				
+				<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+				  <ul class="text-right breadcrumbs list-unstyle">
+					<li>
+						<a class="btn btn-warning btn-sm " href="{:U('Finance/index')}">{:l('Finance')}</a>
+					  </li>
+					<li>
+					  <a class="btn btn-warning btn-sm active" href="{:U('wallet/cryptodeposit')}">{:l('Crypto Deposit')}</a>
+					</li>
+					<li>
+						<a class="btn btn-warning btn-sm" href="{:U('Finance/mycz')}">{:l('Fiat Deposit')}</a>
+					</li>
+				  </ul>
+				</div>
+			  </div>
+		</div>
+	<div class="container ">
+		<div class="row  mb-3">
+			<div class="col-12 mt-3 ">
+				<ul id="withdraw-money-tabs" class="nav nav-pills" role="tablist">
+					<li class="nav-item white-bg">
+						<a  class="nav-link active"  href="{:U('Wallet/cryptodeposit')}"
+							role="tab">{:l('Deposit')} </a>
+					</li>
+					<li class="nav-item white-bg">
+						<a aria-selected="true" class="nav-link "  href="{:U('Pay/receive')}"
+							>{:l('Receive')} </a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-6 card m-b-40 ">
+				<div class="card-body">
+
+					<div class="form-group">
+						<label>{:l('Select Coin')}</label>
+				<select id="depositCyrpto" class="bootstrap-select" data-live-search="true" data-live-search-placeholder='{:l("Search")}' data-width="100%">
+						<volist name="coin_list" id="kolist">
+											<eq name="xnb" value="$key">
+												<option selected="selected" value="{$kolist['name']}" data-value="{$kolist['name']}" data-content="<img src='{$kolist['img']}' height='20px' width='20px !important'/> {$kolist['name'] |strtoupper}"></option>
+											<else/>
+													<option value="{$kolist['name']}" data-value="{$kolist['name']}" data-content="<img src='{$kolist['img']}' height='20px !important' width='20px !important'/> {$kolist['name'] |strtoupper}"></option>
+											</eq>
+								
+							</volist>
+							
+				</select>
+					</div>
+						<div class="form-group">
+						<label> Network</label>
+						
+				<select id="selectNetwork" class="bootstrap-select" data-live-search="true" data-live-search-placeholder='{:l("Search")}' data-width="100%">
+						
+						<volist name="infocoin" id="network">
+							<eq name="xnb" value="$key">
+							<option selected="selected" value="{$network.name}" data-value="{$network.name}" data-content="{$network.name|strtoupper} <span>[{$network.network|strtoupper} <eq name='network.tokenof' value='0'>{$network.name|strtoupper}<else/>{$network.tokenof|strtoupper}</eq> network]</span>"></option>
+							<else/>
+							<option value="{$network.name}" data-value="{$network.name}" data-content="{$network.name|strtoupper} <span>[{$network.network|strtoupper} <eq name='network.tokenof' value='0'>{$network.name|strtoupper}<else/>{$network.tokenof|strtoupper}</eq> network]</span>"></option>
+							</eq>
+						</volist>
+				</select>
+						<small>{:l('Make sure the network you choose for the deposit matches the withdrawal network or your assets may be lost.')}</small>
+					</div>
+
+
+					<div class="alert alert-warning alert-dismissible fade show" role="alert" id="networkMessage">
+						
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+
+					<ul class="form-info row" id="walletinfo">
+						<li class="col-12">
+							<h6>{:l('Address')}</h6>
+							<div class="address-box">
+								<div id="copyAddress" class="h6 font-weight-bold">--</div>
+								<div class="pull-right text-right ">
+								<span class="address-icon">
+									<a role="button" data-toggle="popover" data-placement="top" data-content="Copied" trigger="hover" onclick="copyToClipboard('#copyAddress')" class="btn-link " data-original-title="" title=""><i class="fa  fa-copy fa-2x"></i></a>
+								</span>
+								
+									 <a type="button" class="btn btn-link p-0" data-toggle="modal" data-target="#qr-show-box">
+										<i class="fa fa-qrcode fa-2x"></i>
+									 </a>
+								</div>
+							</div>
+							<span id="qr2" class="address-box text-center" style="display: none;"></span>
+						</li>
+						
+						<if condition="$infocoin[$coin]['dest_tag']">
+						<li class="col-12" id="dest_tag" style="display:none">
+							<h6>{:l('Memo')}</h6>
+							<span id="networkMemo"></span>
+							<a role="button" data-toggle="popover" id="qrcode2" data-placement="top" data-content="{:('Copied')}" trigger="hover" onclick="copyToClipboard('#networkMemo')" class="btn btn-1"><i class="fa  fa-copy"></i></a>						
+							<div class="d-inline p-5 f-s-12 alert alert-warning" role="alert">
+								{:l('MEMO is required or you will lose your funds')}
+							</div>
+
+						</li>
+						</if>
+						<li class="col-6">
+							<h6>{:l('Expected Arrival')}</h6>
+							<div class="text-bold">
+								<label><span id="networkConfirmations" class="font-weight-bold">--</span> {:l('network confirmation')}</label>
+							</div>
+							<hr>
+						</li>
+
+					
+						<li class="col-6">
+							<h6>{:l('Coin')}</h6>
+							<div class="text-bold">
+								<label>{:l('Only send')} <span id="networkName">-</span></label>
+							</div>
+							<hr>
+							</li>
+						<li class="col-6">
+							<h6>{:l('Network')}</h6>
+							<div class="text-bold">
+								<label>{:l('Make sure the network is')} <span id="networkTitle">-</span></label>
+							</div>	
+						</li>
+
+					</ul>
+
+				</div>					
+			</div>
+			
+			<div class="card col-md-5 mt-3 m-b-40  offset-md-1">
+				<div class="card-body">
+					<h6 class="text-bold">
+						{:l('Deposited amount arrive did not arrive?')}
+					</h6>
+					<div class="card">
+						
+					</div>
+					<div class="white-bg">
+						{:l('If you encounter the following issues during the deposit process, you can go to the Deposit Status Inquiry to search for your current deposit status or retrieve your assets via the self-service application.')}'
+						<ul class="orig">
+							<li>{:l('The amount deposited did not arrive even after a long time.')}</li>
+						</ul>
+						<a href="{:U('Finance/trace')}" class="btn theme-bg btn-sm">{:l('Trace Deposit')}</a>
+					</div>
+					<hr/>
+					<div class="white-bg">
+						{:l('Contact Support')}
+						<ul class="orig">
+							<li>{:l('You did not enter the MEMO/Label correctly')}</li>
+							<li>{:l('You deposited unlisted coins')}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="card-body">
+					<h6 class="text-bold">{:l('FAQ')}</h6>
+					
+					<ul class="orig">
+						<li><a href="">{:l('Video Guide')}</a></li>
+						<li><a href="">{:l('Step-by-Step Crypto Deposit Guide')}</a></li>
+						<li><a href="">{:l('Cryptocurrencies Deposited with Wrong or Missing PayID/Memo')}</a></li>
+						<li><a href="">{:l('How to buy Cryptocurrency')}</a></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row card">
+			<div class="card-header">
+			<div class="card-title">{:l('Recent Deposits')}</div>
+
+			</div>
+		<div class="card-body table-responsive">
+			<table class="table text-center" id="investLog_content">
+				<thead>
+				<tr>
+					<th>{:l('STATUS')}</th>
+					<th>{:l('ADDRESS')}</th>
+					<th>{:l('AMOUNT')}</th>
+					
+					<th>{:l('Time')}</th>
+					<th>{:l('Hash')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				
+				<volist name="deposit_list" id="vo">
+					<tr>
+						<td>
+							<eq name="vo.status" value="1">
+								<span class="green"><i class="fa fa-check fa-check-circle" data-toggle="tooltip" data-placement="top" title="{:l('INTO_SUCCESS')}"></i> </span>
+								<else/>
+								<span class="text-warning"><i class="fa fa-exclamation-circle" data-toggle="tooltip" data-placement="top" title="{:l('PENDING_NEEDS_CONFIRMATION')}{$vo.status|abs}"></i></span>
+							</eq>
+							</td>		
+
+						<td><if condition="$vo['username']"><button class="btn btn-link btn-sm" onclick='showtx("{$vo['username']}")'>{$vo.username|substr_replace='...',4,-4}</button><else/>--</if></td>
+						
+						<td>{$vo['mum']|NumToStr} {$vo.coinname|strtoupper}</td>
+				
+							<td>{$vo.addtime|addtime}</td>
+							<td>
+								<if condition="$vo['txid']">
+									 <button class="btn btn-link btn-sm" onclick='showtx("{$vo['txid']}")'>
+									{$vo.txid|substr_replace='...',4,-4}</button>
+								<else/>
+								<if condition="$vo['memo']">
+									 <button class="btn btn-link btn-sm" onclick='showtx("{$vo['memo']}")'>
+									{$vo.memo|substr_replace='...',4,-4}</button>
+								</if>
+							</if>
+							<notempty name="explorer">
+								<a href="{$explorer}{$vo.txid}">{:l('[Info]')}</a>
+								</notempty>
+						</td>
+					</tr>
+				</volist>
+				
+				
+				</tbody>
+				<if condition="$coin_list[$xnb]['type'] eq 'waves'">
+				<tfoot>
+				<tr></tr>
+				<tr><td colspan="6">
+				<span class="btn btn-success" onclick="wavesRefresh()"><i class="fa fa-refresh "></i>{:l('Check Deposit')}</span> 
+				</td></tr>
+				</tfoot>
+				</if>
+			</table>
+		</div>
+		</div>
+	</div>
+	</div></div></div>
+	</section>
+	</main>
+	<!-- NO HEADER Modal START-->	
+<div class="modal fade success-modal" id="qr-show-box" tabindex="-1" aria-labelledby="qr-show-boxx" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		  
+	  <div class="modal-content">
+	     <div class="modal-header">
+        <h5 class="modal-title"><i class="fa fa-check-circle"></i> Scan QR code for deposit address </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+		<div class="modal-body text-center">
+		  <div class="desc" id="qr3"></div>
+		</div>
+
+	  </div>
+	</div>
+  </div>
+  <!--  NO HEADER Modal END -->
+	<span style="display:none">
+			<span id="qrcode1" class="qr_code_get"></span>
+			<span id="qrcode2"></span>
+	</span>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+    <script>
+	$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+	function wavesRefresh(){
+	$.get( "{:U('IPN/WavesDeposit')}", function( data ) {
+	alert( "Deposits checked!." );
+	})
+	}
+	jQuery(document).ready(function ($) {
+		<if condition="$coin_list[$xnb]['type'] eq 'waves'">
+       wavesRefresh();
+		</if>
+
+	var selectNetwork=$('select#selectNetwork').find(":selected").val();
+	
+	changeAddress(selectNetwork);
+	});
+	
+	document.querySelector('select#selectNetwork').onchange = function(){   
+		var selectNetwork=this.selectedOptions[0].getAttribute('data-value'); 
+		
+		changeAddress(selectNetwork);
+	};
+	document.querySelector('select#depositCyrpto').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+	var prefix="coin";
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+};
+function changeAddress(coin){
+    var networkCoins = '{$infocoin|json_encode}';
+	const obj = JSON.parse(networkCoins);
+	var coininfo=obj[coin];
+	let coin_name=coininfo.name;
+	$("#networkName").html(coin_name.toUpperCase());
+	$("#networkName2").html(coininfo.name);
+	if(coininfo.network=='other'){
+	if(coininfo.tokenof==0){
+	$("#networkTitle").html(coininfo.name);
+	}else{
+	$("#networkTitle").html(coininfo.tokenof);
+	}
+	}else{
+	$("#networkTitle").html(coininfo.network);
+	}
+	$("#networkTitle2").html('['+coininfo.network + '] '+coininfo.title);
+	$("#networkConfirmations").html(coininfo.confirmations);
+	$("#copyAddress").html(coininfo.wallet);
+	if(coininfo.wallet==false){
+	 
+		$("#walletinfo").hide();
+		$("#networkMessage").html(coininfo.message);
+	}else{
+	
+		$('#qrcode1').qrcode({
+                        render: "table", //table
+                        size: 150,
+                        text: coininfo.wallet, //Any content
+						background: "#ffffff"
+                    }); 
+			let imgcontent	=$('#qrcode1').html();
+			let content= '<div class="text-bold"><span style="justify-content: center;display: inline-grid;padding: 15px;background: #fff;">imghere</span><span class="qr-address-box">'+coininfo.wallet+'</span></div>';	
+			let newcontent =content.replace(/imghere/g, imgcontent);
+
+			$("#qr1").attr('data-content',newcontent);
+			$("#qr3").html(newcontent);
+					
+		$("#walletinfo").show();
+		$("#networkMessage").hide();
+	}
+	if(coininfo.dest_tag!=null){
+	
+	$('#qrcodeMemo').qrcode({
+                        render: "table", //table
+                        size: 150,
+                        text: coininfo.dest_tag, //Any content
+						background: "#ffffff"
+                    }); 
+		$("#dest_tag").show();
+		$("#networkMemo").html(coininfo.dest_tag);
+	}
+	
+}
+
+function showQrCode() {
+	if($("#qr2").is(":visible")) {
+		$("#qr2").hide();
+	} else {
+		$("#qr2").show();
+	}
+}
+function showtx(tx){
+	layer.alert(tx, {title: "Info",btn: ['Ok']});
+	}
+	</script>
+	<!-- Wallet Content End -->
+<include file="Public:footer_minimal"/>

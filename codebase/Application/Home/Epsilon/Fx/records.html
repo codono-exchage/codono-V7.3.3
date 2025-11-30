@@ -1,0 +1,95 @@
+<include file="Public:header" />
+
+<!-- Page container -->
+
+<div class="container wallet-page">
+	<div class="full-box row">
+		<include file="User:sidebar" />
+
+
+		<!-- Main content -->
+		<div class="col-10">
+			
+				
+						<div class="row mt-3 mb-3">
+							<include file="User:top_bar" />
+							<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+							  <ul class="text-right breadcrumbs list-unstyle">
+								<li>
+								  <a
+									class="btn btn-warning btn-sm"
+									href="{:U('/')}"
+									>{:l('Home')}</a
+								  >
+								</li>
+								<li>
+								  <a
+									class="btn btn-warning btn-sm"
+									href="{:U('/fx')}"
+									>{:l('FX')}</a
+								  >
+								</li>
+								<li class="btn btn-warning btn-sm active">
+								  FX Records
+								</li>
+							  </ul>
+							</div>
+						  </div>
+						<div class="f_tab_body">
+							<div class="table-responsive card p-20">
+								<table class="table table-hover">
+									<thead>
+									  <tr>
+										<th>{:l('Type')}</th>
+										<th>{:l('Traded')}</th>
+										
+										<th>{:l('Price')}</th>
+										<th id="sublist-grid_c4">{:l('Total')}</th>
+										<th>{:l('Fee')}</th>
+										<th id="sublist-grid_c0">{:l('Time')}</th>
+										<th id="sublist-grid_c0">{:l('Status')}</th>
+										<th id="sublist-grid_c0">{:l('Transaction id')}</th>
+									  </tr>
+									</thead>
+									<tbody>
+										<volist name="list" id="vo">
+											<tr>
+												<eq name="vo['type']" value="buy"><td class="btn btn-sm btn-2"><else/><td class="otc_type_sell"></eq>{$vo['type']|strtoupper}</td>
+												<td>{$vo['trade_coin']|strtoupper} {$vo['qty']}</td>
+												<td>{$vo['base_coin']|strtoupper} {$vo['final_price'] * 1}</td>
+												<td>{$vo['base_coin']|strtoupper} {$vo['final_total']}</td>
+												<td>{$vo['base_coin']|strtoupper} {$vo['fees_paid'] * 1}</td>
+												<td>{$vo.addtime|date='m-d H:i:s',###}</td>
+												<td>
+													<eq name="vo.fill" value="0">{:l('Processing')}</eq>
+													<eq name="vo.fill" value="1">{:l('Completed')}</eq> 
+												</td>
+												<td>
+												<empty name="vo.memo"><else/>[{$vo.memo}]</empty>
+												</td>
+												
+											</tr>
+										</volist>
+									</tbody>
+								  </table>
+
+								<div class="pages">{$page}</div>
+							</div>
+						</div>
+				
+			</div>
+		</div>
+	</div>
+
+<style>
+.otc_type_buy{
+background:green;
+color:#fff !important;
+}
+.otc_type_sell{
+background:red;
+color:#fff !important;
+}
+</style>
+<div class="m-t-40"></div>
+<include file="Public:footer_minimal"/>

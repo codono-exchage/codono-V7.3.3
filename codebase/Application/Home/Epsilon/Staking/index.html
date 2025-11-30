@@ -1,0 +1,297 @@
+<include file="Public:header" />
+<section class="generic">
+<!-- Page container -->
+
+<main class="wrapper stake-page ">
+    <!-- Account Heading Start -->
+    <div class="page-top-banner">
+        <div class="filter" style="background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <h1>{$page_title}</h1>
+                        <notempty name="prompt_text">
+        <h2>{$prompt_text}</h2> 
+                            </notempty>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Account Heading End -->
+    	<!-- Account Heading End -->
+	<div class="container">
+		<div class="row mt-3 mb-3">
+			<include file="User:top_bar" />
+			<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+			  <ul class="text-right breadcrumbs list-unstyle">
+				<li>
+				  <a
+					class="btn btn-warning btn-sm"
+					href="{:U('/')}"
+					>{:l('Home')}</a
+				  >
+				</li>
+				<li>
+				  <a
+					class="btn btn-warning btn-sm active"
+					href="{:U('Staking/index')}">{:l('Staking')}</a
+				  >
+				</li>
+				<li >
+				 
+                  <a
+                  class="btn btn-warning btn-sm"
+                  href="{:U('Staking/logs')}"
+                  > {:l('Staking Logs')}</a
+                >
+				</li>
+			  </ul>
+			</div>
+		  </div>
+    <section class="">
+    <div class="container">
+
+        <div class="stake-table table-responsive card p-20">
+            <h1 class="f-s-30 f-w-700 m-b-15">{:l('Plans')}</h1>
+  
+            <table class="table table-striped">
+                <thead>
+                <tr>
+					<th class="text-center">
+                        {:l('Name')}
+                    </th>
+                    <th class="">
+                        {:l('Coin')}
+                    </th>
+                    <th class="">
+                        {:l('Duration')}
+                    </th>
+
+                    <th class="">
+                        {:l('Return')}
+                    </th>
+                    <th class="text-center">
+                        {:l('Minimum Amt')}
+                    </th>
+                    <th class="text-right">
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+					<volist name="list" id="vo">		
+                <tr class="">
+					<td class="text-center">{$vo.title}</td>
+                    <td><div class="icon"> <img src="__UPLOAD__/coin/{$vo.img}" alt=""><span class="coin">{$vo['coinname'] |strtoupper}</span></td>
+                        <td>                                    
+                        <div class="btn-select">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+									<volist name="vo.percentage" id="period" key="days">
+                                <label class="btn btn-radio">{$key}<input type="radio" name="{$vo.id}period" id="option{$period}" value="{$period}"></label>
+							</volist>
+                            </div>
+                    </div>
+                    </td>
+					<td >Upto {$period}%</td>
+                
+                    <td class="text-center">{$vo['minvest'] * 1}</td>
+                    <td class="text-right"><button class="btn btn-4" role="button" data-toggle="modal" data-target="#stakeModal_{$vo.id}" >{:l("STACK_NOW")}</button></td>
+                </tr>
+			</volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<section>
+
+</section>
+        <section class="container">       
+            <div class="page-bottom-faq card p-10">
+                <h3 class="section-title"> {:l('FAQ')}</h3>
+                <div class="page-bottom-tabs">
+                            <div class="row accordion" id="faq-accordion">
+                                <div class="col-lg-6">
+                                    <div class="faq-item">
+                                        <div class="title" data-toggle="collapse" data-target="#one">
+                                            <div class="icon"></div>
+                                            <h3>
+                                                What is Locked Staking?
+                                            </h3>                           
+                                        </div>
+                                        <div id="one" class="collapse" data-parent="#faq-accordion">
+                                            <div class="desc">
+                                                Locked Staking is the process of holding funds in a cryptocurrency wallet to support the operations of a blockchain network.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="faq-item">
+                                        <div class="title" data-toggle="collapse" data-target="#two">
+                                            <div class="icon"></div>
+                                            <h3>
+                                                What will happen when I'm holding Locked Staking?
+                                            </h3>                           
+                                        </div>
+                                        <div id="two" class="collapse" data-parent="#faq-accordion">
+                                            <div class="desc">
+                                                We will reduce the cryptocurrency amounts which you're holding in your spot wallet.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="faq-item link-page">
+                                        <div class="title">
+                                            <div class="icon"></div>
+                                            <h3>
+                                                <a href="faq-detail-2.html">
+                                                    What happens when I redeem early?
+                                                </a>
+                                            </h3>                           
+                                        </div>
+                                    </div>
+                                    <div class="faq-item link-page">
+                                        <div class="title">
+                                            <div class="icon"></div>
+                                            <h3>
+                                                <a href="faq-detail-2.html">
+                                                   If a link will be given to a topic somewhere
+                                                </a>
+                                            </h3>                           
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="faq-item link-page">
+                                        <div class="title">
+                                            <div class="icon"></div>
+                                            <h3>
+                                                <a href="faq-detail-2.html">
+                                                   If a link will be given to a topic somewhere
+                                                </a>
+                                            </h3>                           
+                                        </div>
+                                    </div>
+                                    <div class="faq-item link-page">
+                                        <div class="title">
+                                            <div class="icon"></div>
+                                            <h3>
+                                                <a href="faq-detail-2.html">
+                                                   If a link will be given to a topic somewhere
+                                                </a>
+                                            </h3>                           
+                                        </div>
+                                    </div>
+                                    <div class="faq-item">
+                                        <div class="title" data-toggle="collapse" data-target="#one1">
+                                            <div class="icon"></div>
+                                            <h3>
+                                                How to buy cryptocurrency on {:SHORT_NAME} Staking?
+                                            </h3>                           
+                                        </div>
+                                        <div id="one1" class="collapse" data-parent="#faq-accordion">
+                                            <div class="desc">
+                                                When you complete your identity verification and add your payment methods, you are now ready to receive crypto on the {:SHORT_NAME} Staking platform. First, choose from all the available offers on the marketplace. After that, create an order to receive your crypto and pay the seller with their preferred payment method. Finally, after you complete the fiat transfer and confirm your payment on {:SHORT_NAME} Staking, get your crypto from the seller.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="faq-item">
+                                        <div class="title" data-toggle="collapse" data-target="#two1">
+                                            <div class="icon"></div>
+                                            <h3>
+                                                How to sell cryptocurrency on {:SHORT_NAME} Staking?
+                                            </h3>                           
+                                        </div>
+                                        <div id="two1" class="collapse" data-parent="#faq-accordion">
+                                            <div class="desc">
+                                                You can sell cryptocurrencies instantly and securely on the {:SHORT_NAME} Staking platform! First, browse the crypto you want to sell and find the most suitable offer among other users' offers. To create an order, you must first transfer the cryptocurrencies you want to sell to the Staking wallet section of your account.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="faq-item">
+                                        <div class="title" data-toggle="collapse" data-target="#three1">
+                                            <div class="icon"></div>
+                                            <h3>
+                                                What are the downsides of Staking exchanges?
+                                            </h3>                       
+                                        </div>
+                                        <div id="three1" class="collapse" data-parent="#faq-accordion">
+                                            <div class="desc">
+                                                Staking exchanges also have disadvantages. These disadvantages include long trading times, not very intuitive user experience, and low liquidity. Compared to regular cryptocurrency exchanges, they have lower trading volumes, a smaller user base and longer trading cycles.
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>      
+                            </div>
+                </div>
+            </div>
+        </section>
+    <script>
+   $(document).ready(function() {
+    // Event delegation to catch dynamically added elements or to solve issues with event not firing
+    $(document).on('change', '.cb_period', function() {
+        
+        // Manually check the radio button (should be redundant with correct Bootstrap setup)
+        $(this).prop('checked', true);
+
+        // Fetch the data-percentage attribute
+        var percentage = $(this).data('percentage');
+		console.log('Triggered'+percentage);
+        // Update the content of the #percent element
+        $('.percent').text(percentage+'%'); // Use .text() for span
+    });
+
+    // To visually toggle 'active' class for Bootstrap buttons if not automatically handled
+    $('.btn-group-toggle .btn').on('click', function() {
+        $(this).siblings().removeClass('active'); // Remove 'active' from siblings
+        $(this).addClass('active'); // Add 'active' to clicked button
+        // This part might be redundant if Bootstrap JS is correctly included and initialized
+    });
+});
+
+
+        function stakenow(id,coinname) {
+            var amount=$("input[id='inv_box"+id+"']").val();
+            if(amount==null || amount <=0){
+            layer.tips('Enter Amount', "input[id='inv_box"+id+"']", {tips: 1});
+            return false;
+            }
+            period=$("input[name='"+id+"period']:checked").val();
+            if(period==null || period <=0){
+            layer.tips('Choose Period', "div[id='select_period_"+id+"']", {tips: 1});
+            return false;
+            }
+            var msg = 'You want to stake '+amount+coinname;
+            
+             layer.confirm(msg, {
+                 btn: ['Confirm','Cancel'] //PUSH_BUTTON
+               }, function(){
+                $.post("/Staking/createStaking/",{id:id,amount:amount,period:period} , function (data) {
+                    layer.closeAll('loading');
+                    trans_lock = 0;
+                    if (data.status == 1) {
+        
+                        layer.msg(data.info, {icon: 1});
+                                window.location.href = "{:U('Staking/logs')}";
+                    } else {
+                        if(data.error){
+                            layer.msg(data.error, {icon: 2});    
+                        }
+                        else{
+                            layer.msg(data.info, {icon: 2});    
+                        }
+                    }
+        
+                }, 'json');
+                });
+            }
+        </script>	
+    <volist name="list" id="to">	
+        <include file="Staking:modal" />
+        </volist>
+    <!-- Staking Content End -->
+</main>
+</section>
+<include file="Public:footer_minimal"/>

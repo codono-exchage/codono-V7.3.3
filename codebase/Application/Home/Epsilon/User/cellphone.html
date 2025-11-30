@@ -1,0 +1,323 @@
+<include file="Public:header" />
+<link rel="stylesheet" href="/Public/template/epsilon/addons/intltelinput.css">
+<main class="wrapper">
+  <!-- Account Heading Start -->
+  <div class="full-box row">
+    <include file="User:sidebar" />
+    <div class="col-10">
+  <div class="page-title my-account">
+    <div class="container">
+      <div class="row">
+        <include file="User:top_bar" />
+        <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+          <ul class="text-right breadcrumbs list-unstyle">
+            <li>
+              <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+            </li>
+            <li>
+              <a href="{:U('/user/index')}" class="btn btn-warning btn-sm"
+                >{:l('User')}</a
+              >
+            </li>
+            <li class="btn btn-warning btn-sm active">{:l('Cellphone')}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Account Heading End -->
+  <!-- Account Content Start -->
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">{:l('SMS Verification')}</h4>
+          </div>
+          <div class="card-body">
+            <div class="settings-profile">
+              <div class=" step3">
+                
+                  <eq name="verified" value="1">
+                  <div class="missionItem">
+                    <div class="icon">
+                      <i class="ion ion-ios-done-all"></i>
+                    </div>
+                    <div class="content">
+                      <h3>{:l('YOUR_ACCOUNT_HAS_BEEN_ENABLED_')}</h3>
+                      <p>Verified : {$user.cellphones} {$user.cellphone} on {$user.cellphonetime|date="Y-m-d",###}</p>
+                    </div>
+                    <div class="button">
+                      <button onclick="new_cellphone();" class="theme-bg btn btn-sm">{:l('REPLACEMENT_BINDINGS')}</button>
+                    </div>
+                  </div>
+                <else/>  
+                <div class="missionItem">
+                  <div class="icon">
+                    <i class="ion ion-ios-pending"></i>
+                  </div>
+                
+                  <div class="button">
+                    <button onclick="new_cellphone();" class="theme-bg btn btn-block">{:l('Verify')} {:l('Mobile')}</button>
+                  </div>
+                </div>
+                </eq>
+               
+                
+              </div>
+              <div >
+                
+                  <div class=" step4" style="display:none;">
+                    <eq name="verified" value="1">
+                    <div class="form-group">
+                      <label for="existing_number" class="mb-24">{:l('Existing Number')}</label>
+                    <div class="input-group form-group">
+                      
+                      <input type="text" id="existing_number" value="{$user.cellphones} {$user.cellphone}" class="form-control" disabled> 
+                    </div>
+                  </div>
+                  </eq>
+                    <label for="cellphone_new" class="mb-24">{:l('NEW_MOBILE_PHONE_NUMBER')}</label>
+
+                    <div class="input-group form-group">
+                      
+                      <input type="text" id="cellphones_new"   class="form-control" style="display: none;"> 
+
+                    </div>
+                    <div class="form-group">
+                      <input class="pl-5 form-control" placeholder="{:l('NEW_MOBILE_PHONE_NUMBER')}" type="text" id="cellphone_new" required/>
+                     </div>
+                    <div class="form-group m-t-20">
+                      <button class="btn btn-2" onclick="send_cellphone_new('sms')">
+                      {:l('Send SMS OTP')}
+                      </button>
+                    </div>
+                    
+                  <div class="step6" style="display: none;">
+                    <label for="cellphone_verify_new">{:l('SMS_VERIFICATION_CODE')}</label>
+                  <div class="input-group form-group">
+                    
+                    <input type="text" id="cellphone_verify_new" value="" class="form-control" placeholder="{:l('PLEASE_ENTER_THE_VERIFICATION_')}"/> 
+                    <div class="input-group-append">
+                    <span id="reg_cellphone_new"></span>
+                  </div>
+                  </div>
+                  <div class="input-group form-group ">
+                    <input type="button" value="{:l('REPLACEMENT_BINDINGS')}" id="replace" disabled  class="form-control theme-bg btn-block" onclick="cellphone_news()"/>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+</main>
+
+<style>
+  .iti-mobile-select{
+    position: absolute;
+    bottom: 0 !important;
+  }
+  .intl-tel-input .selected-flag {
+    z-index: 1;
+    position: relative;
+    width: 38px;
+    padding: 0px 10px 0 4px;
+    margin: 20px 4px;
+    height: 30px;
+    top: 0px;
+  }
+</style>
+<script>
+  var hints = "0";
+  if (hints == 1) {
+    $("#hints").show();
+  }
+</script>
+
+<script src="/Public/template/epsilon/addons/intlTelInput.js"></script>
+                   
+<script>
+  $("#cellphones").intlTelInput({
+    autoHideDialCode: false,
+    defaultCountry: "us",
+    nationalMode: false,
+    preferredCountries: ["us", "uk", "hk", "in", "ru", "vi", "de"],
+  });
+</script>
+<script>
+  function new_send() {
+    $(".step2").hide();
+    $(".step1").show();
+  }
+
+  function cellphone_set() {
+    var cellphone = $("#cellphone").val();
+    var cellphones = $("#cellphones").val();
+    var cellphone_verify = $("#cellphone_verify").val();
+    if (cellphone == "" || cellphone == null) {
+      layer.tips("{:l('PLEASE_ENTER_THE_PHONE_NUMBER')}", "#cellphone", {
+        tips: 3,
+      });
+      return false;
+    }
+    if (cellphone_verify == "" || cellphone_verify == null) {
+      layer.msg("{:l('PLEASE_ENTER_THE_VERIFICATION_')}", { icon: 2 });
+      //layer.tips("{:l('PLEASE_ENTER_THE_VERIFICATION_')}", '#cellphone_verify', {tips: 3});
+      return false;
+    }
+    $.post(
+      "/User/cellphone_set",
+      {
+        cellphone: cellphone,
+        cellphones: cellphones,
+        cellphone_verify: cellphone_verify,
+      },
+      function (data) {
+        if (data.status == 1) {
+          layer.msg(data.info, { icon: 1 });
+          location.reload();
+        } else {
+          layer.msg(data.info, { icon: 2 });
+          if (data.url) {
+            window.location = data.url;
+          }
+        }
+      },
+      "json"
+    );
+  }
+</script>
+<script src="__PUBLIC__/static/js/intlTelInput.js"></script>
+<script>
+  $("#cellphones_new").intlTelInput({
+    autoHideDialCode: false,
+    defaultCountry: "tr",
+    nationalMode: false,
+    preferredCountries: ["tr", "us", "uk", "hk", "in", "mo"],
+  });
+</script>
+<script>
+  function new_cellphone() {
+    $(".step3").hide();
+    $(".step4").show();
+  }
+
+  function send_new() {
+    $(".step6").hide();
+    $(".step5").show();
+  }
+
+  function send_cellphone_new(type) {
+    <empty name="uer['cellphone']">
+      var cellphone = $("#cellphone_new").val();
+      <else />
+      var cellphone ="{$user.cellphone}";
+    </empty>;
+
+    var cellphone_new = $("#cellphone_new").val();
+    var cellphones_new = $("#cellphones_new").val();
+
+    if (cellphone_new == "" || cellphone_new == null) {
+      layer.tips("{:l('PLEASE_ENTER_A_NEW_PHONE_NUMBE')}", "#cellphone_new", {
+        tips: 3,
+      });
+      return false;
+    }
+
+    if (cellphone == "" || cellphone == null) {
+      layer.tips("{:l('PLEASE_ENTER_THE_PHONE_NUMBER')}", "#cellphone", {
+        tips: 3,
+      });
+      return false;
+    }
+    $.post(
+      "/Verify/send_code_to_mobile",
+      {
+        cellphone: cellphone,
+        cellphone_new: cellphone_new,
+        cellphones_new: cellphones_new,
+        type: type,
+      },
+      function (data) {
+        if (data.status == 1) {
+          $("#replace").removeAttr("disabled");
+
+          layer.msg(data.info, { icon: 1 });
+          $(".step5").hide();
+          $(".step6").show();
+          $("#cellphone_new").attr("disabled", "disabled");
+          var obj = $("#reg_cellphone_new");
+          var wait = 60;
+          var interval = setInterval(function () {
+            obj.html(wait + " {:l('SEC_CAN_BE_SENT_AGAIN')}");
+            wait--;
+            if (wait < 0) {
+              clearInterval(interval);
+              $(".reloadverify_new").click();
+              $("#verify_new").val("");
+              obj.html(
+                '<a class="move" onclick="send_new()">{:l("DID_NOT_RECEIVE_RESEND")}</a>'
+              );
+            }
+          }, 1000);
+        } else {
+          layer.msg(data.info, { icon: 2 });
+          if (data.url) {
+            window.location = data.url;
+          }
+        }
+      },
+      "json"
+    );
+  }
+  function cellphone_news() {
+    var cellphone_new = $("#cellphone_new").val();
+    var cellphones_new = $("#cellphones_new").val();
+    var cellphone_verify_new = $("#cellphone_verify_new").val();
+    if (cellphone_new == "" || cellphone_new == null) {
+      layer.tips("{:l('PLEASE_ENTER_THE_PHONE_NUMBER')}", "#cellphone_new", {
+        tips: 3,
+      });
+      return false;
+    }
+    if (cellphone_verify_new == "" || cellphone_verify_new == null) {
+      layer.tips(
+        "{:l('PLEASE_ENTER_THE_VERIFICATION_')}",
+        "#cellphone_verify_new",
+        { tips: 3 }
+      );
+      return false;
+    }
+    $.post(
+      "/Verify/verifyCode",
+      {
+        cellphone_new: cellphone_new,
+        cellphones_new: cellphones_new,
+        cellphone_verify_new: cellphone_verify_new,
+      },
+      function (data) {
+        if (data.status == 1) {
+          layer.msg(data.info, { icon: 1 });
+          location.reload();
+        } else {
+          layer.msg(data.info, { icon: 2 });
+          if (data.url) {
+            window.location = data.url;
+          }
+        }
+      },
+      "json"
+    );
+  }
+</script>
+<script>
+  $(".user_cellphone").addClass("active");
+  $("#whichpage").html("{:l('Mobile')}");
+</script>
+<include file="Public:footer_minimal" />

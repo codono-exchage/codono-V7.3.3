@@ -1,0 +1,55 @@
+
+<include file="Public:header_home"/>
+<link rel="stylesheet" href="__PUBLIC__/static/css/index.css"/>
+<neq name="DEBUG_WINDOW" value="0">
+<include file="Public:debug_box"/>
+</neq>
+<style>
+.mainbgbox {
+  background-image: url("__PUBLIC__/Home/images/background-2.png");
+  background-color:#171055;
+  /* Full height */
+  height: 100%;
+  min-height:620px; 
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+
+<include file="Index:widget_new_slider"/>
+<include file="Index:boxes_price_d3"/>
+<div class="container-fluid">
+
+<include file="Index:widget_prices_trade"/>
+
+
+<style>
+	.shadow{  
+	   padding-top:5px;
+	   margin-left:5px;
+	   -webkit-box-shadow: #666 0px 0px 10px;  
+	   -moz-box-shadow: #666 0px 0px 10px;  
+	   box-shadow: #666 0px 0px 10px; 
+	}  
+</style>
+	
+<script>
+
+function change(id){
+	$("#li"+id).attr("class","shadow");
+	newimg = $("#img"+id).attr("src").replace("safe_"+id, "safe_"+id+"1");
+	$("#img"+id).attr("src",newimg);
+}
+
+function changes(id){
+	$("#li"+id).attr("class","");
+	newimg = $("#img"+id).attr("src").replace("safe_"+id+"1", "safe_"+id);
+	$("#img"+id).attr("src",newimg);
+}
+</script>
+<eq name="SOCKET_WS_ENABLE" value='1'>
+<include file="Index:socket_script"/>
+</eq>
+<include file="Public:footer_minimal"/>

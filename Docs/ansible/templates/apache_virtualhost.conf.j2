@@ -1,0 +1,13 @@
+<VirtualHost *:8080>
+    ServerAdmin webmaster@{{ domain_name }}
+    DocumentRoot /var/www/html/{{ domain_name }}
+    ServerName {{ domain_name }}
+    ErrorLog ${APACHE_LOG_DIR}/{{ domain_name }}.error.log
+    CustomLog ${APACHE_LOG_DIR}/{{ domain_name }}.access.log combined
+
+    <Directory /var/www/html/{{ domain_name }}>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>

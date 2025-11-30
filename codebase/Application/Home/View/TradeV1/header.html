@@ -1,0 +1,73 @@
+  <header class="light-bb">
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="/"><img src="__UPLOAD__/public/{$C['web_logo']}" alt="logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
+        aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="icon ion-md-menu"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="headerMenu">
+        <ul class="navbar-nav mr-auto">
+			<volist name="navigation" id="vo">
+						<li class="nav-item" id="{$vo['name']}_box">
+							<a  class="nav-link" href="/{$vo['url']}"><if condition="$vo['ico']"><i class="fa fa-{$vo['ico']}"></i></if>  {:l($vo['title'])}</a>
+						</li>
+					</volist>
+
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item header-custom-icon">
+            <span class="nav-link" id="clickFullscreen">
+              <i class="icon ion-md-expand"></i>
+            </span>
+          </li>
+		  					<li class="nav-item" > <span class="nav-link" onclick="Dark()" id="darksun"><i class="icon ion-ios-moon"></i></span></li>
+
+<gt name="Think.session.userId" value="0">
+          <li class="nav-item dropdown header-img-icon">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <img src="__PUBLIC__/stocks/img/avatar.svg" alt="avatar">
+            </a>
+            <div class="dropdown-menu">
+              <div class="dropdown-header d-flex flex-column align-items-center">
+                <div class="figure mb-3">
+                  <img src="__PUBLIC__/stocks/img/avatar.svg" alt="">
+                </div>
+                <div class="info text-center">
+                  <p class="email text-muted mb-3">{$Think.session.userName} </p>
+                </div>
+              </div>
+              <div class="dropdown-body">
+                <ul class="profile-nav">
+                  <li class="nav-item">
+                    <a href="{:U('User/index')}" class="nav-link">
+                      <i class="icon ion-md-person"></i>
+                      <span>Account</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{:U('Finance/index')}" class="nav-link">
+                      <i class="icon ion-md-wallet"></i>
+                      <span>Finance</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{:U('Login/loginout')}" class="nav-link red">
+                      <i class="icon ion-md-power"></i>
+                      <span>Log Out</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+		  		<else/>
+				  <li class="nav-item"><a class="nav-link" href="{:U('Login/register')}" ><i class="icon-user-plus"></i> {:l('SIGNUP')}</a></li>
+					<li class="nav-item"><a  class="nav-link" href="{:U('Login/login')}" ><i class="icon-enter"></i> {:l('SIGNIN')}</a></li>	
+				</gt>
+
+        </ul>
+      </div>
+    </nav>
+  </header>

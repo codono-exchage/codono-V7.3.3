@@ -1,0 +1,32 @@
+<div class="order-book mb15">
+          <h2 class="heading">Order Book</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>{:l('Price')}({$rmb|strtoupper})</th>
+				  <th>{:l('Amount')}</th>
+				  <th>{:l('Total')}({$rmb|strtoupper})</th>
+              </tr>
+            </thead>
+            	<tbody id="sellorderlist" class="orderlist obtext">
+            </tbody>
+            <tbody class="ob-heading orderlist obtext">
+              <tr>
+                <td>
+                  <span>Last Price</span>
+                  <span id="activexnb">--</span>
+                </td>
+                <td>
+                  <span>{$rmb|strtoupper}</span>
+                  <span id="activesign">--</span>
+                </td>
+                <td class="red">
+                  <span>Change</span>
+                  <span id="activermb">--</span>
+                </td>
+              </tr>
+            </tbody>
+            <tbody id="buyorderlist" class="orderlist obtext">
+            </tbody>
+          </table>
+        </div>

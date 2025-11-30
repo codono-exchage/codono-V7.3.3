@@ -1,0 +1,229 @@
+<include file="Public:header" />
+<div class="wrapper">
+	<div class="register" style="border-radius: 15px; margin-bottom: 20px;">
+		<h3 style="color: #ff7420; font-size: 30px; text-align: center; padding-top: 50px;">{:l('IPS_TOPORDER_DETAILS')}</h3>
+		<table style="">
+			<tbody>
+				<tr>
+					<th align="right" style="font-size: 14px;">{:l('ORDER_TIME')}</th>
+					<td><div class="formbody" style="text-align: left; font-size: 18px;">
+							<span>{$mycz.addtime|addtime}</span>
+						</div></td>
+				</tr>
+				<tr>
+					<th align="right" style="font-size: 14px;">{:l('ORDER_NUMBER')}</th>
+					<td><div class="formbody" style="text-align: left; font-size: 18px;">
+							<span id="invite-input">{$mycz.tradeno}</span>
+						</div></td>
+				</tr>
+				<tr>
+					<th align="right" style="font-size: 14px;">{:l('RECHARGE_AMOUNT')}</th>
+					<td><div class="formbody" style="text-align: left; font-size: 18px; color: #ff8000;">
+							$
+							<span id="invite-inputa" style="width: 150px;">{$mycz.num}</span>
+						</div></td>
+				</tr>
+				<tr>
+					<th align="right" style="font-size: 14px;"></th>
+					<td><div class="w2">
+				<input type="button" class="btn-cztx" id="btn-submit" value="{:l('IMMEDIATE_PAYMENT')}" title="{:l('IMMEDIATE_PAYMENT')}" style="margin-bottom: 20px;margin-top:20px;float: left;">
+					
+					
+					</div></td>
+				</tr>
+				
+				
+				<tr>
+					<th align="right"></th>
+					<td><hr> <span style="float: left; margin-top: 50px;">
+							{:l('PAYMENT_SUCCESSFUL')}
+							<a href="{:U('Finance/mycz')}" target="_blank">{:l('VIEW')}</a>
+						</span></td>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+ <form action="ipspay/redirect.php" METHOD="POST" name="payForm" id="payForm" style="display: none;">	
+      <table  bordercolordark="#FFFFFF" bordercolorlight="#333333" >
+        <tr bgcolor="#8070FF"> 
+          <td colspan="2" align="center">
+            <font color="#FFFF00"><b>{:l('ORDERS_MERCHANT_PAYMENT_INTERF')}({:l('NEW_INTERFACE')})</b></font>
+          </td>
+        </tr>
+        <tr>
+          <td width="37%">{:l('SUBMITTED_ADDRESS')}</td>
+          <td width="63%">
+            <select name="test">
+              <option value="1">{:l('TEST_ENVIRONMENT')}</option>
+              <option value="0"  selected="selected">{:l('FORMAL_ENVIRONMENT')}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('BUSINESS_NUMBER')}</td>
+          <td>
+            <input type="text" name="Mer_code" size="18" value="MerchantCode" /><!--TEST_NO_MERCHANTS-->
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('BUSINESS_CERTIFICATE')}</td>
+          <td>
+            <input type="text" name="Mer_key" size="40" value="YourMerchatKey" /><!--TEST_NO_MERCHANTS-->
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('ORDER_NUMBER')}</td>
+          <td>
+            <input type="text" name="Billno" size="24" value="{$mycz.tradeno}" />
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('AMOUNT')}</td>
+          <td>
+            <input type="text" name="Amount" size="18" value="{$mycz.num}" /><!--TWO_DECIMAL_PLACES-->
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('DISPLAY_AMOUNT')}</td>
+          <td>
+            <input type="text" name="DispAmount" size="18" value="{$mycz.num}" />
+          </td>
+        </tr>
+        <tr>
+          <td>Day&nbsp;&nbsp;Time</td>
+          <td>
+            <input type="text" name="Date" size="18" value="{$mycz.addtime|date='Ymd',###}" />
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('PAYMENT_CURRENCY')}</td>
+          <td>
+            <select name="Currency_Type">
+              <option value="USD" selected="selected">{:l('USD')}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('PAYMENT_METHOD')}</td>
+          <td>
+            <select name="Gateway_Type">
+              <option value="01" selected="selected">{:l('Debit Card')}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('LANGUAGE')}</td>
+          <td>
+            <select name="Lang">
+              <option value="GB">GB</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('PAYMENT_SUCCESSFUL_RETURN')}URL</td>
+          <td>
+            <input type="text" name="Merchanturl" size="40" value="ipspay/OrderReturn.php" />
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('PAYMENT_FAILS_TO_RETURN')}URL</td>
+          <td>
+            <input type="text" name="FailUrl" size="40" value="" />
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('ADDITIONAL_BUSINESSES_PACKET')}</td>
+          <td>
+            <input type="text" name="Attach" size="40" value="" />
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('ORDERS_TO_PAY_ENCRYPTION')}</td>
+          <td>
+            <select name="OrderEncodeType">
+              <option value="5" selected="selected">md5{:l('SUMMARY')}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('TRADING_ENCRYPTION_RETURN')}</td>
+          <td>
+            <select name="RetEncodeType">
+              <option value="16">md5withRsa</option>
+              <option value="17" selected="selected">md5{:l('SUMMARY')}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>{:l('WHETHER')}Server{:l('WAY_TO_RETURN')}</td>
+          <td>
+            <select name="Rettype">
+              <option value="0">No Server to Server</option>
+              <option value="1" selected="selected">Server to Server</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Server to Server{:l('BACK_TO')}</td>
+          <td>
+            <input type="text" name="ServerUrl" size="40" value="<?php echo $url; ?>" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <input type="submit" value="{:l('SUBMIT')}" />
+            <input type="reset" value="{:l('REWRITE')}" />
+          </td>
+        </tr>
+      </table>
+    </form>
+<script>
+	$('#btn-submit').click(function(){
+		$('#payForm').submit();
+		
+	});
+</script>
+<script type="text/javascript" src="__PUBLIC__/Home/js/ZeroClipboard.min.js"></script>
+<script>
+	var client=new ZeroClipboard(document.getElementById("copy-button"));
+	client.on("ready",function(readyEvent){
+		client.on("aftercopy",function(event){
+			event.target.style.display="none";
+		});
+	});
+	ZeroClipboard.config({swfPath:'__PUBLIC__/Home/js/ZeroClipboard.swf'});
+	var clip=new ZeroClipboard(document.getElementById("copy"));
+	$(document).ready(function(){
+		var clip1=new ZeroClipboard(document.getElementById("copy_button1"));
+		var clip2=new ZeroClipboard(document.getElementById("copy_button2"));
+		var clip3=new ZeroClipboard(document.getElementById("copy_button3"));
+		clip1.on("copy",function(e){
+			layer.msg('Copy successful',{icon:1});
+		});
+		clip2.on("copy",function(e){
+			layer.msg('Copy successful',{icon:1});
+		});
+		clip3.on("copy",function(e){
+			layer.msg('Copy successful',{icon:1});
+		});
+		$(".wlb_tsina").click(function(){
+			window.open("http://v.t.sina.com.cn/share/share.php?url="+_share_url+"&title="+_share_content);
+		});
+		$(".wlb_douban").click(function(){
+			window.open("http://www.douban.com/recommend/?url="+_share_url+"&title="+_share_content);
+		});
+		$(".wlb_qzone").click(function(){
+			window.open("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url="+_share_url+"&title="+_share_title+"&pics="+_share_pic+"&desc="+_share_content);
+		});
+	});
+</script>
+<script>
+	//Highlight the top menu
+	$('#menu_top_finance').addClass('current');
+</script>
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,364 @@
+<include file="Public:header" />
+
+<main class="wrapper grey-bg launchpad-page">
+  <div class="page-top-banner">
+    <div class="filter" style="
+        background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');
+      ">
+      <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-md-8 col-lg-7 col-xl-7">
+            <h1>{$page_title}</h1>
+            <h2>
+              <notempty name="prompt_text"> {$prompt_text} </notempty>
+            </h2>
+          </div>
+          <div class="col-8 col-sm-6 col-md-4 col-lg-4 col-xl-5">
+            <img src="__EPSILON__/img/launchpad-banner-img.png" alt="" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Swap Start -->
+  <section class="page-inner">
+    <div class="container mt-3">
+      <div class="row m-b-40 justify-content-center">
+        <div class="col-xl-11">
+          <div class="row">
+            <include file="User:top_bar" />
+            <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+              <ul class="text-right breadcrumbs list-unstyle">
+                <li>
+                  <a href="{:U('/issue/index')}" class="btn btn-warning btn-sm active">{:l('Launchpad')}</a>
+                </li>
+                <li>
+                  <a href="{:U('Issue/log')}" class="btn btn-warning btn-sm">{:l('Logs')}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card list-launchpads">
+            <div class="card-body">
+              <div class="">
+                <div class="row align-items-stretch">
+                  <div class="col-md-4">
+                    <div class="img h-100" style="
+                        background-image: url(__UPLOAD__/issue/{$tuijian.image});
+                      "></div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="row h-100">
+                      <div class="col-sm-6 col-md-7 col-lg-8">
+                        <div class="d-flex align-items-center m-b-15">
+                          <h2 class="title" href="{:U('Issue/buy?id='.$tuijian['id'])}">
+                            <a href="{:U('Issue/buy?id='.$tuijian['id'])}">{$tuijian.name}</a>
+                          </h2>
+                          <span class="btn-3 warming"><img
+                              src="__EPSILON__/img/hot.png" />{:l('Popular')}</php></span>
+                        </div>
+
+                        <div class="desc m-b-15">
+                          <p>{$tuijian.content}......</p>
+                        </div>
+
+                        <div class="info-line">
+                          <div class="d-flex justify-content-between">
+                            <span><b>{:l('ICO_CURRENCY')}</b>
+                              {$tuijian.coinname}</span>
+                            <span><b>{:l('CURRENCY_OF_PAYMENT')}</b>
+                              {$tuijian.buycoin}</span>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <span><b>{:l('SUBSCRIBED')}</b> {$tuijian.deal}</span>
+                            <span><b>{:l('TOTAL')}</b> {$tuijian.num}</span>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <span><b>{:l('STARTING_TIME')}</b>
+                              {$tuijian.beginTime}</span>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <span><b>{:l('END_TIME')}</b> {$tuijian.endTime}</span>
+                          </div>
+                          <div class="progress m-t-15">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: {$tuijian.bili}%" aria-valuenow="{$tuijian.bili}" aria-valuemin="0" aria-valuemax="100">{$tuijian.bili|floor}%</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6 col-md-5 col-lg-4">
+                        <div class="times m-t-30">
+                          <strong class="times-title text-center">{:l('Countdown')}</strong>
+                          <div class="time-wrapper text-center">
+                            <div>
+                              <span id="counterDay"></span>
+                              <p>{:l('Day')}</p>
+                            </div>
+                            <div>:</div>
+                            <div>
+                              <span id="counterHour"></span>
+                              <p>{:l('Hour')}</p>
+                            </div>
+                            <div>:</div>
+                            <div>
+                              <span id="counterMinute"></span>
+                              <p>{:l('Minute')}</p>
+                            </div>
+                            <div>:</div>
+                            <div>
+                              <span id="counterSecond"></span>
+                              <p>{:l('Second')}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="m-t-30 text-center align-self-end">
+                          <a href="{:U('Issue/buy?id='.$tuijian['id'])}" class="btn btn-4">{:l('Subscribe')}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-11 m-t-30">
+          <div class="card">
+            <div class="card-header">
+              <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                  <a aria-selected="true" class="nav-link active" data-toggle="pill" href="#processing"
+                    role="tab">{:l('Processing')}</a>
+                </li>
+                <li class="nav-item">
+                  <a aria-selected="true" class="nav-link" data-toggle="pill" href="#upcoming"
+                    role="tab">{:l('Upcoming')}</a>
+                </li>
+                <li class="nav-item">
+                  <a aria-selected="true" class="nav-link" data-toggle="pill" href="#ended" role="tab">{:l('Ended')}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="processing" role="tabpanel">
+                  <div class="row">
+                    <volist name="list_jinxing" id="vo">
+                      <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="panel panel-flat">
+                          <div class="p-5">
+                            <div class="thumb" style="min-height: 200px">
+                              <a data-toggle="modal" href="/Issue/buy/id/{$vo.id}"><img
+                                  src="__UPLOAD__/issue/{$vo.image}" class="img-fluid h206" />
+                                <span class="zoom-image"><i class="ion ion-md-search"></i></span>
+                              </a>
+                            </div>
+                            <div class="caption">
+                              <div class="content-group-sm media">
+                                <div class="media-body">
+                                  <h6 class="text-semibold no-margin">
+                                    <a href="{:U('Issue/buy?id='.$tuijian['id'])}" class="text-default">{$vo.name}</a>
+                                  </h6>
+                                  <small class="text-muted">{:l('Coin')}: {$vo.coinname}</small>
+                                </div>
+                                <h6 class="text-warning media-right no-margin-bottom text-semibold">
+                                  {$vo.buycoin}{$vo['price']|NumToStr}
+                                </h6>
+                              </div>
+                              <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {$vo.bili}%"
+                                  aria-valuenow="{$vo.bili}" aria-valuemin="0" aria-valuemax="100">
+                                  {$vo.bili|floor}%
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="heading-elements text-center row m-t-15">
+                              <div class="col-sm-4" title="BOUGHT">
+                                <i class="ion ion-md-cart"></i> {$vo.deal}
+                              </div>
+                              <div class="col-sm-4" title="Total">
+                                <i class="ion ion-md-home"></i> {$vo.num}
+                              </div>
+                              <div class="col-sm-4" title="Completed">
+                                <i class="fa fa-percent"></i> {$vo.bili}
+                              </div>
+                            </div>
+                            <div class="m-t-15">
+                              <a class="btn btn-warning btn-2 btn-block"
+                                href="/Issue/buy/id/{$vo.id}">{$vo.zhuangtai}</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </volist>
+                  </div>
+                </div>
+                <div class="tab-pane fade show" id="upcoming" role="tabpanel">
+                  <div class="row">
+                    <volist name="list_yure" id="upcoming">
+
+                      <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="panel panel-flat">
+                          <div class="p-5">
+                            <div class="thumb" style="min-height: 200px">
+                              <a href="/Issue/buy/id/{$upcoming.id}">
+                                <img src="__UPLOAD__/issue/{$upcoming.image}" class="img-fluid h206" />
+                              </a>
+                            </div>
+                            <div class="caption">
+                              <div class="content-group-sm media">
+                                <div class="media-body">
+                                  <h6 class="text-semibold no-margin">
+
+                                    <a href="{:U('Issue/buy?id='.$upcoming['id'])}"
+                                      class="text-default">{$upcoming.name}</a>
+                                  </h6>
+                                  <small class="text-muted">Coin: {$upcoming.coinname}</small>
+                                </div>
+                                <h6 class="text-warning media-right no-margin-bottom text-semibold">
+                                  {$upcoming.buycoin}{$upcoming['price']*1}
+                                </h6>
+                              </div>
+                              <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {$upcoming.bili}%"
+                                  aria-valuenow="{$upcoming.bili}" aria-valuemin="0" aria-valuemax="100">
+                                  {$upcoming.bili|floor}%
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="heading-elements text-center row m-t-15">
+                              <div class="col-sm-4" title="BOUGHT">
+                                <i class="ion ion-md-cart"></i> {$upcoming.deal}
+                              </div>
+                              <div class="col-sm-4" title="Total">
+                                <i class="ion ion-md-home"></i> {$upcoming.num}
+                              </div>
+                              <div class="col-sm-4" title="Completed">
+                                <i class="fa fa-percent"></i> {$upcoming.bili|floor}
+                              </div>
+                            </div>
+                            <div class="m-t-15">
+                              <a class="btn btn-warning btn-2 btn-block" href="/Issue/buy/id/{$vo.id}">
+                                {$upcoming.zhuangtai}</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </volist>
+                  </div>
+                </div>
+                <div class="tab-pane fade show" id="ended" role="tabpanel">
+                  <div class="row">
+                    <volist name="list_jieshu" id="ended">
+
+                      <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="panel panel-flat">
+                          <div class="p-5">
+                            <div class="thumb" style="min-height: 200px">
+                              <a href="/Issue/buy/id/{$ended.id}">
+                                <img src="__UPLOAD__/issue/{$ended.image}" class="img-fluid h206" />
+                              </a>
+                            </div>
+                            <div class="caption">
+                              <div class="content-group-sm media">
+                                <div class="media-body">
+                                  <h6 class="text-semibold no-margin">
+
+                                    <a href="{:U('Issue/buy?id='.$ended['id'])}" class="text-default">{$ended.name}</a>
+                                  </h6>
+                                  <small class="text-muted">Coin: {$ended.coinname}</small>
+                                </div>
+                                <h6 class="text-warning media-right no-margin-bottom text-semibold">
+                                  {$ended.buycoin}{$ended['price']*1}
+                                </h6>
+                              </div>
+                              <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {$ended.bili}%"
+                                  aria-valuenow="{$ended.bili}" aria-valuemin="0" aria-valuemax="100">
+                                  {$ended.bili|floor}%
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="heading-elements text-center row m-t-15">
+                              <div class="col-sm-4" title="BOUGHT">
+                                <i class="ion ion-md-cart"></i> {$ended.deal}
+                              </div>
+                              <div class="col-sm-4" title="Total">
+                                <i class="ion ion-md-home"></i> {$ended.num}
+                              </div>
+                              <div class="col-sm-4" title="Completed">
+                                <i class="fa fa-percent"></i> {$ended.bili|floor}
+                              </div>
+                            </div>
+                            <div class="m-t-15">
+                              <a class="btn btn-warning btn-2 btn-block" href="/Issue/buy/id/{$vo.id}">
+                                {$ended.zhuangtai}</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </volist>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Swap End -->
+</main>
+
+<script>
+  var hints = "0";
+  if (hints == 1) {
+    $("#hints").show();
+  }
+  $("#Issue_box").addClass("active");
+
+  $(".static").click(function () {
+    $(".tab-pane").removeClass("in");
+    $(".tab-pane").removeClass("active");
+    $(".static").removeClass("active");
+    $(this).addClass("active");
+    $("#" + $(this).attr("role")).addClass("active in");
+  });
+</script>
+
+<script>
+  function secondsToDhms(seconds) {
+    seconds = Number(seconds);
+    var d = Math.floor(seconds / (3600 * 24));
+    var h = Math.floor((seconds % (3600 * 24)) / 3600);
+    var m = Math.floor((seconds % 3600) / 60);
+    var s = Math.floor(seconds % 60);
+
+    document.getElementById("counterDay").innerHTML = d;
+    document.getElementById("counterHour").innerHTML = h;
+    document.getElementById("counterMinute").innerHTML = m;
+    document.getElementById("counterSecond").innerHTML = s;
+  }
+
+  let end_time = '{$tuijian["endTime"]|strtotime}';
+  let ok_time = Math.floor(Date.now() / 1000);
+
+
+  let time = end_time - ok_time;
+  if(!end_time || end_time=='' || end_time==0){
+    time = 0;
+
+  }else{
+    setInterval(() => {
+    time = time - 1;
+    secondsToDhms(time);
+  }, 1000);
+  }
+  
+</script>
+<include file="Public:footer_minimal" />

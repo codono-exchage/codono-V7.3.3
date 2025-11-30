@@ -1,0 +1,132 @@
+<include file="Public:header" />
+<main class="wrapper grey-bg ">
+
+<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/assets/js/pages/datatables_advanced.js"></script>
+		<!-- Page content -->
+<div class="container mt-20">	
+	<div class="full-box row">
+		<include file="User:sidebar" />
+		<div class="col-10">
+	<div class="row mt-3 mb-3">
+        <include file="User:top_bar" />
+        <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+			<ul class="text-right breadcrumbs list-unstyle">
+				<li>
+				  <a href="{:U('/finance/index')}" class="btn btn-warning btn-sm"
+					>{:l('Finance')}</a
+				  >
+				</li>
+				<li class="btn btn-warning btn-sm ">
+					<a href="{:U('Wallet/cryptowithdrawal')}">{:l('Crypto Withdrawal')}</a></li>
+				<li >
+					<span class="btn btn-warning btn-sm active">{:l('Withdrawal History')}</span>
+				  </li>
+			  </ul>
+        </div>
+      </div>
+
+		<!-- Main content -->
+<div class="card">
+<div class="card-body">
+	
+					<div class="table-responsive">
+					<table class="table text-center text-nowrap table-hover   datatable-basic" id="investLog_content">
+						<thead>
+						<tr class="">
+
+							<th class="align-middle" width="">{:l('Time')}</th>
+							<th class="align-middle" width="">{:l('Address')}</th>
+							<th class="align-middle" width="">	
+								<select name="type" id="coinnam-select"  class="form-control">
+								<option value="">--{:l('COIN')}--</option>
+										<volist name="coin_list" id="vo">
+											<option value="{$vo['name']}"> {$vo['name']|strtoupper} [{$vo.title}]</option>
+										</volist>
+								 </select>
+								</th>
+							
+							
+							<th class="align-middle hide-mobile" width="">{:l('Sent')}</th>
+							<th class="align-middle hide-mobile" width="">{:l('ROLLOUT_COSTS')}</th>
+							<th class="align-middle" width="">{:l('STATUS')}</th>
+							
+						</tr>
+						</thead>
+						<tbody>
+						
+						
+                        <volist name="list" id="vo">
+						
+                            <tr >
+                                <td>{$vo.addtime|addtime}</td>
+                                <td><if condition="$vo['username']"><button class="btn btn-link btn-sm" onclick='showtx("{$vo['username']}")'>{$vo.username|msubstr=0,10}</button><else/>--</if></td>
+								<td>{$vo['num']|NumToStr} {$vo.coinname|strtoupper}</td>
+                                
+                                
+                                <td class="hide-mobile">{$vo['mum']|NumToStr}</td>
+								<td class="hide-mobile">{$vo['fee']|NumToStr} <php>echo $vo['zc_coin']?:$vo['coinname']</php></td>
+                                <td>
+								<switch name="vo.status">
+									<case value="1">
+                                        
+										
+										<notempty name="vo.txid">
+								<notempty name="explorer">
+								<a href="{$explorer}{$vo.txid}">{:l('[Info]')}</a>
+								<else/>
+								<if condition="$vo['txid']"><i class="btn btn-link fa fa-link" onclick="showtx('{$vo['txid']}')"></i><else/>--</if>
+								</notempty>
+								</notempty>
+								{:l('SUCCESS')} 
+									</case>
+									<case value="0">	
+                                        {:l('PROCESSING')}
+                                    </case>
+									<case value="2">
+									Cancelled and Refunded
+									</case>
+								</switch>	
+                                </td>
+								
+                            </tr>
+                        </volist>
+						
+						
+						</tbody>
+					</table>
+					<div class="pages">{$page}</div>
+					</div>
+				</div>
+</div>
+		</div>
+	</div>
+</div>
+
+</main>
+<script>
+	var hints = 0;
+	if(hints == 1){
+		$('#hints').show();
+	}
+	
+	
+	$("#coinnam-select").val("{$xnb}");
+
+	$("#coinnam-select").change(function () {
+		var coinname = $("#coinnam-select option:selected").val();
+		var url      = "{:U('Finance/coinoutlog')}";
+		if (coinname) {
+			url += '/coin/' + coinname;
+		}
+		window.location = url;
+	});
+
+	$('#finance_box').addClass('active');
+	$('.finan_coinout').addClass('active');
+	function showtx(tx){
+	layer.alert(tx, {title: "Withdrawal information",btn: ['Ok']});
+	}
+</script>	
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+
+		<title>{$market} Exchange TradingView Charting </title>
+
+		<!-- Fix for iOS Safari zooming bug -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+		<script type="text/javascript" src="__PUBLIC__/Home/js/tradingview/charting_library/charting_library.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Home/js/tradingview/datafeeds/udf/dist/polyfills.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/Home/js/tradingview/datafeeds/udf/dist/bundle.js"></script>
+
+		<script type="text/javascript">
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        const theme = getParameterByName('theme') || 'Dark';
+			function initOnReady() {
+				var widget = new TradingView.widget({
+					 //debug: true, // uncomment this line to see Library errors and warnings in the console
+					fullscreen: true,
+					
+					symbol: '{$market}',
+					//theme: '{$Think.cookie.colorshade}',
+					theme: theme,
+					dateRange:'1M',
+					overrides: {
+          'paneProperties.background': '#292f3c',
+          'scalesProperties.textColor': '#FFF',
+          'paneProperties.vertGridProperties.color': '#292f3c',
+          'paneProperties.horzGridProperties.color': '#292f3c',
+          'mainSeriesProperties.candleStyle.upColor': '#5a81ea',
+          'mainSeriesProperties.candleStyle.downColor': '#e5494d',
+          'mainSeriesProperties.candleStyle.borderUpColor': '#5a81ea',
+          'mainSeriesProperties.candleStyle.borderDownColor': '#e5494d'
+					},
+					
+					interval: '1',
+					container_id: "tv_chart_container",
+					//	BEWARE: no trailing slash is expected in feed URL
+					datafeed: new Datafeeds.UDFCompatibleDatafeed("/trade"),
+					library_path: "__PUBLIC__/Home/js/tradingview/charting_library/",
+					locale: getParameterByName('lang') || "en",
+					//	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
+					drawings_access: { type: 'black', tools: [ { name: "Regression Trend" } ] },
+					disabled_features: ["edit_buttons_in_legend","header_symbol_search","use_localstorage_for_settings","header_symbol_search","compare_symbol","border_around_the_chart"],
+					enabled_features: ["hide_left_toolbar_by_default"],
+					charts_storage_url: '__PUBLIC__/Home/js/tradingview/charting_library',
+                    charts_storage_api_version: "1.1",
+				});
+			}
+window.addEventListener('DOMContentLoaded', initOnReady, false);
+		</script>
+
+	</head>
+
+	<body style="margin:0px;">
+		<div id="tv_chart_container"></div>
+	</body>
+</html>

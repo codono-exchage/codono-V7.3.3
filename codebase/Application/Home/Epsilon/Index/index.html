@@ -1,0 +1,34 @@
+<include file="Public:header"/>
+<include file="Index:home_slider"/>
+
+<include file="Index:home_annoucements"/>
+<include file="Index:home_small_sliders"/>
+<include file="Index:home_markets"/>
+<include file="Index:home_feature_boxes"/>
+<include file="Index:home_apps"/>
+<include file="Index:home_blog_box"/>
+
+<script>
+
+	function easytrade(){
+	var coin=$("select#easycoin").find("option:selected").attr('data-value');
+	var amount=$("input#easyamount").val();
+	var url='{:U("Easy/index")}';
+	if(!coin){
+	layer.tips('{:l("Please select coin!")}', '#easycoin', {tips: 3});
+	return false;
+	}
+	if(!amount){
+	layer.tips('{:l("Please enter amount")}', '#easyamount', {tips: 3});
+	return false;
+	}
+	coin=coin.toUpperCase();
+	url=url+'?coin='+coin+'&amount='+amount;
+	console.log(url);
+	window.location=url;
+	}
+</script>
+<eq name="SOCKET_WS_ENABLE" value='1'>
+	<include file="Index:socket_script"/>
+	</eq>
+<include file="Public:footer_minimal"/>

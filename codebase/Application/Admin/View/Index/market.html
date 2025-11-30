@@ -1,0 +1,134 @@
+<include file="Public:header"/>
+
+<!-- Morris.js CSS and JS -->
+<link href="__THEME__/index_js/morris-js/morris.css" rel="stylesheet">
+<script src="__THEME__/index_js/morris-js/raphael-min.js" type="text/javascript"></script>
+<script src="__THEME__/index_js/morris-js/morris.min.js" type="text/javascript"></script>
+
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-danger d-none">
+        <button class="close fixed">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    
+    <section class="main">
+        <!-- Market Stats Header -->
+        <div class="d-flex align-items-center mb-3">
+            <h5 class="mb-0 card-title flex-grow-1">{:l('Market Stats')}</h5>
+            <div class="d-flex align-items-center">
+                <select id="name-select" name="market" class="form-select form-select-sm">
+                    <volist name="C['market']" id="vo">
+                        <option value="{$vo['name']}" <eq name="vo['name']" value="$market">selected</eq>>{$vo['title']}</option>
+                    </volist>
+                </select>
+                <button onclick="chk_xin('{$market}');" class="btn btn-warning ms-2">
+                    <i class="mdi mdi-refresh" title="{:l('Clear Stats')}"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Market Statistics Cards -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 mb-3">
+                <div class="card border-secondary">
+                    <div class="card-body text-center">
+                        <div class="icon mb-2 text-secondary">
+                            <i class="fa fa-font"></i>
+                        </div>
+                        <h1 class="h4 mb-0">{$data['trance_ci']}</h1>
+                        <p class="small">{:l('Market Transactions')}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-3">
+                <div class="card border-secondary">
+                    <div class="card-body text-center">
+                        <div class="icon mb-2 text-secondary">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h1 class="h4 mb-0">{$data['trance_num']*1}</h1>
+                        <p class="small">{:l('Volume')}[{$xnb}]</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-3">
+                <div class="card border-secondary">
+                    <div class="card-body text-center">
+                        <div class="icon mb-2 text-secondary">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h1 class="h4 mb-0">{$data['trance_fee']*1}</h1>
+                        <p class="small">{:l('Fees')}[{$rmb}]</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-3">
+                <div class="card border-secondary">
+                    <div class="card-body text-center">
+                        <div class="icon mb-2 text-secondary">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h1 class="h4 mb-0">{$data['trance_mum']*1}</h1>
+                        <p class="small">{:l('Total Turnover')}[{$rmb}]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fee Chart -->
+        <div class="card mt-4">
+            <div class="card-header text-success">{:l('Fee Chart')}</div>
+            <div class="card-body">
+                <div id="hero-graph" class="graph"></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    // Market Selector Redirection
+    $("#name-select").change(function () {
+        var coinname = $("#name-select option:selected").val();
+        window.location = '/Admin/Index/market/market/' + coinname;
+    });
+
+    // Refresh Stats Function
+    function chk_xin($market) {
+        $.get("{:U('Index/marketSet')}", { market: $market }, function (data) {
+            if (data.status == 1) {
+                alertSuccess(data.info);
+                location.reload();
+            } else {
+                alertError(data.info);
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+
+    // Morris.js Initialization
+    $(function () {
+        Morris.Area({
+            element: 'hero-graph',
+            data: {$cztx},
+            xkey: 'date',
+            ykeys: ['num', 'mum', 'fee_buy', 'fee_sell'],
+            labels: ['Vol', 'Turnover', 'Buy fee', 'Sell fees'],
+            hideHover: 'auto',
+            lineWidth: 1,
+            pointSize: 5,
+            lineColors: ['#4a8bc2', '#ff6c60', '#a94442', '#afgh4e'],
+            fillOpacity: 0.5,
+            smooth: true,
+            xLabels: 'day',
+        });
+    });
+</script>
+
+<include file="Public:footer"/>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        highlight_subnav("{:U('Index/market')}");
+    </script>
+</block>

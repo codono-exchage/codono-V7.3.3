@@ -1,0 +1,77 @@
+<div class="recent-history market-order card mt-0 mb-0">
+				<div class="header d-flex justify-content-between align-items-center white-bg">
+					<ul class="nav nav-pills" role="tablist">
+						<li class="nav-item">
+							<a aria-selected="false" class="nav-link active" data-toggle="pill" href="#opened-orders" role="tab">{:l('Active Orders')}</a>
+						</li>
+						<li class="nav-item">
+							<a aria-selected="false" class="nav-link " data-toggle="pill" href="#closed-orders" role="tab">{:l('My Orders')}</a>
+						</li>
+						
+					
+					</ul>
+					<ul class="list-inline m-r-15 f-s-12 filterMenu">
+
+						<li class="list-inline-item active all-orders"><a href="{:U('Finance/orders')}">{:l("All")}</a></li>
+					</ul>
+				</div>
+				<div class="tab-content">
+
+					<div class="tab-pane fade show active" id="opened-orders" role="tabpanel">
+						<div class="d-flex justify-content-between table-responsive white-bg market-order-item">
+							
+							<table class="table table-sm " id="entrust_over">
+                                        <thead>
+                                            <tr>
+											    <th scope="col">{:l('Market')}</th>
+                                                <th scope="col">{:l('Time')}</th>
+                                                <th scope="col">{:l('Type')}</th>
+                                                <th scope="col">{:l('Price')}</th>
+												<th scope="col">{:l('Stop')}</th>
+                                                <th scope="col">{:l('Qty')}</th>
+                                                <th scope="col">{:l('Dealt')}</th>
+												<th scope="col">{:l('Total')}</th>
+												
+                                                <th scope="col">{:l('Option')}</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="entrustlist">
+                                         <span class="no-data" id="loginrequired">
+											<i class="icon ion-md-person"></i>
+											<span class="login-menu">
+												<a class="cd-signin" href="#0">{:l("Login")}</a> {:l("Or")} <a class="cd-signup" href="#0">{:l("Signup")}</a>
+											</span>
+										 </span>
+                                        </tbody>
+                                    </table>
+						</div>
+
+					</div>
+					<div class="tab-pane fade" id="closed-orders" role="tabpanel">
+						<div class="d-flex justify-content-between table-responsive white-bg market-order-item">
+							<table class="table table-sm">
+								<thead>
+									<tr>
+										<th scope="col">{:l('Time')}</th>
+										<th scope="col">{:l('Type')}</th>
+										<th scope="col">{:l('Price')}</th>
+										<th scope="col">{:l('Qty')}</th>
+										<th scope="col">{:l('Total')}</th>
+									</tr>
+								</thead>
+								<tbody id="closedorderslist">
+									<eq name="Think.session.userId" value="0"><span class="no-data" >
+									<i class="icon ion-md-person"></i>
+									<span class="login-menu">
+										<a class="cd-signin" href="#0">{:l("Login")}</a> {:l("Or")} <a class="cd-signup" href="#0">{:l("Signup")}</a>
+									</span>
+								 </span></eq>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+
+				</div>
+			</div>

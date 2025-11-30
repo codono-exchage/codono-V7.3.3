@@ -1,0 +1,183 @@
+<include file="Public:header" />
+<style>
+	.order li {
+		color:#fff;
+	}
+	
+	.reg_box1 {
+		margin-top: 11px;
+		margin-bottom: 48px;
+		padding-bottom: 38px;
+		min-height: 400px;
+	}
+	.reg_title {
+		color: #fff;
+	}
+	.reg_radio_box a {
+		color: #fff;
+	}
+	
+</style>
+<div class="autobox" id="reg-step4" style="position:absolute;left:50%;margin-left:-600px;">
+	<div class="login_step">
+		<ul class="order clear">
+			<li><i class="order_1"></i>{:l('USER_REGISTRATION')}<div class="order_line"></div></li>
+			<li><i class="order_2"></i>{:l('SECURITY')}<div class="order_line"></div></li>
+			<li><i class="order_3"></i>{:l('KYC')}<div class="order_line"></div></li>
+			<li class="orange"><i class="order_4_1"></i>{:l('SUCCESS')}</li>
+		</ul>
+	</div>
+	<div class="reg_box1">
+		<div class="reg_su">
+			<div class="reg_su_title" style="color:#fff">{:l('CONGRATULATIONS_YOU_HAVE_SUCCE')}</div>
+
+			<div class="reg_info">
+				<ul>
+					<li>{:l('USERNAME')}<span id="reg-email">{$user.username}</span></li>
+					<li>{:l('CERTIFICATION_NAME')}<span id="reg-name">{$user.truename}</span></li>
+					<li>{:l('ID_NUMBER')}:<span id="reg-id_number">{$user.idcard}</span></li>
+				</ul>
+				<div class="auto_btn marb15">
+					<a href="{:U('Finance')}" class="center">{:l('START_TRADING')}</a>
+					<div class="right_side"></div>
+				</div>
+				<div class="reg_otherlink" style="color:#fff">
+					{:l('YOU_CAN_ALSO')}
+					<a href="{:U('User/cellphone')}" target="_blank">{:l('BOUND_PHONE')}</a> 
+					<a href="{:U('Finance/mycz')}" target="_blank">{:l('RECHARGE')}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	<section class="canvas-wrap" style="min-height:700px;">
+		<div id="canvas" class="gradient"></div>
+	</section>
+
+
+<div class="autobox" style="margin-bottom: 30px">
+	<ul class="safety_tips_ul clear">
+		<li>
+			<div class="safety_img safety_img_1"></div>
+			<h4>{:l('SYSTEM_RELIABILITY')}</h4>
+			<p>{:l('BANKLEVEL_USER_DATA_ENCRYPTION')}</p>
+		</li>
+		<li>
+			<div class="safety_img safety_img_2"></div>
+			<h4>{:l('FINANCIAL_SECURITY')}</h4>
+			<p>{:l('WALLET_MULTILAYER_ENCRYPTION_O')}</p>
+		</li>
+		<li>
+			<div class="safety_img safety_img_3"></div>
+			<h4>{:l('FAST_AND_CONVENIENT')}</h4>
+			<p>{:l('INSTANT_RECHARGE_RAPID_WITHDRA')}</p>
+		</li>
+		<li>
+			<div class="safety_img safety_img_4"></div>
+			<h4>{:l('PROFESSIONAL_SERVICES')}</h4>
+			<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p>{:l('ONE')}<br>
+{:l('ONE')}</p>
+		</li>
+	</ul>
+</div>
+<script>
+	$('input').focus(function(){
+		var t=$(this);
+		if(t.attr('type')=='text'||t.attr('type')=='password')
+			t.css({'box-shadow':'0px 0px 3px #1583fb','border':'1px solid #1583fb' });
+		if(t.val()==t.attr('placeholder'))
+			t.val('');
+	});
+	$('input').blur(function(){
+		var t=$(this);
+		if(t.attr('type')=='text'||t.attr('type')=='password')
+			t.css({'box-shadow':'none','border':'1px solid #e1e1e1' });
+		if(t.attr('type')!='password'&&!t.val())
+			t.val(t.attr('placeholder'));
+	});
+	$('.reg_input_box input').each(function(i,d){
+		$(d).focus(function(){
+			var oRegMsg=$('#'+$(this).attr('id')+'-msg');
+			oRegMsg.attr('class')=='form_explain_error'?oRegMsg.attr('class','form_explain').html(oRegMsg.attr('data-explain')).show():oRegMsg.show();
+		})
+		$(d).blur(function(){
+			var oRegMsg=$('#'+$(this).attr('id')+'-msg');
+			$(this).parent().find('.form_explain').hide();
+		})
+	})
+	var mbTest_username=/^(?![^a-zA-Z]+$)(?!\D+$).{5,15}$/;
+	var mbTest_password=/^[a-zA-Z0-9_]{5,15}$/;
+	//MESSAGE_INPUT_BOX
+	function formMsg(o, status, msg){
+		$('#'+o+'-msg').attr('class', 'form_explain_'+(status?'pass':'error')).html((typeof msg == 'undefined'? '': msg)+'<em></em>').show();
+		return true;
+	}
+
+
+	function Update(){
+		var truename=$("#regtruename").val();
+		var idcard=$("#regidcard").val();
+
+		/*
+		if(truename==""||truename=null){
+			formMsg('truename', 0, 'Enter Actual Name');
+			return false;
+		}*/
+		if(idcard==""||idcard==null){
+			formMsg('idcard', 0, 'Please enter identification numbe');
+			return false;
+		}
+
+
+		$.post("{:U('Login/upregister3')}",{truename:truename,idcard:idcard},function(data){
+			if(data.status==1){
+				layer.msg(data.info,{icon:1});
+				window.location='/Login/register4';
+			}else{
+				layer.msg(data.info,{icon:2});
+				if(data.url){
+					window.location=data.url;
+				}
+			}
+		},"json");
+	}
+	
+	
+	
+	
+	
+</script>
+
+
+<include file="Public:footer_minimal"/>

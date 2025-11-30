@@ -1,0 +1,440 @@
+<include file="Public:header" />
+	
+	
+	
+	
+<script type="text/javascript" src="__PUBLIC__/static/js/cityselect.js"></script>
+<style>
+	.ydt-bank {position: relative;padding-top: 20px;color: #7b808c;
+		line-height: 1;font: 14px/1.5 "Roboto", sans-serif;}
+	
+	.yb-add {    border-radius: 4px !important;
+    min-height: 100px;
+    padding-top: 20px;
+    cursor: pointer;}
+	.yb-ico-add {width:16px;height:16px;margin:0 auto;background-position: -100px -10px;background-image: url('__PUBLIC__/static/images/index_sprites_24.png');background-repeat: no-repeat;}
+	.yb-txt { text-align: center;margin-top: 10px;}
+	.yb-item {position:relative;float: left;height: 174px;line-height: 1;}
+	.yb-info {width: 225px; height: 147px;padding-top: 10px;margin-left:13px;background-position: -10px -200px;cursor: pointer;background-image: url('__PUBLIC__/static/images/index_sprites_24.png');background-repeat: no-repeat;}
+	.yb-item .yb-name {padding-left: 4px;}
+	.bank-cmb{display: inline-block;text-indent: 1em; position: relative;  height: 33px;  width: 141px;  overflow: hidden;  line-height:37px;  font-weight: bold;vertical-align: top;}
+	.yb-type{display: inline-block;float: right;margin-top: 10px;white-space: nowrap;overflow: hidden;margin-right:13px;}
+	.yb-num{color: #3a3d42;  font-size: 20px;  width: 194px;  margin: 0 auto;  padding: 18px 0 14px;  white-space: nowrap;  overflow: hidden;}
+	.yb-links {display: block;width: 200px;margin: 0 auto;padding-top: 25px;}
+	.yb-link {float: left; line-height: 20px;  }
+	.yb-link a{color: #00b1ee;text-decoration: none;font-size:10px}
+	.yb-split {  width: 1px;  height: 13px;  float: left;  background-color: #d1d1d1;  margin: 4px 11px 0;overflow: hidden;}
+	.yb-link {float: left;line-height: 20px;}
+	.hide {display: none;}
+	.yb-ico{}
+</style>
+	
+
+
+		<!-- Page content -->
+		<div class="page-container">	
+	
+<include file="Finance:left" />
+<div class="content-wrapper">
+		<!-- Main content -->
+<div class="panel panel-flat">
+		
+			<div class=" panel-heading" >
+					<div class="btn-group btn-group-justified">
+					<span class="btn-group">	
+						<a href="{:U('Finance/mytx')}" class="btn btn-flat  ">{:l('WITHDRAW')}</a>
+                    </span>
+					<span class="btn-group">	
+						<a href="{:U('Finance/outlog')}" class="btn btn-flat ">{:l('LOG_IN_LOG')}</a>
+					</span>
+										<span class="btn-group">	
+						<a href="{:U('Finance/bank')}" class="btn btn-flat active current ">{:l('ADDRESSES')}</a>
+                    </span>
+
+				</div>
+				<span><a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+						<div id="hints" class="mytips" style="display:none;">
+
+				<p>               <notempty name="prompt_text">
+                    {$prompt_text}
+                </notempty></p>			</div>
+			</div>
+<div class="panel-body">
+			<div class="ydt-bank">
+				<div class="yb-list-window">
+						<div id="bank_wrap"  data-on-cls="current" data-page-num="4" class="yb-list">
+							<div class="row">
+							<div class="col-xs-12 col-sm-6">
+							<div class="panel panel-info yt-add text-center" data-toggle="modal" data-target="#bankmodal" data-whatever="@mdo" >
+								
+								<h5 class="content-group">
+									<span class="label label-flat label-rounded label-icon border-grey text-grey mr-10">
+										<i class="icon-plus3"></i>
+									</span>
+								Add Bank										</h5>
+								
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+							<div class="panel panel-info yt-add text-center  " onclick="showCrypto()" >
+								<h5 class="content-group">
+									<span class="label label-flat label-rounded label-icon border-grey text-grey mr-10">
+										<i class="icon-plus3"></i>
+									</span>
+								Add USDT/GUSD/WUSD</h5>
+								</div>
+								</div>
+							</div>
+			
+							
+							<div class="row">
+							<volist name="UserBank" id="vo">		
+									<div class="col-xs-12 col-sm-6 col-md-4">
+									
+												<!-- Bank acconts-->
+						<div class="panel panel-info">
+							<div class="panel-body text-center">
+								<h5 class="content-group">
+									<span class="label label-flat label-rounded label-icon border-grey text-grey mr-10">
+										<i class="icon-user"></i>
+									</span>
+										{$vo.name}
+								</h5>
+
+								<p class="content-group"><i class="icon-library text-info position-left"></i> {$vo.bank}</p>
+
+								<ul class="list list-icons">
+									<li>
+										<i class="icon-credit-card text-success position-left"></i>
+										{$vo.bankcard}
+									</li>
+
+								</ul>
+							</div>
+
+
+
+							<div class="panel-footer text-center">
+							<a href="{:U('Finance/mycz')}" class="btn btn-success btn-sm"  data-fun="C"><span>{:l('RECHARGE')}</span></a>
+							<a href="{:U('Finance/mytx')}" class="btn btn-warning btn-sm"  data-fun="Pay"><span>{:l('WITHDRAW')}</span></a>
+							<a href="javascript:void(0)" class="btn btn-danger btn-sm"  data="{$vo.id}" onclick="bank_del(this)"><span>{:l('UNBUNDLING')}</span></a>
+							</div>
+						</div>
+						<!-- /Bank accounts -->
+				
+									</div>
+									</volist>			
+							</div>
+							
+						</div>
+						</div>
+					</div>
+				
+				<div class="yb-arrows">
+					<div id="bank_pre_btn" class="yb-ico-left i-hide"></div>
+					<div id="bank_next_btn" class="yb-ico-right i-hide"></div>
+				</div>
+			
+		</div>
+	</div>
+</div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="bankmodal" id="bankmodal">
+<div class="modal-dialog" role="document">
+<div class="modal-content page-header-inverse">
+	 <div class="modal-header">
+	 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	 <h4>{:l('ADD_A_WITHDRAWAL_ADDRESS')}</h4></div>
+	<div class="modal-body">
+	<form id="form-login1" class="">
+		<div class="form-group">
+			<div class="control-label">{:l('NOTE_NAME')}</div>
+			<input id="bank_name" class="form-control" type="text">
+		</div>
+		<div class="form-group-2">
+			<div class="control-label">{:l('CURRENCY_NAME')}</div>
+			<select name="bank" id="bank_coinname" class="form-control">
+				<option value="" selected="selected">--{:l('CHOOSE_A_CURRENCY')}--</option>
+				<volist name="FiatList" id="vo">
+								<option value="{$vo.name}" selected>{$vo.title}</option>
+				</volist>
+				 </select>
+		</div>
+		<div class="form-group-2">
+			<div class="control-label">{:l('BANK')}</div>
+			<select name="bank" id="bank_bank" class="form-control">
+				<option value="0">--{:l('CHOOSE_BANK')}--</option>
+				
+				   <volist name="UserBankType" id="vo">
+				<eq name="vo['type']" value="bank">				
+				<option value="{$vo['title']}">{$vo['title']}</option>
+				</eq>				  
+				  </volist>
+				  
+				 </select>
+		</div>
+		<div class="form-group-2">
+			<div class="control-label">{:l('ACCOUNT_PROVINCES')}</div>
+			<span class="controls row" id="city_1">
+			<span class="col-xs-6 col-sm-6">
+				<select class="prov form-control" id="bank_prov" name="prov" ></select>
+			</span>
+			<span class="col-xs-6 col-sm-6">
+				<input class="city form-control" id="bank_city" name="city" placeholder="city" style="width: 98px;"/>
+				</span>
+            </span>
+		</div>
+		<div class="form-group-2">
+			<label for="bank_bankaddr" class="control-label">{:l('BRANCH_ACCOUNT')}</lavel>
+			<input id="bank_bankaddr" class="form-control" type="text" placeholder="SWIFT/IBAN ETC">
+			
+		</div>
+		<div class="form-group-2">
+			<label for="bank_username" class="control-label">{:l('ACCOUNT_NAME')}</label>
+			<input id="bank_username" class="form-control" type="text" value="{$truename}" placeholder="Account Holders Name">
+		</div>
+		<div class="form-group-2">
+			<label for="bank_bankcard" class="control-label">{:l('BANK_CARD_NUMBER')}</label>
+			<input id="bank_bankcard" class="form-control" type="text" placeholder="Account number">
+		</div>
+		<div class="form-group-2">
+			<label for="bank_paypassword" class="control-label">{:l('TRANSACTION_PASSWORD')}</label>
+			<input id="bank_paypassword" class="form-control" type="password"><a href="{:U('Findpwd/findpwd')}" class="move ml5">{:l('FORGET')}?</a>
+		</div>
+		<div class="form-group-2">
+			<input type="button" class="btn btn-info btn-sm" value="{:l('ADD_IT_NOW')}" onclick="bank_up();">
+		</div>
+	</form>
+	</div>
+	
+	</div>
+	</div>
+</div>
+<div class="all_mask_loginbox" id="stepCrypto1" style="display: none;">
+	<div class="login_title pl20">Crytpo Withdrawal Address</div>
+	<form id="form-login2" class="mask_wrap login-fb">
+		<div class="login_text zin90">
+			<div class="mask_wrap_title">Save as</div>
+			<input id="crypto_name" class="texts" type="text">
+		</div>
+		<div class="login_text zin80" style="display:none;">
+			<div class="mask_wrap_title">{:l('CURRENCY_NAME')}</div>
+			<select name="bank" id="crypto_coinname" class="texts">
+				<option value="" selected="selected">--{:l('CHOOSE_A_CURRENCY')}--</option>
+								<option value="usd" selected>{:l('USD')}</option>
+				 </select>
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">Crypto</div>
+			<select name="bank" id="crypto_bank" class="texts">
+				<option value="0">--Choose Method--</option>
+				   <volist name="UserBankType" id="vo">
+				   
+				   <eq name="vo['type']" value="crypto">
+				   <option value="{$vo['title']}">{$vo['title']}</option>
+				   </eq>
+				   </volist>
+				 </select>
+		</div>
+	
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">Address</div>
+			<input id="crypto_bankcard" class="texts" type="text">
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('TRANSACTION_PASSWORD')}</div>
+			<input id="crypto_paypassword" class="texts" type="password"><a href="{:U('Login/findpwd/paypassword')}" class="move ml5">{:l('FORGET')}?</a>
+		</div>
+		<div class="login_button">
+			<input type="button" class="btns2" value="{:l('ADD_IT_NOW')}" onclick="crypto_up();">
+		</div>
+	</form>
+	<div class="mask_wrap_close " onclick="showB()"><i class="fa fa-close fa-2x move"></i></div>
+</div>
+<div id="step2" class="all_mask" style="height: 0px;display: none;"></div>
+<script>
+	$(function () {
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+		$("#city_1").citySelect({nodata: "none", required: false});
+	});
+	function showA() {
+		$("#step1").show();
+		$("#step2").show();
+	}
+	function showCrypto() {
+		$("#stepCrypto1").show();
+		$("#step2").show();
+	}
+	function showB() {
+		$("#step1").hide();
+		$("#stepCrypto1").hide();
+		$("#step2").hide();
+	}
+	function crypto_up(){
+		var name        = $('#crypto_name').val();
+		var bank        = $('#crypto_bank option:selected').val();
+		var bankcard    = $('#crypto_bankcard').val();
+		
+		var bank_coinname    = $('#crypto_coinname option:selected').val();
+		var paypassword = $('#crypto_paypassword').val();
+		
+		if (name == "" || name == null) {
+	console.log('name')	;
+		layer.tips("{:l('ENTER_A_NAME_REMARKS')}", '#crypto_name', {tips: 2});
+			return false;
+		}
+		if (bank_coinname == "" || bank_coinname == null) {
+		console.log('bank_coinname')	;
+			layer.tips("{:l('PLEASE_SELECT_CURRENCY')}", '#crypto_coinname', {tips: 2});
+			return false;
+		}
+
+		if (bankcard == "" || bankcard == null) {
+		console.log('bankcard')	;
+			layer.tips("Please enter address", '#crypto_bankcard', {tips: 2});
+			return false;
+		}
+		
+		if(bankcard.length < 5 || bankcard.length > 64){
+		console.log('length'+bankcard.length)	;
+			layer.tips("Please check address correct length", '#crypto_bankcard', {tips: 2});
+			return false;
+		}
+		
+		if (paypassword == "" || paypassword == null) {
+		console.log('paypassword'+paypassword)	;		
+		layer.tips("{:l('PLEASE_ENTER_TRANSACTION_PASSW')}", '#crypto_paypassword', {tips: 2});
+			return false;
+		}
+		console.log('Upbank nw')	;		
+		$.post("{:U('Finance/upbank')}", {
+			name: name,
+			bank: bank,
+			bankprov: 'NA',
+			bank_coinname: bank_coinname,
+			bankcity: 'NA',
+			bankaddr: 'NA',
+			bankcard: bankcard,
+			paypassword: paypassword
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function bank_up() {
+		var name        = $('#bank_name').val();
+		var bank        = $('#bank_bank option:selected').val();
+		var bankprov    = $('#bank_prov option:selected').val();
+		var bankcity    = $('#bank_city').val();
+		var bank_coinname    = $('#bank_coinname option:selected').val();
+		var bankaddr    = $('#bank_bankaddr').val();
+		var bankcard    = $('#bank_bankcard').val();
+		var paypassword = $('#bank_paypassword').val();
+		var truename =$('#bank_username').val();
+		if (truename == "" || truename == null) {
+			layer.tips("Enter account name", '#bank_username', {tips: 2});
+			return false;
+		}
+		if (name == "" || name == null) {
+			layer.tips("{:l('ENTER_A_NAME_REMARKS')}", '#bank_name', {tips: 2});
+			return false;
+		}
+		if (bank_coinname == "" || bank_coinname == null) {
+			layer.tips("{:l('PLEASE_SELECT_CURRENCY')}", '#bank_coinname', {tips: 2});
+			return false;
+		}
+		if (bankaddr == "" || bankaddr == null) {
+			layer.tips("{:l('ENTER_ACCOUNT_BRANCH')}", '#bank_bankaddr', {tips: 2});
+			return false;
+		}
+		if (bankcard == "" || bankcard == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_BANK_ACCOUNT_')}", '#bank_bankcard', {tips: 2});
+			return false;
+		}
+		
+		if(bankcard.length < 5 || bankcard.length > 30){
+			layer.tips("{:l('PLEASE_ENTER_THE_CORRECT_BANK_')}", '#bank_bankcard', {tips: 2});
+			return false;
+		}
+		
+		
+		
+		
+		if (paypassword == "" || paypassword == null) {
+			layer.tips("{:l('PLEASE_ENTER_TRANSACTION_PASSW')}", '#bank_paypassword', {tips: 2});
+			return false;
+		}
+		$.post("{:U('Finance/upbank')}", {
+			name: name,
+			bank: bank,
+			bankprov: bankprov,
+			bank_coinname: bank_coinname,
+			bankcity: bankcity,
+			bankaddr: bankaddr,
+			bankcard: bankcard,
+			paypassword: paypassword,
+			truename: truename
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function bank_del(_this) {
+		var id = $(_this).attr('data');
+		layer.config({
+			extend: 'extend/layer.ext.js'
+		});
+		layer.ready(function () {
+			layer.prompt({
+				title: "{:l('ENTER_THE_TRANSACTION_PASSWORD')}",
+				formType: 1
+			}, function (val) {
+				if (val) {
+					$.post("{:U('User/delbank')}", {id: id, paypassword: val}, function (data) {
+						if (data.status == 1) {
+							layer.msg(data.info, {icon: 1});
+							location.reload();
+						} else {
+							layer.msg(data.info, {icon: 2});
+							if (data.url) {
+								window.location = data.url;
+							}
+						}
+					}, "json");
+				}
+				;
+			});
+		});
+	}
+</script>
+
+
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_out').addClass('active');
+</script>	
+<include file="Public:footer_minimal"/>

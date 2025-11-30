@@ -1,0 +1,30 @@
+<!-- Blog Start -->
+<section class="blog">
+    <div class="container">
+        
+        <h2 class="section-title">{:SHORT_NAME} {:l('Blog')}</h2>
+
+        <div class="blog-single-item arrow-black">
+            
+            <volist name="index_blog" id="vo" offset="0" length="4">
+                <div>
+                <div class="blog-grid">
+                    <a href="{:U('Article/detail','id='.$vo['id'])}"  class="card">
+                        <figure>
+
+                            <img class="img-fluid" src="__UPLOAD__/article/{$vo['img']}" alt='{$vo["title"]|trim}'>
+                        </figure>
+                        <div class="card-body">
+                            <div class="blog-categorie"><span>{$vo.type|strtoupper}</span></div>
+                            <h4 class="card-title">{$vo['title']|msubstr=0,100}</h4>
+                            <p class="card-text">{$vo['content']|strip_tags|msubstr=0,100}</p>
+                            <span class="date">{$vo.addtime|addtime}</span>
+                        </div>
+                    </a>
+                </div>
+            </div> 
+            </volist>
+        </div>
+    </div>
+</section>
+<!-- Guide & Blog End -->

@@ -1,0 +1,548 @@
+<include file="Public:header" />
+	
+
+<!-- Page container -->
+	<div class="page-container">
+<include file="Finance:left" />
+		<!-- Page content -->
+				<div class="content-wrapper">
+				<div class="row">
+					<div class="col-sm-4">
+				<div class="panel panel-flat">
+				<div class="panel panel-heading">
+				<h2>{:l('INTO_DIGITAL_ASSETS')} <if condition="$coin_list[$xnb]['type'] eq 'esmart'"><small>[<a href="{:U('Finance/trace')}">Trace missing payment</a>]</small></if></h2>
+				</div>
+				<div class="panel-body">
+								<div class="form-group">
+						<label> Select Coin</label>
+				<select id="depositCyrpto" class="form-control input-sm" data-live-search="true" data-live-search-placeholder='{:l("Search")}' data-width="100%">
+						<volist name="coin_list" id="kolist">
+											<eq name="xnb" value="$key">
+												<option selected="selected" value="{$kolist['name']}" data-value="{$kolist['name']}" data-content="<img src='{$kolist['img']}' height='20px'/> {$kolist['name'] |strtoupper}"><img src='{$kolist['img']}' height='20px'/> {$kolist['name'] |strtoupper}</option>
+											<else/>
+													<option value="{$kolist['name']}" data-value="{$kolist['name']}" data-content="<img src='{$kolist['img']}' height='20px'/> {$kolist['name'] |strtoupper}"><img src='{$kolist['img']}' height='20px'/> {$kolist['name'] |strtoupper}</option>
+											</eq>
+								
+							</volist>
+							
+				</select>
+					</div>
+						<div class="form-group">
+						<label> Network</label>
+						
+				<select id="selectNetwork" class="form-control input-sm" data-live-search="true" data-live-search-placeholder='{:l("Search")}' data-width="100%">
+						
+						<volist name="infocoin" id="network">
+							<eq name="xnb" value="$key">
+							<option selected="selected" value="{$network.name}" data-value="{$network.name}" data-content="<span>{$network.title}</span>"><span>{$network.title} [{$network.network}]</span></option>
+							<else/>
+							<option value="{$network.name}" data-value="{$network.name}" data-content="<span>{$network.title}</span>"><span>{$network.title} <if condition="$network['network']">[{$network.network}]</if></span></option>
+							</eq>
+						</volist>
+				</select>
+						<small>Make sure the network you choose for the deposit matches the withdrawal network or your assets may be lost.</small>
+					</div>
+
+				</div>
+				</div>
+				</div>
+				<div class="col-sm-8">
+				<div class="panel panel-flat bg-info">
+				
+				<div class="panel-body text-center"><h2>{$xnb|strtoupper} {:l('CURRENT_NUMBER_OF_DIGITAL_ASSE')}:  {$user_coin[$xnb]|Num}</h1>
+				
+				</div>
+				</div>
+				<div class="panel panel-flat bg-white">
+            <div class="panel-heading"></div>
+			<div class="panel-body">
+			
+			<eq name="codono_opencoin" value="1">
+						<if condition="$coin_list[$xnb]['type'] eq 'offline' && ($xnb neq xrp|| $xnb neq xlm)">
+							<if condition="$xnb neq xrp or $xnb neq xlm">
+							<include file="Finance:block_xrp_xlm"/>
+							<else/>
+						<include file="Finance:block_submitdeposit"/>
+						</if>
+						<else/>
+
+							<div class="col-sm-12 no-padding">
+							
+								<div class="col-sm-3 text-center">
+								
+										<div id="qrcode-wallet" style="display: inline-block;">
+										<span id="codeaa"></span>
+									</div>
+								
+									</div>
+									<div class="col-sm-9">
+											
+					<ul class="form-info no-padding" id="walletinfo">
+						<li class="">
+							<h4 id="copyAddress">--</h4>
+						</li>
+																	
+						<if condition="$infocoin[$coin]['dest_tag']">
+						<li class="" id="dest_tag" style="display:none">
+							<label>MEMO</label>
+							<span id="networkMemo"></span>
+							<a role="button" data-toggle="popover" id="qr2" data-placement="top" data-content="{:('Copied')}" trigger="hover" onclick="copyToClipboard('#networkMemo')" class="btn btn-1"><i class="fa fa-copy"></i></a>
+							<div class="d-inline p-5 f-s-12 alert alert-warning" role="alert">
+							  MEMO is required or you will lose your funds
+							</div>
+
+						</li>
+						</if>
+
+						<li class="col-12 list-square"><i class="fa fa-exclamation-circle"></i> <strong><span id="networkConfirmations">--</span></strong> network confirmation/s Required</li>
+						<li class="col-12 list-square"><i class="fa fa-exclamation-circle"></i> Only send <strong><span id="networkName">-</span></strong> to this Deposit address</li>
+						<li class="col-12 list-square"><i class="fa fa-exclamation-circle"></i> Make sure the network <strong><span id="networkTitle">-</span></strong></li>
+						<li class="pull-right"><label id="adrcopybutton">
+											    <a role="button" data-content="Copy" onclick="copyToClipboard('#copyAddress')" class="btn btn-info btn-xs" data-popup="Copy" title="click">Copy Address <i class="fa fa-copy"></i></a>
+											</label>
+						</li>
+					</ul>
+
+									
+									</div>
+								
+							</div>
+							
+						</if>
+						
+						
+					<else/>
+
+						<div class="pwtrade  pw  mt50">
+								<dl>
+									<dt>{:l('INTO_THE_ADDRESS')}</dt>
+									<dd>
+										<span>
+											{$wallet}
+											<gt name="dest_tag"  value="0"><br/>Dest tag/PaymentID: {$dest_tag}</gt>
+										</span>
+									</dd>
+								</dl>
+								
+								
+								<dl>
+									<dt>{:l('ADDRESS_MARK')}</dt>
+									<dd style="position: relative;">
+										<input type="text" class="texts" id="codono_dzbz" maxlength="100" value="">
+										(*{:l('SIGN_INTO_THE_ADDRESS_FROM_WHI')})						
+									</dd>
+								</dl>
+								
+								
+								
+								<dl>
+									<dt>{:l('NUMBER_OF_TRANSFER')}</dt>
+									<dd style="position: relative;">
+										<input type="text" class="texts" id="usd_num" maxlength="12" value="">
+																
+																</dd>
+								</dl>
+								<dl class="step5">
+									<dt>{:l('SMS_VERIFICATION_CODE')}</dt>
+									<dd class="yuyin">
+										<div class="clear">
+																			<input type="button" value="{:l('SEND_SMS_VERIFICATION_CODE')}" class="btns" onclick="send_cellphone_coinout('sms')" style="width: 100px;font-size: 12px;"/>
+																											{$cellphone}({:l('RECEIVING_CODES')})
+										</div>
+									</dd>
+								</dl>
+								<dl class="step6" style="display:none;">
+									<dt>{:l('SMS_VERIFICATION_CODE')}</dt>
+									<dd>
+										<input type="text" id="usd_cellphone_verify" value="" class="texts" placeholder="{:l('PLEASE_ENTER_THE_VERIFICATION_')}"/> <span id="reg_cellphone_new"></span>
+									</dd>
+								</dl>
+								<dl>
+									<dt>{:l('TRANSACTION_PASSWORD')}</dt>
+									<dd>
+										<input type="password" class="texts" id="usd_paypassword"  value=""><a href="/findpwd/findpwd" class="move ml5">{:l('FORGET')}?</a>
+									</dd>
+								</dl>
+								<dl>
+									<dt></dt>
+									<dd>
+										<empty name="zc_jz">
+											<input type="button" class="btns2" value="{:l('IMMEDIATELY_TRANSFERRED')}" onclick="coinin_up()">
+										<else/>
+											<input type="button" class="btns2" value="{$zr_jz}" disabled>
+										</empty>
+									</dd>
+								</dl>
+						</div>
+
+					
+					</eq>
+			
+			
+			</div>
+			</div>
+			
+				</div>
+				</div>
+			
+			<!--QR-->
+			
+			<div class="panel panel-flat">
+            <div class="panel-heading">
+			<div class="safe_center clear">
+				<h1 class="no-margin">{:l('DEPOSITS')}</span>
+					
+				</h1>
+			</div>
+			<div id="hints" class="mytips" style="display:none;">
+				<p>
+				
+				<notempty name="prompt_text">
+					{$prompt_text}
+				</notempty>
+				
+				</p>			
+			</div>
+			
+			
+			
+			
+			<div class="mytable-body"><div class="step2 f_body table-responsive">
+					
+					<eq name="codono_opencoin" value="1">
+					<table class="table table-responsive" id="investLog_content">
+						<thead>
+						<tr>
+							<th>{:l('TRANSFER_TIME')}</th>
+							<th>{:l('COINNAME')}</th>
+							<th>{:l('FROM')}</th>
+							<th>{:l('AMOUNT')}</th>
+							<th>{:l('FEES')}</th>
+							<th>{:l('TOTAL')}</th>
+							<th>{:l('STATUS')}</th>
+						</tr>
+						</thead>
+						<tbody>
+						
+                        <volist name="list" id="vo">
+                            <tr>
+                                <td>{$vo.addtime|addtime}</td>
+                                <td>{$vo.coinname}</td>
+								
+																<td><if condition="$vo['username']"><button class="btn btn-info btn-sm" onclick='showtx("{$vo['username']}")'>{$vo.username|msubstr=0,4}</button><else/>--</if></td>
+                                <td>{$vo['num']|NumToStr}</td>
+                                <td>{$vo['fee']|NumToStr}</td>
+                                <td>{$vo['mum']|NumToStr}</td>
+                                <td>
+                                    <eq name="vo.status" value="1">
+                                        <font color="#23a800">{:l('INTO_SUCCESS')} </font>
+                                        <else/>
+                                        <font color="red">{:l('PENDING_NEEDS_CONFIRMATION')}{$vo.status|abs}</font>
+                                    </eq><if condition="$vo['memo']"><button class="btn btn-warning btn-sm" onclick='showtx("{$vo['memo']}")'>{$vo.memo|msubstr=0,4}</button></if>
+									<if condition="$vo['txid']"><button class="btn btn-warning btn-sm" onclick='showtx("{$vo['txid']}")'>{$vo.txid|msubstr=0,4}</button></if>
+                                </td>
+                            </tr>
+                        </volist>
+						
+						
+						</tbody>
+						<if condition="$coin_list[$xnb]['type'] eq 'waves'">
+						<tfoot>
+						<tr></tr>
+						<tr><td colspan="6">
+						<a class="btn btn-success " onclick="wavesRefresh()"><i class="fa fa-refresh "></i>Check Deposit</a> 
+						</td></tr>
+						</tfoot>
+						</if>
+					</table>
+					<else/>
+					
+					<table class="table table-condensed table-striped table-hover" id="investLog_content">
+						<thead>
+						<tr>
+							<th>{:l('TRANSFER_TIME')}</th>
+							<th>{:l('ADDRESS_MARK')}</th>
+							<th>{:l('CURRENCY_TRANSFER')}</th>
+							<th>{:l('THE_NUMBER_OF_TRANSFER')}</th>
+							<th>{:l('THE_NUMBER_OF_ARRIVAL')}</th>
+							<th>{:l('STATUS')}</th>
+						</tr>
+						</thead>
+						<tbody>
+						
+                        <volist name="list" id="vo">
+                            <tr>
+                                <td>{$vo.addtime|addtime}</td>
+								<td>{$vo['txid']}</td>
+                                <td>{$vo.coinname}</td>
+                                <td>{$vo['num']|NumToStr}</td>
+                                <td>{$vo['mum']|NumToStr}</td>
+                                <td>
+                                    <eq name="vo.status" value="1">
+                                        <font color="#23a800">{:l('INTO_SUCCESS')} </font>
+                                        <else/>
+                                        <font color="red">{:l('PENDING')}</font>
+                                    </eq>
+                                </td>
+                            </tr>
+                        </volist>
+						
+						
+						</tbody>
+					</table>
+					
+					
+					
+					</eq>
+					
+					
+					<div class="pages"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<span style="display:none">
+			<span id="qrcode1"></span>
+			<span id="qrcode2"></span>
+	</span>
+	
+    <script type="text/javascript" src="__PUBLIC__/static/js/jquery.qrcode.min.js"></script>
+	
+<script>
+
+<if condition="$coin_list[$xnb]['type'] eq 'waves'">
+$(function () {
+       wavesRefresh();
+    });
+</if>
+
+
+	$("#coin-select").change(function () {
+		var coin        = $("#coin-select option:selected").val();
+		window.location = '/Finance/myzr/coin/' + coin + '';
+	});
+	
+	function wavesRefresh(){
+	$.get( "{:U('IPN/WavesDeposit')}", function( data ) {
+	alert( "Deposits checked!." );
+	});
+	}
+	
+	function send_new() {
+		$(".step6").hide();
+		$(".step5").show();
+	}
+	function send_cellphone_coinout(type) {
+		$.post("{:U('Verify/myzr')}", {
+			type: type,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$(".step5").hide();
+				$(".step6").show();
+				$("#usdout_cellphone_verify").focus();
+				$('#cellphone_new').attr("disabled", "disabled");
+				var obj      = $('#reg_cellphone_new');
+				var wait     = 60;
+				var interval = setInterval(function () {
+					obj.html(wait + "{:l('SEC_CAN_BE_SENT_AGAIN')}");
+					wait--;
+					if (wait < 0) {
+						clearInterval(interval);
+						$(".reloadverify_new").click();
+						$("#verify_new").val('');
+						obj.html('<a class="move" onclick="send_new()">{:l('DID_NOT_RECEIVE_RESEND')}</a>');
+					}
+					;
+				}, 1000);
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	
+	
+	
+	
+	function coinin_up() {
+		var num          = $("#usd_num").val();
+		var paypassword  = $("#usd_paypassword").val();
+		
+		var codono_dzbz = $("#codono_dzbz").val();
+		var coin         = $('#coin-select option:selected').val();
+		<eq name="M_ONLY" value="1">
+		var cellphone_verify = $("#usd_cellphone_verify").val();
+		if (cellphone_verify == "" || cellphone_verify == null) {
+			layer.msg('Enter SMS verification code', {
+				icon: 2
+			});
+			return false;
+		}
+		</eq>
+		if (num == "" || num == null) {
+			layer.tips('Enter the amount for transfer', '#usdout_num', {
+				tips: 2
+			});
+			return false;
+		}
+
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Provide Fund Password', '#usdout_paypassword', {
+				tips: 2
+			});
+			return false;
+		}
+		if (coin == "" || coin == null) {
+			layer.tips('Select Currency', '#coin-select', {
+				tips: 2
+			});
+			return false;
+		}
+		var goole ="0";
+		if(goole == 1){
+			layer.config({
+				extend: 'extend/layer.ext.js'
+			});
+			layer.ready(function () {
+				layer.prompt({
+					title: 'Enter the Google verification code and confirm',
+					formType: 1
+				}, function (val) {
+					if (val) {
+						$.post("{:U('Finance/coinout_up')}", {
+							coin:coin,
+							num: num,
+							paypassword: paypassword,
+							cellphone_verify: cellphone_verify,
+							bank: bank,
+							goole:val,
+						}, function (data) {
+							if (data.status == 1) {
+								layer.msg(data.info, {
+									icon: 1
+								});
+								window.location = "{:U('Finance/coinoutlog')}";
+							} else {
+								layer.msg(data.info, {
+									icon: 2
+								});
+								if (data.url) {
+									window.location = data.url;
+								}
+							}
+						}, "json");
+					}
+					;
+				});
+			});
+		}else{
+			$.post("{:U('Finance/upmyzr')}", {
+				coin:coin,
+				num: num,
+				paypassword: paypassword,
+        <eq name="M_ONLY" value="1">			
+		cellphone_verify: cellphone_verify,
+		</eq>
+				codono_dzbz:codono_dzbz,
+			}, function (data) {
+				if (data.status == 1) {
+					layer.msg(data.info, {
+						icon: 1
+					});
+					window.location = "{:U('Finance/myzr')}";
+				} else {
+					layer.msg(data.info, {
+						icon: 2
+					});
+					if (data.url) {
+						window.location = data.url;
+					}
+				}
+			}, "json");
+		}
+	}
+	
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_coinin').addClass('active');
+	function showtx(tx){
+	layer.alert(tx, {title: "Info",btn: ['Ok']});
+	}
+		function copyToClipboard(element) {
+	var $temp = $("<input>");
+	$("body").append($temp);
+	$temp.val($(element).text()).select();
+	document.execCommand("copy");
+	$temp.remove();
+}
+
+	jQuery(document).ready(function ($) {
+	var selectNetwork=$('select#selectNetwork').find(":selected").val();
+	console.log(selectNetwork);
+	changeAddress(selectNetwork);
+	});
+	
+	document.querySelector('select#selectNetwork').onchange = function(){   
+		var selectNetwork=this.selectedOptions[0].getAttribute('data-value'); 
+		console.log(selectNetwork);
+		changeAddress(selectNetwork);
+	};
+	document.querySelector('select#depositCyrpto').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+	var prefix="coin";
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+};
+function changeAddress(coin){
+    var networkCoins = '{$infocoin|json_encode}';
+	const obj = JSON.parse(networkCoins);
+	var coininfo=obj[coin];
+	$("#networkName").html('{$xnb|strtoupper}');
+	$("#networkName2").html(coininfo.name);
+	$("#networkTitle").html(coininfo.network);
+	$("#networkTitle2").html(coininfo.title);
+	$("#networkConfirmations").html(coininfo.confirmations);
+	$("#copyAddress").html(coininfo.wallet);
+	if(coininfo.wallet===false || coininfo.wallet==0 || coininfo.wallet==''){
+	let infomsg=coininfo.message?coininfo.message:'{:l('Offline')}';
+	 let message='<strong><i class="fa fa-exclamation-triangle"></i> '+infomsg+'</strong>';
+		
+		$("#copyAddress").html(message);
+		$("#adrcopybutton").hide();
+		$('#codeaa').hide();
+	}else{
+	$("#adrcopybutton").show();
+	$('#codeaa').show();
+	$('#codeaa').html('');
+			$('#codeaa').qrcode({
+                        render: "table", //table
+                        size: 140,
+                        text: coininfo.wallet, //Any content
+						background: "#ffffff"
+                    }); 
+
+		$("#walletinfo").show();
+		$("#networkMessage").hide();
+	}
+	if(coininfo.dest_tag!=null){
+	
+		$("#dest_tag").show();
+		$("#networkMemo").html(coininfo.dest_tag);
+	}
+	
+}
+</script>	
+
+<include file="Public:footer_minimal"/>

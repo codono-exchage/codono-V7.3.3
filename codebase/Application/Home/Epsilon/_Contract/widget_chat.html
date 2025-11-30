@@ -1,0 +1,204 @@
+<eq name="C['trade_moshi']" value="1">
+<div class="right" style="position:fixed;right:0px;bottom:0px;z-index:1001 !important;opacity:100;" id="chatboxrightcorner">
+	<div class="coinBox buyonesellone">
+		<div class="coinBoxBody buybtcbody2">
+			<div class="th-lts-con-t"> <h1>{:l('CHATROOM')}   <span id="chatshowhidebutton" style="float:right;cursor:pointer;min-width:150px">+</span></h1>
+			
+			</div>
+			
+			<div id="chatboxshowhide" style="display:none">
+			<div id="marqueebox1" style="height:350px;max-height: 450px;" class="">
+				<ul id="chat_content">
+				</ul>
+			</div>
+			<div id="marqueebox2">
+				<ul class="clearfix">
+					<li id="face" class="left"><a href="javascript:void(0);" class="face faceBtn" id="face1">
+						<img src="__PUBLIC__/Home/images/chnl.png" width="20">
+					</a></li>
+					<li id="msg" class="left">
+					<input type="text" name="msg" class="text" id="chat_text"></li>
+					<li id="send" class="right"><input class="tijiao" type="button" value="{:l('SEND')}"
+													   onclick="upChat()"></li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qqFace.js"></script>
+
+<script type="text/javascript">
+    //@He
+    function atChat(_this) {
+        $("#chat_text").val('@' + $(_this).html() + ' :');
+    }
+    //ENTER_SUBMIT_CHAT
+    $("#chat_text").keyup(function (e) {
+        if (e.keyCode === 13) {
+            upChat();
+            return false;
+        }
+    });
+    // SUBMIT_CHAT
+    function upChat() {
+        var content = $("#chat_text").val();
+        if (content == "" || content == null) {
+            layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#chat_text', {tips: 3});
+            return false;
+        }
+        $.post("/Ajax/upChat", {content: content,market:'{$market}'}, function (data) {
+            if (data.status == 1) {
+                $("#chat_text").val('');
+                getChat();
+            } else {
+                layer.tips(data.info, '#chat_text', {tips: 3});
+                return false;
+            }
+        }, 'json');
+    }
+    //EXPRESSION_BOX ID ASSIGNED_TO_THE_CONTROL EXPRESSION_STORED_PATH
+    $('#face1').qqFace({id: 'facebox1', assign: 'chat_text', path: '__UPLOAD__/face/'});
+
+
+    function getChat() {
+        //if (trade_moshi == 2) {
+            $.getJSON("/Ajax/getChat?market={$market}&t=" + Math.random(), function (data) {
+                if (data) {
+
+
+                    var list = '';
+                    for (i = 0; i < data.length; i++) {
+                        list += '<li><a href="javascript:void(0);" onclick="atChat(this)">' + data[i][1] + '</a>:' + data[i][2] + '</li>';
+					}
+                    list = list.replace(/\[\/#([0-9]*)\]/g, '<img src="__UPLOAD__/face/$1.gif"  width="18">');
+
+                    if ($("#chat_content").html() != list) {
+                        $("#chat_content").html(list);
+                        $("#marqueebox1").scrollTop(40000);
+                    }
+
+
+                }
+            });
+            setTimeout('getChat()', 5000);
+        //}
+    }
+
+	
+	getChat();
+
+</script>	
+<style>
+.coinBox{
+    color: #000;
+    background: #FFFFFF;
+}
+.th-lts-con-t {
+    width: 100%;
+    background: #fff;
+}
+.th-lts-con-t h1 {
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    background: #131A33;
+    font-size: 12px;
+    color: #fff;
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+.buyonesellone {
+    border: 1px solid #d5d5d5;
+}
+#marqueebox1 {
+    height: 450px;
+    max-height: 450px;
+    overflow-x: hidden;
+    overflow-y: auto;
+	z-index:999px;
+}
+#marqueebox1 ul{
+padding-left:2px;
+padding-right:4px;
+}
+#marqueebox1 li{
+    font-size:12px;
+    text-align:left;
+    
+    padding-left:2px;
+	list-style:none;
+}
+#marqueebox1 li:hover{
+    background:#0C1327;
+	color:#fff;
+}
+#marqueebox1 li a{
+	font-weight:bold;
+}
+#marqueebox1{
+    height:630px;
+    max-height:625px;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+#marqueebox1 img{
+    margin-bottom:-3px;
+}
+#marqueebox2{
+    height:30px;
+    border-top:1px solid #d5d5d5;
+}
+#marqueebox2 img{
+    padding:2px;
+    margin-left:2px;
+    margin-top:2px;
+    margin-bottom:-2px;
+
+}
+#marqueebox2 ul{
+padding-left:0px;}
+#marqueebox2 li {
+    list-style:none;
+	float:left;
+	margin-top:1px;
+}
+#marqueebox2 li a{
+    font-size:12px;
+}
+#marqueebox2 input{
+    width:192px;
+    height:22px;
+    color:#333333;
+    border:#d5d5d5 solid 1px;
+    background:#ffffff;
+    font-size:12px;
+    border-radius:3px;
+    padding:1px;
+    margin:2px;
+}
+#marqueebox2 input:hover{
+    border:#e55600 solid 1px;
+}
+#marqueebox2 .tijiao{
+    width:58px;
+    height:22px;
+    font-size:12px;
+    border-radius:10px;
+    outline:none;
+    border-radius:3px;
+    padding:1px;
+    margin:2px;
+    color:#ffffff;
+    background:#0E162D;
+}
+#marqueebox2 .tijiao:hover{
+    background:#131722;
+}
+</style>
+</eq>

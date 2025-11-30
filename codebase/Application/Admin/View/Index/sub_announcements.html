@@ -1,0 +1,30 @@
+<div class="col-xl-5">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title mb-5">{:l('Announcements')}</h4>
+        <ul class="verti-timeline list-unstyled">
+            
+            <volist name="arr.announcements" id="ann">
+                
+                <li class="event-list ">
+                <div class="event-timeline-dot">
+                    <i class="bx bxs-right-arrow-circle font-size-18 bx-fade-right"></i>
+                </div>
+                <div class="d-flex">
+                    <div class="flex-shrink-0 me-3">
+                        <h5 class="font-size-14"><php>echo addtime($ann['addtime'],'m-d')</php> <i class="bx bx-right-arrow-alt font-size-16 text-primary align-middle ms-2"></i></h5>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div>
+                        {$ann['title']|msubstr=0,35}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            </volist>
+
+        </ul>
+        <div class="text-center mt-4"><a href="{:U('Article/index?field=type&name=news')}" class="btn btn-primary waves-effect waves-light btn-sm">{:l('View More')}<i class="mdi mdi-arrow-right ms-1"></i></a></div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,99 @@
+<div class="crypt-market-status h-100">
+                    <div >
+						<div class="form-group mb-0">
+                        <ul class="nav nav-tabs" id="crypt-orders-tabx">
+                            <li role="presentation" ><a onclick="showbuysale()" href="#" class="active" data-toggle="tab"><img src="__PUBLIC__/trade-white/images/all_icon.png" /></a></li>
+                            <li role="presentation"><a onclick="showbuyonly()" href="#" data-toggle="tab"><img src="__PUBLIC__/trade-white/images/buy_icon.png" /></a></li>
+                            <li role="presentation"><a onclick="showsellonly()" href="#" data-toggle="tab"><img src="__PUBLIC__/trade-white/images/sell_icon.png" /></a></li>
+							<li role="presentation" class="ml-auto">
+							<select class=" depthMergeField input-sm" id="decimalplaces" >
+							<option value="1" title="1 Decimal" >0.1</option>
+							<option value="2" title="2 Decimal" >0.01</option>
+							<option value="3" title="3 Decimal" >0.001</option>
+							<option value="4" title="5 Decimal" >0.0001</option>
+							<option value="5" title="5 Decimal" >0.00001</option>
+							<option value="6" title="6 Decimal" >0.000001</option>
+							<option value="7" title="7 Decimal" >0.0000001</option>
+							<option value="8" title="8 Decimal"  >0.00000001</option>
+							</select>
+							</li>
+                        </ul>
+						</div>
+                        <div class="tab-contentx crypt-tab-content" id="bsorders">
+                            <div role="tabpanel" class="tab-pane active" id="allxorders">
+                                <table class="table table-condensed table-hover mb-0" >
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">{:l('Price')} ({$rmb|strtoupper})</th>
+                                            <th scope="col">{:l('Amount')}</th>
+                                            <th scope="col">{:l('Total')} ({$rmb|strtoupper})</th>
+                                        </tr>
+                                    </thead>
+									</table>
+									<div class="activeby2" id ="activeby2sell">
+									<table class="table table-condensed table-hover buysellorders" >
+									<tbody id="sellorderlist" class="orderlist">
+									</tbody>
+									</table>
+								</div>	
+								<div class="activeMiddleBar"> <span id="activexnb" class="OK">--</span><span id="activesign" class="OK"></span>     <span id="activermb" class="OK">--</span></div>
+								<div class="activeby2" id ="activeby2buy">
+								<table class="table table-condensed table-hover buysellorders mb-0" >
+									<tbody id="buyorderlist" class="orderlist">
+									</tbody>
+									</table>
+									</div>
+	
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+				<script>
+		var objactiveby2sell = document.getElementById("activeby2sell");
+        objactiveby2sell.scrollTop = objactiveby2sell.scrollHeight;
+				function showbuysale(){
+				
+				$('#sellorderlist').removeClass('hideme');
+				$('#buyorderlist').removeClass('hideme');
+				$('#activeby2sell').removeClass('hideme');
+				$('#activeby2buy').removeClass('hideme');
+					$('#activeby2sell').height('360px');
+				$('#activeby2buy').height('360px');
+				$('#sellorderlist').removeClass('fullheight');
+				$('#buyorderlist').removeClass('fullheight');	
+					$('#activeby2sell').css('display','flex');	
+				$('#activeby2sell').css('margin-bottom','-17px !important');
+				
+				}
+				function showbuyonly(){
+					$('#activeby2sell').height('0px');
+				$('#activeby2buy').height('720px');
+				$('#activeby2sell').addClass('hideme');
+				$('#activeby2buy').removeClass('hideme');
+				$('#sellorderlist').addClass('hideme');
+				$('#buyorderlist').addClass('fullheight');
+				$('#buyorderlist').removeClass('hideme');
+				}
+				function showsellonly(){
+				$('#activeby2sell').height('720px');
+				$('#activeby2sell').css('display','inherit');	
+				$('#activeby2sell').css('margin-bottom','0px !important');
+				$('#activeby2buy').height('0px');
+				$('#activeby2buy').addClass('hideme');
+				$('#activeby2sell').removeClass('hideme');
+				$('#buyorderlist').addClass('hideme');
+				$('#sellorderlist').removeClass('hideme');
+				$('#sellorderlist').addClass('fullheight');
+				}
+				</script>
+<style>
+	#activeby2sell{
+	display: flex;
+flex-direction: column-reverse;
+margin-bottom: -17px;
+}
+	.activeby2{overflow:hidden !important;}
+</style>
+				

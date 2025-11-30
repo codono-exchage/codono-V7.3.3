@@ -1,0 +1,69 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Wallet Details')}</span>
+			<span class="h2-title">>><a href="{:U('Config/coin')}">{:l('Coin List')}</a></span>
+		</div>
+
+		<div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+			<div class="search-form fr cf">
+				<div class="sleft">
+				
+				
+				</div>
+			</div>
+		</div>
+		<div class="card card-body mt-2 table-responsive">
+			<table class="table table-sm emptyx">
+				<thead class="table-light">
+					<tr>
+						<th class="row-selected row-selected"><input class="check-all" type="checkbox" /></th>
+						<th class="">{:l('ID')}</th>						
+						<th class="">{:l('Wallet address')}</th>
+						<th class="">{:l('Exchange UserID')}</th>
+						<th class="">{:l('Label')}</th>
+						<th class="">{:l('Blockchain Balance')}</th>
+						<th class="">{:l('Exchange balance')}</th>
+						
+						
+					</tr>
+				</thead>
+				<tbody>
+					<notempty name="list"> 
+					
+					<volist name="list" id="vo">
+					<tr>
+
+						<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" />{$vo.id}</td>	
+						<td>{$key}</td>		
+						<td>{$vo.addr}</td>
+						<td>{$vo.userid} </td>
+						<td>{$vo.label}</td>
+						<td>{$vo.balance}</td>
+						<td>Available:{$vo.xnb}<br>Freeze:{$vo.xnbd}<br>Total:{$vo.zj}</td>
+						
+									
+					</tr>
+					</volist> <else />
+					<td colspan="12" class="text-center">{:l('No contents!')}</td>
+					</notempty>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Config/coin')}");
+	</script>
+</block>

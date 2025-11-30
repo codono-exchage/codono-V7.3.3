@@ -1,0 +1,81 @@
+<div class="col-md-9 col-pd">
+                    <div class="graph-desc">
+                        <ul class="nav nav-tabs graph-nav lg-navtabs">
+                            <li><a data-toggle="tab" href="#recent-trades">{:l('Recent Trades')}</a></li>
+							<li><a data-toggle="tab" href="#closed-orders">{:l('My Previous Orders')}</a></li>
+                            <li><a data-toggle="tab" href="#opened-orders">{:l('My Open Orders')}</a></li>
+                        </ul>
+
+                        <div class="tab-content" style="margin-top:8px !important">
+						<div id="recent-trades" class="tab-pane fade fade in active">
+
+                                <div class="table-responsive mytable-3 table-height-three all-tables" id="recent-trades">
+                                    <table class="table table-hover table-dark table-crunched">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">{:l('Time')}</th>
+                                                <th scope="col">{:l('Type')}</th>
+                                                <th scope="col">{:l('Price')}</th>
+                                                <th scope="col">{:l('Quantity')}</th>
+                                                <th scope="col">{:l('Total')}</th>
+                                            </tr>
+                                        </thead>
+										<tbody id="recent-orders-list"><tr></tr></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="closed-orders">
+
+                                <div class="table-responsive mytable-3 table-height-three all-tables">
+								<div class="no-orders text-center" id="loginrequired2" style="display:none"><img src="{:SITE_URL}/Public/omegax/assets/images/empty.png" alt="Please login"></div>
+                                    <table class="table table-hover table-dark table-crunched" id="entrust_over2">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Qty</th>
+												<th scope="col">Total</th>
+                                            </tr>
+                                        </thead>
+										<tbody id="closedorderslist">
+                                            
+                                        </tbody>
+                                     
+                                    </table>	
+                                </div>
+                            </div>
+
+                            <div id="opened-orders" class="tab-pane fade" id="opened-orders">
+							
+                                <div class="table-responsive mytable-3 table-height-three all-tables">
+							
+								<div class="search-bar">
+                                                        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="opensearch">
+                                                        <i class="fa fa-search"></i>
+                                                    </div>
+														<div class="no-orders text-center" id="loginrequired" style="display:none"><img src="{:SITE_URL}/Public/omegax/assets/images/empty.png" alt="Please login"></div>
+                                    <table class="table table-hover table-dark table-crunched"  id="entrust_over"> 
+                                        <thead>
+                                            <tr>
+												<th scope="col">Market</th>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Price</th>
+												<th scope="col">Stop</th>
+												<th scope="col">Condition</th>
+                                                <th scope="col">Qty</th>
+                                                <th scope="col">Dealt</th>
+												<th scope="col">Total</th>
+												<th scope="col">Trade Type</th>
+                                                <th scope="col">Option</th>
+                                            </tr>
+                                        </thead>
+										<tbody id="entrustlist"></tbody>
+									</table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>

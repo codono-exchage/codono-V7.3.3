@@ -1,0 +1,170 @@
+<div class="trader_oper">
+					
+						<form action="#" class="form-horizontal">
+													<input id="buy_type" type="hidden" name="type" value="1">
+							<input id="buy_coin" type="hidden" name="coin" value="{$coin}">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Basic layout</h5>
+									<div class="heading-elements">
+										<ul class="icons-list">
+					                		<li><a data-action="collapse"></a></li>
+					                		<li><a data-action="reload"></a></li>
+					                		<li><a data-action="close"></a></li>
+					                	</ul>
+				                	</div>
+								</div>
+
+								<div class="card-body">
+									<div class="form-group">
+										<label class="col-lg-3 control-label">Price:</label>
+										<div class="col-lg-9">
+											<input type="text" class="form-control" id="buy_price" type="text" name="price" value="{$currency[$coin]['sell_price']}">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-lg-3 control-label">Password:</label>
+										<div class="col-lg-9">
+											<input type="password" id="buy_paypassword" class="form-control" placeholder="Your Funding password">
+										</div>
+									</div>
+									<div class="text-right">
+										<button type="submit" d="buy_but" class="btn btn-primary" onclick="c2c_buy(this)">Buy <i class="icon-arrow-right14 position-right"></i></button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!-- /basic layout -->
+
+					
+					
+						<form method="post" class="ft_box" id="form-buy">
+							<input id="buy_type" type="hidden" name="type" value="1">
+							<input id="buy_coin" type="hidden" name="coin" value="{$coin}">
+							<dl>
+								<dt class="red">Buy</dt>
+								<dd class="ft_box_readonly">
+									<p>Buying Price:</p>
+									<input id="buy_price" type="text" name="price" value="{$currency[$coin]['sell_price']}" class="form-control form-second">
+								</dd>
+								<dd>
+									<p>Funding Password:</p><input type="password" class="texts" id="buy_paypassword"  value="">
+								</dd>
+								<dd>
+									<a class="red">Click buy to generate an order!</a>
+									<!-- <a class="iconfont icon-warning minBtn bg_red"> KYC Required</a><br> -->
+									<input id="buy_but" class="bg_red" type="button" value="Buy" onclick="c2c_buy(this)"></dd>
+							</dl>
+						</form>
+						<form method="post" class="ft_box nobr" id="form-sell">
+							<input id="sell_type" type="hidden" name="type" value="2">
+							<input id="sell_coin" type="hidden" name="coin" value="{$coin}">
+							<dl>
+								<style>
+									.green>label{display:inline-block;vertical-align:middle;width:auto;line-height:auto;font-size:14px;}
+									.green>label>input[type=radio]{width:20px;}
+								</style>
+								<dt class="green">
+									<b>Sell</b>
+									<if condition="allow_special">
+										<label onchange="isFun()">  ( <input class="radio_input" type="radio" name="sltype" value="1" checked>General</label>
+										<label onchange="isFun()"><input class="radio_input" type="radio" name="sltype" value="2" >Expedited  )</label>
+									<else />
+										<label><input class="radio_input" type="radio" name="sltype" value="1" checked>General</label>
+									</if>
+									<span style="margin-left:15%;font-size:16px;">Account Balance:{$coinbal} {$coin|strtoupper}</span>
+								</dt>
+								<dd class="ft_box_readonly">
+									<p style="position:relative">Selling Price:</p>
+									<input onkeyup="isFun()" id="sell_price" style="padding-right:200px" type="text" name="price"  placeholder="Need to reserve a handling fee"  value="{$currency[$coin]['sell_price']}" class="form-control form-second">
+									<span style="position: absolute;width:126px;right:0px;color:#eee;line-height: 15px;;
+									border-left:1px solid #ccc;padding-left:5px;top:13px;"id="computedNum">
+									</span>
+								</dd>
+								<script>
+									function isFun() {
+										var isji= parseFloat($("input[name=sltype]:checked").val()==1?0.005:0.01);
+										var num= parseFloat($("#sell_price").val());
+										if(num>100000){layer.tips('Maximum withdrawal Amount100,000',"#sell_price"),{icon:2};$('#sell_price').val(100000);num=100000;}
+										var str='Fees:';
+										num>1000&&isji==0.005||num>500&&isji==0.01?$('#computedNum').html(str+={$usertrdenun}>2?isji*2*num:isji*num):$('#computedNum').html(str+=5);
+									}
+								</script>
+
+								<dd>
+									<p>Funding Password::</p>
+									<input type="password" class="texts" id="sell_paypassword"  value="">
+								</dd>
+								<dd>
+									<a class="red">A small box pops up -> enter the minimum number of matches -> generate an order</a>
+									<input id="sell_but" class="bg_green" type="button" value="Sell" onclick="c2c_sell(this)">
+								</dd>
+							</dl>
+						</form>
+					</div>
+					<div class="trader_box">
+						<div id="usdtcnybuylist" style="margin-right:5px">
+						<div>
+								<h3 class="eee" style="margin:0 0 10px;font-size:16px;">Recharge channel for KYCed Users!</h3>
+								<p>
+									<b>Merchants (sell orders)</b>
+									<eq name="uid" value="1"><b>Time</b> <b>Quantity</b></eq>
+									<eq name="uid" value="0"><b style="width:31%">Quantity</b></eq>
+									<b>Payment Types</b>
+									<b>Option</b>
+								</p>
+								<volist name="sell" id="vo">
+									<p>
+										<b><i class="fa fa-user fa-fw"></i>{$vo.username}</b>
+										<eq name="uid" value="1"><b>{$vo['time']|date="m/d H:i:s",###}</b> <b><egt name="vo.min_num" value="100"><small id="id{$vo['id']}">{$vo.min_num}</small>~{$vo['price']-$vo['deal']}<else/>100~{$vo['price']-$vo['deal']}</egt></b></eq>
+										<eq name="uid" value="0"><b style="width:31%"><egt name="vo.min_num" value="100"><small id="id{$vo['id']}">{$vo.min_num}</small>~{$vo['price']-$vo['deal']}<else/>100~{$vo['price']-$vo['deal']}</egt></b></eq>
+										<b class="typeshow">
+											<eq name="vo['weixin']" value="1">
+												<i class="typeshow iconfont icon-WX"></i>
+											</eq>
+											<eq name="vo['aplay']" value="2">
+													<i class="typeshow iconfont icon-ZFB"></i>
+												</eq>
+											<eq name="vo['bank']" value="0">
+												<i class="typeshow iconfont icon-WY"></i>
+											</eq>
+										</b>	
+										<b class="typeshow"><button class="bg_red minBtn" style="margin:0 2px" onclick="trade(1,{$vo['id']},'user')">Buy</button></b>
+									</p>
+								</volist>
+								<eq name="uid" value="1" >
+									<div class="pages">{$showA}</div>
+								</eq>
+
+							</div>
+						</div><div id="usdtcnyselllist" style="margin-left:5px;">
+							<h3 class="green" style="margin-bottom:10px;font-size:16px;">Sell Option for KYCed Users!</h3>
+							<p>
+								<b class="green">Merchants (buy orders)</b>
+								<eq name="uid" value="1"><b>Order time</b> <b>Quantity</b></eq>
+								<eq name="uid" value="0"><b style="width:31%">Quantity</b></eq>
+								<b>Payment Types</b>
+								<b>Option</b>
+							</p>
+							<volist name="buy" id="vo">
+								<p>
+									<b class="green"><i class="fa fa-user fa-fw"></i>{$vo.username}</b>
+									<eq name="uid" value="1"><b>{$vo['time']|date="m/d H:i:s",###}</b> <b>{$vo['price']-$vo['desl']}</b></eq>
+									<eq name="uid" value="0"><b style="width:31%">{$vo['price']-$vo['desl']}</b></b></eq>
+										<b class="typeshow">
+											<eq name="vo['weixin']" value="1">
+												<i class="typeshow iconfont icon-WX"></i>
+											</eq>
+											<eq name="vo['aplay']" value="2">
+												<i class="typeshow iconfont icon-ZFB"></i>
+											</eq>
+											<eq name="vo['bank']" value="0">
+												<i class="typeshow iconfont icon-WY"></i>
+											</eq>
+										</b>	
+									<b class="typeshow"><button class="minBtn bg_green" style="margin:0 2px" onclick="trade(2,{$vo['id']},'user',{$vo['price']})">Sell</button></b>
+								</p>
+							</volist>
+						</div>
+					</div>

@@ -1,0 +1,156 @@
+<include file="Public:header" />
+<!-- Page content -->
+<main class="wrapper">
+  <div class="full-box row">
+    <include file="User:sidebar" />
+    <div class="col-10">
+      <!-- Account Heading Start -->
+      <div class="page-title my-account">
+        <div class="container">
+          <div class="row">
+            <include file="User:top_bar" />
+            <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+              <ul class="text-right breadcrumbs list-unstyle">
+                <li>
+                  <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+                </li>
+                <li>
+                  <a href="{:U('/user/index')}" class="btn btn-warning btn-sm">{:l('User')}</a>
+                </li>
+                <li class="btn btn-warning btn-sm active">{:l('Authentication')}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+     
+          
+                <div class="card">
+                  <div class="card-header">
+                    <h4 class="card-title">{:l("KYC Application")}</h4>
+                  </div>
+                  <div class="card-body">
+
+                    <div class="settings-profile">
+                  
+                          <!-- Account Heading End -->
+                          <div class="table-responsive">
+                            <table class="table table-bordered default-table">
+                              <thead>
+                                <tr><th>Name</th><th>Level</th><th>Benfits</th></tr>
+                              </thead>
+                              <tbody>
+                                <foreach name='all_levels' item="item">
+                                  
+                                  <tr>
+                                    <td>{$item.name|strtoupper}</td>
+                                    <td><i class="fa fa-shield"></i> Level {$item.level_id}</td>
+                                    <td>Daily withdrawal Limit: {$item.limit_from|NumToStr} to {$item.limit_to|NumToStr} <php>echo strtoupper(DEFAULT_FIAT)</php></td>
+                                  </tr>
+                                  </foreach>
+
+                              </tbody>
+                            </table>
+                          </div>
+                          <hr/>
+                          <div class="table-responsive">
+                            <table class="table table-bordered default-table no-hover">
+                              <tbody>
+                                <tr>
+                                  <td >
+                                    <h6>{:l('Status')}</h6>
+                                  </td>
+                                  <td>                                     
+                                    
+                                    <div>
+                                      <eq name="user_show['kyc_status']" value='0'>
+                                        <i class="fa fa-check-info-circle {$user_show.color} m-r-5"></i>
+                                        <span class="text-info">{:l("Submit Your KYC")}</span></div>
+                                      </eq> 
+                                      <eq name="user_show['kyc_status']" value='1'>
+                                        <i class="fa fa-check-circle {$user_show.color} m-r-5"></i>
+                                        <span class="text-success">{:l("KYC Verified")}</span></div>
+                                      </eq> 
+
+                                      <eq name="user_show['kyc_status']" value='2'>
+                                        <i class="fa fa-check-circle {$user_show.color} m-r-5"></i>
+                                        <span class="text-info">{:l("KYC Being Verified")}</span></div>
+                                      </eq> 
+                                      <eq name="user_show['kyc_status']" value='3'>
+                                        <i class="fa fa-check-close {$user_show.color} m-r-5"></i>
+                                        <span class="text-danger">{:l("KYC Rejected")}</span></div>
+                                      </eq> 
+                                       </td>
+                                    <td>
+                                      <b>{$user_show.truename}</b>
+                                      <eq name="user_show['kyc_status']" value='3'>
+                                        <neq name="user_show['kyc_comment']" value=''>
+                                        
+                                          <p class="text-{$user_show.color}">Reason:{$user_show.kyc_comment}</p>
+                                        </neq>
+                                      </eq>
+                                    </td>
+                                </tr>
+                                <eq name="user_show['kyc_status']" value='1'>
+                                <notempty name="user_show['current_level']">
+                                <tr class="table-active">
+                                  <td>Current User Level</td>
+                                  <td class="text-success">
+                                    <i class="fa fa-shield"></i> KYC Level {$user_show.current_level.level_id}
+                                  </td>
+                                  <td class="col-6">
+                                   Daily withdrawal Limit: {$user_show.current_level.limit_from|NumToStr} to {$user_show.current_level.limit_to|NumToStr} <php>echo strtoupper(DEFAULT_FIAT)</php>
+                                  </td>
+                                </tr>
+                                <else/>
+                              <tr>
+                                <td colspan="3">
+                                  <p><a href='{:U("Identity/start")}' class='btn btn-info btn-block'>Upgrade to Level 1</a>
+                                  </p>
+                                </td>
+                              </tr>
+                                </notempty>
+                                <notempty name="user_show['next_level']">
+                                <tr class="table-inactive">
+                                  <td >
+                                    Next User Level
+                                  </td>
+                                  <td >
+                                    <i class="fa fa-shield"></i> KYC Level {$user_show.next_level.level_id}
+                                  </td>
+                                  <td class="col-6">
+                                   Withdraw Upto {$user_show.next_level.limit_from|NumToStr} to {$user_show.next_level.limit_to|NumToStr} USD
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colspan="3">
+                                    <p><a href='{:U("Identity/start")}' class='btn btn-info btn-block'>Upgrade to Level {$user_show['next_level']['level_id']}</a>
+                                    </p>
+                                  </td>
+                                </tr>
+
+                              </notempty>  
+                              <else/>
+                              <tr>
+                                <td colspan="3">
+                                  <p><a href='{:U("Identity/start")}' class='btn btn-info btn-block'>Complete KYC</a>
+                                  </p>
+                                </tr>
+                             </eq>
+                             
+                              </tbody>
+                            </table>
+                          </div>
+                          <!-- Account Content Start -->
+                    </div>
+                  </div>
+                </div>
+              
+       
+      </div>
+    </div>
+    <!-- Account Content Start -->
+</main>
+
+<include file="Public:footer_minimal" />

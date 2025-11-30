@@ -1,0 +1,92 @@
+<include file="Public:header" />
+<div class="page-top-banner">
+  <div
+    class="filter"
+    style="
+      background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');
+    "
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-8 mt-3">
+          <h1>{$page_title}</h1>
+          <h2>{$prompt_text}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="container">
+  <div class="container">
+    <div class="row mt-3 mb-3">
+      <include file="User:top_bar" />
+      <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+        <ul class="text-right breadcrumbs list-unstyle">
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+          </li>
+          <li>
+            <a href="{:U('/')}" class="btn btn-warning btn-sm">{:l('Content')}</a>
+          </li>
+          <li class="btn btn-warning btn-sm active">{:l('Fees')}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card timeline-content">
+    <div class="card-header">
+      <h6 class="card-title text-semibold">{:l('Trading Fees')}</h6>
+      <div class="heading-elements"></div>
+    </div>
+    <div class="card-body">
+      <!-- Info blocks -->
+      <div class="row table-responsive">
+        <table class="table text-nowrap text-center">
+          <thead>
+            <tr>
+              <th class="col-md-2">{:l('Market')}</th>
+              <th class="col-md-2">{:l('Trading Status')}</th>
+              <th class="col-md-2">{:l('Buy Fees')}</th>
+              <th class="col-md-2">{:l('Sell Fees')}</th>
+              <th class="col-md-2">{:l('Coin')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <volist name="feesMarket" id="vo">
+              <tr>
+                <td onclick="top.location='/trade/index/market/{$vo.name}'">
+                  <div class="media-left media-middle">
+                    <a href="#"
+                      ><img src="{$vo.img}" class="img-circle img-xs" alt=""
+                    /></a>
+                  </div>
+                  <div class="media-left">
+                    <div class="">
+                      <a href="#" class="text-default text-semibold"
+                        >{$vo.title}</a
+                      >
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <eq name="vo['status']" value="0">
+                    <span class="label bg-danger">{:l('Closed')}</span>
+                    <else />
+                    <span class="label bg-blue">{:l('Active')}</span>
+                  </eq>
+                </td>
+                <td><h6 class="{$textclass}">{$vo['fee_buy']*1}%</h6></td>
+                <td><h6 class="{$textclass}">{$vo['fee_sell']*1}%</h6></td>
+                <td><h6 class="{$textclass}">{$vo['xnb_name']}</h6></td>
+              </tr>
+            </volist>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- /info blocks -->
+    </div>
+  </div>
+</section>
+<include file="Public:footer_minimal" />

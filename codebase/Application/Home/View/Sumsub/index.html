@@ -1,0 +1,70 @@
+<include file="Public:header"/>
+
+<!-- Page content -->
+<div class="page-content">
+
+   <include file="User:left" />
+<script src="{$js_url}" ></script>
+<div id="idensic"></div>
+<script>
+
+  var id = idensic.init(
+    '#idensic',
+    {
+           "clientId": "{$clientid}",
+      // may be some additional parameters, see the Demo to see which ones, e.g.
+      "externalUserId": "{$externaluid}",
+	  "accessToken": "{$accesstoken}",
+'requiredIdDocs': {
+        'docSets': [{
+          'idDocSetType': 'APPLICANT_DATA',
+          'types': null,
+          'subTypes': null,
+          'fields': [
+            {
+              'name': 'firstName',
+              'required': true,
+            },
+            {
+              'name': 'lastName',
+              'required': true,
+            },
+          ],
+        }, {
+          'idDocSetType': 'IDENTITY',
+          'types': ['ID_CARD', 'PASSPORT', 'DRIVERS', 'RESIDENCE_PERMIT'],
+        }, {
+          'idDocSetType': 'SELFIE',
+          'types': ['SELFIE'],
+        }, {
+          'idDocSetType': 'PROOF_OF_RESIDENCE',
+          'types': ['UTILITY_BILL'],
+        }],
+      },
+           "navConf": {
+             "showWelcomeScreen": true
+           },
+           "uiConf": {
+              "steps": {
+               "CREATE_APPLICANT": {
+                 "instructions": "To get your account verified, please prepare your identity documents – Passport, National ID card or Driving license. Please make sure that your document is valid. To get detailed information on how to pass KYC, please read the complete guide.\n\n**Note**. Do not try to use fake documents. It will lead to the final blocking of the account.",
+                 "title": "Please follow the steps after agreeing to our conditions.",
+                 "agreements": [
+                   "By clicking the “I Agree” button I accept [General Terms and Conditions](https://sumsub.ru/privacy-policy/)",
+                   "I give my consent to process my personal data for the purposes and conditions set out in the Privacy Policy."
+                 ]
+               },
+               "IDENTITY": {
+                 "title": "Custom title for the identity step"
+               },
+               "SELFIE": {
+                 "videoRequired": "optional"
+               },
+             }
+           }
+        });
+
+// ...
+</script>
+
+<include file="Public:footer_minimal" />

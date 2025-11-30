@@ -1,0 +1,106 @@
+<div class="recent-history market-order card mt-3">
+				<div class="header d-flex justify-content-between align-items-center white-bg">
+					<ul class="nav nav-pills" role="tablist">
+						<li class="nav-item">
+							<a aria-selected="true" class="nav-link active" data-toggle="pill" href="#newrecent-trades" role="tab">{:l('Recent Trades')}</a>
+						</li>
+						<li class="nav-item">
+							<a aria-selected="false" class="nav-link" data-toggle="pill" href="#closed-orders" role="tab">{:l('My Previous Orders')}</a>
+						</li>
+						<li class="nav-item">
+							<a aria-selected="false" class="nav-link" data-toggle="pill" href="#opened-orders" role="tab">{:l('My Open Orders')}</a>
+						</li>
+						<li class="nav-item">
+							<a aria-selected="false" class="nav-link" data-toggle="pill" href="#funds" role="tab">{:l('Funds')}</a>
+						</li>
+					</ul>
+					<ul class="list-inline m-r-15 f-s-12 filterMenu">
+
+						<li class="list-inline-item active all-orders"><a href="#!">{:l("All")}</a></li>
+					</ul>
+				</div>
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="newrecent-trades" role="tabpanel">
+						<div class="d-flex justify-content-between market-order-item table-responsive white-bg hello-xqf">
+							<table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">{:l('Time')}</th>
+                                                <th scope="col">{:l('Type')}</th>
+                                                <th scope="col">{:l('Price')}</th>
+                                                <th scope="col">{:l('Quantity')}</th>
+                                                <th scope="col">{:l('Total')}</th>
+                                            </tr>
+                                        </thead>
+                                    <tbody id="recent-orders-list">
+																<tr><td colspan="5"><span class="no-data">
+		                <i class="icon ion-md-document"></i>
+		                {:l('No Data')}</td></tr>
+									</tbody>
+									</table>
+
+						</div>
+						
+					</div>
+					<div class="tab-pane fade" id="opened-orders" role="tabpanel">
+						<div class="d-flex justify-content-between table-responsive white-bg market-order-item">
+							
+							<table class="table table-striped" id="entrust_over">
+                                        <thead>
+                                            <tr>
+											    <th scope="col">Market</th>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Price</th>
+												<th scope="col">Stop</th>
+												<th scope="col">Condition</th>
+                                                <th scope="col">Qty</th>
+                                                <th scope="col">Dealt</th>
+												<th scope="col">Total</th>
+												
+                                                <th scope="col">Option</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="entrustlist">
+                                         <span class="no-data" id="loginrequired">
+											<i class="icon ion-md-person"></i>
+											<span class="login-menu">
+												<a class="cd-signin" href="#0">{:l("Login")}</a> {:l("Or")} <a class="cd-signup" href="#0">{:l("Signup")}</a>
+											</span>
+										 </span>
+                                        </tbody>
+                                    </table>
+						</div>
+
+					</div>
+					<div class="tab-pane fade" id="closed-orders" role="tabpanel">
+						<div class="d-flex justify-content-between table-responsive white-bg market-order-item">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Time</th>
+										<th scope="col">Type</th>
+										<th scope="col">Price</th>
+										<th scope="col">Qty</th>
+										<th scope="col">Total</th>
+									</tr>
+								</thead>
+								<tbody id="closedorderslist">
+									<eq name="Think.session.userId" value="0"><span class="no-data" >
+									<i class="icon ion-md-person"></i>
+									<span class="login-menu">
+										<a class="cd-signin" href="#0">{:l("Login")}</a> {:l("Or")} <a class="cd-signup" href="#0">{:l("Signup")}</a>
+									</span>
+								 </span></eq>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="funds" role="tabpanel">
+
+							<h4 class="p-20 m-20">Funds will be shown here</h4>
+					</div>
+				</div>
+			</div>

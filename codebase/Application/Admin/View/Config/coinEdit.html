@@ -1,0 +1,793 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+        <div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><empty name="data">{:l('Add Coin')}<else /> {:l('Edit Coin')}</empty></h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{:U('Config/coin')}">{:l('Coin configuration')}</a></li>
+                    <li class="breadcrumb-item active"><empty name="data">{:l('Add Coin')}<else /> {:l('Edit Coin')}</empty></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="card">
+
+            <div class="card-body">
+                <form id="form" action="{:U('Config/coinEdit')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                    <div id="tab" class="tab-pane in tab">
+                        <div class="form-item cf">
+                            <table class="table">
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Unique Symbol')}</td>
+
+                                    <empty name="data['name']">
+                                        <td><input type="text" class="form-control input-10x" name="name" value=""></td>
+                                        <else/>
+                                        <input type="hidden" class="form-control input-10x" name="name" value="{$data.name}">
+                                        <td>{$data.name}</td>
+                                    </empty>
+
+									<td class="item-note"><span class="fa fa-info-circle" title="Lowercase must be completed: but can not fill in keywords such as asc desc"></span> {:l('Only 3-6 small letters , only alphabets')}</td>
+                                </tr>
+
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Parent Symbol')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="symbol" value="{$data['symbol']}">
+                                    </td>
+
+                                    <td class="item-note">{:l('Keep Empty [Use: multichain, Put one symbol under another]')}</td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Frontend Title')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="title" value="{$data['title']}">
+                                    </td>
+
+                                    <td class="item-note">{:l('Unique Title [ie bitcoin cash]')}</td>
+                                </tr>
+                                <eq name="codono_opencoin" value="1">
+                                <tr><td class="item-label">{:l('Coin type')}:</td>
+                                    <td>
+                                
+                                    <select name="type" id="selectcointype" class="form-select input-10x">
+                                        
+                                            <foreach name="coin_types" item="cointype" key="kex">
+
+                                            <option value="{$kex}"
+                                                <if condition="$data.type eq $kex">{:l('selected')}</if>
+                                                >{$cointype}
+                                            </option>
+                                        </foreach>
+                                    </select>
+                                </td></tr>
+							
+								<else/>
+									<input type="hidden" name="type" value="rgb" />
+								</eq>
+<tr class="controls">
+										<td class="item-label">{:l('Token type')}:</td>
+										<td><select name="js_yw"  id="js_yw" class="form-select input-10x">
+											<option value=""
+											<eq name="data.js_yw" value="">{:l('selected')}</eq>
+											>{:l('Not a Token')}
+                                        </option>
+											<option value="erc20"
+											<eq name="data.js_yw" value="erc20">{:l('selected')}</eq>
+											>{:l('Ethereum ERC20')}</option>
+											<option value="bep20"
+											<eq name="data.js_yw" value="bep20">{:l('selected')}</eq>
+											>{:l('Binance BEP20')}
+                                        </option>
+											<option value="ftm20"
+											<eq name="data.js_yw" value="ftm20">{:l('selected')}</eq>
+											>{:l('Fantom FTM20')}
+											</option>
+											<option value="plg20"
+											<eq name="data.js_yw" value="plg20">{:l('selected')}</eq>
+											>{:l('Polygon PLG20')}
+											</option>
+											<option value="krc20"
+											<eq name="data.js_yw" value="krc20">{:l('selected')}</eq>
+											>{:l('Kardia KRC20')}
+											</option>
+											<option value="avx20"
+											<eq name="data.js_yw" value="avx20">{:l('selected')}</eq>
+											>{:l('Avalanche AVX20')}
+											</option>
+											<option value="hrc20"
+											<eq name="data.js_yw" value="hrc20">{:l('selected')}</eq>
+											>{:l('Harmony HRC20')}
+											</option>
+											<option value="hco20"
+											<eq name="data.js_yw" value="hco20">{:l('selected')}</eq>
+											>{:l('HECO HCO20')}
+											</option>
+												<option value="arb20"
+											<eq name="data.js_yw" value="arb20">{:l('selected')}</eq>
+											>{:l('ARBI ARB20')}
+											</option>
+												<option value="mvr20"
+											<eq name="data.js_yw" value="mvr20">{:l('selected')}</eq>
+											>{:l('MoonRiver MVR20')}
+											</option>
+											<option value="qrc20"
+											<eq name="data.js_yw" value="qrc20">{:l('selected')}</eq>
+											>{:l('QTUM QRC20')}
+											</option>
+											<option value="ronin"
+											<eq name="data.js_yw" value="ronin">{:l('selected')}</eq>
+											>{:l('Axie RONIN')}
+											</option>
+											<option value="trc20"
+											<eq name="data.js_yw" value="trc20">{:l('selected')}</eq>
+											>{:l('TRC20')}
+											</option>
+											<option value="trc10"
+											<eq name="data.js_yw" value="trc10">{:l('selected')}</eq>
+											>{:l('TRC10')}
+											</option>
+											<option value="bitcoin" 
+											<eq name="data.js_yw" value="bitcoin">{:l('selected')}</eq>
+											>{:l('Bitcoin Network')}                                        </option>
+											<option value="waves" 
+											<eq name="data.js_yw" value="waves">{:l('selected')}</eq>
+											>{:l('Waves Network')}</option>
+											<option value="substrate" 
+											<eq name="data.js_yw" value="substrate">{:l('selected')}</eq>
+											>{:l('Substrate Network')}</option>
+												<option value="other" 
+											<eq name="data.js_yw" value="other">{:l('selected')}</eq>
+											>{:l('Other')}</option>
+										</select></td>
+										<td class="item-note"><span id="TokenTypeHelp">{:l('For User View Only')}</span></td>
+									</tr>
+
+								<tr class="controls" id="tokenof" style="display:none">
+										<td class="item-label">{:l('Token of')}:</td>
+										<td>
+										<select name="tokenof" class="form-select input-10x">
+										<option value="0"
+											<eq name="data['tokenof']" value="">{:l('selected')}</eq>
+											>{:l('None')}</option>
+											<volist name="C['coin_list']" id="v">
+										
+											<option value="{$v['name']}"
+											<eq name="data['tokenof']" value="$v['name']">{:l('selected')}</eq>
+											>{$v['name']|strtoupper} [{$v['title']}]</option>
+											</volist>
+											</select>
+										</td>
+										<td class="item-note">{:l('Select Main network ie , BNB or others')}</td>
+									</tr>
+									   <tr class="controls" id="networktype" <neq name="data['type']" value="cryptoapis">style="display:none"</neq>>
+                                    <td class="item-label">{:l('Network Type')}:</td>
+                                    <td><select name="network" class="form-select input-10x">
+                                        <option value="1"<eq name="data['network']" value="1">{:l('selected')}</eq>>{:l('Mainnet')}</option>
+                                        <option value="0"<eq name="data['network']" value="0">{:l('selected')}</eq>>{:l('Testnet')}</option>
+                                    </select></td>
+                                    <td class="item-note">{:l('Applicable for CryptoApis Yet')}</td>
+                                </tr>
+									<tr class="controls" id="rpc_type" style="display:none">
+										<td class="item-label">{:l('RPC Type')}:</td>
+										<td>
+										<select name="rpc_type" class="form-select input-10x">
+										<option>{:l('Select Type')}</option>
+										<option value="light"
+											<eq name="data['rpc_type']" value="light">{:l('selected')}</eq>
+											>{:l('Light')}</option>
+											<option value="full"
+											<eq name="data['rpc_type']" value="full">{:l('selected')}</eq>
+											>{:l('Full')}</option>
+											
+											</select>
+										</td>
+										<td class="item-note">{:l('If your connect node is full or light')}</td>
+									</tr>
+								<tr class="controls" id="public_rpc">
+                                    <td class="item-label">{:l('Public RPC URL')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="public_rpc" value="{$data['public_rpc']}">
+                                    </td>
+
+                                    <td class="item-note">[for bnb] https://bsc-dataseed.binance.org/ [<A href="https://chainlist.org/">{:l('Find More')}</a>]</td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Image')}:</td>
+                                    <td>
+                                        <div id="addpicContainer">
+                                            <!-- Use multiple="multiple"Property implementation Add to More map features -->
+                                            <!-- position: absolute;left: 10px;top: 5px;Only for thisuseThe casesinputHidden toimageunder.-->
+                                            <!-- height:0;width:0;z-index: -1;In order to hideinput,becauseChromeYou can not use lowerdisplay:noneOtherwise, notAdd tofile -->
+                                            <!-- onclick="getElementById('inputfile').click()" Click onimageWhen click onAdd tofilePush button -->
+                                            <notempty name="data.img">
+                                                <!--Noimagedisplaydefaultimage-->
+                                                <img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:500px;" title="Click Add Picture" alt="Click Add Picture" src="/Upload/coin/{$data.img}">
+                                                <else/>
+                                                <!--Noimagedisplaydefaultimage-->
+                                                <img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:500px;" title="Click Add Picture" alt="Click Add Picture" src="__THEME__/images/addimg.png">
+                                            </notempty>
+                                            <input type="hidden" id="img" name="img" value="{$data.img}">
+                                            <input type="file" id="inputfile" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+                                        </div>
+                                    </td>
+                                    <td class="item-note">80px*80px</td>
+                                </tr>
+
+								
+								<eq name="codono_opencoin" value="1">
+								
+									<tr class="controls" id="wal_ip">
+										<td class="item-label"><span id="wsi">{:l('Wallet Server IP')}:</span></td>
+										<td><input type="text" class="form-control input-10x" name="dj_zj" value="{$data['dj_zj']}">
+										</td>
+
+										<td class="item-note"><span id="wsih">{:l('No need to fill in the type of ICO COIN.')}</span></td>
+									</tr>
+									<tr class="controls" id="wal_port">
+										<td class="item-label"><span id="wsp">{:l('Wallet Server Port')}:</span></td>
+										<td><input type="text" class="form-control input-10x" name="dj_dk" value="{$data['dj_dk']}">
+										</td>
+
+										<td class="item-note"><span id="wsph">{:l('No need to fill in the type of ICO COIN.')}</span></td>
+									</tr>
+									<tr class="controls" id="serverusername">
+										<td class="item-label"><span id="wsu">{:l('Server Username')}:</span></td>
+										<td><input type="text" class="form-control input-10x" name="dj_yh" value="{$data['dj_yh']}" autocomplete="off" aria-autocomplete="none">
+										</td>
+
+										<td class="item-note"><span id="wsuh">{:l('No need to fill in the type of ICO COIN.')}</span></td>
+									</tr>
+									<tr class="controls" id="wall_pass">
+										<td class="item-label"><span id="wpw">{:l('Wallet Server password')}:</span></td>
+										<td><input type="text" class="pw form-control input-10x" name="dj_mm"
+												   value=""  autocomplete="off" placeholder="Password is not displayed" aria-autocomplete="none"></td>
+
+										<td class="item-note"><span id="wpwh">{:l('No need to fill in the type of ICO COIN.')}</span></td>
+									</tr>
+								</eq>
+								<tr class="controls" id="contract_btc_only" style="display:none">
+									<td class="item-label"><span id="owa">{:l('Contract Address')}</span>:</td>
+									<td><input type="text" class="form-control input-10x" name="contract" value="{$data['contract']}"></td>
+
+									
+									<td class="item-note" ><span >{:l('For BTC type TOKENs only')}</span></td>
+								</tr>
+								<tr class="controls" id="offlinewallet">
+									<td class="item-label"><span id="owa">{:l('Main Address')}</span>:</td>
+									<td><input type="text" class="form-control input-10x" name="codono_coinaddress" value="{$data['codono_coinaddress']}"></td>
+									<td class="item-note" ><span id="owh">{:l('For Offline Coins')}: <span class="fa fa-info-circle" title="[Important]*Applicable When 1.Type:Offline 2.Docking is off[In codono.json codono_opencoin=0].3.Ethereum main account"></span></span></td>
+								</tr>
+								
+								  <tr class="controls">
+                                    <td class="item-label">{:l('Block Explorer')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="js_wk" value="{$data['js_wk']}">
+                                    </td>
+                                    <td class="item-note"><span id="blockexplorerh">Example https://testnet.wavesexplorer.com/tx/</span></td>
+                                </tr>
+									 <tr class="controls">
+                                    <td class="item-label"><span id="wavedecimal">{:l('Decimal Places')}</span>:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_qk" value="{$data['cs_qk']}">
+                                    </td>
+                                    <td class="item-note"><span id="wavedecimal_hint">{:l('Number of decimals in coin/token')}</span></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('List ratio')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="fee_bili" value="{$data['fee_bili']}"  placeholder="Caution While Using">
+                                    </td>
+
+                                    <td class="item-note">{:l('% can only be listed in the current account')}</td>
+                                </tr>
+
+                         
+
+
+<!--
+                                <tr class="controls">
+                                    <td class="item-label">Deposit Bonus:</td>
+                                    <td><input type="text" class="form-control input-10x" name="zr_zs" value="{$data['zr_zs']}" placeholder="Keep blank, If dont know"></td>
+
+                                    <td class="item-note">% Deposit Bonus from 0.01 to 100 [This is in percent]</td>
+                                </tr>
+-->
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Deposits')}:</td>
+                                    <td>
+                                        <empty name="data['zr_jz']">
+                                                <select name="zr_jz" class="form-select input-10x" >
+                                                    <option value="1"<eq name="data['zr_jz']" value="1">{:l('selected')}</eq>>{:l('Enabled')}</option>
+                                                    <option value="0"<eq name="data['zr_jz']" value="0">{:l('selected')}</eq>>{:l('Disabled')}</option>
+                                                </select>
+                                            <else />
+                                                <select name="zr_jz" class="form-select input-10x" >
+                                                    <option value="1"<eq name="data['zr_jz']" value="1">{:l('selected')}</eq>>{:l('Enabled')}</option>
+                                                    <option value="0"<eq name="data['zr_jz']" value="0">{:l('selected')}</eq>>{:l('Disabled')}</option>
+                                                </select>
+                                        </empty>
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+
+							<eq name="codono_opencoin" value="1">
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Network Confirmations')}:</td>
+                                    <td>
+                                        <empty name="data['zr_dz']">
+                                                <input type="text" class="form-control input-10x" name="zr_dz" value="1">
+                                            <else />
+                                                <input type="text" class="form-control input-10x" name="zr_dz" value="{$data['zr_dz']}">
+                                        </empty>
+                                    </td>
+									<td class="item-note"><span class="fa fa-info-circle" title="Network Confirmation number have to fill in ,> 0"></span></td>
+                                </tr>
+							</eq>	
+                            <tr class="controls">
+                                <td class="item-label">{:l('Fees Coin')}:</td>
+                                <td>
+                                    <select name="zc_coin" class="form-select input-10x">
+										<option value="0"
+											<eq name="data['zc_coin']" value="">{:l('selected')}</eq>
+											>{:l('None')}</option>
+											<volist name="C['coin_list']" id="v">		
+											<option value="{$v['name']}"
+											<eq name="data['zc_coin']" value="$v['name']">{:l('selected')}</eq>
+											>{$v['name']|strtoupper} [{$v['title']}]</option>
+											</volist>
+									</select>
+                                <td class="item-note"> Withdrawal fees coin</td>
+                            </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Withdrawal fee %')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="zc_fee" value="{$data['zc_fee']}"></td>
+                                    <td class="item-note" title="% (fill in 0.01-100 any number) Withdrawal fees in percentage"><span class="fa fa-info-circle"></span> {:l('from 0.01 to 100%')}</td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Withdrawal Flat fee')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="zc_flat_fee" value="{$data['zc_flat_fee']}"></td>
+
+                                    <td class="item-note" title="Flat fee">{:l('Flat fees [Total fees= %calculated+flat]')}</td>
+                                </tr>
+
+                                
+                                <empty name="data['name']">
+                                        <tr class="controls">
+                                            <td class="item-label">{:l('Fee Userid*')}:</td>
+                                            <td><input type="text" class="form-control input-10x" name="zc_user" value="0" readonly></td>
+                                            <td class="item-note" title="Fill in Frontend Userid , Where withdrawal fees goes ie UID: 23737"><span class="fa fa-info-circle"></span></td>
+                                        </tr>
+                                    <else/>
+                                        <tr class="controls">
+                                            <td class="item-label">{:l('Fee Userid*')}:</td>
+                                            <td><input type="text" class="form-control input-10x" name="zc_user" value="{$data['zc_user']}"></td>
+
+                                            <td class="item-note" title="[Important]Fill in Frontend Userid , Where withdrawal fees goes ie UID: 23737."><span class="fa fa-info-circle"></span><neq name="data['zc_user']" value="0">[{$data['zc_user']|username}]</neq></td>
+                                        </tr>
+                                </empty>
+							<tr class="controls">
+                                    <td class="item-label">{:l('Min Withdrawal Amt')}:</td>
+                                    <td>
+                                        <empty name="data['zc_min']">
+                                            <input type="text" class="form-control input-10x" name="zc_min" value="0.01">
+                                            <else />
+                                            <input type="text" class="form-control input-10x" name="zc_min" value="{$data['zc_min']}">
+                                        </empty>
+                                    <td class="item-note">{:l('Recommend:Positive and greater than 0.01')}</td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Max Withdrawal Amt')}:</td>
+                                    <td>
+                                        <empty name="data['zc_max']">
+                                            <input type="text" class="form-control input-10x" name="zc_max" value="10000">
+                                            <else />
+                                            <input type="text" class="form-control input-10x" name="zc_max" value="{$data['zc_max']}">
+                                        </empty>
+                                    <td class="item-note">{:l('Recommend:Positive and greater than 10000')}</td>
+                                </tr>
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Withdrawal Status')}:</td>
+                                    <td><select name="zc_jz" class="form-select input-10x">
+                                        <option value="1"<eq name="data['zc_jz']" value="1">{:l('selected')}</eq>>{:l('Enabled')}</option>
+                                        <option value="0"<eq name="data['zc_jz']" value="0">{:l('selected')}</eq>>{:l('Disabled')}</option>
+                                    </select></td>
+                                    <td class="item-note">{:l('Enable/Disable withdrawal')}</td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Automatic Withdrawal')}:</td>
+                                    <td>
+                                        <empty name="data['zc_zd']">
+                                                <input type="text" class="form-control input-10x" name="zc_zd" value="0.0000001">
+                                            <else />
+                                                <input type="text" class="form-control input-10x" name="zc_zd" value="{$data['zc_zd']}">
+                                        </empty>
+                                    </td>
+                					<td class="item-note">
+                                        <span class="fa fa-info-circle" title="Recommend:Positive and greater than 10 (Less than This More Automatic Number Withdraw,Greater than this More number Rear Desk review )in order to Safety Do not set too large"></span>
+                                    </td>
+                                </tr>
+                              
+								 <tr class="controls">
+                                    <td class="item-label"></td>
+                                    <td><hr/><span class="text-center">{:l('Informational')} {:l('Only')}</span><hr/></td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                  <tr class="controls">
+                                    <td class="item-label">Deposit instructions :</td>
+                                    <td><textarea name="zr_sm">{$data.zr_sm}</textarea></td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">Withdrawal Instructions :</td>
+                                    <td><textarea name="zc_sm">{$data.zc_sm}</textarea></td>
+                                    <td class="item-note"></td>
+                                </tr>
+			
+				
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Details')}:</td>
+                                    <td><textarea name="js_sm" class="form-control input-10x">{$data.js_sm}</textarea></td>
+                                    <td class="item-note"></td>
+                                </tr>
+
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Download wallet')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="js_qb" value="{$data['js_qb']}">
+                                    </td>
+
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Source download')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="js_ym" value="{$data['js_ym']}">
+                                    </td>
+
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Official Link')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="js_gw" value="{$data['js_gw']}">
+                                    </td>
+
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Official Forums')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="js_lt" value="{$data['js_lt']}">
+                                    </td>
+
+                                    <td class="item-note"></td>
+                                </tr>
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Developers')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_yf" value="{$data['cs_yf']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Core algorithm')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_sf" value="{$data['cs_sf']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Release date')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_fb" value="{$data['cs_fb']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Proof Method')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_zm" value="{$data['cs_zm']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Total issued')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_zl" value="{$data['cs_zl']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Stock')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_cl" value="{$data['cs_cl']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Difficulty adjustment')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_nd" value="{$data['cs_nd']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Block award')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_jl" value="{$data['cs_jl']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Key Features')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_ts" value="{$data['cs_ts']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('ShortComings')}:</td>
+                                    <td><input type="text" class="form-control input-10x" name="cs_bz" value="{$data['cs_bz']}">
+                                    </td>
+                                    <td class="item-note"></td>
+                                </tr>
+
+
+                                <tr class="controls">
+                                    <td class="item-label"></td>
+                                    <td>
+                                        <div class="form-item cf">
+                                            <button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Submit')}</button>
+                                            <a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+                                            <notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+                                            </notempty>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    //submit Form
+                    $('#submit').click(function () {
+                        $('#form').submit();
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+input.pw {
+    -webkit-text-security: disc;
+}
+</style>
+<script type="text/javascript">
+CoinSelectHint('{$data.type}');
+function CoinSelectHint(cointype){
+switch (cointype) {
+case 'coinpay':
+	$('#wsi').html('Coinpay Merchantid:');
+	$('#wsp').html('Coinpay IPN Secret:');
+	$('#wsu').html('Coinpay Public Key:');
+	$('#wpw').html('Coinpay Private Key:');
+	$('#HelpLink').html('<a href="https://gocps.net/sfg1npk1ybfzj3ij3u26i7kgj94l" target="_blank">Don\'t have CoinPayments accont?</a>');
+break;
+case 'cryptoapis':
+	var assetid_inserted=$( "input[name='dj_yh']" ).val();
+	$("#networktype").show();
+
+	$('#wsi').html('WalletId:');
+	$('#wsi').html('WalletId:');
+	$('#wsih').html('WalletID generated from CryptoApis');
+	$('#wsp').html('NA:');
+	$('#wsph').html('Leave Blank');
+	$('#wsu').html('Contract Address:');
+	$('#wsuh').html('Fill ERC20 Contract address ,Leave blank in case of ethereum <a href="https://etherscan.io/tokens">Example</a>');
+	$('#wpw').html('API Key:');
+	$('#wpwh').html('APIKey from CryptoApis');
+	$('#owa').html('Main Account');
+	$('#owh').html('All deposits will be transfered here after deposit[For ETH ,ETC, BNB only]');
+	$('#wavedecimal').html('Decimal Places');
+	$('#wavedecimal_hint').html('Defined on contract');
+	$('#blockexplorerh').html('Block Explorer like https://etherscan.io/tx/');
+
+	$('#HelpLink').html('<a href="https://codono.com" target="_blank">Help</a>');
+break;
+case 'cryptonote':
+	var assetid_inserted=$( "input[name='dj_yh']" ).val();
+	$('#wsi').html('CryptoNote IP:');
+	$('#wsih').html('example:123.123.123.123');
+	$('#wsp').html('CryptoNote RPC Port:');
+	$('#wsph').html('Example:19092');
+	$('#wsu').html('Wallet User:');
+	$('#wsuh').html('Wallet Username or <a href="::U(\'CryptoNote/test?coin=\'.$data[\'name\'])break;" target="_blank">ReadHere</a>');
+	$('#wpw').html('Wallet Password:');
+	$('#wpwh').html('PlainText');
+	$('#owa').html('CryptoNote Main Account');
+	$('#owh').html('Not required :Optional');
+	$('#wavedecimal').html('Decimal Places');
+	$('#wavedecimal_hint').html('It is usually not required for Cryptonote');
+	$('#HelpLink').html('<a href="https://codono.com" target="_blank">Help</a>');
+break;
+case 'waves':
+	var assetid_inserted=$( "input[name='dj_yh']" ).val();
+	$('#wsi').html('Waves Platform URL:');
+	$('#wsih').html('example:http://123.123.123.123:6869');
+	$('#wsp').html('Waves Port:');
+	$('#wsph').html('Example:6869');
+	$('#wsu').html('Asset id:');
+	$('#wsuh').html('Leave Bank in case of Waves');
+	$('#wpw').html('Waves API Key:');
+	$('#wpwh').html('PlainText');
+	$('#owa').html('Waves Main Account');
+	$('#owh').html('All deposits will be transfered here after deposit');
+	$('#wavedecimal').html('Waves Assets Decimal Places');
+	$('#wavedecimal_hint').html('User For Assets : Number of Decimals <a href="http://dev.pywaves.org/assets/'+assetid_inserted+'">Info</a>');
+	$('#HelpLink').html('<a href="https://docs.wavesplatform.com/en/development-and-api/waves-node-rest-api.html" target="_blank">API DOC</a>');
+break;
+case 'blockio':
+	$('#wsi').html('Leave Blank:');
+	$('#wsp').html('Leave Blank:');
+	$('#wsu').html('BlockIO API Key:');
+	$('#wpw').html('BlockIO PIN:');
+	$('#HelpLink').html('<a href="https://block.io" target="_blank">Don\'t have Block.io accont?</a>');
+break;
+case 'xrp':
+	$('#owa').html('Main Account');
+	$('#owh').html('All deposits will be transfered here');
+	//$('#wsu').html('BlockIO API Key:');
+	//$('#wpw').html('BlockIO PIN:');
+	$('#HelpLink').html('<blink>Deposits are automatically transferred</blink> to <a href="#owh">Main account</a>');
+break;
+case 'blockgum':
+
+    $("#wall_pass").hide();	
+    $("#tokenof").show();
+	$("#rpc_type").hide();	
+	$("#public_rpc").hide();
+    $('#wsih').html('Leave Blank:');
+	$('#wsp').html('NA:');
+    $('#wsi').html('NA:');
+    $('#wpw').html('NA:');
+    $("#wal_port").hide();	
+     $("#wal_ip").hide();	
+     $('#owa').html('Main Account');
+    
+	$('#wsph').html('Leave Blank');
+    $('#wpwh').html('Leave Blank');
+    $('#owh').html('Blockgum Main Wallet : Optional');
+    
+	$('#wsu').html('Contract Address:');
+	$('#wsuh').html('Fill ERC20 Contract address ,Leave blank in case of main coin <a href="https://etherscan.io/tokens">Example</a>');
+    break;
+case 'esmart':
+	console.log("Inside yes");
+	$('#wsih').html('example:123.123.123.123');
+	$('#wsp').html('Geth RPC Port:');
+	$('#wsph').html('Example:19092');
+	$('#wsu').html('Contract Address:');
+	$('#wsuh').html('Contract Address only fill in case if this is a token');
+	$('#wpw').html('Mainaccount Password:');
+	$('#wpwh').html('PlainText Password ');
+	$('#owa').html('Main Account');
+	  $("#tokenof").show();
+	$("#rpc_type").show();	
+	$("#public_rpc").show();	
+	var assetid_inserted=$( "input[name='dj_yh']" ).val();
+	$('#owa').html('Main Account');
+	$('#owh').html('All deposits will be transfered here');
+	//$('#wsu').html('BlockIO API Key:');
+	//$('#wpw').html('BlockIO PIN:');
+	$('#HelpLink').html('<blink>Deposits are automatically transferred</blink> to <a href="#owh">Main account</a>');
+break;
+case 'tron':
+	
+	 $("#tokenof").show();
+     $("#wal_port").hide();	
+     $("#wal_ip").hide();	
+	$("#rpc_type").hide();	
+	$("#public_rpc").hide();	
+	var assetid_inserted=$( "input[name='dj_yh']" ).val();
+	$('#owa').html('Main Account');
+    $('#wsu').html('Contract Address:');
+	$('#wsuh').html('Contract Address only fill in case if this is a token');
+    $('#wpw').html('Main A/c Password:');
+	$('#wpwh').html('PlainText Password ');
+	$('#owh').html('All Deposits  goes to and withdrawals takes from main account <a href="{:SITE_URL}Tron/makeOneAccount/securecode/{:CRON_KEY}" target="_blank">Create a main account</a>');
+	$('#HelpLink').html('<blink>Deposits are automatically transferred</blink> to <a href="#owh">Main account</a>');
+break;
+case 'substrate':
+	
+	$("#tokenof:visible").hide();
+	$("#rpc_type:visible").hide();	
+	$("#public_rpc:visible").hide();
+	$("#serverusername:visible").hide();
+	$("#offlinewallet:visible").hide();
+	$('#wsih').html('example:127.0.0.1');
+	$('#wsp').html('Substrate RPC Port:');
+	$('#wsph').html('Example:22547');	
+	$('#wpw').html('API KEY:');
+	$('#wpwh').html('API KEY for RPC ');
+	$("#selectcointype").val("substrate").change();;
+	var assetid_inserted=$( "input[name='dj_yh']" ).val();
+	$('#owa').html('Main Account');
+	$('#HelpLink').html('<blink>Deposits are automatically transferred</blink> to Main account defined on node ');
+break;
+case 'qbb':
+	$("#tokenof").show();
+	$("#contract_btc_only").show();
+	$('#wsi').html('Wallet Server IP:');
+	$('#wsp').html('Wallet Server Port:');
+	$('#wsu').html('Wallet Server Username:');
+	$('#wpw').html('Wallet Server Password:');
+break;
+default:
+	$('#wsi').html('Wallet Server IP:');
+	$('#wsp').html('Wallet Server Port:');
+	$('#wsu').html('Wallet Server Username:');
+	$('#wpw').html('Wallet Server Password:');
+}
+}
+    $(document).ready(function () {
+		
+	$('#selectcointype').on('change', function() {
+	CoinSelectHint(this.value);
+	
+	});
+        //The response fileAdd tosuccessevent
+        $("#inputfile").change(function () {
+            //createFormDataObjects
+            var data = new FormData();
+            //forFormDataAdding Data Object
+            $.each($('#inputfile')[0].files, function (i, file) {
+                data.append('upload_file' + i, file);
+            });
+
+
+            //send data
+            $.ajax({
+                url: '/Admin/Config/coinImage',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,		//Essential parameters
+                processData: false,		//Essential parameters
+                success: function (data) {
+                    if (data) {
+                        $('#up_img').attr("src", '/Upload/coin/' + data);
+                        $('#img').val(data);
+                        $('#up_img').show();
+                    }
+                },
+                error: function () {
+                    alert('Upload error');
+                    $(".loading").hide();	//plus Upload failed shift except plus Load image
+                }
+            });
+
+        });
+    });
+</script>
+<script type="text/javascript" src="__THEME__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function (K) {
+        editor = K.create('textarea', {
+            width: '500px',
+            height: '100px',
+            items: ['source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'emoticons', 'link', 'fullscreen'],
+            afterBlur: function () {
+                this.sync();
+            }
+        });
+    });
+</script>
+<include file="Public:footer"/>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //Highlight navigation
+        highlight_subnav("{:U('Config/coin')}");
+    </script>
+</block>

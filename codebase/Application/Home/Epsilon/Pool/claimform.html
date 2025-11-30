@@ -1,0 +1,109 @@
+<div
+  class="modal fade"
+  id="claimform_{$vo.id}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="claimform_Label_{$vo.id}"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="claimform_Label_{$vo.id}">
+          {$vo['name']}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+		<div class="row">
+			<div class="col-6">
+
+	
+				<div class="form-group">
+				  <div class="row">
+					<div class="col-6">
+					  <span class="small"><b>{:l('Claim Price')} </b> </span>
+
+					</div>
+	
+					<div class="col-6">
+					  <span class="small text-right"
+						>{$vo['pool']['charge_price']*$vo['daily_profit']} {$vo['pool']['charge_coin'] |strtoupper}</span
+					  >
+					</div>
+				  </div>
+				</div>
+				<input
+						  
+						  class="form-control"
+						  placeholder="Please enter the amount"
+						  id="pool_box{$vo.id}"
+						  value="1" type="hidden"
+						/>
+	
+	
+				<div class="form-group">
+				  <div class="row">
+					<div class="col-6">
+					  <span class="small"
+						><b>{:l('Balance')} </b></span
+					  >
+					</div>
+					
+					<div class="col-6">
+					  <span class="small text-right">{$userBalance[$vo['pool']['charge_coin']]|NumToStr} {$vo['pool']['charge_coin'] |strtoupper}</span>
+					</div>
+				  </div>
+				</div>
+			  </div>
+	
+			  <div class="col-6">
+				<div class="form-group">
+				  <div class="row">
+					<div class="col-6">
+					  <span class="small"><b>{:l('Claimed')}</b></span>
+					</div>
+					<div class="col-6">
+					  <span class="small text-right">{$vo['collected']}/{$vo['days']} days</span>
+					</div>
+				  </div>
+				</div>
+				<div class="form-group">
+				  <div class="row">
+					<div class="col-6">
+					  <span class="small"><b>{:l('Claim Reward')}</b></span>
+					</div>
+					<div class="col-6">
+					  <span class="small text-right"
+						>{$vo['daily_profit']|NumToStr}  {$vo['getcoin']|strtoupper}
+					  </span>
+					</div>
+				  </div>
+				</div>
+	
+			  </div>
+		</div>
+
+	  </div>
+      <div class="modal-footer">
+		
+		<button
+		type="submit"
+		class="btn btn-primary"
+		onclick="claimreward('{$vo.id}','{$vo['daily_profit']|NumToStr} {$vo['getcoin']|strtoupper}','{$vo['pool']['charge_price']*$vo['daily_profit']} {$vo['pool']['charge_coin'] |strtoupper}')" 
+	  >
+	  {:l('Claim Reward')}
+	  </button>
+
+      </div>
+    </div>
+  </div>
+</div>

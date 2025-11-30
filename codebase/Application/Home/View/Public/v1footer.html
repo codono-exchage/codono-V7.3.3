@@ -1,0 +1,378 @@
+<!-- Footer -->
+<include file="Public:widget_previous_error"/>
+	<div class="navbar navbar-default navbar-fixed-bottom footer">
+		<ul class="nav navbar-nav no-border visible-xs-block">
+			<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second"><i class="icon-circle-up2"></i></a></li>
+		</ul>
+
+		<div class="navbar-collapse collapse" id="navbar-second">
+			<div class="navbar-text">
+				{:C('web_icp')}
+			</div>
+
+			<div class="navbar-right">
+				<ul class="nav navbar-nav">
+			<volist name="footerArticleType" id="vo">
+					<li class="dropdown">
+						<a href="{:U('Article/index',array('id'=>$vo['id']))}" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-cog3"></i> {$vo['title']}
+							<span class="caret"></span>
+						</a>
+						
+						<ul class="dropdown-menu dropdown-menu-right">
+									<li><a href="{:U('Article/index',array('id'=>$vo['id']))}">
+							 {$vo['title']}
+								</a></li>
+						<volist name="footerArticle[$vo['name']]" id="vvo">
+					
+							<li><a href="{:U('Article/type',array('id'=>$vvo['id']))}" ><i class="icon-dribbble3"></i> {$vvo['title']}</a></li>
+						</volist>
+						</ul>
+					</li>
+			</volist>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /footer -->
+
+<eq name="RECAPTCHA" value="1">
+<include file="Public:widget_login_user_recaptcha"/>
+<else/>
+<include file="Public:widget_login_user"/>
+</eq>
+
+
+
+<style>
+.th-lts-con-t {
+    width: 100%;
+    background: #fff;
+}
+
+.th-lts-con-t h1 {
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    background: #f8f8f8;
+    font-size: 12px;
+    color: #333;
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+
+.buyonesellone {
+    border: 1px solid #d5d5d5;
+    background-color: #ffffff;
+}
+
+
+#marqueebox1{
+    height:auto;
+    max-height:232px;
+    overflow-x:hidden;
+    overflow-y:hidden;
+	z-index:999px;
+	border: 1px dashed lightgrey;
+}
+
+#marqueebox1 li{
+    font-size:11px;
+    text-align:left;
+    padding:1px;
+    padding-left:5px;
+}
+
+#marqueebox1 li:hover{
+    background:#ebf4fe;
+}
+
+#marqueebox1 img{
+    margin-bottom:-3px;
+}
+
+#marqueebox2{
+    height:30px;
+    border-top:1px solid #d5d5d5;
+}
+
+#marqueebox2 img{
+    padding:2px;
+    margin-left:2px;
+    margin-top:2px;
+    margin-bottom:-2px;
+    border:#d5d5d5 solid 1px;
+}
+
+#marqueebox2 li a{
+    font-size:11px;
+}
+
+#marqueebox2 input{
+    width:192px;
+    height:22px;
+    color:#333333;
+    border:#d5d5d5 solid 1px;
+    background:#ffffff;
+    font-size:12px;
+    border-radius:3px;
+    padding:1px;
+    margin:2px;
+}
+
+#marqueebox2 input:hover{
+    border:#e55600 solid 1px;
+}
+
+#marqueebox2 .tijiao{
+    width:58px;
+    height:26px;
+    border:#e55600 solid 1px;
+    font-size:12px;
+    border-radius:10px;
+    outline:none;
+    border-radius:3px;
+    padding:1px;
+    margin:2px;
+    color:#ffffff;
+    background:#e55600;
+}
+
+#marqueebox2 .tijiao:hover{
+    color:#ffffff;
+    background:#ff660b;
+}
+
+</style>
+
+
+<div ></div>
+ 
+<script>
+    $(document).ready(function () {
+        $("#leftsead a").hover(function () {
+            if ($(this).prop("className") == "youhui") {
+                $(this).children("img.hides").show();
+            } else {
+                $(this).children("div.hides").show();
+                $(this).children("img.shows").hide();
+                $(this).children("div.hides").animate({marginRight: '0px'}, '0');
+            }
+        }, function () {
+            if ($(this).prop("className") == "youhui") {
+                $(this).children("img.hides").hide();
+            } else {
+                $(this).children("div.hides").animate({marginRight: '-163px'}, 0, function () {
+                    $(this).hide();
+                    $(this).next("img.shows").show();
+                });
+            }
+        });
+        $("#top_btn").click(function () {
+            if (scroll == "off") return;
+            $("html,body").animate({scrollTop: 0}, 600);
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        var userid = "";
+        if (window.location.hash == '#login') {
+            if (!userid) {
+                loginpop();
+            }
+        }
+        var exchange_cellphone = $.cookies.get('exchange_cellphone');
+        if (exchange_cellphone != '' && exchange_cellphone != null) {
+            $("#login_cellphone").val(exchange_cellphone);
+        }
+    });
+
+	 function loginpopv1() {
+        var height = $(document).height();
+        if (height < 1000) {
+            height = 1000;
+        }
+        $('.all_mask').css({'height': height});
+        $('.all_mask').show();
+        $('#all_mask_loginbox').show();
+    }
+	function loginpop(){
+		var height = $(document).height();
+        if (height < 1000) {
+            height = 1000;
+        }
+        $('.all_mask').css({'height': height});
+        $('.all_mask').show();
+        $('#all_mask_loginbox').show();
+	}
+	
+	function mobile_login_box(){
+	 var height = $(document).height();
+        if (height < 1000) {
+            height = 1000;
+        }
+        $('.all_mask').css({'height': height});
+        $('.all_mask').show();
+        $('#all_mask_loginbox').show();
+	}
+	function emaillogin(){
+		$("#modal-login").modal();
+		
+	}
+    function wrapClose() {
+        $('.all_mask').hide();
+        $('.all_mask_loginbox').hide();
+    }
+    function footer_login() {
+        var cellphone = $("#login_cellphone").val();
+		var email = $("#login_cellphone").val();
+        var cellphones = $("#login_cellphones").val();
+        var password = $("#login_password").val();
+        var verify = $("#login_verify").val();
+        if (cellphone == "" || cellphone == null) {
+            layer.tips("{:l('PLEASE_ENTER_PHONE_NUMBER')}", '#login_cellphone', {tips: 2});
+            return false;
+        }
+        if (password == "" || password == null) {
+            layer.tips("{:l('PLEASE_ENTER_YOUR_PASSWORD')}", '#login_password', {tips: 2});
+            return false;
+        }
+		
+        if (verify == "" || verify == null) {
+            layer.tips("{:l('PLEASE_ENTER_VERIFICATION_CODE')}", '#login_verify', {tips: 2});
+            return false;
+			
+        }
+        $.post("/Login/submit", {
+            cellphone: cellphone,
+			email: cellphone,
+            cellphones: cellphones,
+            password: password,
+            verify: verify,
+            login_token: "",
+        }, function (data) {
+            if (data.status == 1) {
+                $.cookies.set('exchange_cellphone', cellphone);
+                layer.msg(data.info, {icon: 1});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    window.location = "/";
+                }
+            } else {
+                $("#login_verify_up").click();
+                layer.msg(data.info, {icon: 2});
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+	function footer_user_login() {
+        var username = $("#username").val();
+        var password = $("#login_password").val();
+        var verify = $("#login_verify").val();
+        if (username == "" || username == null) {
+            layer.tips("{:l('USERNAME')}", '#login_cellphone', {tips: 2});
+            return false;
+        }
+        if (password == "" || password == null) {
+            layer.tips("{:l('PLEASE_ENTER_YOUR_PASSWORD')}", '#login_password', {tips: 2});
+            return false;
+        }
+		
+        if (verify == "" || verify == null) {
+            layer.tips("{:l('PLEASE_ENTER_VERIFICATION_CODE')}", '#login_verify', {tips: 2});
+            return false;
+			
+        }
+        $.post("/Login/submit", {
+            username: username,
+	        password: password,
+            verify: verify,
+            login_token: "",
+        }, function (data) {
+            if (data.status == 1) {
+                $.cookies.set('username', username);
+                layer.msg(data.info, {icon: 1});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    window.location = "/";
+                }
+            } else {
+                $("#login_verify_up").click();
+                layer.msg(data.info, {icon: 2});
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+	function footer_emaillogin() {
+        var email = $("#email").val();
+        
+        var password = $("#login_password").val();
+        var verify = $("#verify").val();
+        if (email == "" || email == null) {
+            layer.tips("{:l('PLEASE_ENTER_EMAIL')}", '#email', {tips: 2});
+            return false;
+        }
+        if (password == "" || password == null) {
+            layer.tips("{:l('PLEASE_ENTER_YOUR_PASSWORD')}", '#login_password', {tips: 2});
+            return false;
+        }
+        if (verify == "" || verify == null) {
+	layer.tips("{:l('PLEASE_ENTER_VERIFICATION_CODE')}", '#login_verify', {tips: 2});
+            return false;
+  //alert(verify+"OK");
+        }
+        $.post("/Login/submit", {
+            email: email,
+            password: password,
+			mobile: " ",
+            verify: verify,
+            login_token: "",
+        }, function (data) {
+            if (data.status == 1) {
+                $.cookies.set('exchange_email', email);
+                layer.msg(data.info, {icon: 1});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    window.location = "/";
+                }
+            } else {
+                $("#login_verify_up").click();
+                layer.msg(data.info, {icon: 2});
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+  
+    $(document).ready(function () {
+        $.each($(".mv-hide"), function () {
+            eval($(this).html());
+        });
+    });
+	
+<eq name="Think.session.codono_already" value="1">
+		loginpop();
+</eq>
+
+function choose_lang(lang) {
+        $.cookies.set("lang", lang);
+        window.location.reload();
+}
+</script>
+</div>
+{:C('web_html_footer')}
+</body>
+</html>

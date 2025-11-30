@@ -1,0 +1,119 @@
+<include file="Public:header" />
+<script src="__PUBLIC__/Home/js/datepicker.min.js"></script>
+
+
+		<!-- Page content -->
+		<div class="page-container">	
+	
+<include file="Finance:left" />
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+		<div class="panel panel-flat">
+
+       <div class="panel-heading" >
+	   <div class="row">
+  <div class="col-sm-4">  <h1 >{:l('Trading History')}
+  </h1></div> <div class="col-sm-offset-4 col-sm-4 pull-right">
+  <select name="market-selectTest" id="market-selectTest" class="form-control">
+             <volist name="market_list" id="vo"> <eq name="market" value="$key">
+             <option value="{$vo['name']}" selected="selected">{$vo['xnb']|strtoupper}/{$vo['rmb']|strtoupper} [{$coin_list[$vo['xnb']]['title']}]</option>
+             <else />
+             <option value="{$vo['name']}">{$vo['xnb']|strtoupper}/{$vo['rmb']|strtoupper} [{$coin_list[$vo['xnb']]['title']}]</option>
+             </eq> </volist>
+           </select></div>
+		   </div>
+   </div>
+   
+   <div class="panel-body">
+    <div class="f_body">
+     <div class="f_body_main">
+      <div class="f_tab_body">
+       <div class="table-responsive">
+        <table class="table table-striped " id="investLog_content">
+         <thead>
+          <tr>
+           <th>
+		   <label class="control-label">		<img src="__UPLOAD__/coin/{$coin_list[$market_list[$market]['xnb']]['img']}" alt="" style="width: 22px;float:right" /> Market</label>
+		   </th>
+           <th>{:l('COMMISSIONED_BY_TIME')}</th>
+           <th><select name="type-selectTest" id="type-selectTest">
+             <option value="0"<eq name="type" value="0">selected</eq>>-{:l('All')}-
+             </option>
+             <option value="1"<eq name="type" value="1">selected</eq>>{:l('BUY')}
+             </option>
+             <option value="2"<eq name="type" value="2">selected</eq>>{:l('SELL')}
+             </option>
+           </select></th>
+           <th>{:l('ORDER_PRICE')}</th>
+           <th>{:l('THE_NUMBER_OF_COMMISSIONED')}</th>
+		   <th>{:l('QUANTITY')}</th>
+           <th>{:l('TRANSACTION_VOLUME')}</th>
+           <th><select name="status-selectTest" id="status-selectTest">
+             <option value="0"<eq name="status" value="0">selected</eq>>---{:l('ALL')}---
+             </option>
+             <option value="1"<eq name="status" value="1">selected</eq>>{:l('IN_TRANSACTION')}
+             </option>
+             <option value="2"<eq name="status" value="2">selected</eq>>{:l('COMPLETED')}
+             </option>
+             <option value="3"<eq name="status" value="3">selected</eq>>{:l('REVOKED')}
+             </option>
+           </select></th>
+          </tr>
+         </thead>
+         <tbody>
+          <volist name="list" id="vo">
+          <tr>
+           <td>{$market_list[$vo['market']]['xnb']|strtoupper}/{$market_list[$vo['market']]['rmb']|strtoupper} [{$coin_list[$market_list[$vo['market']]['xnb']]['title']}]</td>
+           <td>{$vo.addtime|date='m-d H:i:s',###}</td>
+           <td><eq name="vo.type" value="1"> <font class="buy">{:l('BUY')}</font> <else /> <font class="sell">{:l('SELL')}</font></eq></td>
+           <td>{$vo['price']|NumToStr}</td>
+		   <td>{$vo['fee']|NumToStr}</td>
+           <td>{$vo['num']|NumToStr}</td>
+           <td>{$vo['mum']|NumToStr}</td>
+           <td><eq name="vo.status" value="0">{:l('IN_TRANSACTION')} | <a class="cancel" id="{$vo.id}" href="javascript:void(0);">{:l('UNDO')}</a></eq> <eq name="vo.status" value="1">{:l('COMPLETED')}</eq> <eq name="vo.status" value="2">{:l('REVOKED')}</eq></td>
+          </tr>
+          </volist>
+         </tbody>
+        </table>
+        <div class="pages">{$page}</div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<script>
+	$("#type-selectTest,#status-selectTest,#market-selectTest").change(function(){
+		var type=$("#type-selectTest option:selected").val();
+		var status=$("#status-selectTest option:selected").val();
+		var market=$("#market-selectTest option:selected").val();
+		window.location='/Finance/orders/type/'+type+'/status/'+status+'/market/'+market+'';
+	});
+
+	$('.cancel').click(function(){
+		$.post("{:U('Trade/reject')}",{id : $(this).attr('id'), },function(data){
+			if(data.status==1){
+				layer.msg(data.info,{icon : 1 });
+				window.setTimeout("window.location='{:U('Finance/orders')}'",1000);
+			}else{
+				layer.msg(data.info,{icon : 2 });
+			}
+		});
+	});
+</script>
+<script>
+	//MENU_HIGHLIGHTS
+	$('#finance_box').addClass('active');
+	$('#finance_mywt').addClass('active');
+	$('#finance_mywt i').attr('class','coin_menu_op_6');
+</script>
+<style>
+	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+		padding:7px 2px !important;
+	}
+</style>
+<include file="Public:footer_minimal"/>

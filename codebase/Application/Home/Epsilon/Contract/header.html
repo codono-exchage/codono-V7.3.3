@@ -1,0 +1,46 @@
+
+<header>
+
+        <div class="container-full-width">
+            <div class="crypt-header">
+			<include file="Contract:topnav"/>
+                <div class="row mobilehide" id="the-stats">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 ">
+                        <div class="row align-items-center">
+                            <div class="col-xs-2">
+                                <div class="crypt-logo">
+								<div class="logo-small">
+								<img src="__UPLOAD__/coin/{$xnbimg}" alt="" /></div>
+								</div>
+                            </div>
+                            <div class="col-xs-2 d-sm-none d-md-block">
+                                <div class="crypt-mega-dropdown-menu"> <a href="" class="crypt-mega-dropdown-toggle">{$xnb|strtoupper}/{$rmb|strtoupper}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="col-xl-10 col-lg-10 col-md-10 "
+					<!--Stats Starts-->
+					<include file="Contract:statsbox"/>
+					<!--Stats Ends-->
+					</div>
+					  
+            </div>
+        </div>
+
+    </header>
+	<script>
+	var colorshade="{$Think.cookie.colorshade}";
+	var mainelementex = document.getElementById("mainbody");
+	var darksun = document.getElementById("darksun");
+	if(colorshade=='White'){
+	darksun.innerHTML='<i class="pe-7s-moon"></i>';
+	mainelementex.classList.remove("crypt-dark");
+	mainelementex.classList.add("crypt-white");
+	}
+	else{
+	darksun.innerHTML='<i class="pe-7s-sun"></i>';
+	mainelementex.classList.remove("crypt-white");
+	mainelementex.classList.add("crypt-dark");
+	}	
+</script>

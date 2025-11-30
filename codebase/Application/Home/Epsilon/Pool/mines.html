@@ -1,0 +1,99 @@
+<!-- Progress counters -->
+<div class="row">
+  <volist name="populars" id="vo">
+    <div class="col-md-6 col-sm-12 {$class}">
+      <!-- Current server load -->
+      <div class="card">
+        <div class="card-body" style="background-color: #2e2e2e !important">
+          <div class="mine_img">
+            <img
+              class=""
+              src="__UPLOAD__/pool/{$vo['ico']}"
+              width="40px"
+              height="40px"
+            />
+          </div>
+          <div class="row ml-1">
+            <div class="col-xs-4">
+              <div class="text-size-mini text-muted ml-3 text-white">
+                {:L('Rent Price')}
+              </div>
+              <h5 class="text-semibold no-margin ml-3 text-warning">
+                {$vo['price']*1} {$vo['coinname'] | strtoupper}
+              </h5>
+            </div>
+
+            <div class="col-xs-4">
+              <div class="text-size-mini text-muted ml-3 text-white">
+                {:L('Available Machines')}
+              </div>
+              <h5 class="text-semibold no-margin ml-3 text-warning">
+                {$vo['stocks']}/{$vo['quantity']}
+              </h5>
+            </div>
+
+            <div class="col-xs-4">
+              <div class="text-size-mini text-muted ml-3 text-white">
+                {:L('Daily Reward')}
+              </div>
+              <h5 class="text-semibold no-margin ml-3 text-warning">
+                {$vo['daily_profit']*1} {$vo['getcoin'] | strtoupper}
+              </h5>
+            </div>
+          </div>
+          <div id="mine-load-{$vo['id']}"></div>
+          <div class="botright">
+            <button
+              class="btn btn-sm btn-warning"
+              data-toggle="modal"
+              data-target="#Buyingform_{$vo['id']}"
+            >
+            {:l('Rent now')}
+            </button>
+          </div>
+          <include file="Pool:buyform" />
+     
+        </div>
+        <div class="svg-center" id="prog-round-{$vo['id']}"></div>
+      </div>
+      <!-- /current server load -->
+    </div>
+    <script>
+      sparkline(
+        "#mine-load-{$vo['id']}",
+        "area",
+        30,
+        50,
+        "basis",
+        750,
+        2000,
+        "rgba(255,255,255,0.5)"
+      );
+    </script>
+  </volist>
+</div>
+<!-- /progress counters -->
+<style>
+  .mine_img img {
+    position: absolute;
+    overflow: hidden !important;
+    left: 54px;
+    opacity: 52%;
+    bottom: 25px;
+  }
+  .botright button {
+    position: absolute;
+    overflow: hidden !important;
+    right: 69px;
+    bottom: 25px;
+  }
+
+  .popular-button {
+    background-color: #ffc45f !important;
+    width: 16%;
+    padding: 0px 4px;
+    position: absolute;
+    right: 15px;
+    top: 0;
+  }
+</style>

@@ -1,0 +1,211 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Customer Support')}</span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('Config/contactEdit')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<tr class="controls">
+									<td class="item-label">{:l('Contant number')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="contact_cellphone" value="{$C['contact_cellphone']}">
+									</td>
+									<td class="item-note">{:l('Support number')}</td>
+								</tr>
+								<tr class="controls" >
+									<td class="item-label">{:l('Facebook')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="contact_facebook" value="{$C['contact_facebook']}">
+									</td>
+									<td class="item-note">{:l('Facebook Page')}</td>
+								</tr>
+								<tr class="controls" >
+									<td class="item-label">{:l('Twitter')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="contact_twitter" value="{$C['contact_twitter']}">
+									</td>
+									<td class="item-note">{:l('Twitter Page')}</td>
+								</tr>
+								<tr class="controls" >
+									<td class="item-label">{:l('Instagram')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="contact_instagram" value="{$C['contact_instagram']}">
+									</td>
+									<td class="item-note">{:l('Instagram Page')}</td>
+								</tr>
+								<tr class="controls" >
+									<td class="item-label">{:l('Linkedin')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="contact_linkedin" value="{$C['contact_linkedin']}">
+									</td>
+									<td class="item-note">{:l('Linkedin Page')}</td>
+								</tr>
+
+								<tr class="controls" >
+									<td class="item-label">{:l('Pinterest')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="contact_pinterest" value="{$C['contact_pinterest']}">
+									</td>
+									<td class="item-note">{:l('Pinterest Page')}</td>
+								</tr>
+								<tr class="controls" >
+									<td class="item-label">{:l('Youtube')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="contact_youtube" value="{$C['contact_youtube']}">
+									</td>
+									<td class="item-note">{:l('Youtube Page')}</td>
+								</tr>
+
+
+								<tr class="controls">
+									<td class="item-label">{:l('Telegram')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="contact_telegram" value="{$C['contact_telegram']}">
+									</td>
+									<td class="item-note">{:l('Telegram Group Link')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Google Playstore')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="google_play" value="{$C['google_play']}">
+									</td>
+									<td class="item-note">{:l('Google Playstore App link if any')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Apple Store')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="apple_store" value="{$C['apple_store']}">
+									</td>
+									<td class="item-note">{:l('Apple Playstore App link if any')}</td>
+								</tr>
+		
+						
+								
+								
+								
+								<tr class="controls">
+									<td class="item-label">{:l('App QR Code')}:</td>
+									<td>
+										<div id="addpicContainer">
+											<notempty name="data.contact_app_img">
+												<!--Noimagedisplaydefaultimage-->
+												<img id="up_imga" onclick="getElementById('inputfilea').click()" style="cursor:pointer;max-width:400px;" title="Click Add Picture" alt="Click Add Picture" src="/Upload/public/{$data.contact_app_img}">
+												<else/>
+												<!--Noimagedisplaydefaultimage-->
+												<img id="up_imga" onclick="getElementById('inputfilea').click()" style="cursor:pointer;max-width:400px;" title="Click Add Picture" alt="Click Add Picture" src="__THEME__/images/addimg.png">
+											</notempty>
+											<input type="hidden" id="imga" name="contact_app_img" value="{$data.contact_app_img}">
+											<input type="file" id="inputfilea" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+										</div>
+									</td>
+									<td class="item-note">100px*100px</td>
+								</tr>
+					
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" target-form="form-horizontal" id="submit" type="submit">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+					
+					
+					$(document).ready(function () {
+						//The response fileAdd tosuccessevent
+						$("#inputfile").change(function () {
+							//createFormDataObjects
+							var data = new FormData();
+							//forFormDataAdding Data Object
+							$.each($('#inputfile')[0].files, function (i, file) {
+								data.append('upload_file' + i, file);
+							});
+
+
+							//send data
+							$.ajax({
+								url: '/Admin/Config/image',
+								type: 'POST',
+								data: data,
+								cache: false,
+								contentType: false,		//Essential parameters
+								processData: false,		//Essential parameters
+								success: function (data) {
+									if (data) {
+										$('#up_img').attr("src", '/Upload/public/' + data);
+										$('#img').val(data);
+										$('#up_img').show();
+									}
+								},
+								error: function () {
+									alert('Upload error');
+									$(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+								}
+							});
+
+						});
+					});
+									
+					
+					
+					
+				$(document).ready(function () {
+					//The response fileAdd tosuccessevent
+					$("#inputfilea").change(function () {
+						//createFormDataObjects
+						var data = new FormData();
+						//forFormDataAdding Data Object
+						$.each($('#inputfilea')[0].files, function (i, file) {
+							data.append('upload_file' + i, file);
+						});
+
+
+						//send data
+						$.ajax({
+							url: '/Admin/Config/image',
+							type: 'POST',
+							data: data,
+							cache: false,
+							contentType: false,		//Essential parameters
+							processData: false,		//Essential parameters
+							success: function (data) {
+								if (data) {
+									$('#up_imga').attr("src", '/Upload/public/' + data);
+									$('#imga').val(data);
+									$('#up_imga').show();
+								}
+							},
+							error: function () {
+								alert('Upload error');
+								$(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+							}
+						});
+
+					});
+				});
+					
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>

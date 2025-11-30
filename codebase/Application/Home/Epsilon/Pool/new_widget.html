@@ -1,0 +1,89 @@
+<div class="row">
+  <volist name="list" id="vo">
+<div class="col-sm-12 col-md-6">
+
+<div class="card list-launchpads">
+            <div class="card-body">
+              <div class="">
+                <div class="row align-items-stretch">
+                  <div class="col-md-3 col-sm-12">
+                    <div class="img h-100 text-center" > 
+					<img
+              class="img-responsive" width="250px"
+              src="__UPLOAD__/pool/{$vo['ico']}"
+            
+            /></div>
+                  </div>
+                  <div class="col-md-9 col-sm-12">
+                    <div class="row h-100">
+                      <div class="col-sm-12">
+                        <div class="d-flex align-items-center m-b-15">
+                          <h4 class="title" href="/issue/buy/id/9">
+                            <if condition="$vo.is_popular eq 1">
+                              <span class=" warming"><img src="/Public/template/epsilon/img/hot.png"></span>
+                            </if>
+                            {$vo['name']}
+                          </h4>
+                        
+                        </div>
+
+
+                        <div class="info-line">
+                          <div class="d-flex justify-content-between">
+                            <span><b>{:l('Rent')}:</b>
+                              {$vo['price'] |NumToStr} {$vo['coinname']|strtoupper}</span>
+                              </span>
+                            <span><b>{:l('Daily Reward')}:</b>
+                              {$vo['daily_profit'] |NumToStr} {$vo['getcoin']|strtoupper}</span>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <span><b>{:l('Hash Rate:')}</b> {$vo.power}</span>
+                            <span><b>{:l('Available')}</b> {$vo['stocks']}/{$vo['quantity']} Units</php></span>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <span class="m-t-30 text-center align-self-end">
+                              <div class="permitted-coin">
+                                
+                                <ul>
+                                  <volist name="vo['coins_icon']" id="coin_icon">
+                                    
+                                    <if condition="$coin_icon">
+                                      
+                                      <li> <img src="__UPLOAD__/coin/{$coin_icon}" alt="" width="25px" height="25px"></li>
+                                    </if>
+                                  </volist>
+                                  
+
+                                </ul>
+                              </div>
+                            </span>
+                            <span class="m-t-30 text-center align-self-end">
+                              <if condition="$vo.stocks gt 0">
+                              <button
+              class="btn btn-md btn-success"
+              data-toggle="modal"
+              data-target="#Buyingform_{$vo['id']}"
+            >
+              {:l('Rent now')}
+            </button><else/>
+            <button class="btn btn-md btn-danger btn-disabled" disabled>
+              {:l('Sold Out')}
+            </button>
+          </if>
+                            </span>
+
+                          </div>
+                        
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+		  </volist>
+</div>

@@ -1,0 +1,83 @@
+<include file="Public:header" />
+<div class="container wallet-page">
+	<div class="full-box row">
+		<include file="User:sidebar" />
+
+
+		<!-- Main content -->
+		<div class="col-10">
+			
+    <div class="row ">
+      <div class="col-xl-12 col-md-12 ">
+        <include file="User:top_bar" />
+        <ul class="text-right breadcrumbs list-unstyle">
+        <li>
+          <a class="btn theme-bg btn-sm" href="{:U('/')}">{:l('Home')}</a>
+        </li>
+        <li>
+          <a class="btn theme-bg btn-sm" href="{:U('Competition/index')}">{:l('Competition')}</a>
+        </li>
+        <li class="btn theme-bg btn-sm active">{:l('Logs')}</li>
+      </ul>
+    
+    </div>
+    <div class="col-xl-12 col-md-12 ">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-title">{:l('My Competition Votes')}</h1>
+      </div>
+      <div class="card-body">
+        <div class="f_body mt5">
+          <div class="f_body_main">
+            <div class="f_tab_body">
+              <div>
+                <table class="table wallet-table table-striped table-hover">
+                  <thead>
+                    <tr>
+            <th>{:l('Index')}</th>
+                      <th>{:l('Competition')}</th>
+                      <th>{:l('Voted')}</th>
+                      <th>{:l('ADD_TIME')}</th>
+                      <th>{:l('Paid')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+          
+                    <volist name="list" id="vo">
+          
+                      <tr>
+              <td>
+              {$ix=$ix+1}
+              </td>
+                        <td>
+              <a href="{:U('Competition/view/id/'.$vo['type_id'])}">
+              <if condition='$vo.type eq 1'>
+              {$vo['voted_favor']|strtoupper} vs {$vo['voted_against']|strtoupper}
+              <else/>
+              {$vo['voted_against']|strtoupper} vs {$vo['voted_favor']|strtoupper}
+              </if>
+              </a>
+              </td>
+                        <td>{$vo['voted_favor']|strtoupper}</td>
+                        <td>{$vo.addtime|addtime}</td>
+                        <td>
+                         {$vo.fees|}
+               {$vo.votecoin|strtoupper}
+                        </td>
+                      </tr>
+                    </volist>
+                  </tbody>
+                </table>
+                <div class="pages">{$page}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+</div>
+</div></div>
+<include file="Public:footer_minimal" />

@@ -1,0 +1,350 @@
+<include file="Public:header" />
+
+<main class="wrapper h-100-vh login">
+	<div class="container">
+	  <div class="row justify-content-center inner-wrapper">
+		<div class="col-12">
+		  <div class="form-wrapper">
+			<div class="row align-items-center me-5">
+			  <div class="col-sm-5 col-md-5 col-lg-5">
+				<div
+				  
+				  class="needs-validation"
+				  id="login-form"
+				>
+				  <h1 class="title">
+					<span class="h1 m-r-5 font-bold"
+					  >{:l('Reset password')}</span
+					>
+				  </h1>
+				  <div class="tab-content">
+					<div
+					  class="tab-pane fade show active"
+					  role="tabpanel"
+					  id="email-login"
+					>
+					<div class="form-group">
+						<div class="reg_input_box reg-fb" id="email_reg">
+						  <label data-toggle="tooltip" title="CAPTCHA"
+							>{:l('CAPTCHA')}</label
+						  >
+						  <div class="input-group mb-3">
+							<input id="verify" value="" class="form-control col-10 mr-3" />
+							<img
+							  id="verify_up"
+							  class="codeImg reloadverify"
+							  src="{:U('Verify/code')}"
+							  title="{:l('REFRESH')}"
+							  onclick="this.src=this.src+'?t='+Math.random()"
+							  width="100"
+							  height="34"
+							/>
+						  </div>
+						</div>
+					  </div>
+					<label >{:l('Email Address')}</label>
+					<div class="input-group mb-3">
+						<input
+						id="email"
+						  class="form-control"
+						  value=""
+						  placeholder="{:l('Email Address')}"
+						  required
+						/>
+						<div class="input-group-append">
+						  <button class="btn btn-info btn-sm" onclick="email_findpwd('sms');">
+							{:l('Request OTP')}
+						  </button>
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label >{:l('Security Code')}</label>
+						<input
+						  class="form-control"
+						  placeholder="{:l('Security code')}"
+						  type="text"
+						  id="email_verify"
+						  required
+						/>
+					  </div>
+					  <div class="form-group">
+						<label for="password">{:l('Password')}</label>
+						<input
+						  class="form-control"
+						  placeholder="{:l('Password')}"
+						  type="password"
+						  id="password"
+						  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+						  autocomplete="no"
+						  required
+						/>
+						<span class="input-inner-right"
+						  ><i class="fa fa-eye" id="eye1"></i
+						></span>
+						<div class="invalid-feedback">
+						  Your password must contain at least 6 characters, 1
+						  uppercase letter, 1 lowercase letter and numbers.
+						</div>
+					  </div>
+		
+					  <div class="form-group">
+						<label for="repassword">{:l('Confirm Password')}</label>
+						<input
+						  class="form-control"
+						  placeholder="{:l('Confirm password')}"
+						  type="password"
+						  id="repassword"
+						  pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+						  autocomplete="no"
+						  required
+						/>
+						<span class="input-inner-right"
+						  ><i class="fa fa-eye" id="eye1"></i
+						></span>
+						<div class="invalid-feedback">
+							{:l('Your password must contain at least 6 characters, 1 uppercase letter, 1 lowercase letter and numbers.')}
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  <a
+					onclick="findpwd_up();"
+					class="btn btn-4 d-block w-100 m-t-30"
+					>{:l('Reset password')}</a
+				  >
+				  <div class="other-link">
+					<p class=""> <a href="{:U('Login/login')}" class="">{:l('Login')}?</a></p>
+				  </div>
+				</div>
+			  </div>
+			  <div class="col-1"></div>
+			  <eq name="MOBILE_LAUNCHED" value="1">
+				<div class="col-sm-6 col-md-4 col-lg-5">
+				  <div class="qr-login">
+					<div class="h3  heading-padding mb-4">{:l('Scan code to log in')}</div>
+				   <div class="row">
+					<div class="col-md-6 col-12  ">
+					  <div class="qr-box" id="qrcode1">
+					<img src="" class="img-fluid"/>
+				  </div>
+					</div>
+					<div class="col-md-6 text-center d-none d-md-block">
+					<img class="qr-tip" src="__EPSILON__/img/scan.png" alt="">
+				  </div>
+				  </div>
+					<p class="">{:l('Open App')} </p>
+					<p class="">
+						{:l('For instant login with the mobile app scan this code.')}
+					</p>
+				  </div>
+				</div>
+			  </eq>
+			</div>
+		  </div>
+		<!-- </div> -->
+	  </div>
+	  <!--/row-->
+	</div>
+  </main>
+
+
+<div class="modal" id="step1">
+  <div class="modal-dialog modal-sm">
+    <div class="card">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+        <h5 class="modal-title">{:l('VERIFY_EMAIL')}</h5>
+      </div>
+
+      <div id="find-pwd-login" class="form-horizontal">
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <label>{:l('CAPTCHA')}</label>
+                <input type="text" id="verify" value="" class="form-control" />
+              </div>
+
+              <div class="col-sm-6">
+                <label> </label>
+                <img
+                  id="verify_up"
+                  class="img-responsive codeImg reloadverify"
+                  src="{:U('Verify/code')}"
+                  title="{:l('REFRESH')}"
+                  onclick="this.src=this.src+'?t='+Math.random()"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-12">
+                <label>{:l('GET_VERIFICATION_CODE')}</label>
+                <input
+                  type="button"
+                  value="{:l('SEND')}"
+                  class="btn btn-block btn-info"
+                  onclick="email_findpwd('sms')"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+	</div>
+      <div class="mask_wrap_close" onclick="showB()">
+        <i class="fa fa-times fz_20 move" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="step2" class="all_mask" style="height: 0px; display: none"></div>
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+
+<script>
+  $(function () {
+  	var height = $(document).height();
+  	if (height < 1000) {
+  		height = 1000;
+  	}
+  	$('#step2').height(height);
+  });
+
+
+  function showB() {
+  	$("#step1").hide();
+  	$("#step2").hide();
+  }
+
+  function check_email() {
+  	var email  = $('#email').val();
+
+  	if (email == "" || email == null) {
+  		layer.tips("{:l('MAILBOX')}", '#email', {tips: 2});
+  		return false;
+  	}
+  	$.post("/Login/check_pwdemail", {
+  		email: email,
+  		token: ""
+  	}, function (data) {
+  		if (data.status == 1) {
+  			$("#step1").show();
+  			$("#step2").show();
+  			$('#reg_email').html('<a class="move" onclick="new_send()">{:l("CLICK_TO_SEND_A_VERIFICATION_C")}</a>');
+  		} else {
+  			layer.tips(data.info, '#email', {tips: 2});
+  			return false;
+  		}
+  	}, 'json');
+  }
+
+
+  function new_send() {
+  	$("#step1").show();
+  	$("#step2").show();
+  }
+
+
+  function email_findpwd(type) {
+  	var email  = $("#email").val();
+  	var verify = $("#verify").val();
+  	if (email == "" || email == null) {
+  		layer.tips("{:l('PLEASE_ENTER_EMAIL')}", '#email', {tips: 2});
+  		return false;
+  	}
+  	if (verify == "" || verify == null) {
+  		layer.tips("{:l('PLEASE_ENTER_THE_CAPTCHA_CODE')}", '#verify', {tips: 2});
+  		return false;
+  	}
+  	$.post("/Verify/email_findpwd", {
+  		email: email,
+  		type: type,
+  		verify: verify,
+  		token: ""
+  	}, function (data) {
+  		if (data.status == 1) {
+  			layer.msg(data.info, {icon: 1});
+  			$("#step1").hide();
+  			$("#step2").hide();
+  			$("#email_verify").focus();
+  			$('#email').attr("disabled", "disabled");
+  			var obj      = $('#reg_email');
+  			var wait     = 60;
+  			var interval = setInterval(function () {
+  				obj.html("<a>" + wait + " {:l('SEC_CAN_BE_SENT_AGAIN')}" + "</a>");
+  				wait--;
+  				if (wait < 0) {
+  					clearInterval(interval);
+  					$(".reloadverify").click();
+  					$("#verify").val('');
+  					obj.html('<a class="move" onclick="new_send()">{:l("CLICK_RESEND")}</a>');
+  				}
+  				;
+  			}, 1000);
+  		} else {
+  			$(".reloadverify").click();
+  			layer.msg(data.info, {icon: 2});
+  			if (data.url) {
+  				window.location = data.url;
+  			}
+  		}
+  	}, "json");
+  }
+
+
+  function findpwd_up() {
+  	var email        = $("#email").val();
+  	var password        = $("#password").val();
+  	var repassword        = $("#repassword").val();
+  	var email_verify = $("#email_verify").val();
+
+
+  	if (email == "" || email == null) {
+  		layer.tips("{:l('PLEASE_ENTER_EMAIL')}", '#email', {tips: 2});
+  		return false;
+  	}
+  	if (email_verify == "" || email_verify == null) {
+  		layer.tips("{:l('PLEASE_ENTER_VERIFICATION_CODE')}", '#email_verify', {tips: 2});
+  		return false;
+  	}
+  	if (password == "" || password == null) {
+  		layer.tips("Please choose a password", '#email', {tips: 2});
+  		return false;
+  	}
+  	if (repassword != password ) {
+  		layer.tips("Password and confirm password should be same", '#email', {tips: 2});
+  		return false;
+  	}
+  	$.post("/Login/findpwdemail", {
+  		email: email,
+  		password: password,
+  		repassword: repassword,
+  		email_verify: email_verify,
+  		token: ""
+  	}, function (data) {
+  		if (data.status == 1) {
+  			layer.msg(data.info, {icon: 1});
+  			window.location = '/Login/findpwdemailconfirm';
+
+  		} else {
+  			layer.msg(data.info, {icon: 2});
+  			if (data.url) {
+  				window.location = data.url;
+  			}
+  		}
+  	}, "json");
+  }
+  $('#qrcode1').qrcode({
+                        render: "table", //table
+                        size: 150,
+                        text: '{$qrhash}', //Any content
+						background: "#ffffff",
+                        class:"img-fluid"
+                    }); 
+                    let imgcontent	=$('#qrcode1').html();
+</script>
+<include file="Public:footer_minimal" />

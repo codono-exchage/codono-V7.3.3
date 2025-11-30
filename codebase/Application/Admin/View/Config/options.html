@@ -1,0 +1,27 @@
+<include file="Public:header" />
+
+<block name="body">
+<div id="main-content">
+<div id="main" class="main">
+    <div class="main-title-h">
+        <span class="d-sm-flex align-items-center justify-content-between h4">{:l('Exchange Other Options')}</span>
+    </div>
+
+    <form action="{:U()}" method="post" class="form-horizontal">
+	<table class="table">
+        {$options_table}
+        <tr class="controls">
+		<td class="item-label"></td>
+		<td>
+            <input type="hidden" name="csrf" value="{$token|default=''}">
+            <button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Update')}</button>
+            <button class="btn btn-return btn-warning" onclick="javascript:history.back(-1);return false;">{:l('Back')}</button>
+		</td>
+        </tr>
+	</table>
+    </form>
+	</div>
+	</div>
+</block>
+
+<include file="Public:footer" />

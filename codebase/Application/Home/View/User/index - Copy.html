@@ -1,0 +1,51 @@
+﻿<include file="Public:header" />
+<script>
+	if ($("#user_box").length > 0) {
+		$('#user_box').addClass('active');
+	} else {
+		$('#index_box').addClass('active');
+	}
+</script>
+		<!-- Page content -->
+		<div class="page-container">	
+	
+			<include file="User:left" />
+			<!-- Main content -->
+			<div class="panel panel-flat">
+			<div class="panel-heading">
+				<h1 class="panel-title">
+					<span>
+						{:l('ACCOUNT_PREVIEW')}					</span>
+					<span>
+												<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+				</h1>
+			<div id="hints" class="mytips" style="display:none;">
+				<script>
+					var hints = "0";
+					if(hints == 1){
+						$('#hints').show();
+					}
+				</script>
+				<notempty name="prompt_text">
+					<p>{$prompt_text}</p>		
+				</notempty>			
+			</div>
+			</div>
+
+			<div class="panel-body">
+				
+<include file="User:4blocks" />				
+<include file="User:3blocks" />				
+
+			</div>
+			
+		</div>
+	
+</div>
+
+<script>
+	$('.finan_index').addClass('active');
+</script>
+
+<include file="Public:footer_minimal"/>

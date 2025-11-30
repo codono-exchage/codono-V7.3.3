@@ -1,0 +1,242 @@
+<include file="Public:header"/>
+<div class="page-container">	
+<include file="User:left" />
+
+		<!-- Main content -->
+<div class="col-sm-9">			
+        <div class="panel panel-flat">
+            <div class="panel-heading" >
+                <h1 >{:l('SET_UP_TWOFACTOR_AUTHENTICATIO')}</h1>
+            </div>
+
+			<notempty name="prompt_text">
+				<!-- Info alert -->
+				<div class="alert alert-info alert-styled-left alert-arrow-left alert-component">
+					<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+					<h6 class="alert-heading text-semibold">{:l('TIPS')}</h6>
+					{$prompt_text}
+			    </div>
+			    <!-- /info alert -->
+             </notempty>
+			<div class="panel-body no-padding">
+
+            <eq name="is_ga" value="0">
+                <form id="form-gaa" >
+                    <div >
+                        <div class="col-sm-6">
+                        <div class="dv_contentx">
+                            <table class="table table-responsive" >
+							<tr><td colspan="2"> <h5>1st step: Install Google Authenticator on your smartphone.</h5></td></tr>			
+							<tr>
+                                    <td>Download iOS Version</td>
+                                    <td>
+                                        <a target="_blank" class="btn btn-info btn-md btn-block" 
+                                           href="https://itunes.apple.com/us/app/google-authenticator/id388497605">Apple Store</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Download Android Version</td>
+                                    <td>
+                                        <a target="_blank" class="btn btn-info btn-md btn-block" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">Play Store</a>
+                                    </td>
+                                </tr>
+									<tr><td colspan="2"><h5> 3rd step: Enter 6-digits code from Google authenticator:</h5></td></tr>			
+							<tr>
+							<td>{:l('TWOFACTOR_AUTHENTICATION_PASSW')}</td>
+									<td><input type="hidden" name="secret" value="{$Asecret}"><input  class="form-control" id="ga" type="text" placeholder="{:l('PLEASE_ENTER_THE_TWOFACTOR_AUT')}" name="ga"/></td>
+                                </tr>
+                                <tr>
+                                    <td>{:l('CONFIGURATION_MODULE_VERIFICAT')}</td>
+                                    <td>
+                                       <label for="ga-login">
+                                    <input type="checkbox" class="form-control" id="ga-login" name="login" checked="1">{:l('LOGIN')}</label>
+                                <label for="ga-transfer"><input class="form-control" type="checkbox" id="ga-transfer" checked="1"
+                                                                name="transfer">{:l('FUNDS_OUT')}</label>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2"><input type="button" class="btn btn-info btn-block" onclick="google_verify()" value="{:l('VERIFY_AND_ENABLE')}"></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                        </div>
+						<div class="col-sm-6">
+						
+                        <div class="dv_contentx">
+						    <table class="table table-responsive" >
+							<tr><td colspan="2"><h5> 2nd step: Setup "Google Authenticator".</h5></td></tr>			
+							<tr>
+                                    <td colspan="2">In the Google Authenticator, Click + to add new account. You may scan the QR code or enter provided key to add your account on Google Authenticator"</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><div class="row"><div class="dv_ewm img-responsive  col-sm-6" id="qrcode"></div></div></td>
+                                </tr>
+								<tr>
+								
+								<td colspan="2">
+                                      {:l('IF_YOU_CAN_NOT_SUCCESSFULLY_SC')}<b>{$Asecret}</b>
+                                    </td></tr>
+
+                            </table>
+                        </div>
+						</div>
+						
+					
+                    </div>
+                </form>
+                <script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+                <script>
+                    $('#qrcode').qrcode({
+                        render: "table", //table
+                        size: 200,
+                        text: "{$qrCodeUrl}", //Any content
+						background: "#ffffff"
+                    }); //ANY_STRING
+
+                    function google_verify() {
+                        var ga = $('#ga').val();
+                        var ga_login = $('#ga-login').is(':checked') ? 1 : 0;
+                        var ga_transfer = $('#ga-transfer').is(':checked') ? 1 : 0;
+                        var ga = $('#ga').val();
+                        if (!ga) {
+                            layer.tips('Enter verification code', '#ga', {
+                                tips: [
+                                    1,
+                                    '#0FA6D8'
+                                ]
+                            });
+                            return;
+                        }
+                        $.post("{:U('user/ga')}", {
+                            ga: ga,
+                            ga_login: ga_login,
+                            ga_transfer: ga_transfer,
+                            type: 'add'
+                        }, function (ret) {
+                            if (ret.status) {
+                                layer.msg('{:l('JUMP_IN_THE_OPERATION_WAS_SUCC')}...', {icon: 16});
+                                setTimeout('flash()', 3000);
+                            } else {
+                                layer.msg(ret.info);
+                            }
+                        }, 'json');
+                    }
+                </script>
+                <else/>
+                <form id="form-ga" class="">
+                    <div class="col-sm-6 col-sm-offset-3">
+					<h6 class="content-group text-center text-semibold no-margin-top">{:l('CONFIGURATION_MODULE_VERIFICAT')}</h6>
+                            <div class="form-group">
+                                <label for="ga-login">
+                                    <input type="checkbox" id="ga-login" name="login"
+                                    <eq name="ga_login" value="1">checked="1"</eq>
+                                    >
+                                    {:l('LOG_IN')}</label>
+                                <span>({:l('LOG_DISPLAY_DUAL_AUTHENTICATIO')})</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ga-transfer">
+                                    <input type="checkbox" id="ga-transfer" name="transfer"
+                                    <eq name="ga_transfer" value="1">checked="1"</eq>
+                                    >
+                                    {:l('FUNDS_OUT')}
+                                </label>
+                                <span>({:l('DISPLAY_DOUBLE_AUTHENTICATION_')})</span>
+                            </div>
+                            
+                                <div class="form-group">
+                                    <input id="ga" placeholder="{:l('PLEASE_ENTER_THE_TWOFACTOR_AUT')}" type="text" class="form-control">
+                                </div>
+                            
+                        <div class="form-group">
+                            <input value="{:l('STORAGE')}" type="button" onclick="google_set()" class="btn btn-info btn-block">
+                        </div>
+                    </div>
+					<div class="col-sm-12"><hr/></div>
+                    <div class="col-sm-6 col-sm-offset-3">
+							<h6 class="content-group text-center text-semibold no-margin-top">{:l('TWOFACTOR_AUTHENTICATION_TURNE')}</h6>
+							<div class="form-group">
+                                    <input id="ga_delete" name="ga_delete" placeholder="{:l('PLEASE_ENTER_THE_TWOFACTOR_AUT')}" type="text" class="form-control">
+                                </div>
+                            
+                            <div class="form-group login-options">
+                                <a onclick="ga_cancel()" class="btn btn-xs btn-danger btn-block">{:l('CANCEL_TWOFACTOR_AUTHENTICATIO')} <i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </div>
+                        </dl>
+                    </div>
+                </form>
+                <script>
+                    function google_set() {
+                        var ga = $('#ga').val();
+                        var ga_login = $('#ga-login').is(':checked') ? 1 : 0;
+                        var ga_transfer = $('#ga-transfer').is(':checked') ? 1 : 0;
+                        var ga = $('#ga').val();
+                        if (!ga) {
+                            layer.tips('Enter verification code', '#ga', {
+                                tips: [
+                                    1,
+                                    '#0FA6D8'
+                                ]
+                            });
+                            return;
+                        }
+                        $.post("{:U('user/ga')}", {
+                            ga: ga,
+                            ga_login: ga_login,
+                            ga_transfer: ga_transfer,
+                            type: 'update'
+                        }, function (ret) {
+                            if (ret.status) {
+                                layer.msg('{:l('JUMP_IN_THE_OPERATION_WAS_SUCC')}...', {icon: 16});
+                                setTimeout('flash()', 3000);
+                            } else {
+                                layer.msg(ret.info);
+                            }
+                        }, 'json');
+                    }
+
+                    function ga_cancel() {
+                        var ga = $('#ga_delete').val();
+                        var ga = $('#ga_delete').val();
+                        if (!ga) {
+                            layer.tips('Enter verification code', '#ga_delete', {
+                                tips: [
+                                    1,
+                                    '#0FA6D8'
+                                ]
+                            });
+                            return;
+                        }
+                        $.post("{:U('user/ga')}", {
+                            ga: ga,
+                            type: 'delete'
+                        }, function (ret) {
+                            if (ret.status) {
+                                layer.msg('{:l('JUMP_IN_THE_OPERATION_WAS_SUCC')}...', {icon: 16});
+                                setTimeout('flash()', 3000);
+                            } else {
+                                layer.msg(ret.info);
+                            }
+                        }, 'json');
+                    }
+                </script>
+            </eq>
+        </div>
+		</div>
+</div>
+</div>
+<script>
+
+    $('#user_box').addClass('active');
+    $('#user_ga').addClass('active');
+    $('#user_ga i').attr('class', 'coin_menu_op_11');
+
+    function flash() {
+
+        window.location = "{:U('user/ga')}"
+    }
+</script>
+<include file="Public:footer_minimal"/>

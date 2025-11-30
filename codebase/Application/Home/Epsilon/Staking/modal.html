@@ -1,0 +1,136 @@
+<div
+  class="modal fade"
+  id="stakeModal_{$to.id}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="LOCK"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex align-items-center">
+        <h5 class="modal-title">
+          <div class="coin-title d-flex align-items-center">
+            <div class="title">Staking: {$to.title}</div>
+          </div>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="row">
+              <div class="col-sm-6">
+			                  <div class="form-group btn-select">
+                  <label for="select_period_{$to['id']}">{:l('Duration Days')}</label>
+                  <div class="btn-group-toggle" id="select_period_{$to['id']}" data-toggle="buttons">
+                    <volist name="to.percentage" id="period" key="days">
+                      <label class="btn btn-radio"
+                        >{$key}<input
+						class="cb_period"
+                          type="radio"
+                          name="{$to.id}period"
+                          id="option{$key}"
+						  data-percentage="{$period}"
+                          value="{$key}"
+                          autocomplete="off"
+                      /></label>
+                    </volist>
+                  </div>
+                </div>
+			  <div class="form-group">
+			  <label>Information </label>
+			  <ul>
+                  <li>
+                    Minimum Locked Amount
+                    <span class="pull-right">{$to['minvest'] * 1}</span>
+                  </li>
+                  <li>
+                    Annual Yield Return
+                    <div class="pull-right"><span class="percent">{:l('Select Duration')}</span></div>
+                  </li>
+                </ul>
+                </div>
+
+              </div>
+              <div class="col-sm-6">
+			  <div class="form-group">
+                  <label>Type </label>
+                  <eq name="vo['allow_withdrawal']" value="1">
+                    <input
+                      type="text"
+                      id="investtype"
+                      name="investtype"
+                      value="Flexible Staking"
+                      disabled
+                      placeholder="Flexible Staking"
+                      class="form-control"
+                    />
+                    <else />
+                    <input
+                      type="text"
+                      id="investtype"
+                      name="investtype"
+                      value="Locked Staking"
+                      disabled
+                      placeholder="Locked Staking"
+                      class="form-control"
+                    />
+                  </eq>
+                </div>
+                
+                <div class="form-group m-t-15">
+                  <label>{$to['coinname'] |strtoupper} Balance</label>
+                  <span class="pull-right">
+                    <span>{$to['balance'] * 1} </span>
+					<span> {$to['coinname'] |strtoupper}</span>
+					</span>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name=""
+                      placeholder="{:l('Please enter amount')}"
+                      id="inv_box{$to.id}"
+                    />
+                    <div class="input-group-append input-inner-btn">
+                      <span
+                        ><button
+                          class="btn p-0 green f-s-13 bold"
+                          type="button"
+                          onclick="$('#inv_box{$to.id}').val('{$to['balance']*1}').trigger('change'); return false;"
+                        >
+                          <small>{:l('Max')}</small>
+                        </button></span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/col-md-6-->
+        </div>
+        <!--/row-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-1" data-dismiss="modal">{:l('Cancel')}</button>
+
+        <button
+          type="submit"
+          class="btn-2"
+          onclick="stakenow('{$to.id}','{$to.coinname}');"
+        >
+        {:l('Confirm Purchase')}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

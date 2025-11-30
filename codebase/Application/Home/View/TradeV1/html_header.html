@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title><neq name="page_title" value=''>{$page_title} |</neq> {:C('web_title')}</title>
+	<meta name="Keywords" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_keywords')}">
+	<meta name="Description" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_description')}">
+  <link rel="icon" href="__PUBLIC__/stocks/img/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="__PUBLIC__/stocks/css/style.css">
+  	<script type="text/javascript">
+    var market = "{$market}";
+    var market_round = "{$C['market'][$market]['round']}";
+	var market_round_num="{$C['market'][$market]['round']}";
+    var userid = "{$Think.session.userId}";
+    var trade_moshi = 1;
+    var getDepth_tlme = null;
+    var trans_lock = 0;
+	if("{$Think.cookie.colorshade}"){
+	var colorshade="{$Think.cookie.colorshade}";	
+	}
+	else{
+	var colorshade="Dark";	
+	}
+</script>
+</head>

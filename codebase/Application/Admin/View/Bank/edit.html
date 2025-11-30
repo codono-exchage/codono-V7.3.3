@@ -1,0 +1,102 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+        <div class="main-title-h">
+            <span class="d-sm-flex align-items-center justify-content-between h4">{:l('Manage Market Pairs')}</span>
+        </div>
+        <div class="card card-body mt-2 table-responsive">
+
+    <form id="form" action="{:U('Bank/edit')}" method="post" class="form-horizontal">
+        <div id="tab" class="tab-pane in tab">
+            <div class="form-item cf">
+                <table class="table">
+                    <tbody>
+                        <tr class="controls">
+                            <td class="item-label">ID:</td>
+                            <td>
+                                <input type="hidden" class="form-control" name="id" value="{$data.id}"/> <span style="background-color: #ECECEC; min-width: 400px; color: red;">{$data.id}</span>
+                            </td>
+                        </tr>
+                        <tr class="controls">
+                            <td class="item-label">Bank Short Unique Symbol [English only]:</td>
+                            <td>
+                                <input type="text" class="form-control" name="name" value="{$data.name}" style="min-width: 400px;">
+                            </td>
+                        </tr>
+                        <tr class="controls">
+                            <td class="item-label">Bank Title:</td>
+                            <td>
+                                <input type="text" class="form-control" name="title" id="title" value="{$data.title}" style="min-width: 400px;">
+                            </td>
+                        </tr>
+                        <tr class="controls">
+                            <td class="item-label">Bank URL:</td>
+                            <td>
+                                <input type="text" class="form-control" name="url" value="{$data.url}" style="min-width: 400px;">
+                            </td>
+                        </tr>
+                        <tr class="controls">
+                            <td class="item-label">Type:</td>
+                            <td>
+                                <select name="type" class="form-select" style="min-width: 400px;">
+                                    <option value="crypto" <eq name='data.type' value='crypto'>selected</eq>>crypto</option>
+                                    <option value="bank" <eq name='data.type' value='bank'>selected</eq>>bank</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="controls">
+                            <td class="item-label">Sort:</td>
+                            <td>
+                                <input type="text" class="form-control" name="sort" value="{$data.sort}" style="min-width: 400px;">
+                            </td>
+                        </tr>
+                        <tr class="controls">
+                            <td class="item-label">Status:</td>
+                            <td>
+                                <select name="status" class="form-select" style="min-width: 400px;">
+                                    <option value="0" <eq name='data.status' value='0'>selected</eq>>Disabled</option>
+                                    <option value="1" <eq name='data.status' value='1'>selected</eq>>Enabled</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="controls">
+                            <td></td>
+                            <td>
+                                 <button class = "btn submit-btn  btn-info ajax-post" target-form = "form-horizontal" id = "submit" type = "submit" >Submit</button >
+                                <a class="btn btn-warning" href="javascript:history.back();">Back</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+	</div>
+</div>
+<script type="text/javascript">
+			function encodeContent() {
+						var contentTextarea = document.getElementById("title");
+						
+						var encodedContent = encodeURIComponent(contentTextarea.value);
+						contentTextarea.value = encodedContent;
+						
+					}
+                    //submit Form
+                    $('#submit').click(function () {
+					encodeContent();
+                        $('#form').submit();
+                    });
+	$(function () {
+		//Highlight the main navigation
+		$('.issue-box').addClass('current');
+		//Highlight side navigation
+		$('.issue-index').addClass('current');
+	});
+</script>
+<include file="Public:footer"/>

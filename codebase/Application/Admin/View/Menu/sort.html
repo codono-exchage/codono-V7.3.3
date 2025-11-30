@@ -1,0 +1,42 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Sort menu')}[ <a href="{:U('index',array('pid'=>I('pid')))}">{:l('Back to list')}</a> ]</span>
+		</div>
+
+		<div class="sort">
+			<form action="{:U('sort')}" method="post">
+				<!-- 			<div class="sort_top">
+                                Find：<input type="text"><button class="btn search" type="button">Find</button>
+                            </div> -->
+				<div class="sort_center">
+					<div class="sort_option">
+						<select value="" size="8">
+							<volist name="list" id="vo">
+								<option class="ids" title="{$vo.title}" value="{$vo.id}">{$vo.title}</option>
+							</volist>
+						</select>
+					</div>
+					<div class="sort_btn">
+						<button class="top btn" type="button">{:l('The first one')}</button>
+						<button class="up btn" type="button">{:l('Up shift')}</button>
+						<button class="down btn" type="button">{:l('Down shift')}</button>
+						<button class="bottom btn" type="button">{:l('most Rear')}</button>
+					</div>
+				</div>
+				<div class="sort_bottom">
+					<input type="hidden" name="ids">
+					<button class="sort_confirm btn submit-btn" type="button">{:l('Submit')}</button>
+					<button class="sort_cancel btn btn-return btn-warning" type="button" url="{$Think.cookie.__forward__}">{:l('Back')}</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<include file="Public:footer" />

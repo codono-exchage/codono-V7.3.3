@@ -1,0 +1,186 @@
+<include file="Public:header" />
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">Warnings</div>
+	</div>
+	<div id="main" class="main">
+		<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><empty name="data">Add Banner<else /> Edit Banner</empty></h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="{:U('App/index')}">Banner List</a></li>
+                    <li class="breadcrumb-item active"><empty name="data">Add Banner<else /> Edit Banner</empty></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+		<div class="card">
+
+			<div class="card-body">
+				<form id="form" action="{:U('App/banner_edit')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<tr class="controls">
+									<td class="item-label">Title :</td>
+									<td><input type="text" class="form-control" name="name" value="{$data.name}" ></td>
+									<td class="item-note"></td>
+								</tr>
+								<!--
+                                <tr class="controls">
+                                    <td class="item-label">Section content :</td>
+                                    <td><input type="text" class="form-control" name="content" value="{$data.content}" ></td>
+                                    <td class="item-note"></td>
+                                </tr>-->
+
+								<tr class="controls">
+									<td class="item-label">Select Image :</td>
+									<td>
+                                        <div id="addpicContainer">
+                                            <!-- Usemultiple="multiple"Property implementationAdd toMore map features -->
+                                            <!-- position: absolute;left: 10px;top: 5px;Only for thisuseThe casesinputHidden toimageunder.-->
+                                            <!-- height:0;width:0;z-index: -1;In order to hideinput,becauseChromeYou can not use lowerdisplay:noneOtherwise, notAdd tofile -->
+                                            <!-- onclick="getElementById('inputfile').click()" Click onimageWhen click onAdd tofilePush button -->
+
+                                            <notempty name="data.img">
+                                                <!--Noimagedisplaydefaultimage-->
+                                                <img id="up_img"  onclick="getElementById('inputfile').click()" style="cursor:pointer;border: 1px solid #AABBCC;"
+                                                     title="Click Add Picture" alt="Click Add Picture" src="{$data.img}">
+                                                <else/>
+                                                <!--Noimagedisplaydefaultimage-->
+                                                <img id="up_img"  onclick="getElementById('inputfile').click()" style="cursor:pointer;
+                                                border: 0"
+                                                     title="Click Add Picture" alt="Click Add Picture"
+                                                     src="/Upload/app/addimg.png">
+                                            </notempty>
+                                            <input type="hidden" id="img" name="img" value="{$data.img}">
+                                           <input type="file" id="inputfile" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+                                        </div>
+									</td>
+									<td class="item-note">Dimensions as per requirement</td>
+								</tr>
+								<!--
+                                <tr class="controls">
+                                    <td class="item-label">Grade requirements :</td>
+                                    <td>
+                                        <select name="rank">
+                                            <volist name="AppVip" id="vo">
+                                                <option   <eq name="vo.id" value="$data.rank">selected</eq>
+                                                value="{$vo.id}"> {$vo.name}
+                                                </option>
+                                            </volist>
+                                        </select>
+                                        With on
+                                    </td>
+                                    <td class="item-note">Greater than these level Available</td>
+                                </tr>
+								
+                                <tr class="controls">
+                                    <td class="item-label">End time :</td>
+                                    <td><input type="text" class="form-control" name="remain" value="{$data.remain}" ></td>
+                                    <td class="item-note">End time</td>
+                                </tr>
+								-->
+								<tr class="controls">
+									<td class="item-label">Status :</td>
+									<td><select name="status" class="input-small">
+										<option value="1" <eq name="data.status" value="1">selected</eq> >Available
+										</option>
+										<option value="0" <eq name="data.status" value="0">selected</eq> >Disable
+										</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">Submit</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">Back</a>
+											<notempty name="data.id"> <input type="hidden" name="id" value="{$data.id}" /> </notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+                    $(document).ready(function(){
+                        //The response fileAdd tosuccessevent
+                        $("#inputfile").change(function(){
+                            //createFormDataObjects
+                            var data = new FormData();
+                            //forFormDataAdding Data Object
+                            $.each($('#inputfile')[0].files, function(i, file) {
+                                data.append('upload_file'+i, file);
+                            });
+                            //send data
+                            $.ajax({
+                                url:'/Admin/App/upload',
+                                type:'POST',
+                                data:data,
+                                cache: false,
+                                contentType: false,		//Essential parameters
+                                processData: false,		//Essential parameters
+                                success:function(data){
+                                    $('#up_img').attr("src",data);
+                                    $('#img').val(data);
+                                    $('#up_img').show();
+                                },
+                                error:function(){
+                                    alert('Upload error');
+                                    $(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+                                }
+                            });
+                        });
+                    });
+
+					//submit Form
+					$('#submit').click(function() {
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="__THEME__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			width : '600px',
+			height : '250px',
+			allowPreviewEmoticons : false,
+			allowImageUpload : true,
+			uploadJson : "{:U('Adver/save','type=images')}",//Image upload and address
+			items : [
+						'source','fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', 'emoticons', 'image', 'link','fullscreen'],
+			afterBlur: function () { this.sync(); }
+		});
+	});
+</script>
+
+
+
+<script type="text/javascript">
+	$(function() {
+		//Highlight the main navigation
+		$('.Adver-box').addClass('current');
+		//Highlight side navigation
+		$('.Adver-index').addClass('current');
+	});
+</script>
+<include file="Public:footer" />

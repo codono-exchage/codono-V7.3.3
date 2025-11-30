@@ -1,0 +1,69 @@
+<!-- classificationAuthorizeeditpage -->
+<include file="Public:header" />
+<block name="body">
+<div class="card">
+    <ul class="tab-nav nav">
+        <li><a href="{:U('AuthManager/access',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">{:l('Access authorization')}</a></li>
+
+		<li><a href="{:U('AuthManager/user',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">{:l('Members of the authorized')}</a></li>
+	    <li class="fr">
+		    <select name="group">
+			    <volist name="auth_group" id="vo">
+				    <option value="{:U('AuthManager/category',array('group_id'=>$vo['id'],'group_name'=>$vo['title']))}" <eq name="vo['id']" value="$this_group['id']">{:l('selected')}</eq> >{$vo.title}</option>
+			    </volist>
+		    </select>
+	    </li>
+    </ul>
+    <!-- List of Tables -->
+    <div class="tb-unit posr">
+        <form class="save-category" action="{:U('AuthManager/addToCategory')}" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="group_id" value="{:I('group_id')}">
+            <div class="category auth-category">
+                <div class="hd cf">
+                    <div class="fold">{:l('fold')}</div>
+                    <div class="order">{:l('select')}</div>
+                    <div class="name">{:l('Sectionname')}</div>
+                </div>
+                {:R('AuthManager/tree', array($group_list))}
+            </div>
+
+            <div class="tb-unit-bar">
+                <button class="btn submit-btn ajax-post btn-info" type="submit" target-form="save-category">{:l('Submit')}</button>
+                <button class="btn btn-return btn-warning" onclick="javascript:history.back(-1);return false;">{:l('Back')}</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /List of Tables -->
+</block>
+<block name="script">
+<script type="text/javascript">
+    +function($){
+        /* Category Expand Collapse */
+        $(".category dd").prev().find(".fold i").addClass("icon-unfold")
+            .click(function(){
+                var self = $(this);
+                if(self.hasClass("icon-unfold")){
+                    self.closest("dt").next().slideUp("fast", function(){
+                        self.removeClass("icon-unfold").addClass("icon-fold");
+                    });
+                } else {
+                    self.closest("dt").next().slideDown("fast", function(){
+                        self.removeClass("icon-fold").addClass("icon-unfold");
+                    });
+                }
+            });
+
+        var auth_groups = [{$authed_group}];
+        $('.cate_id').each(function(){
+            if( $.inArray( parseInt(this.value,10),auth_groups )>-1 ){
+                $(this).prop('checked',true);
+            }
+        });
+	    $('select[name=group]').change(function(){
+		    location.href = this.value;
+	    });
+    }(jQuery);
+    //Highlight navigation
+</script>
+</block>

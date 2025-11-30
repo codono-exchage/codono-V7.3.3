@@ -1,0 +1,142 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+        <div class="main-title-h">
+            <span class="d-sm-flex align-items-center justify-content-between h4">{:l('Details')}</span>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form id="form" class="form-horizontal">
+                    <div id="tab" class="tab-pane in tab">
+                        <div class="form-item cf">
+                            <table class="table">
+                                <tr class="controls">
+                                    <td class="item-label">{:l('User ID')}:</td>
+                                    <td>{$data['userid']}</td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Username')}:</td>
+                                    <td>{$data['username']} </td>
+                                    <td class="item-note"></td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Statistical currency')} :</td>
+                                    <td>{$data['coinname']}</td>
+                                    <td class="item-note"></td>
+                                </tr>
+								
+								<tr class="controls">
+                                    <td class="item-label">{:l('Blockchain address')}  :</td>
+                                    <td>{$data['address']}</td>
+                                    <td class="item-note"></td>
+                                </tr>
+								
+                                <tr class="controls">
+                                    <td class="item-label"></td>
+                                    <td></td>
+                                    <td class="item-note"> </td>
+                                </tr>
+
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Available balance')}  :</td>
+                                    <td>{$data['zhengcheng']}</td>
+                                    <td class="item-note">{:l('User Balance')}  </td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Freeze Balance')}  :</td>
+                                    <td>{$data['dongjie']}</td>
+                                    <td class="item-note">{:l('User Balance')}</td>
+                                </tr>
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Total Balance')}  :</td>
+                                    <td>{$data['zongji']}</td>
+                                    <td class="item-note">  {:l('User Balance')}</td>
+                                </tr>
+
+                                <tr class="controls">
+                                    <td class="item-label"></td>
+                                    <td></td>
+                                    <td class="item-note"> </td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Total Recharge')}:</td>
+                                    <td>{$data['chongzhiusd']}</td>
+                                    <td class="item-note">{:l('Fiat Recharge')}</td>
+                                </tr>
+
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Total withdraw USD')}  :</td>
+                                    <td>{$data['tixianusd']}</td>
+                                    <td class="item-note">{:l('Withdraw Success')}</td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Withdraw Freeze USD')} :</td>
+                                    <td>{$data['tixianusdd']}</td>
+                                    <td class="item-note">{:l('Pending')}</td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label"></td>
+                                    <td></td>
+                                    <td class="item-note"> </td>
+                                </tr>
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Total Coins Deposit')}  :</td>
+                                    <td>{$data['chongzhi']}</td>
+                                    <td class="item-note">{:l('Crypto Deposit')}</td>
+                                </tr>
+
+
+                                <tr class="controls">
+                                    <td class="item-label">{:l('Total Coin Withdraw assets')} :</td>
+                                    <td>{$data['tixian']}</td>
+                                    <td class="item-note">{:l('Crypto Withdraw')}</td>
+                                </tr>
+
+
+
+
+                            </table>
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    //submit Form
+                    $('#submit').click(function () {
+                        $('#form').submit();
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //Search function
+    $(function () {
+        $('#search').click(function () {
+            $('#formSearch').submit();
+        });
+    });
+    //Enter search
+    $(".search-input").keyup(function (e) {
+        if (e.keyCode === 13) {
+            $("#search").click();
+            return false;
+        }
+    });
+</script>
+
+<include file="Public:footer"/>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //Highlight navigation
+        highlight_subnav("{:U('User/coin')}");
+    </script>
+</block>

@@ -1,0 +1,136 @@
+<div class="relative overflow-hidden flex justify-center items-center">
+  <div class="1300px:w-[1300px] px-2 lg:w-[1024px] md:w-[768px] sm:w-[640px] flex w-full relative py-8">
+    <div class="lg:space-y-10 space-y-5">
+      <div class="1300px:w-[600px] md:w-[500px] w-full 1300px:space-y-8 space-y-4">
+        <volist name="indexAdver" id="slide">
+          <h1 class="1300px:text-[2.8rem] lg:text-[2.5rem] md:text-[2rem] text-[1.4rem] theme-text">
+            <?php 
+            $h1_h2 = explode(',', $slide['name']);?>
+            <div class="font-light">{$h1_h2[0]}</div>
+            <div class="font-medium">{$h1_h2[1]}</div>
+          </h1>
+          <p
+            class="text-subTitleColor 1300px:text-[1.8rem] lg:text-[1.5rem] font-light leading-[1.3] md:text-[1.2rem] text-md">
+            {$slide.title}
+          </p>
+        </volist>
+
+      </div>
+      <div class="flex items-center gap-3">
+        <eq name="Think.session.userId" value="0">
+          <a href="/login/login" role="button"
+            class="bg-primary text-white p-[5px] rounded px-5 text-dark font-medium 1300px:w-[180px] min-w-[100px] text-center lg:py-4 py-2 whitespace-nowrap">
+            Register Now
+          </a>
+        </eq>
+
+        <gt name="Think.session.userId" value="0">
+          <a href="/User/index" role="button"
+            class="bg-primary text-white  p-[5px] rounded px-5 text-dark font-medium 1300px:w-[180px] min-w-[100px] text-center lg:py-4 py-2 whitespace-nowrap">
+            Dashboard
+          </a>
+        </gt>
+        <div class="flex items-center gap-3">
+          <div class="bg-element lg:p-4 p-2 rounded-md text-navColor">
+            <a href="{$C['google_play']}">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lg:w-[1.6em] w-[1.2em]" fill="none" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M16.621 0h.17c.138 1.693-.508 2.957-1.293 3.873-.77.91-1.826 1.792-3.532 1.658-.114-1.669.533-2.84 1.318-3.753C14.01.926 15.344.168 16.62 0ZM21.785 17.616v.048c-.48 1.452-1.163 2.697-1.998 3.852-.762 1.048-1.696 2.46-3.363 2.46-1.44 0-2.398-.927-3.874-.952-1.562-.026-2.42.774-3.849.976h-.487c-1.048-.152-1.895-.983-2.511-1.73-1.818-2.212-3.223-5.068-3.484-8.723v-1.074C2.329 9.858 3.6 7.731 5.289 6.7c.892-.548 2.118-1.015 3.483-.806.585.09 1.182.29 1.706.49.496.19 1.117.528 1.705.51.399-.011.795-.219 1.196-.365 1.177-.425 2.33-.912 3.85-.683 1.826.276 3.122 1.087 3.923 2.34-1.545.982-2.767 2.464-2.558 4.995.185 2.298 1.522 3.643 3.191 4.435Z">
+                </path>
+              </svg>
+            </a>
+          </div>
+          <div class="bg-element lg:p-4 p-2 rounded-md text-navColor">
+            <a href="{$C['apple_store']}">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lg:w-[1.6em] w-[1.2em]" fill="none" viewBox="0 0 24 24">
+                <g fill="currentColor" clip-path="url(#google-play-bold_svg__a)">
+                  <path
+                    d="M5.238.384A3.047 3.047 0 0 0 2.264.39l10.934 10.087 3.673-3.673L5.238.384ZM1.17 1.422c-.267.436-.42.936-.42 1.465v18.218c0 .513.14 1.002.391 1.43l10.996-10.996L1.17 1.422ZM21.742 9.494 18.238 7.56l-3.937 3.935 4.825 4.45 2.617-1.444c.942-.522 1.506-1.458 1.506-2.505-.001-1.047-.564-1.983-1.507-2.503ZM13.24 12.559 2.216 23.584a3.09 3.09 0 0 0 1.531.417c.51 0 1.023-.129 1.493-.388l12.505-6.901-4.503-4.153Z">
+                  </path>
+                </g>
+                <defs>
+                  <clipPath id="google-play-bold_svg__a">
+                    <path fill="#fff" d="M0 0h24v24H0z"></path>
+                  </clipPath>
+                </defs>
+              </svg>
+            </a>
+          </div>
+          <div class="bg-element lg:p-4 p-2 rounded-md text-navColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lg:w-[1.6em] w-[1.2em]" fill="none" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M7.5 1a.499.499 0 0 0-.354.854l1.311 1.31A5.986 5.986 0 0 0 6 8h12c0-1.987-.97-3.744-2.457-4.836l1.31-1.31a.5.5 0 0 0-.707-.708L14.665 2.63a5.966 5.966 0 0 0-5.328 0L7.854 1.146A.499.499 0 0 0 7.5 1ZM9 5h1v1H9V5Zm5 0h1v1h-1V5ZM4 9a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1Zm2 0v8a1 1 0 0 0 1 1h1v3.5a1.5 1.5 0 0 0 3 0V18h2v3.5a1.5 1.5 0 0 0 3 0V18h1a1 1 0 0 0 1-1V9H6Zm14 0a1 1 0 0 0-1 1v6a1 1 0 0 0 2 0v-6a1 1 0 0 0-1-1Z">
+              </path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="text-subTitleColor leading-tight">Bitcoin Halving Countdown - </div>
+      <div class="w-fit">
+        <div class="flip-clock" style="
+              --d1758cb6: var(--ticker-text);
+              --25379898: transparent;
+              --4fe7d52c: var(--ticker-bg-1);
+              --229235c6: var(--ticker-text);
+              --4f934c0f: var(--ticker-bg-2);;
+            " data-flip-clock>
+          <span class="flip-clock__piece" id="flip-card-days" style="" data-flip-clock>
+            <div data-flip-clock>
+              <span class="flip-clock__card flip-card" style="font-size: 1.5rem" data-flip-clock>
+                <b class="flip-card__top" data-flip-clock>00</b>
+                <b class="flip-card__bottom" data-value="00" data-flip-clock></b>
+                <b class="flip-card__back" data-value="00" data-flip-clock></b>
+                <b class="flip-card__back-bottom" data-value="00" data-flip-clock></b>
+              </span>
+            </div>
+            <span class="flip-clock__slot" style="font-size: 0.8rem" data-flip-clock>{:l('Days')}</span>
+          </span>
+
+          <span class="flip-clock__piece" id="flip-card-hours" style="" data-flip-clock>
+            <div data-flip-clock>
+              <span class="flip-clock__card flip-card" style="font-size: 1.5rem" data-flip-clock><b
+                  class="flip-card__top" data-flip-clock>00</b><b class="flip-card__bottom" data-value="00"
+                  data-flip-clock></b><b class="flip-card__back" data-value="00" data-flip-clock></b><b
+                  class="flip-card__back-bottom" data-value="00" data-flip-clock></b></span>
+            </div>
+            <span class="flip-clock__slot" style="font-size: 0.8rem" data-flip-clock>{:l('Hours')}</span>
+          </span><span class="flip-clock__piece" id="flip-card-minutes" style="" data-flip-clock>
+            <div data-flip-clock>
+              <span class="flip-clock__card flip-card" style="font-size: 1.5rem" data-flip-clock><b
+                  class="flip-card__top" data-flip-clock>00</b><b class="flip-card__bottom" data-value="00"
+                  data-flip-clock></b><b class="flip-card__back" data-value="00" data-flip-clock></b><b
+                  class="flip-card__back-bottom" data-value="00" data-flip-clock></b></span>
+            </div>
+            <span class="flip-clock__slot" style="font-size: 0.8rem" data-flip-clock>{:l('Minutes')}</span>
+          </span><span class="flip-clock__piece" id="flip-card-seconds" style="" data-flip-clock>
+            <div data-flip-clock>
+              <span class="flip-clock__card flip-card" style="font-size: 1.5rem" data-flip-clock><b
+                  class="flip-card__top" data-flip-clock>00</b><b class="flip-card__bottom" data-value="00"
+                  data-flip-clock></b><b class="flip-card__back" data-value="00" data-flip-clock></b><b
+                  class="flip-card__back-bottom" data-value="00" data-flip-clock></b></span>
+            </div>
+            <span class="flip-clock__slot" style="font-size: 0.8rem" data-flip-clock>{:l('Seconds')}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <volist name="indexAdver" id="slide">
+      <if condition="$slide.embed_link neq ''">
+        <div onclick="window.location.href='{$slide['url']}'">
+          <a src="" style="">
+            <iframe width="437" height="235" src="{$slide.embed_link}">
+            </iframe>
+          </a>
+        </div>
+        <else />
+        <div onclick="window.location.href='{$slide['url']}'">
+          <a src="" style="">
+            <figure class="hidden md:flex items-center">
+              <img class="animate__animated animate__fadeInUp" src="__UPLOAD__/ad/{$slide.img}" alt="" />
+            </figure>
+          </a>
+        </div>
+      </if>
+    </volist>
+  </div>
+</div>

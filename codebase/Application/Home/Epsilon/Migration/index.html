@@ -1,0 +1,96 @@
+<include file="Public:header" />
+<section class="generic">
+  <!-- Page container -->
+  <div class="container">
+    <div class="full-box row">
+      <include file="User:sidebar" />
+      <div class="col-10">
+  
+    <div class="row mt-3 mb-3">
+      <include file="User:top_bar" />
+      <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+        <ul class="text-right breadcrumbs list-unstyle">
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('Finance/index')}">{:l('Finance')}</a>
+          </li>
+          <li>
+            <a href="{:U('Migration/index')}" class="btn btn-warning btn-sm active"
+              >{:l('Migration')}</a
+            >
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <!-- Main content -->
+            <div class="">
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-title"> {:l('Migration Balances')} </span>
+				  
+                </div>
+
+                <div class="card-body">
+                  <span> <button class="btn btn-md btn-warning" onclick="doMigrate();"> Process Migration </button>
+				  <div class="table-responsive">
+                    <table
+                      class="table last-login-table" id="investLog_content">
+                      <thead>
+                        <tr>
+						  <th>{:l('Wallet')}</th>
+                          <th>{:l('Coin')}</th>
+                          <th>{:l('Migration Available')}</th>
+                          <th>{:l('Already migrated')}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <volist name="spot_balance" id="spot" key="k">
+                          <tr>
+						  <td>{:l('Spot')}</td>
+                            <td>{$key|strtoupper}</td>
+                            <td>{$spot}</td>
+							<td><php> echo $moved_balance[$key.'_moved']</php></td>
+                          </tr>
+                        </volist>
+						                        <volist name="stock_balance" id="stock" key="k">
+                          <tr>
+						  <td>{:l('Stock')}</td>
+                            <td>{$key|strtoupper}</td>
+                            <td>{$stock}</td>
+							<td><php> echo $moved_balance[$key.'_moved']</php></td>
+                          </tr>
+                        </volist>
+                      </tbody>
+                    </table>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div></div></div>
+  </div>
+</section>
+<script>
+function doMigrate(){
+layer.load(0, {shade: [0.5,'#8F8F8F']});
+$.get("{:U('Migration/doMigration')}",function(data){
+layer.closeAll('loading');
+	if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+				window.location.reload();
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+//window.location.reload();
+});
+}
+</script>
+<include file="Public:footer_minimal" />

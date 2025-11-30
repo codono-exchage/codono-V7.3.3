@@ -1,0 +1,74 @@
+<include file="Public:header" />
+
+		<!-- Page content -->
+		<div class="page-container">	
+	
+<include file="Finance:left" />
+	
+	<div class="panel panel-flat mb20">
+		<div class=" panel-heading" >
+			<div class="btn-group btn-group-justified">
+					<span class="btn-group">	
+						<a href="/Otc/records" id="step3" class="btn btn-flat ">{:l('My Records')}</a>
+                    </span>
+	                <span class="btn-group">
+                        <a href="/Otc/index" id="step1" class="btn btn-flat">{:l('OTC Exchange')}</a></span>
+					
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="f_body">
+					<div class="f_body_main">
+						<div class="f_tab_body">
+							<div class="table-responsive">
+								<table class="table table-condensed table-striped" id="investLog_content">
+									<thead>
+									<tr>
+										<th>{:l('Type')}</th>
+										<th>{:l('Traded')}</th>
+										
+										<th>{:l('Price')}</th>
+										<th id="sublist-grid_c4">{:l('Total')}</th>
+										<th>{:l('Fee')}</th>
+										<th id="sublist-grid_c0">{:l('Time')}</th>
+										
+									</tr>
+									</thead>
+									<tbody>
+									
+									
+                                    <volist name="list" id="vo">
+                                        <tr>
+											<eq name="vo['type']" value="buy"><td class="otc_type_buy"><else/><td class="otc_type_sell"></eq>{$vo['type']|strtoupper}</td>
+                                            <td>{$vo['trade_coin']|strtoupper} {$vo['qty']}</td>
+                                            <td>{$vo['base_coin']|strtoupper} {$vo['final_price'] * 1}</td>
+                                            <td>{$vo['base_coin']|strtoupper} {$vo['final_total']}</td>
+											<td>{$vo['base_coin']|strtoupper} {$vo['fees_paid'] * 1}</td>
+											<td>{$vo.addtime|date='m-d H:i:s',###}</td>
+                                            
+                                        </tr>
+                                    </volist>
+									
+									
+									</tbody>
+								</table>
+								<div class="pages">{$page}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<style>
+.otc_type_buy{
+background:green;
+color:#fff !important;
+}
+.otc_type_sell{
+background:red;
+color:#fff !important;
+}
+</style>
+<include file="Public:footer_minimal"/>

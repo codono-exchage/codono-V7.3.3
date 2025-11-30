@@ -1,0 +1,520 @@
+<include file="Public:header" />
+<link rel="stylesheet" href="__PUBLIC__/otc/otc.css" />
+<section>
+  <main class="wrapper">
+
+    <input name="tradetype" id="tradetype" value="buy" type="hidden" />
+    <input
+    name="trade_coin"
+    id="trade_coin"
+    value="{$default_coin_trade.symbol}"
+    type="hidden"
+  />
+  <input
+    name="base_coin"
+    id="base_coin"
+    value="{$default_coin_base.symbol}"
+    type="hidden"
+  />
+  <input name="min_req" id="min_req" value="" type="hidden" />
+  <input name="max_req" id="max_req" value="" type="hidden" />
+  <input name="qid" id="qid" value="" type="hidden" /> 
+    <!-- 
+-->
+
+    <!-- Swap Start -->
+    <section class="swap-page dark-bg">
+      <div class="otc-form-wrapper">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 page-top-header white">
+              <h1 class="main-title">{:l('OTC')}</h1>
+              <h6 class="desc">
+                Are you ready for high transaction volume, secure transactions
+                and personalized service?
+              </h6>
+            </div>
+            <div class="col-12 text-center m-b-30">
+              <a href="deposit-money-eft.html" class="btn btn-3">{:l('Invest')}</a>
+            </div>
+            <div class="col-lg-5 m-b-30">
+              <div class="otc-form-inner white-bg">
+                <div class="text-center">
+                  <img
+                    src="__EPSILON__/img/logo-icon-2x.png"
+                    class="img-fluid m-auto m-b-20"
+                  />
+                </div>
+                <h4 class="text-center m-b-15">{:l('Request for Quotation')}</h4>
+                <p class="text-center">
+                  Maximum liquidity and Express access meet on {:SHORT_NAME} Global OTC
+                  Platform!
+                </p>
+                <div class="otc-form">
+                  <ul class="nav nav-pills nav-fill" role="tablist">
+                    <li class="nav-item">
+                      <a
+                        aria-selected="true"
+                        class="nav-link active"
+                        data-toggle="pill"
+                        href="#otc-buy"
+                        role="tab"
+                        >{:l('BUY')}</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        aria-selected="true"
+                        class="nav-link"
+                        data-toggle="pill"
+                        href="#otc-sell"
+                        role="tab"
+                        >{:l('SELL')}</a
+                      >
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div
+                      class="tab-pane fade show active p-t-15"
+                      role="tabpanel"
+                      id="otc-buy"
+                    >
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input
+                            class="form-control"
+                            placeholder="Enter the amount you want to sell"
+                            type="number"
+                            id="change1stInput"
+                          />
+                          <div class="input-group-append">
+                            <select
+                              id="selectSellOtc"
+                              class="bootstrap-select"
+                              data-live-search="true"
+                              data-live-search-placeholder="Search"
+                              data-width="100%"
+                            >
+                              <volist name="trade_coins" id="vo">
+                                <option
+                                  data-subtitle="Bitcoin"
+                                  data-content="<img src='{$vo.image}'>{$vo.symbol|strtoupper}"
+                                ></option>
+                              </volist>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input
+                            class="form-control"
+                            placeholder="Enter the amount you want to transfer"
+                            type="number"
+                            id="change2ndInput"
+                          />
+                          <div class="input-group-append">
+                            <select
+                              id="selectBuyOtcSpend"
+                              class="bootstrap-select"
+                              data-live-search="true"
+                              data-live-search-placeholder="Search"
+                              data-width="100%"
+                            >
+                              <volist name="base_coins" id="so">
+                                <option
+                                  data-subtitle="Turkish lira"
+                                  data-content="<img src={$so.image}>{$so.symbol|strtoupper}"
+                                ></option>
+                              </volist>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade p-t-15"
+                      role="tabpanel"
+                      id="otc-sell"
+                    >
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input
+                            class="form-control"
+                            placeholder="Enter the amount you want to sell"
+                            type="number"
+                            id="change1stInput"
+                          />
+                          <div class="input-group-append">
+                            <select
+                              id="selectSellOtc"
+                              class="bootstrap-select"
+                              data-live-search="true"
+                              data-live-search-placeholder="Search"
+                              data-width="100%"
+                            >
+                              <volist name="trade_coins" id="vo">
+                                <option
+                                  data-subtitle="Bitcoin"
+                                  data-content="<img src='{$vo.image}'>{$vo.symbol|strtoupper}"
+                                ></option>
+                              </volist>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input
+                            class="form-control"
+                            placeholder="Enter the accepted amount"
+                            type="number"
+                          />
+                          <div class="input-group-append">
+                            <select
+                              id="selectSellOtcReceive"
+                              class="bootstrap-select"
+                              data-live-search="true"
+                              data-live-search-placeholder="Search"
+                              data-width="100%"
+                            >
+                              <volist name="base_coins" id="so">
+                                <option
+                                  data-subtitle="Turkish lira"
+                                  data-content="<img src={$so.image}>{$so.symbol|strtoupper}"
+                                ></option>
+                              </volist>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-3" style="display: flex; justify-content: space-between; align-items: center;">
+                      <div class="coin-input-label btn-block" id="input2text">{:l('Bank')}</div>
+                      <select
+                        class="bootstrap-select"
+                        style="float: right;"
+                        name="bankid"
+                        id="bankid"
+                        data-placeholder="Type"
+                        class=""
+                      >
+                        <volist name="UserBank" id="ub">
+                          <option value="{$ub.id}">
+                            {$ub.bankcard}@{$ub.bank}
+                          </option>
+                        </volist>
+                      </select>
+                    </div>
+                    <button
+                      class="btn btn-4 d-block w-100"
+                      onclick="requestQuote();"
+                    >
+                      Get Offer
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="current-quote otc-form-inner white-bg">
+                <div class="row align-items-center header">
+                  <div class="col-auto">
+                    <i class="ion ion-md-arrow-round-back"></i>
+                  </div>
+                  <div class="col">
+                    <h5 class="title">{:l('Current Quote')}</h5>
+                  </div>
+                </div>
+                <div class="row current-quote-empty">
+                  <div class="col-12">
+                    <i class="icon ion-md-stats"></i>
+                  </div>
+                  <div class="col-12">
+                    <div class="alert alert-warning" role="alert">
+                      Please fill in an amount on the left to receive a quote.
+                    </div>
+                  </div>
+                </div>
+                <div class="row current-quote-full" style="display: none">
+                  <div class="col-12 amount-wrapper">
+                    <div class="otc-name">{:l('Purchased')}</div>
+                    <span class="amount">10 <span>{:l('BTC')}</span></span>
+                  </div>
+                  <div class="amount-summary">
+                    <label class="info"
+                      >{:l('Price Per Coin PSearch')}<span>{:l('Price Per Coin PSearch')}</span></label
+                    >
+                    <label>564654654.13265654 <span>546546</span></label>
+                    <label>USD <span>{:l('USD')}</span></label>
+                    <div class="row current-quote-time">
+                      <div class="col-12">
+                        <div class="progress">
+                          <div
+                            class="progress-bar"
+                            id="progressbar"
+                            role="progressbar"
+                            style="width: 100%"
+                            aria-valuenow="100"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="col-12 m-t-5 expireSeconds text-center">
+                        Price offer ends on: <span>{:l('10s')}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 form-bottom">
+                    <ul>
+                      <li>
+                        Commission
+                        <span class="f-w-600 pull-right"
+                          >0.0001<span>{:l('BTC')}</span></span
+                        >
+                      </li>
+                      <li>
+                        Net Amount to Account
+                        <span class="f-w-600 pull-right"
+                          >0.1222<span>{:l('BTC')}</span></span
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-12 btn-wrapper">
+                    <div class="row no-gutters">
+                      <button class="btn btn-1 col-6" onclick="rejectQuote()">
+                        Reject
+                      </button>
+                      <button
+                        class="btn btn-2 col-6"
+                        role="button"
+                        data-toggle="modal"
+                        data-target="#confirmOrderModal"
+                      >
+                        Approve
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ul class="page-inner-menu white">
+                <li>
+                  <a href="{:U('Fx/records')}"
+                    ><i class="fa fa-file-text"></i> Transaction History</a
+                  >
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Swap End -->
+  </main>
+</section>
+<script type="text/javascript">
+  var trade_coins = {$trade_coins|json_encode} ;
+  var base_coins = {$base_coins|json_encode} ;
+  changetype('buy');
+
+  $("#change2ndInput").change(function(){
+  $('.quote-button').prop('disabled', true);
+  $("#input1error").html('');
+  $("#input2error").html('');
+  $('.quote-button').prop('disabled', false);
+  var value=parseFloat($('#change2ndInput').val());
+  $('#change1stInput').val("");
+  var select_coin_b=$("#base_coin").val().toLowerCase();
+  var select_coin=select_coin_b.toLowerCase();
+
+  var min_req_b=parseFloat(base_coins[select_coin]['min']);
+  var max_req_b=parseFloat(base_coins[select_coin]['max']);
+
+  if(value<min_req_b){
+  $('.quote-button').prop('disabled', true);
+  $("#input2error").html('Amount should be greater than '+min_req_b+' '+select_coin_b);
+
+  }
+  else if(value>max_req_b)
+  {
+  $('.quote-button').prop('disabled', true);
+  $("#input2error").html('Amount should be less than  '+max_req_b+' '+select_coin_b);
+
+  }else{
+  //Means its true enable button for quote
+  $('.quote-button').prop('disabled', false);
+  $("#input2error").html('');
+  }
+
+
+  });
+
+
+  $("#change1stInput").change(function(){
+  $("#input1error").html('');
+  $("#input2error").html('');
+  $('.quote-button').prop('disabled', true);
+  var value=parseFloat($('#change1stInput').val());
+  var select_coin_t=$("#trade_coin").val().toLowerCase();
+  var select_coin=select_coin_t.toLowerCase();
+  $('#change2ndInput').val("");
+  var min_req_t=parseFloat(trade_coins[select_coin]['min']);
+  var max_req_t=parseFloat(trade_coins[select_coin]['max']);
+
+  if(value<min_req_t){
+  $('.quote-button').prop('disabled', true);
+  $("#input1error").html('Amount should be greater than  '+min_req_t+' '+select_coin_t);
+
+  }
+  else if(value>max_req_t)
+  {
+  $('.quote-button').prop('disabled', true);
+  $("#input1error").html('Amount should be less than  '+max_req_t+' '+select_coin_t);
+
+  }else{
+  //Means its true enable button for quote
+  $('.quote-button').prop('disabled', false);
+  $("#input1error").html('');
+  }
+
+  });
+
+
+  function changetype(type){
+  if(type !='buy' && type !='sell'){ return false;}
+    $("#tradetype").val(type);
+  if(type=='buy'){
+  $("#input1text").html('Buy');
+  $("#input2text").html('Spend');
+  $("#wanttobuy").css("color","#fff");
+  $("#wanttobuy").css("border-bottom","2px solid #5d78ff");
+  $("#wanttosell").css("color","rgb(146, 154, 165)");
+  $("#wanttosell").css("border-bottom","0px");
+  }else{
+  $("#input1text").html('Sell');
+  $("#input2text").html('Receive');
+  $("#wanttosell").css("color","#fff");
+  $("#wanttosell").css("border-bottom","2px solid #5d78ff");
+  $("#wanttobuy").css("color","rgb(146, 154, 165)");
+  $("#wanttobuy").css("border-bottom","0px");
+  }
+
+  }
+  $("#showbuyoptions li a").click(function () {
+      var selText = $(this).text();
+      var imgSource = $(this).find('img').attr('src');
+      var img = '<img class="coin-input-coinimage" src="' + imgSource + '"/>';
+  	var source =img+'<span class="coinInput-CoinText">'+selText+'</span> <span class="caret"></span>';
+      $('.xbuyoption').html(source);
+  	$("#trade_coin").val(selText);
+  });
+
+  $("#showselloptions li a").click(function () {
+      var selText = $(this).text();
+
+      var imgSource = $(this).find('img').attr('src');
+      var img = '<img class="coin-input-coinimage" src="' + imgSource + '"/>';
+  	var source =img+'<span class="coinInput-CoinText">'+selText+'</span> <span class="caret"></span>';
+      $('.xselloption').html(source);
+  	$("#base_coin").val(selText);
+
+  });
+
+  function rejectQuote(){
+  $('#quote-button').prop('disabled', false);
+  				$('#received_price').html("");
+  				$('#received_total').html("");
+  				$('#tradecoin_name').html("");
+  				$('#tradecoin_qty').html("");
+  				$('#tradetype_final').html("");
+  				$("#with_order").css("display","none");
+  				$("#blank_order").css("display","flex");
+  }
+  function requestQuote(){
+  $("#quotefinal").css("display","flex");
+  $("#quoteerror").css("display","none");
+
+  var trade_coin=$("#trade_coin").val();
+  var base_coin=$("#base_coin").val();
+  var input1=$("#change1stInput").val();
+  var input2=$("#change2ndInput").val();
+  var tradetype=$("#tradetype").val();
+  var bankid=$("#bankid").val();
+  		$.post("{:U('Fx/getquote')}", {
+  			trade_coin: trade_coin,
+  			base_coin: base_coin,
+  			input1: input1,
+  			input2: input2,
+  			tradetype:tradetype,
+  			bankid:bankid,
+  		}, function (data) {
+  			if (data.status == 1) {
+  				if(data.data.qid==0){
+  				$("#quotefinal").css("display","none");
+  				$("#quoteerror").css("display","flex");
+  				}
+  				layer.msg(data.msg, {icon: 1});
+  				layer.tips('Press this button to continue!', '#approve-button', {tips: 3});
+
+  				$('#received_price').html(data.data.price+' '+data.data.base);
+  				$('#received_total').html(data.data.total+' '+data.data.base);
+
+  				$('#tradecoin_name').html(data.data.trade);
+  				$('#tradecoin_qty').html(data.data.qty);
+  				$('#tradetype_final').html("I want to "+data.data.trade_type);
+  				$('#expiretime').html(data.data.expire+'s')
+  				$("#with_order").css("display","block");
+  				$("#blank_order").css("display","none");
+  				$('#qid').val(data.data.qid);
+  				var expire=data.data.expire
+  				var counter = expire;
+  				var interval = setInterval(function() {
+  				counter--;
+  				var percentage=counter*(100/expire);
+  				$('#quote-button').prop('disabled', true);
+  				$("#progressbar").css("width",percentage+"%");
+  				$('#expiretime').html(counter+'s')
+
+  				// Display 'counter' wherever you want to display it.
+  				if (counter == 0) {
+  				// Times up
+  				$("#quotefinal").css("display","none");
+  				$("#quoteerror").css("display","flex");
+  				$("#quoteerror2").html("Your Quote is expired, try a new quote now");
+  				$('#expiretime').html('0s')
+  				clearInterval(interval);
+  				$('#quote-button').prop('disabled', false);
+  						}
+  				}, 1000);
+
+
+
+  			} else {
+  				layer.msg(data.msg, {icon: 3});
+  				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+  			}
+  		}, "json");
+  }
+
+  function approveQuote(){
+
+  var qid=$("#qid").val();
+  if(qid=='' || qid==0)
+  {
+  layer.alert('You currently do not have a valid quote, Please refresh!', {title: "Info",btn: ['Ok']});
+  }
+  $.post("{:U('Fx/approveQuote')}", {
+  			qid: qid,
+  		}, function (data) {
+  			if (data.status == 1) {
+  				layer.msg(data.msg, {icon: 1});
+
+  				window.location=data.url;
+  			} else {
+  				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+  			}
+  		}, "json");
+  }
+</script>
+<include file="Public:footer_minimal" />

@@ -1,0 +1,134 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+
+	<div class="main-title-h">
+			<span class="h1-title col-sm-4">{:l('Trade logs')}</span>
+			<small class="col-sm-8 text-right">Total {$codono_count} Records : Amount :{:L('SITE_CURRENCY')}{$codono_getSum|default="0"}</small>
+		</div>
+		
+		<div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+			<div class="fl">
+			<a class="btn btn-sm btn-info " href="{:U('Trade/liqlog')}">{:l('Liquidity Matched Records')}</a>
+
+			</div>
+			<div class="search-form fr cf">
+				<div class="sleft">
+					<form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+						<select  name="market" class="form-select">
+							<option value=""
+							<empty name="Think.get.market">{:l('selected')}</empty>
+							>{:l('Market')}</option>
+							<volist name="C['market']" id="vo">
+								<option value="{$vo['name']}"
+								<eq name="vo['name']" value="$Think.get.market">{:l('selected')}</eq>
+								>{$vo['title']}</option>
+							</volist>
+						</select>
+						
+						
+						<select  name="type" class="form-select">
+							<option value=""
+							<empty name="Think.get.type">{:l('selected')}</empty>
+							>{:l('Transaction Type')}</option>
+							<option value="1" <eq name="Think.get.type" value="1">{:l('selected')}</eq>>{:l('Buy')}</option>
+							<option value="2" <eq name="Think.get.type" value="2">{:l('selected')}</eq>>{:l('Sell')}</option>
+						</select>
+						
+						
+						<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-select">
+							<option value="username"
+							<eq name="Think.get.field" value="username">{:l('selected')}</eq>
+							>{:l('Buyers Username')}</option>
+							<option value="peername"
+							<eq name="Think.get.field" value="peername">{:l('selected')}</eq>
+							>{:l('Sellers Username')}</option>
+						</select>
+						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//Search function
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//Enter search
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		
+		<div class="card card-body mt-2 table-responsive">
+			<table class="table table-sm emptyx">
+				<thead class="table-light">
+				
+				<tr>
+					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+					<th class="">{:l('ID')}</th>
+
+					<th class="">{:l('Buyers')}</th>
+					<th class="">{:l('Sellers')}</th>
+					<th class="">{:l('Market')}</th>
+					<th class="">{:l('Price')}</th>
+					<th class="">{:l('Quantity')}</th>
+					<th class="">{:l('Total')}</th>
+					<th class="">{:l('Buyers Fee')}</th>
+					<th class="">{:l('Sellers Fee')}</th>
+					<th class="">{:l('Type')}</th>
+					<th class="">{:l('Time')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td>{$vo.id}</td>
+
+							<td>{$vo['username']} [{$vo.userid}]</td>
+							<td>{$vo['peername']}  [{$vo.peerid}]</td>
+							<td>{$vo['market']}</td>
+							<td>{$vo['price']|NumToStr}</td>
+							<td>{$vo['num']|NumToStr}</td>
+							<td>{$vo['mum']|NumToStr}</td>
+							<td>{$vo['fee_buy']|NumToStr}</td>
+							<td>{$vo['fee_sell']|NumToStr}</td>
+							<td>
+								<eq name="vo.type" value="1">Buy
+									<else/>
+								                             Sell
+								</eq>
+							</td>
+							<td>{$vo.addtime|addtime}</td>
+						</tr>
+					</volist>
+					<else/>
+					<td colspan="12" class="text-center">{:l('No contents!')}</td>
+				</notempty>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Trade/log')}");
+	</script>
+</block>

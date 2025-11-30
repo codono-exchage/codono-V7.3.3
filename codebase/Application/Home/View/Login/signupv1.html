@@ -1,0 +1,230 @@
+<include file="Public:header" />
+<div class="page-container">
+<div class="row ">
+<div class="tabbable panel login-form width-400">
+
+					<div class="tab-content panel-body">
+						
+						<div class="tab-pane fade in active" id="basic-tab2">
+								
+								<div class="text-center">
+									<h5 class="content-group">{:l('USER_REGISTRATION')} Email</h5>
+								</div>
+
+							<div class="form-group has-feedback has-feedback-left">
+									<input type="text" class="form-control" placeholder="Username" id="username" onblur="check_username()">
+									<div class="form-control-feedback">
+										<i class="icon-user text-muted"></i>
+									</div>
+										<span id="username_help" class="" style=""></span>
+								</div>
+																<div class="form-group has-feedback has-feedback-left">
+									<input type="text" class="form-control" placeholder="Your email" id="email" onblur="check_email()">
+									<div class="form-control-feedback">
+										<i class="icon-mention text-muted"></i>
+									</div>
+										<span id="email_help" class="" style=""></span>
+								</div>
+								<div class="form-group has-feedback has-feedback-left">
+									<input type="password" class="form-control" placeholder="{:l('PLEASE_ENTER_A_LOGIN_PASSWORD')}" id="email_password">
+									<div class="form-control-feedback">
+										<i class="icon-user-lock text-muted"></i>
+									</div>
+								</div>
+								<eq name="RECAPTCHA" value="1">
+									<include file="Public:recaptcha"/>
+								<else/>
+								<div class="form-group row">
+									<span class="col-sm-6">
+										<input id="login_verify"  type="text" class="form-control" placeholder="{:l('PLEASE_ENTER_VERIFICATION_CODE')}" autocomplete="off">
+									</span>
+									<span class="col-sm-6">
+										<img id="login_verify_up" class="codeImg reloadverify hg40 te" src="{:U('Verify/code')}" title="{:l('REFRESH')}" onclick="this.src=this.src+'?t='+Math.random()" width="100%" height="100%">
+									</span>
+								</div>
+								</eq>
+								<div class="form-group has-feedback has-feedback-left">
+									<input id="email_invit" placeholder="{:l('INVITE_CODE')}" type="text" class="form-control" placeholder="Your username">
+									<div class="form-control-feedback">
+										<i class="icon-user-check text-muted"></i>
+									</div>
+								</div>
+								<div class="content-divider text-muted form-group"></div>
+								<div class="form-group" id="account_type">
+									<label class="display-block text-semibold">{:l('Choose Account Type')}</label>
+									<label class="radio-inline radio-right">
+										<input type="radio" name="accounttype" value="1">
+										{:l('Individual')}
+									</label>
+
+									<label class="radio-inline radio-right">
+										<input type="radio" name="accounttype" value="2">
+										{:l('Institutional')}
+									</label>
+								</div>
+								<div class="form-group">
+									<span class="help-block text-center no-margin"><label> <input type="checkbox" id="emailregweb" checked="checked" style="vertical-align: -2px;"> {:l('REGISTRATION_IS_DEEMED_TO_AGRE')} <a href="javascript:void(0)" class="move" onclick="regWeb();">{:l('USER_REGISTRATION_AGREEMENT')}</a></label></span>
+								</div>
+								<button type="button" class="btn bg-indigo-400 btn-block" onclick="reg_email()" >{:l('SIGN_UP_NOW')} <i class="icon-circle-right2 position-right"></i></button>
+						</div>
+					</div>
+				</div>
+</div>
+</div>
+<script>
+
+
+	$(function () {
+	var inviteurl = new URL(window.location.href);
+	var invitecode = inviteurl.searchParams.get("invite");
+	document.getElementById("email_invit").value =invitecode;
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+		$('#email_step2').height(height);
+		$("#cellphone").focus();
+	});
+	function regWeb() {
+		layer.open({
+			type: 2,
+			skin: 'layui-layer-rim', //frame
+			area: ['800px', '600px'], // width height
+			title: 'User Agreement', // title
+			content: "{:U('Login/webreg')}"
+		});
+	}
+	
+	function showB() {
+		$("#step1").hide();
+		$("#step2").hide();
+		$("#verify").focus();
+	}
+	function showE() {
+		$("#email_step1").hide();
+		$("#email_step2").hide();
+		$("#everify").focus();
+	}
+		function check_username() {
+		var username  = $('#username').val();
+		if (username == "" || username == null) {
+			layer.tips("Please choose username", '#username', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_username", {
+			username: username,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.tips("Good!!", '#username', {tips: 2});
+				return true;
+			} else {
+				layer.tips(data.info, '#username', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	function check_email() {
+		var email  = $('#email').val();
+		if (email == "" || email == null) {
+			layer.tips("{:l('PLEASE_ENTER_email')}", '#email', {tips: 2});
+			return false;
+		}
+		$.post("/Login/check_email", {
+			email: email,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				$("#email_step1").show();
+				$("#email_step2").show();
+				$("#everify").focus();
+				layer.tips("{:l('Good!')}", '#email', {tips: 2});
+			} else {
+				layer.tips(data.info, '#email', {tips: 2});
+				return false;
+			}
+		}, 'json');
+	}
+	
+	function verify_ups() {
+		$('#verify_up').attr('src', "/Ajax/verify?t=" + Math.random());
+	}
+	function new_send() {
+		$("#step1").show();
+		$("#step2").show();
+		$("#verify").focus();
+	}
+	function new_send_email() {
+		$("#email_step1").show();
+		$("#email__step2").show();
+		$("#everify").focus();
+	}
+	
+	
+	function validateEmail(sEmail){
+       var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
+
+  if(!sEmail.match(reEmail)) {
+    alert("Invalid email address");
+    return false;
+  }
+
+  return true;
+
+}
+function reg_email() {
+		var username        = $("#username").val();
+		var email        = $("#email").val();
+		var verify = $("#login_verify").val();
+		var password     = $("#email_password").val();
+		var invit        = $("#email_invit").val();
+		var accounttype =$("input[name='accounttype']:checked").val();
+		if (email == "" || email == null || validateEmail(email)== false) {
+			layer.tips("{:l('PLEASE_ENTER_VALID_EMAIL')}", '#email', {tips: 2});
+			return false;
+		}
+		if (username == "" ||username == null) {
+			layer.tips("Please enter username", '#username', {tips: 2});
+			return false;
+		}
+		
+		if (password == "" || password == null) {
+			layer.tips("{:l('PLEASE_ENTER_YOUR_PASSWORD')}", '#password', {tips: 2});
+			return false;
+		}
+		if (verify == "" || verify == null) {
+			layer.tips("{:l('Please enter Captcha')}", '#login_verify', {tips: 2});
+			return false;
+		}
+		if (accounttype == "" || accounttype == null) {
+			layer.tips("{:l('Please Choose acount type')}", '#account_type', {tips: 2});
+			return false;
+		}
+		if (!$("#emailregweb").is(':checked')) {
+			layer.tips("{:l('CHECK_USER_REGISTRATION_AGREEM')}", '#emailregweb', {tips: 3});
+			return false;
+		}
+		$.post("/Login/emailsignup", {
+			email: email,
+			username: username,
+			verify: verify,
+			password: password,
+			invit: invit,
+			accounttype:accounttype,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$.cookies.set('exchange_email', email);
+					window.location = '/Login/thankyou';
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+<include file="Public:footer_minimal" />

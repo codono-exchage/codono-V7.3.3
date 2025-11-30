@@ -1,0 +1,343 @@
+<include file="Public:header" />
+		<!-- Page content -->
+		<div class="page-container m-20">	
+				<div class="row">
+<include file="Finance:left" />
+			<div class="col-sm-9">
+		<!-- Main content -->
+			<div class="card">
+			<div class="card-header">
+				<h1>
+					<div class="btn-group btn-group-justified">
+					<span class="btn-group">	
+						<a href="{:U('Finance/myzc')}" class="btn btn-flat active current ">{:l('WITHDRAW')}</a>
+                    </span>
+					<span class="btn-group">	
+						<a href="{:U('Finance/coinoutlog')}" class="btn btn-flat ">{:l('LOG_IN_LOG')}</a>
+					</span>
+										<span class="btn-group">	
+						<a href="{:U('Finance/addnew')}" class="btn btn-flat ">{:l('ADDRESSES')}</a>
+                    </span>
+				</div>
+					<span>
+					<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+				</h1>
+							<div id="hints" class="mytips" style="display:none;">
+				<p>
+				
+				<notempty name="prompt_text">
+					{$prompt_text}
+				</notempty>
+				
+				</p>			
+			</div>
+			</div>
+
+			<div class="card-body " >
+				<div class="form-horizontal">
+				<fieldset class="content-group">
+					<div class="form-group">
+						<label class="control-label col-lg-2">{:l('OUT_CURRENCY')}</label>
+						<div class="col-lg-10">
+							<span id="coin-default">
+									<select name="type" id="coin-select" class="form-control"> 	
+										<volist name="coin_list" id="vo">
+											<eq name="xnb" value="$key">
+												<option value="{$vo['name']}" selected="selected">{$vo.name} ({$vo['name']|strtoupper})</option>
+												<else/>
+												<option value="{$vo['name']}">{$vo.name} ({$vo['name']|strtoupper})</option>
+											</eq>
+										</volist>
+									 </select>
+								</span>
+								<span class="help-block"><img src="__UPLOAD__/coin/{$coin_list[$xnb]['img']}" alt="" style="width:22px"/> {:l('AVAILABLE_BALANCE')}:<span id="coin-balance">{$user_coin[$xnb]|Num} 	&#8776; {$user_coin['converted']} {$user_coin['conversion_coin']}</span></span> 
+								</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-lg-2">{:l('OUT_ADDRESS')}</label>
+						<div class="col-lg-10">
+							
+								<select id="usdout_bank" class="form-control">
+									<option value="">-{:l('SELECT_WITHDRAWALS_ADDRESS')}-</option>
+                                        <volist name="userWalletList" id="vo">
+                                            <option value="{$vo.addr}" class="{$vo.dest_tag}">{$vo.name}</option>
+                                        </volist>
+									<option value="addnew">{:l('ADD_A_NEW_ADDRESS_TO_CASH')}</option>
+								</select>
+								<input id="dest_tag" name="dest_tag" value="<if condition="$vo['dest_tag']">{$vo.dest_tag}</if>" type="hidden"/>
+							
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2 col-xs-12">{:l('OUT_QUANTITY')}</label>
+						<div class="col-lg-7 col-xs-7 no-margin">
+							<input type="text" class="form-control" id="usdout_num" maxlength="12" value="">
+							{:l('OUT_OF_COMMISSION')}<span id="perfee">{$coin_list[$xnb]['zc_fee']}</span>%<eq name="coin_list[$xnb]['type']" value="coinpay">{:l('+ network fees')}</eq>
+							<if condition="$coin_list[$xnb]['zc_flat_fee']">+ <span id="flatfee">{$coin_list[$xnb]['zc_flat_fee']*1}</span> </if>
+							<span id="receiveable"></span>
+						</div>
+						<div class="col-lg-2 col-xs-5 no-margin" >
+							<button onclick="maxout()" class="btn btn-info">{:l('Max')}</button>
+							
+						</div>
+													
+					</div>
+					<eq name="is_ga" value="1">
+					<div class="form-group">
+						<label class="control-label col-lg-2">{:l('Google 2FA Code')}:</div>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="gacode"  value="" name="gacode">
+						</div>
+					</div>
+					</eq>
+					<eq name="M_ONLY" value="1">
+					<div class="form-group">
+						<label class="control-label col-lg-2">{:l('SMS_VERIFICATION_CODE')}</div>
+						<div class="col-lg-10 yuyin">
+							<div class="clear">
+								<input type="button" value="{:l('SEND_SMS_VERIFICATION_CODE')}" class="btns" onclick="send_cellphone_coinout('sms')" style="width: 100px;font-size: 12px;"/>
+																								{$cellphone}({:l('RECEIVING_CODES')})
+							</div>
+						</div>
+					</div>
+					<div class="form-group" style="display:none;">
+						<label class="control-label col-lg-2">{:l('SMS_VERIFICATION_CODE')}</label>
+						<div>
+							<input type="text" id="usdout_cellphone_verify" value="" class="form-control" placeholder="{:l('PLEASE_ENTER_THE_VERIFICATION_')}"/> <span id="reg_cellphone_new"></span>
+						</div>
+					</div>
+					</eq>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-2">{:l('OTP Code')}:</label>
+						<div class="col-xs-7 col-sm-7 no-margin">
+							<input type="text" class="form-control" id="otp"  value="">
+						</div>		
+						<div class="col-xs-5 col-sm-3 no-margin">
+														<button onclick="requestOTP()" class="btn btn-info">{:l('Request OTP')}</button>
+						</div>
+						
+					</div>
+					<div class="form-group">
+						<label class="control-label col-lg-2">{:l('TRANSACTION_PASSWORD')}:</label>
+						<div class="col-lg-10">
+							<input type="password" class="form-control" id="usdout_paypassword"  value=""><a href="/findpwd/findpwd" class="move ml5">{:l('FORGET')}?</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-lg-2"></label>
+						<div class="col-lg-10">
+							<empty name="zc_jz">
+								<input type="button" class="btn btn-info btn-sm form-control" value="{:l('IMMEDIATELY_WITHDRAW')}" onclick="coinout_up()">
+							<else/>
+								<input type="button" class="btn btn-info btn-sm" value="{$zc_jz}" disabled>
+							</empty>
+						</div>
+					</div>
+					</fieldset>
+				</div>
+			</div>
+		
+	</div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+                        //The response fileAdd tosuccessevent
+                        $("#usdout_num").change(function(){
+					calcpay();
+
+});
+});
+function calcpay(){
+	var amt=$("#usdout_num").val();
+						var percent_fee=$("#perfee").html();
+						var flatfee=$("#flatfee").html();
+						var payable = (amt* (100-percent_fee)/100)-flatfee;
+						var mux=100000000;
+						var floor=Math.trunc(payable*mux)/mux;
+						if(floor <0 ){
+						$("#receiveable").html("[Try a bigger amount");
+						}else{
+						$("#receiveable").html("[You would receive approx "+floor+"]");
+						}
+}
+function maxout(){
+document.getElementById("usdout_num").value= $("#coin-balance").html();
+calcpay();
+}
+	$("#usdout_bank").change(function () {
+		var type = $("#usdout_bank option:selected").val();
+		document.getElementById("dest_tag").value =$("#usdout_bank option:selected").attr('class');;
+		var coin = $("#coin-select option:selected").val();
+		if (type == 'addnew') {
+			window.location = "{:U('Finance/addnew')}/coin/"+coin;
+		}
+	});
+	$("#coin-select").change(function () {
+		var coin = $("#coin-select option:selected").val();
+		var url    = '/Finance/myzc';
+		if (coin) {
+			url += '/coin/' + coin + '';
+		}
+		window.location = url;
+	});
+	function send_new() {
+		$(".step6").hide();
+		$(".step5").show();
+	}
+	function send_cellphone_coinout(type) {
+		$.post("{:U('Verify/myzc')}", {
+			type: type,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$(".step5").hide();
+				$(".step6").show();
+				$("#usdout_cellphone_verify").focus();
+				$('#cellphone_new').attr("disabled", "disabled");
+				var obj      = $('#reg_cellphone_new');
+				var wait     = 60;
+				var interval = setInterval(function () {
+					obj.html(wait + "{:l('SEC_CAN_BE_SENT_AGAIN')}");
+					wait--;
+					if (wait < 0) {
+						clearInterval(interval);
+						$(".reloadverify_new").click();
+						$("#verify_new").val('');
+						obj.html('<a class="move" onclick="send_new()">{:l('DID_NOT_RECEIVE_RESEND')}</a>');
+					}
+					;
+				}, 1000);
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function requestOTP() {
+		var amount        = $('#usdout_num').val();
+		var coinname        = $('#coin-select option:selected').val();
+		var address        = $('#usdout_bank option:selected').val();
+		if (amount == "" || amount == null) {
+			layer.tips("Please enter amount  to withdraw first !", '#usdout_num', {tips: 2});
+			return false;
+		}
+		if (coinname == "" || coinname == null) {
+			layer.tips("Please choose currency to withdraw first !", '#coinname', {tips: 2});
+			return false;
+		}
+		if (address == "" || address == null) {
+			layer.tips("Please choose currency to withdraw first !", '#usdout_bank', {tips: 2});
+			return false;
+		}
+		
+		$.post("{:U('Finance/requestOTP')}", {
+			amount: amount,
+			coinname: coinname,
+			address: address,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				
+			} else {
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+	function coinout_up() {
+		var otp         = $("#otp").val();
+		var num          = $("#usdout_num").val();
+		var gacode          = $("#gacode").val();
+		var paypassword  = $("#usdout_paypassword").val();
+		var cellphone_verify = $("#usdout_cellphone_verify").val();
+		var bank         = $('#usdout_bank option:selected').val();
+		var dest_tag =$('#dest_tag').val();
+		var coin         = $('#coin-select option:selected').val();
+		<eq name="M_ONLY" value="1">
+		if (cellphone_verify == "" || cellphone_verify == null) {
+			layer.msg('Enter SMS verification code', {
+				icon: 2
+			});
+			return false;
+		}
+		</eq>
+		if (num == "" || num == null) {
+			layer.tips('Enter the amount for transfer', '#usdout_num', {
+				tips: 2
+			});
+			return false;
+		}
+		if (otp == "" || otp == null) {
+			layer.tips('Enter the OTP you received on email', '#otp', {
+				tips: 2
+			});
+			return false;
+		}
+		if (bank == "" || bank == null) {
+			layer.tips('Transfer Address', '#usdout_bank', {
+				tips: 2
+			});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Provide Trans Password', '#usdout_paypassword', {
+				tips: 2
+			});
+			return false;
+		}
+		if (coin == "" || coin == null) {
+			layer.tips('Select Currency', '#coin-select', {
+				tips: 2
+			});
+			return false;
+		}
+		var goole ="0";
+	{
+	layer.load(0, {shade: [0.5,'#8F8F8F']});
+        setTimeout(function () {
+            layer.closeAll('loading');
+            trans_lock = 0;
+        }, 10000);
+			$.post("{:U('Finance/upmyzc')}", {
+				coin:coin,
+				otp:otp,
+				num: num,
+				paypassword: paypassword,
+				cellphone_verify: cellphone_verify,
+				addr: bank,
+				dest_tag:dest_tag,
+				gacode:gacode
+			}, function (data) {
+			  layer.closeAll('loading');
+            trans_lock = 0;
+				if (data.status == 1) {
+					layer.msg(data.info, {
+						icon: 1
+					});
+					window.location = "{:U('Finance/coinoutlog')}/coin/"+coin;
+				} else {
+					layer.msg(data.info, {
+						icon: 2
+					});
+					if (data.url) {
+						window.location = data.url;
+					}
+				}
+			}, "json");
+		}
+	}
+</script>
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_coinout').addClass('active');
+</script>
+<include file="Public:footer_minimal"/>

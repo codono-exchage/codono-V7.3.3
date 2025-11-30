@@ -1,0 +1,408 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">Warnings</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4"><a href="{:U('RAO/index')}">RAO Management</a> >></span> <span class="d-sm-flex align-items-center justify-content-between h4"><empty name="data">Add RAO
+			<else/>
+			                                                                                                                  Edit RAO
+		</empty></span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('RAO/save')}" method="post" class="form-horizontal">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<tr class="controls">
+									<td class="item-label">RAO name:</td>
+									<td>
+										<input type="text" class=" form-control input-10x " name="name" value="{$data.name}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">RAO currency:</td>
+									<td><select name="coinname" class="form-select input-10x">
+										<volist name="C['coin_list']" id="v">
+											<option value="{$v['name']}"
+											<eq name="data['coinname']" value="$v['name']">selected</eq>
+											>{$v['title']}</option>
+										</volist>
+									</select></td>
+									<td class="item-note">User buy owned</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Convert Currency:</td>
+									<td><select name="convertcurrency" class="form-select input-10x">
+										<volist name="C['coin']" id="v">
+											<option value="{$v['name']}"
+											<eq name="data['convertcurrency']" value="$v['name']">selected</eq>
+											>{$v['title']}</option>
+										</volist>
+									</select></td>
+									<td class="item-note">Currency in which user pays</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Price Currency:</td>
+									<td><select name="buycoin" class="form-select input-10x">
+										<volist name="C['coin']" id="v">
+											<option value="{$v['name']}"
+											<eq name="data['buycoin']" value="$v['name']">selected</eq>
+											>{$v['title']}</option>
+										</volist>
+									</select></td>
+									<td class="item-note">Static Price</td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label">RAO price :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="price" value="{$data['price']*1}"> 
+									</td>
+									<td class="item-note">{$data['price']*1} {$data['buycoin']} will be converted into {$data['convertcurrency']} </td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label">RAO Image:</td>
+									<td>
+										<div id="addpicContainer">
+											<notempty name="data.image">
+												<img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:200px;" title="Click Add Picture" alt="Click Add Picture" src="/Upload/rao/{$data.image}">
+												<else/>
+												<img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:200px;" title="Click Add Picture" alt="Click Add Picture" src="__THEME__/images/addimg.png">
+											</notempty>
+											<input type="hidden" id="image" name="image" value="{$data.image}">
+											<input type="file" id="inputfile" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+										</div>
+									</td>
+									<td class="item-note">Image Size 837px*628px</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Show on Homepage :</td>
+									<td>
+										<select name="homepage" class="form-select  input-10x">
+										<option value="0"
+										<eq name="data.homepage" value="0">selected</eq>
+										>No</option>
+										<option value="1"
+										<eq name="data.homepage" value="1">selected</eq>
+										>Yes</option>
+									</select>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Staff Pick :</td>
+									<td>
+										<select name="tuijian" class="form-select  input-10x">
+										<option value="2"
+										<eq name="data.tuijian" value="2">selected</eq>
+										>No</option>
+										<option value="1"
+										<eq name="data.tuijian" value="1">selected</eq>
+										>Yes</option>
+									</select>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								
+								
+								<tr class="controls">
+									<td class="item-label">Sort:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="paixu" value="{$data['paixu']*1}">
+									
+									</td>
+									<td class="item-note">Higher the value , more the forward</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Video Link:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="video" value="{$data['video']}">
+									
+									</td>
+									<td class="item-note">Youtube Link</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">RAOBench name:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="icobench" value="{$data['icobench']}">
+									
+									</td>
+									<td class="item-note">Enter name only: Ex alphax</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">RAOMark name:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="icomark" value="{$data['icomark']}">
+									
+									</td>
+									<td class="item-note">Enter name only: Ex alphax</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">TrackRAO name:</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="trackico" value="{$data['trackico']}">
+									
+									</td>
+									<td class="item-note">Enter name only: Ex alphax</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Facebook :</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="facebook" value="{$data['facebook']}">
+									
+									</td>
+									<td class="item-note">Facebook Page URL</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Twitter :</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="twitter" value="{$data['twitter']}">
+									
+									</td>
+									<td class="item-note">Twitter URL</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Telegram :</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="telegram" value="{$data['telegram']}">
+									
+									</td>
+									<td class="item-note">Telegram URL</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Token Owner :</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="ownerid" value="{$data['ownerid']}">
+									
+									</td>
+									<td class="item-note">Userid of owner example 3124545, Leave 0 for no owner</td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label">Site Commission :</td>
+									<td>
+									<input type="text" class="form-control input-10x " name="commission" value="{$data['commission']}">
+									
+									</td>
+									<td class="item-note">Commision in % [example 12.5%]</td>
+								</tr>					
+								<tr class="controls">
+									<td class="item-label">Total Supply:</td>
+									<td>
+										<input type="text" class="form-control input-10x " name="num" value="{$data['num']*1}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Amount subscribed :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="deal" value="{$data['deal']*1}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label">RAO limit :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="limit" value="{$data.limit}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Start Date :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="time" value="{$data['time']}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">RAO period :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="tian" value="{$data['tian']}">
+									</td>
+									<td class="item-note">Days</td>
+								</tr>
+								<tr class="controls" style="display:none;">
+									<td class="item-label">Time :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="ci" value="0">
+									</td>
+									<td class="item-note">Secondary</td>
+								</tr>
+								<tr class="controls" >
+									<td class="item-label">Unfreeze Time :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="jian" value="0">
+									</td>
+									<td class="item-note">Hours</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Minimum Single :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="min" value="{$data['min']}">
+									</td>
+									<td class="item-note">Minimum Buy</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Max Buy largest :</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="max" value="{$data['max']}">
+									</td>
+									<td class="item-note">One person buy limit</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Bonus Currency:</td>
+									<td><select name="invit_coin" class="form-select  input-10x">
+										<volist name="C['coin']" id="v">
+											<option value="{$v['name']}"
+											<eq name="data['invit_coin']" value="$v['name']">selected</eq>
+											>{$v['title']}</option>
+										</volist>
+									</select></td>
+									<td class="item-note">Bonus</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Bonus 1st Referrer:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="invit_1" value="{$data['invit_1']}">
+									</td>
+									<td class="item-note">%</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Bonuses 2nd Tier:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="invit_2" value="{$data['invit_2']}">
+									</td>
+									<td class="item-note">%</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Bonus 3rd Tier:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="invit_3" value="{$data['invit_3']}">
+									</td>
+									<td class="item-note">%</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Instructions:</td>
+									<td><textarea name="content" class="form-control input-10x">{$data.content}</textarea></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Status :</td>
+									<td><select name="status" class="form-select  input-10x">
+										<option value="1"
+										<eq name="data.status" value="1">selected</eq>
+										>Enabled</option>
+										<option value="0"
+										<eq name="data.status" value="0">selected</eq>
+										>Disable</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">Submit</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">Back</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__THEME__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+	var editor;
+	KindEditor.ready(function (K) {
+		editor = K.create('textarea[name="content"]', {
+			width: '500px',
+			height: '250px',
+			allowPreviewEmoticons: false,
+			allowImageUpload: true,
+			items: [
+				'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons',  'link', 'fullscreen'],
+			afterBlur: function () {
+				this.sync();
+			}
+		});
+	});
+	
+	
+	
+	
+	$(document).ready(function () {
+		//The response fileAdd tosuccessevent
+		$("#inputfile").change(function () {
+			//createFormDataObjects
+			var data = new FormData();
+			//forFormDataAdding Data Object
+			$.each($('#inputfile')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+
+
+			//send data
+			$.ajax({
+				url: '/Admin/RAO/raoimage',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//Essential parameters
+				processData: false,		//Essential parameters
+				success: function (data) {
+					if (data) {
+						$('#up_img').attr("src", '/Upload/rao/' + data);
+						$('#image').val(data);
+						$('#up_img').show();
+					}
+				},
+				error: function () {
+					alert('Upload error');
+					$(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+				}
+			});
+
+		});
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('RAO/index')}");
+	</script>
+</block>

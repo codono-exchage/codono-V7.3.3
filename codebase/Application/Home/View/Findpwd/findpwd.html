@@ -1,0 +1,142 @@
+<include file="Public:header" />
+
+<div class="page-container">	<!-- breadcrumb component -->
+		<div class="page-content">	
+	
+<include file="User:left" />
+	<div class="col-sm-9 ">
+	<div class="panel panel-flat col-sm-6 ">
+				<div class="panel panel-heading">
+				<h1 class="panel-title">
+					<span>
+						Update {:l('TRANSACTION_PASSWORD')}					</span>
+				</h1>
+			</div>
+		<div class="panel-body">
+				<form>
+				<div class="form-group" id="email_reg">
+			<label for="verifyx" class="">{:l('CAPTCHA')}</label>
+			<span class="row">
+			<span class="col-sm-9">
+			<input type="text" id="verify" value="" class="form-control" placeholder="Enter Captcha Text"/>
+			</span>
+			<span class="col-sm-3">
+			<img id="verify_up" class="codeImg reloadverify" src="{:U('Verify/code')}" title="{:l('REFRESH')}" onclick="this.src=this.src+'?t='+Math.random()" width="100" height="34">
+			
+			</span>
+			</span>
+				</div>
+				<div class="form-group" >
+					<label for="real_verify">{:l('SECURITY_CODE')}:</label>
+				<span class="row">
+											<span class="col-sm-9">
+					
+					<input id="real_verify" type="text" class="form-control" placeholder="{:l('PLEASE_ENTER_VERIFICATION_CODE')}"/> 
+					<span id="reg_cellphone" class="hint" ></span>
+					</span>
+						<span class="col-sm-3">
+			
+				<input type="button" class="btn btn-info btn-sm" onclick="emailsend();" id="otp_button" value="Send OTP">
+				</span>	
+				</span>	
+				</div>
+				<div class="form-group">
+					<label>New Fund Password:</label>
+					<input id="paypassword" type="text" class="form-control" placeholder="Please choose new fund password"/> 
+					<span id="reg_fundpwd" class="" style="position:absolute;left: 182px;top: 2px;"></span>
+				</div>
+				<div class="form-group">
+					<input type="button" class="form-control" onclick="findpwd_up();" value="Update Fund Password">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+
+<script>
+	$(function () {
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+
+	});
+
+	
+	function emailsend() {
+
+		var verify = $("#verify").val();
+		if (verify == "" || verify == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_CAPTCHA_CODE')}", '#verify', {tips: 2});
+			return false;
+		}
+		$.post("/Findpwd/emailcode", {
+			verify: verify,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				$("#cellphone_verify").focus();
+				$('#cellphone').attr("disabled", "disabled");
+				$('#cellphones').attr("disabled", "disabled");
+				var obj      = $('#reg_cellphone');
+				var wait     = 60;
+				var interval = setInterval(function () {
+					obj.html("<a>" + wait + " {:l('SEC_CAN_BE_SENT_AGAIN')}" + "</a>");
+					wait--;
+					if (wait < 0) {
+						clearInterval(interval);
+						$(".reloadverify").click();
+						$("#verify").val('');
+						obj.html('<a class="move" onclick="emailsend()">{:l("CLICK_RESEND")}</a>');
+					}
+					;
+				}, 1000);
+			} else {
+				$(".reloadverify").click();
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+
+
+	function findpwd_up() {
+		
+		var real_verify = $("#real_verify").val();
+		var paypassword = $("#paypassword").val();
+
+		if (real_verify == "" || real_verify == null) {
+			layer.tips("{:l('PLEASE_ENTER_VERIFICATION_CODE')}", '#real_verify', {tips: 2});
+			return false;
+		}
+
+
+		if (paypassword == "" || paypassword == null) {
+			layer.tips("Please choose new fund password", '#paypassword', {tips: 2});
+			return false;
+		}
+		$.post("/Findpwd/findpwd", {
+			real_verify: real_verify,
+			paypassword: paypassword,
+			token: ""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location = '/Findpwd/findpwdconfirm';
+				
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+</script>
+<include file="Public:footer_minimal"/>

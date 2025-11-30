@@ -1,0 +1,2162 @@
+SITE_CURRENCY,$
+START_TRADING,Ticarete ba?la
+Login,Oturum aá
+Trading password is wrong!,senin fon ?ifrenizi kontrol edin
+VOL,Cilt
+NEW_PWD_CANT_BE_SAME_AS_FUND_PASS,Yeni ?ifre Fon ?ifre ile ayn? olamaz
+GOOGLE_AUTHENTICATOR,Google 2FA
+Use your Google Authenticator or Authy app,Google ?ifrematik veya Authy uygulamas?n? kullan?n
+Authenticate,kimlik do?rulamas?
+Enter_2FA_Code,2FA Kodunu Girin
+ENTER_COIN_QTY_BUY,Para Adet Sat?n istiyorum
+ENTER_COIN_QTY_SALE,Para Adet Sat?? istiyorum
+_MODULE_NOT_EXIST_,ModÅl yÅklenemiyor
+_CONTROLLER_NOT_EXIST_,Denetleyici yÅklenemez
+_ERROR_ACTION_,Yasad??? Eylem
+_LANGUAGE_NOT_LOAD_,dil paketini yÅklenemiyor
+_TEMPLATE_NOT_EXIST_,?ablon yok
+_MODULE_,modÅl
+_ACTION_,Aksiyon
+_MODEL_NOT_EXIST_,Model yÅklenemez
+_VALID_ACCESS_,eri?im yok
+_XML_TAG_ERROR_,XML etiket sîzdizimi hatalar?
+_DATA_TYPE_INVALID_,Yasad??? veri nesneleri!
+_OPERATION_WRONG_,Operasyon hatas? olu?ur
+_NOT_LOAD_DB_,veritaban?n? yÅklenemiyor
+_NO_DB_DRIVER_,Veritaban? sÅrÅcÅsÅ yÅklenemedi
+_NOT_SUPPORT_DB_,sistemi geáici destek veritaban? de?il
+_NO_DB_CONFIG_,veritaban? yap?land?rmas? tan?mlamaz
+_NOT_SUPPORT_,Sistem desteklemiyor
+_CACHE_TYPE_INVALID_,înbellek tÅrÅ yÅklenemiyor
+_FILE_NOT_WRITABLE_,Dizin (dosya) yaz?labilir de?il
+_METHOD_NOT_EXIST_,?stedi?iniz yîntem yok!
+_CLASS_NOT_EXIST_,Bir s?n?f ba?latmas?n? yok!
+_CLASS_CONFLICT_,S?n?f ad? áak??malar?
+_TEMPLATE_ERROR_,?ablon Motor hatalar?
+_CACHE_WRITE_ERROR_,ônbellek dosyas? yazma ba?ar?s?z!
+_TAGLIB_NOT_EXIST_,Etiket kÅtÅphane tan?mlanmad?
+_OPERATION_FAIL_,Operasyon ba?ar?s?z!
+_OPERATION_SUCCESS_,Operasyon ba?ar?l?!
+_SELECT_NOT_EXIST_,Tutanak yok!
+_EXPRESS_ERROR_,?fade hatalar?
+_TOKEN_ERROR_,Form'?n belirteá hatalar
+_RECORD_HAS_UPDATE_,Tutanak gÅncellendi
+_NOT_ALLOW_PHP_,PHP kodlar? ?ablonda izin verilmez
+_PARAM_ERROR_,Parametre hatas? veya tan?ms?z
+_ERROR_QUERY_EXPRESS_,hatay? ifade Sorgusu
+NO_WARRANTY_LIABLITY_WARNING,"sadece dijital merakl?lar? net varl?klar? Åcretsiz online al??veri?i platformu sa?lamak iáin, para yat?r?m de?eri kabul edemez e?er herhangi bir inceleme, garanti, yÅkÅmlÅlÅk, yok lÅtfen, onlar?n yat?r?m kay?plar? bÅtÅn sorumlulu?unu Åstlenmesi gerekir taahhÅt etmez Ticaret! Te?ekkÅr ederim!"
+2FO_OPT_ADVICE,"iki faktîrlÅ kimlik do?rulama i?levi Hesap aámak sonra, nakit operasyon áekmesi her zaman, sistem size finansal gÅvenli?ini sa?lamak iáin, bir kerelik ?ifre mobil uygulamas?nda gîrÅntÅlenen girmek isteyecektir. Bu îzelli?i etkinle?tirmek ve a?a??daki prosedÅre uygun olarak ayarlayabilirsiniz."
+IF_YOU_HAVE_ALTERED_THE_DATABA,"Veritaban?n? de?i?tirmi? E?er yÅkseltme sonra sorunlar bulursan?z, manuel, bîyle áat??ma, kendi de?i?tirilmi? veritaban? olarak a?a??daki veritaban? de?i?iklikleri, áek, yedek dosyas?n? almak ve veritaban? yede?i geri yÅkleme ediniz."
+RISK_WARNING_TRADING_BITCOIN,"Risk Uyar?s?: Ticaret Bitcoin ve Bitcoin haber riskine kar?? tetikte be? bakanl?k Devlet gîre yÅksek risk (înceden kazmak, ba?ak, yap?m manipÅlasyon, da??ld? ekip, teknik kusurlar, vb) ile di?er dijital varl?klar, miktar n?n-nin"
+TRADING_PLATFORM_ONLY_DIGITAL_,"Åcretsiz online al??veri?i platformu sa?lamak Åzere platforma sadece dijital para merakl?lar? Ticaret, para yat?r?m de?eri herhangi yorumu, garanti, sorumluluk Åstlenmez ve kabul edemiyorsa, ticaret etmeyiniz!"
+DIGITAL_CURRENCY_TRADING_IS_VE,"Dijital dîviz ticareti (înceden kazmak, ba?ak, manipÅlasyon yaparak, tak?m da??ld?, teknik kusurlar, vb) áok riskli, teslimat adresi:"
+FOR_THE_CONFLICT_FILES_PLEASE_,"Birle?me tamamland?ktan sonra áat??ma dosyalar? iáin, elle kendine birle?tirme kodunu yeni bir geli?tirici dosyalar? bulmak lÅtfen kodu otomatik iáerik sakl?d?r ikincil geli?me olmas?n? sa?lamak iáin gÅncellenir atlamak iáin gri butonuna t?klay?n."
+RISK_WARNING_DIGITAL_MONEY_INV,"Risk Uyar?s?: Dijital para rakamlar anlam?yorum para ile yat?r?m yapmay?n, belirli bir risk, para miktar?n? kontrol edin orada yat?r?m, sahte propagandan?n dikkatli MLM îrgÅtleri, reddetti."
+TRADING_PROMISING_INVESTMENT_C,"umut verici bir yat?r?m, dîviz ticareti, yat?r?m riskleri azaltmak; Dijital varl?klar?n îzel bir aá?l??, daha hat tÅccarlar, e?it yat?r?m f?rsatlar? alt?nda yararlanma."
+THE_INVESTMENT_VALUE_OF_THE_CU,"para yat?r?m de?eri herhangi bir inceleme, garanti, sorumluluk Åstlenmez ve kabul edemiyorsa, ticaret yapma, lÅtfen! Te?ekkÅr ederim!"
+INTERFACE_IS_SIMPLE_AND_EASY_T,"ArayÅz kullan?m? kolay, anlamak iáin basit ve kolayd?r. Sistem istikrarl? ve verimli, h?zl? yan?t h?z?. Mobil bilgisayarlar ve di?er istemciler, her an her yerde ticaret yapabilirsiniz."
+THIS_IS_YOUR_SPECIAL_INVITATIO,"Bu arkada?lar dÅ?meye [Copy] ve pay t?klay?n ve onlar bir hesap, bunlar?n web davet kodu girin sa?layabilirsiniz, ba?l? kurulu? kod ?udur:"
+_BANKLEVEL_SECURITY_TECHNOLOGI,"Bu tip áoklu ?ifreli depolama yînetim sistemi denetim olarak Banka dÅzeyinde gÅvenlik teknolojileri, sÅreáleri ve so?uk cÅzdan mekanizmalar?n?n sorumluluklar?."
+THIS_IS_YOUR_EXCLUSIVE_ADVERTI,"Bu îzel reklam slogan?, ka??d? yap??t?rmak ve arkada?lar?n? gîndermek iáin [Kopyala] dÅ?mesine t?klayabilirsiniz:"
+IF_YOU_HAVE_SECONDARY_DEVELOPM,"?kincil geli?imini varsa ve bu belgeleri alabilir dosyas?nda, farkl?l?klara yol aá?yorsa kapl?d?r"
+IF_YOU_CAN_NOT_SUCCESSFULLY_SC,"harita Åzerinde ba?ar?yla tarama barkodlar, manuel olarak da hesaplar eklemek ve a?a??daki anahtar? girebilirsiniz yapam?yorsan?z:"
+THIS_IS_YOUR_SPECIAL_LINK_YOU_,"Bu Ortakl?k ba?lant?d?r, arkada?lar?n?zla [Kopyala] dÅ?mesini ve pay t?klayabilirsiniz:"
+COUNT_ONE_AND_REVENUE_PREPAID_,Her încesi insanlar ve on îdÅllerin iki áe?it) birini say?n) ve gelir (în îdemeli i?lem te?vikler ve toplam?n? îdÅllendiriyor
+_AND_THEN_SELECT__SCAN_BARCODE,Sonra Barkod Tara seáin. A?a??daki ?emada telefonda barkod tarama kamera lensini uyumlu hale getirecektir.
+BANKLEVEL_USER_DATA_ENCRYPTION,"Banka dÅzey kullan?c? veri ?ifreleme, dinamik kimlik do?rulama, áok dÅzeyli bir risk tan?mlama kontrolÅ ve gÅvenli?i sa?lamak"
+WITHIN_MINUTES_YOU_RECORDED_DU,E?er mÅ?teri servisine gerek kalmadan bu dînemde kaydedilen dakika iáinde herhangi bir soru Sizinle ileti?im iáin inisiyatif alacak.
+TWOFACTOR_AUTHENTICATION_CAN_B,"?ki faktîrlÅ kimlik do?rulama, normal iki faktîrlÅ kimlik do?rulama i?lemleri etkilemeden bir hesap aámak iáin de?il, hesab?n?z iáin daha gÅvenli koruma olabilir"
+INSTANT_RECHARGE_RAPID_WITHDRA,"An?nda ?arj?, h?zl? para áekme, tek yÅksek performansl? i?lem motoru ba??na milyon kere"
+WALLET_MULTILAYER_ENCRYPTION_O,"CÅzdan áok katmanl? ?ifreleme, banka kasalarda áevrimd??? depolama, emanet fonlar?, gÅvenli?ini sa?lamak iáin"
+YOU_ARE_USING_A_BROWSER_VERSIO,"Bir taray?c? sÅrÅmÅ áok dÅ?Åk kullan?yorsunuz, efekt gîrÅnÅmÅ ve bilgi kayb?na neden olabilir."
+ONLY_DIGITAL_CURRENCY_ENTHUSIA,Online ticaret iáin Dijital Dîviz
+PLEASE_USE_ALIPAY_TRANSFER_TO_,A?a??daki hesap numaras?na veya tarama QR kodu tarama transfer Alipay transferini kullan?n
+DO_NOT_FILL_IN_THE_OTHER_CHARA,"Di?er karakterlerin (vb Bitcoin, ETH) doldurmak etmeyin veya dÅzgÅn hesaba yat?r?ld? olamaz!"
+DO_NOT_DELETE_THIS_TWOFACTOR_A,"Bu iki faktîrlÅ kimlik do?rulama ?ifre hesab?n? silmeyin, aksi takdirde hesap i?lemi mÅmkÅn olmayacakt?r neden olur"
+PLEASE_USE_THE_MICROCHANNEL_TR,A?a??daki hesap veya tarama QR kodu iáin Wechat transferini geráekle?tir
+ACCORDING_TO_THE_HEAD_OF_CUSTO,MÅ?teri hizmetleri el belgelerin kafas?na gîre bir înceki dÅzeyden daha kesinlikle daha say? ve para birimlerinin say?s?n? gerekli
+OFFICIAL_BULLETIN_NET_LONG_CUR,[Resmi BÅlteni] net uzun para
+PLEASE_FILL_OUT_AN_OFFICIAL_RE,Åcretinin BîlÅmÅ'ne resmi resepsiyonu dîviz hesab? Åretilen adresi doldurun
+PLEASE_TRANSFER_MONEY_TO_THE_F,"LÅtfen, áevrimiái bankac?l?k yoluyla veya reáetesiz a?a??daki banka hesab?na havale para ?Åphe durumunda lÅtfen"
+NEXT_TO_A_DOMESTIC_USER_NAME_O,"Bir iá kullan?c? ad?n?n yan?nda, (yanl?? olabilir), bu dosyalar?n Åzerine ve yÅkseltme"
+ANNOUNCEMENT_PLATFORM__CURRENC,[Duyuru] platformu para net uzun markas?d?r Sanayi iáin Devlet ?daresi taraf?ndan kabul edildi
+AFTER_SETTING_THE_REAL_NAME_CA,Geráek ad?n? ayarlad?ktan sonra de?i?ti ve ayn? hesap ad? ve ilgi áekme edilemez
+UPLOAD_A_POSITIVE_ID_PHOTOS_ID,YÅkleme rengi kimli?inizin în ve arka gîrÅntÅ taranan
+ACCORDING_TO_THE_STATE_FIVE_MI,", Devlete Bitcoin riskine kar?? tetikte be? bakanl?k gîre oran?n? bekleyen"
+THE_DEFAULT_BROWSER_ALSO_DISPL,"Varsay?lan taray?c? ayr?ca dikey kayd?rma áubu?u gîrÅntÅler, Titreme înlemek iáin kayd?rma áubu?u kaynaklan?yor"
+STATE_REGULATIONS_PLEASE_FILL_,Kimlik Kart? gîre ayr?nt?lar?n? girin
+PHONE_SEARCH_FOR__GOOGLE_AUTHE,Telefon: uygulama pazar?nda Google ?ifrematik aramas? veya arama
+AUDIT_CHANGE_REQUEST_AFTER_THE,E?er KYC durumunu kontrol etmek iáin buraya bakabilirsiniz.
+HERE_WITH_THE_ATTRIBUTE_SELECT,"Burada nitelik seáicileri ile bu cÅzdan adresidir, DÅzeltme formuna"
+TO_PROTECT_YOUR_FINANCIAL_SECU,"mali gÅvenli?i, set Fon ?ifre korumak iáin, ak?lda tutulmas? gereken emin olun"
+PLEASE_STRICTLY_IN_ACCORDANCE_,kesinlikle para art?r?ml? yÅkseltme kurallar?n?n farkl? dÅzeylerde áok say?da uyar?nca formu doldurmak iáin lÅtfen
+DYNAMIC_AUTHENTICATION_AND_OTH,Dinamik kimlik do?rulama ve di?er banka dÅzeyinde gÅvenlik teknolojisi i?lemlerin gÅvenli?ini korumak iáin
+ENTER_THE_TWOFACTOR_AUTHENTICA,aámak veya iki faktîrlÅ kimlik do?rulamas?n? kapatman?z iki faktîrlÅ kimlik do?rulama ?ifresini girin
+SECOND_CHANGE_ONCE_THIS_NUMBER,?kinci de?i?iklik kez. Bu say? áift ?ifrenizi do?rulamak oldu?unu.
+LAYOUT_BLOCK_CHAIN_ALI_TENCENT,"DÅzen blo?u zinciri: ileri Ali Tencent bÅyÅk ad?m, Baidu kÅáÅk ad?mlar yÅrÅme"
+AFTER_INSTALLATION_YOU_NEED_TO,"YÅkleme tamamland?ktan sonra, a?a??daki gibi uygulamay? yap?land?rmak iáin gereken"
+AND_SUBJECT_TO_NATIONAL_REQUIR,Ve fonlar?n gÅvenli?i iáin ulusal gereksinimlere tabi Onayl? olmas? gerekiyor
+AFTER_GIVING_THESE_MAY_NOT_HAV,Bu verdikten sonra alt dosya yazma izinleri yazma eri?imine sahip olmayabilir
+IN_THE_CENTER_YOU_CAN_SEE_THE_,Merkezde tek tek (ithalat giri?lerine takip format?n?) gîrebilirsiniz
+PLEASE_ENTER_TRANSACTION_PASSW,Onayla Fonu ?ifre
+PLEASE_ENTER_THE_TWOFACTOR_AUT,2FA Kodunu Girin
+APPLICATION_FAILS_PLEASE_RESUB,Sen ba?ar?s?zl?k Åzerine senin KYC iste?inizi yeniden gînderebilirsiniz.
+DURING_THE_EVENT_A_SINGLE_DAY_,olay (al?? ve sat?? olarak kabul edilir) ticaret tek bir gÅn tutar?nda s?ras?nda
+THIS_UPDATE_DOES_NOT_INVOLVE_C,"Bu gÅncelle?tirme veritaban?nda yap?lan de?i?iklikleri iáermeyen, sen atlayabilirsiniz."
+FRIENDS_SAY_THREE_COINS_COLUMN,Arkada? Åá sikke sÅtun para s?n?fland?rma sîylÅyorlar. kullan?m?na ?htiyaá eve áa??ran
+PROFESSIONAL_REVIEWS_BITCOIN_U,"bak?? kullan?c? aá?s?ndan Bitcoin Profesyonel yorumlar, sîz konusu kÅresel y?ll?k bÅyÅme oran?"
+TRANSACTION_CROSSSITE_CURRENCY,"[??lem] siteler aras? para cinsinden uzun a? kablosu siteler aras? ticaret sistemi, aá?k"
+THE_OPPORTUNITY_TO_DRAW_VALID_,"f?rsat ertesi gÅn kullan?lmak Åzere ta??n?r edilemez, gÅnÅnde geáerli áizmek iáin;"
+PHONE_DOES_NOT_SUPPORT_TWODIME,"Telefon: iki boyutlu kod tarama desteklemez, el bir anahtar girebilir"
+THE_ABOVE_PICTURES_ARE_FOR_REF,Yukar?daki foto?raflar sadece tÅr îdÅllerin hakim lÅtfen referans iáindir
+TO_PROTECT_YOUR_ACCOUNT_SECURI,"Hesab?n?z?n gÅvenli?ini korumak iáin, hesap bilgilerinizi doldurun"
+_OFFICIAL_ANNOUNCEMENT_ON_CURR,[Para net uzun dîviz ticareti tarihinde Resmi duyuru de?i?ecektir]
+PS_STRICTLY_REQUIRED_TO_FILL_T,Kesinlikle Åst sipari? numaras? doldurmak iáin gerekli:
+AFTER_SUCCESSFULLY_ADDED_AN_OF,Ba?ar?yla resmi bir kopyas? yaz??ma para hesab? adresi eklemi? sonra
+LOWERCASE_MANDATORY_KEYWORDS_S,Zorunlu kÅáÅk harfe: áa?r? gibi kelimeler ancak dolgu olamaz
+MEET_THE_FOLLOWING_CURRENCY_AM,Tan??ma a?a??daki para miktar? otomatik seviyeye yÅkseltilecektir
+EVENT_DESCRIPTION_INVITE_DIVID,Etkinlik Aá?klamas?: bîlÅnmÅ? davet Daren (ayn? etkinlik aá?klamas?
+IF_IN_ERROR_IT_CAN_BE_RESTORED,"yanl??l?kla, bu manuel giri? anahtar ile geri yÅklenebilir."
+THE_HIGHER_THE_AMOUNT_OF_THE_T,"??lemin daha yÅksek miktarda, daha fazla olas?l?k bÅyÅk îdÅl áekilmi?;"
+WALLET_WALLET_SERVER_USER_NAME_,"hizmetlerini yerle?tirme CÅzdan sunucusu kullan?c? ad?, lÅtfen ileti?im"
+PLEASE_USE_THE_IPS_ONLINE_PAYM,?Åphe durumunda áevrimiái îdeme lÅtfen IPS kullan?n
+JUMP_END_ERROR_PAGE_AFTER_LOGI,oturum aáma kimlik do?rulama geráek ad? de?il sonra uá hata sayfas? geá.
+BY_APPLICATION_PLEASE_REREGIST,de?il yeniden kaydettirin LÅtfen.
+YOUR_ACCOUNT_LOGIN_IN_OTHER_PL,"Ba?ka yerlerde Hesab?n?z giri?, LÅtfen tekrar giri? yap?n"
+CHARACTER_REPRESENTATION_SO_TH,"Karakter gîsterimi, bu yÅzden herhangi bir kodlama hiábir sorun oldu?u"
+STRICT_CONTROLS_ON_CURRENCY_AU,riskin kur denetim mekanizmas? kapsaml? kayna?a s?k? kontroller
+PROFESSIONAL_SERVICES_TEAM_ONL,"Profesyonel hizmetler ekibi, áevrimiái mÅ?teri hizmetleri ve teknik destek"
+LEAVE_EMPTY_FOR_THE_LATEST_MAR,say?lar doldurun son pazar fiyat? iáin bo? b?rak?n
+BEYOND_THE_SCROLL_BAR_NAVIGATI,kayd?rma áubu?u gezinme áubu?unda îtesinde pencerenin yÅksekli?ini simÅle
+UPGRADE_AND_REPAIR_THE_PROBLEM,YÅkseltme ve problem kayd?n? onarmak. ôzel geli?tirme program?
+INTERNET_GIANT_TENCENT_IS_TO_C,?nternet devi Tencent bir blok zinciri platform olu?turmak
+PROFESSIONAL_CUSTOMER_SERVICE_,"Profesyonel mÅ?teri hizmetleri ekibi, bir profesyonel hizmetlerinde tek"
+REENTER_TRANSACTION_PASSWORD_T,tutarl? olmas? iáin iki kez ihtiyaálar Fon ?ifre tekrar girin
+DEPENDING_ON_THE_SETTING_OF_TH,Fon ?ifre varsa
+REFERRAL_COMMISSION_A_PROMOTIO,sevk komisyonu
+TODAY_ONLY_SELL_CURRENCY_ACCOU,BugÅn sadece dîviz satma hesap bakiyeleri YÅzde
+SMS_TEXT_MESSAGING_INTERFACE_U,SMS metin mesajla?ma arayÅzÅ kullan?c? ad? arayÅzÅ gÅvenlik anahtarlar?
+CONCEPT_CLEAR_AND_RESET_ARE_TI,Konsept: Net ve S?f?rlama s?k? ayr?lmaz
+TYRANT_ERA_COINS_FINAL_INTERPR,Tyrant dînemi paralar net her nihai yorumlanmas?.
+NO_NEED_TO_UPGRADE_THE_DATABAS,"Gerek yok, veritaban?n? yÅkseltmek veritaban? yÅkseltme atlamak iáin"
+SIEGE_LION_EFFORTS_TO_DEVELOP_,", Konaklama ayarl? bîylece kas?lmas?n? geli?tirmek iáin Ku?atma aslan áabalar?"
+I_HAVE_MERGED_THEIR_OWN_DATABA,"Ben kendi veritaban? yÅkseltme birle?mi?, atlamak"
+THE_CENTRAL_BANK_REGULATION_BI,platformun Bitcoin merkez bankas? dÅzenleme Suá Gelirlerinin Aklanmas? ba?lamak
+INSTALL_TWOFACTOR_AUTHENTICATI,Telefonunuzda iki faktîrlÅ kimlik do?rulama program? yÅkleyin:
+AFTER_THE_BUTTON_CODE_IF_YOU_D,dÅ?me koduna sonra e?er bunu silmeyin
+THE_CURRENT_RUN_IS_CREATED_BAS,mevcut áal??t?rman?n iá dayal? olu?turulur olabilir
+YUAN_WILL_BE_ABLE_TO_GET_A_LUC,Yuan ?ansl? bir beraberlik almak mÅmkÅn olacak;
+TO_PREVENT_LOSS_OF_DATA_OR_CON,veri veya ikincil geli?me iáerik kayb?n? înlemek iáin.
+ANNOUNCEMENT_ON_THE_CURRENCY_H,Para ?apka ipliklerini i?lem duyurusu Åzerine [Duyuru]
+_APPLICATION_CLICK_ON_THE__ADD,"Uygulama, Ekle Yeni Hesap t?klayarak"
+THEN_CLICK_THE_ADD_FILE_BUTTON,Ard?ndan Dosya Ekle dÅ?mesi resimlerini t?kland???nda
+DOWNLOAD_THE_UPDATE_PACKAGE_AN,GÅncelle?tirme paketini indirin ve sonra dosyalar?n bir listesini almak
+PLEASE_ENTER_YOUR_REAL_NAME_IN,dîvizleri [iáinde aá?klamalar? geráek isminizi giriniz
+YOU_DO_NOT_NEED_TO_ENTER_EACH_,Fon ?ifre gerekli de?ildir
+FEES_DEDUCTED_DIRECTLY_FROM_TH,öcretler resmi Åcreti adresinden do?rudan mahsup
+PLEASE_ENTER_THE_CONTACT_NAME_,"Ki?i ad?n? giriniz, ileti?im adresi yaz?n?z"
+AFTER_CONFIGURATION_IT_WILL_BE,"Yap?land?rma sonucunda, bir cep telefonu gîrÅntÅlenecektir"
+PLEASE_SELECT_THE_CORRECT_FILE,Do?ru dosya tipini ve boyutunu seáin!
+NET_NEW_CURRENCY_ON_THE_LINE_A,on line net yeni para birimi ve koyun paralar duyuru aá?klamas?
+COMPUTER_END_A_NEW_REVISION_IN,"Bilgisayar yeni bir revizyon sonland?rmak, mobil terminali artt?."
+QUOTE_CHANGE_COMPUTING_WHEN_NO,Yeni iáin yokken ticaret pazar?n? bilgisayar Al?nt? de?i?ikli?i
+BITCOIN_WALLET_STANDARD_DISCUS,Bitcoin cÅzdan standart tart??ma Almanya'da dÅzenlenen
+RESTORING_DATABASE_PLEASE_DO_N,"Veritaban? geri yÅkleme, kapatmak de?il, lÅtfen!"
+THE_DATABASE_IS_BEING_BACKED_U,"Veritaban? yak?n lÅtfen yapma, yedeklenmi? ediliyor!"
+YET_ON_THE_LINE_SO_STAY_TUNED_,"Oysa on line, beklemeye devam s?radan kullan?c? grubunu kalmak"
+I_HAVE_NOT_ALTERED_THE_DATABAS,"Ben veritaban? de?i?mi? de?il, veritaban? yÅkseltme"
+CHENGDU_FIRST_BLOCK_CHAIN_SUMM,Chengdu ilk blok zinciri Zirve Forumu dÅzenlenecek
+START_BACKUP_PLEASE_DO_NOT_CLO,"Ba?lat Yedekleme, de?il yak?n bu sayfay? lÅtfen!"
+ANNOUNCED_BITCOIN_THEFT_BEFORE,Ba?ar?l? bir geri îdeme încesinde Aá?kland? Bitcoin h?rs?zl?k
+REPAIR_VERIFY_THE_TRANSACTION_,Tamir i?lemi geáersiz ?ifre ayar? fonksiyonu do?rulamak
+ADMINISTRATORS_GROUP_TO_ADD_AN,eklenti ve dÅzenleme sayfalar?na Yîneticiler grubu
+ENTER_ONLY_ONCE_EACH_TIME_YOU_,sadece giri? iáin bir kere
+OFFICIAL_FEES_PAID_DIRECTLY_IN,Resmi Åcretleri adresine do?rudan îdenen
+YOU_DO_NOT_NEED_TO_ENTER_THE_T,Fon ?ifresini girin
+OTHERWISE_YOU_MUST_FILL_IN_A_L,"Aksi takdirde, gîrmÅyorum yerlerde bir sÅrÅ girmelisiniz"
+AFTER_FINISHED_SELECTING_FILES,Bitmi? seáme dosyalar? sonra ister otomatik upload.
+NO_ACCOUNT_SIGN_UP_TO_HAVE,Hesap yok? olmas? kaydolun!
+PLEASE_ENTER_A_CURRENCY_NAME_P,Bir para birimi ad? girin ?arj miktar?n? giriniz
+MAKE_SURE_ALL_FILES_RELATED_TO,devlete ba?l? emin tÅm dosyalar? olun
+LITECOIN_ISOLATION_WITNESS_SUP,izolasyon tan?k destek oran?n?n Litecoin
+PHONE_REAL_NAME_DATA_UPGRADE_S,"Telefon As?l ad? veri gÅncellemesi, ask?ya"
+NO_ACCOUNT_NO_BEGINNING_OF_THE,"Hiábir hesap, cari ICO hiábir ba?lang?c?"
+CONGRATULATIONS_RETRIEVE_PASSW,"Tebrikler, ?ifre ba?ar?y? almak!"
+CONGRATULATIONS_RETRIEVE_TRANS,"Tebrikler, Fon ?ifre ba?ar?y? almak!"
+CONGRATULATIONS_THE_UPGRADE_WA,"Tebrikler, yeni sÅrÅme ba?ar?yla geáerli sÅrÅm"
+OFFICIAL_INFORMATION_ONLINE_CU,Resmi bilgi áevrimiái mÅ?teri hizmetleri ve uyumu art?rmak
+YOU_NEED_TO_ENTER_A_PASSWORD_W,Bir i?lem haline girdi?inizde bir ?ifre girmeniz gerekir
+OTHERWISE_IT_WILL_CAUSE_DISLOC,Aksi takdirde á?k??? Åyelik seviyelerine neden olur
+BACKGROUND_INCREASE_ONLINE_CUS,Arkaplan art?? online mÅ?teri yap?land?rma fonksiyonu.
+FOR_BACKGROUND_DISPLAY_CONFIGU,(Arka plan gîrÅntÅ yap?land?rma ba?l??? iáin)
+CONTACT_CUSTOMER_SERVICE_SITE_,?leti?im MÅ?teri Hizmetleri Site Yîneticisi Sistemi
+WELCOME_TO_VISIT_THE_WEBSITE_B,Web sitesi arka plan yînetim sistemi ziyaret etmek
+OPERATORS_FORCE_CONTRACT_MININ,Operatîrler kazaná duyuruyu geli?tirmek iáin sîzle?me madencilik zorlamak
+CALCULATED_BASED_ON_THE_LAST_T,Geáen i?lem dÅn dayal? olarak hesaplan?r
+INVITE_PEOPLE_FIRST_INVITATION,ki?ileri davet edin: ?lk davetiye kodu:
+ENTER_THE_UNLOCK_PASSWORD_OR_L,Kilit aáma ?ifresini ya da giri? ?ifresini girin
+DISPLAY_DOUBLE_AUTHENTICATION_,ne zaman fon d??ar? áift kimlik do?rulama kodunu gîrÅntÅler
+STATISTICAL_REPORTING_SYSTEM_T,?statistiksel raporlama sistemi zamanlama gÅn
+YOU_NEED_TO_ENTER_LOGIN_ACCOUN,Sen giri? hesab?n?n ?ifre girmeniz gerekir
+DOCKING_STATION_FORMAL_PRESENT,Yana?ma istasyonu resmi tan?t?m? litecoin cÅzdan
+RELATED_DATABASE_UPDATE_SCRIPT,?lgili veritaban? gÅncelleme komut yeri
+JIANGXI_XINGSHUO_INFORMATION_T,"Ltd Jiangxi Xingshuo Bilgi Teknolojisi Co,"
+INCOME_OF_PEOPLE_THE_FIRST_TIM,insanlar?n Gelir: ?lk kez kazaná
+TWOFACTOR_AUTHENTICATION_TURNE,Åzerinde 2FA Kimlik aáma / kapama:
+SEND_A_CONSISTENT_MESSAGE_WITH,"E?er HÅkÅmet verdi?i foto?rafl? kimlik tutma Cephesi, Geri ve Foto?raf? Gînder"
+THE_TOTAL_GLOBAL_MARKET_CAPITA,Åzerinde ?ifreleme birimi tam ekran toplam kÅresel piyasa
+DIGITAL_ASSETS_EQUAL_TO_HOW_MU,Dijital varl?klar? iáin e?it ne kadar yuan
+FOR_TWO_PACKETS_LEFT_MENU,(For iki paket menÅsÅ sol)
+PLEASE_FILL_IN_YOUR_USERNAME_P,"Kullan?c? ad?n?z doldurunuz, ?ifre doldurun lÅtfen"
+ENTER_THE_GOOGLE_VERIFICATION_,kod ve onaylay?n do?rulama Google'a Giri?
+EACH_TRANSACTION_TRANSACTION_P,Fon ?ifre her bir i?lem ile gerekli
+CALCULATED_ACCORDING_TO_THE_SI,tek bir i?lem Åcreti gîre hesaplanm??t?r
+SELECT_THE_USER_NAME_INPUT_FIE,kullan?c? ad? giri? alan? ba?latma seáin
+WHEN_THERE_ARE_PENDING_CAN_NOT,de?i?tirilemez beklemedeki zaman
+CONGRATULATIONS_YOU_HAVE_SUCCE,"Tebrikler, ba?ar?l? olarak kay?t!"
+OTHERWISE_THE_PROPORTION_OF_FE,"Aksi takdirde, Åcret ayar? oran? geáersiz"
+THE_CURRENT_NUMBER_OF_PENDING_,emir yaln?zca hesap bekleyen mevcut say?s?
+REINITIALIZE_THE_CURRENT_MARKE,mevcut piyasa istatistiklerini yeniden ba?latmak
+REINITIALIZE_THE_CURRENT_CURRE,Geáerli para birimi istatistiklerini yeniden ba?latmak
+BUTTON_TO_SELECT_THE_FILE_OPTI,DÅ?me dosyas?n? seámek iáin. ?ste?e ba?l?.
+POSITIVE_AND_NEGATIVE_PHOTO_SC,Pozitif ve negatif foto?raf tarama belge veya paráa
+AFTER_THE_REGISTRATION_CERTIFI,tescil belgesi numaras? de?i?tirilemez sonra
+END_HOME_PARTICLES_OUT_OF_THE_,sîz konusu ev paráac?klar?n? bitirin.
+END_BANK_CARD_TO_ADD_VALIDATIO,do?rulama hatas? eklemek iáin banka kart? sonland?r?n.
+REGISTRATION_WILL_BE_ASSIGNED_,Kay?t Hesap toplanmas?na atanacak
+BITCOIN_USER_BASE_RISING,kullan?c? taban? Bitcoin yÅkselen
+WITHIN_EACH_INTEREST_PERIOD_PR,her bir ilgi sÅresi iáinde olumlu Chun takdim
+LOCAL_FILES_INVOLVED_IN_THIS_U,Bu gÅncelle?tirme kat?lan Yerel dosyalar
+CHANGING_THE_REALNAME_AUTHENTI,Geráek ad? kimlik do?rulama bilgi ak???n? de?i?tirme:
+YOUR_ACCOUNT_HAS_BEEN_BOUND_AL,Hesab?n?z Alipay ba?lanm??t?r.
+YOUR_ACCOUNT_HAS_BEEN_ENABLED_,Hesab?n?z telefonla do?rulama etkinle?tirilmi? olmas?
+YOU_HAVE_RUN_OUT_OF_OPPORTUNIT,Sen f?rsatlar bugÅn piyango tÅkenmi?
+THE_BACKUP_IS_COMPLETE_CLICK_O,"Yedekleme tamamland???nda, tekrar yedekleme t?klay?n"
+_UNABLE_TO_ENTER_THE_NEXT_STEP,. Bir sonraki ad?ma girilemiyor. lÅtfen en
+_SET_TO_THE_MAXIMUM_NUMBER_OF_,", Sat?n alma maksimum say?da ayarlay?n"
+FOR_SEQUENTIALLY_DISPLAYING_TH,?áin (s?rayla paket gîrÅntÅlendi?i)
+USERNAME_NO_CONTENT,Ad? Hiábir iáerik
+NO_IMAGE_TO_DISPLAY_THE_DEFAUL,Resim yok varsay?lan resmi gîrÅntÅlemek iáin
+ADD_AN_EVENT_SUCCESSFUL_RESPON,Bir olay ba?ar?l? yan?t dosyas? ekleyin
+LOAD_FAILED_LOAD_PICTURE_REMOV,YÅk ba?ar?s?z YÅk resim kald?r?ld?
+ADDING_ATTRIBUTES_TO_ACHIEVE_M,îzelliklerini ekleme áok fonksiyonlu haritas?n? elde etmek iáin
+ENTER_THE_TRANSACTION_PASSWORD,Fon ?ifre girin ve onaylay?n
+PROCESSING_IMAGE_UPLOAD_ADDRES,??leme resim yÅkleme adresi
+ENGLISH_CONTACT_NAME_CHART,?ngiliz Ki?i Ad? ?emas?
+LOGIN_FORM_GETS_FOCUS_DISCOLOR,Oturum formu odak renk al?r
+INSIDE_THE_ACTUAL_USER_ACCOUNT,geráek kullan?c? hesap bakiyeleri ?áinde
+REMOVE_THE_PRINCIPAL_TO_PAY_IN,pe?in îdeme iáin mÅdÅrÅnÅ kald?r
+CONFIRM_THE_NUMBER_OF_ROLLOUT_,Onay Cayma say?s? tamamlanmas? gerekir
+BATCH_DELETE_UNRECOVERABLE_DED,Toplu silme kurtar?lamayan kesinti
+DO_NOT_SET_TOO_LARGE_FOR_SAFET,gÅvenli?i iáin áok bÅyÅk belirlemeyin
+PLEASE_DO_NOT_MODIFY_DURING_OP,Äal??ma s?ras?nda de?i?tirmek etmeyiniz
+PLEASE_ENTER_YOUR_USER_NAME_OR,Kullan?c? ad? veya telefon numaras? girin
+PLEASE_ENTER_THE_CORRECT_BANK_,Do?ru banka hesab?n? girin
+COLOR_TABLE_FORM_GETS_FOCUS,Renk tablosu form oda?? al?r
+LOG_IN_TO_CHECK_IMMEDIATELY_PR,?imdi kontrol etmek iáin giri? yap?n
+LOG_DISPLAY_DUAL_AUTHENTICATIO,Giri? ekran? ikili kimlik do?rulama kodu
+IPS_TOPORDER_DETAILS,öst sipari? ayr?nt?lar?n? IPS
+SCRIPT_IS_LOADING_PLEASE_WAIT,"Senaryo yÅkleniyor, lÅtfen bekleyin"
+ORDERS_MERCHANT_PAYMENT_INTERF,Sipari?ler tÅccar îdeme arayÅzÅ standard?
+VIEW_ONLINE_CUSTOMER_SERVICE_T,gîrÅnÅm ÅrÅne online mÅ?teri hizmetleri gîrÅntÅle
+THE_UPDATED_DATABASE_CHANGES,gÅncellenen veritaban? de?i?iklikleri
+THE_UPDATED_DOCUMENT_INVOLVED,gÅncellenmi? belge dahil:
+A_NEW_VERSION_OF_THE_SERVER_US,Sunucu kullan?c? ad? yeni bir sÅrÅmÅ
+THE_PROPORTION_OF_FEE_IN_ADVAN,pe?in Åcret oran? esas almak
+LABOR_DAY_HOLIDAY_ARRANGEMENTS,??ái Bayram? tatil dÅzenlemeleri bilgilendirmek
+WORKING_HOURS_MONDAY_TO_SUNDAY,áal??ma saatleri: Pazartesi-Pazar
+YOU_NEED_TO_USE_THE_TIME_TO_CA,Sen nakit iáin zaman kullanmak gerekir
+BEFORE_YOU_INSTALL_THE_UPDATE_,"GÅncellemeyi yÅklemeden înce, lÅtfen"
+OR_LIKELY_TO_CAUSE_CONFUSION_G,Ya muhtemel kar???kl?k notu neden
+SELLER_USER_NAME_SELLER_FEES,Sat?c? kullan?c? ad? Sat?c? Åcretleri
+LOAD_LOAD_PICTURE_REMOVED_SUCC,YÅk YÅk resim ba?ar?yla kald?r?ld?
+CLOSE_ABOUT_US_ONLINE_CUSTOMER,Sanal MÅ?teri Hizmetleri Hakk?nda Yak?n
+THE_WHOLE_STATION_IS_ONLY_A_RE,BÅtÅn istasyonu sadece îneri projedir
+MARGIN_WALLET_HOT_AND_COLD_ISOL,"Kenar, cÅzdan, s?cak ve so?uk yal?t?m"
+MEMBER_FOREGROUND_INTO_THE_ADD,adres para birimine Åye în plan
+FROM_THE_TOP_OF_THE_APPLICATIO,Uygulaman?n ÅstÅnden polimerizasyonu aramalar?
+BUYER_THE_BUYERS_NAME_FEE,"Al?c?, al?c?lar Åcreti isim"
+PLEASE_ENTER_A_USER_NAME_CHANG,Bir kullan?c? ad? de?i?ikli?i giriniz
+OTHERWISE_THE_FILE_CAN_NOT_BE_,"Aksi halde, dosya eklenemez"
+DID_NOT_RECEIVE_RESEND,Almad?? Yeniden gînder
+SCAN_THE_QR_CODE_TO_MAKE_TRANS,Tarama QR
+YOU_NEED_TO_UPGRADE_THE_CURREN,Sen gÅncel sÅrÅmÅnÅ yÅkseltmeniz gerekir
+WE_WILL_RECEIVE_THE_MONEY,Biz îdeme onay? 24 saat iáinde ?arj iste?i i?lemek.
+ACCOUNT_NAME_ACCOUNT_ADDRESS,?sim Hesap Adresi Hesap:
+OFFICIAL_WEBSITE_ALIPAY_ACCOUN,Alipay Hesab?
+CLICK_HERE_TO_SEND_ME_A_MESSAG,bana bir mesaj gîndermek iáin buraya t?klay?n
+ADD_A_NEW_ADDRESS_TO_CASH,#NAME?
+LESS_THAN_THIS_NUMBER_AUTOMATI,Bu numaraya otomatik olarak Äekilme KÅáÅktÅr
+RECHARGE_AMOUNT_OF_OFFLINE_BON,áevrimd??? bonus Yeniden tahsilat tutar?
+THIS_NUMBER_IS_GREATER_THAN_TH,Bu say? arka plan gîzden bÅyÅktÅr
+A_PLURALITY_OF_SEPARATED_BY_CO,virgÅl ile ayr?lm?? bir áok say?da
+PRELOADED_NONTRADABLE,ticarete konu olmayan ônceden yÅklenmi?
+HOME_SHOWS_THE_CUMULATIVE_TURN,Frontend'de Åzerinde toplam ciro Display
+AFTER_ENTERING_THE_SUCCESSFUL_,Ba?ar?l? ?arj emir girdikten sonra
+PLEASE_INPUT_CORRECT_PASSWORD_,LÅtfen giri? do?ru ?ifre
+PLEASE_LOGIN_PASSWORD_REGULARL,LÅtfen gÅncelleme giri? ?ifresi dÅzenli
+PLEASE_UPDATE_YOUR_PASSWORD_RE,?ifrenizi dÅzenli olarak gÅncelleyin
+CHECK_USER_REGISTRATION_AGREEM,Kontrol Kullan?c? Kayd? Sîzle?mesi
+WARNING_DO_NOT_NEED_TO_DELETE,Uyar?: Do not silmeniz gerekir
+APPLICATION_FOCUSING_BLOCK_CHA,Uygulama odaklama blok zincirleri
+EDIT_YUAN_RECHARGE_MODE,DÅzenleme yuan ?arj modu
+DRAW_FIBONACCI_RETRACEMENT,Fibonacci dÅzeltme áizin
+WANT_TO_EMPTY_DATA,Verileri bo?altmak ister misiniz?
+THE_CHINESE_DIFFICULT_TO_READ_,"Äinli zor bu yÅzden, okumak"
+ADD_THE_YUAN_RECHARGE_MODE,yuan ?arj modunu ekle
+SIGN_INTO_THE_ADDRESS_FROM_WHI,mevduat yap?lm?? olan Adres
+DOCUMENTS_RELATED_TO_THIS_UPDA,Bu gÅncelle?tirme ile ilgili belgeler
+THE_LATEST_HOTTEST_TOPIC_OF_DI,tart??ma son s?cak konu
+EVENING_DOWNTIME_UPGRADE_ANNOU,Ak?am Kesinti YÅkseltme Duyuru
+FILENAME_INTEGER_SUCH_AS_FILLI,"Dosya ad? tamsay?d?r, îrne?in dolgu maddesi olarak"
+SCAN_DIRECT_ACCESS_TO_THE_PHON,Telefon sÅrÅmÅne Tarama do?rudan eri?im
+YOUR_EXCLUSIVE_PROMOTION_OF_TW,Ortakl?k Ba?lant? QR Code
+YOU_CAN_RECORD_KEY,Anahtar? kaydedebilir
+YOU_DO_NOT_HAVE_THE_OPPORTUNIT,BugÅn áizmek iáin f?rsat yok
+MULTIFACETED_UNDERSTANDING_OF_,sanayi dinamiklerinin áok yînlÅ anlay??
+BACKUP_FILE_LOCATION,Yedekleme dosyas? konumu:
+FILL_REASON_DID_NOT_PASS_CERTI,belgelendirme geáemedi Dolgu nedeni
+BASED_ON_THE_LATEST_MAJOR_BROW,En son bÅyÅk taray?c?larda dayanarak
+CAPTCHA_CODE_CAN_NOT_BE_EMPTY,Captcha kodu bo? olamaz
+ALLOWING_ONLY_SELECT_A_PICTURE,Sadece bir resim dosyas? seáin izin
+TODAY_THE_BIGGEST_SELLING_TRAD,Maksimum sat?? fiyat?
+TODAY_THE_MINIMUM_PURCHASE_PRI,Min al?? fiyat?
+USD_RECHARGE_MODE_LIST,?arj Yîntemleri
+STRICT_PROJECT_ACCESS_THRESHOL,S?k? proje eri?im e?i?i
+DOWNLOAD_THE_FILE_LOCATION,dosya konumunu ?ndir
+THE_DOWNLOAD_IS_COMPLETE_COMPA,"?ndirme tamamland???nda, dosya kar??la?t?rmak"
+ANNOUNCEMENT_CURRENCY_LONG_NET,[Duyuru] para cinsinden uzun a? yÅkseltme
+BELONGING_TO_THE_PREVIOUS_MENU,(ônceki menÅye Aidiyet)
+PLEASE_ENTER_THE_VERIFICATION_,do?rulama kodu SMS giriniz
+THE_CURRENT_SYSTEM_VERSION_NUM,Mevcut sistem sÅrÅm numaras?
+THE_PAGE_IS_ABOUT_TO_AUTOMATIC,sayfa otomatik olarak atlama Åzeredir
+PLEASE_ENTER_THE_CAPTCHA_CODE,Captcha kodunu giriniz
+I_UNDERSTAND_THESE_RISKS,anl?yorum
+DETERMINE_IN_ADVANCE_THE_PRINC,as?l îzÅ înceden belirleme
+USERS_TO_SWITCH_FROM_SITE,Kullan?c?lar siteden geámek iáin
+CONFIGURATION_MODULE_VERIFICAT,2FA ModÅlÅ Yap?land?rma:
+THE_VALUE_OF_EACH_SCROLL_NUMBE,Her bir kayd?rma say?s?n?n de?eri
+USERS_TURN_TO_THE_SITE,Kullan?c?lar siteye áevirmek
+CLICK_TO_VIEW_THE_PROMOTION_AW,GîrÅnÅm Benim ôdÅller
+ADD_A_WALLET_ADDRESS,Bir cÅzdan adresi ekleyin
+ADD_A_CONTACT_ADDRESS,Bir ileti?im adresi ekleyin
+NEW_CURRENCY_INOPERABLE,Yeni para birimi ameliyat edilemez
+A_LIST_OF_NAMES_TO_CASH_WITHDR,para áekme i?lemi isim listesi
+MEMBERS_OF_THE_AUTHORIZED_EDIT,yetkili dÅzenleme sayfas?n?n Åyeleri
+THE_CURRENT_SIZE_OF_THE_DATA_C,veri înbelle?i geáerli boyutu
+IF_YOU_WANT_TO_CHARGE_A_FEE,E?er bir Åcret istiyorsan?z
+NATIONAL_TOLL_FREE,Ulusal öcretsiz
+TRANSACTION_PASSWORD_INPUT_SET,Fon ?ifre Gereksinimi ayarlar?
+DO_NOT_FILL_NOT_DISPLAYED_BY_D,varsay?lan olarak gîrÅntÅlenmez dolgu etmeyin
+A_KEY_TO_CHECK_ALL_WALLET,TÅm cÅzdan kontrol etmek bir anahtar
+PAGE_CLOSE_THE_SITE,"Sayfa, siteyi kapat?n."
+YOU_NEED_TO_ENTER_A_PASSWORD,Bir ?ifre girmeniz gerekir
+TO_RETURN_TO_AUTOMATIC_UPGRADE,Otomatik yÅkseltme Evde dînmek iáin
+ENTER_A_PASSWORD_LOCK_SCREEN,Bir ?ifre kilit ekran? Enter
+PLEASE_ENTER_YOUR_OLD_PASSWORD,Eski ?ifre i?lemi giriniz
+PLEASE_ENTER_A_NEW_PASSWORD,Yeni bir ?ifre giriniz
+PLEASE_ENTER_A_NEW_PHONE_NUMBE,Yeni bir telefon numaras? giriniz
+PLEASE_ENTER_A_NEW_TRANSACTION,Yeni bir Fon Parola giriniz
+PLEASE_ENTER_ALIPAY_ACCOUNT,Alipay hesab?n? girin
+CERTIFICATE_TYPE,Sertifika TÅrÅ:
+ICO_PAGE_RISK_WARNING,ICO sayfa Risk Uyar?s?
+ORDERS_TO_PAY_ENCRYPTION,îdeme ?ifreleme Sipari?leri
+RULES_ARE_AUTOMATICALLY_UPGRAD,Kurallar otomatik terfi ederler
+DRAW_FIBONACCI_EXTENSION,Fibonacci uzant?s?n? áizin
+ACCUMULATIVE_ROLLOUT_OF_DIGITA,Madeni paralar toplam áekme
+THE_CUMULATIVE_TRANSFER_OF_DIG,Coins toplam transferi
+NOW_GO_TO_WITHDRAW_IMMEDIATELY,?imdi hemen geri áek Git
+ENSURE_USER_SECURITY_FUNDS,Kullan?c? gÅvenlik fonlar? olun
+PLATFORM_TO_ENSURE_THE_INTERES,Platform kullan?c?lar?n?n á?karlar?n? sa?lamak iáin
+USERS_GET_AFTER_PURCHASE,Kullan?c?lar sat?n ald?ktan sonra olsun
+USER_NAME_USER_COMMUNICATION,Kullan?c? Ad? kullan?c? ileti?imi
+CLICK_HERE_TO_VIEW_CLICK_SETTI,T?klay?n Ayarlar? gîrmek iáin buraya t?klay?n
+SUCCESSFUL_ACTIVATION_MAY_BE_L,Ba?ar?l? aktivasyon bÅyÅk olabilir
+ADDING_A_BANK_ADDRESS,banka adresi ekleme
+ADD_A_WITHDRAWAL_ADDRESS,Bir geri áekilme adresi ekleyin
+THE_MINIMUM_AMOUNT_FOR_EACH_PU,Minimum tutar sat?n alma
+THE_MAXIMUM_NUMBER_FOR_EACH_PU,Her sat?n alma iáin maksimum say?
+DAILY_DEAL_END_TIME,GÅnlÅk F?rsat Biti? Zaman?
+DAILY_TRADING_START_TIME,GÅnlÅk Ticaret Ba?lang?á ??Zaman?
+SENDING_BACKUP_REQUEST,Yedek iste?i gînderme
+FORMAT_SIZE_DOES_NOT_EXCEED,"Biáim, boyut geámemelidir"
+STYLE_CLASS_NAME_COLUMN_NAME,Stil s?n?f ad? SÅtun Ad?
+UPDATE_FILE_LOCATION,GÅncelleme dosyas? yeri
+FILE_RECEIVING_SERVER,sunucudan al?c? Dosya.
+RECORD_NUMBERS_WITHDRAW_ASSETS,Tutanak say?lar varl?klar?n? sîndÅrmeden
+DIGITAL_ASSETS_INTO_RECORD,kay?t iáine Dijital varl?klar?
+DIGITAL_REPRESENTATIVES_OF_SEV,di?er baz? îdÅllerin Dijital temsilcileri
+BUS_KEEP_THE_LINKS_IN_THE,OtobÅs: ba?lant?lar? tutun
+MASTER_ALL_KINDS_OF_EVENT_INFO,Olay her tÅrlÅ bilgi Usta
+SWEEPSTAKES_HAS_ENDED,Äekili?ler sona erdi
+A_LIST_OF_PUBLIC_INVESTMENT_ST,kamu yat?r?m tarz? bir listesi
+TECHNICAL_INDICATORS_PARAMETER,ayarlar?nda parametre Teknik gîstergeler
+SCAN_ATTENTION_OFFICIAL_MICRO_,Tarama dikkat resmi mikro mektup
+LIST_OF_USER_GROUPS_BELONG,kullan?c? gruplar?n?n listesi aittir
+MICROCHANNEL_PUBLIC_NUMBER_TWO,Mikro kanal halka say?s? iki boyutlu kod
+THE_LATEST_VERSION_OF_THE_CURR,Geáerli uzaktan son sÅrÅmÅ
+THE_CURRENT_ICO_HAS_E,Geáerli ICO sona erdi
+CURRENT_NUMBER_OF_DIGITAL_ASSE,Denge
+MENU_ON_THE_LEFT_SHOW_HIDE,Sol gîsteri postun Åzerinde MenÅsÅ
+OFFICIAL_WEBSITE_RECEIVING_BAN,Resmi web sitesi al?c? banka hesab?
+BACKUP_FILE_STORAGE_LOCATION,Yedekleme dosya depolama yeri
+TYRANT_CREDITS_LINE_STYLE_FIG,"Tyrant kredi, áizgi stili ?ekil."
+STATISTICS_ONLY_PART_OF_THE_RE,renminbi'nin ?statistik sadece bir paráas?
+THE_ORIGINAL_FILE_LOCATION,Orijinal dosya yeri
+INTEREST_GIFT_TO_WHICH_CURRENC,Faiz hediye hangi para birimi iáin
+CATEGORY_AUTHORIZED_TO_EDIT_PA,Kategori dÅzenleme sayfas?nda yetkisi
+ENTER_THE_NEW_PASSWORD_AGAIN,Yeni ?ifreyi tekrar girin:
+GLOBAL_FONT_COLOR_SETTING,KÅresel font color ayar?
+SAVE_TRANSACTION_PASSWORD_SETT,Kaydet Fonu ?ifre ayarlar?
+THE_ABOVE_INFORMATION_IS,Yukar?daki bilgiler
+ONLY_DEVELOPER_MODE_DISPLAY,Sadece geli?tirici modu ekran?
+DEVELOPER_MODE_ONLY_VISIBLE,Geli?tirici modu sadece gîrÅnÅr
+TRADING_ENCRYPTION_RETURN,Ticaret ?ifreleme dînÅ?
+UNDER_INHERIT_FONT_SIZE,devral?r font boyutu Alt?nda
+ADDED_TIME_AFTER_THE_FIRST,Olded ?lk
+ALL CATEGORIES,TÅm Kategoriler
+To make purchases you are one click away,markas? al?mlar?n?n iáin tek bir t?klama uzakta olan
+ADDED_TIME_FROM_THE_FIRST_TO_T,En yeni ilk
+A_LINE_IMAGE_LINK,Bir áizgi resim ba?lant?s?
+MENU_DETAIL,(MenÅ detay)
+PLEASE_ENTER_YOUR_QUERY,Sorgunuzla giriniz
+PLEASE_ENTER_THE_PHONE_NUMBER,Mobile de?erini girin
+HIDDEN_UNDER_THE_PICTURE_TO,iáin resmin alt?nda gizli.
+FOR_THIS_USE_CASE_ONLY,bu kullan?m ?eklini sadece
+SEND_SMS_VERIFICATION_CODE,Gînder SMS kodu
+PLEASE_ENTER_YOUR_PASSWORD,Parolan? Gir
+CLICK_TO_SEND_A_VERIFICATION_C,Bir do?rulama kodu gîndermek iáin t?klay?n
+THE_METHOD_TO_BE_EXECUTED,yîntem yÅrÅtÅlecek
+PLEASE_ENTER_THE_CONFIRMATION_,Onay kodunu giriniz
+ENTER_A_NAME_REMARKS,Bir isim Notlar girin
+OFFICIAL_FEES_ADDRESS,Resmi Åcretleri Adres
+USERNAME_ANY_NUMBER,herhangi bir say?da Kullan?c? ad?
+THE_NUMBER_OF_INVITED_RANKINGS,davet s?ralamas?nda say?s?
+PLEASE_ENTER_IDENTIFICATION_NU,kimlik numaras?n? girin
+THE_CLASSIFICATION_NO_DATA,Kay?t yok
+JUMP_IN_THE_OPERATION_WAS_SUCC,operasyonda Atlama ba?ar?l? oldu
+THE_MINIMUM_SELLING_PRICE_OF_T,??lemin asgari sat?? fiyat?
+THE_MAXIMUM_SELLING_PRICE_OF_T,??lemin azami sat?? fiyat?
+SELL_??AT_THIS_PRICE,Bu fiyata sat
+BUY_AT_THIS_PRICE,Bu fiyata sat?n
+THE_MINIMUM_PURCHASE_PRICE_OF_,??lemin asgari al?? fiyat?
+THE_MAXIMUM_PURCHASE_PRICE_OF_,??lemin maksimum al?? fiyat?
+WALLET_SERVER_PORT,CÅzdan sunucusu ba?lant? noktas?
+WALLET_SERVER_PASSWORD,CÅzdan sunucusu ?ifre
+REEDIT_THIS_CURRENCY,Bu para yeniden dÅzenleyin
+OUT_OF_PROPORTION_FEE,oran Åcretinin Out
+THE_PROPORTION_OF_TRANSFER_FEE,transfer Åcretleri oran?
+PLEASE_ENTER_THE_BANK_ACCOUNT_,banka hesap numaras?n? girin
+PLEASE_ENTER_THE_WALLET_LOGO,cÅzdan logosunu giriniz
+PLEASE_ENTER_THE_ADDRESS_WALLE,adres cÅzdan giriniz
+PLEASE_ENTER_A_SELECT,Bir seáim giriniz
+PLEASE_ENTER_THE_NUMBER_OF_ROL,Cayma say? giriniz
+PLEASE_TYPE_YOUR_PHONE_NUMBER,Telefon numaran?z? girin
+ENTER_ACCOUNT_BRANCH,Hesap ?ube girin
+EXPRESSION_STORED_PATH,?fade saklanan yolu
+CONTACT_THE_ADMINISTRATOR_TO_M,de?i?tirmek iáin yîneticisine ba?vurun
+ASSIGNED_TO_THE_CONTROL,kontrole Atanan
+NO_WALLET_SERVER,Ne cÅzdan sunucusu
+WALLET_SERVER_INFORMATION,CÅzdan sunucu bilgisi
+DATA_HAS_BEEN_LOADED,Veriler yÅklendikten
+REFER_A_FRIEND_TO_GET_REWARD,îdÅl almak bir arkada??n?za tavsiye edin
+PERFECT_CREDENTIALS,MÅkemmel kimlik bilgileri.
+TO_FILL_THIS_OFFICE_CAN_BE,Bu ofisi doldurmak iáin olabilir
+SINGLE_MINIMUM_TURNOVER,Tek minimum ciro
+THE_SINGLE_LARGEST_TURNOVER,Tek bÅyÅk ciro
+FRONTEND_TITLE_OF_THE_WINNING_TI,Kazanan zaman Frontend Ba?l???
+HOME_THUMBNAIL_DISPLAY,Ekranda kÅáÅk resim Ev
+PERMISSION_TO_REINITIALIZE,Yeniden initialize izni
+REPEAT_TRANSACTION_PASSWORD,Fon ?ifre Tekrar:
+ENTER_EMAIL_OR_CELL_PHONE,E-posta veya cep telefonunu girin
+OUT_OF_A_TOTAL_FEE,toplam Åcretin Out
+SKIP_THE_DATABASE_UPGRADE,veritaban? yÅkseltme atla
+PLEASE_SELECT_THE_ROLLOUT_ADDR,Äekilme adresi seáin
+PLEASE_SELECT_THE_TYPE_OF_DOCU,dokÅman tÅrÅnÅ seáiniz
+PLEASE_SELECT_WITHDRAW_ADDRESS,adresini geri áek seáiniz
+PLEASE_SELECT_THE_RECHARGE_AMO,?arj? miktar?n? seáiniz
+PLEASE_SELECT_THE_RECHARGE_MOD,?arj modunu seáiniz
+PLEASE_CHOOSE_A_PAYMENT_METHOD,Bir îdeme yîntemi seáin
+ENTER_GOOGLE_PASSWORD,Google ?ifresini girin
+PLEASE_ENTER_THE_CERTIFICATE_N,Sertifika numaras?n? giriniz
+PLEASE_ENTER_THE_NUMBER_OF_SUB,ICO say?s?n? girin
+PLEASE_ENTER_THE_NAME_OF_THE_M,menÅnÅn ad?n? giriniz
+PLEASE_ENTER_A_CHAT,sohbet giriniz
+PLEASE_ENTER_A_LOGIN_PASSWORD,GÅvenli bir ?ifre seáin
+ENTER_THE_WITHDRAWAL_AMOUNT,áekilme tutar? girin
+PLEASE_SIGN_IN_LOTTERY,piyango LÅtfen giri? yap?n
+DRAW_FIBONACCI_SURFACE,Fibonacci yÅzeyini áizin
+CUMULATIVE_WITHDRAWALS_YUAN,KÅmÅlatif áekme yuan
+CUMULATIVE_RECHARGE_USD,KÅmÅlatif ?arj USD
+CONFIRM_THE_TRANSACTION_PASSWO,Fon Parola Do?rulama:
+SMS_INTERFACE_SECURITY_CODE,SMS ArayÅz GÅvenlik Kodu
+USERS_TO_BUY_USED,Kullan?c?lar kullan?lan sat?n iáin
+HONG_KONG_AND_MACAO_RESIDENTS_,Hong Kong ve Macao sakinleri izin
+AS_TIME,Zaman olarak
+REGISTRATION_IS_DEEMED_TO_AGRE,Kabul ediyorum
+DAILY_LIMIT_PER_ACCOUNT,Hesap ba??na gÅnlÅk limiti
+NOT_VERIFIED,Do?rulanmad?
+THE_MAXIMUM_PURCHASE_LIMIT,Maksimum sat?n alma limiti
+IT_SHOWS_THE_CUMULATIVE_TURNOV,Bu Toplam ciro gîsterir
+ADD_A_NEW_ADDRESS,yeni bir adres ekleyin
+THE_GREATER_THE_VALUE_THE_MORE,daha ileri daha bÅyÅk bir de?er
+ALIPAY_REMITTANCE,Alipay havale
+ALIPAY_RECHARGE_INFORMATION,Alipay yeniden yÅkleme bilgileri
+ALIPAY_ACCOUNT_WITHDRAWALS,Alipay hesab? para áekme
+USD_FREEZE_WITHDRAWALS,ABD Dolar? donma áekme
+YOUR_WALLET_ADDRESS_IS,CÅzdan?n adresidir
+YOU_HAVE_SUCCESSFULLY_UPLOADED,Ba?ar?yla yÅkledik
+HELLO_AND_WELCOME_TO,ve Merhaba ho? geldiniz
+QUICK_SHARE_TO_THE_COMMUNITY,Sosyal medya
+CURRENT_PHONE_NUMBER,GÅncel telefon numaras?:
+UPGRADE_TO_RECOMMEND,tavsiye yÅkseltme
+ADVERTISING_COUNTDOWN_TIME,Reklam geri say?m zaman?
+MARKET_MARKET_NAME_LIST,Market isim listesi
+IT_HAS_BEEN_VERIFIED,KYC Tamamland?
+HEAD_ADMINISTRATOR_MENU,Ba? Yînetici menÅsÅ
+GREATER_THAN_THIS_LEVEL_AVAILA,Mevcut bu seviyede BÅyÅktÅr
+ADDITIONAL_BUSINESSES_PACKET,Ek i?letmeler paket
+AND_THEN_TO_PARTICIPATE_IN_SWE,Ve sonra áekili?lere kat?lmak iáin
+PERMIT_FOR_TAIWAN_RESIDENTS,Tayvan sakinleri iáin ?zin
+TWOFACTOR_AUTHENTICATION_PASSW,?ki faktîrlÅ kimlik do?rulama ?ifresi:
+VERIFY_THE_LOCATION_OF_THE_ORI,Orijinal gÅvenlik konumunu do?rulay?n
+SHARE_TO_SINA_WEIBO,Sina Weibo iáin pay
+GET_A_FREE_VERIFICATION_CODE,Åcretsiz do?rulama kodu al?n
+ELEMENTS_IT_MAY_BE,"Elemanlar, bu olabilir"
+SO_THAT_FORM_ELEMENTS,form elemanlar? Yani
+ARE_YOU_SURE_YOU_RECHARGE_IT,E?er yeniden ?arj de emin misin?
+TODAY_LIMITS,BugÅn S?n?rlar?:
+TODAY_LIMIT_PRICE,BugÅn s?n?r? Fiyat?:
+TODAY_LIMIT_INCREASE,BugÅn limiti art???:
+TODAY_THE_DAILY_LIMIT_PRICE,BugÅn gÅnlÅk s?n?r de?eri:
+USD_WITHDRAWALS_RECORD,ABD Dolar? para áekme rekoru
+USD_WITHDRAWALS_INTERFACE,ABD Dolar? para áekme ArayÅz
+USD_RECHARGE_RECORD,ABD Dolar? ?arj? rekor
+PLEASE_ENTER_TRANSACTION_PASSW_CAN_NOT_BE_SAME,??lem passsword giri? ?ifresi ile ayn? olamaz
+PRODUCT_INTRODUCTION,ÅrÅn tan?t?m?
+USD_RECHARGE_MODE,ABD Dolar? ?arj modu
+USD_RECHARGE_INTERFACE,ABD Dolar? ?arj ArayÅz
+PROFESSIONAL_SECURITY,Profesyonel gÅvenlik
+CLOSE_BUTTON_DOES_NOT_SHOW,Kapat dÅ?mesi gîrÅnmÅyor
+THAI_LANGUAGE,Tayland
+MANAGED_IMMEDIATELY,hemen Yînetilen
+ACTUAL_TRADING_RISK,"E?er sofistike ticaret seáeneklerini kullanmak îzellikle esnaf yapan, riskli olabilir."
+HERE_IS_WALLET,??te cÅzdan adresidir DÅzeltme formuna
+_SAFER_AND_MORE_AT_EASE,", Daha GÅvenli ve daha rahat!"
+CLICK_ADD_PICTURE,Resim Ekle t?klay?n
+PLEASE_ENTER_VERIFICATION_CODE,Kodu girin
+ADDING_DATA_OBJECT,Veri Nesnesi Ekleme
+PLEASE_ENTER_PHONE_NUMBER,Telefon numaras?n? girin
+ICO_TYPE_OF_CURRENCY,para ICO tipi
+SEC_CAN_BE_SENT_AGAIN,sn tekrar gîndermek iáin
+SMS_VERIFICATION_CODE,SMS do?rulama kodu:
+USER'S_REAL_NAME,Kullan?c? geráek ismi
+DOCKING_WALLET_USE,Yerle?tirme cÅzdan kullan?m?
+ROLLOUT_OF_DIGITAL_ASSETS,Paralar? geri áek
+PLEASE_FILL_IN_THE_VERIFICATIO,Captcha girin
+GET_VERIFICATION_CODE,#VALUE!
+RETRIEVE_PASSWORD,Parola Al
+HIGHLIGHT_THE_TOP_MENU,öst menÅyÅ vurgulay?n
+CONFIRM_PASSWORD_ERROR,Onayla ?ifre hatas?
+THE_MINIMUM_WITHDRAWAL_AMOUNT,Minimum para áekme
+THE_MAXIMUM_AMOUNT_OF_WITHDRAW,Maksimum áekme miktar?
+CLICK_RESEND,t?klay?n tekrar gînder
+ADD_AN_ADDRESS,adres Ekle
+LOCAL_FILE_COMPARISON,Yerel dosya kar??la?t?rma
+RETRIEVE_TRANSACTION_PASSWORD,Fon Parola Al
+MARKET_TRANSACTIONS_REPORT,Piyasa ??lemleri Raporu
+CAPTCHA,Captcha:
+RESET_TRANSACTION_PASSWORD,Fon Parola S?f?rlama
+ROLLOUT_ADDRESS_MANAGEMENT,Äekilme adresleri
+SET_TRANSACTION_PASSWORD,Set Fonu ?ifre
+REMOVE_DETERMINED_IN_ADVANCE,ônceden belirlenen Kald?r
+USER_REGISTRATION_AGREEMENT,Kullan?c? Kay?t Anla?ma
+VIEW_RIGHTS_MANAGEMENT,GîrÅnÅm Haklar Yînetimi
+WITHDRAW_ADDRESS_MANAGEMENT,Adres Yînetimi geri áek
+REPAIR_ANY_CONTENT,herhangi bir iáeri?i Onar?m
+WALLET_ADDRESS_MANAGEMENT,CÅzdan adresi yînetimi
+WALLET_TRANSACTIONS,CÅzdan i?lemleri
+SELECT_WITHDRAWALS_ADDRESS,Seá áekme adresi
+INTO_DIGITAL_ASSETS,mevduat paralar
+CONTACT_TENCENT_MICROBLOGGING,?leti?im Tencent mikroblog
+WAITING_FOR_THE_FIRST_PRIZE,?lk îdÅl bekliyorum
+USER_REGISTRATION_REPORT,Kullan?c? Kayd? Raporu
+DETAILED_FINANCIAL_RECORDS,Ayr?nt?l? mali kay?tlar
+CLICK_FOR_LARGER_IMAGE,Daha bÅyÅk resim iáin t?klay?n
+COMPARE_LOCAL_FILE,Kar??la?t?rma yerel dosya
+HERE_DEMO_CLOSE,??te Demosu yak?n
+RECORD_AMOUNT,Tutanak tutar
+THE_MINIMUM_NUMBER_OF_ROLLOUT,Cayma minimum say?s?d?r
+THE_MINIMUM_RECHARGE_AMOUNT,Asgari ?arj miktar?
+THE_MAXIMUM_NUMBER_OF_ROLLOUT,Äekilme say?s?
+THE_MAXIMUM_AMOUNT_OF_RECHARGE,?arj azami miktar?
+LAST_LOGIN_TIME,Son giri? zaman?
+NEW_LOGIN_PASSWORD,Yeni giri? ?ifresi:
+NEW_MARKET_COMMISSION,New Market komisyonu
+NEW_TRADING_PASSWORD,Yeni Fon ?ifre:
+ALIPAY_ACCOUNT,Alipay hesab?
+FEE_CHART,Åcret ?emas?
+MOBILE_TWODIMENSIONAL_CODE,Mobil iki boyutlu kod
+ADVERTISING_MANAGEMENT_SECTOR,Reklam yînetimi sektîrÅ
+ADVERTISING_SECTOR_LIST,Reklam sektîrÅ listesi
+BLOCK_HAS_BEEN_LOADED,Blok yÅklenmi?
+OFFICIAL_LINKS_CUSTOMER_SERVIC,Resmi Linkler MÅ?teri Hizmetleri
+ENTER_SUBMIT_CHAT,Sohbet gîndermek girin
+LOGIN_FAILED,Giri? ba?ar?s?z
+USER_DOES_NOT_EXISTS,Kullan?c? de?il mevcut does
+CHANGE_MY_PASSWORD,?ifremi De?i?tir
+TWO_DECIMAL_PLACES,?ki ondal?k
+MORE_THAN_THE_PAYMENT_AMOUNT,ôdeme miktardan daha fazla
+MOST_SELL_TODAY,Äo?u satmak bugÅn
+TRADING_INTERFACE_DISPLAY,Ticaret arayÅzÅ ekran
+THE_PROPORTION_OF_SECONDGENERA,ikinci nesil hediye oran?
+AUDIT_WORKING_DAYS,Denetim áal??ma gÅnÅ
+DO_NOT_RESUBMIT,de?il yeniden gînderirim
+THREE_GENERATIONS_PROPORTION_G,öá nesil oran hediye
+THE_PROPORTION_OF_A_GENERATION,Bir ku?ak hediye oran?
+HOME_RISK_WARNING,Ev Risk Uyar?s?
+ESTIMATED_TOTAL_ASSETS,Tahmini Toplam aktifler:
+HIGH_TO_LOW_SALES,DÅ?Åk Sat?? YÅksek
+SALES_FROM_LOW_TO_HIGH,YÅksek Sat?? DÅ?Åk
+WHITE_PAPER_CHAIN_SWIM_SHARES,Beyaz Ka??t zincir yÅzmek paylar?
+WALLET_ACCUMULATED_BALANCE,CÅzdan birikmi? bakiyesi
+RESET_TABLE_ELEMENTS,S?f?rlama tablo elemanlar?
+RESET_FORM_ELEMENTS,Formu s?f?rla elemanlar?
+RESET_LIST_ELEMENTS,S?f?rlama liste elemanlar?
+CONFIGURING_AUTHENTICATION,yap?land?rma kimlik
+SELECT_THE_RECHARGE_AMOUNT,?arj? miktar?n? seáin
+CHOOSE_THE_PAYMENT_METHOD,îdeme yîntemi seámek
+INTO_A_TOTAL_GIFT,toplam hediye iáine
+TRANSFERRED_TO_THIS_ADDRESS,Bu adrese Aktar?lan:
+DO_NOT_REPEAT_CLICKS,t?klamalar? tekrarlamay?n
+SET_THE_DEFAULT_FONT,varsay?lan yaz? tipini ayarlama
+SET_THE_AUTHENTICATION_MODE,Kimlik do?rulama modunu ayarlama
+SET_UP_TWOFACTOR_AUTHENTICATIO,2FA Kur
+CONTACT_TWITTER,heyecan
+ONLINE_BANKING_REMITTANCE,Äevrimiái bankac?l?k havale
+RECHARGE_ONLINE_BANKING_INFORM,?arj online bankac?l?k bilgileri
+WEBSITE_USERS_HOLD_OUT,Web sitesi kullan?c?lar? uzatmak
+SET_SITE_NAME,Set site ad?
+NET_OF_TRANSACTION_NOTIFICATIO,i?lem bildiriminin Net
+TEXT_EDITING_TIPS,Metin dÅzenleme ipuálar?
+EDITING_BACKEND_USERS,arka uá kullan?c?lar? dÅzenleme
+EDIT_PAYMENT_METHOD,ôdeme yîntemini dÅzenleme
+UNIFIED_WIDTH_FONT,Birle?tirilmi? geni?li?i yaz?
+THE_CUMULATIVE_NUMBER_OF_TRANS,Toplam i?lem say?s?
+RATING_UPGRADE_ORDER,YÅkseltme dÅzeni Puanlama
+NO_ACCESS_REASON,Hay?r Eri?im nedeni
+SMS_APPLICATION_ADDRESS,SMS Ba?vuru Adresi
+SMS_INTERFACE_NAME,SMS arayÅzÅ ad?
+TO_DISPLAY_A_SINGLE_PAGE,Tek bir sayfay? gîrÅntÅlemek iáin
+FINANCIAL_REWARD_CYCLE,Finansal ôdÅl dîngÅsÅ
+VERSION_NAME_OF_THE_VERSION_NU,SÅrÅm numaras?n?n SÅrÅm ad?
+CLICK_SIGN_UP_NOW,?imdi Åye Ol
+SIGN_UP_NOW,Kaydol
+CLICK_HERE_TO_DOWNLOAD,?imdi ?ndirin
+LEFT_CLICK_STIPPLED,Sol t?klama noktal?
+RIGHTCLICK_ON_CLEAR,Sa? t?klama Temizle
+CLEAR_FLOAT_EFFECT,?effaf Kayd?rma efekti
+CLEAR_INSIDE_AND_OUTSIDE_MARGI,?effaf iá ve d?? kenar bo?luklar?
+ADD_PAYMENT_METHODS,ôdeme yîntemleri ekleyin
+REGISTRATION_OPEN_AWARD,Kay?t aá?k îdÅlÅ
+REGISTRATION_REWARD_CURRENCY,Kay?t îdÅl para birimi
+COMPARED_TO_THE_PREVIOUS_RECOR,Bir înceki rekor seviyeden
+LUCKY_DRAW_OPPORTUNITIES,?ansl? f?rsat áizmek;
+CHECK_THE_STATE_WALLET,devlet cÅzdan kontrol
+CHECK_SYSTEM_STATUS,Sistem Durumunu Kontrol
+THE_LATEST_TRANSACTION_RECORDS,Son ??lemler
+MORE_INFORMATION_COMMISSION,Daha fazla gîster
+LOAD_PICTURE_SHOW,YÅk film gîsterisi
+CLEAR_OBLIGATIONS_SPECIFICATIO,Temizle yÅkÅmlÅlÅkler ?artname
+OLD_PASSWORD,Eski ?ifre
+OLD_TRADING_PASSWORD,Eski Fon ?ifre:
+NEW_MOBILE_PHONE_NUMBER,Yeni cep telefonu numaras?:
+TEXT_FORMATTING_ELEMENTS,Metin biáimlendirme elemanlar?
+COVERING_THE_COMPLETE_FILE,komple dosyay? kapsayan
+DIGITAL_ASSETS_TRANSFERRED_OUT,Dijital varl?klar? Äekilme
+DIGITAL_ASSETS_TRANSFERRED,Dijital varl?klar? transfer
+DIGITAL_ASSET_INFORMATION,Dijital Varl?k Bilgisi
+DIGITAL_ASSET_NAME,Dijital varl?k ad?
+PAYMENT_SUCCESSFUL_RETURN,ôdeme ba?ar?l? dînÅ?
+PAYMENT_FAILS_TO_RETURN,ôdeme dînÅ? ba?ar?s?z
+PROMPT_TEXT_LIST,?stemi metin listesi
+BANK_ACCOUNT_WITHDRAWALS,Banka hesap para áekme
+STATE_BANK_WITHDRAWALS,Devlet Bankas? para áekme
+WITHDRAW_BANK_BRANCH,banka ?ubesine geri áek
+WITHDRAW_BANK_CITY,Banka kenti geri áek
+WITHDRAW_CAPTION,yaz?s?n? geri áek
+RECOMMENDED_GIFT_CURRENCY,ônerilen hediye para
+RECOMMENDED_GIFT,ônerilen hediye
+INDEX_PARAMETER_SETTINGS,Dizin parametre ayarlar?
+VOTES_NEED_TO_DEDUCT,Oy dÅ?eriz gerekir
+MOBILE_PHONE_AUTHENTICATION_TI,Cep telefonu do?rulama sÅresi
+YOU_ACKNOWLEDGE_THAT_YOU_VOTE,Sen Oy kabul
+YOUR_IDENTITY,Kimli?iniz
+YOU_HAVE_UPLOADED,YÅkledi?iniz
+YOU_MUST_BEGIN_WITH_A_LETTER,Bir harfle ba?lamal?d?r
+MICROCHANNEL_REMITTANCE,wechat ôdeme
+ICO_IS_NOT_CURRENTLY_,ICO ?u anda mevcut de?ildir
+OPEN_MASK_CLOSE,Aá?k maske Kapat
+ADVERTISING_USER_MANAGEMENT,Reklam Kullan?c? Yînetimi
+CLICK_ON_THE_AD_DETAILS,reklam ayr?nt?lar?n? t?klay?n
+MARKET_ASSET_ALLOCATION,Pazar Portfîy Da??l?m?
+MARKET_ACTIVITY_REPORT,Piyasa faaliyet raporu
+HIGHLIGHT_THE_MENU_ON_THE_LEFT,Soldaki menÅyÅ vurgulay?n
+THE_OFFICIAL_CURRENCY_ADDRESS,Resmi para birimi Adresi
+REWARD_AMOUNT_OFF_THE_ASSEMBLY,montaj hatt? ôdÅl miktar?
+HEADER_TEXT_MESSAGES,Ba?l?k metni mesajlar?
+FOUNDATION_DOCUMENT_MODEL,Vak?f belge modeli
+LIVE_CHAT_Q__A,Canl? Sohbet Q & A
+TYRANT_CURRENCY_CHAT_ROOM,Tyrant para sohbet odas?
+PICTURES_CAN_NOT_BE_LOADED,Resimler yÅklenemiyor
+FOLLOWUP_AND_SO_ON,bîylece yukar?-izleyin ve
+USER_MANAGEMENT_BACKGROUND,Kullan?c? yînetimi arkaplan
+SYNTHESIS_OF_EXPENSES_DETAILS,giderler ayr?nt?lar? sentezi
+AVAILABLE_FIAT,Mevcut ABD Dolar?:
+CANCEL_TWOFACTOR_AUTHENTICATIO,iki faktîrlÅ kimlik do?rulama ?ptal
+SENDING_A_REQUEST_LOTTERY,Bir istek piyango gînderme
+GET_HOME_SELLERS,ev sat?c?lar? al?n
+EXTENDED_DYNAMIC_MENU,Geni?letilmi? dinamik menÅ
+CATEGORY_EXPAND_COLLAPSE,Kategori Expand Collapse
+SHARE_YOUTUBE,Hisse Youtube
+FREEZE_FIAT,Sipari? USD Åzerinde:
+GLOBAL_FONT_SIZE,KÅresel yaz? tipi boyutu
+INSUFFICIENT,Yetersiz
+MIN_ORDER_QTY,Minimum sipari? adet oldu?u
+MAX_ORDER_QTY,Maksimum sipari? adet oldu?u
+INCORRECT_QTY,Yanl?? Adet
+RECHARGE_CAPTION,?arj yaz?s?
+MODIFY_TRANSACTION_PASSWORD,De?i?tir Fonu ?ifre
+DIGITS_EVERY,"Rakamlar, her"
+PRICE_HIGH_TO_LOW,Fiyat? yÅksekten dÅ?Å?e do?ru
+PRICE_LOW_TO_HIGH,YÅksek DÅ?Åk Fiyat
+TODAY_MONETIZATION,BugÅn para kazanma
+TODAY_ALREADY_DRAW,BugÅn zaten áizmek
+THE_TOTAL_ASSETS_OF,Toplam ABD dolar?
+TRADING_TICKER,Ticaret senedi
+OPEN_TRADING_CHAT,Troll Kutusu
+TRANSACTION_PASSWORD_SETTINGS,Fon ?ifre ayarlar?
+GET_ON_HOME_BUYERS,konut al?c?lar? binin
+THE_HIGHEST_POINT_IN_HISTORY,tarihindeki en yÅksek noktas?
+THE_NEXT_INTEREST_RATE_RISE_TI,Bir sonraki faiz oran? yÅkselme zaman?
+SITE_NOTICE,[Site Bildirimi]
+HIGHLIGHT_THE_MAIN_NAVIGATION,Ana navigasyon vurgulay?n
+HIGHLIGHT_SIDE_NAVIGATION,Vurgu yan gezinme
+ESSENTIAL_PARAMETERS,Temel parametreler
+TRANSACTION_PASSWORD,Fon ?ifre
+IN_ORDER_TO_HIDE,postu iáin
+YOU_CAN_NOT_USE_LOWER,Sen alt kullanamazs?n?z
+WITHDRAWAL_FEE,Para áekme Åcreti
+REFRESH_CODE,Yenile Kod
+PLEASE_ENTER_CONTENT,iáerik girin
+POSITIVE_AND_GREATER_THAN,Pozitif ve daha bÅyÅk
+NO_DATA_TEMPORARILY,Veri yok geáici olarak
+COPY_SUCCESSFUL,Ba?ar?l? kopyala!
+PLEASE_ENTER_A_QUANTITY,bir miktar giriniz
+ORDER_NUMBER,Sipari? #
+DO_NOT_FORGET_ORDER_NUMBER,aktar?l?rken Sipari?i No belirtmeyi unutmay?n do'nt
+DATABASE_UPGRADE,Veritaban? YÅkseltme
+RECHARGE_AMOUNT,Yeniden tahsilat tutar?
+WALLET_SERVER,CÅzdan sunucusu
+PLEASE_SELECT_CURRENCY,para birimini seáiniz
+ICO_CURRENCY,ICO:
+CONFIRM_PASSWORD,?ifreyi Onayla
+ACTUAL_NAME,Geráek isim:
+CLICK_TOO_OFTEN,Äok s?k t?klay?n
+PAYMENT_AMOUNT,ôdeme miktar?:
+CURRENCY_OF_PAYMENT,ôdeme Para Birimi:
+INTEGER_MULTIPLE_WITHDRAWALS,Birden áekme Tamsay?
+RECEIVING_CODES,kodlar?n? alma
+UPDATE_COMPLETED,GÅncelleme tamamland?
+MESSAGE_INPUT_BOX,Mesaj giri? kutusu
+OUT_OF_COMMISSION,Åcretleri geri áekmek iáin:
+ID_NUMBER,kimlik Numaras?
+REVENUE_RANKINGS,Gelir s?ralamas?
+RECOMMENDED_USERS,ônerilen Kullan?c?lar
+AA,ad
+THE_OFFICIAL_ACCOUNT,Hesap:
+SECURE_BROWSER,GÅvenli taray?c?
+IF_IT_DOES_NOT,E?er de?ilse
+ONLINE_CUSTOMER_SERVICE_NUMBER,Äevrimiái mÅ?teri hizmetleri numaras?
+SELLING_FEES,Sat?? bedelleri
+FREE_UPGRADE_TO,Åcretsiz iyile?tirme
+RECHARGE_WAY,?arj Yîntemi
+USD_RECHARGE,Ekleme ABD dolar?
+BUY_FEE,AL Åcreti
+BANK_CARD_MANAGEMENT,Banka Kart? Yînetimi
+PLEASE_ENTER_A_PRICE,LÅtfen bir fiyat girin
+TYPE_OF_CERTIFICATE,Belge TÅrÅ:
+EXPRESSION_BOX,?fade kutusu
+END_TIME,Biti? zaman?:
+CUMULATIVE_SUBSCRIBED,Toplam abone
+CUMULATIVE_TURNOVER,Toplam ciro
+ADMINISTRATOR_MANAGEMENT,Yînetici Yînetimi
+LOGIN_PASSWORD,Giri? ?ifresi
+BLANK_DOES_NOT_UPDATE,Bo? gÅncelle?tirme yok
+TEST_NO_MERCHANTS,Deney No tÅccarlar
+EACH_COIN_BONUS,Her sikke ikramiye
+THE_LATEST_TRANSACTION_PRICE,Fiyat
+DATA_IS_LOADED,Veri yÅklenir
+ALIPAY_BINDING,Alipay Ba?lama
+TECHNICAL_SCORE,Teknik skor:
+YOU_CAN_ALSO,Ayr?ca:
+MICROCHANNEL_PUBLIC_NUMBER,Mikro kanal halka say?s?
+STARTING_TIME,Ba?lang?á ??zaman?:
+APP_RATING,Uygulama De?erlendirme:
+CURRENCY_NAME,Para Birimi Ad?
+THE_AMOUNT_HAS_BEEN_CREDITED_I,Tutar hesaba yat?r?ld? olmu?tur
+MULTIPLE_USERS_,Birden Fazla Kullan?c?
+NAME_SYNTHESIS_DETAILS,Ad? sentez ayr?nt?lar?
+AVAILABLE_USD,Amerikan Dolar?
+RELEASE_TIME,tarih
+TO_THE_FINANCIAL_CENTER,maliye
+RATING_OUTLOOK,gîrÅnÅm Puanlama:
+RECHARGE_MOBILE,?arj Mobil:
+ANY_STRING,Herhangi bir dize
+CURRENCY_PRICE,Para Fiyat?
+VERIFY_AND_ENABLE,Do?rulama ve etkinle?tirme
+TOP_BAR_WARNING,öst áubuk uyar?
+DIFFICULTY_ADJUSTMENT,Zorluk ayar?
+LOCK_SCREEN_PROTECTION,Kilit ekran? koruma
+BANK_CARD_NUMBER,A / C Resim
+WALLET_ID,CÅzdan Ad?:
+WALLET_ADDRESS,CÅzdan adresi
+INTRODUCTION_QUANTUM_CHAIN,Giri? kuantum zinciri
+IMPORTANT_HINT,ônemli ipucu:
+RIO_PRESENTATION_CURRENCY,Rio sunum para birimi
+TURN_PROCESSED,áevirin i?lenmi?
+OUT_OF_VIRTUAL_CURRENCY,sanal para Äekilme
+OUT_QUANTITY,Äekme miktar:
+OUT_CURRENCY,Äekilme Para Birimi:
+OUT_ADDRESS,Äekilme Adresi
+INTO_VIRTUAL_CURRENCY,Mevduat sanal para
+NUMBER_OF_TRANSFER,transferi say?s?:
+INTO_THE_ADDRESS,Mevduat adresi:
+AUTHENTICATOR,?ifrematik
+GAN_PUBLIC_ANBEI,Gan kamu Anbei
+PURCHASE_QUANTITY,Sat?n alma miktar?
+TOTAL_ASSETS_ACCOUNT,Toplam
+BUY_SALE,tip
+ACCOUNT_BALANCE,Hesap bakiyesi:
+GOOGLE_CHROME,Google Chrome
+PLEASE_SELECT_PROVINCE,ili seáiniz
+PLEASE_CHOOSE_THE_CITY,?ehir seáiniz
+PLEASE_SELECT_A,Bir seáiniz
+PLEASE_INPUT_YOUR_EMAIL,lÅtfen giri? e-posta
+PLEASE_MODIFY_CAUTIOUS,temkinli de?i?iklik yap?n
+PLEASE_WAIT_FOR_REVIEW,inceleme iáin LÅtfen bekleyin
+PLEASE_BACKSTAGE,LÅtfen kulise
+EVALUATION_STARS,De?erlendirme Y?ld?z:
+PROOF_WAY,Dayan?kl? yolu
+ACCESSING_PHONE,?leti?im numaras?
+PHONE_NUMBER,seyyar
+APPROVAL_PERIOD,zaman
+CERTIFICATION_NAME,Sertifika Ad?:
+ORDER_TIME,Sipari? zaman?:
+FIGURE_END_MARKET,?ekil sonu pazar
+LITECOIN_INTRODUCTION,Litecoin Tan?t?m
+ENGLISH_ABBREVIATION,?ngilizce k?saltma
+AUTOFILL_PRICE,Otomatik doldurma fiyat
+CONTACT_NUMBER,?leti?im numaras?
+CONTACT_NAME,Ki?i Ad?:
+TRADING_INVESTIGATION,Ticaret soru?turma
+WEBSITE_KEYWORD,Web sitesi Kelimeler
+NET_MENTION_CURRENCY_ANNOUNCEM,Madeni para duyuru
+EDIT_ADMINISTRATOR,DÅzenleme Yînetici
+MAINTENANCE_YU_BO,Bak?m:
+BINDING_TIME,Zaman Ba?lama:
+BINDING_ALIPAY,Cilt Alipay
+CUMULATIVE_CHARGES,KÅmÅlatif Åcretleri
+HAS_SOLD,Sat?ld?:
+THE_CUMULATIVE_TRADING_VOLUME,Toplam i?lem hacmi
+ADMINISTRATORS_LIST,Yîneticiler listesi
+AFTER_SETTING_LEVEL,Ayar seviyesinde sonra
+PENDING_REVIEW,Bekleyen yorum
+IMMEDIATELY_TO_UPGRADE,Hemen yÅkseltmek iáin
+SEND_SECONDS_AGAIN,Yine saniye Gînder
+LOGIN_AUTHENTICATION_CODE,Giri? do?rulama kodu
+AUTHORIZED_USER_GROUP,Yetkili Kullan?c? Grubu
+DOG_CURRENCY_INTRODUCED,Kîpek para tan?t?ld?
+SPECIAL_USER_GROUPS,ôzel Kullan?c? Gruplar?
+ADDING_CARD,kart ekleme
+ADD_ADMINISTRATOR,Yînetici ekle
+ACTIVITY_TIME,Etkinlik sÅresi:
+ACTIVITIES_PRIZES,"Etkinlikler, îdÅller:"
+THE_TOTAL_NUMBER_OF_REGISTERED,Toplam Kullan?c?
+NO_ACCOUNT,Hesap yok?
+NO_TIME_TO_FILL,Referans numaras? [Varsa]
+INVALID_PHONE_FORMAT,Geáersiz telefon numaras?!
+SYSTEM_IN_DEMO_MODE,Bu sistem Demo modunda ?u anda!
+INVALID_USERNAME,Kullan?c? ad? biáimi yanl??!
+INVALID_NICKNAME,Kullan?c? ad? yanl??!
+INVALID_PASSWORD,?ifre do?ru de?il!
+INVALID_EMAIL,E-posta biáimi yanl??!
+SAVED_SUCCESSFULLY,Ba?ar?yla kaydedildi!
+COULD_NOT_SAVE,De?i?iklikleri kaydetmek olamazd?!
+INCORRECT_REQ,Geáersiz istek!
+INCORRECT_TYPE,Geáersiz Tipi Sa?lanan!
+SUCCESSFULLY_DONE,Ba?ar?yla tamamland?!
+ADDED_SUCCESSFULLY,Ba?ar?yla Eklendi!
+FAILED_TO_ADD,eklenti ba?ar?s?z!
+INCORRECT_OLD_PWD,Yanl?? Eski ?ifre!
+INCORRECT_NEW_PWD,Yanl?? Yeni ?ifre!
+INVALID_OLD_PWD,Geáersiz Eski ?ifre!
+INVALID_NEW_PWD,Geáersiz Yeni ?ifre!
+LOGIN_PWD_CHANGED,Giri? ?ifre De?i?tirildi
+NO_CHANGES_TO_PWD,YOK De?i?iklikler ?ifre yap?lm??t?r
+YOU_NEED_TO_LOGIN,LÅtfen giri? yap?n
+INVALID_SMS_CODE,Geáersiz SMS Kodu
+INCORRECT_SMS_CODE,Yanl?? SMS Kodu
+INTRODUCTION_BITS_SHARES,Tan?t?m hisselerini bitleri
+BITCOIN_HOUSE,Bitcoin Evi
+BILLY_SHARES_INTRODUCTION,Billy Giri? payla?an
+ICO_IS_IN,Sat?? á?kt?!
+LUCKY_DRAW_CHANCE,?ansl? beraberlik ?ans?
+THE_CORE_ALGORITHM,áekirdek algoritma
+TAB_NAVIGATION,Sekme navigasyon
+FIND_ADMINISTRATOR,Yînetici bul
+THE_TOTAL_VALUE_OF_A_CERTAIN_C,Belirli bir para toplam de?eri
+NOT_BY_REASON,De?il nedene gîre
+SERVER_QUEUE,Sunucu kuyru?u
+MAXIMUM_SELL,Maksimum Sat??:
+MAXIMUM_BUY,Maksimum Sat?n:
+BEST_SELLING_PRICE,?yi Teklif:
+BEST_BID,En sor:
+UPDATE_THE_DATABASE,veritaban?n? gÅncellemek
+SHOW_RECORD_NUMBER,rekor say?da gîster
+YESTERDAYS_CLOSING_PRICE,DÅnkÅ kapan?? fiyat?
+DIGITAL_JINJIE_SHAO,Dijital Jinjie Shao
+STATISTICS_PUT_THE_CODE,?statistik kodu koymak
+ALIPAY_HEADED,Alipay ba?l?
+ALIPAY_INFORMATION,Alipay Bilgi
+SOSO_BITCOIN,soso Bitcoin
+THE_AMOUNT_OF_WITHDRAWALS_IS,áekme miktar?d?r
+WITHDRAWAL_AMOUNT,Äekilme Tutar
+WITHDRAW_ADDRESS,Adres geri áek
+RELEASE_DATE,Yay?n tarihi
+SORT_BY,Gîre s?rala:
+DEDUCT_FEES,DÅ?Årme Åcretleri
+OWNED_TRADING,Sahip olunan ticaret
+WHERE_THE_PROVINCES,Konum seá:
+OR_THE_OUTER_CHAIN,Ya d?? zincir)
+I_WAS_SPEAKING_TWO,Benim gîrÅ?Åm
+YOU_ARE_CURRENTLY_AVAILABLE,Denge:
+FORGET_PASSWORD,Parolan?z? m? unuttunuz?
+WECHAT_QR_CODE,QR kodu Wechat
+ZHANG_CERTIFICATION_PICTURES,KYC GîrÅntÅleri
+BANK,Banka
+ACCOUNT_PROVINCES,ölke:
+BRANCH_ACCOUNT,?ube:
+ACCOUNT_NAME,Hesap ad?:
+TOTAL_ADVERTISING_PROFITS,Toplam reklam karlar?
+CURRENCY_PEOPLE_ARE_SAYING,yorumlar
+HAVE_AN_ACCOUNT,Hesab?n var m??
+THE_ITALIC_RIGHTING,italik do?rulma
+IMPORTED_CONTENT,?thal iáerik
+IMPORT_FORMAT,?thalat biáimi:
+IMPORT_DATABASE,?thalat Veritaban?
+SAFE_AND_SECURE,GÅvenli
+NOTE_NAME,Not ad?:
+BACKUP_DATABASE,Yedek veritaban?
+ADDRESS_MARK,Adres i?areti
+REMARK,dÅ?Ånce
+CATEGORIES,Kategoriler:
+COMMODITY_PRICES,Mal fiyatlar?:
+CYCLE_WITHIN_LIMITS,s?n?rlar iáinde DîngÅsÅ
+START_PAGE_PICTURE,Ba?lang?á ??sayfas? resim
+CAN_BE_EXTRACTED_AT_ANY_TIME,Herhangi bir zamanda elde edilebilir
+ONLY_DUE_TO_TAKE,almaya Sadece nedeniyle
+FILL_ONLY_NUMBERS,Sadece rakam doldurun
+THE_TOTAL_ISSUED,Kayna??n? SirkÅlasyon
+KARAT_INTRODUCTION,Karat Tan?t?m
+SELL_??RATIO,Sat?? oran?:
+NUMBER_SOLD,Numara sat?lan:
+SALE_NUMBER,Sat?? ADET:
+SELL_??PRICE,Sat?? fiyat?:
+BLOCK_SPEED,Blok h?z
+BLOCK_BONUS,Blok Bonus:
+ANALYTICAL_FUNCTION,Analitik fonksiyon
+FREEZE_USD,In Ticaret
+BAXI_DIGITAL_NETWORK,Baxi Dijital A??
+YUAN_DEBIT_CARDS,"Yuan, banka kartlar?"
+BIT_AND_CONFIRM,Bit ve onaylay?n
+EXCELLENT_PRESENTATION_CURRENC,MÅkemmel sunum para damla
+ON_BEHALF_OF_NOT_WINNING,kazanmak de?il ad?na
+PAYMENT_METHOD,ôdeme ?ekli
+PAYMENT_CURRENCY,ôdeme Para Birimi:
+CASH_WITHDRAWAL,ABD dolar? geri áek
+TRANSACTION_HOUR,i?lem saat
+BUY_RATIO,Sat?n oran?:
+BUY_QUANTITY,Sat?n Adet:
+PLEASE_LOGIN,LÅtfen înce giri? yap?n!
+BUY_PRICE,Sat?n Fiyat:
+KEY_FEATURES,Ana ôzellikler
+EXCLUSIVE_INVITATION_CODE,MÅnhas?r davet kodu
+EXCLUSIVE_PROMOTION_OF_LANGUAG,Dilin MÅnhas?r tan?t?m
+EXCLUSIVE_ADVERTISING_SLOGAN,MÅnhas?r reklam slogan?
+SHORTCOMINGS,eksiklikleri:
+DO_NOT_AUTOMATICALLY_SHUT_DOWN,otomatik olarak kapan?r etmeyin
+IT_DOES_NOT_SHOW_THE_MASK,Bu maskeyi gîstermiyor
+DO_NOT_DISPLAY_PRICES,fiyatlar? gîsterme
+DOWNLOAD_THE_UPDATE_PACKAGE,GÅncelle?tirme paketini indirin
+PULLDOWN_BAR_STYLE,Aá?lan bar tarz?
+ADDED_TIME,Eklenen sÅresi:
+ON_THREE_DIVIDENDS,öá kar Åzerinde
+WARNINGS,Uyar?lar
+HIGHLIGHT_NAVIGATION,Vurgu navigasyon
+SUBMIT_FORM,Formu gînder
+SEARCH_FUNCTION,Arama fonksiyonu
+ENTER_SEARCH,arama girin
+TIPS,?puálar?
+MENU_HIGHLIGHTS,MenÅ olaylar?
+VIEW_DESCRIPTION,GîrÅnÅm Aá?klama
+FINANCIAL_CENTER,Finans merkezi
+ADD_TIME,Zaman ekle
+SECURITY_CENTER,Hesab?m
+ALL_STATES,TÅm devletler
+MENU_ON_THE_LEFT,Soldaki MenÅ
+RIGHT_OF_THE_CONTENT,iáerik Sa?
+SEND_DATA,Gînder veri
+UPLOAD_ERROR,YÅkleme hatas?
+NORMAL_STATUS,Normal durum
+FROZEN_STATE,Dondurulmu? devlet
+VERIFIED,Do?rulanm??
+REAL_NAME_CAN_NOT_BE_CHANGE,Geráek Ad? Äekilme hesab?yla ayn? gerekiyor ve daha sonra de?i?tirilemez
+KYC,KYC
+SECURITY,GÅvenlik
+INVITE_CODE,Kod Davet
+APPLICATION_CENTER,Uygulama Merkezi
+PROCESSING,Ko?u
+BAZAAR_COMMISSIONED,Äar?? devreye
+ACCESS_AUTHORIZATION,Eri?im yetkilendirme
+ICO_RECORD,ICO rekor
+ICO_CENTER,ICO Merkezi
+EDIT_TIME,DÅzenleme zaman?
+MONEY_NAME,Para Ad
+SHIPPING_ADDRESS,Teslimat adresi
+OPERATING_TIME,Operasyon zaman?
+MY_TRADING,Benim ticaret
+ICON_ADDRESS,Simge Adresi
+THE_STATION'S_RECORD,?stasyonun rekor
+ARTIFICIAL_ARRIVAL,Yapay geli?
+DO_NOT_FILL,doldurmay?n
+ACCOUNT_WITHDRAWALS,Hesap Äekilme
+THANK_YOU_FOR_PARTICIPATION,Kat?l?m?n?z iáin te?ekkÅrler
+ICO_NAME,ICO ad?
+AUTO_UPDATE,otomatik gÅncelleme
+CONFIRM_THE_ACCOUNT,hesap
+USER_REGISTRATION,kay?t
+FINANCIAL_RECORDS,Finansal kay?tlar
+MEMBERS_OF_THE_AUTHORIZED,yetkili Åyeleri
+REMARKS_NAME,Ad? Aá?klamalar
+THE_REMAINING_AMOUNT,Kalan miktar
+SUCCESSFUL_RECHARGE,Ba?ar?l? ?arj?
+SECURITY_CODE,GÅvenlik Kodu
+LOG_IN_IMMEDIATELY,Oturum aá
+WITHDRAWALS_RECORD,Para áekme rekoru
+DIVIDEND_CENTER,TemettÅ Merkezi
+MARKET_PLACE,pazar yeri
+FINANCIAL_SECURITY,Finansal gÅvenlik
+ACCOUNT_FUNDING,Hesap ?arj
+LOG_IN,Oturum aá
+THAWING_TIMES,áîzÅlme sÅreleri
+IMMEDIATE_PAYMENT,An?nda îdeme
+MONEY_CURRENCY,para birimi
+FINANCIAL_PERIOD,Mali dînem
+CHECK_THE_WALLET,cÅzdan kontrol
+PROFESSIONAL_SERVICES,Profesyonel hizmetler
+ACTION_TYPE,Eylem TÅrÅ
+MY_BONUS,Benim Bonus
+FAST_AND_CONVENIENT,h?zl? ve kullan??l?
+OPENING_TIME,aá?l?? zaman?
+CURRENCY_LIST,Para listesi
+COMMISSIONED_BY_TIME,zaman
+REWARD_CURRENCY,ôdÅl para
+DONGYUEBIGU,Dongyuebigu
+CURRENCY_INTEREST,Dîviz Faiz
+FREE_REGISTRATION,Kaydol
+CODE_UPGRADES,Kod yÅkseltmeleri
+VERIFY_PHONE,telefonu do?rula
+HOME_SHOW,Ev gîsterisi
+MARKET_MARKET,Market
+LINK_TITLE,Ba?lant? Ba?l???
+LINK_ADDRESS,ba?lant? adresi
+LINK_NAME,Ba?lant? Ad?
+RESET_PASSWORD,Parola s?f?rlama
+OUT_RECORD,Äekme
+INTO_GIFT,hediye iáine
+PURCHASE_HISTORY,Sat?n al?m geámi?i
+ICO_LIMIT,ICO s?n?r?
+NUMBER_OF_ICO,ICO Say?s?
+THE_TOTAL_AMOUNT_OF_SUBSCRIPTI,Toplam Arz
+ICO_LIST,ICO listesi
+ICO_PRICE,ICO Fiyat
+APPLE_COMPUTER,Apple bilgisayar
+CONTACT_ADDRESS,?leti?im Adresi
+BOUND_PHONE,seyyar
+MY_LOG,Benim Kay?tlar
+SYSTEM_RELIABILITY,Sistem gÅvenilirli?i
+PENDING,Bekliyor
+SUBSCRIBE_NOW,?imdi abone
+PROHIBIT_TRANSFER,transferini yasakla
+BANKING_CENTERS,Bankac?l?k Merkezleri
+CURRENT_MODE,GÅncel mod
+REGISTER_ACCOUNT,Kaydol
+NORMAL_TRANSFER,Normal transferi
+THE_NEW_CURRENCY_VOTE,Oy
+TIP_LOGO,?pucu logosu
+TIP_POSITION,?pucu pozisyon
+MY_PROPERTY,Benim dengeler
+DIVIDEND_START,TemettÅ ba?lang?á
+OPEN_TRADING,Aá?k ticaret
+THE_BOTTOM_OF_THE_DISPLAY,Ekran?n alt
+SUBSCRIBED,Verili?:
+MILLET_BRACELET,Dar? bileklik
+HOUR_ONLINE,Saat Online
+OFFICIAL_ANNOUNCEMENT,duyuru
+DELEGATED_ADMINISTRATION,Emirler
+HUAWEI_CELL_PHONE,Huawei cep telefonu
+AMOUNT_ARRIVAL,Tutar geli?
+DIVIDEND_CURRENCY,TemettÅ para
+DIVIDEND_NAME,TemettÅ Ad?
+RECHARGE_TIME,?arj sÅresi
+CHANGE_PASSWORD,?ifre de?i?tir
+COMMISSION_AMOUNT,Komisyon Tutar?
+COMMISSION_RATE,komisyon oran?
+RISK_WARNING,#VALUE!
+DOWNLOAD_WALLET,?ndir cÅzdan
+INVITE_FRIENDS,Ortakl?k Program?
+TRANSFER_TIME,Transfer zaman?
+THE_NUMBER_OF_TRANSFER,transferi say?s?
+INTO_SUCCESS,mevduat ba?ar?s?
+TYPES_OF_FEE,Åcretin tÅrleri
+VOLUME_COST,Cilt Maliyeti
+ACCOUNT_PREVIEW,hesap
+PREPAID_RECHARGE,Pe?in îdenen ?arj?
+ICO_TIME,ICO zaman?
+THAW_INTERVAL,áîzÅlme aral?k
+FORM_SUBMISSION,Form gînderme
+TYPE_TITLE,TÅr Ba?l?k
+ADD_IT_NOW,?imdi ekle
+BACKUP_NOW,?imdi yedekle
+RECHARGE_IMMEDIATELY,?arj ?imdi
+CONFIRM_ARRIVAL,Onayla geli?
+LOG_IN_LOG,KÅtÅkler
+USERNAME,Kullan?c? ad?
+THE_TOTAL_AMOUNT_OF_FINANCING,finansman tutar?
+CLICK_SWITCH,t?klay?n Anahtar?
+SOURCE_DOWNLOAD,Kaynak indir
+CURRENCY_INTEREST_RATE_RISE,Dîviz faiz yÅkseli?i
+PRINCIPAL_CURRENCY,anapara kur
+UPDATED,gÅncellenmi?
+REPLACEMENT_BINDINGS,GÅncelleme Mobil Numara
+ARTICLE_TYPE,Madde Tipi
+ARTICLE_TITLE,Makale ba?l???
+OPERATING_AMOUNT,??letim Tutar
+TEXT_TIPS,Metin ?puálar?
+WITHDRAW_TIME,Zaman geri áek
+PROMOTION_OF_PEOPLE,insanlar?n Promosyon
+PROMOTION_LIST,Promosyon listesi
+FOR_ANOTHER_ONE,Ba?ka biri iáin?
+MY_ICO,Benim ICO
+MY_RECOMMENDATION,benim referans?m
+MY_PROMOTION,Benim promosyon
+MY_REWARD,Benim îdÅl
+TRANSACTION_QUERY,i?lem
+TRANSACTION_TIME,??lem sÅresi
+THE_NUMBER_OF_TRANSACTIONS,i?lem say?s?
+ACCOUNT_BRANCH,Hesap ?ube
+AD_IMAGE,Reklam Resim
+ANNUALIZED_INTEREST_RATES,Y?ll?k faiz oranlar?
+HELP,Yard?m
+IT_HAS_BEEN_PROCESSED,Bu i?lendikten
+FINANCING_AMOUNT_HAS_BEEN,Finansman miktar? olmu?tur
+EXPORT_SELECTED,D??a Aktarma Seáildi
+THE_ACTUAL_ARRIVAL,Gînderilen Miktar
+RECURRENCE_PATTERN,Tekrarlama paterni
+THE_NUMBER_OF_COMMISSIONED,Uygulanabilir Åcret
+IF_SUPPORT,destek olursa
+INCENTIVE_PAYMENTS,Te?vik îdemeleri
+BONUS_SYSTEM,Bonus sistemi
+BONUS_TIME,Bonus zaman?
+BONUS,Bonus
+REWARD_NAME,ôdÅl ad?
+PROCESSING_TIME,??lem sÅresi
+BASIC_CONFIGURATION,temel yap?land?rma
+LINKS,Ba?lant?lar
+DIVIDEND_RECORD,TemettÅ Tutanak
+ON_BEHALF_OF_THE_RECOMMENDED,ônerilen ad?na
+QUOTES_TODAY,Al?nt?lar BugÅn
+TRANSACTION_TYPE,i?lem tipi
+CURRENCY_TRADING,Dîviz Ticareti
+TRADING_CENTER,ticari
+BUY_NUMBER,AL numaras?
+LAST_THAW,Son áîzÅlme
+MARKET_PRICE,Market fiyat?
+LOCK_SCREEN_BREAK,Kilit ekran? molas?
+WALLET_VERSION,CÅzdan sÅrÅmÅ
+WALLET_LOGO,CÅzdan logosu
+WALLET_TAG,CÅzdan etiketi
+WALLET_DETAILS,CÅzdan Detaylar?
+THE_TOTAL_WALLET,toplam cÅzdan
+WALLET_NAME,CÅzdan ad?
+WALLET_INFORMATION,CÅzdan bilgisi
+WALLET_BALANCE,CÅzdan Bakiyesi
+AMOUNT_LIST,Tutar listesi
+BY_CERTIFICATION,belgelendirme gîre
+CHOOSE_BANK,banka seá
+CHOOSE_A_CURRENCY,Bir para birimi seáin
+ENTER_PASSWORD,Parolan? Gir
+OUT_DESCRIPTION,Ä?kan Aá?klama
+AUTOMATIC_ROLLOUT,Otomatik Äekilme
+OUT_OF_STATE,Devletin Out
+OUT_OF_THE_NUMBER_OF,miktar
+TRANSFER_INSTRUCTIONS,aktar?m talimatlar?
+INTO_THE_STATE,mevduat devlet
+CURRENCY_TRANSFER,Para transferi
+FUNDS_OUT,Fonlar d??ar?
+PURCHASE_CONFIRMATION,Sat?n alma onay?
+PROPERTY_STATISTICS,MÅlkiyet istatistikleri
+ADDRESS,Adres
+DETAILS,ayr?nt?lar
+ICO_MANAGEMENT,ICO Yînetimi
+TOTAL_PRICE_OF_ICO,ICO toplam fiyat?
+DECOMMISSIONING,hizmet d??? b?rak?lmas?n?
+LIST_OF_TABLES,Tablo listesi
+INDUSTRY_NEWS,EndÅstri Haberleri
+EDIT_ARTICLE,DÅzenleme Madde
+EDIT_AD,Reklam? dÅzenle
+EDIT_ADDRESS,Adresi dÅzelt
+SYSTEM_MESSAGE,sistem mesaj?
+TYPE_ID,TÅr Kimli?i
+LIST_MANAGEMENT,Liste Yînetimi
+GRADE_REQUIREMENTS,S?n?f gereksinimleri
+THE_TOTAL_STATION,toplam istasyon
+SITE_ADDRESS,Site adresi
+STATIONS_IN_BALANCE,dengede ?stasyonlar?
+BUY_NOW,?imdi al
+MONEY_NOW,Para ?imdi
+PROHIBITED_WITHDRAW,Yasaklanan sîndÅrmeye
+PROHIBIT_GIFT,hediye yasakla
+PROHIBITED_TRANSACTION,Yasaklanan i?lem
+CONFIRMATION_NUMBER,Onay numaras?
+CONFIRM_DELETE,silme onayla
+REQUESTS_FOR_CHANGES,de?i?iklikler iáin talep
+USERS_WALLET,Kullan?c?lar cÅzdan
+USER_MANAGEMENT,Kullan?c? yînetimi
+USERS_HOLD_OUT,Kullan?c?lar uzatmak
+MONEY_AMOUNT,Para Miktar?
+FINANCIAL_MODEL,Finansal model
+CLICK_TO_DOWNLOAD,?ndirmek ?áin T?klay?n
+CLICK_TO_CHANGE,de?i?im iáin t?klay?n
+EMPTY_ADDRESS,Bo? adresi
+ADDING_WALLET,cÅzdan ekleme
+ADD_ARTICLE,Ekleme Madde
+ADD_AD,Ekleme reklam
+ADD_ADDRESS,Adres Ekle
+FLOATING_NAVIGATION,YÅzer navigasyon
+REGISTRATION_TIME,Kay?t sÅresi
+NO_DATA,Veri yok
+EACH_BONUS,Her bonus
+THIS_BID_IS,Bu teklifidir
+NORMAL_ROLLOUT,Normal Äekilme
+FORMAT_EXAMPLES,Biáim ôrnekler
+SECTION_NAME,BîlÅm ad?
+MINIMUM_AMOUNT,minimum miktar
+THE_MINIMUM_RECHARGE,asgari ?arj?
+THE_MINIMUM_PRICE,Minimum fiyat
+GREATEST_AMOUNT,Greatest tutar
+THE_MAXIMUM_RECHARGE,Maksimum ?arj
+THE_MAXIMUM_PRICE,tavan fiyat
+LAST_LOGIN,Son giri?
+ARE_WINNING,Kazanma Are
+SINA_WEIBO,Sina Weibo
+ARTICLE_MANAGER,Madde Yîneticisi
+ARTICLE_CONTENT,Madde ?áeri?i
+DATA_SIZE,Veri boyutu
+DATASHEETS,Veri sayfalar?
+THE_NUMBER_OF_OPERATIONS,i?lem say?s?
+TIPS_CONTENT,?puálar? iáeri?i
+WITHDRAW_CONFIGURATION,Yap?land?rma geri áek
+WITHDRAW_SUCCESS,ba?ar?y? geri áek
+SUBMIT_CHAT,Sohbet Gînder
+PROMOTION_MANAGEMENT,Promosyon Yînetimi
+KEY_INTERFACE,Anahtar Arabirim
+INTERFACE_NAME,ArayÅz ad?
+RANK_AUTHORIZATION,S?ra yetkilendirme
+HOLD_PERCENTAGE,Tut yÅzdesi
+NUMBER_HOSTING,numara bar?nd?rma
+HOSTING_PRICES,Bar?nd?rma fiyatlar?
+FEE,Åcret:
+ALL_ACCOUNTS,BÅtÅn hesaplar
+MY_ASSETS,Benim varl?klar
+I_HOLD_OUT,Holdings
+I_PRIZE,bonuslar?m
+MICROCHANNEL_GROUP_NUMBER,Grup wechat
+CURRENT_RATES,GÅncel fiyatlar
+OPENING_PROVINCES,Aá?l?? iller
+CITIES_ACCOUNT,?ehirler hesab?
+OPENING_ADDRESS,Aá?k adres
+OPEN_GIFT,Aá?k hediye
+ADVERTISING_LINKS,Reklam Linkler
+ADVERTISING_MANAGEMENT,Reklam yînetimi
+COMMERCIAL_TIME,ticari zaman
+AD_NAME,Reklam Ad?
+AD_CONTENT,Reklam iáeri?i
+MARKET_NAME,Pazar Ad?
+CURRENCY_TYPE,Dîviz tipi
+CURRENCY_MANAGEMENT,Para Yînetimi
+THE_AMOUNT_SUBSCRIBED,Tutar abone
+NAVIGATION_MANAGEMENT,Navigasyon Yînetimi
+OFFICIAL_ACCOUNTS,Resmi hesaplar
+OFFICIAL_FORUMS,Resmi Forumlar?
+THE_OFFICIAL_MINING,Resmi madencilik
+SAFETY_CERTIFICATE,gÅvenlik sertifikas?
+HOW_TO_INVITE,nas?l davet edilir
+IMAGE_LINK,resim ba?lant?s?
+IMAGE_TITLE,GîrÅntÅ Ba?l???
+PICTURE_NAME,Resim Ad?
+SYNTHESIS_OF_NAME,ad? sentezi
+PARTNER,Ortak
+AVAILABLE_BALANCE,Kalan bakiye
+OF_THE_TOTAL_ISSUED,á?kar?lan toplam de?erlere
+PARAMETER_ERROR,Parametre hatas?
+FOR_UPGRADE,yÅkseltme iáin
+BLOCK_AWARD,Blok îdÅlÅ
+LOADING_PROGRESS,YÅkleme ilerleme
+THE_REMAINING_FREEZE,Kalan dondurma
+THE_NUMBER_OF_ARRIVAL,geli? say?s?
+CREATED,dÅzenlendi
+THE_NUMBER_OF_DIVIDEND,temettÅ say?s?
+THE_TOTAL_DIVIDEND,Toplam temettÅ
+OTHER_CONFIGURATIONS,Di?er dÅzenlemeler
+ALL_CURRENCIES,TÅm para birimleri
+SELECT_NODE,seá dÅ?Åm
+THE_TOTAL_SITEWIDE,Toplam site áap?nda
+PREPAID_ORDERS,ôn îdemeli sipari?ler
+DEPOSIT_METHODS,Para yat?rma yîntemleri
+PREPAID_CELL_PHONE,Pe?in îdenen cep telefonu
+MEMBER_GROUP_NUMBER,öye grup numaras?
+PRICE_TRENDS,Fiyat trendleri
+USD,Amerikan Dolar?
+TRANSACTION_RATE,??lem Oran?
+TRADING_PLATFORM,Ticaret platformu
+FRONTEND_TITLE,ôn Uá Ba?l???
+INADEQUATE,yetersiz
+PREVIOUS_MENU,ônceki menÅ
+THE_DEFAULT_RATING,varsay?lan de?erlendirmesi
+ORDER_BOOK,Her?ey
+DEFAULT_MARKET,Standart Pazar
+DEFAULT_CURRENCY,Varsay?lan Para Birimi
+ADVANCED_SEARCH,geli?mi? Arama
+PROJECT_PICTURES,Proje Resimleri
+TOP_MENU,öst MenÅ
+TOP_CLASSIFICATION,aile kategorisi
+PAGE_SETTINGS,Ayarlar
+NEED_TO_REVIEW,incelemeye ?htiyac?
+RECORD_MART,Tutanak Mart
+MARKET_TRADING,Pazar Ticaret
+QUEUE_INFORMATION,kuyruk Bilgisi
+CONFIGURING_CURRENCY,yap?land?rma para
+CONFIGURATION,Yap?land?rma
+CONFIGURATION_LIST,Yap?land?rma listesi
+THE_NUMBER_OF_INVITED,davet say?s?
+ENCOUNTER_PROBLEMS,Encounter problemleri
+OPTIONS,seáenekleri
+SELECT_IMAGE,Foto?raf seá
+ADAPT_TO_CHINESE,Äince Uyum
+DELIVERY_ADDRESS,teslimat adresi
+EXIT_BACKGROUND,Ä?k arka plan
+CONNECT_TITLE,Ba?lan ba?l?k
+CONNECTION_NAME,Ba?lant? ad?
+BACK_TO,Geri
+WAY_TO_RETURN,dînÅ? Way
+BACK_TO_LIST,Listeye geri dîn
+CURRENCY_TRANSFER_GUIDE,Para transferi k?lavuzu
+TRANSFER_PROCESS,aktar?m i?lemi
+ROLLOUT_COSTS,Åcretleri geri áek
+OUT_OF_TIME,withdrawl Zaman
+THE_SUCCESSFUL_ROLLOUT,Ba?ar?l? Äekilme
+TRANSFER_OR_GIFT,Transferi veya hediye
+PRICE_LIMIT,Fiyat s?n?r?
+BUY_TIME,Sat?n Zaman
+BUY_GOODS,Sat?n mallar
+FINANCIAL_CONFIGURATION,Mali Yap?land?rma
+FINANCIAL_DETAILS,Finansal ayr?nt?lar
+PROPERTY_MANAGEMENT,MÅlkiyet yînetimi
+PROPERTY_LIST,MÅlkiyet listesi
+ERROR_IS_GREATER_THAN,Hata daha bÅyÅktÅr
+DETAILED_RECORD,ayr?nt?l? kay?t
+SPECIFICATION,?artname
+HE_COMMENTED,O yorumlad?
+SETTING_SUCCESS,Ba?ar? Ayar
+SETTING_AWARDS,îdÅl ayarlanmas?
+RECORD_LIST,Tutanak listesi
+REMEMBER_ME,Beni hat?rla
+ICO_INSTRUCTIONS,ICO talimatlar?
+THE_TOTAL_ICO,Toplam ICO
+ICO_PERIOD,ICO dînemi
+INTRODUCTION_TO_SUBSCRIBE,ICO Hakk?nda
+ORDER_DETAILS,Sipari? detaylar?
+THAWED,ÄîzÅlmÅ?
+TABLE_ELEMENT,Tablo eleman?
+FORM_ELEMENTS,Form elemanlar?
+MARKET_TREND,Piyasa e?ilimi
+MENU_MANAGER,MenÅ Yîneticisi
+SORT_MENU,S?ralama menÅsÅ
+SYMBOL_AB,sembol
+AUTOMATIC_LANDING,Otomatik ini?
+CONTACT_US,Bize Ula??n
+CHAT_MODE,Sohbet modu
+CHAT_LIST,Sohbet listesi
+ONLINE_BANKING_ACCOUNT,Äevrimiái bankac?l?k hesab?
+ONLINE_BANKING_HEADED,?nternet bankac?l??? ba?l?
+ONLINE_BANKING_INFORMATION,Äevrimiái banka bilgileri
+SITE_STATUS,Site Durumu
+WEBSITE_TITLE,Web Sitesi Ba?l???
+WEBSITE_BOTTOM,Web sitesi alt
+SITE_NAME,Site ad?
+EDIT_LINK,Ba?lant? DÅzenle
+EDIT_WALLET,DÅzenleme cÅzdan
+EDIT_PROPERTY,DÅzenleme îzelli?i
+EDIT_ICO,DÅzenleme ICO
+EDIT_USER,kullan?c?y? dÅzenle
+MONEY_EDITOR,Para editîr
+EDIT_SECTION,BîlÅmÅ dÅzenle
+EDIT_PERMISSIONS,?zinleri DÅzenleme
+EDIT_LOG,DÅzenleme GÅnlÅ?Å
+EDIT_TEXT,Metni dÅzenle
+EDITING_MARKET,DÅzenleme Pazar
+EDIT_CURRENCY,DÅzenleme para
+EDIT_NAVIGATION,DÅzenleme navigasyon
+WRONG_NUMBER,Yanl?? numara
+STATISTICAL_CURRENCY,?statistiksel para
+STATISTICAL_CODE,?statistiksel kodu
+STRUCTURAL_ELEMENTS,Yap?sal unsurlar
+TIME_LINE,Zaman áizelgesi
+FIG_LINE_RATIO,?ekil hat oran?
+TRADITIONAL_CHINESE,Äince
+CUMULATIVE_PROFIT,Toplam kar
+THE_CUMULATIVE_NUMBER_OF,say?s?
+THE_CUMULATIVE_GAIN,Toplam kazaná
+SYSTEM_SETTINGS,Sistem ayarlar?
+OPERATORS_FORCE_CONTRACT,Operatîrler kuvvet sîzle?mesi
+SIMPLIFIED_CHINESE,Basitle?tirilmi? Äince
+LEVEL_CONFIGURATION,Seviye yap?land?rma
+THE_HIGHER_THE_LEVEL,daha yÅksek seviyeli
+LEVEL_MANAGEMENT,Seviye Yînetimi
+LEVEL_NAME,Seviye Ad?
+WAITING_FOR_CERTIFICATION,belgelendirme bekleniyor
+IMMEDIATELY_WITHDRAW,?imdi geri áek
+MINIMUM_ICO_REQUIRED,Asgari ICO sat?n alma gerekli
+MAX_ICO_ALLOWED,Maksimum ICO Al?m izin isimli
+IMMEDIATELY_TRANSFERRED,depoland??? gibi i?aretle
+CERTIFIED_IMMEDIATELY,Komple KYC
+APPLY_IMMEDIATELY,an?nda devreye girer
+SYNTHESIS_IMMEDIATELY,Sentez hemen
+NO_ACCESS,Eri?im yok
+BAN_CHAT,Ban sohbet
+CONFIRM_WITHDRAW,áekilme Onayla
+CONFIRM_ICO,Onayla ICO
+CONFIRMATION_OF_RECEIPT,Al?m belgesi
+DEVELOPERS,Geli?tiriciler
+SMS_CONFIGURATION,SMS Yap?land?rma
+MULTIPLES,Birden áok
+APPLICATION_TIME,uygulama sÅresi
+USER_DETAILS,Kullan?c? detaylar?
+USER_PASSWORD,Kullan?c? ?ifresi
+USER_CENTER,Kullan?c? Merkezi
+GENERATION_TIME,Nesil zaman?
+NO_MONEY,Para yok
+MONEY_MANAGEMENT,Para yînetimi
+MONEY_PROPORTION,Para oran?
+MONEY_TIME,Para Zaman?
+THE_NUMBER_OF_FINANCIAL,Mali say?s?
+MONEY_LIST,Para Liste
+IPS,IPS
+ALL_RIGHTS_RESERVED,tÅm haklar? Sakl?d?r
+HOT_TOPIC,S?cak konu
+THE_NUMBER_OF_CLICKS,t?klama say?s?
+CLICK_LOG,Log t?klay?n
+CLICK_THE_PLUS_GROUP,art? grubunu t?klay?n
+CLICK_TO_CLOSE,sona t?klay?n
+CLEAR_CACHE,berrak înbellek
+CLEAR_THE_CACHE,înbelle?ini temizleyin
+ADD_A_LINK,Ba?lant? ekleme
+ADD_ICO,ICO ekle
+ADD_USER,Kullan?c? Ekle
+ADD_MONEY,Para ekle
+ADD_PLATE,Ekleme plakas?
+ADD_PERMISSIONS,Ekleme ?zinler
+ADD_LOG,Log ekle
+ADD_TEXT,Yaz? ekle
+ADD_MARKETS,Ekleme piyasalar
+ADD_CURRENCY,Ekleme para
+ADD_NAVIGATION,Ekleme navigasyon
+LIMIT_INCREASE,S?n?r art??
+FLOATING_SETTINGS,YÅzer ayarlar?
+TEST_ENVIRONMENT,test ortam?
+REGISTRATION_GUIDE,Kay?t K?lavuzu
+REGISTRATION_AGREEMENT,Kay?t Anla?ma
+LEGAL_DESCRIPTION,Yasal Aá?klama
+BIT_ERA,Bit dînemi
+DAILY_INTEREST,GÅnlÅk ilgi
+FORMAL_ENVIRONMENT,Biáimsel áevre
+NORMAL_BALANCE,Normal denge
+CONTINENTAL_CROWDFUNDING,k?ta verdikáe kitle fonlamas?
+VIEW_DETAILS,Detaylar? gîster
+SEE_DETAILS,Ayr?nt?lara bak?n?z
+PLATE_PICTURES,Plaka Resimleri
+PLATE_ICON,Plaka simgesi
+SECTION_CONTENT,BîlÅm iáeri?i
+PLATE_PRESENTATION,Plaka tan?t?m?
+THIS_PAGE,Bu sayfa.
+FUTURE_VERSIONS,Gelecek sÅrÅmler
+LATEST_PRICE,son fiyat
+RELEASE_NOTES,SÅrÅm notlar?
+UPDATE_LOG,GÅncelleme GÅnlÅ?Å
+DISPLAY_AMOUNT,Ekran miktar?
+DISPLAY_MARKET,Ekran pazar?
+SHOW_TITLE,Ba?l??? gîster
+SHOW_NAME,isim gîster
+WHETHER_TO_HIDE,gizlemek ister
+WHETHER_CERTIFICATION,KYC
+WHETHER,olup olmad???n?
+WHETHER_TO_RECOMMEND,tavsiye etmek ister
+LOGGING,Kerestecilik
+UNABLE_TO_RIGHTING,do?rulma edilemiyor
+ITS_ADVERTISING,Onun reklamc?l?k
+BEGINNER'S_GUIDE,Yeni ba?layanlar?n rehberi
+NEW_PASSWORD,Yeni ?ifre
+THE_TOTAL_NUMBER_OF_ARTICLES,e?yalar?n say?s?
+ARTICLE_CATEGORIES,makale kategorisi
+FILE_PATH,dosya yolu
+DATA_RESTORE,Veri Restore
+DATA_TABLE,Veri tablosu
+DATA_BACKUP,veri yedekleme
+DIGITAL_ASSETS,Madeni para
+INSTRUCTIONS,Talimatlar
+CURRENCY_OPERATIONS,Dîviz i?lemleri
+ACTION_REMARK,Eylem Aá?klama
+ACTION_ADDRESS,Eylem Adresi
+AFTER_THE_OPERATION,Ameliyattan sonra
+BEFORE_OPERATION,??letim încesi
+TIP_MARK,?pucu i?areti
+BANK_WITHDRAWALS,Banka para áekme
+WITHDRAW_TIPS,ipuálar? áekin
+REMOVE_AHEAD,înÅmÅzdeki Kald?r
+SUBMIT_COMMENTS,gîzden geáirmek
+SUBMITTED_ADDRESS,Gînderilen adresi
+RECOMMENDED_ITEMS,Personel seáim
+PROMOTION_REBATE,Promosyon indirim
+RECEIVING_ADDRESS,alma adresi
+INTERFACE_LOGO,ArayÅz logosu
+BUTTON_CONTROL,DÅ?me denetimi
+DESIGNATED_PRIZE,belirlenmi? îdÅl
+CAREERS,Kariyer
+VOTING_TIPS,Oy ?puálar?
+TECHNICAL_SPECIFICATIONS,Teknik îzellikler
+BATCH_IMPORT,Seri ?thal
+MOBILE_ACCESS,Mobil Eri?im
+PHONE,Telefon
+OWN_GROUPS,Kendi gruplar?
+I_WANT_TO_SUBSCRIBE,Ben abone olmak istiyorum
+I_WANT_TO_ENTRUST,Ben emanet etmek istiyorum
+MY_DELEGATION,Benim Bekleyen Emirler
+I_HAVE_MONEY,Ben îdedim
+GROWING_SUCCESS,BÅyÅyen ba?ar?
+TRANSACTION_RECORD,??lem kayd?
+DEAL_PRICE,Anla?ma fiyat?
+TOTAL_BALANCE,Toplam Bakiye
+TOTAL_FEE,Toplam Åcret
+MICROSOFT_ELEGANT_BLACK,Microsoft zarif siyah
+CURRENT_VERSION,?imdiki versiyonu
+PICTURES,Resimler!
+CHECK_NOW,?imdi kontrol et
+START_BACKUP,Ba?lang?á ??Yedekleme
+OPEN_CHAT,Aá?k sohbet
+OPEN_REWARD,Aá?k îdÅl
+DEVELOPER,Geli?tirici
+APPLICATION_MODULE,Uygulama ModÅlÅ
+SHOULD_AID_CENTER,merkezini yard?mc? olmal?
+AD_LIMIT,Reklam s?n?r?
+AD_TITLE,Reklam Ba?l???
+ADS_LIST,Reklamlar listesi
+LUCKY_LIST,?ansl? listesi
+PLATFORM_OVERVIEW,Platform Genel bak??
+PLATFORM_INTRODUCTION,Platform tan?t?m?
+MOST_USED_LINK,En áok kullan?lan ba?lant?
+MARKET_STATISTICS,Pazar istatistikleri
+THE_CURRENCY_ALLOCATION,para tahsisi
+CURRENCY_COMMENTS,Para Yorumlar
+CURRENCY_STATISTICS,Para istatistikleri
+CURRENCY_INTRODUCTION,Para Giri?
+TRANSACTION_VOLUME,??lem hacmi
+HOUR_HOTLINE,Saat hatt?
+DECIMAL_PLACES,Ondal?k
+EXPORT_ALL,?hracat tÅm
+CUSTOMER_SERVICE_CONFIGURATION,MÅ?teri Hizmetleri Yap?land?rma
+CUSTOMER_SERVICE_HOTLINE,MÅ?teri Hizmetleri Hatt?
+CUSTOMER_SERVICE_CODE,MÅ?teri Hizmetleri Kanunu
+OFFICIAL_WEBSITE,Resmi internet sitesi
+OFFICIAL_MICRO_LETTER,Resmi mikro mektup
+MEDIA_REPORTS,Medya raporlar?
+COMMISSIONED_FREEZE,Commissioned dondurma
+ORDER_PRICE,Sipari? fiyat?
+PRIZE_SETTINGS,îdÅl ayarlar?
+PRIZES_NAME,ôdÅller Ad
+DESCRIPTION_AWARDS,Aá?klama îdÅlleri
+REWARD_TYPE,ôdÅl tipi
+STATE_AWARD,Devlet îdÅlÅ
+HEAD_END,Kafa sonu
+HEADLINE_PROJECT,Ba?l?k projesi
+BACKUP_STATUS,Yedekleme Durumu
+BACKUP_TIME,Yedekleme sÅresi
+BACKUP_NAME,Yedekleme ad?
+PROCESSING_STATUS,??leme durumu
+MA_SET,MA Seti
+ADDRESS_REMARKS,Adres Aá?klamalar
+ONLINE_PAYMENT,Online îdeme
+ONLINE_CONSULTATION,Online KonsÅltasyon
+SIZE_OF_THE_PICTURE,Resmin Boyutu
+BUSINESS_CERTIFICATE,??letme Sertifikas?
+COMMODITY_PRICE,Mal bedeli
+LIMIT_CYCLE,S?n?r áevrimi
+CYCLE_INTEREST,DîngÅ faiz
+BACKGROUND_MENU,Arkaplan MenÅsÅ
+BACKEND_SYSTEM,Arka uá sistemi
+SYNTHETICS,Sentetikler
+SYNTHETICALLY,sentetik olarak
+SYNTHETIC_CURRENCY,Sentetik para
+SYNTHESIS_CYCLE,Sentez dîngÅsÅ
+LOOK_TO_SELL,Sat??
+LOOK_TO_BUY,Sat?n alma
+CANCEL_THE_ICO,ICO ?ptal
+DECERTIFICATION,Sertifikan?n geri
+ISSUE_PRICE,Say? fiyat
+ABNORMAL,anormal
+TWOFACTOR_AUTHENTICATION,?ki faktîrlÅ kimlik do?rulama
+HISTORIC_VERSION,tarihi versiyon
+SELLER_CURRENCY,Sat?c? para
+MINIMUM_SINGLE,Asgari Tek
+SINGLE_LARGEST,bÅyÅk Tekli
+ESCALATION_RULES,Escalation kurallar?
+EXCESS_INVENTORY,Fazla envanter
+HOME_FRONT,Ev înÅ
+THE_AMOUNT_OF_INTEREST,faiz miktar?
+INTEREST_RECORD,?lgi kayd?
+LIST_ELEMENTS,Liste elemanlar?
+FREEZE_BALANCE,Freeze Dengesi
+ABC,ABC
+MAKE_PERSISTENT_EFFORTS,kal?c? áaba
+COMPATIBLE_WITH_FIREFOX,Firefox ile uyumlu
+FIG_OFF_LINE,?ekil áizgi d???
+CLOSE_INDICATORS,Yak?n Gîstergeler
+CLOSE_REWARD,Yak?n îdÅl
+CLOSE_MA,Yak?n MA
+RECHARGE_CONFIGURATION,?arj Yap?land?rma
+RECHARGE_RECORD,?arj rekor
+TOP_TIPS,En iyi ipuálar?
+RECHARGE_GUIDE,?arj K?lavuzu
+RECHARGE_REVIEW,?arj yorumu
+MEMBERSHIP_LEVEL,öyelik Seviyesi
+MEMBER_LOGIN,Oturum aá
+MEMBER_LIST,Kullan?c?lar listesi
+CODE_SECTION,Kod bîlÅm
+PAYMENT_RATIO,ôdeme oran?
+NUMBER_OF_PAYMENTS,ôdemeler say?s?
+PAYMENT_SUCCESSFUL,ôdeme ba?ar?l?
+PEOPLE_VOTE,oy
+TRADING_CHAT,Ticaret Sohbet
+TRADING_RECOMMENDATIONS,Ticaret îneriler
+TRADING_GUIDE,Ticaret Rehberi
+TWO_AT_HOME,Evde iki
+BUYER_CURRENCY,Al?c? para
+THEME_TEMPLATE,Tema
+WINNING_MANAGEMENT,Kazanma Yînetimi
+WINNING_PRIZES,îdÅl kazanan
+STRICTLY_FOLLOW,kesinlikle izleyin
+EXCLUSIVE_LINKS,ôzel Linkler
+DO_NOT_OPERATE,áal??t?rmay?n
+WITHOUT_REVIEW,inceleme olmadan
+HERE_ARE_THE_TOP,??te Åst vard?r
+THE_NEXT_INTEREST,sonraki faiz
+UNDER_NO_EFFECT,Hiábir etkisi alt?nda
+UNDER_THE_TYPE_OF_HOME,tip
+ONLINE_CURRENCY,On-line para
+MARKET_SHELVES,Market raflar?nda
+ADDED_CURRENCY,Eklenen para
+UPPER_CLASSIFICATION,aile kategorisi
+UPLOAD_SUCCESSFUL,yÅkleme ba?ar?l?
+UPLOAD_IMAGE,Foto?raf yÅkleniyor
+THREE_AT_HOME,Evde Åá
+BEGINNERS_GUIDE,Yeni ba?layanlar?n rehberi
+ONE_UNDER_THE_HOUSE,Seviye 1
+RENMINBI,Renminbi
+CONTENT_AREA,?áerik alan?
+REVOKED,?ptal edilen
+DEFAULT,Varsay?lan
+COMPLETED,Tamamland?
+TOTAL_AMOUNT,Toplam tutar
+TO_TRADE,Ticaret
+DO_NOT_SHOW,Gîsterme
+BECAUSE,ÄÅnkÅ
+VISITING_THE_MARKET,pazar Ziyaret
+UNPAID,îdenmemi?
+VOLUME,Ses
+UNTREATED,??lenmemi?
+IN_TRANSACTION,i?lemde
+THE_NEXT_STEP,Sonraki ad?m
+USER_GROUP,Kullan?c? grubu
+TYRANT_CURRENCY,tyrant para
+YUAN_IN_CASH,Nakit
+DEFAULTS,Varsay?lan
+SHOPPING_MALL,Al??veri? Merkezi
+ID_CARD,kimlik kart?
+DRIVERS_LICENSE,Ehliyet
+UTILITY_BILL,Fatura
+SOCIAL_SECURITY,Sosyal GÅvenlik
+OTHERS,Di?erleri
+TELEPHONE_AND,Telefon ve
+BITCOIN,Bitcoin
+NOT_CERTIFIED,sertifikal? de?il
+FEES,hará
+TOTAL,Toplam
+TOTAL_COMMISSION,Toplam Komisyonu
+REMITTANCE,Havale
+IT_HAS_WITHDRAWALS,Bu áekme vard?r
+IT_HAS_BEEN_CREDITED_INTO_ACCOUNT,Bu hesaba yat?r?ld? olmu?tur
+SUB_NAVIGATION,Alt navigasyon
+MOVING_SAID_COINS,sîz konusu paralar? Hareketli
+THAWING,áîzÅlme
+LITECOIN,Litecoin
+REMIND_YOU,Not
+TURNOVER,Devir
+DEAL_DONE,Anla?ma yap?ld?
+PROCESSED,??lenmi?
+PASSWORD,Parola
+SELL_A_PRICE,Satmak
+SELL_RATIO,sat?? Oran?
+SELL_PRICE,Sat?? fiyat?
+MINUTE_LINE,min
+COMPATIBILITY,uygunluk
+BUY_A_PRICE,Sat?n
+VERIFICATION_CODE,Do?rulama kodu
+CHAIN_TOUR_STOCKS,Zincir tur stoklar?
+COIN_WALLET,Madeni para cÅzdan
+CAROUSEL_FIGURE,Karusel ?ekil
+SUPER_PRAISE,SÅper îvgÅ
+ANTS_CURRENCY,Kar?ncalar para
+CHATROOM,Sohbet odas?
+BULLSH_,bullsh *
+RISE_IN_INTEREST_RATES,faiz oranlar?ndaki YÅkseli?i
+THE_FIRST_INSPECTION,ilk muayene
+TOTAL_ASSETS,Toplam aktifler
+THE_TOTAL_AMOUNT,Toplam tutar
+TOTAL_BLOCK,Toplam blok
+NET_LONG_CURRENCY,Net uzun para
+ALREADY_APPLIED,Zaten uygulanan
+TURNED_ON,Aá?k
+ALREADY_TRANSFER_MONEY,Zaten para transferi
+HOUR_LINE,sa
+TOO_MODERATE,Äok ?l?ml?
+DECEMBER,Aral?k
+NOVEMBER,Kas?m
+LOADING,YÅkleniyor
+THE_FIRST_DIVIDEND,ilk temettÅ
+REPAIR_TABLES,Tamir Tablolar?
+TABLE_OPTIMIZATION,Tablo Optimizasyon
+USERS,Kullan?c?lar
+AND_GREATER_THAN,daha Ve daha
+SPLIT,BîlÅnmÅ?
+PREHEATING,Yakla?an
+HAZE_CURRENCY,pus para
+MONROE_CURRENCY,Monroe para
+GOLDEN_KEY,alt?n Anahtar
+RIO_CURRENCY,Rio para
+MAILBOX,E-posta
+STILL_NEED,hala laz?m
+OF_WORLD_CURRENCY,DÅnya para
+GIFT,Hediye
+IN_FAVOR_OF,Destek
+ACCOUNTS,Hesaplar
+ACCOUNT_NUMBER,hesap numaras?
+DOUBAN,Douban
+PLEASE_CHOOSE,LÅtfen seá
+FIGURE_QUOTES,?ekil T?rnaklar
+OBTAIN[,Edinme [
+ENGLISH,ingilizce
+HOLIDAYS,Bayram
+CUSTOM_PAGE,ôzel sayfa
+SMALL_WEBSITE,KÅáÅk web sitesi
+ABBREVIATION,k?saltma
+BEFORE_LANDING,aá?l?? înce
+DOG_CURRENCY,Kîpek para
+FEATURES,ôzellikleri
+ENTHUSIAST,hayran
+BROWSER,Taray?c?
+BIT_HELP,Bit yard?m
+NORMALIZATION,normalle?tirme
+FIND,bulmak
+DID_NOT_PASS,Geámedi
+UNBOUND,ba?s?z
+NOT_LOGGED,de?il Giri?
+INACTIVATED,inaktive
+NOT_BACKED_UP,yedeklenmeyen
+UNFILLED,Doldurulmam??
+NO_ARRIVAL,hiábir var??
+NOT_WINNING,kazanan de?il
+NOT_UPLOADED,yÅklenen de?il
+HIGHEST_PRICE,En yÅksek fiyat
+LOWEST,En dÅ?Åk
+REGULAR_VERSION,DÅzenli versiyonu
+TIME_ALLOWED_NEXT,Zaman ?leri izin
+DAY_CHANGE,24H DE????KL???
+BORDERLESS,s?n?rs?z
+NO_PRIZES,îdÅl yok
+NEW_INTERFACE,Yeni ArayÅz
+THE_AMOUNT_OF_DATA,veri miktar?
+DIGITAL_GOLD,Dijital alt?n
+ALIPAY,Alipay
+DIG_CURRENCY_NET,Kaz? para net
+FINAL_PRICE,son fiyat
+TOTAL_SALES,Toplam sat??
+TOTAL_SCORE,Toplam puan
+APPLICATION_CHAIN,Uygulama Zinciri
+ANNUAL_INTEREST,Y?ll?k faiz
+HAT_SHARES,?apka hisseleri
+PASCAL,paskal
+CURRENCY_LONGSHARE,Dîviz uzun pay?
+PASSED,geáti
+RUNNING,Ko?u
+ENDED,Bitti
+UPCOMING,Yakla?an
+OVER,Bitti
+BOUND,Ciltli
+SHIPPED,gînderilen
+CLOSED,kapal?
+WE_HAVE_BEEN_WINNING,Biz kazanan edilmi?tir
+UPLOADED,yÅklenen
+WORKING_DAY,?? gÅnÅ
+IT_MEANS,Anlam?
+EXPORT_TABLE,?hracat Tablo
+ANDREWS,"Andrews,"
+STOCK,"stok, mevcut"
+CASE_NUMBER,vaka numaras?
+ENTER_KEY,Giri? anahtar?
+BUSINESS_NUMBER,i? numaras?
+AFTER_REFRESH,ferahlat?c?
+ONLY_SUPPORTS,Sadece destekleri
+PUBLISHER,Yay?mc?
+AGAINST,Kar??s?nda
+KARAT,Ayar
+LOAD_LAYER,YÅk tabakas?
+SHARE_TO,iáin pay
+MILITARY_OFFICER,Askeri memur
+COUNTDOWN,geri say?m
+INFORMATION,bilgi
+AS_FOLLOWED,takip olarak
+EXCELLENT_DROP_COINS,MÅkemmel damla paralar
+ETHERNET_SQUARE,Ethernet Kare
+ETHEREUM,Ethereum
+BILLION_DOLLARS,Milyar dolar
+TRADING_VOLUME,I?lem hacmi
+TRADING_RANGE,Ticaret Aral???
+QR_CODE,QR kod
+PRIMARY_NAVIGATION,?lkî?retim Navigasyon
+IN_SEARCH,Aray?? iáinde olmak
+CONFIRMATION,Onayla
+PROFESSIONAL_EDITION,Professional Edition
+DO_NOT_NEED,Gerekmez
+NOT_SUPPORTED,Desteklenmiyor
+NOT_RECOMMENDED,Tavsiye edilmez
+MONTH,Ay
+STATUS,durum
+HOME,Ev
+OPERATING,Aksiyon
+AVAILABLE,Mevcut
+DISABLE,Devre D???
+EXCEPT,d???nda
+EDIT,DÅzenle
+FREEZE,Sipari?
+FORGET,Unuttun
+SELL,Satmak
+NORMAL,Normal
+SEQUENCE,S?ra
+DELETE,Sil
+BUY,Sat?n
+OBJECTS,Nesneler
+CREATE,olu?turmak
+UNDO,Geri alma
+CARRY_OUT,Tamamland?
+ABOUT,hakk?nda
+REVIEW,gîzden geáirmek
+SHUT_DOWN,Kapat
+TIME,zaman
+CURRENCIES,Kurlar
+UNIT_PRICE,Birim fiyat
+MORE,Daha
+DISPLAY,GîrÅntÅle
+QUANTITY,miktar
+USE,kullan?m
+RECHARGE,?arj
+SUCCESS,ba?ar?
+LUMP_SUM,Toplam
+PRICE,Fiyat
+RECOMMEND,ônermek
+ENABLE,etkinle?tirme
+CONTENT,iáerik
+COMPLETE,Her?ey
+STORAGE,Depolama
+TYPES_OF,TÅrleri
+AN_EXAMINATION,incelenmesi
+HOUR,saat
+CANCEL,?ptal etmek
+NEW,Yeni
+PUSH_BUTTON,Butona bas?n?z
+FILL_IN,Doldurun
+NAME,ad
+IMPORTANT,ônemli
+DETAIL,detay
+CONTACT,?leti?im
+REGISTERED,Kay?tl?
+TITLE,Ba?l?k
+NICKNAME,Takma ad
+DESCRIPTION,aá?klama
+IMAGE,gîrÅntÅ
+ICON,ikon
+NAME_AWARD,isim ôdÅlÅ
+DROP_OUT,Ä?k?? Yap
+LOG_OUT,Ä?k?? Yap
+INTO,iáine
+DEPOSIT,Depozito
+UNBUNDLING,Kald?rmak
+SYSTEM,sistem
+MANAGEMENT,yînetim
+DETERMINE,Onaylamak
+CHANGE,De?i?iklik
+PROPORTION,oran
+DATE,tarih
+THE_WAY,yol
+INCOME,Gelir
+EXPENDITURE,harcama
+SIZE,boyut
+OFFICIAL,resmi
+COPY,kopya
+MINUTE,dakika
+DOWNLOAD,indir
+LINK,ba?lant?
+MONEY,Para
+REWRITE,Yeniden yazmak
+SIDEBAR,Kenar áubu?u
+WITHDRAW,Äekil
+ACCOUNT,hesap
+THAW,erime
+POLYMERIZATION,polimerizasyon
+GROUP,grup
+SPACE,Uzay
+CONFIRM,onaylamak
+CLEAR_UP,temizle yukar?
+NOTE,Not
+ORDER,Sipari?
+ACCORDING_TO,gîre
+LABEL,Etiket
+PLATE,Tabak
+NOT_IN,De?il
+DIVISION,BîlÅnme
+CHARGES,Masraflar
+SUMMARY,îzet
+SUBMIT,Sunmak
+CURRENT,?imdiki
+MARKET,Market
+ALREADY_IN,Zaten
+LEFT,ayr?ld?
+DEAL_WITH,u?ra?mak
+MA,MA
+APRIL,Nisan
+SEND,Gînder
+SINGLE_LINE,Tek áizgi
+OCTOBER,Ekim
+SWITCH,De?i?tirmek
+PACKET,Paket
+CLASSIFICATION,Kategori
+JUNE,Haziran
+AUGUST,A?ustos
+FREE,BEDAVA
+TRANSACTION,i?lem
+MAY,May?s
+FEBRUARY,?ubat
+II,II
+SEPTEMBER,EylÅl
+MARCH,Mart
+THREE_GENERATIONS,öá nesil
+JULY,Temmuz
+JANUARY,Ocak
+GENERATION,nesil
+HEIGHT,YÅkseklik
+STYLE,stil
+PROJECT,proje
+TOP,öst
+NEED,ihtiyaá
+HIDE,saklamak
+LOCK_SCREEN,Kilit ekran?
+WALLET,CÅzdan
+RESET,S?f?rla
+SELECT,seámek
+REDUCTION,indirgeme
+RETURN,DînÅ?
+FRAME,áeráeve
+TURNTABLE,dîner tabla
+APPROVAL,onay
+ASSETS,Varl?klar
+RATES,Oranlar
+FINANCIAL_AFFAIRS,Finansal ili?kiler
+EXPLANATION,aá?klama
+LANGUAGE,Dil
+DETAILED,detayl?
+SCORE,Puan
+EVALUATION,De?erlendirme
+FORUM,forum
+FOR_NON,olmayan iáin
+RULE,kural
+FORMS,Formlar
+RANGE,Aral?k
+FROM_THE_SALE,sat???ndan
+FROM_BUYING,al?? itibaren
+WEBSITE,?nternet sitesi
+NUMBERING,Numaralama
+LEVEL,seviye
+EQUAL,e?it
+DRAWING_A_LINE,Bir áizgi áizme
+POINT,Nokta
+FIRE_CURRENCY,Yang?n para
+ACTIVATION,etkinle?tirme
+MANCANG,Mancang
+ADD_TO,a ekle
+INCREASE,art?rmak
+SEEK,Aramak
+COMPETENCE,yetenek
+ORDINARY,s?radan
+DAILY,GÅn
+MINING,madencilik
+HOLD_OUT,uzatmak
+PASSPORT,Pasaport
+CONVERT,DînÅ?tÅrmek
+FOLD,kat
+CONGRATULATION,tebrik
+IN_SHORT,K?sacas?
+OPEN,Aá?k
+APPLICATION,Uygulama
+NO,Hay?r.
+EQUALITY,e?itlik
+TOOL,Araálar
+EXPANSION,Geni?leme
+SMALL_COINS,KÅáÅk paralar
+LESS_THAN,Daha az
+LOGARITHM,logaritma
+WIDTH_HEIGHT,En boy
+WIDTH,Geni?lik
+REGULARLY,dÅzenli olarak
+TIMES_NEW_ROMAN,Times New Roman
+INSTALLATION,Kurulum
+SAFETY,Emniyet
+MEMORY,Haf?za
+AWARDS,ôdÅller
+PRIZE,ôdÅl
+REWARD,ôdÅl
+CITY,Kent
+ONLINE,?nternet Åzerinden
+IN,iáinde
+CYCLE,dîngÅ
+SUNDAY,Pazar
+THURSDAY,Per?embe
+ON_SATURDAY,Cumartesi gÅnÅ
+FRIDAY,Cuma
+ON_TUESDAY,Sal? gÅnÅ
+ON_WEDNESDAY,Äar?amba gÅnÅ
+ON_MONDAY,Pazartesi gÅnÅnde
+WRITABLE,yaz?labilir
+OPPOSITION,Muhalefet
+UNINSTALL,Kald?rma
+VOLUMES,Cilt
+SELLERS,Sat?c?lar
+REFRESH,Yenile
+ARRIVAL,Var??
+PAGING,Äa?r?
+ERROR,Hata
+OTHER,di?er
+FULL_SITE,Tam Sitesi
+BUY_ALL,Hepsini al
+ACCOUNTED_FOR,sorumluydu
+CONVENIENT,uygun
+MEMBER,Åye
+CROWDFUNDING,Kitle sermayesi
+AS_WELL_AS,Hem de
+INTRODUCTION,Giri?
+NUMBER_OF_PEOPLE,?nsanlar?n say?s?
+TO_UNDERSTANDING,hakk?nda
+BUYERS,Al?c?lar
+CHINESE,Äince
+NEXT_IS,S?radaki
+UPPER_LAYER,Åst katman
+SUPPORT_HEAD_ACCORDING_TO_THE_DOCUMENT_HOLDING_GOODS,Belge tutma mallar? gîre Destek kafas?
+ACCORDING_TO_THE_STATE_FIVE_MINISTRIES,Devlete be? bakanl?k gîre
+NOT_YET,henÅz de?il
+ANY_NUMBER,Herhangi bir numara
+MORE_PEOPLE,Daha fazla insan
+USERS_EXCHANGE,Kullan?c?lar de?i?imi
+SUMMARY_GRAPH,îzet grafi?i
+INTEREST,Faiz
+POSITIVE_CHUN,Pozitif Chun
+COMPOUND,Bile?ik
+TIMES,Zamanlar
+SET,Ayarlamak
+WHICH_IS,hangisi
+RECORD,kay?t
+PURCHASE,sat?n alma
+ADD,Ekle
+PLUS,art?
+RUN,Äal??t?rmak
+SHIFT,vardiya
+CARE,Bak?m
+OR,veya
+CROSS,áapraz
+KEY,anahtar
+INTRODUCE,Takdim etmek
+SEARCH,Arama
+SECONDARY,?kincil
+REAR,Arka
+NUMBER,numara
+ENTER,Giri?
+ONE,bir
+GRAPH,grafik
+TRADE,Ticaret
+EXCHANGE,De?i? toku?
+SIGN_UP,Kaydol
+FINANCE,maliye
+"Unable to send SMS Code, Retry in sometime","bazen de SMS Kodu, yeniden dene gînderilemiyor"
+BALANCE,Denge
+THE TRANSACTION PRICE EXCEEDS A PRICE LIMIT TODAY!,i?lem fiyat? bir fiyat limiti bugÅn a??yor!
+YOUR_WITHDRAWAL_MESSAGE,Ki?isel Äekilme Mesaj?
+YOUR_RECHARGE_MESSAGE,Ki?isel ?arj Mesaj?
+Least sale bid suggested:,Az sat?? teklifi înerdi:
+User,hesap
+Vote,Oy
+ICO,ICO
+Store,DÅkkan
+News,Blog
+SIGNUP,Kaydol
+SIGNIN,Oturum aá
+Launchpad,Ba?latma
+Health,Sa?l?k
+24H_CHANGES,24 Saat De?i?iklikler
+THE NUMBER OF TRANSACTIONS IS MALFORMED,Do?ru Miktar belirtin lÅtfen
+THE TRANSACTION PRICE IS MALFORMED,Do?ru Fiyat belirtin lÅtfen
+CUSTOMER_SUPPORT,MÅ?teri deste?i
+PENDING_NEEDS_CONFIRMATION,[Beklemede] Teyitleri gerekli:
+COINNAME,Coinname
+AMOUNT,Miktar
+SYSTEM HEALTH,Sistem Sa?l?k
+VERIFY_EMAIL,do?rulama Email
+SEND VIA EMAIL,Via E-posta Gînder
+USERNAME_OR_EMAIL,Kullan?c? ad? / E-posta

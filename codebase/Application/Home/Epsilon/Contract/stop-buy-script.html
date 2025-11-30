@@ -1,0 +1,198 @@
+<script>
+function OrderType(type){ //limitsell,limitbuy , stopsell stopbuy
+switch (type) {
+case 'limit':
+$('#ltbutton button').addClass("active");
+$('#mtbutton button').removeClass("active");
+$('#stbutton button').removeClass("active");
+$('#sellstop').hide();
+$('#stopsellbutton').hide();
+$('#limitsellbutton').show();
+$('#buystop').hide();
+$('#stopbuybutton').hide();
+$('#limitbuybutton').show();
+$('#marketbuybutton').hide();
+$('#marketsellbutton').hide();
+$('#buypricebox').show();
+$('#sellpricebox').show();
+$('#DealRecordTable').css('height','451px');
+break;
+case 'stop':
+$('#stbutton button').addClass("active");
+$('#mtbutton button').removeClass("active");
+$('#ltbutton button').removeClass("active");
+$('#sellstop').show();
+$('#stopsellbutton').show();
+$('#limitsellbutton').hide();
+$('#buystop').show();
+$('#stopbuybutton').show();
+$('#limitbuybutton').hide();
+$('#marketbuybutton').hide();
+$('#marketsellbutton').hide();
+$('#buypricebox').show();
+$('#sellpricebox').show();
+$('#DealRecordTable').css('height','489px');
+break;
+
+case 'market':
+$('#mtbutton button').addClass("active");
+$('#ltbutton button').removeClass("active");
+$('#stbutton button').removeClass("active");
+$('#sellstop').hide();
+$('#stopsellbutton').hide();
+$('#limitsellbutton').hide();
+$('#buystop').hide();
+$('#buypricebox').hide();
+$('#sellpricebox').hide();
+$('#stopbuybutton').hide();
+$('#limitbuybutton').hide();
+$('#marketbuybutton').show();
+$('#marketsellbutton').show();
+$('#DealRecordTable').css('height','411px');
+break;
+default:
+ console.log('Incorrect Type');
+
+}
+}
+function TipStopLimit(){
+            layer.tips('A Stop-Limit order is an order to buy or sell a coin once the price reaches a specified price.', '#stbutton', {tips: 3});
+}
+function stopadd_buy() {
+        /*if (trans_lock) {
+            layer.msg('Do not resubmit', {icon: 2});
+            return;
+        }
+        trans_lock = 1;
+		*/
+        var price = $('#buy_price').val();
+		var stop = $('#buy_stop').val();
+        var num = parseFloat($('#buy_num').val());
+        var paypassword = $('#buy_paypassword').val();
+		var buyprice= $('#market_buy_price').html();
+		//var buyprice= bestbuyoffer; //Highest buy offer take from Orderbook
+		var xnb = '{$xnb}';
+		var rmb = '{$rmb}';
+		
+		if (price == "" || price == null) {
+            layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#buy_price', {tips: 3});
+            return false;
+        }
+		 if (stop == "" || stop == null) {
+            layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#buy_stop', {tips: 3});
+            return false;
+        }
+        if (num == "" || num == null) {
+            layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#buy_num', {tips: 3});
+            return false;
+        }
+
+        //load layer style 3-1
+      //  layer.load(3);
+		//layer.load(0, { shade:[0.3, '#000'] });
+
+        //HERE_DEMO_CLOSE
+    /*    setTimeout(function () {
+            layer.closeAll('loading');
+            trans_lock = 0;
+        }, 3000);*/
+		
+		if(buyprice>stop){var condition='drops to or below';}
+					 else{var condition='rises to or above';}
+	var msg = 'If the last price '+condition+' '+stop+rmb+'  , an order to buy '+num+xnb+'  at a price of '+price+rmb+' will be placed';
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.post("{:U('Contract/saveStop')}", {
+            price: $('#buy_price').val(),
+			stop: $('#buy_stop').val(),
+            num: $('#buy_num').val(),
+            paypassword: $('#buy_paypassword').val(),
+            market: market,
+            type: 1
+        }, function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+			getActiveOrders(6);
+				$("#buy_stop").val('');
+                $("#buy_price").val('');
+                $("#buy_num").val('');
+                $("#sell_price").val('');
+                $("#sell_num").val('');
+                layer.msg(data.info, {icon: 1});
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+        }, 'json');
+		});
+    }
+
+    function stopadd_sell() {
+        if (trans_lock) {
+            //layer.msg('Do not resubmit', {icon: 2});
+            //return;
+        }
+        trans_lock = 1;
+        var price = $('#sell_price').val();
+		var stop = $('#sell_stop').val();
+        var num = parseFloat($('#sell_num').val());
+        var paypassword = $('#sell_paypassword').val();
+		var sellprice= $('#market_sell_price').val();
+		//var sellprice= bestselloffer; //lowest sell offer take from Orderbook
+		
+		var xnb = '{$xnb}';
+		var rmb = '{$rmb}';
+
+        if (price == "" || price == null) {
+            layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#sell_price', {tips: 3});
+            return false;
+        }
+		if (stop == "" || stop == null) {
+            layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#sell_stop', {tips: 3});
+            return false;
+        }
+        if (num == "" || num == null) {
+            layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#sell_num', {tips: 3});
+            return false;
+        }
+        //layer.load(3);
+		/*layer.load(0, { shade:[0.3, '#000'] });
+        //HERE_DEMO_CLOSE
+        setTimeout(function () {
+            layer.closeAll('loading');
+            trans_lock = 0;
+        }, 10000);
+*/
+if(sellprice>stop){var condition='drops to or below';}
+else{var condition='rises to or above';}
+	var msg = 'If the last price '+condition+' '+stop+rmb+'  , an order to sell '+num+xnb+'  at a price of '+price+rmb+' will be placed';
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+	
+        $.post("{:U('Contract/saveStop')}", {
+            price: $('#sell_price').val(),
+			stop: $('#sell_stop').val(),
+            num: $('#sell_num').val(),
+            paypassword: $('#sell_paypassword').val(),
+            market: market,
+            type: 2
+        }, function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+			getActiveOrders(6);
+                $("#buy_price").val('');
+                $("#buy_num").val('');
+                $("#sell_price").val('');
+				$("#sell_stop").val('');
+                $("#sell_num").val('');
+                layer.msg(data.info, {icon: 1});
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+        }, 'json');
+		});
+    }
+</script>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HighStock</title>
+
+<link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/stocktools/gui.css">
+<link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/annotations/popup.css">
+
+<script src="__PUBLIC__/Home/js/jqfun.js"></script>
+<script src="__PUBLIC__/Home/highstock/highstock.js"></script>
+
+<script src="__PUBLIC__/Home/highstock/indicators/indicators-all.js"></script>
+<script src="__PUBLIC__/Home/highstock/modules/drag-panes.js"></script>
+
+<script src="__PUBLIC__/Home/highstock/modules/annotations-advanced.js"></script>
+<script src="__PUBLIC__/Home/highstock/modules/price-indicator.js"></script>
+<script src="__PUBLIC__/Home/highstock/modules/full-screen.js"></script>
+
+<script src="__PUBLIC__/Home/highstock/modules/stock-tools.js"></script>
+
+</head>
+<div id="container" class="chart"></div>
+
+
+
+		<script type="text/javascript">
+		var market = "{$market}";
+	var round={$round};
+		       var time = $.cookies.get('chart_time')?$.cookies.get('chart_time'):1;
+						
+				var datex = new Date();
+				var timestampex = datex.getTime();
+$.get("/Chart/getMarketOrdinaryJson?market="+market+"&time="+time+"&t="+timestampex,function(data){
+
+ // split the data set into ohlc and volume
+    var ohlc = [],
+        volume = [],
+        dataLength = data.length,
+        i = 0;
+
+    for (i; i < dataLength; i += 1) {
+        ohlc.push([
+            data[i][0] + '000', // the date
+            data[i][2], // open
+            data[i][3], // high
+            data[i][4], // low
+            data[i][5] // close
+        ]);
+
+        volume.push([
+            data[i][0] + '000', // the date
+            data[i][1] // the volume
+        ]);
+    }
+
+    Highcharts.stockChart('container', {
+        yAxis: [{
+            labels: {
+                align: 'left'
+            },
+            height: '80%',
+            resize: {
+                enabled: true
+            }
+        }, {
+            labels: {
+                align: 'left'
+            },
+            top: '80%',
+            height: '20%',
+            offset: 0
+        }],
+        tooltip: {
+            shape: 'square',
+            headerShape: 'callout',
+            borderWidth: 0,
+            shadow: false,
+            positioner: function (width, height, point) {
+                var chart = this.chart,
+                    position;
+
+                if (point.isHeader) {
+                    position = {
+                        x: Math.max(
+                            // Left side limit
+                            chart.plotLeft,
+                            Math.min(
+                                point.plotX + chart.plotLeft - width / 2,
+                                // Right side limit
+                                chart.chartWidth - width - chart.marginRight
+                            )
+                        ),
+                        y: point.plotY
+                    };
+                } else {
+                    position = {
+                        x: point.series.chart.plotLeft,
+                        y: point.series.yAxis.top - chart.plotTop
+                    };
+                }
+
+                return position;
+            }
+        },
+        series: [{
+            type: 'candlestick',
+            id: 'aapl-ohlc',
+            name: '{$market}',
+            data: ohlc
+        }, {
+            type: 'column',
+            id: 'aapl-volume',
+            name: '{$market} Vol',
+            data: volume,
+            yAxis: 1
+        }],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 800
+                },
+                chartOptions: {
+                    rangeSelector: {
+                        inputEnabled: true
+                    }
+                }
+            }]
+        }
+    });
+});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,71 @@
+<div class="banner-box mb30 mainbgbox"  id="banner__codono_var" >
+	<div class="banner-tag-box">
+		<gt name="Think.session.userId" value="0">
+			<div class="banner-tag col-lg-offset-2 login-banner-tag">
+				<!-- Invitation stats white -->
+				<div class="panel text-center bg-blue-400 has-bg-image">
+					<div class="panel-body">
+						<h6 class="text-semibold no-margin-bottom mt-5 mb-20">Hello  {$Think.session.userName}</h6>
+						<div class="text-muted content-group">
+							<a href="/Finance/myzr" type="button" class="btn btn-info btn-float"><i class="icon-download"></i> <span>{:l('Deposit')}</span></a>
+							<a href="/Finance/" type="button" class="btn btn-danger btn-float btn-float-lg"><i class="icon-pie-chart"></i> <span>{:l('FINANCE')}</span></a>
+							<a href="/User/" type="button" class="btn btn-info btn-float btn-loading"><i class="icon-briefcase"></i> <span>{:l('ACCOUNT')}</span></a>
+						</div>
+					</div>
+
+					<div class="panel-body panel-body-accent pb-15">
+						<div class="row">
+							<div class="col-xs-4">
+								<div class="text-uppercase text-size-mini text-muted">{:l('Balance')}</div>
+								<h5 class="text-semibold no-margin">{$userCoin_top['usd']}</h5>
+							</div>
+
+							<div class="col-xs-4">
+								<div class="text-uppercase text-size-mini text-muted">{:l('FREEZE')}</div>
+								<h5 class="text-semibold no-margin">{$userCoin_top['usdd']}</h5>
+							</div>
+
+							<div class="col-xs-4">
+								<div class="text-uppercase text-size-mini text-muted">{:l('TOTAL_ASSETS')}</div>
+								<h5 class="text-semibold no-margin">{$userCoin_top['allusd']}</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /invitation stats white -->
+			</div>	
+		<else/>
+            <div class="new_banner-tag visitor-banner-tag col-lg-offset-2 ">
+                <div class="topest-profit" style="margin:5px 0 0 0;">
+                    <div class="modal-header" style="border:none;text-align:center;padding:0px;">
+                    </div>
+                    <div class="modal-body" style="font-size:18px;width: 350px;">
+                        <div style="font-size:13px;text-align:left;margin: 0px 0 0 0">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <p>{:l('ACTUAL_TRADING_RISK')}</p>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-sm-10 col-sm-offset-1">
+                	<a href="{:U('Login/login')}" class="btn btn-info btn-block">{:l('LOG_IN_IMMEDIATELY')} </a><br/>
+                	<a href="{:U('Login/register')}" class="btn btn-success btn-block"> {:l('SIGN_UP_NOW')} </a>
+				</div>
+            </div>
+		</gt>
+	</div>
+</div>
+
+
+<style>
+.new_banner-tag {
+	width: 340px;
+	height: 350px;
+	position: absolute;
+	left: 640px;
+	top: 26px;
+	background: url(/Public/static/images/user_data_bg.png) repeat;
+	border-radius: 8px;
+	animation: drop 0.8s 0s ease-in;
+	-webkit-animation: drop 0.8s 0s ease-in;
+}
+</style>

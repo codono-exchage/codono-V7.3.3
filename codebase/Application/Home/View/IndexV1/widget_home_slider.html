@@ -1,0 +1,93 @@
+<div class="banner-box mb30"  id="banner__codono_var" >
+	<div class="banner-tag-box">
+	
+		<gt name="Think.session.userId" value="0">
+	
+			<div class="banner-tag col-lg-offset-2 login-banner-tag">
+				<div class="user-base">
+						<span class="user-base-sp">
+							Hi,<a href="{:U('User/index')}" target="_blank">{$Think.session.userName}</a>
+						</span>
+					<div class="user-info-block">
+						<table>
+							<tr>
+								<td>{:l('AVAILABLE')} USD</td>
+								<td>{:l('FREEZE')}</td>
+								<td>{:l('TOTAL_ASSETS')}</td>
+							</tr>
+							<tr>
+								<td>{$userCoin_top['usd']}</td>
+								<td>{$userCoin_top['usdd']}</td>
+								<td>{$userCoin_top['allusd']}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<ul class="clearfix">
+					<div class="user-info-fina">
+						<a href="{:U('Finance/mycz')}">{:l('RECHARGE')}</a> <a href="{:U('Finance/mytx')}">{:l('WITHDRAW')}</a>
+						<a href="{:U('User/index')}" class="w82">{:l('ACCOUNT')}</a>
+					</div>
+				</ul>
+				<a href="{:U('Finance/index')}" target="_blank" class="green-link-btn">{:l('TO_THE_FINANCIAL_CENTER')}</a>
+				<a href="{:U('Finance/mytj')}" target="_blank" class="transparent-link-btn">
+					<i class="icon-hot-tag"></i> {:l('REFER_A_FRIEND_TO_GET_REWARD')} </a>
+			</div>
+
+	
+		<else/>
+            <div class="banner-tag visitor-banner-tag col-lg-offset-2 ">
+                <div class="topest-profit" style="margin:5px 0 0 0;">
+                    <div class="modal-header" style="border:none;text-align:center;padding:0px;">
+                    </div>
+                    <div class="modal-body" style="font-size:18px;width: 350px;">
+                        <div style="font-size:13px;text-align:left;margin: 0px 0 0 0">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <p>{:l('ACTUAL_TRADING_RISK')}</p>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-sm-10 col-sm-offset-1">
+                <a href="javascript:loginpop();" class="btn btn-info btn-block">{:l('LOG_IN_IMMEDIATELY')} </a><br/>
+                <a href="{:U('Login/register')}" class="btn btn-success btn-block"> {:l('SIGN_UP_NOW')} </a>
+				</div>
+            </div>
+		</gt>
+		
+		
+		
+		
+	</div>
+	<div id="slider_index"
+     class="slider" style="height:400px;">
+    <div class="slider-loading" data-u="loading">
+        <div class="slider-loading-a"></div>
+        <div class="slider-loading-b"></div>
+    </div>
+    <div class="slider-body" data-u="slides">
+	
+	
+		<volist name="indexAdver" id="vo">
+			<div  onclick="window.location.href='{$vo['url']}'">
+				<a src="" style=""><img data-u="image" title="" alt="" src="__UPLOAD__/ad/{$vo.img}"/>
+				</a>
+			</div>
+		</volist>	
+		
+    </div>
+			
+			
+        <div id="slider-body-navigator_index"
+         class="sbn-3" data-u="navigator" style="position: absolute;
+        bottom: 16px;" data-autocenter="1">
+        <div data-u="prototype" style=""></div>
+    </div>
+            <span id="slider-body-arrow-l_index" data-u="arrowleft"
+          class="slider-body-arrowleft-1" data-autocenter="2"></span>
+    <span id="slider-body-arrow-r_index" data-u="arrowright"
+          class="slider-body-arrowright-1" data-autocenter="2"></span>
+    </div>
+<textarea class="mv-hide" style="display: none;">
+    slider_run("slider_index", [{"$Duration":1200,"x":0.3,"$SlideOut":true,"$Easing":{},"$Opacity":2}]);
+</textarea></div>
+<script src="__PUBLIC__/Home/js/canvas.index.js?version=<php>echo time()</php>"></script>

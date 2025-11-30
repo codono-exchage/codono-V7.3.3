@@ -1,0 +1,48 @@
+<include file="Public:header" />
+<script type="text/javascript">
+     let market = "{$market}";
+     let market_round = "{$C['market'][$market]['round']}";
+
+     let market_round_num="{$C['market'][$market]['round']}";
+     let market_type="{$C['market'][$market]['ext_orderbook']}";
+     let userid = "{$Think.session.userId}";
+     let trade_moshi = 1;
+     let getDepth_tlme = null;
+     let trans_lock = 0;
+  if("{$Think.cookie.colorshade}"){
+    const colorshade = "{$Think.cookie.colorshade}";
+  }
+  else{
+    const colorshade = "Dark";
+  }
+</script>
+
+<div class="container-fluid mtb15 no-fluid">
+  <div class="row sm-gutters">
+    <div class="col-md-3">
+      <include file="Trade:left_orderbook" />
+      <include file="Trade:left-margin" />
+    </div>
+    <div class="col-md-6">
+      <include file="Trade:mid_stats" />
+      <include file="Trade:mid_charts" />
+      <include file="Trade:mid_tradebox" />
+    </div>
+    <div class="col-md-3">
+      <include file="Trade:right_pairs" />
+      <include file="Trade:right_history" />
+    </div>
+    <div class="col-md-12">
+      <include file="Trade:bottom_history" />
+    </div>
+  </div>
+</div>
+<include file="Trade:widget_chat"/>
+<include file="Trade:footer_scripts" />
+<eq name="switch" value="0">
+  <script>
+    OrderType('market');
+    console.log('switched to market');
+  </script>
+  </eq>
+<include file="Public:footer_minimal" />

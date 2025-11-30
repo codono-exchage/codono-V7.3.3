@@ -1,0 +1,103 @@
+              <section class="bg-light tc-dark" id="tokens-2">
+
+                <div class="section section-tokensale tc-dark">
+
+                    <div class="container">
+
+                        <div class="section-head text-center wide-auto">
+                            <h2 class="title animated tc-dark" data-animate="fadeInUp" data-delay=".1">{$singletoken.name}</h2>
+                            <span class="animated tc-dark" data-animate="fadeInUp" data-delay=".2">{$singletoken.content|msubstr=0,120}</span>
+                        </div>
+
+                        <div class="nk-block nk-block-token mgb-m30">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="token-info bg-light tc-dark animated" data-animate="fadeInUp" data-delay=".3">
+                                        <h4 class="title title-md mb-2 text-sm-center tc-dark">Sales Information</h4>
+                                        <table class="table table-token">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="table-head">Public Sale Starts</td>
+                                                    <td class="table-des">{$singletoken.beginTime}</td>
+                                                </tr>
+												 <tr>
+                                                    <td class="table-head">Public Sale Ends</td>
+                                                    <td class="table-des">{$singletoken.endTime}</td>
+                                                </tr>
+													 <tr>
+                                                    <td class="table-head">Duration</td>
+                                                    <td class="table-des">{$singletoken.tian} Days</td>
+                                                </tr>
+												
+                                                <tr>
+                                                    <td class="table-head">Total Token Supply</td>
+                                                    <td class="table-des">{$singletoken.num}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-head">Tokens Allocated</td>
+                                                    <td class="table-des">{$singletoken.deal}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-head">ICO Limit</td>
+                                                    <td class="table-des">{$singletoken.limit}</td>
+                                                </tr>
+                                               
+                                                <tr>
+                                                    <td class="table-head">Token Price</td>
+                                                    <td class="table-des">1 {$singletoken.coinname} = {$singletoken.price} {$singletoken.buycoin}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-head">Accepted</td>
+                                                    <td class="table-des">{$singletoken.buycoin}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="animated" data-animate="fadeInUp" data-delay=".4">
+                                        <div class="token-status bg-light tc-dark ">
+                                            <h4 class="title title-md tc-dark">{$stats.starttext}</h4>
+                                            <div class="token-countdown countdown" data-date="{$stats.showdate}"></div>
+                                            <div class="progress-wrap progress-wrap-point">
+                                                <span class="progress-info">Raised so far <span>{$stats.coinsymbol}{$stats.raised}</span></span>
+                                                <div class="progress-bar">
+                                                    <div class="progress-percent bg-grad" data-percent="{$singletoken.bili}"></div>
+                                                    <div class="progress-point progress-point-1">Raised <span>{$stats.coinsymbol}{$stats.raised}</span></div>
+                                                    <div class="progress-point progress-point-2">Total <span>{$stats.coinsymbol}{$stats.total}</span></div>
+                                                </div>
+                                            </div>
+                                            <a href="{:U('Issue/buy?id='.$singletoken['id'])}" class="btn btn-grad">Buy Token</a>
+                                            <span class="token-min">Min Buy: {$singletoken.min} {$singletoken.coinname}, Max Buy: {$singletoken.limit} {$singletoken.coinname}</span>
+                                        </div>
+                                        <gt name="singletoken.invit_1" value="0">
+										<div class="bonus bg-light tc-dark">
+                                            <div class="bonus-info">
+                                                 <div class="bonus-percent">{$singletoken.invit_1}% </div>
+												<div class="bonus-date">Bonus</div>
+                                                <span class="bonus-badge badge-xs">1st  Tier</span>
+                                            </div>
+											<gt name="singletoken.invit_2" value="0">
+                                            <div class="bonus-info">
+                                                 <div class="bonus-percent">{$singletoken.invit_2}% </div>
+												<div class="bonus-date">Bonus</div>
+                                                <span class="bonus-badge badge-xs">2nd Tier </span>
+                                            </div>
+											</gt>
+											<gt name="singletoken.invit_3" value="0">
+                                            <div class="bonus-info">
+                                                <div class="bonus-percent">{$singletoken.invit_3}% </div>
+												<div class="bonus-date">Bonus</div>
+                                                <span class="bonus-badge badge-xs">3rd Tier</span>
+                                            </div>
+											</gt>
+                                        </div>
+										</gt>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>

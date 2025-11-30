@@ -1,0 +1,155 @@
+<volist name="ads" id="vo">	
+<tr <eq name="vo['ad_type']" value="1">class="sell-table"</eq>>
+										<td class="text-left">
+											<div class="row row-cols-md-5 row-cols-1">
+												<div class="col">
+													<div class="pair-name">
+														<div class="icon" style="background-image: url('__UPLOAD__/coin/{$coinimgs[$vo['coin']]}')"></div>
+														<div class="name">{$vo.name} <span><span class="order d-inline">{$vo.orders} {:l("Orders")}</span> / <span class="copmlated d-inline">{$vo.completion}% {:l("Completion")}</span></span>
+														</div>
+													</div>
+												</div>
+												<div class="col">{$vo['fixed_price']| numtostr} <span class="currency d-inline">{$vo.fiat}</span></div>
+												<div class="col">
+													<div class="available">
+														<span class="d-inline">{:l("Available")}</span> {$vo['available']|NumToStr} {$vo.coin}
+													</div>
+													<div class="limit"><span class="d-inline">{:l("Range")}</span> {$vo['fiat']|ucfirst} {$vo['min_limit'] | numtostr} - {$vo['max_limit'] | numtostr}
+													</div>
+												</div>
+												<div class="col">
+													
+												<volist name="vo.method" id="meth">
+													<div class="badge badge-primary m-r-2 badge-sm" tabindex="0" data-toggle="tooltip" title="{$meth}">
+														{$meth}
+													</div>
+												</volist>
+													
+												</div>
+												<div class="col text-right">
+																										
+																<eq name="vo['ad_type']" value="2">
+																				<a data-toggle="collapse" href="#collapse{$vo.id}" role="button" aria-expanded="false" aria-controls="collapse1" class="btn-4 btn-sm">{:('Buy')} {$vo.coin|strtoupper}</a>
+																				<else/>
+																					<a data-toggle="collapse" href="#collapse{$vo.id}" role="button" aria-expanded="false" aria-controls="collapse1" class="btn-5 btn-sm">{:('Sell')} {$vo.coin|strtoupper}</a>	
+																				</eq>
+												</div>
+											</div>
+											<div class="collapse" id="collapse{$vo.id}" data-parent="#p2p-list-table">
+												<div class="content">
+													<div class="inner">
+														<div class="row">
+															<div class="col-12 col-sm-6 col-md-7 col-lg-8">
+																<div class="left">
+																	<div class="pair-name m-b-15">
+																		<div class="icon" style="background-image: url('__UPLOAD__/coin/{$coinimgs[$vo['coin']]}')"></div>
+																		<div class="name">{$vo.name}
+																			<span><span class="order d-inline">{$vo.orders}% {:l("Orders")}</span> / <span class="copmlated d-inline">{$vo.completion}% {:l("Completion")}</span></span>
+																		</div>
+																	</div>
+																	<ul class="row m-b-30">
+																		<li class="col-12 col-sm-6 m-b-10">
+																			<div class="available">
+																				<span class="d-inline">{:l("Price")}</span> {$vo['fixed_price']| numtostr} {$vo.fiat}
+																			</div>
+																		</li>
+																		<li class="col-12 col-sm-6 m-b-10">
+																			<div class="available">
+																				<span class="d-inline">{:l("Available")}</span> {$vo['available']|numtostr} {$vo.coin}
+																			</div>
+																		</li>
+																		<li class="col-12 col-sm-6 m-b-10">
+																			<div class="available">
+																				<span class="d-inline">{:l('Payment Time Limit')}</span> {$vo['time_limit']|numtostr} {:l("mins")} 
+																			</div>
+																		</li>
+																		<li class="col-12 col-sm-6 m-b-10">
+																			<div class="available">
+																				<span class="d-inline">{:l('Order Limit')}</span> {$vo['min_limit']|numtostr} -{$vo['max_limit']|numtostr} {$vo['fiat']|strtoupper} 
+																			</div>
+																		</li>
+																		<li class="col-12 col-sm-6 m-b-10">
+																		
+																				<volist name="paymethod" id="meth">
+													<div class="badge badge-primary mr5" tabindex="0" data-toggle="tooltip" title="{$meth}">
+														{$meth}
+													</div>
+													</volist>
+													<div class="badge badge-primary mr5" tabindex="0" data-toggle="tooltip" title="{:l("Bank Transfer")}">{:l("Bank Transfer")}</div>
+															
+																		</li>
+																	</ul>
+																	<div class="clearfix"></div>
+																	<div class="description">
+																	<span class="d-inline">{:l('Info')}</span>
+																	<p>{$vo.terms}</p>
+																	</div>
+																</div>
+															</div>
+															<div class="col-12 col-sm-6 col-md-5 col-lg-4">
+																<div class="right">
+																	<div class="p2p-buy-sell-form">
+																		<div class="form-group">
+																			<label for="pw_{$vo.id}"><eq name="vo['ad_type']" value="2">{:l("I want to pay with")}<else/>{:l("I want to receive")}</eq></label>
+																			<div class="input-group">
+																				<input class="form-control" name="paywith" id="pw_{$vo.id}" placeholder="1,000.00" type="number" value="0.00">
+																				<div class="input-group-append">
+																					<button style="min-width: 2.5rem" class="btn btn-increment" type="button"><strong>+</strong>
+																					</button>
+																					<span class="input-group-text">{$vo.fiat}</span>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="form-group">
+																			<label for="ta_{$vo.id}"><eq name="vo['ad_type']" value="2">{:l("I will take")}<else/>{:l("Trade")}</eq></label>
+																			<div class="input-group">
+																				<input class="form-control" name="takeamount" id="ta_{$vo.id}" placeholder="Enter amount of coin" <eq name="vo['ad_type']" value="1">value="{$user_balance}"<else/>value="0.00"</eq> type="number">
+																				<div class="input-group-append">
+																					<span class="input-group-text">{$vo.coin}</span>
+																				</div>
+																			</div>
+																		</div>
+																		
+																		<div class="row">
+																		<eq name="vo['ad_type']" value="1">
+																		<div class="col-12 m-b-15">
+																				<label for="pm_{$vo.id}">{:l("Payment Methods")}  <a href="{:U('P2p/paymentsettings')}" class="btn-1 btn-sm">+ Add New </a></label>
+																				<div class="filter-quantity">
+																				<select name="paymethod" id="pm_{$vo.id}" class="bootstrap-select" data-live-search="false" data-live-search-placeholder="{:l('Search')}" data-width="100%">
+																					<option data-content="Please select" data-value="0"></option>
+																					<notempty name="user_banks">
+																						<volist name="user_banks" id="ubank">	
+																							<option data-value="bank:{$ubank.id}" data-content="<span class='badge badge-info'>{:l('Bank Transfer')}</span>:{$ubank.bankcard}" ></option>
+																						</volist>
+																					</notempty>
+																					<notempty name="user_payment_methods">
+																						<volist name="user_payment_methods" id="pms">	
+																							<option data-value="{$pms.method}:{$pms.id}" data-content="<span class='badge badge-info'>{$pms.method}</span></option>:{$pms.information}" ></option>
+																					</volist>
+																					</notempty>
+																				</select>
+																				</div>
+																			</div>
+																		</eq>
+																			<div class="col-6">
+																				<a data-toggle="collapse" href="#collapse{$vo['id']}" role="button" aria-expanded="false" aria-controls="collapse1" class="btn-1 m-b-15 d-block text-center">{:l("Cancel")}</a>
+																			</div>
+																			<div class="col-6">
+																			<eq name="vo['ad_type']" value="2">
+																				<button onclick='trade("{$vo.id}",1)' class="btn-1 btn-sm btn-block text-center bg-success ">{:l("Buy")} {$vo.coin}</button>
+																				<else/>
+																				<button onclick='trade("{$vo.id}",2)' class="btn-1 btn-sm btn-block text-center bg-danger" >{:l("Sell")} {$vo.coin} </button>
+																			</eq>
+																			</div>
+
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+</volist>

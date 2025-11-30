@@ -1,0 +1,70 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Manage Permissions')}</span>
+		</div>
+	
+		<!-- Datasheets -->
+		<div class="card card-body mt-2 table-responsive">
+			<nav role="navigation" class="cf m-2">
+				<div class="fl">
+					<a id="add-group" class="btn btn-success " href="{:U('User/authEdit')}">{:l('Add New')}</a>
+					<a url="{:U('User/authStatus',array('type'=>'resume'))}" class="btn ajax-post btn-info " target-form="ids">{:l('Enable')}</a>
+					<a url="{:U('User/authStatus',array('type'=>'forbid'))}" class="btn ajax-post btn-warning " target-form="ids">{:l('Disable')}</a>
+					<a url="{:U('User/authStatus',array('type'=>'del'))}" class="btn ajax-post confirm btn-danger " target-form="ids"><i class="far fa-trash-alt" title="Delete"></i></a>
+					<a url="{:U('User/authStart')}" class="btn ajax-post confirm btn-primary" target-form="ids">{:l('Reset Permissions')}</a>
+	
+				</div>
+			</nav>
+			<table class="table table-sm emptyx">
+				<thead class="table-light">
+				<tr>
+					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+					<th class="">{:l('Admin group')}</th>
+					<th class="d-none d-md-table-cell">{:l('Title')}</th>
+					<th class="">{:l('Permissions')}</th>
+					<th class="">{:l('Status')}</th>
+					<th class="">{:l('Option')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="_list">
+					<volist name="_list" id="vo">
+						<tr>
+							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td class="d-none d-md-table-cell">{$vo.title}</td>
+							<td><span>{:mb_strimwidth($vo['description'],0,60,"...","utf-8")}</span></td>
+							<td>
+								<span class="btn-group">
+								<a class="btn btn-warning btn-sm" href="{:U('User/authAccess?group_name='.$vo['title'].'&group_id='.$vo['id'])}" title="Permissions"><i class="fa fa-key" title="Permissions"></i></a>
+								<a class="btn btn-info btn-sm" href="{:U('User/authUser?group_id='.$vo['id'])}" title="Alloted Admin"><i class="fa fa-users" title="Alloted Admin"></i></a>
+							</span>
+							</td>
+							<td>
+
+								<eq name="vo.status" value="1">
+									<span class="badge badge-pill badge-soft-success font-size-11">{:l('Enabled')}</span>
+									<else/>
+									<span class="badge badge-pill badge-soft-danger font-size-11">{:l('Disabled')}</span>
+								</eq>
+							</td>
+							<td>
+								<a href="{:U('User/authEdit?id='.$vo['id'])}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+							</td>
+						</tr>
+					</volist>
+					<else/>
+					<td colspan="6" class="text-center"> {:l('No contents!')}</td>
+				</notempty>
+				</tbody>
+			</table>
+		</div>
+	
+	</div>
+</div>
+<include file="Public:footer"/>

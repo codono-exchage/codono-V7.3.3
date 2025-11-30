@@ -1,0 +1,268 @@
+<include file="PublicNew:header"/>
+<include file="P2p:inc_common_banner"/>
+
+<!-- P2P Content Start -->
+
+	<div class="p2p-page">
+		<!-- P2P Content Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="card invite-code-wrapper">
+				<include file="P2p:inc_mid_nav"/>
+					<div class="card-body">
+						<form action="#" class="m-b-30">
+							<div class="row ">
+								<div class="col-12">
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="form-filters d-flex align-items-center">
+											<div class="filterItem">
+												<label for="coin">{:l("Coin")}</label>
+												<div class="filter-quantity">
+													<select id="coin" class="bootstrap-select" data-live-search="true" data-live-search-placeholder='{:l("Search")}' data-width="100%">
+													<option>{:l("PLEASE_CHOOSE")}</option>
+													<volist name="allow_cryptos" id="coin">
+													
+														<option data-content="<img src='{$coin['image']}'> {$coin['symbol']|strtoupper}" data-value="{$coin['symbol']}"></option>
+													</volist>
+											</select>
+												</div>
+											</div>
+											<div class="filterItem">
+												<label for="type">{:l("Type")}</label>
+												<div class="filter-quantity">
+													<select id="type" class="bootstrap-select" data-live-search="false" data-width="200px">
+														<option data-content="{:l('Buy')}" data-value="1"></option>
+														<option data-content="{:l('Sell')}" data-value="2"></option>
+													</select>
+												</div>
+											</div>
+											<div class="filterItem">
+												<label for="status">{:l("Type")}</label>
+												<div class="filter-quantity">
+													<select id="status" class="bootstrap-select" data-live-search="false" data-width="200px">
+														<option data-content="{:l('All')}" data-value=""></option>
+														<option data-content="{:l('Paid')}" data-value="1"></option>
+														<option data-content="{:l('Pending')}" data-value="0"></option>
+														<option data-content="{:l('Canceled')}" data-value="2"></option>
+														<option data-content="{:l('Completed')}" data-value="4"></option>
+														<option data-content="{:l('Disputed')}" data-value="3"></option>
+													</select>
+												</div>
+											</div>
+											<div class="filterItem">
+												<label>&nbsp;</label>
+												<div class="refresh-settings">
+													<a href="#" class="btn main p-t-5 p-b-5 f-s-14"> <i class="ion ion-ios-refresh"></i> Reset</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div class="table-responsive">
+							<table class="table p2p-list-table order-table table-striped table-hover">
+								<thead>
+								<tr>
+									<th scope="col">{:l("Coin")}/{:l("Type")}</th>
+									<th scope="col">{:l("Price")}</th>
+									<th scope="col">{:l("Total")}/{:l("Qty")}</th>
+									<th scope="col">{:l("Peer")}</th>
+									<th scope="col">{:l("Time")}</th>
+									<th scope="col">{:l("Status")}</th>
+									<th scope="col" class="text-right">
+										{:l("Options")}
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<volist name="p2pOrders" id="order">
+								<tr>
+									<td>
+										<div class="pair-name">
+											<div class="name">{$order.coin|strtoupper}<span class="m-t-5">
+											<if condition="($order.ad_type eq 1)">
+											<span class="order d-inline badge badge-success">{:l("Buy")}</span></span>
+											<else/>
+											<span class="order d-inline badge badge-danger">{:l("Sell")}</span>
+											</if>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="available">
+											{$order.fixed_price|NumToStr}
+										</div>
+									</td>
+									<td>{$order.fiat_qty|NumToStr} <span class="currency d-inline">{$order.fiat|strtoupper}</span>
+										<div class="clearfix"></div>
+										{$order.coin_qty|NumToStr} <span class="amount d-inline">{$order.coin|strtoupper}</span></td>
+									<td>
+										{$order.merchant_id|username}
+									</td>
+									<td>
+										<span class="amount d-inline">{$order.addtime|addtime}</span>
+									</td>
+									<td>
+										<switch name="order.status">
+																<case value="0">
+																<div class="badge badge-warning" tabindex="0" data-toggle="tooltip" title="{:l('Pending')}">
+																{:l('Pending')}
+																</div>
+																</case>
+																<case value="1">
+																<div class="badge badge-info" tabindex="0" data-toggle="tooltip" title="{:l('Paid')}">
+																{:l('Paid')}
+																</div>
+																</case>
+																<case value="2">
+																<div class="badge badge-danger" tabindex="0" data-toggle="tooltip" title="{:l('Cancelled')}">
+																{:l('Cancelled')}
+																</div>
+																</case>
+																<case value="3">
+																<div class="badge badge-warning" tabindex="0" data-toggle="tooltip" title="{:l('Disputed')}">
+																{:l('Disputed')}
+																</div>
+																</case>
+																<case value="4">
+																<div class="badge badge-success" tabindex="0" data-toggle="tooltip" title="{:l('Completed')}">
+																{:l('Completed')}
+																</div>
+																</case>
+																<default />--
+															</switch>
+															
+									</td>
+									<td>
+									<if condition="$type eq 'order'">
+									<switch name="order.status">
+																<case value="0">
+																<a href="{:U('P2p/vieworder',array('id'=>$order['orderid']))}" class="btn btn-warning btn-sm">{:l("View")}</a>
+																
+																</case>
+																<case value="1">
+																<a href="{:U('P2p/vieworder',array('id'=>$order['orderid']))}" class="btn btn-info btn-sm">{:l("View")}</a>
+																</case>
+																<case value="2">
+																<a href="{:U('P2p/vieworder',array('id'=>$order['orderid']))}" class="btn btn-info btn-sm">{:l("View")}</a>
+																</case>
+																<case value="3">
+																<a href="{:U('P2p/vieworder',array('id'=>$order['orderid']))}" class="btn btn-warning btn-sm">{:l("View")}</a>
+																</case>
+																<case value="4">
+																<a href="{:U('P2p/vieworder',array('id'=>$order['orderid']))}" class="btn btn-info btn-sm">{:l("View")}</a>
+																</case>
+																<default />--
+															</switch>
+									<else/>
+																		<switch name="order.status">
+																<case value="0">
+																<a href="{:U('P2p/receivedorder',array('id'=>$order['orderid']))}" class="btn btn-warning btn-sm">{:l("View")}</a>
+																
+																</case>
+																<case value="1">
+																<a href="{:U('P2p/receivedorder',array('id'=>$order['orderid']))}" class="btn btn-info btn-sm">{:l("View")}</a>
+																</case>
+																<case value="2">
+																<a href="{:U('P2p/receivedorder',array('id'=>$order['orderid']))}" class="btn btn-info btn-sm">{:l("View")}</a>
+																</case>
+																<case value="3">
+																<a href="{:U('P2p/receivedorder',array('id'=>$order['orderid']))}" class="btn btn-warning btn-sm">{:l("View")}</a>
+																</case>
+																<case value="4">
+																<a href="{:U('P2p/receivedorder',array('id'=>$order['orderid']))}" class="btn btn-info btn-sm">{:l("View")}</a>
+																</case>
+																<default />--
+															</switch>
+										</if>
+									</td>
+								</tr>
+								</volist>
+								
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="card-footer">
+					<div class="pages">{$page}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- P2P Content End -->
+</div>
+<include file="Publicnew:inc_newAdsModal" />
+<script>
+	jQuery(document).ready(function ($) {
+		$("#p2p-list-table").on('shown.bs.collapse', '.collapse', function (e) {
+			$('.table-overlay').addClass('active');
+		});
+		$('.table-overlay').on('click', function () {
+			$(this).removeClass("active");
+			$("#p2p-list-table").find('.collapse.show').collapse('hide');
+		});
+		$('#p2p-list-table').on('hidden.bs.collapse', '.collapse', function () {
+			$('.table-overlay').removeClass('active');
+		})
+	});
+function refreshpage(prefix,value){
+
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+}
+
+document.querySelector('select#coin').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+	var prefix="coin";
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+
+};
+document.querySelector('select#status').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+	var prefix="status";
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+
+};
+document.querySelector('select#type').onchange = function(){   
+   var value=this.selectedOptions[0].getAttribute('data-value'); 
+	var prefix="type";
+	var location=window.location.href;
+	var url = new URL(location);
+	url.searchParams.append(prefix, value);
+	url.searchParams.set(prefix, value);
+    window.location.href =url;
+
+};
+<if condition="$Think.get.coin eq ''">
+$("#allowed_USDT").parent().addClass("active");
+</if>
+
+<if condition="$Think.get.type eq 'sell'">
+$("#sellcat").addClass("active");
+<else/>
+$("#buycat").addClass("active");
+</if>
+
+<if condition="$Think.get.coin">
+$("#allowed_{$Think.get.coin}").parent().addClass("active");
+</if>
+<if condition="$Think.get.fiat">
+$("#fiat_{$Think.get.coin}").parent().addClass("active");
+</if>
+</script>
+<include file="Publicnew:footer_minimal" />

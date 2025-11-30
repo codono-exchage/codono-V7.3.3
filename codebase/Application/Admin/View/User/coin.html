@@ -1,0 +1,103 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('User coins')}</span>
+		</div>
+		<div class="card">
+		<div class="card-body">
+			<div class="data-table table-responsive">
+			<div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+				<div class="fl">
+					<a class="btn btn-md btn-info " href="{:U('User/user_coin_download')}" target="_blank"><i class="bx bx-spreadsheet"></i> {:l('Excel this Page')}</a>
+				<a class="btn btn-success btn-md " href="{:U('User/coinEditLog')}">{:l('User Coin Edit Logs')}</a>
+				</div>
+				<div class="search-form fr cf">
+					<div class="sleft">
+						<form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+	
+							<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-select">
+								<option value="username"
+								<eq name="Think.get.field" value="username">{:l('selected')}</eq>
+								>{:l('Username')}</option>
+								<option value="userid"<eq name="Think.get.field" value="userid">{:l('selected')}</eq>
+								>{:l('Userid')}</option>
+							</select>
+							<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" >
+							<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+						</form>
+						<script>
+							//Search function
+							$(function () {
+								$('#search').click(function () {
+									$('#formSearch').submit();
+								});
+							});
+							//Enter search
+							$(".search-input").keyup(function (e) {
+								if (e.keyCode === 13) {
+									$("#search").click();
+									return false;
+								}
+							});
+						</script>
+					</div>
+				</div>
+			</div>
+			<table class="table table-striped">
+				<thead class="table-light">
+				<tr>
+					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+					<th class="">{:l('UserID')}</th>
+					<th class="">{:l('Username')}</th>
+					<th class="">{:l('Option')}</th>
+					<volist name=":C('coin')" id="v">
+						<th class="">{$v['name'] |strtoupper}</th>
+					</volist>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td>{$vo.userid}</td>
+							<td>{$vo['username']}</td>
+							<td><a href="{:U('User/coinEdit?id='.$vo['id'])}" class="btn btn-danger btn-sm"><i class="far fa-edit"></i></a><br/> {:l('Available')}:<br>{:l('Freeze')}:<br>Total :
+								<br></td>
+							<volist name=":C('coin')" id="v">
+								<td>
+								<a href="{:U('User/coinLog?coinname='.$v['name'].'&userid='.$vo['userid'])}" class="btn btn-secondary btn-sm">{:l('Info')}</a><br/>
+								<b><php>echo TrimTrailingZeroes($vo[$v['name']])</php></b>
+								<br><php>echo TrimTrailingZeroes($vo[$v['name'].'d']);</php>
+								<br><php>echo TrimTrailingZeroes(bcadd($vo[$v['name'].'d']  ,$vo[$v['name']],8)) ;</php>
+								
+								
+								</td>
+							</volist>
+						</tr>
+					</volist>
+					<else/>
+					<td colspan="12" class="text-center">{:l('No contents!')}</td>
+				</notempty>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('User/coin')}");
+	</script>
+</block>

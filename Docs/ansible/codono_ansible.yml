@@ -1,0 +1,131 @@
+---
+- name: Setup Codono LAMP stack with Nginx Reverse Proxy
+  hosts: localhost
+  become: yes
+  vars_prompt:
+    - name: action
+      prompt: "Do you want to install or uninstall? (install/uninstall)"
+      private: no
+    - name: domain_name
+      prompt: "Enter the domain name (e.g., example.com)"
+      private: no
+
+  tasks:
+    - name: Generate random Redis password
+      set_fact:
+        redis_password: "{{ lookup('password', '/dev/null length=20 chars=ascii_letters,digits') }}"
+      when: action == 'install'
+
+    - name: Set MariaDB root password (only during installation)
+      set_fact:
+        mariadb_root_password: "{{ lookup('password', '/dev/null length=20 chars=ascii_letters,digits') }}"
+      when: action == 'install'
+
+    - name: Install or uninstall Apache, PHP, MariaDB, Nginx
+      apt:
+        name: "{{ item }}"
+        state: "{{ 'present' if action == 'install' else 'absent' }}"
+      loop:
+        - apache2
+        - php7.4
+        - php7.4-cli
+        - php7.4-fpm
+        - php7.4-mysql
+        - php7.4-curl
+        - php7.4-mbstring
+        - php7.4-xml
+        - php7.4-zip
+        - php7.4-gd
+        - php7.4-redis
+        - php7.4-pdo
+        - php7.4-json
+        - php7.4-bcmath
+        - nginx
+        - mariadb-server
+        - redis-server
+
+    - name: Enable or Disable PHP extensions
+      lineinfile:
+        dest: /etc/php/7.4/cli/php.ini
+        regexp: "^;?extension={{ item }}.so"
+        line: "extension={{ item }}.so"
+        state: "{{ 'present' if action == 'install' else 'absent' }}"
+      loop:
+        - openssl
+        - redis
+        - pdo_mysql
+        - mbstring
+        - curl
+        - tokenizer
+        - xml
+        - fileinfo
+        - ctype
+        - json
+        - bcmath
+        - zip
+        - gd
+        - allow_url_fopen
+        - iconv
+        - libsodium
+        - stream_socket_server
+
+    - name: Remove "exec" from disable_functions
+      replace:
+        dest: /etc/php/7.4/cli/php.ini
+        regexp: '^disable_functions\s*=\s*.*exec.*$'
+        replace: ''
+      when: action == 'install'
+
+    - name: Configure Redis password
+      lineinfile:
+        dest: /etc/redis/redis.conf
+        regexp: '^requirepass'
+        line: 'requirepass {{ redis_password }}'
+      when: action == 'install'
+
+    - name: Configure MariaDB root password
+      shell: |
+        mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mariadb_root_password }}';"
+      when: action == 'install'
+
+    - name: Create Apache Virtual Host for the domain
+      template:
+        src: templates/apache_virtualhost.conf.j2
+        dest: "/etc/apache2/sites-available/{{ domain_name }}.conf"
+      notify: Reload Apache
+      when: action == 'install'
+
+    - name: Enable Apache Virtual Host
+      command: "a2ensite {{ domain_name }}.conf"
+      notify: Reload Apache
+      when: action == 'install'
+
+    - name: Create Nginx Virtual Host for the domain
+      template:
+        src: templates/nginx_reverse_proxy.conf.j2
+        dest: "/etc/nginx/sites-available/{{ domain_name }}"
+      notify: Reload Nginx
+      when: action == 'install'
+
+    - name: Enable Nginx Virtual Host
+      command: "ln -s /etc/nginx/sites-available/{{ domain_name }} /etc/nginx/sites-enabled/"
+      notify: Reload Nginx
+      when: action == 'install'
+
+    - name: Print passwords
+      debug:
+        var: item
+      loop:
+        - "Generated Redis password: {{ redis_password }}"
+        - "MariaDB root password: {{ mariadb_root_password }}"
+
+  handlers:
+    - name: Reload Apache
+      service:
+        name: apache2
+        state: reloaded
+
+    - name: Reload Nginx
+      service:
+        name: nginx
+        state: reloaded

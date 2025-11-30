@@ -1,0 +1,1086 @@
+<input class="hide" style="display:none" id="socket_data" value="0">
+<eq name="C['market'][$market]['socket_type']" value="1">
+    <include file="Trade:selfengine_footer_scripts"/>
+    </eq>
+    <eq name="C['market'][$market]['socket_type']" value="2">
+    <include file="Trade:ws_footer_scripts"/>
+    </eq>
+    
+<script>
+    $('#buy_price,#sell_price').bind('keyup change', function () {
+	
+    var buyprice = parseFloat($('#buy_price').val())||0;
+    
+    var sellprice = parseFloat($('#sell_price').val())||0;
+    
+    var fiat_symbol="{$fiat_symbol}";
+    var conversion_price=parseFloat({$conversion_price});
+    
+    if (buyprice == null || buyprice.toString().split(".") == null ) {
+    $('#buyHintBox').html("");
+    }else{
+         
+         var buyHintBox=(buyprice*conversion_price)
+        
+            $('#buyHintBox').html(fiat_symbol+buyHintBox.toFixed(2));
+        }
+
+    if (sellprice != null && sellprice.toString().split(".") != null ) {
+        
+            var sellHintBox=(sellprice*conversion_price)
+            $('#sellHintBox').html(fiat_symbol+sellHintBox.toFixed(2));
+        
+        }else{
+         $('#sellHintBox').html("");
+        }
+    
+
+}).bind("paste", function () {
+    //return false;
+}).bind("blur", function () {
+    if (this.value.slice(-1) == ".") {
+        this.value = this.value.slice(0, this.value.length - 1);
+    }
+}).bind("keypress", function (e) {
+    var code = (e.keyCode ? e.keyCode : e.which); // COMPATIBLE_WITH_FIREFOX IE
+    if (this.value.indexOf(".") == -1) {
+        return (code >= 48 && code <= 57) || (code == 46);
+    } else {
+        return code >= 48 && code <= 57
+    }
+});
+  function choose_lang(lang) {
+    $.cookies.set("lang", lang);
+    window.location.reload();
+  }
+  /*document.getElementById("buyorderlist").scrollIntoView();*/
+  /* Search Filter For Market Pairs*/
+  $(document).ready(function () {
+    $("#crypt-tab li a").click(function () {
+      $.cookies.set("selectedcoin", $(this).attr("id"));
+    });
+
+    if (!$.cookies.get("selectedcoin")) {
+      $("a#idbtc").trigger("click");
+      $.cookies.set("selectedcoin", "idbtc");
+    } else {
+      var sc = $.cookies.get("selectedcoin");
+      $("a#" + sc).trigger("click");
+    }
+    /*Chat Hide/Show*/
+    $("#chatshowhidebutton").click(function () {
+      $("#chatboxshowhide").toggle("slow", function () {
+        if ($("#chatshowhidebutton").text() == "+") {
+          $("#chatshowhidebutton").html("-");
+        } else {
+          $("#chatshowhidebutton").html("+");
+        }
+        // $(".log").text('Toggle Transition Complete');
+      });
+    });
+    $(window).resize(function () {
+      if ($(window).width() >= 980) {
+        // when you hover a toggle show its dropdown menu
+        $(".navbar .dropdown-toggle").hover(function () {
+          $(this).parent().toggleClass("show");
+          $(this).parent().find(".dropdown-menu").toggleClass("show");
+        });
+
+        // hide the menu when the mouse leaves the dropdown
+        $(".navbar .dropdown-menu").mouseleave(function () {
+          $(this).removeClass("show");
+        });
+
+        // do something here
+      }
+    });
+    if (!$.cookies.get("decimalplaces")) {
+      var deci = 8;
+    } else {
+      var deci = $.cookies.get("decimalplaces");
+    }
+    $("select#decimalplaces option[value=" + deci + "]").attr(
+      "selected",
+      "selected"
+    );
+
+    $("select#decimalplaces").on("change", function () {
+      $.cookies.set("decimalplaces", this.value);
+      getActiveOrders(this.value);
+    });
+
+    $("#searchFilter").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#CryptoPriceTable tbody tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    });
+  });
+  
+  function Fav(pair) {
+    $.getJSON("/Trade/star?action=toggle&market="+ pair+ "&t=" + Math.random(), function (data) {
+        if (data && data.status === 1) {
+            getFav();
+        }
+    });
+  }
+  
+  function getFav() {
+    $.getJSON("/Trade/star?action=find" + "&t=" + Math.random(), function (data) {
+        if (data && data.status === 1 && data.data && data.data.market) {
+            let xdata = data.data.market;
+            var list = '';
+            for (var i in xdata) {
+                if (xdata[i]) {
+                    var id = xdata[i].id;
+                    var pair = xdata[i].ticker.replace('_', '/');
+                    var price = xdata[i].new_price.toFixed(2);
+                    var change = xdata[i].change.toFixed(2) + '%';
+                    var colorClass = xdata[i].change > 0 ? 'green' : 'red';
+                    
+                    list += '<tr class="row"><td class="text-uppercase col-4 ml-3"><i class="icon ion-md-star add-to-favorite" id="favourite' + id + '" onclick="Fav(\''+xdata[i].ticker+'\')" data-favourite="0" data-id="' + id + '"></i> <a href="/Trade/index/market/' + xdata[i].ticker + '">' + pair + '</a></td><td class="col-4"><span class="pr-2" data-toggle="tooltip" data-placement="right">' + price + '</span></td><td class="col-3"> <span class="' + colorClass + ' crypt-up">' + change + '</span></td></tr>';
+                }
+            }
+            $("#STAR_DATA").html(list);
+        }
+    });
+}
+</script>
+<script>
+    function getJsonTop() {
+  	var sthesign="";
+  	var bthesign="";
+          $.getJSON("{:U('Ajax/getJsonTop',array('market'=>$market))}/?t=" + Math.random(), function (data) {
+              if (data) {
+                  if (data['info']['new_price']) {
+                      $('#market_new_price').removeClass('buy');
+                      $('#market_new_price').removeClass('sell');
+                      if ($("#market_new_price").html() > data['info']['new_price']) {
+                          $('#market_new_price').addClass('sell');
+                      }
+                      if ($("#market_new_price").html() < data['info']['new_price']) {
+                          $('#market_new_price').addClass('buy');
+                      }
+                      $("#market_new_price").html(data['info']['new_price']*1);
+                  }
+                  if (data['info']['buy_price']) {
+                      $('#market_buy_price').removeClass('buy');
+                      $('#market_buy_price').removeClass('sell');
+  					$('#activermb').removeClass('buy');
+                      $('#activermb').removeClass('sell');
+                      if ($("#market_buy_price").html() > data['info']['buy_price']) {
+                          $('#market_buy_price').addClass('sell');
+  						$('#activermb').addClass('sell');
+  						$("#activesign").html("↓");
+                      }
+                      if ($("#market_buy_price").html() < data['info']['buy_price']) {
+                          //$('#market_buy_price').addClass('buy');
+  						$('#activermb').addClass('buy');
+  						$("#activesign").html("↑");
+                      }
+                      $("#market_buy_price").html(data['info']['buy_price']*1);
+  					$("#activermb").html(data['info']['buy_price']*1);
+
+                      $("#sell_best_price").html('$' + data['info']['buy_price']);
+                  }
+                  if (data['info']['sell_price']) {
+                      $('#market_sell_price').removeClass('buy');
+                      $('#market_sell_price').removeClass('sell');
+  					$('#activexnb').removeClass('buy');
+                      $('#activexnb').removeClass('sell');
+                      if ($("#market_sell_price").html() > data['info']['sell_price']) {
+                     //     $('#market_sell_price').addClass('sell');
+  						$('#activexnb').addClass('sell');
+
+                      }
+                      if ($("#market_sell_price").html() < data['info']['sell_price']) {
+                     //     $('#market_sell_price').addClass('buy');
+  						$('#activexnb').addClass('buy');
+                      }
+                      $("#market_sell_price").html(data['info']['sell_price']*1);
+  					$("#activexnb").html(data['info']['sell_price']*1);
+                      $("#buy_best_price").html('$' + data['info']['sell_price']);
+                  }
+                  if (data['info']['max_price']) {
+                      $("#market_max_price").html(data['info']['max_price']*1);
+  					$("#zhangting").html("$"+data['info']['max_price']);
+                  }
+                  if (data['info']['min_price']) {
+                      $("#market_min_price").html(data['info']['min_price']*1);
+  					$("#dieting").html("$"+data['info']['min_price']);
+                  }
+          
+                  if (data['info']['volume']) {
+    var volume = data['info']['volume'];
+    if (volume >= 1000000000) {
+        volume = (volume / 1000000000).toFixed(2) + "B";
+    } else if (volume >= 1000000) {
+        volume = (volume / 1000000).toFixed(2) + "M";
+    } else if (volume >= 1000) {
+        volume = (volume / 1000).toFixed(2) + "K";
+    } else {
+        volume = volume;
+    }
+    $("#market_volume").html(volume);
+}
+
+                  if (data['info']['change']) {
+                      $('#market_change').removeClass('buy');
+                      $('#market_change').removeClass('sell');
+                      if (data['info']['change'] > 0) {
+                          $('#market_change').addClass('buy');
+                      } else {
+                          $('#market_change').addClass('sell');
+                      }
+                      $("#market_change").html(data['info']['change'] + "%");
+                  }
+              }
+          });
+          <eq name="C['market'][$market]['socket_type']" value="0">
+		setTimeout('getJsonTop()', 5000);
+		</eq>
+      }
+      $(function () {
+  	var the_decimals=$.cookies.get('decimalplaces');
+  	<volist name="activated_base_markets" id="v">
+  	//getInstrument('{$v |strtolower}');
+      newgetInstrument('{$v |strtolower}');
+  	</volist>
+          getJsonTop();
+  		getActiveOrders(the_decimals);
+  		getTradelog();
+  		 if (userid > 0) {
+              getEntrustAndUsercoin();
+  			getClosedOrders();
+          } else {
+  			$('#entrust_over').hide();
+  			$('#entrust_over2').hide();
+  			$('#loginrequired').show();
+  			$('#loginrequired2').show();
+          }
+
+
+      });
+
+  	 function getTradelog() {
+        
+          $.getJSON("{:U('Ajax/getTradelog',array('market'=>$market))}/?t=" + Math.random(), function (data) {
+              if (data) {
+                  if (data['tradelog']) {
+                      var list = '';
+                      var shortlist='';
+  					var type = '';
+
+                      var typename = '';
+                      for (var i in data['tradelog']) {
+                          if (data['tradelog'][i]['type'] == 1) {
+  						var total=toNum(data['tradelog'][i]['num']* data['tradelog'][i]['price'],6);
+                              list += '<tr><td span="col">' + data['tradelog'][i]['addtime'] + '</td><td class="green">{:l("Buy")}</td><td class="green"><span  class="price">' + data['tradelog'][i]['price'] + '</span></td><td><span  class="quantity">' + data['tradelog'][i]['num'] + '</span></td><td>' +total + '</td></tr>';
+  							shortlist+='<tr><td  ><span class="time">' + data['tradelog'][i]['addtime'] + '</span></td><td class="green"><span  class="price">' + data['tradelog'][i]['price'] + '</span></td><td ><span  class="quantity">' + data['tradelog'][i]['num'] + '</span></td></tr>';
+                          } else {
+                              list += '<tr><td span="col">' + data['tradelog'][i]['addtime'] + '</td><td class="red">{:l("Sell")}</td><td class="red"><span  class="price">' + data['tradelog'][i]['price'] + '</span></td><td><span  class="quantity">' + data['tradelog'][i]['num'] + '</span></td><td>' + data['tradelog'][i]['mum'] + '</td></tr>';
+  							shortlist+='<tr><td  ><span class="time">' + data['tradelog'][i]['addtime'] + '</span></td><td class="red"><span  class="price">' + data['tradelog'][i]['price'] + '</span></td><td ><span  class="quantity">' + data['tradelog'][i]['num'] + '</span></td></tr>';
+                          }
+                      }
+                      $('#dealrecordbody').html(shortlist);
+  					$("#recent-orders-list").html(list);
+                  }
+              }
+          });
+          <eq name="C['market'][$market]['socket_type']" value="0">
+        setTimeout('getTradelog()', 5000);
+		 </eq>
+      }
+      function newgetInstrument(category) {
+        $.getJSON("/Ajax/pairsBycat?cat=" + category + "&t=" + Math.random(), function (data) {
+            if (data) {
+                if (data['data']) {
+                    var list = '';
+                    var type = '';
+                    var typename = '';
+                    for (var i in data['data']) {
+                        if (data['data'][i]) {
+                            list += '<tr><td class="align-middle text-uppercase"><img class="crypt-star pr-1" alt="star" src="/Public/trade-white/images/star.svg" width="15" id="favourite'+data['data'][i][4]+'" onclick="Fav(\''+data['data'][i][0]+'\')" data-favourite="0" data-id="'+data['data'][i][4]+'" width="15"><a href="/Trade/tradepro/market/'+data['data'][i][0]+'">'+data['data'][i][0]+'</a></td><td class="align-middle"><span class="pr-2" data-toggle="tooltip" data-placement="right">'+data['data'][i][1]+'</span></td><td> <span class="d-block '+data['data'][i][5]+'">'+data['data'][i][3]+'</span></td></tr>';
+                        } 
+                    }
+                    $("#coinleftmenu-"+category).html(list);
+                }
+            }
+        });
+        setTimeout('newgetInstrument("'+category+'")', 50000);
+    }
+  	function getInstrument(coinname) {
+          $.getJSON("/Ajax/advanceinstrument?coin=" + coinname + "&t=" + Math.random(), function (data) {
+              if (data) {
+                  if (data['data']) {
+                      var list = '';
+                      var type = '';
+                      var typename = '';
+                      for (var i in data['data']) {
+  							if(data["data"][i][5]=='crypt-up'){
+  								var changeclass="green";
+  							}else{
+  								var changeclass="red";
+  							}
+                          if (data['data'][i]) {
+                            list += '<tr class="row"><td class="text-uppercase col-4 ml-3"><i class="icon ion-md-star add-to-favorite" id="favourite'+data['data'][i][4]+'" onclick="Fav(\''+data['data'][i][0]+'\')" data-favourite="0" data-id="'+data['data'][i][4]+'"></i> <a href="/Trade/tradepro/market/'+data['data'][i][0]+'">'+data['data'][i][0].toString()+'</a></td><td class="col-4"><span class="pr-2" data-toggle="tooltip" data-placement="right">'+data['data'][i][1].toString()+'</span></td><td class="col-3"> <span class="'+changeclass+' '+data['data'][i][5]+'">'+data['data'][i][3]+'</span></td></tr>';
+                          }
+                      }
+                      $("#coinleftmenu-"+coinname).html(list);
+                  }
+              }
+          });
+          setTimeout('getInstrument("'+coinname+'")', 50000);
+      }
+  function getEntrustAndUsercoin() {
+          $.getJSON("/Ajax/getFullEntrustAndUsercoin?market=" + market + "&t=" + Math.random(), function (data) {
+              if (data) {
+                  if (data['entrust']) {
+                      $('#entrust_over').show();
+  					$('#loginrequired').hide();
+                      var list = '';
+                      var cont = data['entrust'].length;
+                      for (i = 0; i < data['entrust'].length; i++) {
+                            if (data['entrust'][i]['type'] == 1) {
+                               list += '<tr><td class="buy green text-uppercase">' + data['entrust'][i]['market'] + '</td><td>' + data['entrust'][i]['addtime'] + '</td><td >{:l("Buy")}-' + data['entrust'][i]['tradetype']+'</td><td >' + data['entrust'][i]['price'] + '</td><td >' + data['entrust'][i]['condition'] + '</td><td >' + data['entrust'][i]['num'] + '</td><td >' + data['entrust'][i]['deal'] + '</td><td>' + (parseFloat(data['entrust'][i]['price']) * parseFloat(data['entrust'][i]['num'])).toFixed(market_round) + '</td><td><a class="cancelaa btn btn-danger btn-xs" id="' + data['entrust'][i]['id'] + '" onclick="cancelaa(\'' + data['entrust'][i]['id'] + '\',\'' + data['entrust'][i]['tradetype'] + '\')" href="javascript:void(0);"><i class="fa fa-trash" ></i> </a></td></tr>';
+                          } else {
+                              list += '<tr><td class="sell red text-uppercase">' + data['entrust'][i]['market'] + '</td><td>' + data['entrust'][i]['addtime'] + '</td><td >{:l("Sell")}-' + data['entrust'][i]['tradetype']+'</td><td >' + data['entrust'][i]['price'] + '</td><td >' + data['entrust'][i]['condition'] + '</td><td>' + data['entrust'][i]['num'] + '</td><td >' + data['entrust'][i]['deal'] + '</td><td >' + (parseFloat(data['entrust'][i]['price']) * parseFloat(data['entrust'][i]['num'])).toFixed(market_round) + '</td><td><a class="cancelaa btn btn-danger btn-xs" id="' + data['entrust'][i]['id'] + '" onclick="cancelaa(\'' + data['entrust'][i]['id'] + '\',\'' + data['entrust'][i]['tradetype'] + '\')" href="javascript:void(0);"><i class="fa fa-trash" ></i> </a></td></tr>';
+                          }
+                      }
+                      if (cont == 10) {
+                          list += '<tr><td style="text_align:center;" colspan="7"><a href="/Finance/orders" style="color: #2674FF;">{:l("View More")}</a>&nbsp;&nbsp;</td></tr>';
+                      }
+                      $('#entrustlist').html(list);
+                  } else {
+                      $('#entrust_over').hide();
+  					$('#loginrequired').show();
+                  }
+
+                  if (data['usercoin']) {
+                      if (data['usercoin']['usd']) {
+                          $("#base_coin").html(data['usercoin']['usd']);
+                      } else {
+                          $("#base_coin").html('0.00');
+                      }
+
+                      if (data['usercoin']['usdd']) {
+                          $("#my_usdd").html(data['usercoin']['usdd']);
+                      } else {
+                          $("#my_usdd").html('0.00');
+                      }
+
+                      if (data['usercoin']['xnb']) {
+                          $("#user_coin").html(data['usercoin']['xnb']);
+                      } else {
+                          $("#user_coin").html('0.00');
+                      }
+
+                      if (data['usercoin']['xnbd']) {
+                          $("#my_xnbd").html(data['usercoin']['xnbd']);
+                      } else {
+                          $("#my_xnbd").html('0.00');
+                      }
+                  }
+
+              }
+          });
+          setTimeout('getEntrustAndUsercoin()', 5000);
+      }
+
+   function getActiveOrders(decimals) {
+    if($("input#socket_data").val()==1){
+	  return false;}
+   var bestselloffer='';
+   var bestbuyoffer='';
+  	if(decimals == null){var decimals=6;}
+          if (trade_moshi != 2) {
+
+              $.getJSON("/Ajax/getActiveOrders?market=" + market + "&trade_moshi=" + trade_moshi + "&t=" + Math.random(), function (data) {
+                  if (data) {
+
+                      if (data['depth']) {
+                          var list = '';
+
+                          if (data['depth']['sell']) {
+                         //   data['depth']['sell'].reverse();
+                              for (i = 0; i < data['depth']['sell'].length; i++) {
+                                  list += '<tr title="Buy at this price" class="topmost pl-1" style="background:linear-gradient(to left, rgba(207,48,74, 0.15) '+(data['depth']['sell'][i][1] * 100 / data['sellvol'])+'%, transparent 0%)" onclick="autotrust(this,\'sell\',1)"><td class="red xcol-4">' + data['depth']['sell'][i][0] + '</td><td class="xcol-3">' + data['depth']['sell'][i][1] + '</td><td class="xcol-5 mobile-hide">' + (data['depth']['sell'][i][0] * data['depth']['sell'][i][1]).toFixed(decimals) + '</td></tr>';
+                              var bestselloffer= data['depth']['sell'][0][0];
+  							}
+  								if( $('#buy_price').val().length == 0  || $('#buy_price').val()=='--') {
+  								$("#buy_price").val(bestselloffer);
+  								}
+
+                          }
+                          $("#sellorderlist").html(list);
+                          list = '';
+                          if (data['depth']['buy']) {
+                              for (i = 0; i < data['depth']['buy'].length; i++) {
+                                  list += '<tr title="Sell at this price" class="topmost pl-1" style="background:linear-gradient(to left, rgba(3,166,109, 0.15) '+(data['depth']['buy'][i][1] * 100 / data['buyvol'])+'%, transparent 0%)" onclick="autotrust(this,\'buy\',1)"><td class="green xcol-4"  >' + data['depth']['buy'][i][0] + '</td><td  class="xcol-3">' + data['depth']['buy'][i][1] + '</td><td class="xcol-5 mobile-hide"  >' + (data['depth']['buy'][i][0] * data['depth']['buy'][i][1]).toFixed(decimals) + '</td></tr>';
+                              }
+
+                          }
+
+  						if(data['depth']['buy']){
+  						var bestbuyoffer= data['depth']['buy'][0][0];
+  						}else{ bestbuyoffer='';}
+  								if( $('#sell_price').val().length === 0 ||$('#sell_price').val()=='--') {
+  									$("#sell_price").val(bestbuyoffer);
+  								}
+                          $("#buyorderlist").html(list);
+                      }
+
+                  }
+              });
+  			if( $('#buy_price').val().length == 0  || $('#buy_price').val()=='--') {
+  		$("#buy_price").val(bestselloffer);
+  		}
+  		if( $('#sell_price').val().length === 0 ||$('#sell_price').val()=='--') {
+  		$("#sell_price").val(bestbuyoffer);
+  		}
+         	 
+             clearInterval(getDepth_tlme);
+             
+             var wait = second = 5;
+             getDepth_tlme = setInterval(function () {
+                 wait--;
+                 if (wait < 0) {
+                     clearInterval(getDepth_tlme);
+                     getActiveOrders(decimals);
+                     
+                     wait = second;
+                 }
+             }, 1000);
+             
+         
+          }
+      }
+  	function getClosedOrders(decimals=1) {
+                 $.getJSON("/Ajax/getClosedOrders?market=" + market + "&t=" + Math.random(), function (data) {
+              if (data) {
+                  if (data['entrust']) {
+                      $('#entrust_over2').show();
+  					$('#loginrequired2').hide();
+                      var list = '';
+                      var cont = data['entrust'].length;
+                      for (i = 0; i < data['entrust'].length; i++) {
+                          if (data['entrust'][i]['type'] == 1) {
+                              list += '<tr ><td >' + data['entrust'][i]['addtime'] + '</td><td class="green" >{:l('Buy')}</td><td >' + data['entrust'][i]['price'] + '</td><td >' + data['entrust'][i]['num'] + '</td><td >' + (parseFloat(data['entrust'][i]['price']) * parseFloat(data['entrust'][i]['num'])).toFixed(market_round) + '</td></tr>';
+                          } else {
+                              list += '<tr><td >' + data['entrust'][i]['addtime'] + '</td><td class="red">{:l('Sell')}</td><td >' + data['entrust'][i]['price'] + '</td><td >' + data['entrust'][i]['num'] + '</td><td >' + (parseFloat(data['entrust'][i]['price']) * parseFloat(data['entrust'][i]['num'])).toFixed(market_round) + '</td></tr>';
+                          }
+                      }
+                      if (cont == 10) {
+                          list += '<tr><td style="text_align:center;" colspan="7"><a href="/Finance/orders" style="color: #2674FF;">{:l('View More')}</a>&nbsp;&nbsp;</td></tr>';
+                      }
+                      $('#closedorderslist').html(list);
+                  } else {
+                      $('#entrust_over2').hide();
+  					$('#loginrequired2').show();
+                  }
+  		}
+      });
+  	   setTimeout('getClosedOrders()', 5000);
+  }
+  // AUTOFILL_PRICE
+      function autotrust(_this, type, cq) {
+
+          if (type == 'sell') {
+              $('#buy_num').val($(_this).children().eq(cq).html());
+  			$('#buy_price').val($(_this).children().eq(0).html());
+              if ($("#my_usd").html() > 0) {
+                  $("#buy_max").html(toNum(($("#my_usd").html() / $('#buy_price').val()), market_round_num));
+              }
+              if ($('#buy_num').val()) {
+                  $("#buy_mum").html(($('#buy_num').val() * $('#buy_price').val()).toFixed(market_round));
+              }
+
+          }
+          if (type == 'buy') {
+              $('#sell_num').val($(_this).children().eq(cq).html());
+  			$('#sell_price').val($(_this).children().eq(0).html());
+              if ($("#my_xnb").html() > 0) {
+                  $("#sell_max").html($("#my_xnb").html());
+              }
+              if ($('#sell_num').val()) {
+                  $("#sell_mum").html((parseFloat($('#sell_num').val() * $('#sell_price').val())).toFixed(market_round));
+              }
+          }
+
+      }
+
+  	    function tradeadd_buy(tradeType) {
+          if (trans_lock) {
+              layer.msg('Do not resubmit', {icon: 2});
+              return;
+          }
+  		if (userid<1) {
+              layer.msg('Please login first', {icon: 2});
+              return;
+          }
+          trans_lock = 1;
+
+          var price = parseFloat($('#buy_price').val());
+          var num = parseFloat($('#buy-num').val());
+          var paypassword = $('#buy_paypassword').val();
+          if (price == "" || price == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#buy_price', {tips: 3});
+              return false;
+          }
+          if (num == "" || num == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#buy_num', {tips: 3});
+              return false;
+          }
+
+          //load layer style 3-1
+  		//layer.load(3);
+  		layer.load(0, { shade:[0.3, '#000'] });
+
+
+          setTimeout(function () {
+              layer.closeAll('loading');
+              trans_lock = 0;
+          }, 3000);
+          $.post("{:U('Trade/upTrade')}", {
+              price: $('#buy_price').val(),
+              num: $('#buy_num').val(),
+              paypassword: $('#buy_paypassword').val(),
+              market: market,
+              type: 1,
+  			tradeType:tradeType
+          }, function (data) {
+              layer.closeAll('loading');
+              trans_lock = 0;
+              if (data.status == 1) {
+  getActiveOrders({$C['market'][$market]['round']});
+  getTradelog();
+                  $("#buy_price").val('');
+                  $("#buy_num").val('');
+                  $("#sell_price").val('');
+                  $("#sell_num").val('');
+                  layer.msg(data.info, {icon: 1});
+              } else {
+                  layer.msg(data.info, {icon: 2});
+              }
+          }, 'json');
+      }
+
+      function tradeadd_sell(tradeType) {
+          if (trans_lock) {
+              layer.msg('Do not resubmit', {icon: 2});
+              return;
+          }
+  		if (userid<1) {
+              layer.msg('Please login first', {icon: 2});
+              return;
+          }
+          trans_lock = 1;
+          var price = parseFloat($('#sell_price').val());
+          var num = parseFloat($('#sell_num').val());
+          var paypassword = $('#sell_paypassword').val();
+          if (price == "" || price == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#sell_price', {tips: 3});
+              return false;
+          }
+          if (num == "" || num == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#sell_num', {tips: 3});
+              return false;
+          }
+          //layer.load(3);
+  		layer.load(0, { shade:[0.3, '#000'] });
+          //HERE_DEMO_CLOSE
+          setTimeout(function () {
+              layer.closeAll('loading');
+              trans_lock = 0;
+          }, 10000);
+
+
+          $.post("{:U('Trade/upTrade')}", {
+              price: $('#sell_price').val(),
+              num: $('#sell_num').val(),
+              paypassword: $('#sell_paypassword').val(),
+              market: market,
+              type: 2,
+  			tradeType:tradeType
+          }, function (data) {
+  			getActiveOrders({$C['market'][$market]['round']});
+  			getTradelog();
+              layer.closeAll('loading');
+              trans_lock = 0;
+              if (data.status == 1) {
+                  $("#buy_price").val('');
+                  $("#buy_num").val('');
+                  $("#sell_price").val('');
+                  $("#sell_num").val('');
+                  layer.msg(data.info, {icon: 1});
+              } else {
+                  layer.msg(data.info, {icon: 2});
+              }
+          }, 'json');
+      }
+
+
+      //UNDO
+      function cancelaa(id,type) {
+  	if (userid<1) {
+              layer.msg('Please login first', {icon: 2});
+              return;
+          }
+  	var router='reject';
+  	if(type=='limit'){
+  	 router='reject'
+  	}
+  	if(type=='Stop-Limit'){
+  		router='stopreject'
+      }
+          $.post("{:U('Trade/"+router+"/')}", {id: id}, function (data) {
+              if (data.status == 1) {
+                  getEntrustAndUsercoin();
+  				getActiveOrders(8);
+                  layer.msg(data.info, {icon: 1});
+              } else {
+                  layer.msg(data.info, {icon: 2});
+              }
+          });
+  	}
+
+  function hasClass(ele,cls) {
+       return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+  }
+  function Dark(){
+  var elementx = document.getElementById("mainbody");
+  var darkclass="crypt-dark";
+  var lightclass="crypt-white";
+  if(hasClass(elementx, darkclass)){
+  $('#darksun').html('<i class="pe-7s-moon" style="font-size:16px;font-weight:bold;"></i>');
+  elementx.classList.remove(darkclass);
+  elementx.classList.add(lightclass);
+   $.cookies.set("colorshade", "White");
+   $.cookies.set('chart_theme', 'white');
+  }
+  else{
+  elementx.classList.add(darkclass);
+  elementx.classList.remove(lightclass);
+  $('#darksun').html('<i class="pe-7s-sun" style="font-size:16px;font-weight:bold;"></i>');
+   $.cookies.set("colorshade", "Dark");
+   $.cookies.set('chart_theme', 'black');
+  }
+  document.getElementById('market_chart').contentWindow.location.reload(true);
+  document.getElementById('market_chartx').contentWindow.location.reload(true);
+
+  }
+
+  function ShowMe(ShowMe){
+
+  var elementx = document.getElementById(ShowMe);
+  var hideclass="hideme"
+
+  if(ShowMe=='depthchart'){
+  document.getElementById('marketchartbox').classList.add(hideclass);
+  document.getElementById('tradingviewbox').classList.add(hideclass);
+  //document.getElementById('depthchart').classList.remove(hideclass);
+  }
+  if(ShowMe=='tradingviewbox'){
+  document.getElementById('marketchartbox').classList.add(hideclass);
+  //document.getElementById('depthchart').classList.add(hideclass);
+  document.getElementById('tradingviewbox').classList.remove(hideclass);
+  }
+  if(ShowMe=='marketchartbox'){
+  //document.getElementById('depthchart').classList.add(hideclass);
+  document.getElementById('tradingviewbox').classList.add(hideclass);
+  document.getElementById('marketchartbox').classList.remove(hideclass);
+  }
+
+
+  }
+
+     function toNum(num, round) {
+          return Math.round(num * Math.pow(10, round) - 1) / Math.pow(10, round);
+      }
+
+  	$('#buy_price,#buy_num,#sell_price,#sell_num').bind('keyup change', function () {
+
+          var buyprice = parseFloat($('#buy_price').val());
+          var buynum = parseFloat($('#buy_num').val());
+          var sellprice = parseFloat($('#sell_price').val());
+          var sellnum = parseFloat($('#sell_num').val());
+          var buymum = buyprice * buynum;
+          var sellmum = sellprice * sellnum;
+          var myrmb = $("#my_usd").html();
+          var myxnb = $("#my_xnb").html();
+          var buykenum = 0;
+          var sellkenum = 0;
+          if (myrmb > 0) {
+              buykenum = myrmb / buyprice;
+          }
+          if (myxnb > 0) {
+              sellkenum = myxnb;
+          }
+
+          if (buyprice != null && buyprice.toString().split(".") != null && buyprice.toString().split(".")[1] != null) {
+              if (buyprice.toString().split('.')[1].length > market_round) {
+                  $('#buy_price').val(buyprice.toFixed(market_round));
+              }
+          }
+          if (buynum != null && buynum.toString().split(".") != null && buynum.toString().split(".")[1] != null) {
+              if (buynum.toString().split('.')[1].length > market_round_num) {
+                  $('#buy_num').val(toNum(buynum, market_round_num));
+              }
+          }
+          if (sellprice != null && sellprice.toString().split(".") != null && sellprice.toString().split(".")[1] != null) {
+              if (sellprice.toString().split('.')[1].length > market_round) {
+                  $('#sell_price').val(sellprice.toFixed(market_round));
+              }
+          }
+          if (sellnum != null && sellnum.toString().split(".") != null && sellnum.toString().split(".")[1] != null) {
+              if (sellnum.toString().split('.')[1].length > market_round_num) {
+                  $('#sell_num').val(toNum(sellnum, market_round_num));
+              }
+          }
+          if (buymum != null && buymum > 0) {
+              $('#buy_mum').html((buymum * 1).toFixed(market_round));
+          }
+          if (sellmum != null && sellmum > 0) {
+              $('#sell_mum').html((sellmum * 1).toFixed(market_round));
+          }
+          if (buykenum != null && buykenum > 0 && buykenum != 'Infinity') {
+              $('#buy_max').html(toNum(buykenum, market_round_num));
+          }
+          if (sellkenum != null && sellkenum > 0 && sellkenum != 'Infinity') {
+              $('#sell_max').html(sellkenum);
+          }
+      }).bind("paste", function () {
+          //return false;
+      }).bind("blur", function () {
+          if (this.value.slice(-1) == ".") {
+              this.value = this.value.slice(0, this.value.length - 1);
+          }
+      }).bind("keypress", function (e) {
+          var code = (e.keyCode ? e.keyCode : e.which); // COMPATIBLE_WITH_FIREFOX IE
+          if (this.value.indexOf(".") == -1) {
+              return (code >= 48 && code <= 57) || (code == 46);
+          } else {
+              return code >= 48 && code <= 57
+          }
+      });
+
+  function Percentage(percent,type){
+    percent=parseInt(percent);					  
+
+var buy_fees=$('#buy_fees').html();
+        var sell_fees=$('#sell_fees').html();
+        if(type=='buy' && percent==100){
+                percent=parseFloat(100-buy_fees);
+        }
+        if(type=='sell' && percent==100){
+                percent=parseFloat(100-sell_fees);
+        }
+  			var user_coin=$('#user_coin').html();
+  			var base_coin=$('#base_coin').html();
+
+  				if(type=='buy'){
+  			 	if ($('#buy_price').val() == "" || $('#buy_price').val() == null) {
+              	layer.tips('Please enter a price', '#buy_price', {tips: 3});
+              	return false;
+          		}
+
+  				var paste=(base_coin/100)*percent;
+  				$('#buy_mum').html((paste).toFixed(market_round));
+  				$("#buy_num").val((paste/parseFloat($('#buy_price').val() )).toFixed(market_round));
+  				}
+  				if(type=='sell'){
+  				var paste=(user_coin/100)*percent;
+  				$('#sell_num').val((paste).toFixed(market_round));
+  				$("#sell_mum").html((parseFloat($('#sell_num').val() * $('#sell_price').val())).toFixed(market_round));
+  				}
+
+  	}
+  //SAVE_TRANSACTION_PASSWORD_SETT
+      function tpwdsettingaa() {
+          var paypassword = $("#aaapaypassword").val();
+          var tpwdsetting = $("input[name='aaatpwdsetting']:checked").val();
+          if (paypassword == "" || paypassword == null) {
+              layer.tips('Provide Trans Password', '#paypassword', {tips: 3});
+              return false;
+          }
+          if (tpwdsetting == "" || tpwdsetting == null) {
+              layer.tips('Please select Trans Password', '#tpwdsetting', {tips: 3});
+              return false;
+          }
+
+
+          $.post('/user/uptpwdsetting', {paypassword: paypassword, tpwdsetting: tpwdsetting}, function (d) {
+              if (d.status) {
+                  layer.msg('Settings Saved', {icon: 1});
+                  window.location.reload();
+              } else {
+                  layer.msg(d.info, {icon: 2});
+              }
+
+          }, 'json');
+      }
+  function OrderType(type){ //limitsell,limitbuy , stopsell stopbuy
+  switch (type) {
+  case 'limit':
+  $('#ltbutton').addClass("active");
+  $('#mtbutton').removeClass("active");
+  $('#stbutton').removeClass("active");
+  $('#sellstop').hide();
+  $('#stopsellbutton').hide();
+  $('#limitsellbutton').show();
+  $('#buystop').hide();
+  $('#stopbuybutton').hide();
+  $('#limitbuybutton').show();
+  $('#marketbuybutton').hide();
+  $('#marketsellbutton').hide();
+  $('#buypricebox').show();
+  $('#sellpricebox').show();
+  $('#selectedwidget').html('Limit');
+  $('#margin-tab').hide();
+  //$('#DealRecordTable').css('height','451px');
+
+  break;
+  case 'stop':
+  $('#stbutton').addClass("active");
+  $('#mtbutton').removeClass("active");
+  $('#ltbutton').removeClass("active");
+  $('#sellstop').show();
+  $('#stopsellbutton').show();
+  $('#limitsellbutton').hide();
+  $('#buystop').show();
+  $('#stopbuybutton').show();
+  $('#limitbuybutton').hide();
+  $('#marketbuybutton').hide();
+  $('#marketsellbutton').hide();
+  $('#buypricebox').show();
+  $('#sellpricebox').show();
+  $('#selectedwidget').html('Stop');
+  $('#margin-tab').hide();
+  //$('#DealRecordTable').css('height','489px');
+  break;
+
+  case 'market':
+  $('#mtbutton').addClass("active");
+  $('#ltbutton').removeClass("active");
+  $('#stbutton').removeClass("active");
+  $('#sellstop').hide();
+  $('#stopsellbutton').hide();
+  $('#limitsellbutton').hide();
+  $('#buystop').hide();
+  $('#buypricebox').hide();
+  $('#sellpricebox').hide();
+  $('#stopbuybutton').hide();
+  $('#limitbuybutton').hide();
+  $('#marketbuybutton').show();
+  $('#marketsellbutton').show();
+  $('#selectedwidget').html('Market');
+  $('#margin-tab').hide();
+  break;
+  default:
+   console.log(789, 'Incorrect Type');
+
+  }
+  }
+  function TipStopLimit(){
+              layer.tips('A Stop-Limit order is an order to buy or sell a coin once the price reaches a specified price.', '#stbutton', {tips: 3});
+  }
+  function stopadd_buy() {
+          /*if (trans_lock) {
+              layer.msg('Do not resubmit', {icon: 2});
+              return;
+          }
+          trans_lock = 1;
+  		*/
+          var price = $('#buy_price').val();
+  		var stop = $('#buy_stop').val();
+          var num = parseFloat($('#buy_num').val());
+          var paypassword = $('#buy_paypassword').val();
+  		var buyprice= $('#market_buy_price').html();
+  		//var buyprice= bestbuyoffer; //Highest buy offer take from Orderbook
+  		var xnb = '{$xnb}';
+  		var rmb = '{$rmb}';
+
+  		if (price == "" || price == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#buy_price', {tips: 3});
+              return false;
+          }
+  		 if (stop == "" || stop == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#buy_stop', {tips: 3});
+              return false;
+          }
+          if (num == "" || num == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#buy_num', {tips: 3});
+              return false;
+          }
+
+          //load layer style 3-1
+        //  layer.load(3);
+  		//layer.load(0, { shade:[0.3, '#000'] });
+
+          //HERE_DEMO_CLOSE
+      /*    setTimeout(function () {
+              layer.closeAll('loading');
+              trans_lock = 0;
+          }, 3000);*/
+
+  		if(buyprice>stop){var condition='drops to or below';}
+  					 else{var condition='rises to or above';}
+  	var msg = 'If the last price '+condition+' '+stop+rmb+'  , an order to buy '+num+xnb+'  at a price of '+price+rmb+' will be placed';
+       layer.confirm(msg, {
+           btn: ['Confirm','Cancel'] //PUSH_BUTTON
+     	}, function(){
+          $.post("{:U('Trade/upTrade')}", {
+              price: $('#buy_price').val(),
+  			stop: $('#buy_stop').val(),
+              num: $('#buy_num').val(),
+              paypassword: $('#buy_paypassword').val(),
+              market: market,
+  			tradeType:'stop',
+              type: 1
+          }, function (data) {
+              layer.closeAll('loading');
+              trans_lock = 0;
+              if (data.status == 1) {
+  			getActiveOrders(6);
+  				$("#buy_stop").val('');
+                  $("#buy_price").val('');
+                  $("#buy_num").val('');
+                  $("#sell_price").val('');
+                  $("#sell_num").val('');
+                  layer.msg(data.info, {icon: 1});
+              } else {
+                  layer.msg(data.info, {icon: 2});
+              }
+          }, 'json');
+  		});
+      }
+
+      function stopadd_sell() {
+          if (trans_lock) {
+              //layer.msg('Do not resubmit', {icon: 2});
+              //return;
+          }
+          trans_lock = 1;
+          var price = $('#sell_price').val();
+  		var stop = $('#sell_stop').val();
+          var num = parseFloat($('#sell_num').val());
+          var paypassword = $('#sell_paypassword').val();
+  		var sellprice= $('#market_sell_price').val();
+  		//var sellprice= bestselloffer; //lowest sell offer take from Orderbook
+
+  		var xnb = '{$xnb}';
+  		var rmb = '{$rmb}';
+
+          if (price == "" || price == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#sell_price', {tips: 3});
+              return false;
+          }
+  		if (stop == "" || stop == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#sell_stop', {tips: 3});
+              return false;
+          }
+          if (num == "" || num == null) {
+              layer.tips('{:l('PLEASE_ENTER_CONTENT')}', '#sell_num', {tips: 3});
+              return false;
+          }
+
+  if(sellprice>stop){var condition='drops to or below';}
+  else{var condition='rises to or above';}
+  	var msg = 'If the last price '+condition+' '+stop+rmb+'  , an order to sell '+num+xnb+'  at a price of '+price+rmb+' will be placed';
+       layer.confirm(msg, {
+           btn: ['Confirm','Cancel'] //PUSH_BUTTON
+     	}, function(){
+
+          $.post("{:U('Trade/upTrade')}", {
+              price: $('#sell_price').val(),
+  			stop: $('#sell_stop').val(),
+              num: $('#sell_num').val(),
+              paypassword: $('#sell_paypassword').val(),
+  			tradeType:'stop',
+              market: market,
+              type: 2
+          }, function (data) {
+              layer.closeAll('loading');
+              trans_lock = 0;
+              if (data.status == 1) {
+  			getActiveOrders(6);
+                  $("#buy_price").val('');
+                  $("#buy_num").val('');
+                  $("#sell_price").val('');
+  				$("#sell_stop").val('');
+                  $("#sell_num").val('');
+                  layer.msg(data.info, {icon: 1});
+              } else {
+                  layer.msg(data.info, {icon: 2});
+              }
+          }, 'json');
+  		});
+      }
+
+  	$(function () {
+  	var the_decimals=$.cookies.get('decimalplaces');
+  	<volist name="activated_base_markets" id="v">
+  	getInstrument('{$v |strtolower}');
+  	</volist>
+
+
+          getJsonTop();
+  	getActiveOrders(the_decimals);
+  		getTradelog();
+        getFav();
+  		 if (userid > 0) {
+              getEntrustAndUsercoin();
+  			 getClosedOrders();
+          } else {
+  			$('#entrust_over').hide();
+  			$('#entrust_over2').hide();
+  			$('#loginrequired').show();
+  			$('#loginrequired2').show();
+          }
+
+
+      });
+
+  $( document ).ready(function() {
+
+  	 $("#buy_range").ionRangeSlider({
+
+  		step: 1,
+  		min:0,
+  		max:100,
+          from: 100,
+  		grid:true,
+  		skin:"round",
+          onChange: function (data) {
+  			var fees=$("#buy_fees").val();
+              var percent=data.from;
+  			var avail=$("#base_coin").html();
+  			var calc_buy=(avail*percent)/100;
+  			var to_buy=calc_buy*(100-fees)/100;
+
+  			$("#buy_num").val((to_buy/parseFloat($('#buy_price').val() )).toFixed(market_round));
+              if ($('#buy_num').val()) {
+                  $("#buy_mum").html(($('#buy_num').val() * $('#buy_price').val()).toFixed(market_round));
+              }
+          }
+      });
+  	$("#sell_range").ionRangeSlider({
+
+  		step: 1,
+  		min:0,
+  		max:100,
+          from: 100,
+  		grid:true,
+  		skin:"round",
+          onChange: function (data) {
+              var percent=data.from;
+  			var avail=$("#user_coin").html();
+  			var calc_buy=(avail*percent)/100;
+  			$("#sell_num").val(calc_buy.toString());
+              if ($('#sell_num').val()) {
+                  $("#sell_mum").html((parseFloat($('#sell_num').val() * $('#sell_price').val())).toFixed(market_round));
+              }
+          }
+      });
+  });
+</script>

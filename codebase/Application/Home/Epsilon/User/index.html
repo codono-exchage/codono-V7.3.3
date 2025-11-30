@@ -1,0 +1,169 @@
+﻿<include file="Public:header" />
+<!-- Page content -->
+<section class="generic">
+
+  <!-- Page container -->
+  <div class="container">
+    <div class="full-box row">
+
+      <include file="User:sidebar" />
+      <div class="col-10">
+    <div class="row mt-3 mb-3">
+      <include file="User:top_bar" />
+      <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+        <ul class="text-right breadcrumbs list-unstyle">
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+          </li>
+          <li>
+            <a href="{:U('User/index')}" class="btn btn-warning btn-sm active"
+              >{:l('User')}</a
+            >
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="row">
+          <div class="col-xl-6 col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">{:l('Authentication')}</h4>
+              </div>
+              <div class="card-body m-h">
+                <p>
+                  {:l('Verify to improve your security level and withdrawal limit')}
+                </p>
+              </div>
+              <div class="card-footer">
+                <a href="{:U('User/authentication')}" class="btn-2">{:l('Settings')}</a>
+                <button type="button" class="btn-2 pull-right" data-toggle="modal" data-target="#qrCodeModal"><i class="fa fa-qrcode"></i>
+                  Mobile App Login
+              </button>
+              </div>
+            </div>
+          </div>
+            	
+          <div class="col-xl-6 col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">{:l('Account Security')}</h4>
+              </div>
+              <div class="card-body m-h">
+                <!--
+								security-status 
+								poor
+								average
+								strong
+								-->
+                <div class="security-status poor">
+                  <p>{:l('Current Account Risk Level:')}</p>
+                  <span>{:l('High school')}</span>
+                  <ul class="strength-bar">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-footer">
+                <a href="{:U('User/security')}" class="btn-2">{:l('Settings')}</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6 col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">{:l('Shipping addresss')}</h4>
+              </div>
+              <div class="card-body m-h">
+                <p>{:l('Add or edit your Shipping address')}</p>
+              </div>
+              <div class="card-footer">
+                <a href="{:U('User/goods')}" class="btn-2">{:l('Settings')}</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6 col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">{:l('User Actions')}</h4>
+              </div>
+              <div class="card-body m-h">
+                <p>{:l('You can track all user movements you have made.')}</p>
+              </div>
+              <div class="card-footer">
+                <a href="{:U('User/log')}" class="btn-2">{:l('Settings')}</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6 col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">{:l('Invite a Friend')}</h4>
+              </div>
+              <div class="card-body m-h">
+                <div class="security-status poor">
+                  <p>{:l('Invite your friends, earn more!')}</p>
+                </div>
+              </div>
+              <div class="card-footer">
+                <a href="{:U('Invite/index')}" class="btn-2">{:l('Invite')}</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-6 col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">{:l('Transaction fee level')}</h4>
+              </div>
+              <div class="card-body m-h">
+                <div class="security-status poor">
+                  <p>{:l('Check your transaction fee')}</p>
+                </div>
+              </div>
+              <div class="card-footer">
+                <a href="{:U('Content/fees')}" class="btn-2">{:l('Settings')}</a>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="qrCodeModal" tabindex="-1" role="dialog" aria-labelledby="qrCodeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="qrCodeModalLabel">{:l('Login via Mobile App')}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body  text-center">
+            <div class="qr-box" id="qrcode1">
+              
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.qrcode.min.js"></script>
+<script>
+  	$('#qrcode1').qrcode({
+                        render: "table", //table
+                        size: 150,
+                        text: '{$token_object}', //Any content
+						            background: "#ffffff",
+                        class:"img-fluid"
+                    }); 
+                    let imgcontent	=$('#qrcode1').html();
+</script>
+<include file="Public:footer_minimal" />

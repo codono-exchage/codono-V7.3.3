@@ -1,0 +1,113 @@
+<include file="Public:header"/>
+<link href="__THEME__/index_js/morris-js/morris.css" rel="stylesheet">
+<script src="__THEME__/index_js/morris-js/morris.min.js" type="text/javascript"></script>
+<script src="__THEME__/index_js/morris-js/raphael-min.js" type="text/javascript"></script>
+<!-- tui charts plugins -->
+<script src="__THEME__/assets/libs/tui-chart/tui-chart-all.min.js"></script>
+
+<script src="__THEME__/assets/js/pages/tui-charts.init.js"></script>
+<style>.custom-select-sm, .custom-btn-sm {
+    height: 38px; /* Example height, adjust as necessary */
+}
+</style>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<section class="main">
+		<div class="d-flex align-items-center mb-2">
+			<h5 class="mb-0 card-title flex-grow-1">{:l('Coin Stats')}</h5>
+			<div class="d-flex align-items-center">
+				<select id="name-select" name="coinname" class="form-select  me-2">
+					
+					<volist name="C['coin_list']" id="vo">
+						<option value="{$vo['name']}" {$vo['name'] == $coinname ? 'selected' : ''}>{$vo['title']}</option>
+					</volist>
+				</select>
+				<button onclick="chk_xin('{$coinname}');" class="btn btn-warning ">
+					<i class="mdi mdi-refresh" title="{:l('Clear')}"></i> 
+				</button>
+			</div>
+		</div>
+		
+		<include file="Index:coin_top_sub"/>
+		
+		
+
+        
+		<div class="row">
+		<include file="Index:apex_charts_coin"/>
+		<include file="Index:fee_buy_sell"/>
+	</div>
+		<div id="morris">
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="card">
+						<header class="card-header text-success">{:l('Fee Chart')}</header>
+						<div class="card-body">
+							<div id="hero-graph" class="graph"></div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<script>
+	$("#name-select").change(function () {
+		var coinname = $("#name-select option:selected").val();
+		window.location = '/Admin/Index/coin/coinname/' + coinname;
+	});
+
+	function chk_xin($coinname) {
+		$.get("{:U('Index/coinSet')}", {
+			coinname: $coinname,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+
+
+
+	var Script = function () {
+
+		//morris chart
+		$(function () {
+
+			//Market Transactions Report
+			Morris.Area({
+				element: 'hero-graph',
+				data: {$cztx},
+				xkey: 'date',
+				ykeys: ['num', 'mum', 'fee_buy', 'fee_sell'],
+				labels: ['Balance', 'wallet', 'Deposit', 'Sell'],
+				hideHover: 'auto',
+				lineWidth: 1,
+				pointSize: 5,
+				lineColors: ['#4a8bc2', '#ff6c60', '#a94442', '#afgh4e'],
+				fillOpacity: 0.5,
+				smooth: true,
+				postUnits: ' ',
+				xLabels: 'day',
+			});
+		});
+
+
+	}();
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Index/coin')}");
+	</script>
+</block>

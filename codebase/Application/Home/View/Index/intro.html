@@ -1,0 +1,69 @@
+<include file="Index:html_header"/>
+    <body class="nk-body body-wider bg-theme mode-onepage">
+	<div class="nk-wrap">
+		<header class="nk-header is-sticky is-dark" id="header">
+		<include file="Index:top_menu"/>	
+		</header>
+        <main class="nk-pages tc-light">
+			
+            <section class="bg-white ov-h section">
+                        <!-- Section Head @s -->
+                        <div class="section-head text-center wide-auto">
+                            <h4 class="title title-semibold">Token Allocation Forecast</h4>
+                        </div><!-- .section-head @e -->
+                        <!-- Block @s -->
+                        <div class="nk-block nk-block-token">
+                            <div class="container">
+                                <div class="tab-s1 text-center">
+                                    <ul class="nav tab-nav-s4 text-center bg-theme-grad">
+                                        <li><a data-toggle="tab" href="#tab-dist-1">Distribution </a></li>
+                                        <li><a class="active show" data-toggle="tab" href="#tab-fund-1">Funding Allocation</a></li>
+                                    </ul>
+                                    <div class="gap-3x d-none d-lg-block"></div>
+                                    <div class="gap-10x d-none d-lg-block"></div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade animate" id="tab-dist-1">
+                                            <div class="token-alocate-item token-alocate-item-s1 shadow-none">
+                                                <div class="token-alocate-graph token-alocate-graph-s1 animated" data-animate="fadeInUp" data-delay="0.4">
+                                                    <canvas class="chart-canvas chart-canvas-s1" id="token-alocate-4"></canvas>
+                                                </div>
+                                                <ul class="chart-data-s1" data-canvas="token-alocate-4" data-canvas-type="doughnut" data-border-color="#F5F6F9">
+                                                    <li data-color="#223fa8" data-title="Token Sale Program" data-amount="60"></li>
+                                                    <li data-color="#8fa0df" data-title="Reserve Fund" data-amount="8"></li>
+                                                    <li data-color="#4aa0f6" data-title="Team and Founders" data-amount="15"></li>
+                                                    <li data-color="#6ad9ac" data-title="Board Advisors" data-amount="4"></li>
+                                                    <li data-color="#4d6fe9" data-title="Ecosystem Development" data-amount="7"></li>
+                                                    <li data-color="#15216d" data-title="Marketing and Bounty" data-amount="6"></li>
+                                                </ul>
+                                            </div>
+                                        </div><!-- End tab-pane -->
+                                        <div class="tab-pane fade show animate active" id="tab-fund-1">
+                                            <div class="token-alocate-item token-alocate-item-s1 shadow-none">
+                                                <div class="token-alocate-graph token-alocate-graph-s1 animated" data-animate="fadeInUp" data-delay="0.4">
+                                                    <canvas class="chart-canvas chart-canvas-s1" id="token-alocate-5"></canvas>
+                                                </div>
+                                                <ul class="chart-data-s1" data-canvas="token-alocate-5" data-canvas-type="doughnut" data-border-color="#F5F6F9">
+                                                    <li data-color="#223fa8" data-title="Product Develoment" data-amount="40"></li>
+                                                    <li data-color="#8fa0df" data-title="Business Development" data-amount="12"></li>
+                                                    <li data-color="#4aa0f6" data-title="Marketing" data-amount="20"></li>
+                                                    <li data-color="#6ad9ac" data-title="Legal & Regulation" data-amount="10"></li>
+                                                    <li data-color="#4d6fe9" data-title="Partner/Investor" data-amount="6"></li>
+                                                    <li data-color="#15216d" data-title="Operational" data-amount="8"></li>
+                                                    <li data-color="#72a3f4" data-title="Contingency" data-amount="4"></li>
+                                                </ul>
+                                            </div>
+                                        </div><!-- End tab-pane -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .block @e -->
+                    </section>
+         </main>
+        <footer class="nk-footer ov-h has-ovm">
+            <include file="Index:footer_menu"/> 
+        </footer>
+        <div class="nk-ovm nk-ovm-repeat nk-ovm-fixed shape-i">
+            <div class="ovm-line"></div>
+        </div>
+	</div>
+<include file="Index:html_footer"/>	

@@ -1,0 +1,237 @@
+﻿<include file="Public:header" />
+<div class="page-top-banner">
+  <div
+    class="filter"
+    style="background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png')"
+  >
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-8 mt-3">
+          <h1>{$page_title}</h1>
+          <h2>{$prompt_text}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="shop-page card p-20">
+  <main class="wrapper">
+    <!-- Shop Listing Start -->
+    <section class="shop-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12 col-md-12">
+            <h1>{:l("Store")}</h1>
+            <gt name="Think.session.userId" value="0">
+              <!--Logged in User-->
+              <else />
+
+              <div
+                class="alert alert-info alert-styled-left alert-bordered col-12"
+              >
+                <button type="button" class="close" data-dismiss="alert">
+                  <span>&times;</span><span class="sr-only">Close</span>
+                </button>
+                {:l('To make purchases you are one click away')}
+                <span class="text-semibold"
+                  ><a href="#" onclick="loginpop();return false;"
+                    >{:l('LOG_IN')}</a
+                  ></span
+                >
+                now!
+              </div>
+            </gt>
+            <div class="card m-b-30">
+              <div class="row align-items-center">
+                <div class="col-auto">
+                  <ul class="nav nav-pills">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">{:l('Shopping centre')}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/Shop/log">{:l('Order History')}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/user/goods"
+                        >{:l('My Delivery Addresses')}</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-share4"></i>
+                        <span class="visible-xs-inline-block position-right">{:l('Filter')}</span>
+                        <span class="caret"></span>
+                      </a>
+    
+                      <ul class="dropdown-menu dropdown-menu-right p-20">
+                        <li><a href="{:U('Shop/index',array('type'=>$type))}"
+                        <if condition="empty($price) AND empty($deal)  AND empty($addtime)  ">class="active border-bottom border-success "</if>
+                        ><span style="background: none;" about="" accesskey="">{:l('Default')}</span></a></li>
+                        <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>$deal,'addtime'=>$addtime,'price'=>'price_desc'))}"
+                        <eq name="price" value="price_desc">class="active border-bottom border-success"</eq>
+                        ><span style="background: none;" about="" accesskey="">{:l('PRICE_HIGH_TO_LOW')}</span></a></li>
+                        <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>$deal,'addtime'=>$addtime,'price'=>'price_asc'))}"
+                        <eq name="price" value="price_asc">class="active border-bottom border-success"</eq>
+                        ><span style="background: none;">{:l('PRICE_LOW_TO_HIGH')}</span></a></li>
+                        <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>'deal_desc','addtime'=>$addtime,'price'=>$price))}"
+                        <eq name="deal" value="deal_desc">class="active border-bottom border-success"</eq>
+                        ><span style="background: none;">{:l('HIGH_TO_LOW_SALES')}</span></a></li>
+                        <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>'deal_asc','addtime'=>$addtime,'price'=>$price))}"
+                        <eq name="deal" value="deal_asc">class="active border-bottom border-success"</eq>
+                        ><span style="background: none;">{:l('SALES_FROM_LOW_TO_HIGH')}</span></a></li>
+                        <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>$deal,'addtime'=>'addtime_desc','price'=>$price))}"
+                        <eq name="addtime" value="addtime_desc">class="active border-bottom border-success"</eq>
+                        ><span style="background: none;">{:l('ADDED_TIME_FROM_THE_FIRST_TO_T')}</span></a></li>
+                        <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>$deal,'addtime'=>'addtime_asc','price'=>$price))}"
+                        <eq name="addtime" value="addtime_asc">class="active border-bottom border-success"</eq>
+                        ><span style="background: none;">{:l('ADDED_TIME_AFTER_THE_FIRST')}</span></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="row">
+              <volist name="list" id="vo" mod="2">
+                <div class="col-sm-6 col-md-4">
+                  <div class="product product-list">
+                    <figure class="product-media">
+                      <span class="discount"
+                        ><i class="fa fa-arrow-down"></i>{:l('DISCOUNT')}</span
+                      >
+                      <img src="{$vo.img}" alt="{$vo.name}" />
+                    </figure>
+                    <div class="product-detail">
+                      <div class="row align-items-center">
+                        <div class="product-cat col">
+                          <a
+                            href="{:U('Shop/index' ,array('type'=>$vo['type']))}"
+                            >{$vo.type}</a
+                          >
+                        </div>
+                        <div class="col-auto product-favorite">
+                          <button class="btn">
+                            <i class="fa fa-heart-o"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <h4 class="product-name">
+                        <a
+                          href="{:U('Shop/go','view='.slugify($vo['name']).'-'.$vo['id'])}"
+                          >{$vo.name}</a
+                        >
+                      </h4>
+                      <div class="product-price">
+                        {$vo.buycoin}{$vo.market_price|Num} ${$vo.price|Num}
+                      </div>
+                      <div class="product-desc">
+                        {$vo['content']|strip_tags|msubstr=0,100}
+                      </div>
+                      <!-- <div class="product-price">$1085.00 <span class="old-price">$1293.00</span></div> -->
+                      <a
+                        href="{:U('Shop/go','view='.slugify($vo['name']).'-'.$vo['id'])}"
+                        class="shop-now btn-4"
+                        ><i class="ion ion-md-basket"></i>{:l('BUY_NOW')}</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </volist>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="filter-group">
+              <h5 class="filter-title">{:l('Search')}</h5>
+              <form class="navbar-form navbar-left" action="/Shop/index" method="get">
+                <div class="form-group has-feedback">
+                  <input type="search" name="name" class="form-control input-xs" placeholder="{:l('Search field')}" autocomplete="off" value="{$name}">
+                   <input type="hidden" name="c" value="List">
+                   <input type="hidden" name="spm" value="921">
+                  <div class="form-control-feedback">
+                    <i class="icon-search4 text-muted text-size-base"></i>
+                  </div>
+                </div>
+              </form>
+              
+            </div>
+            <div class="filter-group">
+              <h5 class="filter-title">{:l('By Price')}</h5>
+              <div class="price-filter">
+                <div class="col">
+                  <div id="product-price-range"></div>
+                  <button class="btn btn-1">{:l('Filter')}</button>
+                </div>
+              </div>
+            </div>
+            <div class="filter-group">
+              <h5 class="filter-title">{:l('Categories')}</h5>
+              <div class="caregorie-list">
+                <ul>
+                  <volist name="shop_type_list" id="vo">
+                    <li><a href="{:U('Shop/index' ,array('name'=>$name,'type'=>$key,'deal'=>$deal,'addtime'=>$addtime,'price'=>$price))}"
+                    <eq name="Think.get.type" value="$key">class="active"</eq>><i class="icon-circle-small position-left"></i>     {$vo}</a></li>
+                    </volist>														
+                </ul>
+              </div>
+            </div>
+            <div class="filter-group">
+              <h5 class="filter-title">{:l('Bestsellers')}</h5>
+              <div class="best-seller">
+                <a
+                  href="shop-product-details.html"
+                  class="best-seller-item row align-items-center"
+                >
+                  <figure class="col-3">
+                    <img src="__EPSILON__/img/shop/1.jpg" alt="Product" />
+                  </figure>
+                  <div class="col-auto">
+                    <h4 class="product-name">Apple Laptop M1 Intel</h4>
+                    <div class="product-price">
+                      $1085.00 <span class="old-price">$1293.00</span>
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="shop-product-details.html"
+                  class="best-seller-item row align-items-center"
+                >
+                  <figure class="col-3">
+                    <img src="__EPSILON__/img/shop/1.jpg" alt="Product" />
+                  </figure>
+                  <div class="col-auto">
+                    <h4 class="product-name">Apple Laptop M1 Intel</h4>
+                    <div class="product-price">
+                      $1085.00 <span class="old-price">$1293.00</span>
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="shop-product-details.html"
+                  class="best-seller-item row align-items-center"
+                >
+                  <figure class="col-3">
+                    <img src="__EPSILON__/img/shop/1.jpg" alt="Product" />
+                  </figure>
+                  <div class="col-auto">
+                    <h4 class="product-name">Apple Laptop M1 Intel</h4>
+                    <div class="product-price">
+                      $1085.00 <span class="old-price">$1293.00</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Shop Listing End -->
+  </main>
+</section>
+<include file="Public:footer_minimal" />

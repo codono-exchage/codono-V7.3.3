@@ -1,0 +1,49 @@
+Array
+(
+    [ret] => Array
+        (
+            [0] => Array
+                (
+                    [contractRet] => SUCCESS
+                )
+
+        )
+
+    [signature] => Array
+        (
+            [0] => 7284227599cd7dddbe9943d092bf885a2a915727cecb7460e651510f0c1f66c99bc11a33889b7d93203fb29664d41729474cb833a50a4689a63d9a764af33ecc00
+        )
+
+    [txID] => 8df4f54cebe8213dbaeec35363ca3e02979801a32d103027bee7590a051f6664
+    [raw_data] => Array
+        (
+            [contract] => Array
+                (
+                    [0] => Array
+                        (
+                            [parameter] => Array
+                                (
+                                    [value] => Array
+                                        (
+                                            [amount] => 1888888
+                                            [asset_name] => 31303034323130
+                                            [owner_address] => 41bec297a71ee5129d3539c4a98452d04fa25ffe4d
+                                            [to_address] => 411feb2c05c0de6f94cfd683368a8f5305cbd6ad9d
+                                        )
+
+                                    [type_url] => type.googleapis.com/protocol.TransferAssetContract
+                                )
+
+                            [type] => TransferAssetContract
+                        )
+
+                )
+
+            [ref_block_bytes] => 135d
+            [ref_block_hash] => f34a4f737d7e2f38
+            [expiration] => 1639468164000
+            [timestamp] => 1639468104769
+        )
+
+    [raw_data_hex] => 0a02135d2208f34a4f737d7e2f3840a0c7abbfdb2f5a75080212710a32747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e5472616e736665724173736574436f6e7472616374123b0a0731303034323130121541bec297a71ee5129d3539c4a98452d04fa25ffe4d1a15411feb2c05c0de6f94cfd683368a8f5305cbd6ad9d20f8a47370c1f8a7bfdb2f
+)

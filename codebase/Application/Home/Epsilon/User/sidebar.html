@@ -1,0 +1,42 @@
+<div class="col-2 card">
+	<div class="d-flex flex-column align-items-center justify-content-between"
+		style="padding: 10px 15px 10px 15px; gap: 30px;">
+		<a href="{:U('User/index')}" class="d-flex align-items-center justify-content-start w-100 m-2 p-2"
+		id="securityLink" style="gap: 10px;">
+		<i class="fa fa-dashboard fa-lg" aria-hidden="true"></i>
+		<p class="m-0 d-none d-lg-block">{:l('Dashboard')}</p>
+	</a>
+
+		<a href="{:U('Finance/index')}" class="d-flex align-items-center justify-content-start w-100 m-2 p-2"
+			id="authLink" style="gap: 10px;">
+			<i class="fa fa-cube fa-lg" aria-hidden="true"></i>
+			<p class="m-0 d-none d-lg-block">{:l('Balance')}</p>
+		</a>
+		<a href="{:U('Wallet/cryptodeposit')}" class="d-flex align-items-center justify-content-start w-100 m-2 p-2"
+		id="authLink" style="gap: 10px;">
+		<i class="fa fa-sitemap fa-lg" aria-hidden="true"></i>
+		<p class="m-0 d-none d-lg-block">{:l('Deposit')}</p>
+	</a>
+	<a href="{:U('Wallet/cryptowithdrawal')}" class="d-flex align-items-center justify-content-start w-100 m-2 p-2"
+	id="authLink" style="gap: 10px;">
+	<i class="fa fa-send fa-lg" aria-hidden="true"></i>
+	<p class="m-0 d-none d-lg-block">{:l('Withdrawal')}</p>
+</a>
+	
+		<a href="{:U('Transfer/giftcardcreate')}" class="d-flex align-items-center justify-content-start w-100 m-2 p-2" id="logsLink"
+			style="gap: 10px;">
+			<i class="fa fa-gift fa-lg" aria-hidden="true"></i>
+			<p class="m-0 d-none d-lg-block">{:l('Gift Cards')}</p>
+		</a>
+		<a href="{:U('Invite/index')}" class="d-flex align-items-center justify-content-start w-100 m-2 p-2"
+			id="inviteLink" style="gap: 10px;">
+			<i class="fa fa-user-plus fa-sm" aria-hidden="true"></i>
+			<p class="m-0 d-none d-lg-block">{:l('Invite a Friend')}</p>
+		</a>
+		<a href="{:U('Finance/orders')}" class="d-flex align-items-center justify-content-start w-100 m-2 p-2"
+			id="feesLink" style="gap: 10px;">
+			<i class="fa fa-money fa-sm" aria-hidden="true"></i>
+			<p class="m-0 d-none d-lg-block">{:l('Trades')}</p>
+		</a>
+	</div>
+</div>

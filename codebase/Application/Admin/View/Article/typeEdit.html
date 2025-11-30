@@ -1,0 +1,161 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4"><a href="{:U('Article/type')}">{:l('Categories')}</a> >></span> <span class="d-sm-flex align-items-center justify-content-between h4"><empty name="data">{:l('Add Article')}<else/>{:l('Edit Article')}</empty></span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('Article/typeEdit')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+								<tr class="controls">
+									<td class="item-label">{:l('Category Title')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="title" value="{$data.title}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Category Slug')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="name" value="{$data.name}">
+									</td>
+									<td class="item-note">Unique, No Spaces</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Parent')}:</td>
+									<td>
+										<select name="shang" class="form-select input-10x">
+											<option value=""
+											<eq name="data['shang']" value="">{:l('selected')}</eq>
+											>{:l('Parent Category')}</option>
+											<volist name="list" id="v">
+												<option value="{$key}"
+												<eq name="data['shang']" value="$key">{:l('selected')}</eq>
+												>{$v}</option>
+											</volist>
+										</select></td>
+									<td class="item-note"></td>
+								</tr>
+
+								<tr class="controls">
+									<td class="item-label">{:l('On Frontend')}:</td>
+									<td><select name="index" class="form-select input-10x">
+										<option value="1"
+										<eq name="data.index" value="1">{:l('selected')}</eq>
+										>{:l('Show')}</option>
+										<option value="0"
+										<eq name="data.index" value="0">{:l('selected')}</eq>
+										>{:l('Hide')}</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('On Footer')}:</td>
+									<td><select name="footer" class="form-select input-10x">
+										<option value="1"
+										<eq name="data.footer" value="1">{:l('selected')}</eq>
+										>{:l('Show')}</option>
+										<option value="0"
+										<eq name="data.footer" value="0">{:l('selected')}</eq>
+										>{:l('Hide')}</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Article Content')}:</td>
+									<td>
+										<textarea name="content" class="form-control input-10x">{$data.content}</textarea>
+									</td>
+									<td class="item-note">{:l('Content')}</td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Add time')}:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="addtime" value="{$data['addtime']|addtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Edit time')}:</td>
+									<td>
+										<input type="text" class="form-control  input-10x " name="endtime" value="{$data['endtime']|addtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Sort')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="sort" value="{$data.sort}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Status')}:</td>
+									<td><select name="status" class="form-select input-10x">
+										<option value="1"
+										<eq name="data.status" value="1">{:l('selected')}</eq>
+										>{:l('Available')}</option>
+										<option value="0"
+										<eq name="data.status" value="0">{:l('selected')}</eq>
+										>{:l('Disable')}</option>
+									</select></td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="ajax-post btn submit-btn btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Submit')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<script type="text/javascript">
+					//submit Form
+					$('#submit').click(function () {
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__THEME__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+	var editor;
+	KindEditor.ready(function (K) {
+		editor = K.create('textarea[name="content"]', {
+			width: '500px',
+			height: '250px',
+			allowPreviewEmoticons: false,
+			allowImageUpload: true,
+			uploadJson: "{:U('Article/typeEdit','type=images')}",//Image upload and address
+			items: [
+				'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'image', 'link', 'fullscreen'],
+			afterBlur: function () {
+				this.sync();
+			}
+		});
+	});
+</script>
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Article/type')}");
+	</script>
+</block>

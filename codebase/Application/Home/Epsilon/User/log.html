@@ -1,0 +1,89 @@
+<include file="Public:header" />
+<section class="generic">
+  <!-- Page container -->
+  <div class="container">
+    <div class="full-box row">
+      <include file="User:sidebar" />
+      <div class="col-10">
+  
+    <div class="row mt-3 mb-3">
+      <include file="User:top_bar" />
+      <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+        <ul class="text-right breadcrumbs list-unstyle">
+          <li>
+            <a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+          </li>
+          <li>
+            <a href="{:U('/user/index')}" class="btn btn-warning btn-sm"
+              >{:l('User')}</a
+            >
+          </li>
+          <li class="btn btn-warning btn-sm active">{:l('Log')}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <!-- Main content -->
+            <div class="">
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-title"> {:l('LOG_IN_LOG')} </span>
+                </div>
+
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table
+                      class="table last-login-table" id="investLog_content">
+                      <thead>
+                        <tr>
+                          <th>{:l('TIME')}</th>
+                          <th>{:l('ACTION_TYPE')}</th>
+                          <th>{:l('ACTION_REMARK')}</th>
+                          <th>{:l('Access')} IP</th>
+                          
+                          <th>{:l('STATUS')}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <volist name="list" id="vo">
+                          <tr>
+                            <td>{$vo.addtime|addtime}</td>
+                            <td>{$vo.type}</td>
+                            <td>{$vo.remark}</td>
+                            <td>{$vo.addip}</td>
+                            
+                            <td>
+                              <eq name="vo.status" value="0">
+                                <font color="violet">{:l('ERROR')}</font>
+                              </eq>
+                              <eq name="vo.status" value="1">
+                                <font class="green">{:l('NORMAL')}</font></eq
+                              >
+                              <eq name="vo.status" value="2">
+                                <font color="red">{:l('ABNORMAL')}</font>
+                              </eq>
+                            </td>
+                          </tr>
+                        </volist>
+                      </tbody>
+                    </table>
+                    <div class="pages">{$page}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div></div></div>
+  </div>
+</section>
+<script>
+  $("#whichpage").html("{:l('User Activities')}");
+  $(".user_log").addClass("active");
+</script>
+<include file="Public:footer_minimal" />

@@ -1,0 +1,48 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="__PUBLIC__/otc/otc.css"/>
+<div class="page-container">
+<div class="row">
+
+<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+<!-- rightbox starts -->
+<div class="rightbox">
+	<div class="QuoteLayout-Wrap">
+		<div class="QuoteLayout-Title" id="quotebox">Order Paid</div>
+		<div class="QuoteLayout-Body">
+			
+			<div class="quoteContent-wrap" id="with_orderx">
+				<div class="quoteContent-TopWrap">
+					<div class="quoteContent-CryptoTitle" id="tradetype_final"><i class="fa fa-check-circle fa-3x text-success"></i></div>
+					<div class="quoteContent-CryptoWrap">
+						<div class="quoteContent-StyledTargetAmount" id="tradecoin_qty">{$record.qty}</div>
+						<div class="quoteContent-CryptoCoin" id="tradecoin_name">{$record.buy_coin}</div>
+					</div>
+				</div>
+				<div class="quoteContent-MiddleWrap">
+				
+				<div class="quoteContent-LabelRow"><div>{:L('BOUGHT')}</div><div class="text-bold">{$record.qty} {$record.buy_coin|strtoupper}</div></div>
+					<div class="quoteContent-LabelRow"><div>Price</div><div class="text-bold">{$record.price} {$record.spend_coin|strtoupper}</div></div>
+					<!--<div class="quoteContent-LabelRow"><div>Fees</div><div class="text-bold">{$record.fees_paid} {$record.base_coin|strtoupper}</div></div>-->
+					<div class="quoteContent-LabelRow"><div>Total</div><div class="text-bold">{$record.total} {$record.spend_coin|strtoupper}</div></div>
+					
+					
+				</div>
+
+				<div class="quoteContent-button" id="quotefinal">
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- Rightbox ends -->
+</div>
+</div>
+</div>
+<script type = "text/javascript" >
+function newtrade(){
+window.location="{:U('Dex/index')}";
+}
+</script >
+<include file="Public:footer_minimal"/>

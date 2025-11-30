@@ -1,0 +1,333 @@
+<include file="Public:header" />
+
+<section class="generic">
+	<div class="container">
+<div class="full-box row">
+	<include file="User:sidebar" />
+	<div class="col-10">
+		<div class="row mt-3 mb-3">
+			<include file="User:top_bar" />
+			<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+				<ul class="text-right breadcrumbs list-unstyle">
+					<li>
+						<a class="btn btn-warning btn-sm" href="{:U('/')}">{:l('Home')}</a>
+					</li>
+					<li>
+						<a href="{:U('/finance/index')}" class="btn btn-warning btn-sm">{:l('Finance')}</a>
+					</li>
+					<li class="btn btn-warning btn-sm active">{:l('Fiat Withdrawal')} </li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-12">
+					<ul id="withdraw-money-tabs" class="nav nav-pills" role="tablist">
+						<li class="nav-item white-bg">
+							<a aria-selected="true" class="nav-link active" data-toggle="pill" href="#money"
+								data-target=".money" role="tab">{:l("Fiat")} </a>
+						</li>
+						<li class="nav-item white-bg">
+							<a aria-selected="false" class="nav-link " href="/wallet/cryptowithdrawal">{:l('Crypto')}
+							</a>
+						</li>
+						<li class="nav-item white-bg">
+							<a aria-selected="true" class="nav-link " href="/Pay/index">{:l("Pay")} </a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class=" row">
+
+
+
+				<div class="col-md-3 col-sm-12 card p-10">
+					<div class="">
+						<div class="form-group">
+							<label for="coin-select">{:l('Coin')}</label>
+
+							<select id="coin-select" class="bootstrap-select form-control" data-live-search="true"
+								data-live-search-placeholder={:l("Search")} data-width="100%">
+								<volist name="fiatcoins" id="vo">
+									<eq name="vo['name']" value="$coin">
+										<option value="{$vo.name}" selected="selected">{$vo.name|strtoupper}</option>
+										<else />
+										<option value="{$vo.name}">{$vo.name|strtoupper}</option>
+									</eq>
+								</volist>
+
+							</select>
+
+						</div>
+
+						<div class="form-group">
+							<label for="out_bank">{:L('Method')}</label>
+
+							<select id="out_bank" class="bootstrap-select form-control" data-live-search="true"
+								data-live-search-placeholder="Search" data-width="100%"
+								title="{:l('SELECT_WITHDRAWALS_ADDRESS')}">
+								<volist name="userBankList" id="vo">
+									<option value="{$vo.id}" data-bank="{$vo.bankcard} @ {$vo.bank}">{$vo.name}</option>
+								</volist>
+
+
+
+								<option value="addnew" class="green">{:l('ADD_A_NEW_ADDRESS_TO_CASH')}</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="out_num">{:l('Amount')}</label>
+							<input type="text" class="form-control" id="out_num" maxlength="12" value="" required="">
+
+							<div class="label-block">
+								<span class="label label-primary">
+									<notempty name="C['mytx_fee']">{:l('WITHDRAWAL_FEE')} {$C['mytx_fee']}%</notempty>
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="out_paypassword">{:l('TRANSACTION_PASSWORD')} </label> <input type="password"
+								id="out_paypassword" name="fundpassword" class="form-control" value="" required>
+							<a href="{:U('findpwd/findpwd')}" class="green m-t-5 d-inline-block">{:l('I forgot my password?')}</a>
+						</div>
+						<empty name="zc_jz">
+							<button class="btn btn-4 text-center" onclick="out_up()">{:l('Send')}</button>
+							<else />
+							<button class="btn btn-4 text-center">Withdrawals are disabled </button>
+						</empty>
+					</div>
+				</div>
+				<div class="col-md-9 col-sm-12 ">
+					<div class="card p-10">
+						<div class="card-header">
+							<div class="card-title">{:l('Fiat Withdrawal History')}</div>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table datatable-basic" id="investLog_content">
+									<thead>
+										<tr>
+											<th>{:l('AMOUNT')}</th>
+
+											<th>{:l('FEE')}</th>
+											<th>{:l('AMOUNT_ARRIVAL')}</th>
+											<th>{:l('WITHDRAW_ADDRESS')}</th>
+											<th>{:l('TIME')}</th>
+											<th>{:l('MEMO')}</th>
+											<th>
+												<span>
+													<select id="status-select">
+														<option value="" <eq name="status" value="">selected</eq>
+															>{:l('ALL_STATES')}</option>
+														<option value="1" <eq name="status" value="1">selected</eq>
+															>{:l('ALREADY_APPLIED')}</option>
+														<option value="2" <eq name="status" value="2">selected</eq>
+															>{:l('WITHDRAW_SUCCESS')}</option>
+														<option value="3" <eq name="status" value="3">selected</eq>
+															>{:l('REVOKED')}</option>
+														<option value="4" <eq name="status" value="4">selected</eq>
+															>{:l('PROCESSING')}</option>
+													</select>
+												</span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+										<volist name="out_list" id="vo">
+											<tr>
+												<td>{$vo['num']|default="0.00"} {$vo['coin']|strtoupper}</td>
+
+												<td>{$vo['fee']|default="0.00"}</td>
+												<td>{$vo['mum']|default="0.00"}</td>
+												<td>{$vo['name']}</td>
+												<td>{$vo['addtime']|date='Y-m-d H:i:s',###}</td>
+												<td>
+													<if condition="$vo['memo']"><button class="btn btn-warning btn-sm"
+															onclick='showtx("{$vo[' memo']}")'>{:l('Show')}</button>
+														<else />--
+													</if>
+												</td>
+												</td>
+												<td>
+													<eq name="vo.status" value="0">
+														{:l('ALREADY_APPLIED')}
+														<a onclick="out_reject(this)" data="{$vo['id']}"
+															href="javascript:void(0)"
+															style="color:#2674FF!important;">{:l('UNDO')}</a>
+													</eq>
+													<eq name="vo.status" value="1">
+														{:l('WITHDRAW_SUCCESS')}
+													</eq>
+													<eq name="vo.status" value="2">
+														{:l('REVOKED')}
+													</eq>
+													<eq name="vo.status" value="3">
+														{:l('PROCESSING')}
+													</eq>
+												</td>
+											</tr>
+										</volist>
+
+
+									</tbody>
+								</table>
+								<div class="pages">{$page}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div></div>
+</section>
+<script>
+	$("#out_bank").change(function () {
+		var type = $("#out_bank option:selected").val();
+		if (type == 'addnew') {
+			window.location = "{:U('Finance/bank')}";
+		}
+	});
+	function send_new() {
+		$(".step6").hide();
+		$(".step5").show();
+	}
+	function send_cellphone_out(type) {
+		$.post("{:U('Verify/mytx')}", {
+			type: type,
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, { icon: 1 });
+				$(".step5").hide();
+				$(".step6").show();
+				$("#out_cellphone_verify").focus();
+				$('#cellphone_new').attr("disabled", "disabled");
+				var obj = $('#reg_cellphone_new');
+				var wait = 60;
+				var interval = setInterval(function () {
+					obj.html(wait + "{:l('SEC_CAN_BE_SENT_AGAIN')}");
+					wait--;
+					if (wait < 0) {
+						clearInterval(interval);
+						$(".reloadverify_new").click();
+						$("#verify_new").val('');
+						obj.html('<a class="move" onclick="send_new()">{:l("DID_NOT_RECEIVE_RESEND")}</a>');
+					}
+					;
+				}, 1000);
+			} else {
+				layer.msg(data.info, { icon: 2 });
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function out_up() {
+
+		var num = $("#out_num").val();
+		var paypassword = $("#out_paypassword").val();
+		var cellphone_verify = $("#out_cellphone_verify").val();
+		var bank = $('#out_bank option:selected').val();
+		var coinname = $('#coin-select option:selected').val();
+		<eq name="M_ONLY" value="1">
+
+			if (cellphone_verify == "" || cellphone_verify == null) {
+				layer.msg('Enter SMS verification code', { icon: 2 });
+			return false;
+		}
+
+		</eq>
+		if (num == "" || num == null) {
+
+			layer.tips('Withdrawal Amount', '#out_num', { tips: 2 });
+			return false;
+		}
+		if (bank == "" || bank == null) {
+
+			layer.tips('Choose withdraw address', '#out_bank', { tips: 2 });
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+
+			layer.tips('Provide Trans Password', '#out_paypassword', { tips: 2 });
+			return false;
+		}
+
+		{
+			$.post("{:U('Finance/mytxUp')}", {
+				num: num,
+				paypassword: paypassword,
+				cellphone_verify: cellphone_verify,
+				type: bank,
+				coinname: coinname,
+			}, function (data) {
+
+				if (data.status == 1) {
+					layer.msg(data.info, { icon: 1 });
+					window.location = '/Finance/outlog';
+				} else {
+					layer.msg(data.info, { icon: 2 });
+					if (data.url) {
+						window.location = data.url;
+					}
+				}
+			}, "json");
+		}
+	}
+</script>
+<script>
+	$("#coin-select").change(function () {
+		var coin = $("#coin-select option:selected").val();
+		window.location = '/Finance/mytx/coin/' + coin + '';
+	});
+
+	$('.finan_out').addClass('active');
+	$("#out_bank").change(function () {
+		$("#bank_info_hint").html($(this).find("option:selected").attr('data-bank'));
+
+		//alert($(this).find('option:selected').attr('data-bank'));
+
+	});
+</script>
+
+<script>
+	var hints = "0";
+	if (hints == 1) {
+		$('#hints').show();
+	}
+	$("#status-select").val("{$status}");
+	$("#status-select").change(function () {
+		var status = $("#status-select option:selected").val();
+		var url = '{:U("Finance/mytx")}';
+		if (status) {
+			url += '/status/' + status;
+		}
+		window.location = url;
+	});
+	$('#finance_box').addClass('active');
+	$('.finan_out').addClass('active');
+	function out_reject(_this) {
+		var id = $(_this).attr('data');
+		$.post("{:U('Finance/mytxReject')}", { id: id }, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, { icon: 1 });
+				window.location.reload();
+			} else {
+				layer.msg(data.info, { icon: 2 });
+			}
+		}, "json");
+	}
+	function showtx(tx) {
+		layer.alert(tx, { title: "Withdrawal information", btn: ['Ok'] });
+	}
+</script>
+<include file="Public:footer_minimal" />

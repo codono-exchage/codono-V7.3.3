@@ -1,0 +1,119 @@
+<include file="Public:header"/>
+<style>
+	.ribbon-container {
+  width: 104px;
+  height: 106px;
+  overflow: hidden;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+}
+.ribbon {
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.6666667;
+  font-weight: 500;
+  text-transform: uppercase;
+  position: relative;
+  padding: 5px 0;
+  left: -11px;
+  top: 25px;
+  width: 150px;
+  background-color: #4CAF50;
+  color: #fff;
+  letter-spacing: 0.25px;
+  z-index: 999;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.pricing-table .pricing-table-price {
+  font-size: 42px;
+}
+.pricing-table .pricing-table-price > span {
+  font-size: 30px;
+  margin-right: 5px;
+}
+.pricing-table ul > li {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.pricing-table div[class*=bg-] ul > li {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.pricing-table-panel .pricing-table-body {
+  padding: 20px;
+  text-align: center;
+  -webkit-box-shadow: 1px 0 0 #ddd, 0 1px 0 #ddd;
+  box-shadow: 1px 0 0 #ddd, 0 1px 0 #ddd;
+}
+</style>
+<div class="container wallet-page">
+	<div class="full-box row">
+		<include file="User:sidebar" />
+	<div class="col-10 pricing-table">
+		<div class="row">
+	<volist name="plans" id="vo">
+                    <div class="col-lg-4">
+                        <div class="card text-center <eq name="vo['is_popular']" value='1'>bg-pink-400</eq>">
+                            <div class="card-body">
+                                <h4>{$vo.name}</h4>
+                                <h1 class="pricing-table-price"><span>{$vo.coin| strtoupper}</span>{$vo.price}</h1>
+                                <ul class="list-unstyled content-group">
+                                    <li><strong>{:l('Benefits')}</strong></li>
+                                    <li><strong>{$vo.discount}%</strong> discounts on Trading fees</li>
+                                    <li>Validity <strong>{$vo.duration} months</strong> Months</li>
+                                    <li>KYC Requirements <strong><i class="fa fa-check-square-o"></i></strong></li>
+                                    <li><strong>Unlimited </strong>{:l('Trades')}</li>
+                                    <li>{$vo.condition}</li>
+
+                                </ul>
+                                <a onclick='Buy("{$vo.id}","{$vo.name}","{$vo.coin}","{$vo.price}");' href="javascript:void(0)"  class="btn <eq name="vo['is_popular']" value='1'>bg-info<else/>bg-success</eq> btn-lg text-uppercase text-size-small text-semibold">Join Now</a>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+				</volist>
+			</div>
+                </div>
+		</div>
+		</div>
+
+		<!-- Main content -->
+			<script type="text/javascript">
+	function Buy(id,name,coin,price) {
+		layer.confirm('Subscribe to '+name+',it will cost '+coin+price+' confirm?', 
+		{
+			btn: ['Confirm','Cancel'], //PUSH_BUTTON
+			shade: false, //it does not show shadow
+			title:'Plan Change'
+		}, function(index){
+			$.post("/Plans/buy", {
+				id : id
+			}, function (data) {
+				if (data.status == 1) {
+					layer.msg(data.info, {icon: 1});
+					window.setTimeout("window.location='/User/index'", 1000);
+				} else {
+					layer.msg(data.info, {icon: 2});
+					if (data.url) {
+						window.setTimeout("window.location=" + data.url, 1000);
+					}
+				}
+			}, "json");
+		
+			layer.close(index);
+		},function(index){
+			layer.close(index);
+		}
+		
+		);
+
+	}
+</script>
+
+<include file="Public:footer_minimal"/>

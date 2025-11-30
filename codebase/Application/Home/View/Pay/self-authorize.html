@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="renderer" content="webkit">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>{:C('web_title')}</title>
+	<meta name="Keywords" content="{:C('web_keywords')}">
+	<meta name="Description" content="{:C('web_description')}">
+	
+	<link rel="shortcut icon" href=" /favicon.ico"/>
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/basic.css"/>
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/style.css"/>
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/pay.css"/>
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/font-awesome.min.css"/>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.flot.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Home/js/jquery.cookies.2.2.0.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+
+</head>
+<body>
+<div class="wrapper" style="width: 650px; margin-top: 0px; margin: inherit;">
+	<div id="dialog_ali" class="mana-app styled-pane">
+	<div class="mana-app-title" style="line-height: 34px;">{:l('AUTHORIZE.NET')}
+		<span id="wait" style="color:#e55600;">
+		<eq name="mycz.status" value="0">
+			{:l('UNPAID')} 	<a onclick="myczRemittance({$mycz['id']})" href="javascript:void(0)" style="color: #2674FF!important;">{:l('MARK AS PAID')}</a>
+		</eq>
+		<eq name="mycz.status" value="1">
+		{:l('SUCCESSFUL_RECHARGE')}
+		</eq>
+		<eq name="mycz.status" value="2">
+		{:l('ARTIFICIAL_ARRIVAL')}
+		</eq>
+		<eq name="mycz.status" value="3">
+		{:l('PROCESSING')}
+		</eq></span>
+	</div>
+<neq name="mycz.status" value="0">
+		<div class="lighttips">{:l('PLEASE_USE_THE_MICROCHANNEL_TR')}</div>
+		<form style="padding-left: 40px;padding-top: 0px;width: 380px;float: left;">
+			<table class="mana-app-table info" style="width: 90%;padding-top:0;">
+				<tbody>
+				<tr>
+					<td width="140">{:l('THE_OFFICIAL_ACCOUNT')}</td>
+					<td>{$myczType.username}</td>
+				</tr>
+				<tr>
+					<td>{:l('AA')}</td>
+					<td>{$myczType.truename}</td>
+				</tr>
+				<tr>
+					<td>{:l('OPENING_ADDRESS')}:</td>
+					<td>{$myczType.kaihu}</td>
+				</tr>
+				<tr>
+					<td>{:l('PAYMENT_AMOUNT')}</td>
+					<td>
+						<b id="right_usd">{$mycz.num}</b>
+					</td>
+				</tr>
+
+				<tr>
+					<td>{:l('ORDER_NUMBER')}</td>
+					<td><em class="usdin_msg"
+							style="color:red;font-style:normal;font-weight: bold;">{$mycz.tradeno}</em></td>
+				</tr>
+
+				</tbody>
+			</table>
+		</form>
+		
+		<notempty name="myczType['img']">
+			<div class="pay_code">
+				<img src="__UPLOAD__/public/{$myczType['img']}" width="130">
+				
+			</div>
+		</notempty>
+		<div style="clear: both"></div>
+		<div class="pay_con">
+			<span></span>
+
+			<div class="pay_con_r">
+
+					<p>{:l('DO_NOT_FORGET_ORDER_NUMBER')}:<em class="usdin_msg" style="font-weight: bold;color:#e55600;font-style:normal;color:red;">{$mycz.tradeno}</em><br>
+					{:l('DO_NOT_FILL_IN_THE_OTHER_CHARA')}<br>
+					{:l('WE_WILL_RECEIVE_THE_MONEY')}
+
+
+			</div>
+
+		</div>
+	<else/>
+<script type="text/javascript"
+    src="https://jstest.authorize.net/v1/Accept.js"
+    charset="utf-8">
+</script>
+
+<form id="paymentForm"
+    method="POST"
+    action="{:SITE_URL}Pay/authorize" >
+    <input type="text" name="cardNumber" id="cardNumber" placeholder="cardNumber"/> <br><br>
+    <input type="text" name="expMonth" id="expMonth" placeholder="expMonth"/> <br><br>
+    <input type="text" name="expYear" id="expYear" placeholder="expYear"/> <br><br>
+    <input type="text" name="cardCode" id="cardCode" placeholder="cardCode"/> <br><br>
+    <input type="text" name="accountNumber" id="accountNumber" placeholder="accountNumber"/> <br><br>
+    <input type="text" name="routingNumber" id="routingNumber" placeholder="routingNumber"/> <br><br>
+    <input type="text" name="nameOnAccount" id="nameOnAccount" placeholder="nameOnAccount"/> <br><br>
+    <input type="text" name="accountType" id="accountType" placeholder="accountType"/> <br><br>
+    <input type="hidden" name="dataValue" id="dataValue" />
+    <input type="hidden" name="dataDescriptor" id="dataDescriptor" />
+    <button type="button" onclick="sendPaymentDataToAnet()">Pay</button>
+</form>
+
+<script type="text/javascript">
+
+function sendPaymentDataToAnet() {
+    var authData = {};
+        authData.clientKey = "{:AUTHORIZE_NET['clientkey']}";
+        authData.apiLoginID = "{:AUTHORIZE_NET['loginid']}";
+
+    var cardData = {};
+        cardData.cardNumber = document.getElementById("cardNumber").value;
+        cardData.month = document.getElementById("expMonth").value;
+        cardData.year = document.getElementById("expYear").value;
+        cardData.cardCode = document.getElementById("cardCode").value;
+
+    // If using banking information instead of card information,
+    // build a bankData object instead of a cardData object.
+    //
+    // var bankData = {};
+    //     bankData.accountNumber = document.getElementById('accountNumber').value;
+    //     bankData.routingNumber = document.getElementById('routingNumber').value;
+    //     bankData.nameOnAccount = document.getElementById('nameOnAccount').value;
+    //     bankData.accountType = document.getElementById('accountType').value;
+
+    var secureData = {};
+        secureData.authData = authData;
+        secureData.cardData = cardData;
+        // If using banking information instead of card information,
+        // send the bankData object instead of the cardData object.
+        //
+        // secureData.bankData = bankData;
+
+    Accept.dispatchData(secureData, responseHandler);
+
+    function responseHandler(response) {
+        if (response.messages.resultCode === "Error") {
+            var i = 0;
+            while (i < response.messages.message.length) {
+                console.log(
+                    response.messages.message[i].code + ": " +
+                    response.messages.message[i].text
+                );
+                i = i + 1;
+            }
+        } else {
+            paymentFormUpdate(response.opaqueData);
+        }
+    }
+}
+
+function paymentFormUpdate(opaqueData) {
+    document.getElementById("dataDescriptor").value = opaqueData.dataDescriptor;
+    document.getElementById("dataValue").value = opaqueData.dataValue;
+
+    // If using your own form to collect the sensitive data from the customer,
+    // blank out the fields before submitting them to your server.
+    document.getElementById("cardNumber").value = "";
+    document.getElementById("expMonth").value = "";
+    document.getElementById("expYear").value = "";
+    document.getElementById("cardCode").value = "";
+    document.getElementById("accountNumber").value = "";
+    document.getElementById("routingNumber").value = "";
+    document.getElementById("nameOnAccount").value = "";
+    document.getElementById("accountType").value = "";
+
+    document.getElementById("paymentForm").submit();
+}
+</script>
+
+
+	</neq>
+	</div>
+</div>
+<script>
+	function myczRemittance(id) {
+		$.post("{:U('Finance/myczRemittance')}", {id: id}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+	
+</script>
+
+</body></html>

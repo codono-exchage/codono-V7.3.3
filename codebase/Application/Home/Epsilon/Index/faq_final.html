@@ -1,0 +1,49 @@
+<section class="section bg-theme tc-light" id="faqs">
+
+                <div class="container">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-lg-6">
+                            <div class="section-head section-head-s2">
+                                <h2 class="title title-xl animated" data-animate="fadeInUp" data-delay="0.1" title="FAQS">FAQS</h2>
+                                <p class="animated" data-animate="fadeInUp" data-delay="0.2">Below we’ve provided a bit of ICO, ICO Token, cryptocurrencies, and few others. If you have any other questions, please get in touch.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Block @s -->
+                    <div class="nk-block">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-10">
+                                <ul class="nav tab-nav tab-nav-btn tab-nav-btn-bdr tab-nav-center pdb-r animated" data-animate="fadeInUp" data-delay="0.3">
+<volist name="index_faqType" id="vo" offset="0" length="4">                                 
+								 <li><a  data-toggle="tab" href="#tab-2-{$vo['id']}">{$vo['title']}</a></li>
+</volist>
+
+                                </ul>
+                                <div class="tab-content">
+								
+								<volist name="index_faqType" id="vo" offset="0" length="4">    
+                                    <div class="tab-pane show <eq name="key" value='0'>active</eq>" id="tab-2-{$vo['id']}">
+                                        
+										<volist name="index_faq[$vo['id']]" id="to" offset='0' length='4'>
+										    <div class="accordion" id="acc-{$i}">
+										        
+										          <div class="accordion-item accordion-item-s3 animated" data-animate="fadeInUp" data-delay="0.4">
+                                                <h5 class="accordion-title accordion-title-sm" data-toggle="collapse" data-target="#acc-{$i}-{$vo.id}">{$to['title']} <span class="accordion-icon"></span></h5>
+                                                <div id="acc-{$i}-{$vo['id']}" class="collapse show" data-parent="#acc-{$to['id']}">
+                                                    <div class="accordion-content">
+                                                        <p>{$to['content']}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                            </volist>
+                                        
+                                    </div>
+                                </volist>
+                            </div>
+                        </div>
+                    </div><!-- .block @e -->
+                </div>
+
+            </section>

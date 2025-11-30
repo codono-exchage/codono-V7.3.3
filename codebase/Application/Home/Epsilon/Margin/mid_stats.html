@@ -1,0 +1,34 @@
+<div class="exchange-headline white-bg">
+  <div class="headline-left col-11 p-0">
+    <div class="title-big">
+      {$xnb|strtoupper} / {$rmb|strtoupper}
+      <i class="icon ion-md-star add-to-favorite default"></i>
+    </div>
+    <div class="headline-item instant-status">
+      <div>
+        <span class="title" id="market_sell_price"></span>
+        <span class="green" id="market_change">-</span>
+      </div>
+      <div>
+        <span>{$rmb|strtoupper}</span> <span id="market_buy_price"></span>
+      </div>
+    </div>
+    <div class="headline-item is-hh">
+      <div>24H H</div>
+      <div class="title green" id="market_max_price"></div>
+    </div>
+    <div class="headline-item is-hl">
+      <div>24H L</div>
+      <div class="title red" id="market_min_price"></div>
+    </div>
+    <div class="headline-item is-hv">
+      <div>24H {:l('VOLUME')}</div>
+      <div class="title" id="market_volume"></div>
+    </div>
+  </div>
+  <div class="headline-right col-1 p-0 ml-auto">
+    <a href="#!" class="btn changeThemeLight"
+      ><i class="icon ion-md-moon"></i
+    ></a>
+  </div>
+</div>

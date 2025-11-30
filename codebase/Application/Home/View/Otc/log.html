@@ -1,0 +1,52 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="__PUBLIC__/otc/otc.css"/>
+<div class="page-container">
+<div class="row">
+
+<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+<!-- rightbox starts -->
+<div class="rightbox">
+	<div class="QuoteLayout-Wrap">
+		<div class="QuoteLayout-Title" id="quotebox">Trade Confirmation</div>
+		<div class="QuoteLayout-Body">
+			
+			<div class="quoteContent-wrap" id="with_orderx">
+				<div class="quoteContent-TopWrap">
+					<div class="quoteContent-CryptoTitle" id="tradetype_final"><i class="fa fa-check-circle fa-3x text-success"></i></div>
+					<div class="quoteContent-CryptoWrap">
+						<div class="quoteContent-StyledTargetAmount" id="tradecoin_qty">{$record.qty}</div>
+						<div class="quoteContent-CryptoCoin" id="tradecoin_name">{$record.trade_coin}</div>
+					</div>
+				</div>
+				<div class="quoteContent-MiddleWrap">
+				
+				<div class="quoteContent-LabelRow"><div>{$record['type']|ucfirst}</div><div class="text-bold">{$record.qty} {$record.trade_coin|strtoupper}</div></div>
+					<div class="quoteContent-LabelRow"><div>Price</div><div class="text-bold">{$record.final_price} {$record.base_coin|strtoupper}</div></div>
+					<!--<div class="quoteContent-LabelRow"><div>Fees</div><div class="text-bold">{$record.fees_paid} {$record.base_coin|strtoupper}</div></div>-->
+					<div class="quoteContent-LabelRow"><div>Total</div><div class="text-bold">{$record.final_total} {$record.base_coin|strtoupper}</div></div>
+					
+					
+				</div>
+
+				<div class="quoteContent-button" id="quotefinal">
+					
+					<span class="row"> <button data-bn-type="button"  id="approve-button" class="quote-button" onclick="records()">Go to trade history </button></span>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- Rightbox ends -->
+</div>
+</div>
+</div>
+<script type = "text/javascript" >
+function records(){
+window.location="{:U('Otc/records')}";
+}
+function newtrade(){
+window.location="{:U('Otc/index')}";
+}
+</script >
+<include file="Public:footer_minimal"/>

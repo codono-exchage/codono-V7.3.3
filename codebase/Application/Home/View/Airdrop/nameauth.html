@@ -1,0 +1,302 @@
+<include file="Public:header" />
+<!-- Page container -->
+<div class="page-container">
+<!-- Page content -->
+<div class="page-content">
+   <include file="User:left" />
+   <!-- Main content -->
+   <div class="panel panel-flat">
+      <div class="panel-heading">
+         <div class="panel-title">
+            <h1>{:l('KYC')}<span>
+               <a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span> </a>
+               </span>
+            </h1>
+         </div>
+         <div class="tag-list-content panel-body">
+            <div id="hints" class="mytips" style="display:none;">
+               <p>
+                  <notempty name="prompt_text">{$prompt_text}</notempty>
+               </p>
+            </div>
+            <div class="pwtrade">
+               <neq name="user['idcardauth']" value='1'>
+					<eq name="user['idcardauth']" value='0'>
+                  <div class="band_succ move" style="color: red !important;">	
+                     <i class="fa fa-check mr5"></i>	 
+                     Please submit KYC Documents
+                  </div>
+                  </eq>
+				  <eq name="user['idcardauth']" value='2'>
+                  <div class="band_succ move" style="color: red !important;">
+                     <i class="fa fa-check mr5"></i>	 
+                     
+                        {$user['idcardinfo']}: {:l('PENDING_REVIEW')}.
+                     
+
+                  </div>
+				</eq>
+				<eq name="user['idcardauth']" value='3'>
+                  <div class="band_succ move" style="color: red !important;">
+                     <i class="fa fa-check mr5"></i>	 
+						<br/>
+						{$user['idcardinfo']}: {:l('Rejected')}.
+                     <br/>
+                        <i>Your KYC Details were Rejected by the admin!</i>
+						<br/>
+                     <i>Comment:{$user['kyc_comment']}</i>
+                  </div>
+				</eq>
+               <else/>
+               <div class="band_succ move" style="">
+                  <div class="alert alert-info"><i class="fa fa-check-circle mr5"></i>	 
+                     {:l('IT_HAS_BEEN_VERIFIED')}
+                  </div>
+               </div>
+               </neq>	
+               <br>
+               <div class="set_verify">
+                  <table class="table table-condensed">
+                     <eq name="user['idcardinfo']" value=''>
+                        <tr>
+                           <th>{:l('ACTUAL_NAME')}</th>
+                           <td><input type="text" id="regtruename" value="{$user.truename}" placeholder="Realname"/></td>
+                        </tr>
+                        <th>{:l('CERTIFICATE_TYPE')}</th>
+                        <td><input type="text" id="regidinfo" value="" placeholder="ID Type" /></td>
+                        </tr>
+                        <tr>
+                           <th>{:l('ID_NUMBER')}:</th>
+                           <td><input type="text" id="regidcard" value="" placeholder="ID Number" /></td>
+                        </tr>
+                        <eq name="user['idcardauth']" value='0'>
+                           <neq name="userimg" value=''>
+                              <tr>
+                                 <th></th>
+                                 <td >
+                                    <div id="imagesubmited">{$userimg}</div>
+                                 </td>
+                              </tr>
+                           </neq>
+                        </eq>
+                        <tr>
+                           <th>{:l('APPROVAL_PERIOD')}</th>
+                           <td>{$user['addtime']|addtime}</td>
+                        </tr>
+                        <else/>
+                        <tr>
+                           <th>Status</th>
+                           <td>Hi {$user.truename}, You have submitted {$user.idcard} for your KYC</td>
+                        </tr>
+                     </eq>
+                  </table>
+               </div>
+               <div class="set_upload_img" style="display:none;">
+               </div>
+            </div>
+            <eq name="user['idcardimg1']" value=''>
+               <eq name="allowImg" value="true">
+                  <div class="pwtrade" id="shang_qq_chuandiv">
+                     <div class="alert alert-danger no-border">
+                        <button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-check mr5"></i> Upload ID's Front , Back and make a Selfie with same "{:SHORT_NAME}", date and Signature in JPG or PNG format [Upto 2MB]
+                     </div>
+                     <div class="band_succ move" style="color: red !important;">
+                     </div>
+                     <br>
+                     <div class="set_verify">
+                        <ul>
+                           <li>
+                              <style>
+                                 .file {
+                                 position: relative;
+                                 display: inline-block;
+                                 background: #D0EEFF;
+                                 border: 1px solid #99D3F5;
+                                 border-radius: 4px;
+                                 padding: 4px 12px;
+                                 overflow: hidden;
+                                 color: #1E88C7;
+                                 text-decoration: none;
+                                 text-indent: 0;
+                                 line-height: 20px;
+                                 }
+                                 .file input {
+                                 position: absolute;
+                                 font-size: 100px;
+                                 right: 0;
+                                 top: 0;
+                                 opacity: 0;
+                                 }
+                                 .file:hover {
+                                 background: #AADFFD;
+                                 border-color: #78C3F3;
+                                 color: #004974;
+                                 text-decoration: none;
+                                 }
+                                 .sv_text p {
+                                 padding-left: 5px;
+                                 }
+                              </style>
+                              <button class="btn btn-info btn-block" id="up_img" onclick="getElementById('inputfile').click()"><i class="fa fa-image"></i> Upload Front Page of ID </button>
+                              <input type="file" accept="image/gif, image/jpeg, image/jpg, image/png" id="inputfile" style="height:0;width:0;z-index: -1; position: absolute;left: 10px;top: 5px;" value=""/>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </eq>
+               <else/>
+               <input class="btn btn-info btn-block" type="button" value="{:l('DELETE KYC')}" onclick="deletekyc();" id="updatebutton" />
+            </eq>
+            <input class="btn btn-info btn-block" type="button" value="{:l('SUBMIT KYC')}" onclick="Update();" id="updatebutton" style="display:none"/>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   var hints = "0";
+   if(hints == 1){
+   	$('#hints').show();
+   }
+</script>
+<script>
+   $(document).ready(function () {
+       //ADD_AN_EVENT_SUCCESSFUL_RESPON
+   		if($('#imagesubmited').find('img').length >= 3){
+   			alert("You have successfully uploaded 3 images , Please fill in other details and submit for KYC");
+   			$("#updatebutton").show();
+   		}
+       $("#inputfile").change(function () {
+           //CREATE FormData OBJECTS
+           var data = new FormData();
+           //FormData ADDING DATA OBJECT
+           $.each($('#inputfile')[0].files, function (i, file) {
+               data.append('upload_file' + i, file);
+           });
+   //SEND_DATA
+           $.ajax({
+               url: '/Ajax/imgUser',
+               type: 'POST',
+               data: data,
+               cache: false,
+               contentType: false,		//ESSENTIAL_PARAMETERS
+               processData: false,		//ESSENTIAL_PARAMETERS
+               success: function (data) {
+                   if (data) {
+   		if(data=="error"){
+   			alert("{:l('PLEASE_SELECT_THE_CORRECT_FILE')}");
+   			return false;
+   		}
+   		if(data=="error2"){
+   			alert("{:l('YOU_HAVE_UPLOADED')} 3 {:l('PICTURES')}");
+   			return false;
+   		}
+   	
+   		  $('<img />', {
+   			src : '/Upload/idcard/' + data,
+   			height : "100px",
+   			width  : "300px",
+   		  }).appendTo($('.set_upload_img'));
+   		$('.set_upload_img').show();
+   
+   		if($('.set_upload_img').find('img').length == 1){
+   			$('#up_img').html('Upload Back Page');
+   		}
+   		if($('.set_upload_img').find('img').length == 2){
+   			$('#up_img').html('Upload Selfie');
+   		}
+   		if($('.set_upload_img').find('img').length >= 3){
+   			$('#shang_qq_chuandiv').hide();
+   			alert("You have successfully uploaded 3 images , Please fill in other details and submit for KYC");
+   			$("#updatebutton").show();
+   		}
+   	
+                       //$('#up_img').attr("src", '/Upload/idcard/' + data);
+   		//$('#up_img').attr("height", '100px');
+   		//$('#up_img').attr("width", '300px');
+   		//$('#up_img').attr("disabled", 'true');
+                      //$('#up_img').show();
+                   }
+               },
+               error: function () {
+                   alert('Uploading Error');
+   	$('.set_upload_img').hide();
+                   //$(".loading").hide();	//load failed remove picture
+               }
+           });
+   
+       });
+   });
+   
+</script>
+<script>
+   $('.user_truename').addClass('active');
+   function formMsg(o, status, msg){
+   	$('#'+o+'-msg').attr('class', 'form_explain_'+(status?'pass':'error')).html((typeof msg == 'undefined'? '': msg)+'<em></em>').show();
+   	return true;
+   }
+   
+   
+   function Update(){
+   	var truename=$("#regtruename").val();
+   	var idcard=$("#regidcard").val();
+   	var idcardinfo=$("#regidinfo").val();
+   
+   	
+   	if(truename==""||truename==null){
+   		//formMsg('regtruename', 0, 'Enter Actual Name');
+   		layer.tips('Enter Realname', '#regtruename', {tips: 3});
+   		return false;
+   	}
+   	if(idcard==""||idcard==null){
+   		//formMsg('regidcard', 0, 'Please enter ID Number');
+   		layer.tips('Please enter ID Number', '#regidcard', {tips: 3});
+   		return false;
+   	}
+   	if(idcardinfo==""||idcardinfo==null){
+   	layer.tips('Please enter ID Type', '#regidinfo', {tips: 3});
+   	//	formMsg('idcardinfo', 0, 'Please enter ID Type');
+   		return false;
+   	}
+   
+   
+   	$.post("{:U('User/kyc')}",{truename:truename,idcard:idcard,idcardinfo:idcardinfo},function(data){
+   		if(data.status==1){
+   			layer.msg(data.info,{icon:1});
+   			window.location=data.url;
+   		}else{
+   			layer.msg(data.info,{icon:2});
+   			if(data.url){
+   				window.location=data.url;
+   			}
+   		}
+   	},"json");
+   }
+   
+   
+   function deletekyc(){
+   	layer.prompt({
+   		title: 'Type DELETE to remove Previous Kyc',
+   		formType: 1,
+   		btn: ['Delete','Cancle'] //Push button
+   	}, function(pass){
+   		if(!pass || pass !='DELETE'){
+   			layer.msg('Type DELETE!');
+   		}else{
+   			$.post("{:U('User/deletekyc')}",{pass:pass},function(data){
+   				layer.msg(data.info);
+   				layer.close();
+   				if(data.status){
+   					window.location.href = "{:U('User/index')}";
+   				}
+   			},'json');
+   		}
+   	});
+   }
+</script>
+<style>
+   .set_verify ul{
+   padding-left:0px !important;
+   }
+</style>
+<include file="Public:footer_minimal"/>

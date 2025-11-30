@@ -1,0 +1,49 @@
+Array
+(
+    [ret] => Array
+        (
+            [0] => Array
+                (
+                    [contractRet] => SUCCESS
+                )
+
+        )
+
+    [signature] => Array
+        (
+            [0] => b5d7ade1e4ea0bb474c67f5d7e631da9340908d27e4bdda5a6442cde859223c16f2c898620e51b5ef379a6d8aa58866ff9fbb23e9ce86f7cceafc8af71eba12c01
+        )
+
+    [txID] => 5860e7fc8c44483bfd2593edcf096772f68b1540631460a10d3e56bd8060d630
+    [raw_data] => Array
+        (
+            [contract] => Array
+                (
+                    [0] => Array
+                        (
+                            [parameter] => Array
+                                (
+                                    [value] => Array
+                                        (
+                                            [data] => a9059cbb0000000000000000000000417a45b73dab3f77881bb4be514d70c0732946c9850000000000000000000000000000000000000000000000000000001695a68a00
+                                            [owner_address] => 4189cbcb2372e1c2fbc00f24895a406a0c722c89f3
+                                            [contract_address] => 41a614f803b6fd780986a42c78ec9c7f77e6ded13c
+                                        )
+
+                                    [type_url] => type.googleapis.com/protocol.TriggerSmartContract
+                                )
+
+                            [type] => TriggerSmartContract
+                        )
+
+                )
+
+            [ref_block_bytes] => 136e
+            [ref_block_hash] => 83125581b7f09605
+            [expiration] => 1639468164219
+            [fee_limit] => 10000000
+            [timestamp] => 1639468101000
+        )
+
+    [raw_data_hex] => 0a02136e220883125581b7f0960540fbc8abbfdb2f5aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a154189cbcb2372e1c2fbc00f24895a406a0c722c89f3121541a614f803b6fd780986a42c78ec9c7f77e6ded13c2244a9059cbb0000000000000000000000417a45b73dab3f77881bb4be514d70c0732946c9850000000000000000000000000000000000000000000000000000001695a68a007088dba7bfdb2f900180ade204
+)

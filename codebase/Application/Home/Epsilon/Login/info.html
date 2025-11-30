@@ -1,0 +1,29 @@
+<include file="Public:header" />
+<php> 
+$reg_class="";
+$fund_class="";
+$kyc_class="";
+$success_class="move";
+</php>
+<div class="page-container">
+
+<div class="col-sm-6 col-sm-offset-3">
+	<include file="Login:progress" />
+	<div class="card">
+		<div class="card-header">
+			<div class="card-title"></div>
+			<div class="card-body">
+				<table class="table table-striped">
+					<tr><th colspan="2"><i class="fa fa-check mr5 fz_40"></i>{:l('CONGRATULATIONS_YOU_HAVE_SUCCE')}</th></tr>
+					<tr><th>{:l('Complete KYC')}</th><td><a class="btn btn-xs btn-danger" href="{:U('User/nameauth')}">{:l("Complete KYC")}</a></td></tr>
+					<tr><th>{:l('Deposit Crypto')}</th><td><a class="btn btn-xs btn-success" href="{:U('Finance/myzr')}">{:l("Crypto Deposit")}</a></td></tr>
+					<eq name="FIAT_ALLOWED" value="1"><tr><th>{:l('Deposit Fiat')}</th><td><a class="btn btn-xs btn-info" href="{:U('Finance/mycz')}">{:l("Fiat Deposit")}</a></td></tr></eq>
+					<tr><th>{:l('Start Trading')}</th><td><a class="btn btn-xs btn-warning" href="{:U('Trade/index')}">{:l("Start Trading")}</a></td></tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<include file="Public:footer_minimal"/>

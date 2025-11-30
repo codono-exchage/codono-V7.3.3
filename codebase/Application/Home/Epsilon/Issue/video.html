@@ -1,0 +1,18 @@
+<div class="crowd_bi clear">
+               <empty name="issue['video']">
+                     <div class="thumbnail clear pull-right">
+                        <div class="thumb">
+                           <img src="__UPLOAD__/coin/{$issue['img']}" alt="" class="img-rounded" style="max-width:200px;max-height:100px">
+                           <div class="caption-overflow">
+                              <span>
+                              <a href="__UPLOAD__/coin/{$issue['img']}" data-popup="lightbox" rel="gallery" class="btn border-white text-white btn-flat btn-icon btn-rounded"><i class="icon-plus3"></i></a>
+                              </span>
+                           </div>
+                        </div>
+                     </div>
+                     <else/>
+                     <div class="embed-responsive embed-responsive-16by9">
+                        <embed class="embed-responsive-item" src="https://www.youtube.com/embed/{$issue['video']}">
+                     </div>
+                  </empty>
+               </div>

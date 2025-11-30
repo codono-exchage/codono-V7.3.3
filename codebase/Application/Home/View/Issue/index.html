@@ -1,0 +1,479 @@
+<include file="Public:header"/>
+
+<style>
+
+.margin-bottom15 {
+    margin-bottom: 20px;
+}
+
+.crowd_title {
+    color: #5d78ff;
+}
+.font_24 {
+    font-size: 24px!important;
+}
+
+.crowd_rec {
+    border: 1px solid #d3d7db;
+    position: relative;
+}
+
+.bg_light_white {
+    background-color: #131722!important;
+}
+.m_5 {
+    margin: 5px;
+}
+
+
+.crowd_pic {
+    padding-left: 0;
+}
+
+.col-xs-6 {
+    width: 50%;
+	float:left;
+}
+
+
+
+a, button {
+    box-sizing: border-box;
+}
+a {
+    -webkit-transition: color .5s,background-color .5s,background .5s,border .5s,-webkit-transform .5s;
+    -moz-transition: color .5s,background-color .5s,background .5s,border.5s,-moz-transform .5s;
+    -o-transition: color .5s,background-color .5s,background .5s,border.5s,-o-transform .5s;
+    transition: color .5s,background-color .5s,background .5s,border .5s;
+}
+a {
+    color: #4285F4;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+dd, div, dl, dt, form, img, li, ol, option, td, th, ul, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none outside none;
+}
+
+.crowd_info {
+    margin-top: 20px;
+    position: relative;
+    padding-bottom: 10px;
+	
+}
+.fontweight {
+    font-weight: 700;
+}
+
+.font_16 {
+    font-size: 16px!important;
+}
+
+
+.crowd_info h2 a {
+    
+}
+
+
+.crowd_info_desc {
+    color: #999;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+
+.crowd_info_detail {
+    overflow: hidden;
+}
+
+
+.progressstyle1 {
+    background: #E4E4E4 !important;
+    height: 8px !important;
+    border-radius: 45px !important;
+}
+
+.m_b_10 {
+    margin-bottom: 10px!important;
+}
+
+.progress_codono {
+    height: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #f5f5f5; 
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1); 
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1); 
+}
+
+
+.progress_cur {
+    background-color: #ff9035;
+}
+
+
+.progress.active .progress-bar, .progress-bar.active {
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+    -o-animation: progress-bar-stripes 2s linear infinite;
+    animation: progress-bar-stripes 2s linear infinite;
+}
+
+.progress-striped .progress-bar, .progress-bar-striped {
+    background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-image: -o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    -webkit-background-size: 40px 40px;
+    background-size: 40px 40px;
+}
+
+
+
+
+.progress-bar {
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
+}
+
+.progresstitle1 {
+    
+    font-size: 13px;
+    font-weight: normal !important;
+}
+
+.progresstitle2 {
+    float: right;
+    font-size: 13px;
+    
+    font-weight: normal !important;
+}
+
+.crowd_status_tag {
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    left: 0;
+    font-size: 14px;
+    color: #222;
+    padding: 10px 20px;
+    display: inline;
+    text-align: center;
+    border-top: 1px solid #eee;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+
+</style>
+
+
+<div class="page-container" >
+		<!-- content -->
+			<div class="container">
+		<!-- HEADLINE_PROJECT-->
+		<h2 class="margin-bottom15 text-center font_24 crowd_title">{:l('RECOMMENDED_ITEMS')}</h2>
+		
+		
+		<notempty name="tuijian">
+		<div class="panel row">
+
+			<div class="col-xs-6 crowd_pic">
+				<a href="{:U('Issue/buy?id='.$tuijian['id'])}"> <img src="__UPLOAD__/issue/{$tuijian.image}" class="img-responsive"></a>
+			</div>
+			
+			<div class="col-xs-6 crowd_info">
+
+				<h2 class="fontweight font_16">
+					<a href="{:U('Issue/buy?id='.$tuijian['id'])}">{$tuijian.name}</a>
+				</h2>
+			
+				<div class="crowd_info_detail">
+					<p>{$tuijian.content}......</p>
+				</div>
+
+				<div class="progress_codono">
+  <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {$tuijian.bili}%" aria-valuenow="{$tuijian.bili}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>	
+					<p>
+					<span class="progresstitle1">{:l('ICO_CURRENCY')} {$tuijian.coinname}</span> <span class="progresstitle2">{:l('CURRENCY_OF_PAYMENT')} {$tuijian.buycoin}</span>
+				</p>	
+				<p>
+					<span class="progresstitle1">{:l('SUBSCRIBED')}{$tuijian.deal}</span> <span class="progresstitle2">{:l('TOTAL')}:{$tuijian.num}</span>
+				</p>
+				<p>
+					<span class="progresstitle1">{:l('STARTING_TIME')}{$tuijian.beginTime}</span> <span class="progresstitle2">{:l('END_TIME')}{$tuijian.endTime}</span>
+				</p>
+<!--				<div class="crowd_status_tag">{$tuijian.zhuangtai}&nbsp;&nbsp;{$tuijian['rengou']}<br/></div>-->
+				<div class="text-center"><a href="{:U('Issue/buy?id='.$tuijian['id'])}" class="btn btn-block btn-info "><i class="icon-bag position-left"></i> Subscribe</a></div>
+			</div>
+			
+			
+			
+
+		</div>
+		</notempty>
+		
+<style>
+.margin-top40 {
+    margin-top: 40px;
+}
+.row {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.crowdfunding_items {
+    min-height: 496.86px;
+    padding: 0px;
+}
+
+.col-xs-12 {
+    width: 100%;
+	float:left;
+}
+
+
+
+#crowdfundingul {
+    border-bottom: 1px solid transparent;
+}
+
+#crowdfundingul {
+    text-align: center;
+}
+
+
+#crowdfundingul li:focus, #crowdfundingul li.active, #crowdfundingul li:hover {
+    background-color: #4285F4;
+}
+
+#crowdfundingul li:first-child {
+    margin-right: -2px;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+#crowdfundingul li {
+    float: none;
+    display: inline-block;
+    border: 1px solid #4285F4;
+    color: #4285F4;
+    border-radius: 2px !important;
+}
+
+#crowdfundingul li:focus a, #crowdfundingul li.active a, #crowdfundingul li:hover a {
+    color: #fff;
+}
+
+#crowdfundingul li a {
+    color: #4285F4;
+    font-size: 15px;
+    text-align: center;
+    border-color: transparent !important;
+    background-color: transparent;
+    padding: 5px 20px;
+}
+.nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+
+
+#crowdfundingcontent {
+    overflow: hidden;
+    padding: 20px 0px;
+    border: 0px solid transparent;
+    border-top: none;
+    margin-bottom: 10px;
+    line-height: 200%;
+}
+
+.tab-content>.tab-pane {
+    display: none;
+    visibility: hidden;
+}
+.tab-content>.active {
+    display: block;
+    visibility: visible;
+}
+
+.fade.in {
+    opacity: 1;
+}
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity .15s linear;
+    -o-transition: opacity .15s linear;
+    transition: opacity .15s linear;
+}
+
+
+
+
+.col-xs-6 {
+    width: 50%;
+	float:left;
+}
+
+
+.col-xs-3 {
+    width: 25%;
+	float:left;
+}
+.crowd-item {
+    margin-bottom: 20px;
+    height: 474px;
+}
+
+.col-xs-12 {
+    width: 100%;
+	float:left;
+}
+
+.box1 {
+    background-color: #fff;
+    padding: 0px;
+    border: 1px solid #e9e9e9;
+}
+
+
+#crowdfundingcontent img {
+    width: 100%;
+	max-height: 200px;
+}
+.img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+.location {
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+#crowdfundingcontent h4 {
+    
+}
+
+
+p {
+    margin: 0 0 10px;
+}
+
+
+.crowd_status_tag_sm {
+    font-size: 14px;
+    color: #222;
+    padding: 10px 20px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+
+
+</style>
+		
+		
+		
+		
+		
+		
+		<div class="row margin-top40">
+		
+			<div class="col-xs-12 col-xs-12 progress_border crowdfunding_items">
+				<ul id="crowdfundingul"  role="tablist">
+					<li role="jxz" class="static active"><a href="#" onclick="return false;" role="tab">{:l('PROCESSING')}</a></li>
+					<li role="jjks" class="static middle"><a href="#" onclick="return false;" role="tab">{:l('PREHEATING')}</a></li>
+					<li role="yjs" class="static "><a href="#" onclick="return false;" role="tab">{:l('OVER')}</a></li>
+				</ul>
+				<div id="crowdfundingcontent" class="tab-content">
+
+					<div role="tabpanel" class="tab-pane fade in active" id="jxz">
+					<notempty name="list_jinxing">	
+						<div class="row">
+						<volist name="list_jinxing" id="vo">					
+						<include file="Issue:icos_list_widget"/>
+					</volist>	
+					</div>
+					<else/>
+						<p class="text-center font_gray font_16">{:l('THE_CLASSIFICATION_NO_DATA')}</p>
+					</notempty>						
+					</div>
+					<div role="tabpanel" class="tab-pane fade in" id="jjks">
+
+
+					
+					<notempty name="list_yure">	
+						<volist name="list_yure" id="vo">
+							<include file="Issue:icos_list_widget"/>
+						</volist>	
+					<else/>
+						<p class="text-center font_gray font_16">{:l('THE_CLASSIFICATION_NO_DATA')}</p>
+					</notempty>
+				
+					</div>
+					<div role="tabpanel" class="tab-pane fade " id="yjs">
+					<notempty name="list_jieshu">	
+						<volist name="list_jieshu" id="vo">
+							<include file="Issue:icos_list_widget"/>
+						</volist>	
+					<else/>
+						<p class="text-center font_gray font_16">{:l('THE_CLASSIFICATION_NO_DATA')}</p>
+					</notempty>
+					
+					</div>
+				</div>
+			</div>
+			<script>
+				var hints = "0";
+				if(hints == 1){
+					$('#hints').show();
+				}
+				$('#Issue_box').addClass('active');
+				
+				$(".static").click(function() {
+					$(".tab-pane").removeClass("in");
+					$(".tab-pane").removeClass("active");
+					$(".static").removeClass("active");
+					$(this).addClass("active");
+					$("#" + $(this).attr("role")).addClass("active in");
+				});
+				
+				
+				
+				
+			</script>
+		</div>
+	</div>
+	</div>
+<include file="Public:footer_minimal"/>

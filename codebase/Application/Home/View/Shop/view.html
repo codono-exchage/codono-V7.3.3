@@ -1,0 +1,12 @@
+﻿<include file="Public:header"/>
+<div class="autobox main">
+		<include file="Shop:sub_menu"/>
+        <notempty name="prompt_text">
+				<div class="alert alert-primary no-border">
+									<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+									{$prompt_text}
+							    </div>
+        </notempty>
+	<include file="Shop:product_view"/>
+    </div>
+<include file="Public:footer_minimal"/>

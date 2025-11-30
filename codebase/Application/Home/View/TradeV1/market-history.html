@@ -1,0 +1,21 @@
+<div class="market-history">
+          <ul class="nav nav-pills" role="tablist">
+        
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="pill" href="#market-depth" role="tab" aria-selected="false">Market
+                Depth</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade active show" id="market-depth" role="tabpanel">
+              <div class="depth-chart-container">
+                <div class="depth-chart-inner">
+                  <div id="lightDepthChart"></div>
+				  <div id="depthurl" style="display:none">{:SITE_URL}Ajax/getDepthNew?market={$market}</div>
+<div id="depthmarket" style="display:none">{$market}</div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

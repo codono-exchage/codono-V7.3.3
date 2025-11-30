@@ -1,0 +1,74 @@
+	<!-- Guide Start -->
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-md-12 col-lg-6 m-t-30 m-b-30">
+				<section class="guide">
+					<h2>{:SHORT_NAME} {:l('Guide')}</h2>
+					<div class="guide-single-item arrow-black">
+						<volist name="index_guide" id="vo" offset="0" length="4">
+						<div>
+							<div class="guide-grid">
+								<div class="card">
+									<div class="row">
+										<div class="col-12 col-sm-6">
+											<img class="img-fluid" src="__UPLOAD__/article/{$vo['img']}" alt="{$vo['title']}">
+										</div>
+										<div class="col-12 col-sm-6">
+											<div class="card-body">
+												<a href="{:U('Article/detail','id='.$vo['id'])}">
+													<h4 class="card-title">{$vo['title']|msubstr=0,100}.</h4>
+												</a>
+												<p class="card-text">{$vo['content']|strip_tags|msubstr=0,100}</p>
+											</div>
+											<div class="card-footer">
+												<a href="{:U('Article/detail','id='.$vo['id'])}" class="btn main">{:l("View Now")}</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</volist>
+						
+					</div>
+				</section>
+			</div>
+			<div class="col-12 col-md-12 col-lg-6 m-t-30 m-b-30">
+				<section class="blog">
+					<h2>{:SHORT_NAME} {:l('Blog')}</h2>
+					<div class="blog-single-item arrow-black">
+						<volist name="index_blog" id="vo" offset="0" length="4">
+						<div>
+							<div class="guide-grid">
+								<div class="card">
+									<div class="row">
+										<div class="col-12 col-sm-6">
+											<img class="img-fluid" src="__UPLOAD__/article/{$vo['img']}" alt="{$vo['title']}">
+										</div>
+										<div class="col-12 col-sm-6">
+											<div class="card-body">
+												<a href="{:U('Article/detail','id='.$vo['id'])}">
+													<h4 class="card-title">{$vo['title']|msubstr=0,100}.</h4>
+												</a>
+												<p class="card-text">{$vo['content']|strip_tags|msubstr=0,100}</p>
+											</div>
+											<div class="card-footer">
+												<a href="{:U('Article/detail','id='.$vo['id'])}" class="btn main">{:l("View Now")}</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</volist>
+						
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	<!-- Guide End -->
+<style>
+.guide-grid p.card-text {
+    min-height: 62px;
+}</style>

@@ -1,0 +1,66 @@
+<include file="Public:header"/>
+<div class="page-container">
+<div class="breadcrumb-line breadcrumb-line-component content-group-lg">
+					<ul class="breadcrumb">
+						<li><a href="/"><i class="icon-home2 position-left"></i> {:l('HOME')}</a></li>
+						<li>{:l('DIVIDEND_CENTER')}</li>
+					</ul>
+</div>
+<notempty name="prompt_text">
+				<div class="alert alert-info alert-styled-left alert-bordered">
+									<button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+									 {$prompt_text}
+				</div>
+                </notempty> 
+    <!-- Page content -->
+		<div class="row">
+        			<!-- Main content -->
+			<div class="col-sm-12">
+			<div class="panel panel-flat">
+			<div class="panel-heading">
+						<h5 class="panel-title">{:l('DIVIDEND_CENTER')}</h5>
+			</div>
+            <div class="panel-body">
+                                <table class="table table-responsive" id="investLog_content">
+                                    <thead>
+                                    <tr>
+                                        <th id="sublist-grid_c0">{:l('CURRENCIES')}</th>
+                                        <th id="sublist-grid_c1">{:l('THE_TOTAL_SITEWIDE')}</th>
+                                        <th id="sublist-grid_c2">{:l('MY_ASSETS')}</th>
+                                        <th id="sublist-grid_c3">{:l('HOLD_PERCENTAGE')}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="list" id="vo">
+                                        <tr>
+                                            <td>
+                                                <img src="__UPLOAD__/coin/{$vo['img']}" alt="" style="width: 20px; margin-bottom: -5px;"/>
+                                                {$vo['title']}
+                                            </td>
+                                            <td>{$vo['quanbu']}</td>
+                                            <td>{$vo['wodi']}</td>
+                                            <td>{$vo['bili']}</td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                                
+            </div>
+				<div class="panel-footer panel-footer-condensed">
+								<div class="heading-elements not-collapsible">
+								<div class="pages">{$page}</div>
+								</div>
+							</div>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<br>
+<script>
+    //MENU_HIGHLIGHTS
+    $('#game_box').addClass('active');
+    $('#game_dividend').addClass('active');
+    $('#game_dividend i').attr('class', 'coin_menu_op_11');
+</script>
+<include file="Public:footer_minimal"/>

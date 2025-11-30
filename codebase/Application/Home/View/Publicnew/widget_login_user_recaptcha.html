@@ -1,0 +1,83 @@
+<div id="all_mask" class="all_mask" style="height: 0px; display: none;"></div>
+<div id="all_mask_loginbox" class="all_mask_loginbox" style="display: none;">
+    <div class="login_title pl20">
+        <span style="text-align: center;margin-left: 15px;color: #1a81d6;cursor:pointer;">{:l('MEMBER_LOGIN')}</span>
+		<eq name="Think.session.codono_already" value="1"><font color="#ff0000" size="1px;">{:l('YOUR_ACCOUNT_LOGIN_IN_OTHER_PL')}</font></eq>
+	</div>
+    <form id="form-login" class="mask_wrap_login">
+        <div class="form-group has-feedback has-feedback-left" >
+									<input id="username" type="text" class="form-control" placeholder="{:l('USERNAME')}" value="">
+									<div class="form-control-feedback">
+										<i class="icon-user text-muted"></i>
+									</div>
+								</div>
+        
+		<div class="form-group has-feedback has-feedback-left">
+									<input id="login_password" type="password" class="form-control" placeholder="{:l('PLEASE_ENTER_YOUR_PASSWORD')}" autocomplete="off">
+									<div class="form-control-feedback">
+										<i class="icon-lock2 text-muted"></i>
+									</div>
+								</div>
+        <div class="form-group">
+			<include file="Publicnew:recaptcha"/>	
+        </div>
+		<div class="form-group login-options">
+									<div class="row">
+										<div class="col-sm-6">
+										<a href="{:U('Login/register')}">{:l('FREE_REGISTRATION')}</a>
+										</div>
+
+										<div class="col-sm-6 text-right">
+											<a href="{:U('Login/findpwd')}" >{:l('FORGET_PASSWORD')}</a>
+										</div>
+									</div>
+								</div>
+        	<div class="form-group">
+									<button type="button" class="btn bg-blue btn-block" onclick="user_recaptcha();">{:l('LOG_IN')} <i class="icon-arrow-right14 position-right"></i></button>
+		</div>
+    </form>
+    <div class="mask_wrap_close" onclick="wrapClose()"><i class="fa fa-times fz_20 move" aria-hidden="true"></i></div>
+</div>
+<script>
+function user_recaptcha() {
+        var username = $("#username").val();
+		var password = $("#login_password").val();
+        var verify = $("#g-recaptcha-response").val();
+        if (username == "" || username == null) {
+            layer.tips('username', '#username', {tips: 2});
+            return false;
+        }
+        if (password == "" || password == null) {
+            layer.tips("{:l('PLEASE_ENTER_YOUR_PASSWORD')}", '#login_password', {tips: 2});
+            return false;
+        }
+		
+        if (verify == "" || verify == null) {
+            layer.tips("{:l('PLEASE_ENTER_VERIFICATION_CODE')}", '#login_verify', {tips: 2});
+            return false;
+			
+        }
+        $.post("/Login/submit", {
+            username: username,
+            password: password,
+            verify: verify,
+            login_token: "",
+        }, function (data) {
+            if (data.status == 1) {
+                $.cookies.set('username', username);
+                layer.msg(data.info, {icon: 1});
+                if (data.url) {
+                    window.location = data.url;
+                } else {
+                    window.location = "/";
+                }
+            } else {
+                $("#login_verify_up").click();
+                layer.msg(data.info, {icon: 2});
+                if (data.url) {
+                    window.location = data.url;
+                }
+            }
+        }, "json");
+    }
+	</script>		   

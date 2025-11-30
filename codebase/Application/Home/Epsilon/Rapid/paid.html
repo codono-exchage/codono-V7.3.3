@@ -1,0 +1,80 @@
+<include file="Public:header"/>
+<link rel="stylesheet" href="__PUBLIC__/otc/otc.css"/>
+<div class="page-container">
+<div class="row">
+
+<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+<!-- rightbox starts -->
+<div class="rightbox" id="paidPage" >
+	<div class="QuoteLayout-Wrap table-responsive">
+		<div class="QuoteLayout-Title" id="quotebox"> <i class="fa fa-check-circle mr10 text-success"></i> Order Paid</div>
+		<div class="QuoteLayout-Body">
+			
+			<div class="quoteContent-wrap" id="with_orderx">
+				
+				<div class="quoteContent-MiddleWrap">
+					<div class="tx_spent">
+						<div class="quoteContent-LabelRow"><div>From</div><div class="text-bold">{$record.in_address}</div></div>
+						<div class="quoteContent-LabelRow"><div>Paid </div><div class="text-bold"><span class="amt_spent">{$record.amount} {$record.coin|strtoupper}</span></div></div>
+						<div class="quoteContent-LabelRow"><div>In Hash </div><div class="text-bold"><small ><a href="{$scanner_link}{$record['in_hash']}">{$record['in_hash']}</a></small></div></div>
+						<div class="quoteContent-LabelRow"><div>Time</div><div class="text-bold">{$record['in_time']|addtime}</div></div>
+					</div>
+				</div>
+				<div class="quoteContent-MiddleWrap">
+					<div class="quoteContent-LabelRow"><div>Receiver</div><div class="text-bold">{$record.in_address}</div></div>
+					<div class="quoteContent-LabelRow"><div>Received </div><div class="text-bold"><span class="amt_received">{$record['payout_qty']*1} {$token|strtoupper}</span></div></div>
+					<div class="quoteContent-LabelRow"><div>Out Hash </div><div class="text-bold"><small class="txid_received"><a href="{$scanner_link}{$record['payout_hash']}">{$record['payout_hash']}</a></small></div></div>
+					<div class="quoteContent-LabelRow"><div>Time</div><div class="text-bold">{$record['payout_time']|addtime}</div>
+				</div>
+				<div class="quoteContent-button" id="quotefinal">
+					
+					<span class="row">
+					<button data-bn-type="button" id="more-button" class="quote-button " onclick="newtrade();">Do More </button>
+			
+					</span>
+				</div>
+
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- Rightbox ends -->
+</div>
+</div>
+</div>
+<style>
+.amt_spent{
+display: block;
+    padding: 0.25rem;
+    color: rgb(217, 59, 48);
+    background: rgb(245, 217, 215);
+    border: 1px solid rgb(245, 217, 215);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    width: fit-content !important;
+	}
+.amt_received{
+display: block;
+    padding: 0.25rem;
+    color: rgb(0, 135, 90);
+    background: rgb(209, 240, 219);
+    border: 1px solid rgb(209, 240, 219);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    width: fit-content !important;
+}
+.txid_received{
+color:rgb(20, 70, 153)}
+.u-label--success {
+    color: #00c9a7;
+    background-color: rgba(0,201,167,.1);
+}
+</style>
+<script type = "text/javascript" >
+function newtrade(){
+window.location="{:U('Dex/index')}";
+}
+
+</script >
+<include file="Public:footer_minimal"/>

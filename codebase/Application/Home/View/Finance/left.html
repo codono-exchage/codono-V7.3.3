@@ -1,0 +1,89 @@
+			<!-- Main sidebar -->
+			
+			<div class="sidebar sidebar-main">
+				<div class="sidebar-content">
+
+					<!-- Main navigation -->
+					<div class="sidebar-category sidebar-category-visible">
+						<div class="category-title h6">
+							<span>{:l('FINANCIAL_CENTER')}</span>
+							<ul class="icons-list">
+								<li><a href="#" data-action="collapse"></a></li>
+							</ul>
+						</div>
+
+		
+
+						<div class="category-content no-padding">
+							<ul class="navigation navigation-main navigation-accordion">
+
+								
+	<li class="finan_index">
+				<a href="{:U('Finance/index')}"> <i class="fa fa-tasks fa-lg fa-fw mr5"></i> {:l('MY_PROPERTY')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<eq name="FIAT_ALLOWED" value="1">
+			<li class="finan_pay">
+				<a href="{:U('Finance/mycz')}"> <i class="fa fa-mail-forward fa-lg fa-fw mr5"></i> {:l('ACCOUNT_FUNDING')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<li class="finan_out">
+				<a href="{:U('Finance/mytx')}"> <i class="fa fa-mail-reply fa-lg fa-fw mr5"></i> {:l('ACCOUNT_WITHDRAWALS')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			</eq>
+			<li class="finan_coinin">
+				<a href="{:U('Finance/myzr')}"> <i class="fa fa-arrow-right fa-lg fa-fw mr5"></i> {:l('INTO_DIGITAL_ASSETS')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<li class="finan_coinout">
+				<a href="{:U('Finance/myzc')}"> <i class="fa fa-arrow-left fa-lg fa-fw mr5"></i> {:l('ROLLOUT_OF_DIGITAL_ASSETS')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<eq name="ICO_ALLOWED" value="1">
+			<li class="finan_paybyemail">
+				<a href="{:U('Issue/log')}"> <i class="fa fa-hourglass fa-lg fa-fw mr5"></i> {:l('ICO Records')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			</eq>
+			<li class="finan_paybyemail">
+				<a href="{:U('Pay/index')}"> <i class="fa fa-send fa-lg fa-fw mr5"></i> {:l('PAYBYEMAIL')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<eq name="OTC_ALLOWED" value="1">
+			<li class="finan_otc">
+				<a href="{:U('Otc/records')}"> <i class="fa fa-tasks fa-lg fa-fw mr5"></i> {:l('OTC Records')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			</eq>
+			<li class="finan_invit">
+				<a href="{:U('Finance/mytj')}"> <i class="fa fa-users fa-lg fa-fw mr5"></i> {:l('INVITE_FRIENDS')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<li class="finan_invitlog">
+				<a href="{:U('Finance/referrals')}"> <i class="fa fa-credit-card fa-lg fa-fw mr5"></i> {:l('MY_RECOMMENDATION')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<li class="finan_award">
+				<a href="{:U('Finance/myjp')}"> <i class="fa fa-archive fa-lg fa-fw mr5"></i> {:l('MY_REWARD')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<if condition="$show_dividend">
+			<li class="finan_dividend">
+				<a href="{:U('Finance/holdings')}"> <i class="fa fa-dollar fa-lg fa-fw mr5"></i> {:l('DIVIDEND_CENTER')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			</if>
+			<li class="finan_myfh">
+				<a href="{:U('Finance/mybonus')}"> <i class="fa fa-line-chart fa-lg fa-fw mr5"></i> {:l('MY_BONUS')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			<eq name="TRADING_ALLOWED" value="1">
+			<li class="finan_orders">
+				<a href="{:U('Finance/orders')}"> <i class="fa fa-cart-plus fa-lg fa-fw mr5"></i> {:l('Trading History')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			</eq>
+			<eq name="VOTING_ALLOWED" value="1">
+			<li class="finan_orders">
+				<a href="{:U('Vote/log')}"> <i class="fa fa-trophy fa-lg fa-fw mr5"></i> {:l('VOTE')} <i class="fa fa-angle-right fa-lg right mr10 mt17"></i> </a>
+			</li>
+			</eq>
+			
+							</ul>
+						</div>
+					</div>
+					<!-- /main navigation -->
+
+				</div>
+			</div>
+			<!-- /main sidebar -->
+			<script>
+			$('#showside').css('display','block');
+			</script>

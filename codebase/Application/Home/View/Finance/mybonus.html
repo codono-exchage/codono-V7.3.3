@@ -1,0 +1,74 @@
+<include file="Public:header" />
+
+		<!-- Page content -->
+		<div class="page-container">	
+	
+<include file="Finance:left" />
+
+		<!-- Main content -->
+			<div class="content-wrapper">
+			<div class="panel panel-flat">
+			<div class="panel-heading">
+				<div class="safe_center clear ">
+					<h1>{:l('MY_BONUS')} <a class="right" onclick="$('#hints').slideToggle();"> <i class="fa fa-hand-o-right move fz_14 mr5"></i> <span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span> </a> 					</h1>
+				</div>
+				<div id="hints" class="mytips" style="display:none;">
+					
+					<p>
+					<notempty name="prompt_text">
+					{$prompt_text}
+					</notempty>
+					
+					</p>
+			</div>
+			</div>
+				<div class="panel-body ">
+					<div class="f_body  step2 table-responsive">
+						<table class="table table-hover table-striped" id="investLog_content">
+							<thead>
+							<tr>
+								<th>{:l('BONUS_TIME')}</th>
+								<th>{:l('DIVIDEND_NAME')}</th>
+								<th>{:l('DIVIDEND_CURRENCY')}</th>
+								<th>{:l('REWARD_CURRENCY')}</th>
+								<th>{:l('THE_TOTAL_DIVIDEND')}</th>
+								<th>{:l('EACH_BONUS')}</th>
+								<th>{:l('I_HOLD_OUT')}</th>
+								<th>{:l('MY_BONUS')}</th>
+							</tr>
+							</thead>
+							<tbody>
+														
+                                    <volist name="list" id="vo">
+                                        <tr>
+                                            <td>{$vo.addtime|date='m-d H:i:s',###}</td>
+                                            <td>{$vo['name']}</td>
+                                            <td>{$vo['coinname']}</td>
+                                            <td>{$vo['coinjian']}</td>
+                                            <td>{$vo['fenzong']|Num}</td>
+                                            <td>{$vo['price']|Num}</td>
+                                            <td>{$vo['num']|Num}</td>
+                                            <td>{$vo['mum']|Num}</td>
+                                        </tr>
+                                    </volist>			
+								
+							</tbody>
+						</table>
+						<div class="pages">{$page}</div>
+					</div>
+				</div>
+			
+		</div>
+	</div>
+</div>
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_myfh').addClass('active');
+</script>	
+	
+<include file="Public:footer_minimal"/>

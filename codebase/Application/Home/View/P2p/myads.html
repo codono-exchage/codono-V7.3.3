@@ -1,0 +1,193 @@
+<include file="Publicnew:header"/>
+<include file="P2p:inc_common_banner"/>
+
+<!-- P2P Content Start -->
+	<div class="container p2p-page">
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="card invite-code-wrapper">
+					<include file="P2p:inc_mid_nav"/>
+					<div class="card-body">
+						<form action="#" class="m-b-30">
+							<div class="row ">
+								<div class="col-12">
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="form-filters d-flex align-items-center">
+											<div class="filterItem">
+												<label for="coin">{:l("Coin")}</label>
+												<div class="filter-quantity">
+														<select id="coin" class="bootstrap-select" data-live-search="true" data-live-search-placeholder='{:l("Search")}' data-width="100%">
+													<option>{:l("PLEASE_CHOOSE")}</option>
+													<volist name="allow_cryptos" id="coin">
+													
+														<option data-content="<img src='{$coin['image']}'> {$coin['symbol']|strtoupper}" data-value="{$coin['symbol']}"></option>
+													</volist>
+											</select>
+												</div>
+											</div>
+											<div class="filterItem">
+												<label for="type">{:l('Type')}</label>
+												<div class="filter-quantity">
+													<select id="type" class="bootstrap-select" data-live-search="false" data-width="200px">
+														<option data-content="{:l('PLEASE_CHOOSE')}" data-value=""></option>
+														<option data-content="{:l('Buy')}" data-value="buy"></option>
+														<option data-content="{:l('Sell')}" data-value="sell"></option>
+													</select>
+												</div>
+											</div>
+											<div class="filterItem">
+												<label for="status">{:l('Status')}</label>
+												<div class="filter-quantity">
+													<select id="status" class="bootstrap-select" data-live-search="false" data-width="200px">
+														<option data-content="{:l('PLEASE_CHOOSE')}" data-value=""></option>
+														<option data-content="{:l('Online')}" data-value="online"></option>
+														<option data-content="{:l('Offline')}" data-value="offline"></option>
+													</select>
+												</div>
+											</div>
+											
+											<div class="filterItem">
+												<label>&nbsp;</label>
+												<div class="refresh-settings">
+													<button type="button" onclick="search();" class="btn main p-t-5 p-b-5 f-s-14"> {:l('Search')}</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div class="table-responsive">
+							<table class="table p2p-list-table table-striped table-hover">
+								<thead>
+								<tr>
+									<th scope="col">{:l('Listing Number')}</th>
+									<th scope="col">{:l('Type')}</th>
+									<th scope="col">{:l('Total amount')}</th>
+									<th scope="col">{:l('Price')}</th>
+									<th scope="col">{:l('Payment method')}</th>
+									<th scope="col">{:l('Last update')}</th>
+									<th scope="col">{:l('Online')}</th>
+									<th scope="col" class="text-right">
+										{:l('Options')}
+									</th>
+								</tr>
+
+								</thead>
+								<tbody>
+							<volist name="myads" id="ad">
+								<tr>
+									<td>
+										<div class="pair-name">
+											<div class="name">{$ad.orderid}
+												<span><span class="order d-inline">{$ad.coin}</span> / <span class="copmlated d-inline">{$ad.fiat}</span></span></div>
+										</div>
+									</td>
+									<td>
+										<if condition="$ad['ad_type'] eq 1">
+										<div class="badge badge-info" >
+											{:l('Buy')}
+										</div>
+										</if>
+										<if condition="$ad['ad_type'] eq 2">
+										<div class="badge badge-danger" >
+											{:l('Sell')}
+										</div>
+										</if>
+									</td>
+									<td>
+										<div class="available">
+											{$ad.available|NumToStr} {$ad.coin|strtoupper}
+										</div>
+									</td>
+									<td>{$ad['fixed_price']|NumToStr} <span class="currency d-inline">{$ad['fiat'] |strtoupper}</span></td>
+									<td>
+										<div class="badge badge-primary" tabindex="0" data-toggle="tooltip" title="{:l('Bank Transfer')}">
+											{:l('Bank Transfer')}
+										</div>
+									</td>
+									<td>{$ad['updated_at']|addtime}</td>
+									<td><if condition="($ad['online'] eq 1)">{:l("Online")}<else/>{:l("Offline")}</if></td>
+									<td>
+										<button type="button" onclick="closelisting('{$ad['orderid']}');" class="btn-danger btn btn-sm">{:l('Close')}</button> <a href="{:U('P2p/edit',array('id'=>$ad['id']))}" class="btn-2">{:l('Edit')}</a>
+									</td>
+								</tr>
+								</volist>
+								
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="card-footer">
+					<div class="pages">{$page}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- P2P Content End -->
+</div>
+
+<script>
+function search(){
+var coin=$('select#coin').find("option:selected").attr('data-value');
+var type=$('select#type').find("option:selected").attr('data-value');
+var status=$('select#status').find("option:selected").attr('data-value');
+var sendinfo=[];
+var location=window.location.href;
+var url = new URL(location);
+if(coin){
+sendinfo['coin']= coin;
+url.searchParams.append('coin', coin);
+url.searchParams.set('coin', coin);
+}
+if(type){
+sendinfo['type']= type;
+url.searchParams.append('type', type);
+url.searchParams.set('type', type);
+}
+if(status){
+sendinfo['status']= status;
+url.searchParams.append('status', status);
+url.searchParams.set('status', status);;
+}
+if(!status && !type && !coin){
+url ='{:U("P2p/myads")}';
+}
+window.location.href =url;
+
+}
+function closelisting(orderid) {
+        layer.confirm('<p style="color: red;">({:l("Are you sure to close ad")}'+':'+orderid+')</p>', {
+            btn: ['Confirm','Cancel'] //Button
+        }, function(){
+            $.post("/P2p/closelisting", {
+                orderid: orderid,
+            }, function (data) {
+                if (data.status == 1) {
+                    layer.msg(data.info, {icon: 1});
+                    location.reload();
+                } else {
+                    layer.msg(data.info, {icon: 2});
+                }
+            }, 'json');
+		})
+    }
+function apply(){
+layer.load(0, {shade: [0.5,'#8F8F8F']});
+$.post("{:U('P2p/doApply')}", {}, function (data) {
+		layer.closeAll('loading');
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+</script>
+<include file="Publicnew:footer_minimal" />
+<script>
+	$('.input-daterange input').each(function () {
+		$(this).datepicker('clearDates');
+	});
+</script>

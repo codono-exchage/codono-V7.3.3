@@ -1,0 +1,141 @@
+<include file="Publicnew:html_header_trade"/>
+<body lang="en-us" class="navbar-bottom">
+<include file="Publicnew:main_navigation"/>
+<include file="Publicnew:second_menu"/>
+<script>
+    $('#trade_top').hover(function () {
+        $('#trade_list').show();
+    }, function () {
+        $('#trade_list').hide();
+    });
+    $('#trade_tops').hover(function () {
+        $('#trade_lists').show();
+    }, function () {
+        $('#trade_lists').hide();
+    });
+    $('#trade_list').hover(function () {
+        $('#trade_list').show();
+    }, function () {
+        $('#trade_list').hide();
+    });
+    $('#trade_lists').hover(function () {
+        $('#trade_lists').show();
+    }, function () {
+        $('#trade_lists').hide();
+    });
+
+    $.post("/Ajax/top_coin_menu?t=" + Math.random(), function (data) {
+        if (data) {
+            var interText = doT.template($("#trade_list_tpl").text());
+            var interTexts = doT.template($("#trade_list_tpls").text());
+            $("#trade_list").html(interText(data));
+            $("#trade_lists").html(interTexts(data));
+
+            var $li = $('#trade-nav-tabs > li');
+            var $lis = $('#trade-nav-tabss > li');
+            var $ul = $('#trade-nav-body > dl');
+            var $uls = $('#trade-nav-bodys > dl');
+
+            $li.mouseover(function () {
+                var $this = $(this);
+                var $t = $this.index();
+                $li.removeClass();
+                $this.addClass('current');
+                $ul.css('display', 'none');
+                $ul.eq($t).css('display', 'block');
+            })
+            $lis.mouseover(function () {
+                var $this = $(this);
+                var $t = $this.index();
+                $lis.removeClass();
+                $this.addClass('current');
+                $uls.css('display', 'none');
+                $uls.eq($t).css('display', 'block');
+            })
+        }
+    }, "json");
+
+    $('#game_top').hover(function () {
+        $('#game_list').show();
+    }, function () {
+        $('#game_list').hide();
+    });
+    $('#game_list').hover(function () {
+        $('#game_list').show();
+    }, function () {
+        $('#game_list').hide();
+    });
+
+
+    $('#user_top').hover(function () {
+        $('#mywallet_list').show();
+    }, function () {
+        $('#mywallet_list').hide();
+    });
+    $('#mywallet_list').hover(function () {
+        $('#mywallet_list').show();
+    }, function () {
+        $('#mywallet_list').hide();
+    });
+
+
+    $('#theme_top').hover(function () {
+        $('#theme_list').show();
+    }, function () {
+        $('#theme_list').hide();
+    });
+    $('#theme_list').hover(function () {
+        $('#theme_list').show();
+    }, function () {
+        $('#theme_list').hide();
+    });
+    $(document).ready(function () {
+        var theme = $.cookies.get("theme");
+        if (theme) {
+            $('#theme').attr("href", "__PUBLIC__/static/css/" + theme + ".css");
+        } else {
+
+        }
+    });
+    function chose_theme(theme) {
+        $.cookies.set("theme", theme);
+        window.location.reload();
+    }
+
+
+    $('#lang_top').hover(function () {
+        $('#lang_list').show();
+    }, function () {
+        $('#lang_list').hide();
+    });
+    $('#lang_list').hover(function () {
+        $('#lang_list').show();
+    }, function () {
+        $('#lang_list').hide();
+    });
+
+    function chose_lang(lang) {
+        $.cookies.set("lang", lang);
+        window.location.reload();
+    }
+
+
+    function expect() {
+        layer.msg('Not on line, please look forward to!', {icon: 6});
+    }
+
+
+    $('#moban_top').hover(function () {
+        $('#moban_list').show();
+    }, function () {
+        $('#moban_list').hide();
+    });
+    $('#moban_list').hover(function () {
+        $('#moban_list').show();
+    }, function () {
+        $('#moban_list').hide();
+    });
+</script>
+
+
+<!-- top End  -->

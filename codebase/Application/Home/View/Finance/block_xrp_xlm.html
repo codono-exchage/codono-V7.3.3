@@ -1,0 +1,29 @@
+						<div class="usdin_record">
+							<div class="adr-zhuanru" style="position: relative;z-index:0;">
+								<div class="qb_tishi alert alert-info">
+									{:l('HERE_IS_WALLET')} <b class="coin-name">{$coin_list[$xnb]['title']}</b> {:l('TRANSFERRED_TO_THIS_ADDRESS')} 
+									<notempty name="coin_list[$xnb]['zr_zs']">
+										<span id="zengsong" style="color: red; font-size: 14px;">{:l('TRANSFER_OR_GIFT')} {$coin_list[$xnb]['zr_zs']}%</span>
+									</notempty>
+								</div>							
+							<div class="row thumbnail">
+
+								<div id="pt-qrcode">
+								<div class="col-sm-3 text-center">
+																		<eq name="show_qr" value="1">
+										<div id="qrcode-wallet" style="display: inline-block;">
+										<saon id="codeaa"></saon>
+									</div></eq>
+									</div>
+									<div class="col-sm-9">
+											<h1 id="wallets">{$wallet}</h1>
+						<small>					<switch name="xnb">
+    <case value="xrp"><dl><dt>DestTag:{$Think.session.userId}</dt></dl></case>
+    <case value="xlm"><dl><dt>MemoID:{$Think.session.userId}</dt></dl></case>
+	<default />
+</switch></small>
+									</div>
+								</div>
+							</div>
+							</div>
+						</div>

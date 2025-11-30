@@ -1,0 +1,305 @@
+<include file="Public:header"/>
+<!-- Wallet Content Start -->
+	<div class="container">
+		<div class="full-box row">
+		<include file="User:sidebar" />
+		<div class="col-10">
+		<div class="row mt-3">
+			<include file="User:top_bar" />
+			<div class="col-12 col-md-6 order-1 order-md-2 float-right">
+			  <ul class="text-right breadcrumbs list-unstyle">
+				<li>
+					<a class="btn btn-warning btn-sm" href="{:U('Finance/index')}">{:l('Wallet')}</a>
+				  </li>
+				  <li class="btn btn-warning btn-sm active">{:l('Giftcards')}</li>
+				<li>
+				  <a class="btn btn-warning btn-sm" href="{:U('Transfer/giftcardcreate')}">{:l('Create Gift Card')}</a>
+				</li>
+			  </ul>
+			</div>
+		  </div>
+		<div class="row">
+			<div class="col-xl-12 m-t-30">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">{:l("Gift Card")}</h4>
+					</div>
+					<div class="card-body text-center gift-card-buttons">
+						<a href="{:U('Transfer/giftcardcreate')}" class="btn btn-secondary col-md-3 col-sm-6 m-t-10" >
+							 <i class="ion ion-md-cloud-download f-s-24"></i> <span class="clearfix"></span> {:l("Send Card")} </a>
+						<a href="#!" data-toggle="modal" data-target="#getGiftCardModal" role="button" class="btn btn-secondary col-md-3 col-sm-6 m-t-10" > <i class="ion ion-md-cloud-upload f-s-24 fa-rotate-180"></i>
+							<span class="clearfix"></span> {:l("Check")} / {:l("Redeem")} </a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-12">
+				<div class="card gift-card-list">
+					
+						<div class="col-12">
+									<ul class="nav nav-pills nav-fill " role="tablist">
+										<li class="nav-item">
+											<a aria-selected="true" class="nav-link active" data-toggle="pill" href="#mycards" role="tab">{:l("My cards")}</a>
+										</li>
+										<li class="nav-item">
+											<a aria-selected="false" class="nav-link" data-toggle="pill" href="#spentcards" role="tab">{:l("Spent")}</a>
+										</li>
+									</ul>
+								</div>
+					
+														<div class="tab-content">
+
+					<div class="tab-pane fade p-t-15 show active" role="tabpanel" id="mycards">
+					<notempty name="mycards">
+					
+					<div class="row ">	
+						<volist name="mycards" id="mycard">
+						<div class="col-xl-3 col-sm-6">
+							<div class="card">
+							
+						<div class="card-body text-center gc-box">
+						
+									<div class="card-img-actions">
+											<img src="__UPLOAD__/giftcard/{$mycard.card_img}" class="card-img giftcard-banner" width="96" alt="">
+									</div>
+							
+									<div class="mb-2">
+										
+											<span class="value-box">{$mycard.coin|strtoupper} {$mycard.value|NumToStr}</span>
+										
+
+									</div>
+
+									<h3 class="mb-0 font-weight-semibold">{$mycard.gc_title}</h3>
+
+									<div>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+									</div>
+
+									<div class="ribbon-top-right"><br/></div>
+						<button onclick="viewcode('{$mycard['id']}','{$mycard['gc_title']}','{$mycard['coin']|strtoupper}','{$mycard.value|NumToStr}','{$mycard.public_code}','{$mycard.secret_code}')" class="btn btn-warning btn-block" id="share">{:l("View")}</button>
+								</div>
+								</div>
+						 <div class="ribbon ribbon-top-right"><span><if condition="($mycard.status eq 0)">
+						{:l("Inactive")}
+						</if>
+						<if condition="($mycard.status eq 1)">
+						{:l("Active")}
+						</if>
+						<if condition="($mycard.status eq 2)">
+						{:l("Consumed")}
+						</if></span></div>
+
+</div>
+						</volist>
+						</div>
+						<else/>
+						<div class="no-data">
+							<i class="ion ion-ios-gift"></i>
+							<p>
+								{:l("There are no cards")}. <br/> {:l("Create one now!")} </p>
+						</div>
+						
+						</notempty>
+							</div>
+
+						<div class="tab-pane fade p-t-15" role="tabpanel" id="spentcards">
+					<notempty name="spentcards">
+					<div class="row ">
+					
+						
+						<volist name="spentcards" id="spentcard">
+						<div class="col-xl-3 col-sm-6">
+							<div class="card">
+							
+						<div class="card-body text-center">
+						
+									<div class="card-img-actions">
+											<img src="__UPLOAD__/giftcard/{$spentcard.card_img}" class="card-img giftcard-banner" width="96" alt="">
+									</div>
+							
+									<div class="mb-2">
+										
+											<span class="value-box">{$spentcard.coin|strtoupper} {$spentcard.value|NumToStr}</span>
+										
+
+									</div>
+
+									<h3 class="mb-0 font-weight-semibold">{$spentcard.gc_title}</h3>
+
+									<div>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+										<i class="icon-star-full2 font-size-base text-warning"></i>
+									</div>
+						<button onclick="viewConsumed('{$spentcard['id']}','{$spentcard['gc_title']}','{$spentcard['coin']|strtoupper}','{$spentcard.value|NumToStr}','{$spentcard.public_code}','{$spentcard.usetime|addtime}')" class="btn btn-warning btn-block" id="share">{:l("View")}</button>
+								</div>
+								</div>
+						
+						</div>
+						
+						</volist>
+						</div>
+						<else/>
+						<div class="no-data">
+							<i class="ion ion-ios-gift"></i>
+							<p>
+								{:l("There are no cards")}. <br/> {:l("Create one now!")} </p>
+						</div>
+						
+						</notempty>
+						</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	</div>
+	<!-- Wallet Content End -->
+<include file="Transfer:inc_footer_giftcard"/>
+<script type="text/javascript" src="__PUBLIC__/Home/js/clipboard.min.js"></script>
+<script>
+function checkit() {
+	var secret=$("#gift-card-no").val();
+	if(secret==""||secret==null){
+   		//formMsg('regidcard', 0, 'Please enter ID Number');
+   		layer.tips('Please enter card information', '#gift-card-no', {tips: 3});
+   		return false;
+   	}
+   	   $.post("/Transfer/check",{secret:secret} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+						
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+        }, 'json');
+		
+    }
+	function redeemit1() {
+	var secret=$("#add-gift-card-no").val();
+	if(secret==""||secret==null){
+   		//formMsg('regidcard', 0, 'Please enter ID Number');
+   		layer.tips('Please enter card information', '#add-gift-card-no', {tips: 3});
+   		return false;
+   	}
+   	   $.post("/Transfer/redeem",{secret:secret} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+				window.location.href = "{:U('Transfer/giftcard')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+			
+        }, 'json');
+		
+    }
+	function redeemit2() {
+	var secret=$("#gc-gift-card-no").val();
+	if(secret==""||secret==null){
+   		//formMsg('regidcard', 0, 'Please enter ID Number');
+   		layer.tips('Please enter card information', '#gc-gift-card-no', {tips: 3});
+   		return false;
+   	}
+   	   $.post("/Transfer/redeem",{secret:secret} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+				window.location.href = "{:U('Transfer/giftcard')}";
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+			
+        }, 'json');
+		
+    }
+	function viewcode(id,title,coin,value,public,secret) {
+        layer.confirm('<p style="font-weight: bold;text-align: center;font-size: 18px;">'+title+'</p><div class="card"><div class="card-body"><ul><li class="d-flex justify-content-between"><label>{:l("Value")}</label> <span>'+coin +' '+value+'</span></li><li class="d-flex justify-content-between"><label>{:l("Card Number")}</label> <span><small>'+public+'</small></span></li><li class="d-flex justify-content-between"><label>{:l("Code")}</label> <span><small>'+secret+'</small></span></li></ul></div></div>', {
+            btn: ['{:l("Redeem")}','{:l("Copy")}'] //Button
+        }, function(){
+				$.post("/Transfer/redeem",{secret:secret} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+						
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+			window.location.href = "{:U('Transfer/giftcard')}";
+        }, 'json');
+		
+		},function(){
+		 ClipboardJS.copy(secret);
+		 alert("Copied:"+secret);
+		});
+    }
+	function viewConsumed(id,title,coin,value,public,used) {
+        layer.confirm('<p style="font-weight: bold;text-align: center;font-size: 18px;">'+title+'</p><div class="card"><div class="card-body"><ul><li class="d-flex justify-content-between"><label>{:l("Value")}</label> <span>'+coin +' '+value+'</span></li><li class="d-flex justify-content-between"><label>{:l("Card Number")}</label> <span><small>'+public+'</small></span></li><li class="d-flex justify-content-between"><label>{:l("Used")}</label> <span><small>'+used+'</small></span></li></ul></div></div>', {
+            btn: ['{:l("Info")}','{:l("Close")}'] //Button
+        }, function(){
+				
+                layer.msg("Your Giftcard was consumed on "+used, {icon: 1});
+				
+		});
+    }
+</script>
+<style>
+.gift-card-list{
+min-height:275px}
+.value-box{
+    position: absolute;
+    top: 29px;
+    left: 21px;
+    font-size: 15px;
+    color: #fff !important;
+    background: var(--theme-color);
+    box-shadow: 0 5px 3px rgb(0 0 0 / 30%);
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.gc-box {
+  position: relative;
+}
+.card-img-actions {
+    min-height: 166px;
+}
+/* common */
+</style>
+<include file="Public:footer_minimal"/>
+<script>
+	$('.slider-for').slick({
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		arrows: false,
+		fade: true,
+		asNavFor: '.slider-nav'
+	});
+	$('.slider-nav').slick({
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		asNavFor: '.slider-for',
+		dots: true,
+		arrows: false,
+		centerMode: false,
+		focusOnSelect: true
+	});
+</script>

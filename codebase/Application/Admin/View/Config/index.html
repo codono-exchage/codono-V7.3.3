@@ -1,0 +1,265 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4">{:l('Basic configuration')}</span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('Config/edit')}" method="post" class="form-horizontal col-lg-6 col-md-8 col-sm-12" enctype="multipart/form-data">
+					<div class="tab-pane in tab" id="tab">
+				
+						<!-- Site Name -->
+						<div class="form-group">
+							<label for="web_name">{:l('Site Name')}:</label>
+							<input type="text" id="web_name" class="form-control" name="web_name" value="{$data['web_name']}">
+						</div>
+				
+						<hr/>
+						<!-- Main Logo -->
+						<div class="form-group">
+							<label for="inputfile">{:l('Light Logo')} (250px*34px):<small>[{:l('To show in dark theme.')}]</small></label>
+							<div>
+								<img id="up_img" onclick="getElementById('inputfile').click()" style="cursor:pointer;max-width:200px;" title="Click to Add Picture" alt="Click to Add Picture" src="<notempty name='data.web_logo'>/Upload/public/{$data.web_logo}<else/>__THEME__/images/addimg.png</notempty>">
+								<input type="hidden" name="web_logo" id="img" value="{$data.web_logo}">
+								<input type="file" id="inputfile" class="form-control-file" style="display:none;">
+							</div>
+						</div>
+				
+						<!-- Footer Logo -->
+						<div class="form-group">
+							<label for="inputfileb">{:l('Dark Logo')}	(168px*22px): <small>[{:l('To show in light theme.')}]</small></label>
+							<div>
+								<img id="up_imgb" onclick="getElementById('inputfileb').click()" style="cursor:pointer;max-width:200px;" title="Click to Add Picture" alt="Click to Add Picture" src="<notempty name='data.footer_logo'>/Upload/public/{$data.footer_logo}<else/>__THEME__/images/addimg.png</notempty>">
+								<input type="hidden" name="footer_logo" id="imgb" value="{$data.footer_logo}">
+								<input type="file" id="inputfileb" class="form-control-file" style="display:none;">
+							</div>
+							
+						</div>
+						<hr/>
+						<!-- Meta title -->
+						<div class="form-group">
+							<label for="web_title">{:l('Meta Title')}:</label>
+							<input type="text" id="web_title" class="form-control" name="web_title" value="{$data['web_title']}">
+						</div>
+				
+						<!-- Meta Description -->
+						<div class="form-group">
+							<label for="web_description">{:l('Meta Description')}:</label>
+							<textarea id="web_description" class="form-control" name="web_description">{$data['web_description']}</textarea>
+						</div>
+				
+						<!-- Meta Keyword -->
+						<div class="form-group">
+							<label for="web_keywords">{:l('Meta Keyword')}:</label>
+							<textarea id="web_keywords" class="form-control" name="web_keywords">{$data['web_keywords']}</textarea>
+						</div>
+				
+						<!-- Site Status -->
+						<div class="form-group">
+							<label for="web_close">{:l('Site Status')}:</label>
+							<select id="web_close" name="web_close" class="form-select">
+								<option value="1" <eq name="data['web_close']" value="1">{:l('selected')}</eq>>{:l('Open')}</option>
+								<option value="0" <eq name="data['web_close']" value="0">{:l('selected')}</eq>>{:l('No Access')}</option>
+							</select>
+						</div>
+				
+						<!-- No Access reason -->
+						<div class="form-group">
+							<label for="web_close_cause">{:l('No Access Reason')}:</label>
+							<textarea id="web_close_cause" class="form-control" name="web_close_cause">{$data['web_close_cause']}</textarea>
+						</div>
+				
+						<!-- Footer Copyright -->
+						<div class="form-group">
+							<label for="web_icp">{:l('Footer Copyright')}:</label>
+							<textarea id="web_icp" class="form-control" name="web_icp">{$data['web_icp']}</textarea>
+						</div>
+				
+						<!-- Footer HTML code -->
+						<div class="form-group">
+							<label for="web_html_footer">{:l('Footer HTML Code')}:</label>
+							<textarea id="web_html_footer" class="form-control" name="web_html_footer">{$data['web_html_footer']}</textarea>
+							<small class="form-text text-muted">{:l('Code will be added just above the end body tag.')}</small>
+						</div>
+				
+						<!-- User Registration Agreement -->
+						<div class="form-group">
+							<label for="web_reg">{:l('User Registration Agreement')}:</label>
+							<textarea id="web_reg" class="form-control" name="web_reg">{$data['web_reg']}</textarea>
+						</div>
+							<!-- User Registration Agreement -->
+							<div class="form-group">
+								<label for="web_waring">{:l('Footer Information')}:</label>
+								<textarea id="web_waring" class="form-control" name="web_waring">{$data['web_waring']}</textarea>
+							</div>
+						<!-- Submission Buttons -->
+						<div class="form-group">
+							<button class="btn submit-btn ajax-post btn-info" type="submit" id="submit" target-form="form-horizontal">{:l('Submit')}</button>
+							<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+						</div>
+					</div>
+				</form>
+				
+				<script type="text/javascript">
+					function encodeContent() {
+						var contentTextarea = document.getElementById("web_waring");
+						
+						var encodedContent = encodeURIComponent(contentTextarea.value);
+						contentTextarea.value = encodedContent;
+						console.log(314, contentTextarea.value);
+					}
+					//submit Form
+					$('#submit').click(function () {
+						console.log(118,'called')
+						encodeContent();
+						$('#form').submit();
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		//The response file Add to success event
+		$("#inputfile").change(function () {
+			//createFormDataObjects
+			var data = new FormData();
+			//forFormDataAdding Data Object
+			$.each($('#inputfile')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+
+
+			//send data
+			$.ajax({
+				url: '/Admin/Config/image',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//Essential parameters
+				processData: false,		//Essential parameters
+				success: function (data) {
+					if (data) {
+						$('#up_img').attr("src", '/Upload/public/' + data);
+						$('#img').val(data);
+						$('#up_img').show();
+					}
+				},
+				error: function () {
+					alert('Upload error');
+					$(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+				}
+			});
+
+		});
+	});
+
+
+	$(document).ready(function () {
+		//The response fileAdd tosuccessevent
+		$("#inputfileb").change(function () {
+			//createFormDataObjects
+			var data = new FormData();
+			//forFormDataAdding Data Object
+			$.each($('#inputfileb')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+
+
+			//send data
+			$.ajax({
+				url: '/Admin/Config/image',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//Essential parameters
+				processData: false,		//Essential parameters
+				success: function (data) {
+					if (data) {
+						$('#up_imgb').attr("src", '/Upload/public/' + data);
+						$('#imgb').val(data);
+						$('#up_imgb').show();
+					}
+				},
+				error: function () {
+					alert('Upload error');
+					$(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+				}
+			});
+
+		});
+	});
+
+	$(document).ready(function () {
+		//The response fileAdd tosuccessevent
+		$("#inputfilea").change(function () {
+			//createFormDataObjects
+			var data = new FormData();
+			//forFormDataAdding Data Object
+			$.each($('#inputfilea')[0].files, function (i, file) {
+				data.append('upload_file' + i, file);
+			});
+
+
+			//send data
+			$.ajax({
+				url: '/Admin/Config/image',
+				type: 'POST',
+				data: data,
+				cache: false,
+				contentType: false,		//Essential parameters
+				processData: false,		//Essential parameters
+				success: function (data) {
+					if (data) {
+						$('#up_imga').attr("src", '/Upload/public/' + data);
+						$('#imga').val(data);
+						$('#up_imga').show();
+					}
+				},
+				error: function () {
+					alert('Upload error');
+					$(".loading").hide();	//plusUpload failedshiftexceptplusLoadimage
+				}
+			});
+
+		});
+	});
+</script>
+<script type="text/javascript" src="__THEME__/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+	var editor,editor2;
+	KindEditor.ready(function (K) {
+		editor = K.create('textarea[name="web_reg"]', {
+			width: '100%',
+			height: '100px',
+			allowPreviewEmoticons: false,
+			allowImageUpload: true,
+			items: [
+				'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'link', 'fullscreen'],
+			afterBlur: function () {
+				this.sync();
+			}
+		});
+		editor2 = K.create('textarea[name="web_waring"]', {
+			width: '100%',
+			height: '100px',
+			allowPreviewEmoticons: false,
+			allowImageUpload: true,
+			
+			filterMode: false,
+			afterBlur: function () {
+				this.sync();
+			}
+		});
+		var htmlContent = editor2.selectedHtml();
+	});
+</script>
+<include file="Public:footer"/>

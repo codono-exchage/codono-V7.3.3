@@ -1,0 +1,32 @@
+<div class="row">
+	<notempty name="list_running">	
+		<volist name="list_running" id="homeico">					
+		
+		<div class="col-sm-4 col-md-4">
+						<div class="panel panel-body has-bg-image">
+							<div class="media no-margin-top content-group">
+								<div class="media-body">
+									<h6 class="no-margin text-semibold">{$homeico.name} <small class="pull-right"><img src="__UPLOAD__/issue/{$homeico.image}" class="img-responsive" width="30px" height="30px"/></small></h6> 
+									
+								</div>
+
+								<div class="media-right media-middle">
+									
+								</div>
+							</div>
+
+							<div class="progress progress-micro mb-10">
+								<div class="progress-bar bg-danger-400" style="width: {$homeico.bili}%">
+									<span class="sr-only">{$homeico.bili}% Complete</span>
+								</div>
+							</div>
+			                {$homeico.bili}%
+			           <span class="pull-right"><a href="{:U('Issue/buy?id='.$homeico['id'])}" class="btn btn-xs"><i class="icon-bag position-left"></i> {$homeico['price']*1} {$homeico.buycoin}</a></span>
+						</div>
+					</div>
+					</volist>	
+					<else/>
+				
+					</notempty>						
+
+</div>

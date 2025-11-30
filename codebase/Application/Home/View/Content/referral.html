@@ -1,0 +1,94 @@
+<include file="Public:header"/>
+<div class="container"	>
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+			<div class="alert alert-info alert-styled-left alert-arrow-left alert-component content-group-lg {$disp_class}">
+					<button type="button" class="close" data-dismiss="alert"><span>×</span><span class="sr-only">Close</span></button>
+					<h6 class="alert-heading text-semibold">Signup Bonus</h6>
+					<eq name="is_ref_award" value='1'>
+					Invite your friends and get <code>{$ref_award_num} {$ref_award_coin}</code> Bonus per signup!! </eq> 
+					<eq name="is_reg_award" value='1'>
+					Users signing up will get 
+					<code>{$reg_award_num} {$reg_award_coin}</code> as Bonus.</eq>
+				</div>
+				<div class="panel panel-flat timeline-content">	
+					<div class="panel-heading">
+									<h6 class="panel-title text-semibold">Trading Commission Program</h6>
+									<div class="heading-elements">
+										
+				                	</div>
+								</div>
+								<div class="panel-body">
+				<!-- Info blocks -->
+				<div class="row">
+					<table class="table text-nowrap">
+									<thead>
+										<tr>
+
+											<th class="col-md-2">Market</th>
+											<th class="col-md-2">Sell Commision</th>
+											<th class="col-md-2">Buy Commision</th>
+											<th class="col-md-2">Tier 1</th>
+											<th class="col-md-2">Tier 2</th>
+											<th class="col-md-2">Tier 3</th>
+										</tr>
+									</thead>
+									<tbody>
+													<volist name="referralMarket" id="vo">
+													<?php
+													if($vo['invit_buy'] ==0 && $vo['invit_sell'] ==0  ){
+													$textclass="text-muted";
+													}else{
+													$textclass="text-semibold";
+													}?>
+										<tr>
+											<td onclick="top.location='/trade/index/market/{$vo.name}'">
+												<div class="media-left media-middle">
+													<a href="#"><img src="{$vo.img}" class="img-circle img-xs" alt=""></a>
+												</div>
+												<div class="media-left">
+													<div class=""><a href="#" class="text-default text-semibold">{$vo.title}</a></div>
+													<div class="text-muted text-size-small">
+														<span class="status-mark border-blue position-left"></span>
+														{$vo.name}
+													</div>
+												</div>
+											</td>
+											<td><eq name="vo['invit_buy']" value='0'>
+											<span class="label bg-danger">Closed</span>
+											<else/>
+											<span class="label bg-blue">Active</span>
+											</eq>
+											</td>
+											<td>
+											<eq name="vo['invit_sell']" value='0'>
+											<span class="label bg-danger">Closed</span>
+											<else/>
+											<span class="label bg-blue">Active</span>
+											</eq>
+											</td>
+											<td><h6 class="{$textclass}"> {$vo.invit_1}%</h6></td>
+										<td><h6 class="{$textclass}"> {$vo.invit_2}%</h6></td>
+										<td><h6 class="{$textclass}"> {$vo.invit_3}%</h6></td>
+											
+										</tr>
+									</volist>
+									</tbody>
+								</table>
+				</div>
+				
+				<!-- /info blocks -->
+				</div>
+				</div>
+</div>
+</div>
+</div>
+</div>
+<include file="Public:footer_minimal"/>

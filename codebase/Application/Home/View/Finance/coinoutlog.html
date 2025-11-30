@@ -1,0 +1,139 @@
+<include file="Public:header" />
+<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/assets/js/plugins/forms/selects/select2.min.js"></script>
+
+	<script type="text/javascript" src="__PUBLIC__/assets/js/pages/datatables_advanced.js"></script>
+		<!-- Page content -->
+		<div class="page-container">	
+
+<include file="Finance:left" />
+
+
+		<!-- Main content -->
+<div class="panel panel-flat">
+
+
+			<div class="panel-heading">
+				<h1>
+		<div class="btn-group btn-group-justified">
+					<span class="btn-group">	
+						<a href="{:U('Finance/myzc')}" class="btn btn-flat  ">{:l('WITHDRAW')}</a>
+                    </span>
+					<span class="btn-group">	
+						<a href="{:U('Finance/coinoutlog')}" class="btn btn-flat  active current">{:l('LOG_IN_LOG')}</a>
+					</span>
+					<span class="btn-group">	
+						<a href="{:U('Finance/addnew')}" class="btn btn-flat ">{:l('ADDRESSES')}</a>
+                    </span>
+				</div>
+					<span><a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+					</span>
+				</h1>
+			</div>
+					<div class="tag-list-content assets_content">
+			<div id="hints" class="mytips" style="display:none;">
+				<p>
+				<notempty name="prompt_text">
+					{$prompt_text}
+				</notempty>
+				</p>
+			</div>
+			<div class="mytable-body ">
+				<div class="f_body  table-responsive">
+					<table class="table text-nowrap table-hover table-striped table-condensed  datatable-basic" id="investLog_content">
+						<thead>
+						<tr>
+
+							<th width="">{:l('OUT_OF_TIME')}</th>
+							<th width="">	<select name="type" id="coinnam-select" style="width:100px;" class="form-control">
+								<option value="">--{:l('COIN')}--</option>
+										<volist name="coin_list" id="vo">
+											<option value="{$vo['name']}">{$vo.title} ({$vo['name']|strtoupper})</option>
+										</volist>
+								 </select></th>
+							<th width="">{:l('RECEIVING_ADDRESS')}</th>
+							<th width="">{:l('OUT_OF_THE_NUMBER_OF')}</th>
+							<th width="">{:l('ROLLOUT_COSTS')}</th>
+							<th width="">{:l('THE_ACTUAL_ARRIVAL')}</th>
+							<th width="">{:l('STATUS')}</th>
+							
+						</tr>
+						</thead>
+						<tbody>
+						
+						
+                        <volist name="list" id="vo">
+						
+                            <tr>
+                                <td>{$vo.addtime|addtime}</td>
+                                <td>{$vo.coinname}</td>
+                                <td><if condition="$vo['username']"><button class="btn btn-info btn-sm" onclick='showtx("{$vo['username']}")'>{$vo.username|msubstr=0,10}</button><else/>--</if></td>
+                                <td>{$vo['num']|NumToStr}</td>
+                                <td>{$vo['fee']|NumToStr}</td>
+                                <td>{$vo['mum']|NumToStr}</td>
+                                <td>
+								<switch name="vo.status">
+									<case value="1">
+                                        <font color="#23a800">{:l('SUCCESS')} 
+										</font>
+										<notempty name="vo.txid">
+								<notempty name="explorer">
+								<a href="{$explorer}{$vo.txid}">[Info]</a>
+								<else/>
+								<if condition="$vo['txid']"><button class="btn btn-info btn-sm" onclick='showtx("{$vo['txid']}")'>Show Txid</button><else/>--</if>
+								</notempty>
+								</notempty>
+									</case>
+									<case value="0">	
+                                        {:l('PROCESSING')}
+                                    </case>
+									<case value="2">
+									Cancelled and Refunded
+									</case>
+								</switch>	
+                                </td>
+								
+                            </tr>
+                        </volist>
+						
+						
+						</tbody>
+					</table>
+					<div class="pages">{$page}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	
+	
+	$("#coinnam-select").val("{$xnb}");
+
+	$("#coinnam-select").change(function () {
+		var coinname = $("#coinnam-select option:selected").val();
+		var url      = '{:U('Finance/coinoutlog')}';
+		if (coinname) {
+			url += '/coin/' + coinname;
+		}
+		window.location = url;
+	});
+
+
+	
+	
+	
+	
+	$('#finance_box').addClass('active');
+	$('.finan_coinout').addClass('active');
+	function showtx(tx){
+	layer.alert(tx, {title: "Withdrawal information",btn: ['Ok']});
+	}
+</script>	
+<include file="Public:footer_minimal"/>

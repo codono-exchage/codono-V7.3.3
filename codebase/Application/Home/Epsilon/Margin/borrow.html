@@ -1,0 +1,1527 @@
+<include file="Public:header" />
+<link rel="stylesheet" href="__PUBLIC__/testmargin/common.css" />
+<script data-n-head="true" src="__PUBLIC__/testmargin/jquery-3.3.1.min.js"></script>
+<style type="text/css">
+:root{
+--green: #1abc9c;
+--yellow: #f1c40f;
+--red: #c0392b;
+--blue: #3498db;
+--grey: #f2f2f2;
+}
+
+.mask {
+  position: relative;
+  overflow: hidden;
+
+  display: block;
+  width: rem(200);
+  height: rem(100);
+  margin: rem(20);
+}
+.semi-circle {
+  position: relative;
+
+  display: block;
+  width: rem(200);
+  height: rem(100);
+
+  background: linear-gradient(to right, var(--red) 0%, var(--yellow) 50%, var(--green) 100%);
+
+  border-radius: 50% 50% 50% 50% / 100% 100% 0% 0% ;
+}
+  .semi-circle::before {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 2;
+
+    display: block;
+    width: rem(140);
+    height: rem(70);
+    margin-left: rem(-70);
+
+    background: #fff;
+
+    border-radius: 50% 50% 50% 50% / 100% 100% 0% 0% ;
+     
+}
+
+.semi-circle--mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: rem(200);
+  height: rem(200);
+
+  background: transparent;
+
+  transform: rotate(120deg) translate3d(0,0,0);
+  transform-origin: center center;
+  backface-visibility: hidden;
+  transition: all .3s ease-in-out;
+}
+  .semi-circle--mask::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0%;
+    z-index: 2;
+
+    display: block;
+    width: rem(202);
+    height: rem(102);
+    margin: -1px 0 0 -1px;
+
+    background: #f2f2f2;
+
+    border-radius: 50% 50% 50% 50% / 100% 100% 0% 0% ;
+  }      
+
+
+.gauge--1 .semi-circle {
+    background: var(--green);
+  
+}
+
+.gauge--2 .semi-circle {
+    background: var(--red);
+  }
+  
+  .gauge--2 .semi-circle--mask {
+    transform: rotate(20deg) translate3d(0,0,0);
+  }
+
+.gauge {
+    width: var(--width);
+    position: relative;
+    background:linear-gradient(to right, var(--red) 0%, var(--yellow) 50%, var(--green) 100%);
+    border-radius: 50%/100% 100% 0 0;
+    overflow: hidden;
+}
+.gauge:before{
+    content: "";
+    display: block;
+    padding-top: 50%;   /* ratio of 2:1*/
+}
+.gauge .chart {
+  overflow: hidden;
+}
+.gauge .mask {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 0;
+  top: 40%;
+  background-color: #fff;
+  border-radius: 50%/100% 100% 0 0;
+}
+
+.gauge .percentage {
+    position:  absolute;
+    top: -1px;
+    left: -1px;
+    bottom: 0;
+    right: -1px;
+    background-color: #010911;
+    transform:rotate(var(--rotation))  translate3d(0,0,0); 
+    
+    transform-origin: bottom center; 
+    transition-duration: 600;
+}
+.gauge:hover {
+  --rotation: 100deg;
+}
+.gauge .value {
+  position:absolute; bottom:0%; left:0;   
+  width:100%; 
+  text-align: center;
+}
+
+.gauge .min {
+  position:absolute; 
+  bottom:0; left:5%;   
+}
+.gauge .max {
+  position:absolute; 
+  bottom:0; right:5%;   
+ }
+
+    /*The percentage of liquidation*/
+    .account-details .grade {
+        margin: 0 4px;
+        width: 170px;
+        height: 30px;
+        border: 1px solid #212340;
+        background-color: #1b1d2f !important;
+    }
+
+    .account-details .grade div {
+        height: 100%;
+        background-color: #313151;
+    }
+
+    .account-details span.level1 {
+        color: #32b28f;
+    }
+
+  
+</style>
+
+
+<div id="__nuxt">
+
+    <div class="page-top-banner">
+        <div class="filter"
+            style="background-image: url('/Public/template/epsilon/img/redesign/slider/filter2-min.png');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-8 mt-3">
+                        <h1>Margin Borrow {$xnb|strtoupper}/{$rmb|strtoupper}</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container p-t-30">
+        <div class="layout-blank">
+            <!--header content-->
+
+            <!--header content   end-->
+            <div class="row lending-page">
+                <div class="col-0" style="display: none;">
+                    <div class="product-list">
+
+                        <div
+                            class="flex-doc flex-direction-row flex-justify-between flex-align-item-start flex-wrap-nowrap">
+                            <div
+                                class="flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap nav cn">
+                                <a class="active">{$rmb|strtoupper}</a>
+                            </div>
+
+                        </div>
+                        <div class="container">
+                            <div class="list-title item-border flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap"
+                                style="padding-left: 16px;">
+                                <h4 class="col-1">CoinName</h4>
+                                <h4 class="col-2">Price</h4>
+                                <h4 class="col-3">Change</h4>
+
+                            </div>
+                            <div class="easy-scrollbar chromeScrollShow" style="max-height: 300px;">
+                                <div style="margin-right: -17px;" class="easy-scrollbar__wrap">
+                                    <div style="position: relative;" class="el-scrollbar__view">
+                                        <div class="wrapper" style="max-height: 300px;">
+                                            <!--<div class="area">-->
+                                            <!--<span></span>main area-->
+                                            <!--</div>-->
+                                            <volist name="base" id="vo">
+                                                <a href="/Margin/borrow/market/{$vo['xnb']}">
+                                                    <div class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap item-border"
+                                                        style="padding: 0px 16px;">
+                                                        <p class="col-1">{$vo['xnb']|strtoupper}</p>
+                                                        <p class="col-2">{$vo['new_price']}</p>
+                                                        <p class="col-3 buy">{$vo['change']}%</p>
+                                                        <!-- <p><a class="col-4"></a></p> -->
+                                                    </div>
+                                                </a>
+                                            </volist>
+                                            <!---->
+                                            <!---->
+                                        </div>
+                                        <div class="resize-triggers">
+                                            <div class="expand-trigger">
+                                                <div style="width: 361px; height: 186px;"></div>
+                                            </div>
+                                            <div class="contract-trigger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="esay-scrollbar__bar is-vertical"
+                                    style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                    <div class="easy-scrollbar__thumb"
+                                        style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;">
+                                    </div>
+                                </div>
+                            </div>
+                            <!---->
+                        </div>
+                    </div>
+                </div>
+                	<!-- Coin List Start -->
+					<div class="col-md-3 col-lg-3 col-xl-2">
+						<div class="coin-list">
+							<h5 class="card-title">Market</h5>
+							<div class="form-group">
+								<input type="text" class="form-control" id="searchCoin" onkeyup="filterCoin()" placeholder="Search Market">
+								<span class="input-inner-right"><i class="fa fa-search"></i></span>
+							</div>
+
+							<ul id="coinList">
+								<volist name="base" id="vo">
+								<li
+                                <if condition="$vo.name eq $market">class="active"</if>><a href="/Margin/borrow/market/{$vo['name']}"><img alt="" src="__UPLOAD__/coin/{$vo.xnbimg}"><span>{$vo['xnb']|strtoupper}/{$vo['rmb']|strtoupper}</span></a></li>
+                            </volist>
+							</ul>
+						</div>
+					</div>
+					<!-- Coin List End -->
+
+                <div class="col-md-9 col-lg-9 col-xl-10">
+                    <div class="card">
+                        <div class=" detail-panel">
+                            <div class="row justify-content-between">
+                                
+                                <div class="col-auto">
+                                    <div class="text-secondary-color">Available {$xnb |strtoupper}:
+                                        <span class="m-l-5 m-r-5 f-w-500 text-color">    <gt name="ky_coin.yue" value="0">
+                                            {$ky_coin.yue|NumToStr} {$xnb|strtoupper}
+                                            <else />
+                                            --
+                                        </gt>
+                                    </span>
+                                    <button type="button" class="btn theme-bg btn-sm" data-toggle="modal" data-target="#xnb-transfer">
+                                        Transfer {$xnb|strtoupper}
+                                      </button>
+                                    </div>
+                                    <div class="text-secondary-color m-t-10">Available {$rmb |strtoupper}:
+                                        <span class="m-l-5 m-r-5 f-w-500 text-color">
+                                            <gt name="ky_coin.p_yue" value="0">
+                                                {$ky_coin.p_yue|NumToStr} {$rmb|strtoupper}
+                                            <else />--</gt>
+                                    </span>
+                                    <button type="button" class="btn theme-bg btn-sm" data-toggle="modal" data-target="#rmb-transfer">
+                                        Transfer {$rmb|strtoupper}
+                                      </button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-auto">
+                                    <div class="text-secondary-color m-t-10">Borrowed {$xnb|strtoupper}:
+                                        
+                                        <span class="m-l-5 m-r-5 f-w-500 text-color">
+                                            <gt name="ky_coin.borrow" value="0">
+                                            {$ky_coin.borrow|NumToStr} {$xnb|strtoupper}
+                                            <else />--</gt>
+                                    </span> 
+                                    </div>
+                                    <div class="text-secondary-color m-t-10">Borrowed {$rmb|strtoupper}:
+                                        
+                                        <span class="m-l-5 m-r-5 f-w-500 text-color">
+                                            <gt name="ky_coin.p_borrow" value="0">
+                                            {$ky_coin.p_borrow|NumToStr} {$rmb|strtoupper}
+                                            <else />--</gt>
+                                    </span> 
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="text-secondary-color m-t-10">
+                                    <span class="popover-btn"><span data-toggle="popover" data-trigger="hover" 
+                                        data-placement="top" data-content="Risk Rate = （Total assets-Total Interest）／Total Borrowing">
+                                        Risk Rate:</span></span><span class="m-l-10 f-s-24 f-w-600 green riskrate">0%</span><span>
+                                            
+                                     <span class="m-l-5 m-r-5 f-w-500 text-color">Liquidation price ({$rmb|strtoupper}): </span>     
+                                    </div>  
+                                            <a href="#repayModal" data-toggle="modal" data-target="#repayModal" role="button" class="btn btn-2 f-s-14 p-5 m-l-15">Repay</a></span>
+                                </div>
+                                <div class="col-auto">
+
+                                    <div class="gauge" style="--width: 180px; --rotation:2deg;">
+                                        <div class="percentage"></div>
+
+                                        <div class="mask"></div>
+                                        <span class="value" id="risk-percent">100%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Lend Form Start -->
+                    <div class="account margin show">
+
+                        <div class="row">
+                            <div class="col-3">
+                                <span style="white-space: nowrap;">Liquidation price ({$rmb|strtoupper})</p>
+                                    <div>--</div>
+                            </div>
+                            <div class="col-9">
+                                
+                                <div class="account-details">
+                                    <span class="level1"></span>
+                                    <div class="limit" id="limit"></div>
+                                    <div class="grade">
+                                        <div style=""></div>
+                                    </div>
+                                    <div class="currentNum"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    <div class="row">
+                        <div class="col-md-6  col-sm-12">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title">Borrow<span class="m-l-5">{$xnb|strtoupper}</span></h5>
+                                        </div>
+                                        <div class="col-auto">
+                                            <span class="btn btn-link" data-toggle="popover" title="Borrow Limit" data-content="Can Borrow = Own Assets*（Leverage-1）-Borrowed amount">Info</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <label for="borrow_num">Amount</label>
+                                        <span class="pull-right">{:l('Interest Rate')}:<span class="m-l-5 green">{$ky_coin['lever_interest']|NumToStr}</span>%</span>
+                                        <input type="text" class="form-control" placeholder="0.00"  id="borrow_num" required>
+                                        <div class="input-inner-right f-s-12">Available Borrowing: <span class="green"><gt name="ky_coin.q_lend" value="0">{$ky_coin.q_lend|NumToStr}<else />--</gt> {$xnb|strtoupper}</span></div>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <span class="text-muted text-small">
+                                            {:l('Available')}: <strong><span class="green">  
+                                                <gt name="ky_coin.borrow" value="0">{$ky_coin.borrow|NumToStr}<else />--</gt></span> {$xnb|strtoupper}</strong>
+                                            </span>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer"><button onclick="quote_borrow();" class="btn btn-block theme-bg bold">{:l('Borrow')} {$xnb|strtoupper}</button></div>
+                            </div>
+                        </div>
+                        <div class=" col-md-6 col-sm-12">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title">Borrow<span class="m-l-5">{$rmb|strtoupper}</span></h5>
+                                        </div>
+                                        <div class="col-auto">
+                                            <span class="btn btn-link" data-toggle="popover" title="Borrow Limit" data-content="Can Borrow = Own Assets*（Leverage-1）-Borrowed amount">Info</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <label for="coin">Amount</label>
+                                        <span class="pull-right">{:l('Interest Rate')}:<span class="m-l-5 green">{$ky_coin['lever_interest']|NumToStr}</span>%</span>
+                                        <input type="text" class="form-control" placeholder="0.00"  id="base_borrow" required>
+                                        <div class="input-inner-right f-s-12">Available Borrowing: <span class="green"><gt name="ky_coin.r_lend" value="0">{$ky_coin.r_lend|NumToStr}<else />0</gt>  {$rmb|strtoupper}</span></div>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <span class="text-muted">
+                                            {:l('Available')}: <strong><span class="green text-small">  
+                                                <gt name="ky_coin.p_borrow" value="0">{$ky_coin.p_borrow|NumToStr}<else />--</gt></span>{$rmb|strtoupper}</strong>
+                                            </span>
+                                    </div>
+                              
+                                    
+                                </div>
+                                <div class="card-footer"><button onclick="base_borrow();" class="btn btn-block theme-bg bold">{:l('Borrow')} {$rmb|strtoupper}</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <div class="my-current-entrust margin container ">
+                        <div class="card p-10">
+                            <div class="row">
+                                <div class="col">
+                                    <ul id="list-tabs" class="nav nav-pills" role="tablist">
+                                        <li class="nav-item">
+                                            <a aria-selected="true" class="nav-link active" data-toggle="pill" href="#"
+                                                data-target="#unrepaid" role="tab">
+                                                <span>{:l('Positions')}</span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a aria-selected="true" class="nav-link " data-toggle="pill" href="#"
+                                                data-target="#repaid" role="tab">
+                                                <span>{:l('History')}</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="custom-control custom-checkbox m-b-15">
+                                        <a class="cancel-all" style="display:none;">{:l('cancel-all-entrust')}</a>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                     <div class="tab-content">
+                                    <!--Current borrowing-->
+                                    <div class="tab-pane fade show active" role="tabpanel" id="unrepaid">
+
+                                        <div class="table-responsive">
+
+                                            <table class="table list-table m-t-15 table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th><span class="type1">{:l('Borrowing time')}</span></th>
+                                                        <th><span class="type1">{:l('Loan Order Number')}</span></th>
+                                                        <th><span class="type1">{:l('Currency')}</span></th>
+                                                        <th><span class="type1">{:l('Quantity')}</span></th>
+                                                        <th><span class="type2">{:l('Interest Rate')} (%)</span></th>
+                                                        <th><span class="type1">{:l('Interest')}</span></th>
+                                                        <th><span class="type2">{:l('Unreturned Quantity')}</span></th>
+                                                        <th><span class="type2">{:l('Operation')}</span></th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <notempty name="info1" value="">
+                                                        <volist name="info1" id="v">
+                                                            <tr>
+                                                                <td><span>{$v['addtime']|addtime}</span></td>
+                                                                <td><span>{$v['b_order']}</span></td>
+                                                                <td><span>{$v['currency']|strtoupper}</span></td>
+                                                                <td><span>{$v['borrow']|NumToStr}</span></td>
+                                                                <td><span>{$v['interest_fee']|NumToStr}</span></td>
+                                                                <td><span>{$v['interest']|NumToStr}</span></td>
+                                                                <td><span>{$v['borrow']|NumToStr}</span></td>
+
+                                                                <td>
+                                                                  
+                                                                    <span><span
+                                                                            class="repay-single btn theme-bg btn-sm"
+                                                                            onclick="repay2('{$v.b_order}');">Repayment</span></span></td>
+                                                            </tr>
+                                                        </volist>
+                                                        <else />
+                                                        <div class="no-list">
+                                                            <p class="ws-tabp">No data yet</p>
+                                                        </div>
+                                                    </notempty>
+                                                </tbody>
+                                            </table>
+
+
+                                            <!---->
+                                        </div>
+
+                                        <!---->
+                                    </div>
+                                    <!--history record-->
+                                    <div class="tab-pane fade" role="tabpanel" id="repaid">
+
+                                        <div class="table-responsive">
+                                            <table class="table list-table m-t-15 table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th><span class="type1">{:l('borrowing time')}</span></th>
+                                                        <th><span class="type1">{:l('Loan Order Number')}</span></th>
+                                                        <th><span class="type1">{:l('coin-name')}</span></th>
+                                                        <th><span class="type1">{:l('number')}</span></th>
+                                                        <th><span class="type2">{:l('rate')} (%)</span></th>
+                                                        <th><span class="type1">{:l('interest')}</span></th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <notempty name="info2" value="">
+                                                        <volist name="info2" id="vo">
+                                                            <tr>
+                                                                <td><span>{$vo['addtime']|addtime}</span></td>
+                                                                <td><span>{$vo['r_order']}</span></td>
+                                                                <td><span>{$vo['currency']|strtoupper}</span></td>
+                                                                <td><span>{$vo['repayment']}</span></td>
+                                                                <td><span>{$vo['interest_fee']}</span></td>
+                                                                <td><span>{$vo['interest']}</span></td>
+                                                            </tr>
+                                                        </volist>
+                                                        <else />
+                                                        <div class="no-list">
+                                                            <p class="ws-tabp">No data yet</p>
+                                                        </div>
+                                                    </notempty>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                            
+                        <!-- Static Modal START-->	
+<div class="modal fade" id="xnb-transfer" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{$xnb|strtoupper} Transfer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body ">
+            <div class="transfer-form-wrapper">
+                <div class="transfer-from-to">
+                    <div class="from-to-inputs">
+                        <div>
+                            <label>From where:</label>
+                            <div class="fromInput">
+                                <span id="from" class="bootstrap-input form-control">Spot Wallet</span> 
+                            </div>
+
+                        </div>
+                        <img src="__EPSILON__/img/transfer-arrow.svg">
+                        <div>
+                            <label>To where:</label>
+                            <div class="toInput">
+                                <span id="to" class="bootstrap-input form-control">Margin Wallet</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="coin">Coin</label>
+                        <span id="cpin" class="bootstrap-input form-control" >{$xnb|strtoupper}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="coin">Amount</label>
+                        <div class="amount form-control">
+                            <input type="text" class="form-control" placeholder="0.00"  id="infonum" required>
+                            <div class="balance">Available balance:<span class="current_balance quanbu2" id="quote_bal">{$spot_balance.xnb|NumToStr}</span> {$xnb|strtoupper}</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id ="quote_range" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button submit" class="btn-2 w-100" onclick="transfer_quote()">Transfer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  Static Modal END -->
+                          <!-- Static Modal START-->	
+<div class="modal fade" id="rmb-transfer" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{$rmb|strtoupper} Transfer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body ">
+            <div class="transfer-form-wrapper">
+                <div class="transfer-from-to">
+                    <div class="from-to-inputs">
+                        <div>
+                            <label>From where:</label>
+                            <div class="fromInput">
+                                <span id="from" class="bootstrap-input form-control">Spot Wallet</span> 
+                            </div>
+
+                        </div>
+                        <img src="__EPSILON__/img/transfer-arrow.svg">
+                        <div>
+                            <label>To where:</label>
+                            <div class="toInput">
+                                <span id="to" class="bootstrap-input form-control">Margin Wallet</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="coin">Coin</label>
+                        <span id="cpin" class="bootstrap-input form-control" >{$rmb|strtoupper}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="coin">Amount</label>
+                        <div class="amount form-control">
+                            <input type="text" class="form-control" placeholder="0.00"  id="turnnum" required>
+                            <div class="balance">Available balance:<span class="current_balance quanbu2" id="base_bal">{$spot_balance['rmb']|NumToStr}</span>  {$rmb|strtoupper}</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="base_range"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button submit" class="btn-2 w-100" onclick="transfer_base()">Transfer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  Static Modal END -->
+                        <div class="popup popup1 flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap"
+                            style="display: none;">
+                            <div class="popup-box">
+                                <div
+                                    class="header flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                    <h3>{$xnb|strtoupper} Transfer In</h3>
+                                    <a></a>
+                                </div>
+                                <div class="transfer-accounts">
+                                    <div
+                                        class="item flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">From</p>
+                                        <div tabindex="0" class="loan-select" style="width: 360px;">
+                                            <div class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap"
+                                                style="cursor: pointer;">
+                                                <p class="inAccount">Spot Account</p>
+                                            </div>
+                                        </div>
+                                        <!---->
+                                        <div tabindex="0" class="loan-select loan-select2"
+                                            style="width: 360px; margin-left: 12px;display: none;">
+                                            <div class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap"
+                                                style="cursor: pointer;">
+                                                <!-- <p >ETH/UCC</p> -->
+                                                <span class="">{$xnb|strtoupper}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!---->
+                                    <p class="error error11" style="display: none;">Transfer account and Transfer to
+                                        account cannot be the same</p>
+                                    <div
+                                        class="item flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">Goto</p>
+                                        <div tabindex="0" class="loan-select" style="width: 360px;">
+                                            <div class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap"
+                                                style="cursor: initial;">
+                                                <p class="outAccount">Margin Account</p>
+                                                <!---->
+                                            </div>
+                                            <div class="options easy-scrollbar chromeScrollShow"
+                                                style="max-height: 180px;display: none;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div class="wrapper" style="max-height: 180px;">
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 175px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical"
+                                                    style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb"
+                                                        style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div tabindex="0" class="loan-select" style="width: 360px; margin-left: 12px;">
+                                            <div class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap"
+                                                style="cursor: initial;">
+                                                <p>{$xnb|strtoupper}</p>
+                                                <!---->
+                                            </div>
+                                            <div class="options easy-scrollbar chromeScrollShow"
+                                                style="max-height: 180px;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div class="wrapper" style="max-height: 180px;">
+
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 175px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical"
+                                                    style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb"
+                                                        style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!---->
+                                    <div
+                                        class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">Transfer Amount</p>
+                                      
+                                        <p class="transfer-all quanbu2">All Transfers</p>
+                                    </div>
+                                    <p>{$spot_balance|trace}</p>
+                                    <p class="tip1">{:l('turn-maximum')} <span
+                                            class="trun_num1">{$spot_balance['xnb']}</span> {$xnb|strtoupper}</p>
+                                    <input type="submit" value="Transfer1" onclick="transfer_quote()" />
+                                    <p class="tip2">There is no handling fee for internal transfers</p>
+                                    <!---->
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $(".quanbu2").click(function () {
+                                var num = $('.trun_num1').text();
+                                $("#infonum").val(num);
+                            });
+                        </script>
+
+
+                        <!--Go to popup-->
+                        <div class="popup popup11 flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap"
+                            style="display: none;">
+                            <div class="popup-box">
+                                <div
+                                    class="header flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                    <h3>{$rmb|strtoupper} Transfer In</h3>
+                                    <a></a>
+                                </div>
+                                <div class="transfer-accounts">
+                                    <div
+                                        class="item flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">From</p>
+                                        <div tabindex="0" class="loan-select" style="width: 360px;">
+                                            <div class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap"
+                                                style="cursor: pointer;">
+                                                <p class="inAccount">Spot Account</p>
+
+                                            </div>
+                                            <div class="options easy-scrollbar chromeScrollShow"
+                                                style="max-height: 180px;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div class="wrapper" style="max-height: 180px;">
+                                                            <ul style="display: none;">
+
+                                                            </ul>
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 361px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical"
+                                                    style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb"
+                                                        style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!---->
+                                        <div tabindex="0" class="loan-select loan-select2"
+                                            style="width: 360px; margin-left: 12px;display: none;">
+                                            <div class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap"
+                                                style="cursor: pointer;">
+                                                <p>{$rmb|strtoupper}</p>
+                                                <span class=""></span>
+                                            </div>
+                                            <div class="options easy-scrollbar chromeScrollShow"
+                                                style="max-height: 180px;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div class="wrapper" style="max-height: 180px;">
+
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 175px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical"
+                                                    style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb"
+                                                        style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!---->
+                                    <p class="error error11" style="display: none;">Transfer account and Transfer to
+                                        account cannot be the same</p>
+                                    <div
+                                        class="item flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">Goto</p>
+                                        <div tabindex="0" class="loan-select" style="width: 360px;">
+                                            <div class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap"
+                                                style="cursor: initial;">
+                                                <p class="outAccount">Margin Account</p>
+                                                <!---->
+                                            </div>
+                                            <div class="options easy-scrollbar chromeScrollShow"
+                                                style="max-height: 180px;display: none;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div class="wrapper" style="max-height: 180px;">
+                                                            <ul style="display: none;">
+                                                                <li class="transfer-option">Currency Account</li>
+                                                                <li class="transfer-option">Margin Account</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 175px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical"
+                                                    style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb"
+                                                        style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div tabindex="0" class="loan-select" style="width: 360px; margin-left: 12px;">
+                                            <div class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap"
+                                                style="cursor: initial;">
+                                                <p>{$rmb|strtoupper}</p>
+                                                <!---->
+                                            </div>
+                                            <div class="options easy-scrollbar chromeScrollShow"
+                                                style="max-height: 180px;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div class="wrapper" style="max-height: 180px;">
+                                                            <ul style="display: none;">
+
+                                                            </ul>
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 175px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical"
+                                                    style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb"
+                                                        style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!---->
+                                    <div
+                                        class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">Transfer Amount</p>
+                                        <input type="number" placeholder="Please enter the transfer amount"
+                                            id="turnnum" />
+                                        <p class="transfer-all quanbu">All Transfers</p>
+                                    </div>
+
+                                    <p class="tip1">Maximum <span class="trun_num">{$spot_balance['rmb']}</span> {$rmb}
+                                    </p>
+                                    <button class="btn theme-bg" onclick="transfer_base();">Transfer </button>
+                                    <p class="tip2">There is no handling fee for internal transfers</p>
+                                    <!---->
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <script type="text/javascript">
+                        $(".quanbu").click(function () {
+                            var num = $('.trun_num').text();
+                            $("#turnnum").val(num);
+                        });
+                        /*Click "Transfer" and a pop-up box will appear*/
+                        $(".turnIn-one").click(function () {
+                            $(".popup1").show();
+                        });
+                        $(".turnIn-two").click(function () {
+                            $(".popup11").show();
+                        });
+                        //quote transfer in
+                        function transfer_quote() {
+                            var infonum = $('#infonum').val();
+                            var market = "{$market}";
+                            var coin = "{$xnb}";
+
+                            if (infonum == '' || infonum == null) {
+                                layer.msg("Please enter the transfer amount", { icon: 2 }); return false;
+                            }
+                            $.ajax({
+                                url: '/Margin/transer_quote',
+                                type: "POST",
+                                dataType: "json",
+                                data: { infonum: infonum, market: market, coin: coin },
+                                success: function (res) {
+                                    if (res.status == 1) {
+                                        $("#xnb-transfer").modal('hide');
+                                        layer.msg(res.info, { icon: 1 });
+                                        window.location.reload();
+
+                                    } else {
+                                        layer.msg(res.info, { icon: 2 });
+                                    }
+                                }
+                            });
+                        }
+                        function transfer_base() {
+
+                            var amount = $('#turnnum').val();
+                            var market = "{$market}";
+                            var coin = "{$rmb}";
+
+                            if (amount == '' || amount == null || amount == 0) {
+                                layer.msg("Please enter the transfer amount", { icon: 2 }); return false;
+                            }
+                            $.ajax({
+                                url: '/Margin/transfer_base',
+                                type: "POST",
+                                dataType: "json",
+                                data: { amount: amount, market: market, coin: coin },
+                                success: function (res) {
+                                    if (res.status == 1) {
+                                        $("#rmb-transfer").modal('hide');
+                                        layer.msg(res.info, { icon: 1 });
+                                        window.location.reload();
+                                    } else {
+                                        layer.msg(res.info, { icon: 2 });
+                                    }
+                                }
+                            });
+                        }
+                    </script>
+                    <!--Repayment pop-up window-->
+                    <div class="popup popup2 flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap"
+                        style="display: none;">
+                        <div class="popup-box">
+                            <div
+                                class="header flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                <h3 class="res1"></h3>
+                                <a></a>
+                            </div>
+                            <div class="repayment">
+                                <div class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap"
+                                    id="order">
+                                    <p class="label">{:l('Loan Order Number')}</p>
+                                    <p class="res2"></p>
+                                </div>
+                                <div
+                                    class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <p class="label">{:l('Payable Total')}</p>
+                                    <p class="res3"></p>
+                                </div>
+                                <div
+                                    class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <div
+                                        class="inner flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">{:l('borrowing')}</p>
+                                        <p class="res4"></p>
+                                    </div>
+                                    <div
+                                        class="inner flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">{:l('interest')}</p>
+                                        <p class="res5"></p>
+                                    </div>
+                                </div>
+                                <div class="item flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap"
+                                    style="margin-right: 84px;">
+                                    <button type="button" onclick="cancel_repay();">{:l('Cancel')}</button>
+                                    <button type="button" onclick="repayment();">{:l('Confirm')}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+            <input type="hidden" name="" value="{$market}" id="coin_type">
+
+        </div>
+    </div>
+</div>
+<!-- Transfer modal start -->
+<div class="modal fade" id="repayModal" tabindex="-1" role="dialog" aria-labelledby="Repay" aria-hidden="true">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header  d-flex align-items-center">
+				<h5 class="modal-title" id="exampleModalLabel">
+					<div class="coin-title d-flex align-items-center">
+						<div class="title">
+							Repay
+						</div>
+					</div>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				
+					<div class="col-12 form-group m-t-15">
+						<label for="repay_amount">Repay Amount</label> 
+                        <span class="pull-right">Interest:<span class="m-l-5 green text-small" id="repay_interest">0</span></span>
+						<input id="repay_amount" class="bootstrap-input form-control" value="" disabled>
+                        <div class="input-inner-right f-s-12" id="repay_coin"></div>
+					</div>
+					<div class="col-12 form-group">
+						<label for="repay_order_id">OrderID</span>
+						<input type="text" class="bootstrap-input form-control" value="" id="repay_order_id" disabled>
+						
+					</div>
+		
+					<div class="col-12 form-group">
+                        <button type="button" class="btn btn-2 btn-block" onclick="repayment();">{:l('Confirm Repayment')}</button>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Transfer modal end -->
+
+
+<script src="__PUBLIC__/layer/layer.js"></script>
+
+<script>
+      $( document ).ready(function() {
+      	 $("#quote_range").ionRangeSlider({
+
+step: 1,
+min:0,
+max:100,
+from: 100,
+grid:true,
+skin:"round",
+onChange: function (data) {
+    
+    var percent=data.from;
+    var avail=$("#quote_bal").html();
+    var calc_quote=(avail*percent)/100;
+    console.log(1106,percent,avail,calc_quote);
+    $("#infonum").val((parseFloat(calc_quote).toFixed(8)));
+}
+});
+$("#base_range").ionRangeSlider({
+
+step: 1,
+min:0,
+max:100,
+from: 100,
+grid:true,
+skin:"round",
+onChange: function (data) {
+    var percent=data.from;
+    var avail=$("#base_bal").html();
+    var calc_buy=(avail*percent)/100;
+    $("#turnnum").val(calc_buy.toString());
+
+}
+});
+      });
+    /*current page*/
+    $(".nav .item:nth-child(2)").find("a").addClass("active");
+
+    /*Disable mouse scrolling*/
+    $("input").bind('mousewheel', function (event, delta) { return false; });
+</script>
+
+<script type="text/javascript">
+    function quote_borrow() {
+        let q_lend = {$ky_coin['q_lend']?: 0};
+        var borrow_num = $('#borrow_num').val();
+        var coin_type = $('#coin_type').val();
+        var market = "{$market}";
+        if (borrow_num == "" || borrow_num == 'NULL') {
+            layer.msg("The loan amount cannot be empty", { icon: 2 });
+            return false;
+        }
+
+        if (borrow_num < 0) {
+            layer.msg('Lend amount format error', { icon: 2 });
+            return false;
+        }
+
+        if (borrow_num > q_lend) {
+            layer.msg('The borrowing amount must be less than or equal to the borrowing amount'+q_lend, { icon: 2 });
+            return false;
+        }
+
+        $.ajax({
+            url: "/Margin/quote_borrow",
+            data: { borrow_num: borrow_num, coin_type: coin_type, market: market },
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == 1) {
+                    layer.msg(data.info, { icon: 1 });
+                    window.location.reload();
+                } else {
+                    layer.msg(data.info, { icon: 2 });
+                }
+            }
+        });
+    }
+
+    function base_borrow() {
+        let r_lend = {$ky_coin['r_lend']?: 0};
+        var base_borrow = $('#base_borrow').val();
+     
+        var market = "{$market}";
+        if (base_borrow == "" || base_borrow == 'NULL') {
+            layer.msg("Loan amount cannot be empty", { icon: 2 });
+            return false;
+        }
+
+        if (base_borrow < 0) {
+            layer.msg("{:l('lend-formatError')}", { icon: 2 });
+            return false;
+        }
+
+        if (base_borrow > r_lend) {
+            layer.msg("Number of loans must be no greater than Available quantity", { icon: 2 });
+            return false;
+        }
+
+        $.ajax({
+            url: "/Margin/base_borrow",
+            data: { borrow_num: base_borrow, market: market },
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == 1) {
+                    layer.msg(data.info, { icon: 1 });
+                    window.location.reload();
+                } else {
+                    layer.msg(data.info, { icon: 2 });
+                }
+            }
+        });
+    }
+    function cancel_repay() {
+        $(".popup2").hide();
+    }
+    function repay2(b_order) {
+        // alert(b_order);
+        $.ajax({
+
+            url: '/Margin/repay_info',
+            data: { b_order: b_order },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 200) {
+                    $("#repayModal").modal('show');
+                    $("#repay_amount").val(data['res']['yh'] );
+                    $("#repay_coin").html( data['res']['currency'].toUpperCase());
+                    $("#repay_order_id").val(data['res']['b_order']);
+                    $("#repay_interest").html(data['res']['interest'] +' '+ data['res']['currency'].toUpperCase());
+                }
+            }
+        });
+    }
+
+
+    //repayment information
+    function repay(b_order) {
+        // alert(b_order);
+        $.ajax({
+
+            url: '/Margin/repay_info',
+            data: { b_order: b_order },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.code == 200) {
+                    $(".popup2").show();
+
+                    $(".res1").html(data['res']['currency'].toUpperCase() + "Repayment");
+                    $(".res2").html(data['res']['b_order']);
+                    $(".res3").html(data['res']['yh'] + data['res']['currency'].toUpperCase());
+                    $(".res4").html(data['res']['borrow'] + data['res']['currency'].toUpperCase());
+                    $(".res5").html(data['res']['interest'] + data['res']['currency'].toUpperCase());
+                    $(".res6").html(data['res']['currency']);
+                }
+            }
+        });
+    }
+
+    //repayment
+    function repayment() {
+        var order = $("#repay_order_id").val();
+        var market = "{$market}"
+        var coin_type = $('#coin_type').val();
+        //alert(order);
+        $.ajax({
+            url: "/Margin/repayment",
+            data: { order: order, coin_type: coin_type },
+            type: "post",
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == 1) {
+                    layer.msg(data.info, { icon: 1 });
+                    window.location.reload();
+                } else {
+                    layer.msg(data.info, { icon: 2 });
+                }
+            }
+        });
+    }
+
+
+    /*Current loan and history switching effect*/
+    $(".dataChange li a").click(function () {
+        console.log(1749, $(this).in);
+        $(".dataChange li a").removeClass("active");
+        $(this).addClass("active");
+        if ($(this).index() == 0) {
+            $(".my-current-loan").show();
+            $(".my-history-loan").hide();
+        } else {
+            $(".my-current-loan").hide();
+            $(".my-history-loan").show();
+        }
+    });
+
+</script>
+<script>
+
+    function showWidth() {
+        /*Display the ratio of loans according to the number of loans*/
+        var htmlHref = window.location.href;
+        htmlHref = htmlHref.replace(/^http:\/\/[^/]+/, "");
+        var addr = htmlHref.substr(htmlHref.lastIndexOf('/', htmlHref.lastIndexOf('/') - 1) + 1);
+        var index = addr.lastIndexOf("\/");
+        //js Get the content after the last slash in the string == the current currency
+        var coinType = "{$market}";
+
+        $.ajax({
+            url: "/Margin/ajax_fx",
+            data: { market: coinType },
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 200) {
+
+                    $(".limit").html(data['result']['lever_risk_rate'] + "%");
+                    $(".riskrate").html(data['result']['lever_risk_rate'] + "%");
+                    $(".currentNum").html(data['result']['fxl'] + "%");
+                    var downNumber = 200 - parseFloat(data['result']['lever_risk_rate']);//200-110
+                    var current = parseFloat(data['result']['current']);//current -100
+                    var tWidth = parseFloat($(".grade").css("width"));//overall width bar
+                        
+
+                    var showWidth = current / downNumber * tWidth;
+                    if (showWidth >= 170) {
+                        $(".grade div").css("width", "170px")
+                    } else if (0 < showWidth < 170) {
+                        $(".grade div").css("width", showWidth + "px");
+                    } if (showWidth <= 0) {
+                        $(".grade div").css("width", "0px");
+                    }
+                    if (parseFloat($(".currentNum").html()) > 120) {
+                        $(".level1").css("color", "#32b28f").html("{:l('Safe')}");
+                    } else {
+                        $(".level1").css("color", "red").html("{:l('Alerts')}");
+                    }
+                } else {
+                    // layer.msg(data.info, {icon: 2});
+                }
+            },
+            // error: function (data) {
+            //     console.log("000")
+            // }
+        });
+        setTimeout(function () {
+            showWidth();
+        }, 1000)
+    }
+    showWidth();
+
+    /*Displays the format of the entered number*/
+    var vue = parseFloat($(".canBorrow").html());
+    if ((/^(\+|-)?\d+$/.test(vue)) && vue > 0) {
+        var l = vue.toString().length;
+    } else {
+        if (vue.toString().split(".")[1]) {
+            var l = vue.toString().split(".")[1].length;
+        }
+    }
+
+    /*Enter the borrowing amount to display the ratio of borrowable and borrowed*/
+    $("#borrow_num").keyup(function () {
+        clearNoNum($(this));
+        $(this).closest(".borrow ").next(".error").remove();
+        var current = parseFloat($(this).val());
+        if (current.toString().indexOf(".") > 0) {
+            var vue1 = current.toString().split(".")[1];
+            var vue0 = current.toString().split(".")[0];
+            current = vue1.substring(0, l);
+            $(this).val(vue0 + "." + current);
+        }
+
+        var current = parseFloat($(this).val());
+        var down = parseFloat($(".canBorrow").html());
+        var chartWidth = parseFloat($(".area1").css("width"));//total progress bar width
+        var curChart = parseFloat(current / down * chartWidth);
+        var showChar = (curChart / chartWidth * 100).toFixed(2);
+        if (current >= down) {
+            $(".area1 .progress").css("width", "565px");//line account
+            $(".area1 .st-slider-button").css("left", "565px");//Origin position
+            $(".area1").next("div").find("p:last-child").html("100%");//line showing percentage
+            $(".area1").find(".percent0,.percent25,.percent50,.percent75,.end").css("background", "#0976d9");//origin color
+        } else if (current < down) {
+            $(".area1 .progress").css("width", curChart + "px");
+            $(".area1 .st-slider-button").css("left", curChart + "px");
+            $(".area1").next("div").find("p:last-child").html(showChar + "%");
+            if (curChart >= chartWidth) {
+                $(".area1").find(".percent0,.percent25,.percent50,.percent75,.end").css("background", "#0976d9");
+            } else if (curChart >= 489) {
+                $(".area1").find(".percent0,.percent25,.percent50,.percent75").css("background", "#0976d9");
+                $(".area1").find(".end").css("background-color", "rgb(102, 107, 147)");
+            } else if (curChart >= 326) {
+                $(".area1").find(".percent0,.percent25,.percent50").css("background", "#0976d9");
+                $(".area1").find(".end,.percent75").css("background-color", "rgb(102, 107, 147)");
+            } else if (curChart >= 163) {
+                $(".area1").find(".percent0,.percent25").css("background", "#0976d9");
+                $(".area1").find(".end,.percent75,.percent50").css("background-color", "rgb(102, 107, 147)");
+            } else {
+                $(".area1").find(".percent0").css("background", "#0976d9");
+                $(".area1").find(".end,.percent75,.percent50,.percent25").css("background-color", "rgb(102, 107, 147)");
+            }
+        } else {
+            $(".area1 .progress").css("width", 0);
+            $(".area1 .st-slider-button").css("left", 0);
+            $(".area1").next("div").find("p:last-child").html("0%");
+            $(".area1").find(".percent0,.percent25,.percent50,.percent75,.end").css("background-color", "rgb(102, 107, 147)");
+        }
+
+    });
+    if (parseInt($("#borrow_num").val()) == 0) {
+        // $("#borrow_num").val("0")
+        console.log(11)
+    }
+
+    // lose focus
+    $("#borrow_num").blur(function () {
+        if ($(this).val() == '' || $(this).val() == '0') {
+            if ($(this).closest(".borrow ").next(".error").length <= 0) {
+                $(this).closest(".borrow ").after("<p class='error'>{:l('correct-number')}</p>");
+            } else {
+                $(this).closest(".borrow ").next(".error").remove();
+            }
+
+        }
+    });
+
+
+    /*Displays the format of the entered number*/
+    var vue = parseFloat(<gt name="ky_coin.r_lend" value="0">{$ky_coin.r_lend}<else/>'0.00'</gt>);
+    if ((/^(\+|-)?\d+$/.test(vue)) && vue > 0) {
+        var s = vue.toString().length;
+    } else {
+        var s = vue.toString().split(".")[1].length;
+    }
+    /*Base Borrowing*/
+    $("#base_borrow").keyup(function () {
+        clearNoNum($(this));
+        console.log($(this).val())
+        $(this).closest(".borrow ").next(".error").remove();
+        var current = parseFloat($(this).val());
+
+        if (current.toString().indexOf(".") > 0) {
+            var vue1 = current.toString().split(".")[1];
+            var vue0 = current.toString().split(".")[0];
+            current = vue1.substring(0, s);
+            $(this).val(vue0 + "." + current);
+        }
+        var current = parseFloat($(this).val());
+        var down = parseFloat($("#borTotal").html());
+        var chartWidth = parseFloat($(".area2").css("width"));//total progress bar width
+        var curChart = parseFloat(current / down * chartWidth);
+        var showChar = (curChart / chartWidth * 100).toFixed(2);
+        if (current >= down) {
+            $(".area2 .progress").css("width", "565px");//line account
+            $(".area2 .st-slider-button").css("left", "565px");//Origin position
+            $(".area2").next("div").find("p:last-child").html("100%");//line showing percentage
+            $(".area2").find(".percent0,.percent25,.percent50,.percent75,.end").css("background", "#0976d9");//origin color
+        } else if (current < down) {
+            $(".area2 .progress").css("width", curChart + "px");
+            $(".area2 .st-slider-button").css("left", curChart + "px");
+            $(".area2").next("div").find("p:last-child").html(showChar + "%");
+            if (curChart >= chartWidth) {
+                $(".area2").find(".percent0,.percent25,.percent50,.percent75,.end").css("background", "#0976d9");
+            } else if (curChart >= 489) {
+                $(".area2").find(".percent0,.percent25,.percent50,.percent75").css("background", "#0976d9");
+                $(".area2").find(".end").css("background-color", "rgb(102, 107, 147)");
+            } else if (curChart >= 326) {
+                $(".area2").find(".percent0,.percent25,.percent50").css("background", "#0976d9");
+                $(".area2").find(".end,.percent75").css("background-color", "rgb(102, 107, 147)");
+            } else if (curChart >= 163) {
+                $(".area2").find(".percent0,.percent25").css("background", "#0976d9");
+                $(".area2").find(".end,.percent75,.percent50").css("background-color", "rgb(102, 107, 147)");
+            } else {
+                $(".area2").find(".percent0").css("background", "#0976d9");
+                $(".area2").find(".end,.percent75,.percent50,.percent25").css("background-color", "rgb(102, 107, 147)");
+            }
+        } else {
+            $(".area2 .progress").css("width", 0);
+            $(".area2 .st-slider-button").css("left", 0);
+            $(".area2").next("div").find("p:last-child").html("0%");
+            $(".area2").find(".percent0,.percent25,.percent50,.percent75,.end").css("background-color", "rgb(102, 107, 147)");
+        }
+
+    });
+    // lose focus
+    $("#base_borrow").blur(function () {
+        if ($(this).val() == '' || $(this).val() == '0') {
+            if ($(this).closest(".borrow ").next(".error").length <= 0) {
+                $(this).closest(".borrow ").after("<p class='error'>{:l('correct-number')}</p>");
+            } else {
+                $(this).closest(".borrow ").next(".error").remove();
+            }
+
+        }
+    })
+    function filterCoin() {
+		var input, filter, ul, li, span, i, txtValue;
+		input = document.getElementById("searchCoin");
+		filter = input.value.toUpperCase();
+		ul = document.getElementById("coinList");
+		li = ul.getElementsByTagName("li");
+		for(i = 0; i < li.length; i++) {
+			span = li[i].getElementsByTagName("span")[0];
+			txtValue = span.textContent || span.innerText;
+			if(txtValue.toUpperCase().indexOf(filter) > -1) {
+				li[i].style.display = "";
+			} else {
+				li[i].style.display = "none";
+			}
+		}
+	}
+    // Limit the input input box input
+    function clearNoNum(obj) {
+        //First replace all non-numbers, except numbers and .
+        $(obj)[0].value = $(obj)[0].value.replace(/[^\d.]/g, "");
+        //Must ensure that the first one is a number and not .
+        $(obj)[0].value = $(obj)[0].value.replace(/^\./g, "");
+        //It is guaranteed that only one appears. There are no more than one.
+        $(obj)[0].value = $(obj)[0].value.replace(/\.{2,}/g, ".");
+        //Guaranteed. Appears only once, not twice or more上
+        $(obj)[0].value = $(obj)[0].value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+    }
+</script>
+<include file="Public:footer_minimal" />

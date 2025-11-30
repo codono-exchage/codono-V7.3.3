@@ -1,0 +1,28 @@
+<include file="Index:html_header"/>
+{$debug}
+    <body class="nk-body body-wider bg-theme mode-onepage">
+	<div class="nk-wrap">
+		<header class="nk-header is-sticky is-dark" id="header">
+		<include file="Index:top_menu"/>	
+		<include file="Index:banner-3"/>	
+		</header>
+        <main class="nk-pages tc-light">
+		<eq name="TRADING_ALLOWED" value="1">
+			<include file="Index:markets"/>
+		</eq>
+		<include file="Index:platform"/>	
+		<eq name="TRADING_ALLOWED" value="1">
+		<include file="Index:tokensale"/>
+		</eq>
+		<include file="Index:eco-system"/>	
+		<include file="Index:faq_final"/> 
+			<lt name="Think.session.userId" value="1">			
+			<include file="Index:boxes_2"/>	
+			</lt>
+			
+         </main>
+        <footer class="nk-footer ov-h has-ovm">
+            <include file="Index:footer_menu"/> 
+        </footer>
+	</div>
+<include file="Index:html_footer"/>

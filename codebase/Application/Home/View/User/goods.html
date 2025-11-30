@@ -1,0 +1,250 @@
+<include file="Public:header" />
+
+<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">	
+	
+<include file="User:left" />
+
+		<!-- Main content -->
+		<div class="col-sm-9">
+	
+			<div class="panel panel-flat">
+			<div class="panel-heading clear">
+				<h1>
+					<span>
+						{:l('SHIPPING_ADDRESS')}					</span>
+					<span>
+												<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+				</h1>
+			</div>
+			
+			<div class="usdin_record panel-body">
+			<div id="hints" class="mytips" style="display:none;">
+				
+				<p>
+				
+					<notempty name="prompt_text">
+						{$prompt_text}
+					</notempty>
+				
+				
+				</p>			
+				
+			</div>
+				<div class="f_body table-responsive">
+					<table class="table table-striped" >
+						<thead>
+						<tr>
+							<th>{:l('REMARKS_NAME')}</th>
+							<th>{:l('CONTACT_NAME')}</th>
+							<th>{:l('CONTACT_NUMBER')}</th>
+							<th>{:l('CITY')}</th>
+							<th>{:l('ADDRESS')}</th>
+							<th>{:l('ADD_TIME')}</th>
+							<th>{:l('OPERATING')}</th>
+						</tr>
+						</thead>
+						<tbody>
+						
+					  <volist name="userGoodsList" id="vo">
+					  <tr>
+					   <td>{$vo.name}</td>
+					   <td>{$vo.truename}</td>
+					   <td>{$vo.cellphone}</td>
+					   <td>{$vo.city},{$vo.prov}</td>
+					   <td>{$vo.addr}</td>
+					   <td>{$vo.addtime|addtime}</td>
+					   <td><a class="btn btn-danger btn-xs" href="javascript:void(0)" id="{$vo['id']}" onclick="goods_del(this)">{:l('DELETE')}</a></td>
+					  </tr>
+					  </volist>
+						
+						</tbody>
+					</table>
+					<div class="pages">
+						<a href="javascript:void(0)" onclick="showA()" class="">{:l('ADD_AN_ADDRESS')}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+</div>
+</div>
+</div>
+<div class="all_mask_loginbox" id="step1" style="display: none;">
+	<div class="login_title pl20">{:l('ADD_A_CONTACT_ADDRESS')}</div>
+	<form id="form-loginx" class="mask_wrap login-fb">
+		<div class="login_text zin90">
+			<div class="mask_wrap_title">{:l('NAME')}</div>
+			<input id="goods_name" class="texts" type="text">
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('CONTACT_NAME')}</div>
+			<input id="goods_truename" class="texts" type="text">
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('CONTACT_NUMBER')}:</div>
+			<input id="goods_cellphone" class="texts" type="text">
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('WHERE_THE_PROVINCES')}</div>
+			<span class="controls" id="city_1">
+				<select class="prov texts" id="goods_prov" name="prov" style="width: 98px;"></select>
+				<input type="text" class="city texts" id="goods_city" name="city" style="width: 98px;" placeholder="City Name"></select>
+            </span>
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('SHIPPING_ADDRESS')}:</div>
+			<input id="goods_addr" class="texts" type="text">
+		</div>
+		<div class="login_text zin80">
+			<div class="mask_wrap_title">{:l('TRANSACTION_PASSWORD')}</div>
+			<input id="goods_paypassword" class="texts" type="password"><a href="/findpwd/findpwd" class="move ml5">{:l('FORGET')}?</a>
+		</div>
+		<div class="login_button">
+			<input type="button" class="btns2" value="{:l('ADD_IT_NOW')}" onclick="goods_up();" >
+		</div>
+	</form>
+	<div class="mask_wrap_close " onclick="showB()"><i class="fa fa-times fz_20 move" aria-hidden="true"></i></div>
+</div>
+<div id="step2" class="all_mask" style="height: 0px;display: none;"></div>
+
+
+
+
+<script type="text/javascript" src="__PUBLIC__/static/js/cityselect.js"></script>
+
+<script>
+	if ($("#user_box").length > 0) {
+		$('#user_box').addClass('active');
+	} else {
+		$('#index_box').addClass('active');
+	}
+</script>
+<script>
+					var hints = "0";
+					if(hints == 1){
+						$('#hints').show();
+					}
+				</script>
+<script>
+	function showA() {
+		$("#step1").show();
+		$("#step2").show();
+	}
+
+	function showB() {
+		$("#step1").hide();
+		$("#step2").hide();
+	}
+	$(function () {
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+
+		$('#step2').height(height);
+
+		$("#city_1").citySelect({nodata: "none", required: false});
+	});
+
+
+	function goods_up() {
+		var name        = $('#goods_name').val();
+		var truename    = $('#goods_truename').val();
+		var prov        = $('#goods_prov option:selected').val();
+		var city        = $('#goods_city').val();
+		var cellphone   = $('#goods_cellphone').val();
+		var addr        = $('#goods_addr').val();
+		var paypassword = $('#goods_paypassword').val();
+
+		if (name == "" || name == null) {
+			layer.tips('Enter name Remarks', '#goods_name', {tips: 3});
+			return false;
+		}
+		if (truename == "" || truename == null) {
+			layer.tips('Please enter contact name', '#goods_truename', {tips: 3});
+			return false;
+		}
+		if (cellphone == "" || cellphone == null) {
+			layer.tips('Enter Mobile', '#goods_cellphone', {tips: 3});
+			return false;
+		}
+		if (prov == "" || prov == null) {
+			layer.tips('Select State', '#goods_prov', {tips: 3});
+			return false;
+		}
+		if (city == "" || city == null) {
+			layer.tips('Choose City', '#goods_city', {tips: 3});
+			return false;
+		}
+		if (addr == "" || addr == null) {
+			layer.tips('Enter Address', '#goods_addr', {tips: 3});
+			return false;
+		}
+		if (paypassword == "" || paypassword == null) {
+			layer.tips('Provide Trans Password', '#goods_paypassword', {tips: 3});
+			return false;
+		}
+
+		$.post("/User/upgoods_codono", {
+			name: name,
+			truename: truename,
+			cellphone: cellphone,
+			addr: addr,
+			prov: prov,
+			city: city,
+			paypassword: paypassword
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+
+
+	function goods_del(o) {
+		var id = $(o).attr('id');
+
+
+		layer.config({
+			extend: 'extend/layer.ext.js'
+		});
+		layer.ready(function () {
+			//Default Prompt
+			layer.prompt({
+				title: 'Enter Fund Pwd',
+				formType: 1
+			}, function (val) {
+				if (val) {
+					//THE_METHOD_TO_BE_EXECUTED
+					$.post("/User/delgoods", {id: id, paypassword: val}, function (data) {
+						if (data.status == 1) {
+							layer.msg(data.info, {icon: 1});
+							location.reload();
+						} else {
+							layer.msg(data.info, {icon: 2});
+							if (data.url) {
+								window.location = data.url;
+							}
+						}
+					}, "json");
+				}
+				;
+			});
+		});
+	}
+</script>
+<script>
+	$('.user_goods').addClass('active');
+</script>
+<include file="Public:footer_minimal"/>

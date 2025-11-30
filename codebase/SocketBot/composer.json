@@ -1,0 +1,25 @@
+{
+    "name"  : "workerman/workerman-chat",
+    "type"  : "project",
+    "keywords": ["chat"],
+    "homepage": "https://www.workerman.net",
+    "license" : "MIT",
+    "require": {
+        "workerman/gateway-worker" : ">=3.0.0",
+		"workerman/mysql": "^1.0",
+        "clue/redis-react": "^2.3",
+      "ext-json": "*",
+        "workerman/redis": "^1.0",
+      "ext-curl": "*",
+      "ext-bcmath": "*",
+      "ext-gd": "*",
+      "ext-gmp": "*",
+      "ext-openssl": "*",
+      "ext-iconv": "*",
+      "ext-mongo": "*",
+      "ext-pdo": "*",
+      "ext-mysqli": "*",
+      "ext-memcache": "*",
+      "ext-simplexml": "*"
+    }
+}

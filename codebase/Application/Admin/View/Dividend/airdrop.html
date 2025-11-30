@@ -1,0 +1,132 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+        <block name="body">
+            <div class="container-span">
+                <div class="span4">
+                    <div class="columns-mod">
+                        <div class="hd cf">
+                            <h5>{:l('Airdrop start')}</h5>
+                        </div>
+                        <div class="bd">
+                            <div class="sys-info">
+                                <table id="wallet_table">
+                                    <tr>
+                                        <th>
+                                            <table id="wallet_tablea">
+                                                <tr>
+                                                    <td>{:l('Airdrop Name')}: <span style="color: red;">{$data['name']}</span> </td>
+                                                    <td>{:l('Number of dividend')}: <span style="color: red;">{$data['num']*1} {$data['coinjian']}</span> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{:l('Users Holding')} : <span style="color: red;">{$data['quanbu']*1} {$data['coinname']}</span></td>
+                                                    <td>{:l('Each coin bonus')} : <span style="color: red;">{$data['meige']}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{:l('Holding currency')}: <span style="color: red;">{$data['coinname']}</span></td>
+                                                    <td>{:l('Reward currency')}: <span style="color: red;">{$data['coinjian']}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{:l('Number of users')}: <span style="color: red;">{$data['user']}</span></td>
+                                                    <td>{:l('If this was airdropped?')}: <span style="color:magenta;" id="chuli">0</span></td>
+                                                </tr>
+												<tr>
+												<td colspan="2">Users would get {$data['meige']} {$data['coinjian']} for holding each {$data['coinname']}</td>
+												</tr>
+                                            </table>
+                                        </th>
+                                        <th>
+                                            <button class="btn" onclick="start_chk_wallet();">{:l('Begin Airdrop')} </button>
+                                        </th>
+                                        <td>
+                                            <div id="loader"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <script type="text/javascript" src="__THEME__/js/jquery.percentageloader-0.1.min.js"></script>
+                        <script type="text/javascript">
+                            var $loader;
+                            var totalKb = '{$cacheSize}';
+                            var kb = 0;
+                            var clearCacheFlag = 0;
+                            var list_len = "{$data['user']}";
+                            $loader = $("#loader").percentageLoader({
+                                width: 200,
+                                height: 200,
+                                progress: 0
+                            });
+                            $loader.setValue('Wait');
+
+                            function init() {
+                                $('#wallet_table').html('<tr> <th><button class="btn" onclick="start_chk_wallet();">Check the wallet</button></th> <td><div id="loader"></div></td> </tr>');
+                                $loader = $("#loader").percentageLoader({
+                                    width: 200,
+                                    height: 200,
+                                    progress: 0
+                                });
+                                $loader.setValue('Checking...');
+                            }
+
+                            var lock_click = 0;
+                            var first = 1;
+
+
+                            function start_chk_wallet() {
+                                if (lock_click) {
+                                    layer.msg('Click too often...');
+                                    return;
+                                }
+                                lock_click = 1;
+                                if (!first) {
+                                    init();
+                                }
+                                first = 0;
+                                request(-1);
+                            }
+
+                            function request(id) {
+
+
+                                $loader.setProgress((id + 1 ) / list_len);
+                                $loader.setValue('First Airdrop ' + id + ' user');
+
+                                $('#chuli').html(id+1);
+
+                                var fid =  "{$data['id']}";
+                                var dange= "{$data['meige']}";
+
+
+
+                                console.log(id);
+                                $.getJSON('/Admin/Dividend/distribute', {id: id,fid:fid,dange:dange}).done(function (data) {
+                                    console.log(data);
+                                    if (data.status === 1) {
+                                        $('#wallet_table').append('<tr><td colspan="2" style="color: green">' + data.info + '</td></tr>');
+                                        request(++id);
+                                    } else if (data.status === -1) {
+                                        $('#wallet_table').append('<tr><td colspan="2" style="color: yellowgreen;font-weight: bold">' + data.info + '</td></tr>');
+                                        request(++id);
+                                    } else if (data.status == -2) {
+                                        $('#wallet_table').append('<tr><td colspan="2" style="color: red;font-weight: bold">' + data.info + '</td></tr>');
+                                        request(++id);
+                                    } else if (data.status == 100) {
+                                        lock_click = 0;
+                                        $('#wallet_table').append('<tr><td colspan="2">' + data.info + '</td></tr>');
+                                    }
+                                });
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </block>
+    </div>
+</div>
+<!-- /Content Area -->
+<include file="Public:footer"/>

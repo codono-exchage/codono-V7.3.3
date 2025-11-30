@@ -1,0 +1,177 @@
+<div class="col-md-3 col-pd">
+                    <div class="graph-desc buy-sec">
+                        <ul class="nav nav-tabs graph-nav">
+                            <li class="active"><a data-toggle="tab" href="#buy"><span class="crypt-up">{:l('BUY')}</span> </a></li>
+                            <li><a data-toggle="tab" href="#sell"><span class="crypt-down">{:l('SELL')} </span></a></li>
+                            <li class="my-dropdown limit-list">
+								<a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="bold" id="selectedwidget">Limit</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" id="widgetselected">
+                                <li onclick="OrderType('limit')">Limit</li>
+								<li onclick="OrderType('market')">Market</li>
+								<li onclick="OrderType('stop')">Stop-Limit <i onclick="TipStopLimit()" class="fa fa-info-circle"></i></li></ul>
+							</li>
+                        </ul>
+
+                        <div class="tab-content" style="margin-top:10px !important">
+                            <div id="buy" class="tab-pane fade in active">
+							<div id="buystop" style="display:none">
+							<ul class="list-inline buy-list">
+                                    <li>{:l('Stop')}</li>
+                                    
+                                </ul>
+							<div class="input-group">
+							
+							<input type="text" class="form-control" id="buy_stop" name="stop" >
+							<span class="inputHintBox">{$rmb|strtoupper}</span>
+							</div>
+							</div>		
+							
+							<ul class="list-inline buy-list">
+                                    <li>{:l('Price')}</li>
+                                    <li>{:l('BALANCE')}: <b class="crypt-up"><i id="base_coin">{$base_coin*1}</i> {$rmb|shortFirstLetter=0,1}</b></li>
+                                </ul>
+
+                                <div class="input-group" id="buypricebox">
+                                    <input type="text" class="form-control" placeholder="Buy Price in {$rmb|strtoupper}" id="buy_price" name="price" >
+                                    <span class="input-group-addon btn">{$rmb|strtoupper}</span>
+                                </div>
+
+
+                                <ul class="list-inline buy-list">
+                                    <li>{:l('Qty')}</li>
+                                    <li><div class="PercentButtons">
+						  <button onclick="Percentage('25','buy')" class="btn btn-xs btn-primary">25%</button>
+						  <button onclick="Percentage('50','buy')" class="btn btn-xs btn-primary">50%</button>
+						  <button onclick="Percentage('75','buy')" class="btn btn-xs btn-primary">75%</button>
+						  <button onclick="Percentage('100','buy')" class="btn btn-xs btn-primary">100%</button>
+						  </div></li>
+                                </ul>
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Buying {:l('Qty')} in {$xnb|strtoupper}" id="buy_num" name="num" >
+                                    <span class="input-group-addon btn">{$xnb|strtoupper}</span>
+                                </div>
+								<eq name="IF_TRADING_PASS" value="1">
+								<ul class="list-inline buy-list">
+                                    <li>{:l('Tx Pwd')}</li>
+                                </ul>
+
+                                <div class="input-group">
+                                  <input type="password" class="form-control" id="buy_paypassword" name="pwtrade" placeholder=<eq name="showPW" value="0">"{:l('YOU_DO_NOT_NEED_TO_ENTER_THE_T')}"</eq><eq name="showPW" value="2">"{:l('DEPENDING_ON_THE_SETTING_OF_TH')}"</eq>>
+									<span class="input-group-addon btn" data-toggle="modal" data-target="#modal_paypass"><i class="fa fa-cog"></i></span>
+                                </div>
+								</eq>
+                                
+                                <ul class="list-inline buy-list">
+                                    <eq name="SHOW_TRADING_FEES" value="1"><li>{:l('FEE')} <span class="white-text"> {$buy_fees}%</span></li></eq>
+                                    <li>
+									{:l('TOTAL')}: <span class="white-text" id="buy_mum">--</span>
+                                    </li>
+                                </ul>
+
+
+								<div id="stopbuybutton" style="display:none"><button value="{:l('STOP BUY')}" onclick="stopadd_buy();"  class="buy-btn" >{:l('STOP BUY')}</button></div>
+                                    <div id="limitbuybutton"><button value="{:l('BUY')}" onclick="tradeadd_buy('limit');"  class="buy-btn">{:l('BUY')}</button></div>
+									 <div id="marketbuybutton" style="display:none"><button value="{:l('BUY')}" onclick="tradeadd_buy('market');"  class="buy-btn">{:l('BUY')}</button></div>
+
+                            </div>
+
+
+                            <div id="sell" class="tab-pane fade">
+							<div id="sellstop" style="display:none">
+							<ul class="list-inline buy-list">
+                                    <li>{:l('Stop')}</li>
+                                </ul>
+							<div class="input-group">	
+							<input type="text" class="form-control" id="sell_stop" name="sellstop" placeholder="Stop sell price in {$rmb|strtoupper}">
+							<span class="input-group-addon">{$rmb|strtoupper}</span>
+							</div>
+						  </div>
+                                <ul class="list-inline buy-list">
+                                    <li>{:l('Price')}</li>
+                                    <li>{:l('BALANCE')} <b class="crypt-down"><i id="user_coin">{$user_coin*1}</i> {$xnb|shortFirstLetter=0,1}</b></li>
+                                </ul>
+
+                                <div class="input-group">
+								<input type="text" class="form-control" id="sell_price" name="price" placeholder="Sell price in {$rmb|strtoupper}">
+								<span class="input-group-addon">{$rmb|strtoupper}</span>
+                                </div>
+
+                                <ul class="list-inline buy-list">
+                                    <li>{:l('Qty')}</li>
+                                    <li>
+						  <button onclick="Percentage('25','sell')" class="btn btn-xs btn-primary">25%</button>
+						  <button onclick="Percentage('50','sell')" class="btn btn-xs btn-primary">50%</button>
+						  <button onclick="Percentage('75','sell')" class="btn btn-xs btn-primary">75%</button>
+						  <button onclick="Percentage('100','sell')" class="btn btn-xs btn-primary">100%</button></li>
+
+                                </ul>
+
+
+                                <div class="input-group">
+						<input type="text" class="form-control"  id="sell_num" name="num" placeholder="BTC"/>
+							<span class="input-group-addon">{$xnb|strtoupper}</span>
+                                </div>
+								<eq name="IF_TRADING_PASS" value="1">
+                                <ul class="list-inline buy-list">
+                                    <li>{:l('Tx Pwd')}</li>
+                                </ul>
+
+
+                                <div class="input-group">
+									<input type="password" class="form-control" id="sell_paypassword" name="pwtrade" >
+                                    <span class="input-group-addon btn" data-toggle="modal" data-target="#modal_paypass"><i class="fa fa-cog"></i></span>
+                                </div>
+								</eq>
+                                <ul class="list-inline buy-list">
+                                   <eq name="SHOW_TRADING_FEES" value="1"> <li>
+                                        {:l('FEE')} <span class="white-text">{$sell_fees}%</span>
+                                    </li></eq>
+                                    <li>{:l('TOTAL')} <span class="white-text" id="sell_mum">--</span></li>
+                                </ul>
+
+								<div id="stopsellbutton" style="display:none"><button value="{:l('STOP SELL')}" onclick="stopadd_sell();"  class="sell-btn" >{:l('STOP SELL')}</button></div>
+                                    <div id="limitsellbutton"><button onclick="tradeadd_sell('limit');" class="sell-btn" >{:l('SELL')}</button></div>
+									 <div id="marketsellbutton" style="display:none"><button onclick="tradeadd_sell('market');" class="sell-btn" >{:l('SELL')}</button></div>
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+				<!-- tx pwd modal -->
+<div id="modal_paypass" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h5 class="modal-title">{:l("TRANSACTION_PASSWORD_INPUT_SET")}</h5>
+							</div>
+							<form id="tpwdsetting" class="set_verify">
+							<div class="modal-body" id="tpwd">
+							<ul class="tpwd">
+							<li><label for="only"><input type="radio" id="only" value="1" name="aaatpwdsetting" <eq name="showPW" value="1">checked</eq>> {:l("ENTER_ONLY_ONCE_EACH_TIME_YOU_")} </label></li>
+							<li> <label for="every"><input type="radio"  id="every" value="2" name="aaatpwdsetting" <eq name="showPW" value="2">checked</eq>> {:l("EACH_TRANSACTION_TRANSACTION_P")}</label></li>
+							<li><label for="none"><input type="radio"  id="none" name="aaatpwdsetting" value="3" <eq name="showPW" value="3">checked</eq>> {:l("YOU_DO_NOT_NEED_TO_ENTER_EACH_")}</label></li>
+							<li><input type="password" id="aaapaypassword" name="paypassword" placeholder="{:l('PLEASE_ENTER_TRANSACTION_PASSW')}" class="text form-control"/>
+							</li></ul>
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+								<button type="button" onclick="tpwdsettingaa()" class="btn btn-primary save_verify">{:l("SAVE")}</button>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- /tx pwd modal -->

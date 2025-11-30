@@ -1,0 +1,122 @@
+<include file="Public:header"/>
+<div id="main-content">
+    <div id="top-alert" class="fixed alert alert-error" style="display: none;">
+        <button class="close fixed" style="margin-top: 4px;">&times;</button>
+        <div class="alert-content">{:l('Warnings')}</div>
+    </div>
+    <div id="main" class="main">
+      <div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18">{:l('Links')}</h4>
+        </div>
+    </div>
+</div>
+
+
+      
+        <div class="card card-body mt-2 table-responsive">
+            <div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+                <div class="justify-content-right">
+                    <a class="btn btn-success " href="{:U('Article/linkEdit')}">{:l('Add')}</a>
+                    <button class="btn ajax-post btn-info "
+                            url="{:U('Article/linkStatus',array('type'=>'resume'))}" target-form="ids">{:l('Enable')}</button>
+                    <button class="btn ajax-post btn-warning "
+                            url="{:U('Article/linkStatus',array('type'=>'forbid'))}" target-form="ids">{:l('Disable')}</button>
+                    <button class="btn ajax-post confirm btn-danger "
+                            url="{:U('Article/linkStatus',array('type'=>'delete'))}" target-form="ids"><i class="far fa-trash-alt" title="Delete"></i></button>
+                </div>
+        
+                        <form name="formSearch" class="d-flex align-items-center" id="formSearch" method="get" name="form1">
+    
+                            <select  name="status" class="form-select">
+                                <option value=""
+                                <empty name="Think.get.status">{:l('selected')}</empty>
+                                >{:l('All states')}</option>
+                                <option value="1"
+                                <eq name="Think.get.status" value="1">{:l('selected')}</eq>
+                                >{:l('Disabled')}</option>
+                                <option value="2"
+                                <eq name="Think.get.status" value="2">{:l('selected')}</eq>
+                                >{:l('Enabled')}</option>
+                            </select>
+                            <select  name="field" class="form-select">
+                                <option value="title"
+                                <eq name="Think.get.field" value="title">{:l('selected')}</eq>
+                                >{:l('Connect title')}</option>
+                            </select>
+                            <input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" style="">
+                            <a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+                        </form>
+                        <script>
+                            //Search function
+                            $(function () {
+                                $('#search').click(function () {
+                                    $('#formSearch').submit();
+                                });
+                            });
+                            //Enter search
+                            $(".search-input").keyup(function (e) {
+                                if (e.keyCode === 13) {
+                                    $("#search").click();
+                                    return false;
+                                }
+                            });
+                        </script>
+            </div>
+            <table class="table table-sm emptyx">
+                <thead class="table-light">
+                <tr>
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th class="">{:l('ID')}</th>
+                    <th class="">{:l('Name')}</th>
+					<th class="">{:l('Img')}</th>
+                    <th class="">{:l('Title')}</th>
+                    <th class="">{:l('URL')}</th>
+                    <th class="">{:l('Add Time')}</th>
+                    <th class="">{:l('Sort')}</th>
+                    <th class="">{:l('Status')}</th>
+                    <th class="">{:l('Option')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <notempty name="list">
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+                            <td>{$vo.id}</td>
+                            <td><small>{$vo.name}</small></td>
+							<td><img src="__UPLOAD__/link/{$vo.img}" height="18px"/></td>
+                            <td><small>{$vo.title}</small></td>
+                            <td>{$vo.url}</td>
+                            <td>{$vo.addtime|addtime}</td>
+                            <td>{$vo.sort}</td>
+                            <td>
+								<eq name="vo.status" value="1">
+									<span class="badge badge-pill badge-soft-success font-size-11">{:l('Enabled')}</span>
+									<else/>
+									<span class="badge badge-pill badge-soft-danger font-size-11">{:l('Disabled')}</span>
+								</eq>
+                            </td>
+                            <td><a href="{:U('Article/linkEdit?id='.$vo['id'])}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="12" class="text-center">{:l('No contents!')}</td>
+                </notempty>
+                </tbody>
+            </table>
+            <div class="page">
+                <div>{$page}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>
+<block name="script">
+    <script type="text/javascript" charset="utf-8">
+        //Highlight navigation
+        highlight_subnav("{:U('Article/link')}");
+    </script>
+</block>

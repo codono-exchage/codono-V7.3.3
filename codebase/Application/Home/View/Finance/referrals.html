@@ -1,0 +1,136 @@
+﻿<include file="Public:header" />
+
+		<!-- Page content -->
+		<div class="page-container">	
+	
+<include file="Finance:left" />
+
+		<!-- Main content -->
+			<div class="content-wrapper">
+			<div class="panel panel-flat">
+				<div class="panel-heading">
+					<div class="safe_center clear ">
+						<h1>{:l('MY_RECOMMENDATION')}  <a class="right" onclick="$('#hints').slideToggle();"> <i class="fa fa-hand-o-right move fz_14 mr5"></i> <span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span> </a> 						</h1>
+					</div>
+					<div id="hints" class="mytips" style="display:none;">
+						
+						<p>
+						
+             <notempty name="prompt_text">
+
+                        {$prompt_text}
+
+                </notempty>
+						
+						</p>		</div>
+					</div>
+					<div class="panel-body ">
+						<div class="f_body  step2">
+							<table class="table table-responsive" id="investLog_content">
+								<thead>
+								<tr>
+									<th width="180" style="text-align: left; padding-left: 30px;">{:l('UNDER_THE_TYPE_OF_HOME')}</th>
+									<th>{:l('USERNAME')}</th>
+									
+									<th>{:l('TIME')}</th>
+									<th>{:l('WHETHER_CERTIFICATION')}</th>
+								</tr>
+								</thead>
+								<tbody>
+																
+         <volist name="list" id="v">
+          <tr>
+           <td style="text-align: left; padding-left: 20px;"><a href="javascript:void(0)" onclick="Address({$v['id']})">
+             <img class="invit_img_{$v['id']}" src="__PUBLIC__/Home/images/plus.png" style="width: 18px; vertical-align: middle; margin-top: -5px;">{:l('ONE_UNDER_THE_HOUSE')} ({$v.invitss})
+            </a></td>
+
+		   <td>{$v.username|substr_replace='****',3,6}</td> 
+           <td>{$v.addtime|addtime}</td>
+           <td><i class="icon-<neq name="v['idcardauth']" value='1'>cross2<else/>checkmark</neq>  text-blue-400"></i></td>
+          </tr>
+          <notempty name="v['invits']"> <volist name="v['invits']" id="vv">
+          <tr class="invit_{$v['id']}" style="display: none;">
+           <td style="text-align: left; padding-left: 40px;"><a href="javascript:void(0)" onclick="Address({$vv['id']})">
+             <img class="invita_img_{$v['id']} invit_img_{$vv['id']}" src="__PUBLIC__/Home/images/plus.png" style="width: 18px; vertical-align: middle; margin-top: -5px;">{:l('TWO_AT_HOME')}({$vv.invitss})
+            </a></td>
+           <td>{$vv.username|substr_replace='****',3,6}</td>
+           
+           <td><empty name="vv.cellphone"> <font class="buy">{:l('NOT_CERTIFIED')} </font> <else /> <font class="sell">{:l('VERIFIED')} </font></empty></td>
+          </tr>
+          <notempty name="vv['invits']"> <volist name="vv['invits']" id="vvv">
+          <tr class="invita_{$v['id']} invit_{$vv['id']} " style="display: none;">
+           <td style="text-align: left; padding-left: 60px;"><a href="javascript:void(0)" onclick="Address({$vvv['id']})">
+             <img class="invita_img_{$v['id']} invit_img_{$vvv['id']}" src="__PUBLIC__/Home/images/minus.png" style="width: 18px; vertical-align: middle; margin-top: -5px;">{:l('THREE_AT_HOME')}
+            </a></td>
+           <td>{$vvv.username|substr_replace='****',3,6}</td>
+           <td>{$vvv.addtime|addtime}</td>
+           <td><empty name="vvv.cellphone"> <font class="buy">{:l('NOT_CERTIFIED')} </font> <else /> <font class="sell">{:l('VERIFIED')} </font></empty></td>
+		   <td>{$v.addtime|addtime}</td>
+          </tr>
+          </volist> </notempty> </volist> </notempty> </volist>							
+																
+								</tbody>
+							</table>
+							<div class="pages">{$page}</div>
+						</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	
+	
+function Address(id){
+	var img1="__PUBLIC__/Home/images/plus.png";
+	var img2="__PUBLIC__/Home/images/minus.png";
+	var img=$(".invit_img_"+id).attr("src");
+	
+	
+	//alert(img)
+	if(img==img1){
+		$(".invit_img_"+id).attr("src",img2);
+	
+		$(".invit_"+id).show();
+	}else{
+		$(".invit_img_"+id).attr("src",img1);
+		$(".invita_img_"+id).attr("src",img1);
+		$(".invit_"+id).hide();
+		$(".invita_"+id).hide();
+	}
+}
+
+
+
+
+function Addressb(id){
+	var img1="__PUBLIC__/Home/images/plus.png";
+	var img2="__PUBLIC__/Home/images/minus.png";
+	var img=$(".invit_img_"+id).attr("src");
+	
+	
+	//alert(img)
+	if(img==img1){
+		$(".invit_img_"+id).attr("src",img2);
+		
+		$(".invit_"+id).show();
+	}else{
+		$(".invit_img_"+id).attr("src",img1);
+		$(".invit_"+id).hide();
+		$(".invita_"+id).hide();
+	}
+}
+	
+	
+	
+	
+	$('#finance_box').addClass('active');
+	$('.finan_invitlog').addClass('active');
+</script>	
+	
+<include file="Public:footer_minimal"/>

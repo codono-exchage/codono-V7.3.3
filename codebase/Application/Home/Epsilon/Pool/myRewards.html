@@ -1,0 +1,428 @@
+<include file="Public:header" />
+<div class="">
+  <main class="wrapper stake-page">
+    <!-- Account Heading Start -->
+    <div class="page-top-banner">
+      <div
+        class="filter"
+        style="
+          background-image: url('__EPSILON__/img/redesign/slider/filter2-min.png');
+        "
+      >
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-8 mt-3">
+              <h1>{:l('My Rewards')}</h1>
+              <h2>{$prompt_text}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Account Heading End -->
+    <div class="container">
+      <div class="row mt-3 mb-3">
+        <include file="User:top_bar" />
+        <div class="col-12 col-md-6 order-1 order-md-2 float-right">
+          <ul class="text-right breadcrumbs list-unstyle">
+            <li>
+              <a href="{:U('/pool')}" class="btn btn-warning btn-sm"
+                >{:l('Pool Home')}</a
+              >
+            </li>
+            <li>
+              <a href="{:U('/pool/myMachines')}" class="btn btn-warning btn-sm"
+                >{:l('My Machines')}</a
+              >
+            </li>
+            <li class="btn btn-warning btn-sm active">{:l('My Rewards')}</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="stake-table  card">
+        <div class="card-body table-responsive">
+        <table class="table " id="investLog_content">
+          <tbody>
+            <tr>
+              <th id="sublist-grid_c1">{:l('PoolID')}</th>
+              <th id="sublist-grid_c2">{:l('RentID')}</th>
+              <th id="sublist-grid_c4">{:L('Coin')}</th>
+              <th id="sublist-grid_c4">{:L('Reward')}</th>
+              <th id="sublist-grid_c5">{:l('Mining Hash')}</th>
+              <th id="sublist-grid_c6">{:L('Time')}</th>
+            </tr>
+          </tbody>
+          <tbody>
+            <volist name="list" id="vo">
+              <tr>
+                <td>{$vo['poolid']}</td>
+                <td>{$vo['logid']}</td>
+                <td>{$vo['coinname']}</td>
+                <td>{$vo['amount']*1}</td>
+                <td>{$vo['hash']}</td>
+                <td>{$vo['addtime']|addtime}</td>
+                <td>
+                  <switch name="vo.status">
+                    <case value="0">
+                      <span onclick="startpool('{$vo['id']}')" class="btn btn-sm btn-info">{:l('Start Mining')}</span>
+                      </case>
+                    <case value="1">{:l('Running Currently')}</case>
+                    <case value="2">{:l('Mining Completed')}</case>
+                  </switch>
+                  <include file="Pool:buyform" />
+                </td>
+              </tr>
+            </volist>
+          </tbody>
+        </table>
+      </div>
+        <div class="card-footer"><div class="pages">{$page}</div></div>
+      </div>
+    </div>
+
+    <div class="page-bottom-info p-0 white-bg">
+      <div class="container-fluid page-bottom-info-box grey-bg">
+        <div class="container">
+          <div class="row">
+            <h2 class="col-12 section-title">{:l('What are the advantages?')}</h2>
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+              <article class="item">
+                <div class="icon">
+                  <img
+                    alt="{:SHORT_NAME}"
+                    src="__EPSILON__/img/seo-advantage1.png"
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="text-wrapper">
+                  <div class="title">{:l('Low transaction fees')}</div>
+                  <div class="desc">
+                    Because the P2P exchange is a simple platform, the overheads
+                    are extremely low for both buyers and sellers.
+                  </div>
+                  <div class="desc">
+                    In {:SHORT_NAME} P2P, no trading commission is charged from market
+                    takers. Market makers, on the other hand, pay a low
+                    commission after each completed order. We are committed to
+                    applying the lowest P2P trading commission among all
+                    markets.
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+              <article class="item">
+                <div class="icon">
+                  <img
+                    alt="{:SHORT_NAME}"
+                    src="__EPSILON__/img/seo-advantage2.png"
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="text-wrapper">
+                  <div class="title">{:l('Flexible payment methods')}</div>
+                  <div class="desc">
+                    Peer-to-peer exchanges give merchants the freedom to choose
+                    their payment method.
+                  </div>
+                  <div class="desc">
+                    At {:SHORT_NAME} P2P you can buy and sell crypto with over 150
+                    payment methods including bank transfer, cash, PayPal,
+                    M-Pesa and many e-wallets.
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+              <article class="item">
+                <div class="icon">
+                  <img
+                    alt="{:SHORT_NAME}"
+                    src="__EPSILON__/img/seo-advantage3.png"
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="text-wrapper">
+                  <div class="title">{:l('Trade at any price you want')}</div>
+                  <div class="desc">
+                    Peer-to-peer exchanges give users the freedom to buy and
+                    sell crypto at any price.
+                  </div>
+                  <div class="desc">
+                    In {:SHORT_NAME} P2P, you can buy and sell crypto from existing
+                    offers or create a trading post at the prices you set
+                    yourself.
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+              <article class="item">
+                <div class="icon">
+                  <img
+                    alt="{:SHORT_NAME}"
+                    src="__EPSILON__/img/seo-advantage4.png"
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="text-wrapper">
+                  <div class="title">{:l('Your privacy is protected')}</div>
+                  <div class="desc">
+                    Unlike credit cards and bank transfers, peer-to-peer
+                    exchanges do not collect information about buyers and
+                    sellers.
+                  </div>
+                  <div class="desc">
+                    You can buy Bitcoin with cash on {:SHORT_NAME} P2P and you don't
+                    need to use a bank account or online wallet to do
+                    fiat-crypto transactions.
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FAQ -->
+      <section class="page-bottom-faq white-bg">
+        <div class="container">
+          <h3 class="section-title">{:l('FAQ')}</h3>
+          <div class="page-bottom-tabs">
+            <div class="row accordion" id="faq-accordion">
+              <div class="col-lg-6">
+                <div class="faq-item">
+                  <div class="title" data-toggle="collapse" data-target="#one">
+                    <div class="icon"></div>
+                    <h3>{:l('What is Locked Staking?')}</h3>
+                  </div>
+                  <div id="one" class="collapse" data-parent="#faq-accordion">
+                    <div class="desc">
+                      Locked Staking is the process of holding funds in a
+                      cryptocurrency wallet to support the operations of a
+                      blockchain network.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item">
+                  <div class="title" data-toggle="collapse" data-target="#two">
+                    <div class="icon"></div>
+                    <h3>What will happen when I'm holding Locked Staking?</h3>
+                  </div>
+                  <div id="two" class="collapse" data-parent="#faq-accordion">
+                    <div class="desc">
+                      We will reduce the cryptocurrency amounts which you're
+                      holding in your spot wallet.
+                    </div>
+                  </div>
+                </div>
+                <div class="faq-item link-page">
+                  <div class="title">
+                    <div class="icon"></div>
+                    <h3>
+                      <a href="faq-detail-2.html">
+                        What happens when I redeem early?
+                      </a>
+                    </h3>
+                  </div>
+                </div>
+                <div class="faq-item link-page">
+                  <div class="title">
+                    <div class="icon"></div>
+                    <h3>
+                      <a href="faq-detail-2.html">
+                        If a link will be given to a topic somewhere
+                      </a>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="faq-item link-page">
+                  <div class="title">
+                    <div class="icon"></div>
+                    <h3>
+                      <a href="faq-detail-2.html">
+                        If a link will be given to a topic somewhere
+                      </a>
+                    </h3>
+                  </div>
+                </div>
+                <div class="faq-item link-page">
+                  <div class="title">
+                    <div class="icon"></div>
+                    <h3>
+                      <a href="faq-detail-2.html">
+                        If a link will be given to a topic somewhere
+                      </a>
+                    </h3>
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <div class="title" data-toggle="collapse" data-target="#one1">
+                    <div class="icon"></div>
+                    <h3>How to buy cryptocurrency on {:SHORT_NAME} P2P?</h3>
+                  </div>
+                  <div id="one1" class="collapse" data-parent="#faq-accordion">
+                    <div class="desc">
+                      When you complete your identity verification and add your
+                      payment methods, you are now ready to receive crypto on
+                      the {:SHORT_NAME} P2P platform. First, choose from all the
+                      available offers on the marketplace. After that, create an
+                      order to receive your crypto and pay the seller with their
+                      preferred payment method. Finally, after you complete the
+                      fiat transfer and confirm your payment on {:SHORT_NAME} P2P, get
+                      your crypto from the seller.
+                    </div>
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <div class="title" data-toggle="collapse" data-target="#two1">
+                    <div class="icon"></div>
+                    <h3>How to sell cryptocurrency on {:SHORT_NAME} P2P?</h3>
+                  </div>
+                  <div id="two1" class="collapse" data-parent="#faq-accordion">
+                    <div class="desc">
+                      You can sell cryptocurrencies instantly and securely on
+                      the {:SHORT_NAME} P2P platform! First, browse the crypto you want
+                      to sell and find the most suitable offer among other
+                      users' offers. To create an order, you must first transfer
+                      the cryptocurrencies you want to sell to the P2P wallet
+                      section of your account.
+                    </div>
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <div
+                    class="title"
+                    data-toggle="collapse"
+                    data-target="#three1"
+                  >
+                    <div class="icon"></div>
+                    <h3>{:l('What are the downsides of P2P exchanges?')}</h3>
+                  </div>
+                  <div
+                    id="three1"
+                    class="collapse"
+                    data-parent="#faq-accordion"
+                  >
+                    <div class="desc">
+                      P2P exchanges also have disadvantages. These disadvantages
+                      include long trading times, not very intuitive user
+                      experience, and low liquidity. Compared to regular
+                      cryptocurrency exchanges, they have lower trading volumes,
+                      a smaller user base and longer trading cycles.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- FAQ End -->
+    </div>
+
+    <!-- P2P Content End -->
+  </main>
+  <div class="row">
+    <div class="navbar navbar-default navbar-xs navbar-component">
+      <ul class="nav navbar-nav no-border visible-xs-block">
+        <li>
+          <a
+            class="text-center collapsed"
+            data-toggle="collapse"
+            data-target="#navbar-filter"
+            ><i class="icon-circle-down2"></i
+          ></a>
+        </li>
+      </ul>
+      <div class="navbar-collapse collapse" id="navbar-filter">
+        <p class="navbar-text">{:l('Filter:')}</p>
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a class="text-info" href="{:U('Pool/index')}">Mining </a>
+          </li>
+          <li class="dropdown">
+            <a class="text-info" href="{:U('Pool/myMachines')}">My Machines </a>
+          </li>
+          <li class="dropdown active">
+            <a class="" href="{:U('Pool/myRewards')}">My Rewards </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<script>
+  function buypool(id) {
+    var ele = document.getElementsByName(id + "tian");
+    for (i = 0; i < ele.length; i++) {
+      if (ele[i].checked) var tian = ele[i].value;
+    }
+    var amount = $("input[id='pool_box" + id + "']").val();
+    if (amount == null || amount <= 0) {
+      layer.tips("Enter Amount", "input[id='pool_box" + id + "']", { tips: 1 });
+      return false;
+    }
+    var days = tian > 1 ? "days" : "day";
+
+    var msg = " Mine " + amount + " " + " for " + tian + " " + days + "!";
+
+    layer.confirm(
+      msg,
+      {
+        btn: ["Confirm", "Cancel"], //PUSH_BUTTON
+      },
+      function () {
+        $.post(
+          "/Pool/rentMachine/",
+          { id: id, num: amount },
+          function (data) {
+            layer.closeAll("loading");
+            trans_lock = 0;
+            if (data.status == 1) {
+              layer.msg(data.info, { icon: 1 });
+              window.location.href = "{:U('Pool/myMachines')}";
+            } else {
+              layer.msg(data.info, { icon: 2 });
+            }
+          },
+          "json"
+        );
+      }
+    );
+  }
+
+  function startpool(id) {
+    $.post("{:U('Pool/startMachine')}", { id: id }, function (data) {
+      if (data.status == 1) {
+        layer.msg(data.info, { icon: 1 });
+        window.setTimeout("window.location='{:U('Pool/myMachines')}'", 1000);
+      } else {
+        layer.msg(data.info, { icon: 2 });
+      }
+    });
+  }
+  $(".receiving").click(function () {
+    $.post(
+      "{:U('Pool/receiving')}",
+      { id: $(this).attr("id") },
+      function (data) {
+        if (data.status == 1) {
+          layer.msg(data.info, { icon: 1 });
+          window.setTimeout("window.location='{:U('Pool/myMachines')}'", 1000);
+        } else {
+          layer.msg(data.info, { icon: 2 });
+        }
+      }
+    );
+  });
+</script>
+
+<include file="Public:footer_minimal" />

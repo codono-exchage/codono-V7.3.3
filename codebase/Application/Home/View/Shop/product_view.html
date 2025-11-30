@@ -1,0 +1,103 @@
+<div class="page-container">
+  <!-- Post -->
+  <div class="panel">
+    <div class="panel-body">
+      <div class="content-group-lg">
+        <h3 class="text-semibold mb-5">
+          <span itemprop="name" class="text-default">{$data.name}</span>
+        </h3>
+        <ul class="list-inline list-inline-separate text-muted content-group">
+          <li>{:l('ADDED_TIME')}</li>
+          <li>{$data.addtime|addtime}</li>
+          <li><a href="#" class="text-muted">{:l('SOLD')}</a></li>
+          <li>
+            <a href="#" class="text-muted"
+              ><i
+                class="icon-heart6 text-size-base text-pink position-left"
+              ></i>
+              {$data.deal}/{$data.num}</a
+            >
+          </li>
+        </ul>
+
+        <div class="content-group">
+          <div class="col-sm-6">
+            <a href="#" class="thumbnail">
+              <img
+                src="{$data.img}"
+                class="img-responsive"
+                alt=""
+                itemprop="image"
+              />
+            </a>
+          </div>
+          <div class="col-sm-6"><include file="Shop:product_form" /></div>
+        </div>
+        <div class="col-sm-12">
+          <div class="content-group" itemprop="description">
+            {$data.content}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /post -->
+</div>
+<script>
+  $("#shop_goods").change(function () {
+    var type = $("#shop_goods option:selected").val();
+    if (type == "addnew") {
+      window.location = "/User/goods";
+    }
+  });
+  $(function () {
+    $(".coin_price_1").show();
+  });
+
+  $("#coin_type").change(function () {
+    var coin_type = $("#coin_type option:selected").val();
+
+    $(".coin_price").hide();
+
+    $("#coin_price_" + coin_type).show();
+  });
+</script>
+<script>
+  function Update() {
+    var type = $("#coin_type option:selected").val();
+    var goods = $("#shop_goods option:selected").val();
+
+    var paypassword = $("#paypassword").val();
+    if (goods == "" || goods == "addnew" || goods == "CHOOSE") {
+      layer.tips("Please add an address", "#shop_goods", { tips: 3 });
+      return false;
+    }
+    if (paypassword == "" || paypassword == null) {
+      layer.tips("Fund Password Required", "#paypassword", { tips: 3 });
+      return false;
+    }
+
+    $.post(
+      "{:U('Shop/buyShop')}",
+      {
+        id: "{$data['id']}",
+        type: type,
+        goods: goods,
+        num: $("#num").val(),
+        paypassword: $("#paypassword").val(),
+      },
+      function (data) {
+        if (data.status === 1) {
+          layer.msg(data.info, { icon: 1 });
+          window.location = "{:U('Shop/log')}";
+        } else {
+          layer.msg(data.info, { icon: 2 });
+          if (data.url) {
+            window.setTimeout("window.location='" + data.url + "'", 3000);
+          }
+        }
+      },
+      "json"
+    );
+  }
+</script>

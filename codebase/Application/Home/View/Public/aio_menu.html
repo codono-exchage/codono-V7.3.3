@@ -1,0 +1,101 @@
+<div class="navbar navbar-inverse" id="navbar-second">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/"><img src="__UPLOAD__/public/{$C['web_logo']}" alt=""/></a>
+
+
+			<ul class="nav navbar-nav pull-right visible-xs-block">
+				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+				<li id="showside" style="display:none"><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+
+			</ul>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar-mobile">
+		
+			<ul class="nav navbar-nav">
+				
+					  <volist name="navigation" id="vo">  
+					<if condition="$vo.dropdown eq 1">
+					<li class=" dropdown" id="{$vo['name']}_box">
+					<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">{:l($vo['title'])} <if condition="$vo['featured']"><span class="featured">{:l($vo['featured'])}</span></if><i class="caret"></i></a>
+					<ul class="dropdown-menu dropdown-menu-right">
+						
+						<volist name="vo.submenu" id="submenu">
+						<li >
+						
+							<if condition="$submenu['is_external']">
+							<a href="{$submenu.url}">
+							<else/>
+							<a href="/{$submenu.url}">
+							</if>
+							
+								<div class="icon">
+									<i class="icon {$submenu.ico}"></i>
+								</div>
+								<div class="content">
+									{$submenu.title} <if condition="$submenu['featured']"><p class="featured">{:l($submenu['featured'])}</p> </if>
+									<if condition="$submenu['subtext']"><span class="subtext">{:l($submenu['subtext'])}</span> </if>
+								</div>
+							</a> 
+						</li>
+						</volist>
+						
+					</ul>
+				</li>
+				<else/>
+					
+                    <li id="{$vo['name']}_box" class="nav-item">
+                        						
+							<if condition="$vo['is_external']">
+							<a href="{$vo['url']}" class="nav-link">
+							<else/>
+							<a href="/{$vo['url']}" class="nav-link">
+							</if>
+
+						<if condition="$vo['ico']">
+						<div class="icon">
+								<i class="icon {$vo['ico']}"></i>
+							</div>
+						</if>  {:l($vo['title'])} <if condition="$vo['featured']"><span class="featured">{:l($vo['featured'])}</span></if></a>
+                    </li>
+					</if>
+                </volist>
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
+			<include file="Public:lang_bar"/>
+				
+				<gt name="Think.session.userId" value="0">
+                    <li class="dropdown dropdown-user">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <span>{$Think.session.userName}</span>
+                            <i class="caret"></i>
+                        </a>
+                        
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="{:U('Finance/index')}" ><i class="fa fa-institution"></i> {:l('FINANCE')}</a></li>
+                                <li><a href="{:U('User/index')}" ><i class="icon-cube"></i> {:l('ACCOUNT')}</a></li>
+                            
+                            <li class="divider"></li>
+                            <li><a href="{:U('Login/loginout')}"><i class="fa fa-sign-out"></i> {:l('LOG_OUT')}</a></li>
+                        </ul>
+                    </li>
+				<else/>
+                    <li><a href="{:U('Login/register')}" ><i class="glyphicon glyphicon-user"></i> {:l('SIGNUP')}</a></li>
+                    <li><a href="{:U('Login/login')}" ><i class="icon-lock"></i> {:l('SIGNIN')}</a></li>	
+				</gt>
+				
+			</ul>
+			
+		</div>
+	</div>
+	<script>
+
+    function chose_lang(lang) {
+        $.cookies.set("lang", lang);
+		window.location.reload();
+    }
+    function expect() {
+        layer.msg('We are currently upgrading our system!', {icon: 6});
+    }
+</script>

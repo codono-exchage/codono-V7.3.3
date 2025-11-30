@@ -1,0 +1,85 @@
+	<!-- get gift card modal start -->
+<div class="modal fade" id="getGiftCardModal" tabindex="-1" role="dialog" aria-labelledby="{:l("Get Card")}" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header  d-flex align-items-center">
+				<h5 class="modal-title">
+					<div class="coin-title d-flex align-items-center">
+						<div class="title">
+							{:l("Get Card")}</span>
+						</div>
+					</div>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="{:l("Close")}">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-pills nav-fill m-t-40" role="tablist">
+					<li class="nav-item col-sm-12 col-md-4">
+						<a aria-selected="true" class="nav-link" data-toggle="pill" href="#check-value" role="tab"> <i class="ion ion-md-search"></i> {:l("Check Value")}
+							<span class="description">{:l("Enter card number to check card\'s value and status")}</span></a>
+					</li>
+					<li class="nav-item col-sm-12 col-md-4">
+						<a aria-selected="false" class="nav-link" data-toggle="pill" href="#add-card" role="tab"> <i class="ion ion-md-add"></i> {:l("Add Card")}
+							<span class="description">{:l('Enter the gift card code and link the gift card to your account')}</span></a>
+					</li>
+					<li class="nav-item col-sm-12 col-md-4">
+						<a aria-selected="false" class="nav-link" data-toggle="pill" href="#get-crypto" role="tab"> <i class="ion ion-md-card "></i> {:l('Get Crypto')}
+							<span class="description">{:l("Enter the gift card code to have the crypto credited to your account")}</span></a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade p-t-15" role="tabpanel" id="check-value">
+						<form action="#">
+							<div class="form-group">
+								<label for="gift-card-no"></label>
+								<div class="input-group">
+									<input class="form-control" placeholder="{:l('Please enter the gift card number')}" type="text" id="gift-card-no">
+									<div class="input-group-append">
+										<button type="submit" class="input-group-text btn-2" onclick="checkit();">{:l('Check it')}</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="tab-pane fade p-t-15" role="tabpanel" id="add-card">
+						<form action="#">
+							<div class="form-group">
+								<label for="add-gift-card-no"></label>
+								<div class="input-group">
+									<input class="form-control" placeholder="{:l('Please enter the gift card number')}" type="text" id="add-gift-card-no">
+									<div class="input-group-append">
+										<button type="submit" class="input-group-text btn-2" onclick="redeemit1();">{:l('Redeem')}</button>
+									</div>
+								</div>
+							</div>
+							<p>
+								{:l('We are not responsible for the illegal behavior or fraud of any third party associated with any Gift card; and assumes no liability to you. I accept and accept the Exchange Gift Card Terms')} </p>
+							<p>
+								{:l('To view the full Terms and Conditions for the gift card, please visit the Help Center')} </p>
+						</form>
+					</div>
+					<div class="tab-pane fade p-t-15" role="tabpanel" id="get-crypto">
+						<form action="#">
+							<div class="form-group">
+								<label for="gc-gift-card-no"></label>
+								<div class="input-group">
+									<input class="form-control" placeholder="{:l('Please enter the gift card number')}" type="text" id="gc-gift-card-no">
+									<div class="input-group-append">
+										<button type="submit" class="input-group-text btn-2" onclick="redeemit2();">{:l('Redeem now')}</button>
+									</div>
+								</div>
+							</div>
+							<p>
+								{:l('We are not responsible for the illegal behavior or fraud of any third party associated with any Gift card; and assumes no liability to you. I accept and accept the Exchange Gift Card Terms')} </p>
+							<p>
+								{:l('To view the full Terms and Conditions for the gift card, please visit the Help Center')} </p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- get gift card modal end -->

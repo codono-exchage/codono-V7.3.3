@@ -1,0 +1,258 @@
+<include file="Public:header" />
+		<!-- Page content -->
+		<div class="page-container">	
+	
+<include file="Finance:left" />
+<div class="content-wrapper">
+		<!-- Main content -->
+<div class="panel panel-flat">
+		
+			<div class=" panel-heading" >
+					<div class="btn-group btn-group-justified">
+							<span class="btn-group">	
+						<a href="/Fx/records" id="step3" class="btn btn-flat ">{:l('My Records')}</a>
+                    </span>
+	                <span class="btn-group">
+                        <a href="/Fx/index" id="step1" class="btn btn-flat">Fx {:l('Exchange')}</a></span>
+					<span class="btn-group">	
+						<a href="{:U('Fx/bank')}" class="btn btn-flat active current ">Fx Transfer Banks</a>
+                    </span>
+
+				</div>
+
+			</div>
+<div class="panel-body">
+			<div class="ydt-bank">
+				<div class="yb-list-window">
+						<div id="bank_wrap"  data-on-cls="current" data-page-num="4" class="yb-list">
+							<div class="row">
+							<div class="col-xs-12 col-sm-12">
+							<div class="panel panel-info yt-add text-center" data-toggle="modal" data-target="#bankmodal" data-whatever="@mdo" >
+								
+								<h5 class="content-group">
+									<span class="label label-flat label-rounded label-icon border-grey text-grey mr-10">
+										<i class="icon-plus3"></i>
+									</span>
+								Add New Fx Bank</h5>
+								
+								</div>
+							</div>
+					
+							</div>
+			
+							
+							<div class="row">
+							<volist name="UserBank" id="vo">		
+									<div class="col-xs-12 col-sm-6 col-md-4">
+									
+												<!-- Bank acconts-->
+						<div class="panel panel-info">
+							<div class="panel-body text-center">
+								<h5 class="content-group">
+									<span class="label label-flat label-rounded label-icon border-grey text-grey mr-10">
+										{$vo.coin}
+									</span>
+										{$vo.truename}
+								</h5>
+
+								
+
+								<ul class="list list-icons">
+									<li>
+										<i class="icon-credit-card text-success position-left"></i>
+										{$vo.bankcard} 
+									</li>
+										<li>
+										<i class="icon-station text-success position-left"></i>
+										{$vo.bank},{$vo.bankaddr}
+									</li>
+
+								</ul>
+							</div>
+
+
+
+							<div class="panel-footer text-center">
+
+							<a href="javascript:void(0)" class="btn btn-danger btn-md"  data="{$vo.id}" onclick="bank_del(this)"><span>{:l('UNBUNDLING')}</span></a>
+							</div>
+						</div>
+						<!-- /Bank accounts -->
+				
+									</div>
+									</volist>			
+							</div>
+							
+						</div>
+						</div>
+					</div>
+				
+				<div class="yb-arrows">
+					<div id="bank_pre_btn" class="yb-ico-left i-hide"></div>
+					<div id="bank_next_btn" class="yb-ico-right i-hide"></div>
+				</div>
+			
+		</div>
+	</div>
+</div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="bankmodal" id="bankmodal">
+<div class="modal-dialog" role="document">
+<div class="panel">
+	 <div class="panel-heading">
+	 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="text-white">&times;</span></button>
+	 <h4>{:l('ADD_A_WITHDRAWAL_ADDRESS')}</h4></div>
+	<div class="modal-body">
+	<form id="form-login1" class="">
+
+		<div class="form-group">
+			<div class="control-label">{:l('Fiat')}</div>
+			<select name="bank" id="bank_coinname" class="form-control">
+				<option value="" selected="selected">--{:l('CHOOSE_A_CURRENCY')}--</option>
+				<volist name="C['rmb_list']" id="vo">
+								<option value="{$vo.name}" selected>{$vo.name|strtoupper} [{$vo.title}]</option>
+				</volist>
+				 </select>
+				 <div class="hint">Select Fiat</div>
+		</div>
+		<div class="form-group">
+			<div class="control-label">{:l('BANK')}</div>
+				 <input name="bank" id="bank_bank" class="form-control" type="text" placeholder="ex. Bank of america">
+				 <div class="hint">Bank Name</div>
+		</div>
+
+		<div class="form-group">
+			<div class="control-label">{:l('BRANCH_ACCOUNT')}</div>
+			<input id="bank_bankaddr" class="form-control" type="text" placeholder="ex. BOFAUS3MXXX">
+			<div class="hint">SWIFT/IBAN ETC</div>
+		</div>
+		<div class="form-group">
+			<div class="control-label">{:l('ACCOUNT_NAME')}</div>
+			<input id="bank_username" class="form-control" type="text" value="{$truename}" placeholder="ex. Matt Dave">
+			<div class="hint">Account Holders Name</div>
+		</div>
+		<div class="form-group">
+			<div class="control-label">{:l('BANK_CARD_NUMBER')}</div>
+			<input id="bank_bankcard" class="form-control" type="text" placeholder="ex. 256374374799893289">
+			<div class="hint">Account Number</div>
+		</div>
+		<div class="form-group">
+			<input type="button" class="btn btn-info btn-block" value="{:l('ADD_IT_NOW')}" onclick="bank_up();">
+		</div>
+	</form>
+	</div>
+	
+	</div>
+	</div>
+</div>
+
+<div id="step2" class="all_mask" style="height: 0px;display: none;"></div>
+<script>
+	$(function () {
+		var height = $(document).height();
+		if (height < 1000) {
+			height = 1000;
+		}
+		$('#step2').height(height);
+
+	});
+	function showA() {
+		$("#step1").show();
+		$("#step2").show();
+	}
+
+	function showB() {
+		$("#step1").hide();
+		
+		$("#step2").hide();
+	}
+	
+	function bank_up() {
+
+		var bank        = $('#bank_bank').val();
+
+		var bank_coinname    = $('#bank_coinname option:selected').val();
+		var bankaddr    = $('#bank_bankaddr').val();
+		var bankcard    = $('#bank_bankcard').val();
+		
+		var truename =$('#bank_username').val();
+		if (truename == "" || truename == null) {
+			layer.tips("Enter account name", '#bank_username', {tips: 2});
+			return false;
+		}
+		if (bank_coinname == "" || bank_coinname == null) {
+			layer.tips("{:l('PLEASE_SELECT_CURRENCY')}", '#bank_coinname', {tips: 2});
+			return false;
+		}
+		if (bankaddr == "" || bankaddr == null) {
+			layer.tips("{:l('ENTER_ACCOUNT_BRANCH')}", '#bank_bankaddr', {tips: 2});
+			return false;
+		}
+		if (bankcard == "" || bankcard == null) {
+			layer.tips("{:l('PLEASE_ENTER_THE_BANK_ACCOUNT_')}", '#bank_bankcard', {tips: 2});
+			return false;
+		}
+		
+		if(bankcard.length < 5 || bankcard.length > 30){
+			layer.tips("{:l('PLEASE_ENTER_THE_CORRECT_BANK_')}", '#bank_bankcard', {tips: 2});
+			return false;
+		}
+		$.post("{:U('Fx/upbank')}", {
+			
+			bank: bank,
+			coin: bank_coinname,
+			bankaddr: bankaddr,
+			bankcard: bankcard,
+			truename: truename
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	}
+	function bank_del(_this) {
+		var id = $(_this).attr('data');
+		layer.config({
+			extend: 'extend/layer.ext.js'
+		});
+		layer.ready(function () {
+			layer.prompt({
+				title: "{:l('ENTER_THE_TRANSACTION_PASSWORD')}",
+				formType: 1
+			}, function (val) {
+				if (val) {
+					$.post("{:U('Fx/delbank')}", {id: id, paypassword: val}, function (data) {
+						if (data.status == 1) {
+							layer.msg(data.info, {icon: 1});
+							location.reload();
+						} else {
+							layer.msg(data.info, {icon: 2});
+							if (data.url) {
+								window.location = data.url;
+							}
+						}
+					}, "json");
+				}
+				;
+			});
+		});
+	}
+</script>
+
+
+
+<script>
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_out').addClass('active');
+</script>	
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,105 @@
+<style>
+
+.content {width:100%;overflow:hidden;margin:0px auto 0;}
+.content_l {width:665px;overflow:hidden;float:left;}
+.content_r {width:310px;overflow:hidden;float:right;}
+.title {font-size:16px;height:32px;line-height:32px;}
+/*links*/
+#links {width:100%;height:54px;overflow:hidden;float:left;margin:0 10px;}
+#links ul {height:42px;padding-top:11px;overflow:hidden;width:2000px;}
+#links li {float:left;width:90px;margin:0 10px;display:inline;}
+#links img {display:block;width:90px;height:32px;overflow:hidden;}
+#links a:hover img {opacity:0.8;filter:alpha(opacity=80);}
+
+.slideContainer{position: relative;z-index:0;}
+
+</style>	
+
+	
+<div class="row"><div class="col-sm-12">
+<div class="panel panel-info">
+<div class="panel-body">
+        <div id="links">
+            <ul id="slideContainer" class="slideContainer" >
+                
+				
+				
+	<volist name="indexLink" id="vo">
+		<li>
+			<a href="{$vo['url']}" alt="{$vo['title']}" title="{$vo['title']}" target="_blank" >
+				<img src="/Upload/link/{$vo['img']}">
+			</a>
+		</li>
+	</volist>	
+				
+				
+            </ul>
+        </div>
+    </div>  
+</div></div>
+</div>
+
+<script type="text/javascript">
+
+//c THE_VALUE_OF_EACH_SCROLL_NUMBER
+                var slideContainer = $('#slideContainer'), c = 1, s_w = 110 * c, counts_l = 0, counts_r = 0, maxCounts = slideContainer.find('li').size() - 0, gameOver = true, slideCounts = 10, sTimer;
+
+                function link_next_event() {
+                    if (gameOver) {
+                        gameOver = false;
+                        counts_r++;
+                        slideContainer.animate({
+                            left: '-=' + s_w
+                        }, 500, function() {
+                            gameOver = true;
+                            slideContainer.animate({
+                                left: '+=' + s_w
+                            }, 0);
+                            slideContainer.find('li:lt(' + c + ')').clone().appendTo(slideContainer);
+                            slideContainer.find('li:lt(' + c + ')').remove();
+                        });
+                    }
+                }
+
+                lastCLiHtml();
+                slideContainer.find('li:gt(' + (maxCounts - 1) + ')').remove();
+                function lastCLiHtml() {
+                    var html = '';
+                    slideContainer.find('li:gt(' + (maxCounts - c - 1) + ')').each(function() {
+                        html += '<li>' + $(this).html() + '</li>';
+                    });
+                    slideContainer.html(html + slideContainer.html()).css({
+                        'margin-left': -s_w + 'px'
+                    });
+                }
+
+                var l_hover = false, m_hover = false, r_hover = false;
+                $('#links').on({
+                    'mouseover': function() {
+                        m_hover = true;
+                        clearInterval(sTimer);
+                    },
+                    'mouseout': function() {
+                        m_hover = false;
+                        isStartGo();
+                    }
+                });
+
+
+                setInverterTimer();
+                function setInverterTimer() {
+                    clearInterval(sTimer);
+                    sTimer = setInterval(function() {
+                        link_next_event();
+                    }, 2000);
+                }
+
+                function isStartGo() {
+                    var st = setTimeout(function() {
+                        if (!l_hover && !m_hover && !r_hover) {
+                            setInverterTimer();
+                        }
+                    }, 1000);
+                }
+  
+</script>

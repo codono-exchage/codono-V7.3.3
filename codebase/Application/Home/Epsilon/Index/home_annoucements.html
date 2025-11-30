@@ -1,0 +1,25 @@
+<!-- Announcements Start -->
+	<div class="container p-t-20">
+		<div class="row">
+			<div class="col-12">
+				<div class="announcements-block d-flex align-items-center">
+					<div class="icon">
+						<i class="ion ion-md-megaphone"></i>
+					</div>
+					<div class="announcements-single-item">
+					
+						<volist name="index_news" id="vo" offset="0" length="4">
+								<div>
+									<a href="{:U('Article/detail','id='.$vo['id'])}">{$vo['title']|msubstr=0,180}</a>
+								</div>
+						</volist>
+						
+					</div>
+					<div class="read-more ml-auto">
+						<a href="{:U('Article/index')}">{:l("More")} <i class="ion ion-md-arrow-forward"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Announcements End -->

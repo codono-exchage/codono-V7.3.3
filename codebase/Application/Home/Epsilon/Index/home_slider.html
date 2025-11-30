@@ -1,0 +1,145 @@
+<style>li.slick-active {
+  display: none !important;
+}
+@media (min-width: 500px) {
+    .graph {
+        display: none !important;
+    }
+}
+
+</style>
+<!-- Home Slider Start -->
+<div class="home-banner">
+  <div class="xbanner-filter " >
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-6 d-flex flex-column justify-content-center" style="min-height: 100vh;">
+          <div>
+          <volist name="indexAdver" id="slide">
+		<?php $h1_h2 = explode(',', $slide['name']);?>
+          <h1><span class="font-light">{$h1_h2[0]}</span>
+            <span class="font-medium theme-color">{$h1_h2[1]}</span></h1>
+          <h4 class="mt-4">
+            {$slide.title}
+          </h4>
+</volist>
+</div>
+<div class="mt-5">
+          <eq name="Think.session.userId" value="0">
+          
+            <div class="form-group">
+              <div class="input-group mb-3 dark-bg">
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="{:l('Please enter email')}"
+                />
+                <div class="input-group-append">
+
+                <button class="btn btn-2" onclick="signup();">
+                  {:l("Signup")}
+                </button>
+                </div>
+              </div>
+            </div>
+            <div class="hr-box"><div class="hr-line"></div><div data-bn-type="text" class="hr-text p-t-20 p-b-20">{:l('Or Login')}</div><div class="hr-line"></div></div>                
+            <div class="d-flex align-items-center mt-3">
+              <div class="d-flex align-items-center w-100">
+                <div class="p-2 w-50">
+                  <a href="{:U('Login/googleLogin')}" class="btn white-bg btn-success btn-block btn-md common-text d-flex align-items-center justify-content-center" style="background-color: var(--bs-primary);">
+                    <img src="/Public/template/epsilon/img/redesign/google-icon.svg" style="margin-right: 5px;"> {:l('Google Login')}
+                  </a>
+                </div>
+                <div class="p-2 w-50">
+                  <a href="{:U('Login/login')}" class="btn white-bg btn-primary btn-block btn-md common-text d-flex align-items-center justify-content-center" style="background-color: var(--bs-primary);">
+                    <img src="/Public/template/epsilon/img/transfer-arrow.svg" style="margin-right: 5px;"> {:l('Email login')}
+                  </a>
+                </div>
+              </div>
+            </div>
+          
+            <else/>
+            <div class="form-group ">
+              <div class="input-group mb-3 dark-bg">
+                <select
+                  id="easycoin"
+                  class="bootstrap-select dark-bg"
+                  data-live-search="true"
+                  data-live-search-placeholder="{:l('Search')}"
+                  data-width="8rem"
+                >
+                  <volist name="cryptoList" id="ac">
+                    <option
+                      data-value="{$ac['name']|strtoupper}"
+                      data-title="{$ac['title']}"
+                      data-balance="{$ac['balance']}"
+                      data-subtitle="{$ac['name'] |strtoupper}"
+                      data-content="<img src='__UPLOAD__/coin/{$ac['img']}'> <span>{$ac['name']|strtoupper}</span>"
+                    ></option>
+                  </volist>
+                </select>
+                <input
+                  type="number"
+                  name="amount"
+                  id="easyamount"
+                  class="form-control"
+                  placeholder="{:l('Please enter amount')}"
+                />
+                <button class="btn btn-2 m-l-5" onclick="easytrade();">
+                  {:l("Buy")}
+                </button>
+              </div>
+            </div>
+          
+          </eq>
+        </div>
+        </div>
+        
+        <div class="col-12 col-md-12 col-lg-6 hide-mobile">
+          <div class="video-single-item arrow-black">
+            <volist name="indexAdver" id="slide">
+
+              <if condition="$slide.embed_link neq ''">
+              <div  onclick="window.location.href='{$slide.url}'">
+                <a src="" style="">
+                  <iframe
+                  width="437"
+                  height="235"
+                  src="{$slide.embed_link}"
+                >
+                </iframe>
+                </a>
+              </div>
+              <else/>
+              <div  onclick="window.location.href='{$slide['url']}'">
+                <a src="" style="">
+                  <img data-u="image" title="" alt="" src="__UPLOAD__/ad/{$slide.img}"/>
+      
+                </a>
+              </div>
+            </if>
+            </volist>	
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <include file="Index:home_pricing_ticker" />
+</div>
+<!-- Home Slider End -->
+<script>
+  function signup() {
+    var email = $('#email').val(); // Get the value from the input with ID 'email'
+    if (email) { // Check if the email input is not empty
+        var url = "{:U('Login/register')}"+'?email=' + encodeURIComponent(email);
+        window.location.href = url; // Redirect the browser to the constructed URL
+    } else {
+      layer.tips('Please enter email ', '#email', {tips: 3});
+    }
+}
+
+</script>

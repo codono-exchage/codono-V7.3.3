@@ -1,0 +1,76 @@
+<div class="navbar navbar-default navbar-component">
+					<ul class="nav navbar-nav no-border visible-xs-block">
+						<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-content"><i class="icon-circle-down2"></i></a></li>
+					</ul>
+
+					<div class="navbar-collapse collapse" id="navbar-content">
+						<ul class="nav navbar-nav">
+							<li><a href="{:U('Shop/index')}"><i class="icon-store2 position-left"></i> {:l('Shop')}</a></li>
+							<li>
+							<a href="{:U('Shop/log')}"><i class="icon-history position-left"></i>  {:l('PURCHASE_HISTORY')}</a></li>
+							<li>
+							<a href="{:U('User/goods')}"><i class="icon-address-book position-left"></i> {:l('SHIPPING_ADDRESS')}</a>
+							</li>
+							<li class="dropdown">
+														<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+															<i class="icon-list2 position-left"></i>
+															{:l('CATEGORIES')}
+															<span class="caret"></span>
+														</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+								<li><a href="{:U('Shop/index')}" <notpresent name="Think.get.type">class="current"</notpresent>><i <i class="icon-circle-small position-left"></i>     {:l('ALL CATEGORIES')}</a></li>
+								<volist name="shop_type_list" id="vo">
+								<li><a href="{:U('Shop/index' ,array('name'=>$name,'type'=>$key,'deal'=>$deal,'addtime'=>$addtime,'price'=>$price))}"
+								<eq name="Think.get.type" value="$key">class="active"</eq>><i class="icon-circle-small position-left"></i>     {$vo}</a></li>
+								</volist>														
+								</ul>
+							</li>
+						</ul>
+
+						<div class="navbar-right">
+									<form class="navbar-form navbar-left" action="/Shop/index" method="get">
+											<div class="form-group has-feedback">
+												<input type="search" name="name" class="form-control input-xs" placeholder="Search field" autocomplete="off" value="{$name}">
+												 <input type="hidden" name="c" value="List">
+												 <input type="hidden" name="spm" value="921">
+												<div class="form-control-feedback">
+													<i class="icon-search4 text-muted text-size-base"></i>
+												</div>
+											</div>
+										</form>
+							<ul class="nav navbar-nav">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										<i class="icon-share4"></i> Filter
+										<span class="visible-xs-inline-block position-right">Filter</span>
+										<span class="caret"></span>
+									</a>
+
+									<ul class="dropdown-menu dropdown-menu-right">
+                    <li><a href="{:U('Shop/index',array('type'=>$type))}"
+                    <if condition="empty($price) AND empty($deal)  AND empty($addtime)  ">class="active"</if>
+                    ><span style="background: none;" about="" accesskey="">{:l('Default')}</span></a></li>
+                    <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>$deal,'addtime'=>$addtime,'price'=>'price_desc'))}"
+                    <eq name="price" value="price_desc">class="active"</eq>
+                    ><span style="background: none;" about="" accesskey="">{:l('PRICE_HIGH_TO_LOW')}</span></a></li>
+                    <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>$deal,'addtime'=>$addtime,'price'=>'price_asc'))}"
+                    <eq name="price" value="price_asc">class="active"</eq>
+                    ><span style="background: none;">{:l('PRICE_LOW_TO_HIGH')}</span></a></li>
+                    <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>'deal_desc','addtime'=>$addtime,'price'=>$price))}"
+                    <eq name="deal" value="deal_desc">class="active"</eq>
+                    ><span style="background: none;">{:l('HIGH_TO_LOW_SALES')}</span></a></li>
+                    <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>'deal_asc','addtime'=>$addtime,'price'=>$price))}"
+                    <eq name="deal" value="deal_asc">class="active"</eq>
+                    ><span style="background: none;">{:l('SALES_FROM_LOW_TO_HIGH')}</span></a></li>
+                    <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>$deal,'addtime'=>'addtime_desc','price'=>$price))}"
+                    <eq name="addtime" value="addtime_desc">class="active"</eq>
+                    ><span style="background: none;">{:l('ADDED_TIME_FROM_THE_FIRST_TO_T')}</span></a></li>
+                    <li><a href="{:U('Shop/index',array('name'=>$name,'type'=>$type,'deal'=>$deal,'addtime'=>'addtime_asc','price'=>$price))}"
+                    <eq name="addtime" value="addtime_asc">class="active"</eq>
+                    ><span style="background: none;">{:l('ADDED_TIME_AFTER_THE_FIRST')}</span></a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>

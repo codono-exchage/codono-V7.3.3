@@ -1,0 +1,184 @@
+<include file="Public:header"/>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="h1-title col-sm-4">{:l('Spot Trades')}</span>
+			<small class="col-sm-8 text-right">Total {$codono_count} Records : Amount :{:L('SITE_CURRENCY')}{$codono_getSum|default="0"}</small>
+		</div>
+		
+		<div class="d-flex flex-wrap gap-2 tomato-1 mb-1">
+			<div class="fl">
+			<a class="btn btn-sm btn-info " href="{:U('Trade/liqindex')}" >{:l('Liquidity Orders')}</a>
+			<a class="btn btn-sm btn-warning " href="{:U('Trade/stoporders')}" >{:l('Stop Orders')}</a>
+			</div>
+			<div class="search-form fr cf">
+				<div class="sleft">
+					<form name="formSearch" id="formSearch" method="get" name="form1" class="d-flex align-items-center">
+						<select  name="market" class="form-select">
+							<option value=""
+							<empty name="Think.get.market">{:l('selected')}</empty>
+							>{:l('Market')}</option>
+							<volist name="C['market']" id="vo">
+								<option value="{$vo['name']}"
+								<eq name="vo['name']" value="$Think.get.market">{:l('selected')}</eq>
+								>{$vo['title']}</option>
+							</volist>
+						</select>
+						<select  name="status" class="form-select">
+							<option value=""
+							<empty name="Think.get.status">selected</empty>
+							>{:l('All states')}</option>
+                            <option value="0" <eq name="Think.get.status" value="0">{:l('selected')}</eq>>{:l('In Transaction')}</option>
+							<option value="1" <eq name="Think.get.status" value="1">{:l('selected')}</eq>>{:l('Completed')}</option>
+							<option value="2" <eq name="Think.get.status" value="2">{:l('selected')}</eq>>{:l('Revoked')}</option>
+						</select>
+						
+						
+						
+						<select  name="type" class="form-select">
+							<option value=""
+							<empty name="Think.get.type">{:l('selected')}</empty>
+							>{:l('Transaction Type')}</option>
+							<option value="1" <eq name="Think.get.type" value="1">{:l('selected')}</eq>>{:l('Buy')}</option>
+							<option value="2" <eq name="Think.get.type" value="2">{:l('selected')}</eq>>{:l('Sell')}</option>
+						</select>
+						
+						
+						
+						
+						<select style=" width: 160px; float: left; margin-right: 10px;" name="field" class="form-select">
+							<option value="username"
+							<eq name="Think.get.field" value="username">{:l('selected')}</eq>
+							>{:l('Username')}</option>
+						</select>
+						<input type="text" name="name" class="search-input form-control  " value="{$Think.get.name}" placeholder="Enter text to search" style="">
+						<a class="sch-btn" href="javascript:;" id="search"> <i class="btn-search"></i> </a>
+					</form>
+					<script>
+						//Search function
+						$(function () {
+							$('#search').click(function () {
+								$('#formSearch').submit();
+							});
+						});
+						//Enter search
+						$(".search-input").keyup(function (e) {
+							if (e.keyCode === 13) {
+								$("#search").click();
+								return false;
+							}
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+	
+		<div class="card card-body mt-2 table-responsive">
+			<table class="table table-sm emptyx">
+				<thead class="table-light">
+				
+				<tr>
+					<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+					<th class="">{:l('ID')}</th>
+					<th class="">{:l('Username')}</th>
+					<th class="">{:l('Market')}</th>
+					<th class="">{:l('Price')}</th>
+					<th class="">{:l('QTY')}</th>
+					<th class="">{:l('Deal done')}</th>
+					<th class="">{:l('Total')}</th>
+					<th class="">{:l('Types')}</th>
+					<th class="">{:l('Time')}</th>
+					<th class="">{:l('Status')}</th>
+					<th class="">{:l('Option')}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<notempty name="list">
+					<volist name="list" id="vo">
+						<tr>
+							<td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}"/></td>
+							<td>{$vo.id}</td>
+							<td><?php if(!$vo['username']){ echo "<i style='color:red'>{:l('LiqTool')}</i>";}else{ echo $vo['username'];}?> [{$vo.userid}]</td>
+							<td>{$vo['market']}</td>
+							<td>{$vo['price']|Num}</td>
+							<td>{$vo['num']|Num}</td>
+							<td>{$vo['deal']|Num}</td>
+							<td>{$vo['mum']|Num}</td>
+							<td>
+								<eq name="vo.type" value="1">
+									<span class="badge badge-pill badge-soft-success font-size-11">{:l('Buy')}</span>
+									<else/>
+									
+									<span class="badge badge-pill badge-soft-danger font-size-11">{:l('Sell')}</span>
+								</eq>
+							</td>
+							<td>{$vo.addtime|addtime}</td>
+							<td>
+								<eq name="vo.status" value="0"><span class="badge badge-pill badge-soft-info font-size-11">{:l('Running')}</span></eq>
+								<eq name="vo.status" value="1">
+									<span class="badge badge-pill badge-soft-success font-size-11">{:l('Matched')}</span></eq>
+								<eq name="vo.status" value="2"><span class="badge badge-pill badge-soft-danger font-size-11">{:l('Revoked')}</span></eq>
+							</td>
+							<td>
+								<eq name="vo.status" value="0">
+									<a href="{:U('Trade/reject?id='.$vo['id'])}" class="ajax-get btn btn-primary btn-sm">{:l('Undo')}</a>
+									<button class="btn btn-danger btn-sm" onclick="resolve({$vo.id},{$vo.type},'{$vo.market}','{$vo.price}');">{:l('Force Match with Liquidity')}</button>
+								</eq>
+							</td>
+						</tr>
+					</volist>
+					<else/>
+					<td colspan="12" class="text-center">{:l('No contents!')}</td>
+				</notempty>
+				</tbody>
+			</table>
+			<div class="page">
+				<div>{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+	function resolve(id,type,market,price)
+	{
+	
+	var res = market.split("_");
+	var xnb=res[0];
+	var rmb=res[1];
+	if(type==1){
+	var msg = 'User is trying to buy '+xnb+' at price '+price+' '+rmb+' , do you Confirm?';
+	}else{
+	var msg = 'User is trying to sell '+xnb+' at price '+price+' '+rmb+',  do you Confirm?';
+	}
+	
+	
+     layer.confirm(msg, {
+         btn: ['Confirm','Cancel'] //PUSH_BUTTON
+   	}, function(){
+        $.post("/Admin/Trade/forcematch/",{id:id} , function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+
+                layer.msg(data.info, {icon: 1});
+				location.reload();
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+			   setTimeout(function(){return true;},30000);
+			
+        }, 'json');
+		});
+    }
+
+		highlight_subnav("{:U('Trade/index')}");
+	</script>
+</block>

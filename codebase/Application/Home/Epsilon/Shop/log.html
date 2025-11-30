@@ -1,0 +1,113 @@
+<include file="Public:header" />
+<!-- Page container -->
+
+<div class="container wallet-page">
+	<div class="full-box row">
+		<include file="User:sidebar" />
+
+
+		<!-- Main content -->
+		<div class="col-10">
+			<include file="User:top_bar" />
+        <div class="row card p-20">
+          <div class="col-xl-12 col-md-12 white-bg mb-3">
+            <div class="col-xl-12 col-md-12 mt-3">
+              <div class="card m-b-30">
+                <ul class="nav nav-pills">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/shop">{:l('Shopping centre')}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">{:l('Order History')}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/user/goods"
+                      >{:l('My Delivery Addresses')}</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-responsive text-center" id="investLog_content">
+                <thead>
+                  <tr>
+                    <th>{:l('BUY_TIME')}</th>
+                    <th>{:l('BUY_GOODS')}</th>
+                    <th>{:l('COMMODITY_PRICE')}</th>
+                    <th>{:l('QUANTITY')}</th>
+                    <th>{:l('TOTAL_AMOUNT')}</th>
+                    <th>{:l('PAYMENT_METHOD')}</th>
+                    <th>{:l('SHIPPING_ADDRESS')}</th>
+                    <th class="">{:l('STATUS')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <volist name="list" id="vo">
+                    <tr>
+                      <td>{$vo.addtime|addtime}</td>
+                      <td>
+                        <a
+                          href="{:U('Shop/view?id='.$vo['shopid'])}"
+                          class="btn btn-xs p-0 btn-warning"
+                          >{:l('View Product')}</a
+                        >
+                      </td>
+                      <td>{$vo['price']|Num}</td>
+                      <td>{$vo['num']|Num}</td>
+                      <td>{$vo['mum']|Num}</td>
+                      <td>{$vo['coinname']}</td>
+                      
+                      <td>{$vo['addr']}</td>
+                      <td>
+                        <eq name="vo.status" value="1">{:l('COMPLETED')}</eq>
+                        <eq name="vo.status" value="2">{:l('REVOKED')}</eq>
+                        <eq name="vo.status" value="0">{:l('UNFILLED')}</eq>
+                        <eq name="vo.status" value="3"
+                          >{:l('SHIPPED')}
+                          <a
+                            onclick="reward({$vo['id']})"
+                            class="btn btn-xs btn-success"
+                            >{:l('CONFIRMATION_OF_RECEIPT')}</a
+                          >
+                        </eq>
+                      </td>
+                    </tr>
+                  </volist>
+                </tbody>
+              </table>
+              <div class="pages">{$page}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Shop Listing End -->
+  </div>
+  <script>
+    //MENU_HIGHLIGHTS
+    $("#shop_box").addClass("active");
+
+    function reward(id) {
+      $.post(
+        "/Shop/reward",
+        {
+          id: id,
+        },
+        function (data) {
+          if (data.status == 1) {
+            layer.msg(data.info, { icon: 1 });
+            window.location = "/Shop/log";
+          } else {
+            layer.msg(data.info, { icon: 2 });
+            if (data.url) {
+              window.location = data.url;
+            }
+          }
+        },
+        "json"
+      );
+    }
+  </script>
+  <include file="Public:footer_minimal" />
+</div>

@@ -1,0 +1,40 @@
+<div id="PreviousModal" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header bg-info">
+								<h6 class="modal-title">{:l('Error')}:</h6>
+							</div>
+
+							<div class="modal-body" id="previoushtml">
+
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-info btn-block text-center" data-dismiss="modal" id="ok_sure">{:l('OK')}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /info modal -->
+<div id="modelpreviousdrop" class="modal-backdrop fade in" style="display:none;"></div>
+
+<script>
+
+	$("#ok_sure").click(function(){
+		$('#PreviousModal').css('display','none');
+		$('#modelpreviousdrop').css('display','none');
+		$.cookies.set('previous_error', 0);
+	});
+
+	$(function () {
+        var previous_error_msg = $.cookies.get('previous_error');
+        if (previous_error_msg!=0 && previous_error_msg!=null) {
+			$('#PreviousModal').css('display','block');
+			$('#PreviousModal').removeClass("fade");
+			$('#PreviousModal').addClass("fade in");
+			$('#previoushtml').html(decodeURIComponent(($.cookies.get('previous_error')).replace(/\+/g,  " ")));
+			$('#modelpreviousdrop').css('display','block');
+			$.cookies.set('previous_error', 0);
+        }
+    });
+</script>

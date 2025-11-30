@@ -1,0 +1,116 @@
+<include file="Public:header"/>
+
+<div class="page-container" >
+		
+
+		<div class="row ">
+		<div class="page-header text-center text-white"><h1>{:l('Faucets')}</h1></div>
+		<div class="col-xs-12">
+				<div class="btn-group btn-group-justified">
+								<div class="btn-group">
+									<a type="button" class="btn bg-slate-700" href="#jxz" data-toggle="tab">{:l('PROCESSING')}</a>
+								</div>
+								<div class="btn-group">
+									<a type="button" class="btn bg-slate-700" href="#jjks" data-toggle="tab">{:l('PREHEATING')}</a>
+								</div>
+								<div class="btn-group">
+									<a type="button" class="btn bg-slate-700" href="#yjs" data-toggle="tab">{:l('OVER')}</a>
+								</div>
+				</div>
+							<hr/>
+				<div id="crowdfundingcontent" class="tab-content">
+
+					<div role="tabpanel" class="tab-pane fade in active" id="jxz">
+					<include file="Faucet:faucet_list_widget"/>
+					</div>
+					<div role="tabpanel" class="tab-pane fade in" id="jjks">
+						<include file="Faucet:faucet_list_widget_upcoming"/>
+						</div>
+					<div role="tabpanel" class="tab-pane fade " id="yjs">
+						<include file="Faucet:faucet_list_widget_expired"/>
+					</div>
+				</div>
+				
+
+			</div>
+
+			
+			
+		</div>
+
+		<div class="row">
+				<div class="col-sm-12">
+				<div class="panel panel-info">
+				<div class="panel-body">
+				<table class="table table-bordered table-condensed " id="orderlist">
+				</table>
+				</div>
+				</div>
+				</div>
+		</div>
+
+
+	</div>
+	<script>
+				var hints = "0";
+				if(hints == 1){
+					$('#hints').show();
+				}
+				$('#Faucet_box').addClass('active');
+				
+				$(".static").click(function() {
+					$(".tab-pane").removeClass("in");
+					$(".tab-pane").removeClass("active");
+					$(".static").removeClass("active");
+					$(this).addClass("active");
+					$("#" + $(this).attr("role")).addClass("active in");
+				});
+				
+			
+	
+	function buy_up(id) {
+	<php>if (!userid()){</php>
+	layer.msg("Please login first", {icon: 2});
+	<php>}else{</php>
+$.post("{:U('Faucet/upbuy')}", {
+			id: id,
+			token:""
+		}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location = "/faucet/log";
+			} else {
+				layer.msg(data.info, {icon: 2});
+				if (data.url) {
+					window.location = data.url;
+				}
+			}
+		}, "json");
+	<php>}</php>
+	}
+function getUselog() {
+        $.getJSON("/Faucet/getUselog?t=" + Math.random(), function (data) {
+            if (data) {
+                if (data['consumelog']) {
+                    var list = '<thead><tr><th>Time</th><th>Nickname</th><th>Coin</th><th>Amount</th></tr></thead><tbody>';
+                    var type = '';
+                    var typename = '';
+                    for (var i in data['consumelog']) {
+					var xdate = new Date(data['consumelog'][i]['addtime'] * 1000);
+					var iso = xdate.toISOString().match(/(\d{4}\-\d{2}\-\d{2})T(\d{2}:\d{2}:\d{2})/)
+					var truedate=iso[1] + ' ' + iso[2];
+                            list += '<tr><td >' + truedate + '</td><td >' + data['consumelog'][i]['username'] + '</td><td >' + data['consumelog'][i]['coinname'] + '</td><td >' + data['consumelog'][i]['price'] + '</td></tr>';
+							}
+							list +='</tbody>'
+                    $("#orderlist").html(list);
+                }
+            }
+        });
+        setTimeout('getUselog()', 5000);
+    }
+	$(function () {
+        getUselog();
+    });
+	</script>
+
+<include file="Public:footer_minimal"/>

@@ -1,0 +1,149 @@
+<include file="Public:header" />
+		<!-- Page content -->
+		<div class="page-container">	
+	
+		<include file="Finance:left" />
+
+		<!-- Main content -->
+			<div class="content-wrapper">
+		<div class="panel panel-flat">
+			<div class=" panel-heading" >
+					<div class="btn-group btn-group-justified">
+					<span class="btn-group">	
+						<a href="{:U('Finance/mytx')}" class="btn btn-flat  ">{:l('WITHDRAW')}</a>
+                    </span>
+					<span class="btn-group">	
+						<a href="{:U('Finance/outlog')}" class="btn btn-flat active current  ">{:l('LOG_IN_LOG')}</a>
+					</span>
+										<span class="btn-group">	
+						<a href="{:U('Finance/bank')}" class="btn btn-flat ">{:l('ADDRESSES')}</a>
+                    </span>
+				</div>
+				<span>
+												<a class="right" onclick="$('#hints').slideToggle();"><i class="fa fa-hand-o-right move fz_14 mr5"></i><span class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+				</h1>
+						<div id="hints" class="mytips" style="display:none;">
+
+				<p>               <notempty name="prompt_text">
+                    {$prompt_text}
+                </notempty></p>			</div>
+			</div>
+
+			<div class="panel-body ">
+				<div class="step2 f_body table-responsive  ">
+					<table class="table table-condensed" id="investLog_content">
+						<thead>
+						<tr>
+							<th>{:l('AMOUNT')}</th>
+							<th>{:l('FIAT')}</th>
+							<th>{:l('FEE')}</th>
+							<th>{:l('AMOUNT_ARRIVAL')}</th>
+							<th>{:l('WITHDRAW_ADDRESS')}</th>
+							<th>{:l('TIME')}</th>
+							<th>{:l('MEMO')}</th>
+							<th width="">
+								<span>
+									<select id="status-select">
+										<option value=""
+										<eq name="status" value="">selected</eq>
+										>{:l('ALL_STATES')}</option>
+										<option value="1"
+										<eq name="status" value="1">selected</eq>
+										>{:l('ALREADY_APPLIED')}</option>
+										<option value="2"
+										<eq name="status" value="2">selected</eq>
+										>{:l('WITHDRAW_SUCCESS')}</option>
+										<option value="3"
+										<eq name="status" value="3">selected</eq>
+										>{:l('REVOKED')}</option>
+										<option value="4"
+										<eq name="status" value="4">selected</eq>
+										>{:l('PROCESSING')}</option>
+									</select>
+								</span>
+							</th>
+						</tr>
+						</thead>
+						<tbody>
+						
+						
+						<volist name="list" id="vo">
+							<tr>
+								<td>{$vo['num']|default="0.00"}</td>
+								<td>{$vo['coin']}</td>
+								<td>{$vo['fee']|default="0.00"}</td>
+								<td>{$vo['mum']|default="0.00"}</td>
+								<td>{$vo['name']}</td>
+								<td>{$vo['addtime']|date='Y-m-d H:i:s',###}</td>
+								<td><if condition="$vo['memo']"><button class="btn btn-info btn-sm" onclick='showtx("{$vo['memo']}")'>Show</button><else/>--</if></td>
+								</td>
+								<td>
+									<eq name="vo.status" value="0">
+										{:l('ALREADY_APPLIED')}
+										<a onclick="out_reject(this)" data="{$vo['id']}" href="javascript:void(0)" style="color:#2674FF!important;">{:l('UNDO')}</a>
+									</eq>
+									<eq name="vo.status" value="1">
+										{:l('WITHDRAW_SUCCESS')}
+									</eq>
+									<eq name="vo.status" value="2">
+										{:l('REVOKED')}
+									</eq>
+									<eq name="vo.status" value="3">
+										{:l('PROCESSING')}
+									</eq>
+								</td>
+							</tr>
+						</volist>
+						
+						
+						
+						</tbody>
+					</table>
+					<div class="pages"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$("#status-select").val("{$status}");
+	$("#status-select").change(function () {
+		var status = $("#status-select option:selected").val();
+		var url    = '{:U('Finance/outlog')}';
+		if (status) {
+			url += '/status/' + status;
+		}
+		window.location = url;
+	});
+	function out_reject(_this) {
+		var id = $(_this).attr('data');
+		$.post("{:U('Finance/mytxReject')}", {id: id}, function (data) {
+			if (data.status == 1) {
+				layer.msg(data.info, {icon: 1});
+				window.location.reload();
+			} else {
+				layer.msg(data.info, {icon: 2});
+			}
+		}, "json");
+	}
+</script>
+
+
+
+
+
+<script>
+function showtx(tx){
+	layer.alert(tx, {title: "Withdrawal information",btn: ['Ok']});
+	}
+	var hints = "0";
+	if(hints == 1){
+		$('#hints').show();
+	}
+	$('#finance_box').addClass('active');
+	$('.finan_out').addClass('active');
+</script>	
+	
+<include file="Public:footer_minimal"/>

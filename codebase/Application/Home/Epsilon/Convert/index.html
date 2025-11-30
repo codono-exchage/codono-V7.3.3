@@ -1,0 +1,164 @@
+<include file="Public:header" />
+<!-- Swap Start -->
+
+	<section class="wallet-page">
+		<div class="container">
+			<div class="row justify-content-center inner-wrapper">
+				<div class="col-12">
+					<div class="easytrade-form-wrapper">
+						<div class="card m-100 rounded-lg p-30">
+							<h1 class="text-center m-b-30">{:l("Convert")} </h1>
+							
+								<div class="easy-trade-from">
+									<div class="form-group">
+									<label for="swapFrom">From</label>	
+									<select id="swapFrom" class="bootstrap-select selectpicker" data-live-search="true" data-live-search-placeholder="{:l('Search')}" data-width="100%">
+
+									<volist name="CoinList" id="ac">
+									<option   value="{$ac['name']|strtoupper}" data-value="{$ac['name']|strtoupper}"  data-title="{$ac['name']}" data-balance="{$ac['balance']}" data-content="<img src='__UPLOAD__/coin/{$ac['img']}'> <span>{$ac['name']|strtoupper}</span> <span class='value'>{$ac['balance']|NumToStr} </span>"></option>
+									</volist>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="swapTo">To</label>
+									<select id="swapTo" class="bootstrap-select selectpicker" data-live-search="true" data-live-search-placeholder="{:l('Search')}" data-width="100%">
+											
+										<volist name="CoinList" id="ac">
+										<option   value="{$ac['name']|strtoupper}" data-value="{$ac['name']|strtoupper}"  data-title="{$ac['name']}" data-balance="{$ac['balance']}" data-content="<img src='__UPLOAD__/coin/{$ac['img']}'> <span>{$ac['name']|strtoupper}</span> <span class='value'>{$ac['balance']|NumToStr} </span>"></option>
+										</volist>
+										</select>
+									</div>
+									<div class="tab-content">
+										<div class="tab-pane fade show active p-t-15" role="tabpanel" id="easy-trade-buy">
+											<div class="input-group">
+												<input class="form-control" placeholder="Amount you want to convert" type="number" id="convertamount" value="">
+												<div class="input-group-append">
+													<button class="btn btn-success" type="button" tabindex="0"  title="Max" id="putmax" ><strong>{:l('Max')}</strong></button>
+												</div>
+											</div>
+											<eq name="loggedIn" value="1">
+											<button id="buybutton" class="btn buy d-block w-100" onclick="trade();">
+												 {:l("Convert")}
+											</button>
+											<else/>
+											<a class="btn buy d-block w-100" href="{:U('Login/login')}">
+												{:l("Please Login")}
+											</a>
+											</eq>
+										</div>
+									
+									</div>
+								
+											 
+								</div>
+					
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		$(document).ready(function() {
+			 // Event listener for the Max button
+			 $('#putmax').click(function() {
+        // Get the balance of the selected option in the 'From' dropdown
+        var maxBalance = $('#swapFrom option:selected').data('balance');
+        // Set the value of the input field to this balance
+        $('#convertamount').val(maxBalance);
+    });
+			$('#swapFrom').val($('#swapFrom option:eq(0)').val()); // Set first option as default for 'From'
+			$('#swapTo').val($('#swapTo option:eq(1)').val());    // Set second option as default for 'To'
+			$('.selectpicker').selectpicker('refresh');          // Refresh the bootstrap-select plugin to reflect changes
+		});
+		
+jQuery(document).ready(function ($) {
+var base_coin_name =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+var base_coin_title =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-title');
+var base_coin_balance =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-balance');
+$(".coinname").html(base_coin_name);
+$(".cointitle").html(base_coin_title);
+$("#selectedcoin").val(base_coin_name);
+$("#sellamount").val(base_coin_balance);
+	document.querySelector('select#swapFrom').onchange = function(){   
+		var base_coin_name =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+		var base_coin_title =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-title');
+		var base_coin_balance =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-balance');
+		$(".coinname").html(base_coin_name);
+$(".cointitle").html(base_coin_title);
+$("#selectedcoin").val(base_coin_name);
+$("#sellamount").val(base_coin_balance);
+	};
+});
+function switchMarket(market){
+
+  if(market=='' || market==0)
+	{
+	layer.tips('Please enter amount!', '#bottomModal', {tips: 3});
+	return false;
+	}
+	console.log("Convert/index/market/"+market);
+	window.location = "{:SITE_URL}Convert/index/market/"+market;
+	
+}
+function trade(){
+
+  var amount=$("#convertamount").val();
+  if(amount=='' || amount==0)
+	{
+	layer.tips('Please enter amount!', '#convertamount', {tips: 3});
+	return false;
+	}
+   
+   var from_coin =document.querySelector('select#swapFrom').selectedOptions[0].getAttribute('data-value');
+if(from_coin=='' || from_coin==null)
+{
+layer.tips('Please select from coin!', '#swapFrom', {tips: 3});
+return false;
+}
+var to_coin =document.querySelector('select#swapTo').selectedOptions[0].getAttribute('data-value');
+if(to_coin=='' || to_coin==null)
+{
+layer.tips('Please select to coin!', '#swapTo', {tips: 3});
+return false;
+}
+
+layer.load(0, {shade: [0.5,'#8F8F8F']});
+$.post("{:U('Convert/doTrade')}", {
+			from_coin: from_coin,
+			to_coin: to_coin,
+			amount: amount,
+			
+		}, function (data) {
+		layer.closeAll('loading');
+			if (data.status == 1) {			
+				layer.msg(data.info, {icon: 1});
+				window.location='{:U("Finance/orders")}';
+			} else {
+				layer.alert(data.info, {title: "Info",btn: ['Ok']});
+			}
+		}, "json");
+}
+	</script>
+
+<php>
+$coin = isset($_GET['from_coin']) ? $_GET['from_coin'] : '';
+$amount = isset($_GET['amount']) ? $_GET['amount'] : '';
+</php>
+
+<if condition="$from_coin neq ''">
+    <script>
+        $('.selectpicker').selectpicker('val', '{$from_coin}');
+    </script>
+</if>
+
+<if condition="$amount neq ''">
+    <script>
+        $('#convertamount').val({$amount});
+        layer.tips('{:l("Click Here")}', '#buybutton', {tips: 3});
+    </script>
+</if>
+	
+	<include file="Public:footer_minimal"/>
+	

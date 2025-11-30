@@ -1,0 +1,225 @@
+<include file="Public:header"/>
+
+<!-- Page content -->
+<div class="page-container">
+
+    <include file="Finance:left"/>
+
+    <!-- Main content -->
+
+    <div class="panel panel-flat">
+
+        <div class=" panel-heading">
+            <div class="btn-group btn-group-justified">
+					<span class="btn-group">	
+						<a href="{:U('Finance/withdrawMobile')}"
+                           class="btn btn-flat  active current ">{:l('WITHDRAW')}</a>
+                    </span>
+                <span class="btn-group">
+						<a href="{:U('Finance/outlog')}" class="btn btn-flat ">{:l('LOG_IN_LOG')}</a>
+					</span>
+                <span class="btn-group">
+						<a href="{:U('Finance/bank')}" class="btn btn-flat ">{:l('ADDRESSES')}</a>
+                    </span>
+            </div>
+            <span>
+												<a class="right" onclick="$('#hints').slideToggle();"><i
+                                                        class="fa fa-hand-o-right move fz_14 mr5"></i><span
+                                                        class="fz_12 move">{:l('VIEW_DESCRIPTION')}</span></a>
+											</span>
+            </h1>
+            <div id="hints" style="display:none;">
+                <div class="table-responsive">
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td>{:l('AVAILABLE')} {$coin |strtoupper}
+
+                            </td>
+                            <td>
+                                {$user_coin['fiat']|NumToStr}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{:l('THE_MINIMUM_WITHDRAWAL_AMOUNT')}</td>
+                            <td>{:C('mytx_min')}</td>
+                        </tr>
+                        <tr>
+                            <td>{:l('THE_MAXIMUM_AMOUNT_OF_WITHDRAW')}</td>
+                            <td>{:C('mytx_max')}</td>
+                        </tr>
+                        <tr>
+                            <td>{:l('THE_AMOUNT_OF_WITHDRAWALS_IS')}</td>
+                            <td>{:C('mytx_bei')}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="panel-body">
+            <!--Form starts-->
+
+            <div class="row">
+                <fieldset class="col-xs-12">
+
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">Available {:l('UGX')}</label>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-md-6">
+								<input type="text" class="form-control" value="{$balance*1} UGX" disabled/>
+                                    <div class="label-block">
+                                        <span class="label label-danger"></span></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">{:l('PHONE')}</label>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" value="" id="cellphone"
+                                           placeholder="ie +256 123456789"/>
+
+                                    <div class="label-block">
+                                        <span class="label label-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">{:l('WITHDRAWAL_AMOUNT')}</label>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <input type="text" class="form-control" id="out_num" maxlength="12" value="">
+
+                                    <div class="label-block">
+                                        <span class="label label-primary"><notempty name="C['mytx_fee']">{:l('WITHDRAWAL_FEE')} {$C['mytx_fee']}%</notempty></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">{:l('TRANSACTION_PASSWORD')}</label>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="password" class="form-control" id="out_paypassword" value="">
+                                    <div class="label-block">
+                                        <div class="label-block">
+                                            <span class="label "><a href="/findpwd/findpwd" class="btn btn-info">{:l('FORGET')}?</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-2"></label>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="button" class="btn btn-info form-control" value="{:l('WITHDRAW')}"
+                                           onclick="out_up()">
+                                    <div class="label-block">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!--Form Ends-->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    function out_up() {
+        var num = $("#out_num").val();
+        var paypassword = $("#out_paypassword").val();
+        var cellphone = $("#cellphone").val();
+        
+        var coinname = $('#coin-select option:selected').val();
+        <eq name="M_ONLY" value="1">
+            if (cellphone_verify == "" || cellphone_verify == null) {
+            layer.msg('Enter SMS verification code', {
+                icon: 2
+            });
+            return false;
+        }
+        </eq>
+        if (num == "" || num == null) {
+            layer.tips('Withdrawal Amount', '#out_num', {tips: 2});
+            return false;
+        }
+        if (cellphone == "" || cellphone == null) {
+            layer.tips('Please enter phone number for withdrawal', '#cellphone', {tips: 2});
+            return false;
+        }
+        if (paypassword == "" || paypassword == null) {
+            layer.tips('Provide Trans Password', '#out_paypassword', {tips: 2});
+            return false;
+        }
+		layer.load(0, {shade: [0.5,'#8F8F8F']});
+        {
+		   setTimeout(function () {
+            layer.closeAll('loading');
+            trans_lock = 0;
+        }, 10000);
+            $.post("{:U('Pay/ugxWithdrawal')}", {
+                num: num,
+                paypassword: paypassword,
+                cellphone: cellphone,
+            }, function (data) {
+					  layer.closeAll('loading');
+                if (data.status == 1) {
+                    layer.msg(data.info, {icon: 1});
+                    window.location = '/Finance/outlog';
+                } else {
+                    layer.msg(data.info, {icon: 2});
+                    if (data.url) {
+                        window.location = data.url;
+                    }
+                }
+            }, "json");
+        }
+    }
+</script>
+<script>
+    $('.finan_out').addClass('active');
+</script>
+
+<script>
+    var hints = "0";
+    if (hints == 1) {
+        $('#hints').show();
+    }
+    $('#finance_box').addClass('active');
+    $('.finan_out').addClass('active');
+</script>
+<include file="Public:footer_minimal"/>

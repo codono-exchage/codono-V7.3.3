@@ -1,0 +1,1832 @@
+<include file="Public/header"/>
+
+    <link rel="stylesheet" href="__PUBLIC__/testmargin/common.css"/>
+    
+    <script data-n-head="true" src="__PUBLIC__/testmargin/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <style type="text/css">
+        .product-info .product-info-top .item span{
+            color:#fff;
+        }
+        .labs-trade .cny {
+            margin-top: 4px;
+            color: #666b93;
+            font-size: 12px;
+        }
+
+        .item input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color: rgb(102, 107, 147)!important;
+            font-size: 12px!important;
+        }
+        .item input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: rgb(102, 107, 147)!important;
+            font-size: 12px!important;
+        }
+        .item input::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: rgb(102, 107, 147)!important;
+            font-size: 12px!important;
+        }
+        .item input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: rgb(102, 107, 147)!important;
+            font-size: 12px!important;
+        }
+
+        span.tip, .contract-trade span.tip {
+            position: relative;
+            display: inline-block;
+            vertical-align: text-top;
+            margin-left: 5px;
+            width: 12px;
+            height: 12px;
+            background: url(/Public/Home/image/common/tips.png) no-repeat;
+            cursor: pointer;
+        }
+        .labs-trade .form .total p .tip span {
+            display: none;
+            width: 104px;
+            padding: 3px 0;
+            border-radius: 2px;
+            position: absolute;
+            left: -85px;
+            bottom: 20px;
+            background-color: #666b93;
+            color: #cbd7f0;
+            text-align: center;
+        }
+        /*委托交易列表*/
+        .my-current-entrust table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        .my-current-entrust table thead {
+            width: 500px;
+        }
+        .my-current-entrust table tr {
+            height: 30px;
+            border-bottom: 1px solid #212340;
+        }
+        .my-current-entrust table thead tr th {
+            font-size: 12px;
+            font-weight: 400;
+            color: #666b93;
+            text-align: right;
+            min-width: 90px;
+            width:12.5%;
+        }
+        .my-current-entrust table thead tr th:first-child {
+            padding-left: 16px;
+            text-align: left;
+        }
+        .my-current-entrust table thead tr th .type1, .my-current-entrust table thead tr th .type2 {
+            color: #666b93;
+        }
+
+        .my-current-entrust table tbody tr td {
+            padding: 0;
+            color: #cbd7f0;
+            font-size: 12px;
+            text-align: right;
+            min-width: 90px;
+            width:12.5%;
+        }
+        .my-current-entrust table tbody tr td:first-child {
+            padding-left: 16px;
+            text-align: left;
+        }
+        .my-current-entrust table tbody tr td:first-child {
+            padding-left: 16px;
+            text-align: left;
+        }
+        .my-current-entrust table tbody tr td span {
+            color: #cbd7f0;
+        }
+        .my-current-entrust table tbody tr td:first-child span:last-child {
+            color: #666b93;
+        }
+        .my-current-entrust table tbody tr td span.buy {
+            color: #3ac79f;
+        }
+        .my-current-entrust .wrapper .cancel-single {
+            color: #0976d9;
+            cursor: pointer;
+        }
+        .create-item{
+            position: relative;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+        .create-item h3 {
+            font-size: 16px;
+            color: #cbd7f0;
+        }
+        .create-item div{
+            margin-top: 45px;
+            width: 270px;
+        }
+        .create-item div input[type=submit]{
+            width: 120px;
+            height: 40px;
+            font-size: 16px;
+            color: #cbd7f0;
+            background: none;
+            border: 1px solid #0976d9;
+            border-radius: 3px;
+        }
+        .create-item div input[type=submit]:hover {
+            color: #cbd7f0;
+            background: #0976d9;
+            cursor: pointer;
+        }
+        .red,.red span{
+            color:#d64172!important;
+        }
+        .green,.green span{
+            color:#3ac79f!important;
+        }
+        /*滚动条*/
+        .zUIpanelScrollBox,.zUIpanelScrollBar{
+            width:6px;
+            top:4px;
+            right:2px;
+            border-radius:5px;
+
+        }
+        .zUIpanelScrollBox{
+            background:rgb(29, 31, 53);
+            opacity:0.9;
+            filter:alpha(opacity=10);
+            display: block!important;
+        }
+        .zUIpanelScrollBar{
+            background:rgb(59, 59, 99);opacity:0.8;
+            filter:alpha(opacity=80);
+            display: block!important;
+        }
+        /*爆仓所占百分比*/
+        .account-details .grade {
+            margin: 0 4px;
+            width: 170px;
+            height: 30px;
+            border: 1px solid #212340;
+            background-color: #1b1d2f!important;
+        }
+        .account-details .grade div {
+            height: 100%;
+            background-color: #313151;
+        }
+        .account-details span.level1 {
+            color: #32b28f;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div id="__nuxt">
+    <div class="nuxt-progress" style="width: 0%; height: 2px; background-color: rgb(59, 128, 112); opacity: 0;"></div>
+    <div id="__layout">
+        <div class="layout-blank">
+            <!--头部内容-->
+
+            <!--头部内容   end-->
+            <div class="trade flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                <div class="left">
+                    <div class="product-list">
+                        <div class="title flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                            <h3>Market</h3>
+                            <div>
+                                <!-- <input placeholder="请输入币种" value="" type="text"/> -->
+                                <!---->
+                            </div>
+                        </div>
+                        <div class="flex-doc flex-direction-row flex-justify-between flex-align-item-start flex-wrap-nowrap">
+                            <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap nav cn">
+                                <a class="active">{$rmb}</a>
+                            </div>
+                            <div class="flex-doc flex-direction-row flex-justify-end flex-align-item-center flex-wrap-nowrap nav optional cn">
+                                <!-- <a class=""><span></span>自选</a> -->
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="list-title item-border flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap"
+                                 style="padding-left: 16px;">
+                                <h4 class="col-1">coin-name</h4>
+                                <h4 class="col-2">new-price</h4>
+                                <h4 class="col-3">change-price</h4>
+                                <h4 style="width: 6px;"></h4>
+                            </div>
+                            <div class="easy-scrollbar chromeScrollShow" style="max-height: 300px;">
+                                <div style="margin-right: -17px;" class="easy-scrollbar__wrap">
+                                    <div style="position: relative;" class="el-scrollbar__view">
+                                        <div class="wrapper" style="max-height: 300px;">
+                                            <div class="area">
+                                                <span></span>main-area
+                                            </div>
+                                            <volist name="market_list" id='vo'>
+                                                <div class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap item-border" style="padding: 0px 16px;" onclick="window.top.location.href='/Margin/borrowMoney/market/{$vo['name']}'">
+                                                    <p class="col-1">{$vo['xnb']|strtoupper}</p>
+                                                    <p class="col-2">{$vo['new_price']}</p>
+                                                    <p class="col-3 buy">{$vo['change']}%</p>
+                                                    <p><a class="col-4"></a></p>
+                                                </div>
+                                            </volist>
+                                          
+                                            <!---->
+                                            <!---->
+                                        </div>
+                                        <div class="resize-triggers">
+                                            <div class="expand-trigger">
+                                                <div style="width: 361px; height: 186px;"></div>
+                                            </div>
+                                            <div class="contract-trigger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="esay-scrollbar__bar is-vertical"
+                                     style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                    <div class="easy-scrollbar__thumb"
+                                         style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;"></div>
+                                </div>
+                            </div>
+                            <!---->
+                        </div>
+                    </div>
+                    <div class="labs-trade margin">
+                        <div class="header flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                            <div class="active1">
+                                Buy
+                            </div>
+                            <div>
+                                Sell
+                            </div>
+                        </div>
+                        <div style="margin:0 16px;" class="title priceType flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap" >
+                            <div class="limit-price active">
+                                Limit
+                            </div>
+                            <div class="market-price">
+                                Market
+                            </div>
+                        </div>
+                        <!--买入-->
+                        <div class="form buyDiv">
+                            <div class="able flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                <p>Amount Available:<span id="my_rmbs">{$bow['p_yue']}</span> {$data.s2|strtoupper}</p>
+                                <div>
+                                    <!-- <a class="zhuan">转入</a> -->
+                                    <a class="" href="/Margin/borrow/market/usdt" style="margin-left: 10px;">Leverage Management</a>
+                                </div>
+                            </div>
+                            <!--买入-限价-->
+                            <div class="limitPrice">
+                                <div class="trade-label flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                    <span>buying price</span>
+                                </div>
+                                <div class="input flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap item">
+                                        <span>{$data.s2|strtoupper}</span>
+                                        <input type="number" maxlength="16" placeholder="{:l('best-price')}" value="" class="price" id="buy_price" onkeyup="keyPrice($(this),$('#my_rmbs'),$('#buy_maxs'))"/>
+                                        <div class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                
+                                <!---->
+                                <div class="trade-label flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                    <span>{:l('buy-number')}</span>
+                                </div>
+                                <div class="input flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap item">
+                                        <span>{$data.s1|strtoupper}</span>
+                                        <input type="number" id="buy_num" maxlength="16" value="" onkeyup="keyNumber($(this),$('#buy_price'),$('#buy_maxs'),$('.area1'))"/>
+                                        <div class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="total flex-doc flex-direction-row flex-justify-between flex-align-item-start flex-wrap-nowrap">
+                                    <p>{:l('buy-maximum')}：</p>
+                                    <p><span id="buy_maxs"></span> {$data.s1|strtoupper}
+                                        <!----></p>
+                                </div>
+                                <div class="ratio">
+                                    <div class="st-slider slidex">
+                                        <div class="area area1">
+                                            <div class="percent0"></div>
+                                            <div class="percent25"></div>
+                                            <div class="percent50"></div>
+                                            <div class="percent75"></div>
+                                            <div class="end"></div>
+                                            <div class="progress" style="width: 0px;"></div>
+                                            <div width="328" class="st-slider-button" style="left: 0px;"></div>
+                                        </div>
+                                        <div class="flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                            <p style="margin-left: -4px;">0</p>
+                                            <p id="showNum1">0%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="trade-price flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <p>{:l('trade-money')}：</p>
+                                    <p id="buy_money">0</p>
+                                    <p style="margin-left:5px;">{$data.s2|strtoupper}</p>
+                                </div>
+                                <input value="{:l('buy')}" class="buy" type="submit" onclick="tradeadd_buy();"/>
+                            </div>
+                            <!--买入-市价-->
+                            <div class="commonPrice" style="display: none;">
+                                <div class="trade-label flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                    <span>{:l('buy-price')}</span>
+                                </div>
+                                <div class="input flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap item">
+                                        <span>{$data.s2|strtoupper}</span>
+                                        <input id="buy_price1" maxlength="16" placeholder="{:l('best-price')}" value="" class="price" disabled/>
+                                    </div>
+                                </div>
+                                <!---->
+                                <div class="trade-label flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                    <span>{:l('buy-number')}</span>
+                                </div>
+                                <div class="input flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap item">
+                                        <span>{$data.s1|strtoupper}</span>
+                                        <input id="buy_num1" maxlength="16" value="" onkeyup="keyNumber($(this),$('#buy_price1'),$('#buy_max'),$('.area2'))"/>
+                                        <div class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="total flex-doc flex-direction-row flex-justify-between flex-align-item-start flex-wrap-nowrap">
+                                    <p>{:l('sell-maximum')}：</p>
+                                    <p> <span id="buy_max1">0</span> {$data.s1|strtoupper}
+                                        <span class="tip" title="{:l('premium')}"></span>
+                                        <!---->
+                                    </p>
+                                </div>
+                                <div class="ratio">
+                                    <div class="st-slider slidex">
+                                        <div class="area">
+                                            <div class="percent0"></div>
+                                            <div class="percent25"></div>
+                                            <div class="percent50"></div>
+                                            <div class="percent75"></div>
+                                            <div class="end"></div>
+                                            <div class="progress" style="width: 0px;"></div>
+                                            <div width="328" class="st-slider-button" style="left: 0px;"></div>
+                                        </div>
+                                        <div class="flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                            <p style="margin-left: -4px;">0</p>
+                                            <p id="showNum2">0%</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input value="{:l('buy')}" class="buy" type="submit" onclick="tradeadd_buy();"/>
+                            </div>
+                        </div>
+                        <!--卖出-->
+                        <div class="form sellDiv" style="display: none;">
+                            <div class="able flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                <p>{:l('canUser-money')}：<span id="my_xnbs">{$bow['yue']}</span> {$data.s1|strtoupper}</p>
+                                <div>
+                                    <!--<a class="zhuan">{:l('turnIn')}</a>-->
+                                    <a class="" href="/Margin/borrow/market/usdt" style="margin-left: 10px;">Leverage Management</a>
+                                </div>
+                            </div>
+                            <!--卖出-限价-->
+                            <div class="limitPrice" style="display: none;">
+                                <div class="trade-label flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                    <span>{:l('sell-price')}</span>
+                                </div>
+                                <div class="input flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap item">
+                                        <span>{$data.s2|strtoupper}</span>
+                                        <input type="number" id="sell_price" maxlength="16" placeholder="" value="" class="price" onkeyup="keyPrice($(this),$('#my_xnbs'),$('#sell_max'))"/>
+                                        <div class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                
+                                <!---->
+                                <div class="trade-label flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                    <span>{:l('sell-number')}</span>
+                                </div>
+                                <div class="input flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap item">
+                                        <span>{$data.s1|strtoupper}</span>
+                                        <input type="number" id="sell_num" class="" maxlength="16" value="" onkeyup="keyNumber($(this),$('#sell_price'),$('#sell_max'),$('.area3'))"/>
+                                        <div class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="total flex-doc flex-direction-row flex-justify-between flex-align-item-start flex-wrap-nowrap">
+                                    <p>{:l('sell-maximum')}：</p>
+                                    <p><span id="sell_max">0</span> {$data.s2|strtoupper}
+                                        <!----></p>
+                                </div>
+                                <div class="ratio">
+                                    <div class="st-slider slidex">
+                                        <div class="area area3">
+                                            <div class="percent0"></div>
+                                            <div class="percent25"></div>
+                                            <div class="percent50"></div>
+                                            <div class="percent75"></div>
+                                            <div class="end"></div>
+                                            <div class="progress" style="width: 0px;"></div>
+                                            <div width="328" class="st-slider-button" style="left: 0px;"></div>
+                                        </div>
+                                        <div class="flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                            <p style="margin-left: -4px;">0</p>
+                                            <p id="showNum3">0%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="trade-price flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <p>{:l('trade-money')}：</p>
+                                    <p id="sell_money">0</p>
+                                    <p style="margin-left:5px;">{$data.s2|strtoupper}</p>
+                                </div>
+                                <input value="{:l('sell')}" class="buy" type="submit" style="background:#b92e5d;" onclick="tradeadd_sell()"/>
+                            </div>
+                            <!--卖出-市价-->
+                            <div class="commonPrice" style="display: none;">
+                                <div class="trade-label flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                    <span>{:l('sell-price')}</span>
+                                </div>
+                                <div class="input flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap item">
+                                        <span>{$data.s2|strtoupper}</span>
+                                        <input type="number" id="sell_price1" maxlength="16" placeholder="{:l('best-price')}" value="" class="price" disabled/>
+                                        <div class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <!---->
+                                <div class="trade-label flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                    <span>{:l('sell-number')}</span>
+                                </div>
+                                <div class="input flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap item">
+                                        <span>{$data.s1|strtoupper}</span>
+                                        <input type="number" id="sell_num1" class="" maxlength="16" value="" onkeyup="keyNumber($(this),$('#sell_price'),$('#sell_max'),$('.area4'))"/>
+                                        <div class="error" style="display: none;"></div>
+                                    </div>
+                                </div>
+                                <div class="total flex-doc flex-direction-row flex-justify-between flex-align-item-start flex-wrap-nowrap">
+                                    <p>{:l('sell-maximum')}：</p>
+                                    <p><span id="sell_max1">0</span> {$data.s2|strtoupper}
+                                        <!----></p>
+                                </div>
+                                <div class="ratio">
+                                    <div class="st-slider slidex">
+                                        <div class="area area4">
+                                            <div class="percent0"></div>
+                                            <div class="percent25"></div>
+                                            <div class="percent50"></div>
+                                            <div class="percent75"></div>
+                                            <div class="end"></div>
+                                            <div class="progress" style="width: 0px;"></div>
+                                            <div width="328" class="st-slider-button" style="left: 0px;"></div>
+                                        </div>
+                                        <div class="flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                            <p style="margin-left: -4px;">0</p>
+                                            <p id="showNum4">0%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input value="{:l('sell')}" class="buy" type="submit" style="background:#b92e5d;" onclick="tradeadd_sell()"/>
+                            </div>
+                        </div>
+                        <!---->
+                        <!--转入弹出框-->
+                        <div   class="popup popup1 flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap" style="display: none;">
+                            <div   class="popup-box">
+                                <div   class="header flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                    <h3  >ETH {:l('turnIn')}</h3>
+                                    <a  ></a>
+                                </div>
+                                <form  class="transfer-accounts" >
+                                    <div  class="item flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                        <p  class="label">From</p>
+                                        <div   tabindex="0" class="loan-select"  style="width: 360px;">
+                                            <div   class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap" style="cursor: pointer;">
+                                                <p  class="inAccount">Currency Account</p>
+                                                <span   class=""></span>
+                                            </div>
+                                            <div  class="options easy-scrollbar chromeScrollShow" style="max-height: 180px;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div  class="wrapper" style="max-height: 180px;">
+                                                            <ul  style="display: none;">
+                                                                <li  class="transfer-option">Currency Account</li>
+                                                                <li  class="transfer-option">Margin Account</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 361px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical" style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb" style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!---->
+                                        <div  tabindex="0" class="loan-select loan-select2" style="width: 360px; margin-left: 12px;display: none;">
+                                            <div  class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap" style="cursor: pointer;">
+                                                <p >ETH/UCC</p>
+                                                <span  class=""></span>
+                                            </div>
+                                            <div  class="options easy-scrollbar chromeScrollShow" style="max-height: 180px;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div  class="wrapper" style="max-height: 180px;">
+                                                            <ul  style="display: none;">
+                                                                <li class="transfer-option">BTC/UCC</li>
+                                                                <li class="transfer-option">LTC/UCC</li>
+                                                                <li class="transfer-option">ETH/UCC</li>
+                                                                <li class="transfer-option">BCH/UCC</li>
+                                                                <li class="transfer-option">EOS/UCC</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 175px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical" style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb" style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!---->
+                                    <p  class="error error11" style="display: none;">Transfer account and Transfer to account cannot be the same</p>
+                                    <div  class="item flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                        <p  class="label">Goto</p>
+                                        <div   tabindex="0" class="loan-select"  style="width: 360px;">
+                                            <div   class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap" style="cursor: initial;">
+                                                <p  class="outAccount">Margin Account</p>
+                                                <!---->
+                                            </div>
+                                            <div  class="options easy-scrollbar chromeScrollShow" style="max-height: 180px;display: none;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div  class="wrapper" style="max-height: 180px;">
+                                                            <ul  style="display: none;">
+                                                                <li  class="transfer-option">Currency Account</li>
+                                                                <li  class="transfer-option">Margin Account</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 175px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical" style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb" style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div   tabindex="0" class="loan-select"  style="width: 360px; margin-left: 12px;">
+                                            <div   class="box flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap" style="cursor: initial;">
+                                                <p  >ETH/UCC</p>
+                                                <!---->
+                                            </div>
+                                            <div  class="options easy-scrollbar chromeScrollShow" style="max-height: 180px;">
+                                                <div class="easy-scrollbar__wrap" style="margin-right: -17px;">
+                                                    <div class="el-scrollbar__view" style="position: relative;">
+                                                        <div  class="wrapper" style="max-height: 180px;">
+                                                            <ul  style="display: none;">
+                                                                <li  class="transfer-option">ETH/UCC</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="resize-triggers">
+                                                            <div class="expand-trigger">
+                                                                <div style="width: 175px; height: 1px;"></div>
+                                                            </div>
+                                                            <div class="contract-trigger"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="esay-scrollbar__bar is-vertical" style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: none;">
+                                                    <div class="easy-scrollbar__thumb" style="transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!---->
+                                    <div  class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                        <p  class="label">Transfer Amount</p>
+                                        <input  type="number" placeholder="Please enter the transfer amount" />
+                                        <p  class="transfer-all">All Transfers</p>
+                                    </div>
+                                    <p  class="tip1">{:l('turn-maximum')} 0 ETH</p>
+                                    <input  type="submit" value="Transfer" />
+                                    <p  class="tip2">There is no handling fee for internal transfers</p>
+                                    <!---->
+                                </form>
+                            </div>
+                        </div>
+                        <!---->
+                        <!--还款弹出框-->
+                        <div  class="popup popup2 flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap" style="display: none;">
+                            <div class="popup-box">
+                                <div class="header flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                    <h3>UCC Repayment</h3>
+                                    <a></a>
+                                </div>
+                                <div class="repayment">
+                                    <div class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">Margin Account</p>
+                                        <p>ETH/UCC</p>
+                                    </div>
+                                    <div class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                        <p class="label">{:l('Payable Total')}</p>
+                                        <p>8.04000000 UCC</p>
+                                    </div>
+                                    <div class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                        <div class="inner flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                            <p class="label">{:l('borrowing')}</p>
+                                            <p>8.000 UCC</p>
+                                        </div>
+                                        <div class="inner flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                            <p class="label">{:l('interest')}</p>
+                                            <p>0.04000000 UCC</p>
+                                        </div>
+                                    </div>
+                                    <div class="item flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap" style="margin-right: 84px;">
+                                        <input type="submit" value="{:l('Cancel')}" />
+                                        <input type="submit" value="{:l('Confirm')}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+            
+                </div>
+                
+                <div class="right">
+                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                        <div class="product-info show">
+                            <div class="product-info-top flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                <div class="arrow flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap">
+                                    <a class=""></a>
+                                </div>
+
+                                <h3>{$data.s1|strtoupper}/{$data.s2|strtoupper}</h3>
+                                <div class="item first-item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <p>{:l('Latest Dealing Price')}</p>
+                                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                        <span id="market_new_price"></span> <span style="margin-left:5px;">{$data.s2|strtoupper}</span>
+                                    </div>
+                                    <p class="cny">≈ <span id="cny_prices" style="display:inline-block"></span> {$data.s2}</p>
+                                </div>
+                                <div class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <p>{:l('change-price')}</p>
+                                    <span class="" id="market_change"></span>
+                                </div>
+                                <div class="item flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <p>{:l('dayTrade')}</p>
+                                    <span class="volume" id="market_volume"></span>
+                                </div>
+                            </div>
+                            <div id="tv_chart_container">
+                           TVCOMESHERE
+                            </div>
+                        </div>
+                        <div class="entrust show">
+                            <div class="title flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                <div class="arrow flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap">
+                                    <a class=""></a>
+                                </div>
+                                <h3>{:l('new-price')} <span id="orderbook_last_rate"></span> {$data.s2|strtoupper}</h3>
+                            </div>
+                            <div class="list">
+                                <div class="table">
+                                    <div class="thead">
+                                        <div class="tr flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap"
+                                             style="height: 40px;">
+                                            <div class="th">
+                                                {:l('price')} ({$data.s2|strtoupper})
+                                            </div>
+                                            <div class="th">
+                                                {:l('number')} ({$data.s1|strtoupper})
+                                            </div>
+                                            <div class="th">
+                                                {:l('total-number')} ({$data.s1|strtoupper})
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tbody" id="ul-ask-list1">
+                                        <!--删除的数据-->
+                                        <!--<div class="tr trs tr-sell flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap"-->
+                                             <!--style="background: transparent linear-gradient(to left, rgb(45, 30, 51) 26.5179%, transparent 0px) repeat scroll 0% 0%;">-->
+                                            <!--<div class="td sell">-->
+                                                <!--46250.63-->
+                                            <!--</div>-->
+                                            <!--<div class="td">-->
+                                                <!--35.640-->
+                                            <!--</div>-->
+                                            <!--<div class="td">-->
+                                                <!--87.849-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--删除的数据    end-->
+                                    </div>
+                                    <div class="tbody"  id="ul-bid-list1" style="border-top:1px solid #212340;">
+
+
+                                    </div>
+                                </div>
+                                <div class="deep flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap" style="display: none;">
+                                    <p>{:l('consolidation-depth')}：</p>
+                                    <div class="deep-button flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                        <a class="active">{:l('2wei')}</a>
+                                        <a class="">{:l('1wei')}</a>
+                                        <a class="">{:l('0wei')}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account margin show">
+                        <div class="title flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                            <div class="arrow flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap">
+                                <a></a>
+                            </div>
+                            <h3>{$data.s1|strtoupper}/{$data.s2|strtoupper} {:l('Leverage Management Account')}</h3>
+                            
+                            <a class="btn btn-link" href="/Margin/borrow/market/usdt">Leverage Management</a>
+                        </div>
+                        <div class="account-details flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                            <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-wrap">
+                                <p>{:l('borrowed quantity')} {$data.s1|strtoupper}</p>
+                                <div class="flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap">
+                                    <div>
+                                        
+                                        <if condition="$bow['borrow'] neq ''">
+                                            {$bow['borrow']|NumToStr}
+                                        <else />
+                                            --
+                                        </if>
+                                    </div>
+                                    <!--<a class="huan">Repayment</a>-->
+                                </div>
+                            </div>
+                            <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-wrap">
+                                <p>{:l('borrowed quantity')} {$data.s2|strtoupper}</p>
+                                <div class="flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap">
+                                    <div>
+                                        <if condition="$bow['p_borrow'] neq ''">
+                                            {$bow['p_borrow']|NumToStr}
+                                        <else />
+                                            --
+                                        </if>
+                                    </div>
+                                   <!-- <a class="huan">Repayment</a>-->
+                                </div>
+                            </div>
+                            <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-wrap">
+                                <p style="white-space: nowrap;">liquidation price ({$data.s2|strtoupper})</p>
+                                <div>
+                                    --
+                                </div>
+                            </div>
+                            <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-wrap">
+                                <div class="risk flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                    <p>Risk Rate</p>
+                             
+                                    </div>
+                                </div>
+                                <div class="flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap">
+                                    <span class="level0">--</span>
+                                    <div class="limit"></div>
+                                    <div class="grade">
+                                        <div style=""></div>
+                                    </div>
+                                    <div class="currentNum"></div>
+                                </div>
+                            </div>
+                            <!---->
+                            <!---->
+                        </div>
+                    </div>
+                    <div class="my-current-entrust margin container">
+                        <div class="card">
+
+                            <div class="orderChange flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap">
+                                <h3 style="margin-right: 40px;" class="active">{:l('current entrustment')}</h3>
+                                <h3 class="ws-tab">{:l('Historical Entrustment')}</h3>
+                            </div>
+                            <div class="col">
+                                <ul id="list-tabs" class="nav nav-pills" role="tablist">
+                                    <li class="nav-item">
+                                        <a aria-selected="true" class="nav-link active" data-toggle="pill" href="#unrepaid" data-target="#unrepaid" role="tab">
+                                            <span>Unrepaid</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a aria-selected="false" class="nav-link" data-toggle="pill" href="#repaid" data-target="#repaid" role="tab">
+                                            <span>Repaid</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="blank"></div>
+
+                        </div>
+                        
+                        <div>
+                            <div class="wrapper flex-doc flex-direction-column flex-justify-start flex-align-item-start flex-wrap-nowrap" style="margin-bottom:8px;">
+                                <!--当前委托-->
+                                <div style="width: 100%;" class="current-list">
+                                    <table class="thead">
+                                        <thead>
+                                        <tr>
+                                            <th><span class="type1">{:l('entrust-time')}</span></th>
+                                            <th><span class="type1">{:l('trade-coin')}</span></th>
+                                            <th><span class="type1">{:l('order-type')}</span></th>
+                                            <th><span class="type1">{:l('entrust-price')}({$data.s2|strtoupper})</span></th>
+                                            <th><span class="type2">{:l('entrust-number')}({$data.s1|strtoupper})</span></th>
+                                            <th><span class="type2">{:l('surplus-number')}({$data.s1|strtoupper}) </span></th>
+                                            <th><span class="type2">{:l('order-status')}</span></th>
+                                            <th style="padding-right: 20px;"><span class="type2">{:l('order-operate')}</span></th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                    <div class="scroll" style="overflow: hidden;height:120px;">
+                                        <table>
+                                            <tbody class="zhu-content0">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="no-list" style="display:none">
+                                        <p class="ws-tabp">No data yet</p>
+                                    </div>
+                                </div>
+                                <div style="width: 100%;display: none;" class="history-list" >
+                                    <table class="thead">
+                                        <thead>
+                                            <tr>
+                                                <th><span class="type1">{:l('entrust-time')}</span></th>
+                                                <th><span class="type1">{:l('trade-coin')}</span></th>
+                                                <th><span class="type1">{:l('order-type')}</span></th>
+                                                <th><span class="type1">{:l('entrust-price')}({$data.s2|strtoupper})</span></th>
+                                                <th><span class="type2">{:l('entrust-number')}</span></th>
+                                                <th><span class="type2">{:l('turnover')}({$data.s1|strtoupper}) </span></th>
+                                                <th style="padding-right: 20px;"><span class="type2">{:l('order-status')}</span></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <div class="scroll" style="overflow: hidden;height:120px;">
+                                        <table>
+                                            <tbody class="zhu-content1">
+                      
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="no-list" style="display:none">
+                                        <p class="ws-tabp">No data yet</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!---->
+                        </div>
+                        <!---->
+                    </div>
+
+                    <!--确定撤销弹框-->
+                    <div class="popup cancelPopup flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap" style="display:none;">
+                        <div class="popup-box">
+                            <div class="header flex-doc flex-direction-row flex-justify-between flex-align-item-center flex-wrap-nowrap">
+                                <h3>{:l('cancel-order')}</h3>
+                                <a></a>
+                            </div>
+                            <div class="create-item flex-doc flex-direction-column flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                <h3>{:l('cancel-sure')}</h3>
+                                <div class="flex-doc flex-direction-row flex-justify-between flex-align-item-start flex-wrap-nowrap">
+                                    <input type="submit" class="create-submit" value="{:l('Cancel')}" />
+                                    <input type="submit" class="create-submit" value="{:l('Confirm')}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex-doc flex-direction-row flex-justify-start flex-align-item-start flex-wrap-nowrap" style="display: none;">
+                        <div class="deep show">
+                            <div class="title flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                <div class="arrow flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap">
+                                    <a></a>
+                                </div>
+                                <h3>{:l('depth-chart')}</h3>
+                            </div>
+                            <div class="deep-canvas">
+                                <canvas height="442" width="959"></canvas>
+                                <canvas height="442" width="959" class="tool-tips"></canvas>
+                            </div>
+                        </div>
+                        <div class="history show">
+                            <div class="title flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap">
+                                <div class="arrow flex-doc flex-direction-row flex-justify-center flex-align-item-center flex-wrap-nowrap">
+                                    <a class=""></a>
+                                </div>
+                                <h3>{:l('real-trade')}</h3>
+                            </div>
+                            <div class="list">
+                                <table style="margin-right: 20px;">
+                                    <thead>
+                                    <tr>
+                                        <th style="min-width: 40px; padding-left: 16px;"><span>{:l('time')}</span></th>
+                                        <th><span class="type1">{:l('price')} </span></th>
+                                        <th style="padding-right: 20px;"><span class="type2">{:l('number')} </span></th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                                <div class="bg"></div>
+                                <div class="easy-scrollbar chromeScrollShow" style="height: 370px;">
+                                    <div style="margin-right: -17px;" class="easy-scrollbar__wrap">
+                                        <div style="position: relative;" class="el-scrollbar__view">
+                                            <div class="wrapper" style="height: 350px; padding-right: 20px;">
+                                                
+                                            </div>
+                                            <div class="resize-triggers">
+                                                <div class="expand-trigger">
+                                                    <div style="width: 329px; height: 351px;"></div>
+                                                </div>
+                                                <div class="contract-trigger"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="esay-scrollbar__bar is-vertical"
+                                         style="background-color: rgb(29, 31, 53); z-index: 200; width: 6px; right: 0px; display: block;">
+                                        <div class="easy-scrollbar__thumb"
+                                             style="height: 26.5152%; transform: translateY(0%); background-color: rgb(59, 59, 99); width: 6px; opacity: 0.3;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<input type="hidden" id="market_bz" value="{$market}">
+            <!--底部内容-->
+            
+            <!--底部内容   end-->
+        </div>
+    </div>
+</div>
+
+<div style="display: none;" class="toast">
+    <span class="text"></span>
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/zui/1.10.0/js/zui.min.js"></script>
+
+
+<script>
+    var market = "{$market}";
+    $(document).ready(function () {
+        /*当前页*/
+
+        $(".nav .item:nth-child(1)").find("a").addClass("active");
+        getMaxPrice();
+        getDepth();
+        getTradelogNew();
+
+        /*点击“撤销”出现弹出框*/
+        $(".cancel-single").click(function () {
+            $(".cancelPopup").show();
+        });
+        $(".create-submit").click(function () {
+            $(".cancelPopup").hide();
+        });
+
+    });
+
+        /*当前委托、历史委托切换*/
+    $(".orderChange h3").click(function () {
+        $(".orderChange h3").removeClass("active");
+        $(this).addClass("active");
+        if($(this).index()==0){
+            $(".current-list").show();
+            $(".history-list").hide();
+            $(".cancel-all").show();
+            $(".check-all").hide();
+            getTradelogNew();
+        }else{
+            $(".current-list").hide();
+            $(".history-list").show();
+            $(".cancel-all").hide();
+            $(".check-all").show();
+            getTradelogNewH();
+        }
+    });
+    /*买入价输入设置*/
+    function keyPrice(cv,tv,mv){
+        clearNoNum(cv);
+        // 判断整数或小数
+        var vue=parseFloat(tv.html());
+        if((/^(\+|-)?\d+$/.test(vue))&&vue>0){
+            var l=vue.toString().length;
+        }else{
+            if(vue.toString().split(".")[1]){
+                var l=vue.toString().split(".")[1].length;
+            }
+        }
+        // 限制输入值的位数
+        cv.next(".error").hide();
+        var current=parseFloat(cv.val());
+        if(current.toString().indexOf(".")>0) {
+            var vue1=current.toString().split(".")[1];
+            var vue0=current.toString().split(".")[0];
+            current=vue1.substring(0,l);
+            cv.val(vue0+"."+current);
+        }
+        //最大可买/卖数量
+        if(cv.attr("id")=="sell_price"||cv.attr("id")=="sell_price1"){
+            var maxNumber=(tv.html()*cv.val()).toFixed(l+1);
+        }else{
+            var maxNumber=(tv.html()/cv.val()).toFixed(l+1);
+        }
+        if(parseInt(maxNumber)==0||maxNumber==Infinity||isNaN(maxNumber)){
+            mv.html("0");
+        }else{
+            mv.html(maxNumber);
+        }
+    };
+    // 输入买入数量
+    function keyNumber(num,pri,max,area){
+        clearNoNum(num);
+        // 判断极限值是整数或小数取位数
+        var vue=parseFloat(max.html());
+        if((/^(\+|-)?\d+$/.test(vue))&&vue>0){
+            var l=vue.toString().length;
+        }else{
+            var l=vue.toString().split(".")[1].length;
+        }
+        // 限制输入值的位数
+        num.next(".error").hide();
+        var current=parseFloat(num.val());
+        if(current.toString().indexOf(".")>0) {
+            var vue1=current.toString().split(".")[1];
+            var vue0=current.toString().split(".")[0];
+            current=vue1.substring(0,l);
+            num.val(vue0+"."+current);
+        }
+
+        // 进度条显示所占比例
+        var current=parseFloat(num.val());
+        var price=parseFloat(pri.val());
+        var total=parseFloat(max.html());
+        var chartWidth=parseFloat(area.css("width"));//总进度条宽
+        var curChart=parseFloat(current/total*chartWidth);
+        var showChar=(curChart/chartWidth*100).toFixed(2);
+
+        if(current>=total){
+            area.find(".progress").css("width","328px");//线条占款
+            area.find(".st-slider-button").css("left","328px");//原点位置
+            area.next("div").find("p:last-child").html("100%");//线条显示百分比
+            area.find(".percent0,.percent25,.percent50,.percent75,.end").css("background","#0976d9");//原点颜色
+        }else if(current<total){
+            area.find(".progress").css("width",curChart+"px");
+            area.find(".st-slider-button").css("left",curChart+"px");
+            area.next("div").find("p:last-child").html(showChar+"%");
+            if(curChart>=chartWidth){
+                area.find(".percent0,.percent25,.percent50,.percent75,.end").css("background","#0976d9");
+            }else if(curChart>=246){
+                area.find(".percent0,.percent25,.percent50,.percent75").css("background","#0976d9");
+                area.find(".end").css("background-color","rgb(102, 107, 147)");
+            }else if(curChart>=164){
+                area.find(".percent0,.percent25,.percent50").css("background","#0976d9");
+                area.find(".end,.percent75").css("background-color","rgb(102, 107, 147)");
+            }else if(curChart>=82){
+                area.find(".percent0,.percent25").css("background","#0976d9");
+                area.find(".end,.percent75,.percent50").css("background-color","rgb(102, 107, 147)");
+            }else{
+                area.find(".percent0").css("background","#0976d9");
+                area.find(".end,.percent75,.percent50,.percent25").css("background-color","rgb(102, 107, 147)");
+            }
+        }else {
+            area.find(".progress").css("width",0);
+            area.find(".st-slider-button").css("left",0);
+            area.next("div").find("p:last-child").html("0%");
+            area.find(".percent0,.percent25,.percent50,.percent75,.end").css("background-color","rgb(102, 107, 147)");
+        }
+        // 计算总价
+        var money=parseFloat((current*price)).toFixed(l);
+        console.log(parseFloat(money));
+        if($(".buyDiv .limitPrice").is(":visible")){
+            if(isNaN(money)){
+                $("#buy_money").html("0");
+            }else{
+                // 乘积精度问题需要解决
+                $("#buy_money").html(money);
+                // $("#buy_money").html(multiplication($('#buy_num').val(),$("#buy_price").val()));
+            }
+            return false
+        }else if($(".sellDiv .limitPrice").is(":visible")){
+            if(isNaN(money)){
+                $("#sell_money").html("0");
+            }else{
+                $("#sell_money").html(money);
+            }
+            return false
+        }
+    }
+
+    //
+    // function multiplication(arg1,arg2){
+    //     var m=0,s1=arg1.toString(),s2=arg2.toString();
+    //     try{m += s1.split(".")[1].length}catch(e){}
+    //     try { m += s2.split(".")[1].length}catch(e){}
+    //     return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m);
+    // }
+
+
+
+
+
+    // 当前委托
+    function getTradelogNew(){
+       
+        $.getJSON("/Ajax/getMarginUsercoin?market=" + market + "&t=" + Math.random(), function (data) {
+            //console.log(data['entrust'])
+        if (data) {
+            // console.log(data)
+            // console.log(data);
+            if (data['usercoin']) {
+                if (data['usercoin']['cny']) {
+                    $("#my_rmb").html(data['usercoin']['cny']);
+                    $("#my_xnb").html(data['usercoin']['xnb']);
+                    keyPrice($("#buy_price"),$('#my_rmb'),$('#buy_max'));
+                    keyPrice($("#buy_price1"),$('#my_rmb'),$('#buy_max1'));
+                    keyPrice($("#sell_price"),$('#my_xnb'),$('#sell_max'));
+                    keyPrice($("#sell_price1"),$('#my_xnb'),$('#sell_max1'));
+
+                    // if($("#buy_price").val() == '' || $("#buy_price").val() == 0){
+                    //     $('#buy_max').html(0);
+                    // }else{
+                    //     $('#buy_max').html((Number($('#my_rmb').html()) / Number($("#buy_price").val()) + Number($("#ask_fee").html())).toFixed(8));
+                    // }
+                }
+                // else {
+                //     $("#my_rmb").html('0.00');
+                //     $('#buy_max').html('0');
+                // }
+
+                // if (data['usercoin']['cnyd']) {
+                //     $("#my_rmbd").html(data['usercoin']['cnyd']);
+                // } else {
+                //     $("#my_rmbd").html('0.00');
+                // }
+
+                // if (data['usercoin']['xnb']) {
+                //     $("#my_xnb").html(data['usercoin']['xnb']);
+                //     if($('#sell_price').val() == '' || $('#sell_price').val() == 0){
+                //         $('#sell_max').html(0);
+                //  }else{
+                //         $('#sell_max').html((Number($("#my_xnb").html()) * Number($('#sell_price').val()) - Number($('#bid_fee').html())).toFixed(8));
+                //  }
+                //
+                //     //console.log(Number($("#my_xnb").html()),Number($('#sell_price').val()),Number($('#bid_fee').html()))
+                // } else {
+                //     $("#my_xnb").html('0.00');
+                //     $('#sell_max').html('0');
+                // }
+                //
+                // if (data['usercoin']['xnbd']) {
+                //     $("#my_xnbd").html(data['usercoin']['xnbd']);
+                // } else {
+                //     $("#my_xnbd").html('0.00');
+                // }
+            }
+            
+
+            if (data['entrust']) {
+                //console.log('habcesf');
+                var list = '';
+                var type = '';
+                var totalprice = '';
+                var dataL = data['entrust'].length;
+                //console.log('dataL='+dataL);
+                if(dataL>=1){
+                    for (var i = 0; i < dataL; i++) {
+                        if(data['entrust'][i]['type'] == '2'){
+                            //type = "{:l('Sell')}";
+                            type = "{:l('sell')}";
+                            classColor = "green";
+                        }else{
+                            //type = "{:l('buy')}";
+                            type = "{:l('buy')}";
+                            classColor = "red";
+                        }
+                      
+                        totalprice = Number(data['entrust'][i]['price'])+Number(data['entrust'][i]['num']);
+                        // console.log(data['entrust'][i]['addtime'])
+                        var ss=data['entrust'][i]['num']-data['entrust'][i]['deal'];
+                        //ssbb
+                        
+                        list += '<tr>&lt;!&ndash;&ndash;&gt;<td class="buy"><span>'+data['entrust'][i]['addtime']+
+                        '</span></td><td><span>'+"{$xnb|strtoupper}"+
+                        '</span></td><td><span class="'+classColor+'">'+type+
+                        '</span></td><td><span>'+ data['entrust'][i]['price']+
+                        '</span></td><td><span>'+ data['entrust'][i]['num']+
+                        '</span></td><td><span>'+ss+
+                        '</span></td><td><span>'+"{:l('unsettled')}"+'</span></td><td style="padding-right:20px"><span class="cancel-single" data-id='+data['entrust'][i]['id']+'>'+
+                        "{:l('repeal')}"+'</span></td></tr>'
+                    }
+                 
+                    $(".zhu-content0").html(list);
+                        if($('.cancel-single')){
+                            $('.cancel-single').on('click', function(){
+                                // $(".cancelPopup").show();
+                                var dataId = $(this).attr('data-id');
+                                cancelaa(dataId);
+                                // var index = $(this).index();
+                               
+                            })
+                        }
+                    }
+                }else{
+                    $(".current-list").find(".scroll").hide().next(".no-list").show();
+                }
+            }
+        });
+        setTimeout(function(){
+            getTradelogNew();
+        },3000);
+    }
+    //当前委托
+
+    //历史委托
+    function getTradelogNewH(){
+        $.getJSON("/Margin/getMarginTradeLogs/market/" + market + "&t=" + Math.random(), function (data) {
+            console.log(111)
+            if (data) {
+
+            var list = '';
+            var type = '';
+            var totalprice = '';
+            var dataL = data.length;
+            var dataStatus = '';
+            //console.log('dataL='+dataL);
+            for (var i = 0; i < dataL; i++) {
+                var dataNum = data[i]['num'];
+                var dataTime = timeChage(data[i]['addtime']);
+                var dataPrice = data[i]['price'];
+                var dealNum = data[i]['deal'];
+                if(data[i]['type'] == '2'){
+                  type = "{:l('sell')}";
+                  classColor = "green";
+                }else{
+                  type = "{:l('buy')}"
+                  classColor = "red";
+                }
+                //console.log(data[i]['status']);
+                if(data[i]['status'] == 1){
+                    dataStatus = "{:l('completed')}"
+                    var dataNum = data[i]['num'];
+                }
+                if(data[i]['status'] == 0){
+                    dataStatus = "{:l('trading')}";
+                    var dataNum = (data[i]['num']-data[i]['deal']).toFixed(8);
+
+                }
+                if(data[i]['status'] == 2){
+                    dataStatus = "{:l('canceled')}";
+                    var dataNum = (data[i]['num']-data[i]['deal']).toFixed(8);
+                    dataStatus = "{:l('completed')}";
+                    var dealNum = data[i]['deal'];
+                }
+
+              
+
+              
+                // if(data[i]['status'] != 2 || data[i]['deal']==0){
+                //   list += '<tr class="zhu-header"><td>'+dataTime+'</td><td>'+ type +'</td><td class="'+classColor+'">'+ dataPrice+'</td><td>'+ dataNum+'</td><td class="cancle-click" data-id='+data[i]['id']+'>'+ dataStatus +'</td></tr>';
+                // }
+                // if(data[i]['status'] == 2 && data[i]['deal']>0){
+                  list += '<tr><td><span>'+dataTime+'</span></td><td><span>'+data[i]['market']+'</span></td><td><span class="'+classColor+'">'+ type +'</span></td><td><span>'+ dataPrice+'</span></td><td><span>'+ dataNum+'</span></td><td><span>'+ dealNum+'</span></td><td style="padding-right:20px"><span>'+ dataStatus+'</span></td>';
+                // }
+                
+            }
+            $(".zhu-content1").html(list);
+            if($('.cancle-click')){
+
+            // $('.cancle-click').on('click', function(){
+            //   var index = $(this).index();
+            //   var dataId = $(this).attr('data-id');
+            //   cancelaa(dataId);
+            // })
+        }
+            
+        } else{
+                $(".history-list").find(".scroll").hide().next(".no-list").show();
+            }
+ 
+        });
+        setTimeout('getTradelogNewH()', 3000);
+    };
+    
+    //撤销
+    function cancelaa(id) {
+        layer.confirm('Confirm Undo?', {title:'Confirm Undo'}, function(index){
+        $.post("{:U('Margin/undo')}", {id: id}, function (data) {
+		
+		//console.log(data);
+		//console.log(data.status);
+            if (data.status == 1) {
+                // alert(111);
+                // getEntrustAndUsercoin();
+                layer.msg(data.info, {icon: 1});
+                window.location.reload();
+            } else {
+                layer.msg(data.info, {icon: 2});
+                window.location.reload();
+            }
+        });
+        });
+    }
+
+    // 最高价
+    var newBiLei;
+    var newPriceZhu;
+    function getMaxPrice(){
+	var market_bz = $('#market_bz').val();
+	var bz_coin = market_bz + '_cny';
+	
+        $.getJSON("/Ajax/getJsonTop?market="+market+"&t=" + Math.random(), function (data) {
+            // console.log(data['info']);
+            if(data['info']){
+                // console.log(data)
+                $('#market_new_price').removeClass('red');
+                $('#market_new_price').removeClass('green');
+
+                $('#orderbook_last_rate').html(data['info']['new_price']);
+                if(data['info']['new_price']){
+                    $('#market_new_price').html(data['info']['new_price']);
+
+                    newPriceZhu = data['info']['new_price'];
+                }else{
+                    $('#market_new_price').html(0);
+                }
+
+                if (data['info']['volume'] > 10000) {
+                    data['info']['volume'] = (data['info']['volume'] / 10000).toFixed(2) + "ml"
+                }
+                if (data['info']['volume'] > 100000000) {
+                    data['info']['volume'] = (data['info']['volume'] / 100000000).toFixed(2) + "bl"
+                }
+                if(data['info']['volume']){
+                    $("#market_volume").html(data['info']['volume']);
+                }else{
+                    $("#market_volume").html(0);
+                }
+
+                $('#market_change').removeClass('red');
+                $('#market_change').removeClass('green');
+                if (data['info']['change'] > 0) {
+                    $('#market_change').addClass('green');
+                    $("#market_new_price").closest("div").find("span").addClass('green');
+                } else if(data['info']['change'] < 0)  {
+                    $('#market_change').addClass('red');
+                    $("#market_new_price").closest("div").addClass('red');
+                }
+                if(data['info']['change']){
+                    $("#market_change").html(data['info']['change'] + "%");
+                }else{
+                    $("#market_change").html(0).css("color","#fff");
+                }
+
+                //}
+            }
+            if(data['list']){
+                //console.log(data['list'])
+                // newBiLei = data['list'];
+                // console.log(newBiLei)
+            }
+
+        });
+        setTimeout('getMaxPrice()',1000);
+    }
+
+    /*Get Depth data list*/
+    function getDepth() {
+        $.getJSON("/Ajax/getDepth?market=" + market + "&t=" + Math.random(), function (data) {
+            if (data) {
+                // console.log(data)
+                if (data['depth']) {
+                    var list = '';
+                    var sellk = data['depth']['sell'].length;
+                    var inputData = [];
+                    if (data['depth']['sell']) {
+                        for (i = 0; i < data['depth']['sell'].length; i++) {
+                            list += '<div class="tr trs tr-sell flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap"><div class="td sell">'+ data['depth']['sell'][i][0] +'</div><div class="td">'+ data['depth']['sell'][i][1] +'</div><div class="td">'+ (Number(data['depth']['sell'][i][0]) * Number(data['depth']['sell'][i][1])).toFixed(6) +'</div></div>';
+                            // var inputDataSmall = [];
+                            // inputDataSmall.push(data['depth']['sell'][i][0]);
+                            // inputDataSmall.push(data['depth']['sell'][i][1]);
+                            // inputData.push(inputDataSmall);
+                        }
+                    }
+
+                    $("#ul-ask-list1").html(list);
+
+                    // Click to autofill price
+                    $('#ul-ask-list1 tr').on('click', function(){
+                        var curPrice =$('#ul-ask-list1 tr td:first-child').html();
+                        if($(".buyDiv .limitPrice").is(":visible")){
+                            $("#buy_price").val(curPrice);
+                            keyPrice($("#buy_price"),$('#my_rmb'),$('#buy_max'))
+
+                        }else  if($(".sellDiv .limitPrice").is(":visible")){
+                            $("#sell_price").val(curPrice);
+                            keyPrice($("#sell_price"),$('#my_xnb'),$('#sell_max'))
+                        }
+                    });
+
+
+                    var transform =
+                        list = '';
+                    var buyL = data['depth']['buy'].length;
+                    var inputDataBuy = [];
+                    if (data['depth']['buy']) {
+                        for (i = 0; i < buyL; i++) {
+
+                            list += '<div class="bottom-content tr trs tr-buy flex-doc flex-direction-row flex-justify-start flex-align-item-center flex-wrap-nowrap"><div class="td buy">'+ data['depth']['buy'][i][0] +'</div><div class="td">'+ data['depth']['buy'][i][1] +'</div><div class="td">'+ (Number(data['depth']['buy'][i][0]) * Number(data['depth']['buy'][i][1])).toFixed(6) +'</div></div>';
+                            // var inputDataBuy1 = [];
+                            // inputDataBuy1.push(data['depth']['buy'][i][0]);
+                            // inputDataBuy1.push(data['depth']['buy'][i][1]);
+                            // inputDataBuy.push(inputDataBuy1);
+                        }
+
+                    }
+                    $("#ul-bid-list1").html(list);
+                }
+
+            }
+        });
+        clearInterval(getDepth_tlme);
+
+        var wait = second = 3;
+        var getDepth_tlme = setInterval(function () {
+            wait--;
+            if (wait < 0) {
+                clearInterval(getDepth_tlme);
+                getDepth();
+                wait = second;
+            }
+        }, 1000);
+
+    }
+
+
+    //时间戳转日期函数
+    function timeChage(time){
+        var date = new Date(time*1000);
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        var D = date.getDate();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        var dayL = String(date.getDate()).length;
+        var dayH = String(date.getHours()).length;
+        var dayM = String(date.getMinutes()).length;
+        var dayS = String(date.getSeconds()).length;
+        if(dayL == 1){
+            D = "0"+D;
+        }
+        if(dayH == 1){
+            h = "0"+h;
+        }
+        if(dayM == 1){
+            m = '0' + m;
+        }
+        if(dayS == 1){
+            s = '0' + s;
+        }
+        return (M+D+" "+h+":"+m+":"+s+"")
+    }
+    //时间戳转日期函数
+
+
+
+
+    /*禁止鼠标滚动*/
+    $("input").bind('mousewheel', function(event, delta) { return false; });
+
+
+    // 限制input输入框输入
+    function clearNoNum(obj)
+    {
+    //先把非数字的都替换掉，除了数字和.
+    $(obj)[0].value = $(obj)[0].value.replace(/[^\d.]/g,"");
+    //必须保证第一个为数字而不是.
+    $(obj)[0].value = $(obj)[0].value.replace(/^\./g,"");
+    //保证只有出现一个.而没有多个.
+    $(obj)[0].value = $(obj)[0].value.replace(/\.{2,}/g,".");
+    //保证.只出现一次，而不能出现两次以上
+    $(obj)[0].value = $(obj)[0].value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+    }
+
+//买入
+    function tradeadd_buy() {
+
+        // if (trans_lock) {
+        //     layer.msg('不要重复提交', {icon: 2});
+        //     return;
+        // }
+        trans_lock = 1;
+        var tradeType = $(".priceType>div.active").index()+1;
+        //alert(tradeType);
+        var tradeSendData;
+        if(tradeType == 1){
+            //alert($('#buy_price').val(),$('#buy_num').val());
+            if ($('#buy_price').val() == "" || $('#buy_price').val() == 0) {
+                layer.tips("Please enter the price", '#buy_price', {tips: 3});
+                return false;
+            }
+            if ($('#buy_num').val() == "" || $('#buy_num').val() == '0') {
+                layer.tips("Please enter the quantity", '#buy_num', {tips: 3});
+                return false;
+            }
+            tradeSendData = {
+                price: $('#buy_price').val(),
+                num: $('#buy_num').val(),
+                paypassword: $('#buy_paypassword').val(),
+                market: market,
+                type: 1,
+                tradetype:1,
+				trade_pt:2
+            };
+        }else{
+            //console.log(2)
+            if ($('#buy_num1').val() == "" || $('#buy_num1').val() == 0) {
+                layer.tips("Please enter the quantity", '#buy_num1', {tips: 3});
+                return false;
+            }
+            tradeSendData = {
+                num: $('#buy_num1').val(),
+                paypassword: $('#buy_paypassword').val(),
+                market: market,
+                type: 1,
+                tradetype: 2,
+				trade_pt:2
+            }
+        }
+        //console.log(tradeSendData)
+        //var price = parseFloat($('#buy_price').val());
+        //var num = parseFloat($('#buy-num').val());
+        //var paypassword = $('#buy_paypassword').val();
+        if($('#buy_paypassword').val() == ''){
+            layer.tips("{:l('place-financePwd')}", '#buy_paypassword', {tips: 3});
+            return false;
+        }
+
+        //加载层-风格3
+       
+        //alert(tradeSendData);
+
+        //此处演示关闭
+        // setTimeout(function () {
+        //     layer.closeAll('loading');
+        //     trans_lock = 0;
+        // }, 10000);
+        layer.confirm('Confirm to buy?', {title:'Confirm to buy'}, function(index){
+             layer.load(2);
+        $.post("{:U('Margin/upTrade')}", tradeSendData, function (data) {
+            //console.log(data)
+            layer.closeAll('loading');
+            trans_lock = 0;
+            // console.log(data)
+            if (data.status == 1) {
+                // $("#buy_price").val('');
+                $("#buy_num").val('0');
+                $("#buy_mum").val('0');
+                // $("#sell_price").val('');
+                // $("#sell_num").val('');
+                layer.msg(data.info, {icon: 1});
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+        }, 'json');
+        });
+    }
+	
+	// 卖出
+    function tradeadd_sell() {
+        // if (trans_lock) {
+        //     layer.msg('不要重复提交', {icon: 2});
+        //     return;
+        // }
+        trans_lock = 1;
+        var tradeType = $(".priceType>div.active").index()+1;
+        
+        var tradeSendData;
+        if(tradeType == 1){
+            if ($('#sell_price').val() == "" || $('#sell_price').val() == 0) {
+                layer.tips("Please enter the price", '#sell_price', {tips: 3});
+                return false;
+            }
+            if ($('#sell_num').val() == "" || $('#sell_num').val() == 0) {
+                layer.tips("Please enter the quantity", '#sell_num', {tips: 3});
+                return false;
+            }
+            tradeSendData = {
+                price: $('#sell_price').val(),
+                num: $('#sell_num').val(),
+                paypassword: $('#sell_paypassword').val(),
+                market: market,
+                type: 2,
+                tradetype: 1,
+                trade_pt:2
+            };
+        }else{
+            if ($('#sell_num1').val() == "" || $('#sell_num1').val() == 0) {
+                layer.tips("Please enter the quantity", '#sell_num', {tips: 3});
+                return false;
+            }
+            tradeSendData = {
+                num: $('#sell_num1').val(),
+                paypassword: $('#sell_paypassword').val(),
+                market: market,
+                type: 2,
+                tradetype: 2,
+                trade_pt:2
+            };
+        }
+        ///var price = parseFloat($('#sell_price').val());
+        //var num = parseFloat($('#sell_num').val());
+        //var paypassword = $('#sell_paypassword').val();
+        if ($('#sell_paypassword').val() == "") {
+            layer.tips("{:l('place-financePwd')}", '#sell_paypassword', {tips: 3});
+            return false;
+        }
+        // layer.load(2);
+        //此处演示关闭
+        // setTimeout(function () {
+        //     layer.closeAll('loading');
+        //     trans_lock = 0;
+        // }, 10000);
+
+layer.confirm('确认卖出?', {title:'确认卖出'}, function(index){
+             layer.load(2);
+        $.post("{:U('Margin/upTrade')}", tradeSendData, function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+                // $("#buy_price").val('');
+                // $("#buy_num").val('0');
+                // $("#sell_price").val('');
+                $("#sell_num").val('0');
+                $("#sell_mum").val('0');
+                layer.msg(data.info, {icon: 1});
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+        }, 'json');
+});
+    }
+
+    // 卖出
+    function tradeadd_sellx() {
+        // if (trans_lock) {
+        //     layer.msg('不要重复提交', {icon: 2});
+        //     return;
+        // }
+        trans_lock = 1;
+        var tradeType = $(".header>div.active1").index()+1;
+        
+        var tradeSendData;
+        if(tradeType == 1){
+            if ($('#sell_price').val() == "" || $('#sell_price').val() == 0) {
+                layer.tips("Please enter the price", '#sell_price', {tips: 3});
+                return false;
+            }
+            if ($('#sell_num').val() == "" || $('#sell_num').val() == 0) {
+                layer.tips("Please enter the quantity", '#sell_num', {tips: 3});
+                return false;
+            }
+            tradeSendData = {
+                price: $('#sell_price').val(),
+                num: $('#sell_num').val(),
+                paypassword: $('#sell_paypassword').val(),
+                market: market,
+                type: 2,
+                tradetype: 1,
+				trade_pt:2
+            };
+        }else{
+            if ($('#sell_num1').val() == "" || $('#sell_num1').val() == 0) {
+                layer.tips("Please enter the quantity", '#sell_num', {tips: 3});
+                return false;
+            }
+            tradeSendData = {
+                num: $('#sell_num1').val(),
+                paypassword: $('#sell_paypassword').val(),
+                market: market,
+                type: 2,
+                tradetype: 2,
+				trade_pt:2
+            };
+        }
+        ///var price = parseFloat($('#sell_price').val());
+        //var num = parseFloat($('#sell_num').val());
+        //var paypassword = $('#sell_paypassword').val();
+        if ($('#sell_paypassword').val() == "") {
+            layer.tips("{:l('place-financePwd')}", '#sell_paypassword', {tips: 3});
+            return false;
+        }
+        layer.load(2);
+        //此处演示关闭
+        // setTimeout(function () {
+        //     layer.closeAll('loading');
+        //     trans_lock = 0;
+        // }, 10000);
+
+
+        $.post("{:U('Margin/upTrade')}", tradeSendData, function (data) {
+            layer.closeAll('loading');
+            trans_lock = 0;
+            if (data.status == 1) {
+                // $("#buy_price").val('');
+                // $("#buy_num").val('0');
+                // $("#sell_price").val('');
+                $("#sell_num").val('0');
+                $("#sell_mum").val('0');
+                layer.msg(data.info, {icon: 1});
+            } else {
+                layer.msg(data.info, {icon: 2});
+            }
+        }, 'json');
+    }
+
+
+    /*liquidation price*/
+    function  showWidth() {
+        var htmlHref = window.location.href;
+        htmlHref = htmlHref.replace(/^http:\/\/[^/]+/, "");
+        var addr = htmlHref.substr(htmlHref.lastIndexOf('/', htmlHref.lastIndexOf('/') - 1) + 1);
+        var index = addr.lastIndexOf("\/");
+        //js gets the content after the last slash in the string == the current currency
+        var coinType = decodeURI(addr.substring(index + 1, addr.length));
+        var coinType=coinType.split("_")[0];
+
+        $.ajax({
+            url: "/Margin/ajax_fx",
+            data: {market: coinType},
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+			//console.log(data);
+                if (data.code == 200) {
+                    $(".limit").html(data['result']['lever_risk_rate']+"%");
+                    $(".currentNum").html(data['result']['fxls']+"%");
+                    var downNumber=200-parseFloat($(".limit").html());//200-110
+                    var current=parseFloat($(".currentNum").html())-parseFloat($(".limit").html());//current-100
+                    var tWidth=parseFloat($(".grade").css("width"));//overall width bar
+                    var showWidth=current/downNumber*tWidth;
+                    if(showWidth>=170){
+                        $(".grade div").css("width","170px")
+                    }else if(0<showWidth<170){
+                        $(".grade div").css("width",showWidth+"px");
+                    }if(showWidth<=0){
+                        $(".grade div").css("width","0px");
+                    }
+                    if(parseFloat($(".currentNum").html())>120){
+                        $(".level0").css("color","#32b28f").html("{:l('safe')}");
+                    }else{
+                        $(".level0").css("color","red").html("{:l('alert')}");
+                    }
+                } else {
+                    // layer.msg(data.info, {icon: 2});
+                }
+            },
+            // error: function (data) {
+            //     console.log("000")
+            // }
+        });
+        setTimeout(function(){
+            showWidth();
+        }, 1000)
+    }
+    showWidth();
+
+    /*Displays the format of the entered number*/
+    var vue=parseFloat($(".canBorrow").html());
+    if((/^(\+|-)?\d+$/.test(vue))&&vue>0){
+        var l=vue.toString().length;
+    }else{
+        if(vue.toString().split(".")[1]){
+            var l=vue.toString().split(".")[1].length;
+        }
+    }
+</script>
+<include file="Public/footer_minimal"/> 

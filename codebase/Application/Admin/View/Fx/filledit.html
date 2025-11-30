@@ -1,0 +1,134 @@
+<include file="Public:header"/>
+<script type="text/javascript" src="__THEME__/layer/laydate/laydate.js"></script>
+<div id="main-content">
+	<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+		<button class="close fixed" style="margin-top: 4px;">&times;</button>
+		<div class="alert-content">{:l('Warnings')}</div>
+	</div>
+	<div id="main" class="main">
+		<div class="main-title-h">
+			<span class="d-sm-flex align-items-center justify-content-between h4"><a href="{:U('Fx/log')}">{:l('Fx logs')}</a> >></span>
+			 <span class="d-sm-flex align-items-center justify-content-between h4">{$note}</span>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<form id="form" action="{:U('Fx/fillEditConfirm')}" method="post" class="form-horizontal">
+				<input type="hidden" name="id" value="{$info.id}">
+					<div id="tab" class="tab-pane in tab">
+						<div class="form-item cf">
+							<table class="table">
+							<tr class="controls">
+									<td class="item-label">{:l('Status')}:</td>
+									<td>
+										<span>{$info.status}</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Bank')}:</td>
+									<td>
+										<span>{$bank.bank}</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Bank Swift/IBAN')}:</td>
+									<td>
+										<span>{$bank.bankaddr}</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('A/C Number')}:</td>
+									<td>
+										<span>{$bank.bankcard}</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Person Name')}:</td>
+									<td>
+										<span>{$bank.truename}</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+									<tr class="controls">
+									<td class="item-label">{:l('KYC Status')}:</td>
+									<td>
+										<span><eq name="kyc" value="0"><font color='red'>{:l('Failed')}</font></eq>
+								<eq name="kyc" value="1"><font color='green'>{:l('Passed')}</font></eq>
+							</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+							
+							
+								<tr class="controls">
+									<td class="item-label">{:l('Type')}:</td>
+									<td>
+										<span>{$info.type} {$info.trade_coin} for {$info.base_coin}</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Qty')}:</td>
+									<td>
+										<span>{$info.qty}</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Total')}:</td>
+									<td>
+										<span>{$info.final_total}</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">Username : userid</td>
+									<td>
+										<span>{$username} : {$info.userid}</span>
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								<tr class="controls">
+									<td class="item-label">{:l('Memo')}:</td>
+									<td>
+										<input type="text" class="form-control input-10x" name="memo" value="{$info.memo}">
+									</td>
+									<td class="item-note"></td>
+								</tr>
+								
+								<tr class="controls">
+									<td class="item-label"></td>
+									<td>
+										<div class="form-item cf">
+											<button class="btn submit-btn ajax-post btn-info" id="submit" type="submit" target-form="form-horizontal">{:l('Confirm')}</button>
+											<a class="btn btn-return btn-warning" href="{$Think.server.HTTP_REFERER}">{:l('Back')}</a>
+											<notempty name="data.id"><input type="hidden" name="id" value="{$data.id}"/>
+											</notempty>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//submit Form
+	$('#submit').click(function () {
+		$('#form').submit();
+	});
+</script>
+
+<include file="Public:footer"/>
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		//Highlight navigation
+		highlight_subnav("{:U('Fill/log')}");
+	</script>
+</block>

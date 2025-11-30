@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head class="crypt-light">
+<meta charset="UTF-8">
+<title><neq name="page_title" value=''>{$page_title} |</neq> {:C('web_title')}</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="Keywords" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_keywords')}">
+<meta name="Description" content="<neq name="page_title" value=''>{$page_title} |</neq> {:C('web_description')}">
+<link rel="stylesheet" href="__PUBLIC__/trade-white/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/trade-white/css/style.css">
+<link rel="stylesheet" href="__PUBLIC__/trade-white/css/icons.css">
+<link rel="stylesheet" href="__PUBLIC__/trade-white/css/ui.css">
+	<link href="__PUBLIC__/template/common/common.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Poppins&display=swap" rel="stylesheet">
+
+<script type="text/javascript">
+    var market = "{$market}";
+    var market_round = {$C['market'][$market]['round']};
+    
+	var market_round_num={$C['market'][$market]['round']};
+	var market_type={$C['market'][$market]['ext_orderbook']};
+    var userid = "{$Think.session.userId}";
+    var trade_moshi = 1;
+    var getDepth_tlme = null;
+    var trans_lock = 0;
+	var colorshade="{$Think.cookie.colorshade}";
+	if(!colorshade){
+	var colorshade="Dark";	
+	}
+</script>
+</head>

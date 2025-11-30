@@ -1,0 +1,112 @@
+﻿<include file="Public:header" />
+<!-- main start -->
+	<div class="page-container">
+		<!-- wap banner start -->
+	
+		<div class="container prompt-main">
+			
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+									<h2 class="text-center"><img src="/Public/Home/images/prompt-award.png" alt="{:l('BONUS_SYSTEM')}"></h2>
+</div>
+						<div class="panel-body">
+				   <div class="col-sm-6 table-responsive">
+				   <h3 class="text-center"><img src="/Public/Home/images/rank-flag1.png" alt="{:l('REVENUE_RANKINGS')}"></h3>
+						
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>{:l('RANKING')}</th>
+									<th>{:l('USERNAME')}</th>
+									<th>{:l('THE_NUMBER_OF_INVITED')}</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								
+								     <notempty name="list"> 
+										<volist name="list" id="vo">
+											<tr>
+												<td><img src="/Public/Home/images/no{$i}.png" alt="{$i} place"></td>
+												<td>{$vo['username'] |substr_replace='****',3,4}</td>
+												<td>{$vo.pnum}</td>
+											</tr>
+											
+										</volist> 
+									 <else />
+									   <tr>
+											<td><img src="__PUBLIC__/Home/images/no1.png" alt="{:l('NO_DATA')}"></td>
+											<td>{:l('NO_DATA_TEMPORARILY')}</td>
+											<td>{:l('NO_DATA_TEMPORARILY')}</td>
+										</tr>
+									 </notempty>
+								
+
+
+							</tbody>
+						</table>
+					</div>
+					<!-- THE_NUMBER_OF_INVITED_RANKING end -->
+					<!-- REVENUE_RANKINGS start -->
+					<div class="col-sm-6 table-responsive">
+						<h3 class="text-center"><img src="/Public/Home/images/rank-flag2.png" alt="{:l('REVENUE_RANKINGS')}"></h3>
+						
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>{:l('Ranking')}</th>
+									<th>{:l('USERNAME')}</th>
+									<th>{:l('INCOME')}</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+									<notempty name="list_jiner"> 
+										<volist name="list_jiner" id="vo_jiner">
+											<tr>
+												<td><img src="/Public/Home/images/no{$i}.png" alt="{$i} place"></td>
+												<td>{$vo_jiner['username']}</td>
+												<td>{$vo_jiner.jiner}</td>
+											</tr>
+											
+										</volist> 
+									 <else />
+									   <tr>
+											<td><img src="__PUBLIC__/Home/images/no1.png" alt="{:l('NO_DATA')}"></td>
+											<td>{:l('NO_DATA_TEMPORARILY')}</td>
+											<td>{:l('NO_DATA_TEMPORARILY')}</td>
+										</tr>
+									 </notempty>
+								
+							</tbody>
+						</table>
+					</div>
+					<!-- REVENUE_RANKINGS end -->
+				
+				</div>
+				</div>
+				
+			
+			<!-- MY_PROMOTION start -->
+			<div class="panel panel-default">
+				<div class="panel-title text-center"><h2><img src="/Public/Home/images/prompt-my.png" alt="{:l('MY_PROMOTION')}"></h2></div>
+				<div class="panel-body">
+				<div class="row text-center">
+				<gt name="Think.session.userId" value="0">
+				
+				   <a class="btn btn-blue btn-lg loginBtn" href="{:U('Finance/myjp')}">{:l('CLICK_TO_VIEW_THE_PROMOTION_AW')}</a>&nbsp;
+				
+				<else/> 
+					
+					<div class="col-sm-offset-4 col-sm-4"><a href="javascript:;" onclick="loginpop();" class="btn btn-info btn-lg ">{:l('LOG_IN_TO_CHECK_IMMEDIATELY_PR')}</a> Or <a href="{:U('Login/register')}" target="_blank" class="btn btn-success btn-lg ">{:l('FREE_REGISTRATION')}</a></div>
+					
+				</gt>
+				</div>
+				</div>	
+			</div>
+			<!-- MY_PROMOTION end -->
+		</div>
+	</div>
+	<!-- main end -->
+<include file="Public:footer_minimal"/>
